@@ -1,0 +1,263 @@
+{
+  "schema_version": 1,
+  "reviewed_on": "2026-09-25",
+  "records": [
+    {
+      "id": "E01",
+      "title": "Laya: specialist performance is not base-model performance",
+      "model_ids": [
+        "laya"
+      ],
+      "source_ids": [
+        "laya-specialist"
+      ],
+      "evidence_type": "author_reported",
+      "reviewed_on": "2026-09-25",
+      "report_date": null,
+      "model_revision": null,
+      "protocol": {
+        "task": "Four synthetic typed-decision workflows",
+        "test_unit": "400 cases containing 2,000 decisions",
+        "split": "Official test split reported by the author; specialist uses workflow training data",
+        "reference": "Teacher-based synthetic benchmark references, not independent observed business outcomes",
+        "training": "Specialist fine-tuned; base comparison is not fine-tuned on these workflows",
+        "measurement": "Hard-label accuracy; calibration caveats separately reported",
+        "hardware": "Not required for the accuracy statement; no latency claim imported"
+      },
+      "metrics": [
+        {
+          "label": "Workflow-specialized Laya accuracy",
+          "value": 0.766,
+          "unit": "fraction"
+        },
+        {
+          "label": "Base Laya accuracy",
+          "value": 0.362,
+          "unit": "fraction"
+        },
+        {
+          "label": "Per-question majority baseline",
+          "value": 0.461,
+          "unit": "fraction"
+        }
+      ],
+      "conclusion": "The useful result is a within-project base-versus-specialist contrast, not evidence of universal superiority over Jev.",
+      "caveats": [
+        "The Jev value on the source card is imported from another report with different prompts/sample sizes; excluded from this side-by-side measurement.",
+        "The released checkpoint discloses temperature fitting on a training slice and a conflicting inherited temperature configuration. Do not treat its current confidence as held-out calibrated.",
+        "A teacher-agreement reference is not an objective ceiling on real-world correctness."
+      ],
+      "artifacts": {
+        "protocol": "public model card and linked notebook",
+        "raw_outputs": "Not independently audited by this list",
+        "model_hash": "not captured"
+      },
+      "reproduced_here": false
+    },
+    {
+      "id": "E02",
+      "title": "CLM: a domain-trained selector recovers more successful supplied candidates",
+      "model_ids": [
+        "clm"
+      ],
+      "source_ids": [
+        "clm-deepswe",
+        "clm"
+      ],
+      "evidence_type": "author_reported",
+      "reviewed_on": "2026-09-25",
+      "report_date": null,
+      "model_revision": null,
+      "protocol": {
+        "task": "DeepSWE trajectory selection",
+        "test_unit": "38 held-out tasks",
+        "split": "75/38 task-disjoint training/evaluation split, seed 42; 66 training tasks have successful trajectories, split 59/7 for train/validation",
+        "reference": "Trajectory pass outcomes as described by the release; environment execution not rerun here",
+        "training": "A specialized projection head initialized from CLM v0.1-8B, not the generic checkpoint alone",
+        "measurement": "Best-of-4; trajectory score averages final 12 available step scores",
+        "hardware": "Accuracy claim only; candidate generation and full end-to-end cost not measured here"
+      },
+      "metrics": [
+        {
+          "label": "Selected successful tasks",
+          "value": 0.8157894736842105,
+          "unit": "fraction",
+          "numerator": 31,
+          "denominator": 38
+        },
+        {
+          "label": "Reported pass@1 baseline",
+          "value": 0.7368421052631579,
+          "unit": "fraction",
+          "numerator": 28,
+          "denominator": 38
+        },
+        {
+          "label": "Oracle success within supplied candidates",
+          "value": 0.8947368421052632,
+          "unit": "fraction",
+          "numerator": 34,
+          "denominator": 38
+        }
+      ],
+      "conclusion": "This is selection improvement on a small, task-specific held-out set. It is not the coding success rate of a standalone 8B agent or a full official SWE benchmark score.",
+      "caveats": [
+        "The candidate generator, sampling budget and candidate quality are part of the system.",
+        "38 tasks provide limited precision; paired per-task outcomes are needed for a defensible significance analysis.",
+        "Do not transfer results from this trained head to CLM zero-shot use."
+      ],
+      "artifacts": {
+        "protocol": "public model card, reproduce command and task-split description",
+        "raw_outputs": "Linked dataset/reproduction path; binaries and execution not independently checked",
+        "checkpoint_sha256": "554989fe88635606cb978dc45a1ce083be1990c4a51e551ea3b6055ead1a029a",
+        "heldout_list_sha256": "d4e2e7639f9eace09fba50318a266111c080d591bfbe39d213c3ea611e7b65c1"
+      },
+      "reproduced_here": false
+    },
+    {
+      "id": "E03",
+      "title": "Nimble vs Jev: paired human-reference comparisons remain task-dependent",
+      "model_ids": [
+        "nimble",
+        "jev"
+      ],
+      "source_ids": [
+        "nimble-eval"
+      ],
+      "evidence_type": "author_reported",
+      "reviewed_on": "2026-09-25",
+      "report_date": null,
+      "model_revision": null,
+      "protocol": {
+        "task": "13 public-data subsets, including intent and sentence understanding",
+        "test_unit": "3,880 records overall; MASSIVE en-US example below has 350 records",
+        "split": "Public subset manifests and family identifiers described in the pinned report",
+        "reference": "Dataset human labels; some distributions are vote fractions rather than objective probabilities",
+        "training": "Released nimble-9b vs Jev 1.13.0; provenance of all pretraining data is not fully known",
+        "measurement": "Same record IDs and reference labels; no candidate shuffling; Nimble raw temperature 1.0",
+        "hardware": "No speed conclusion imported"
+      },
+      "metrics": [
+        {
+          "label": "Nimble: MASSIVE en-US accuracy (n=350)",
+          "value": 0.869,
+          "unit": "fraction"
+        },
+        {
+          "label": "Jev 1.13.0: MASSIVE en-US accuracy (n=350)",
+          "value": 0.874,
+          "unit": "fraction"
+        }
+      ],
+      "conclusion": "This is a useful paired protocol, but a small difference in one subset does not establish a general winner.",
+      "caveats": [
+        "The Nimble project ran the comparison; it is not an independent audit.",
+        "Manifests and procedures are public, while raw run/comparison outputs are gitignored and must be regenerated.",
+        "A subsequently fitted temperature was not applied to these reported runs; do not mix it with the displayed calibration numbers.",
+        "Records can share source families. Uncertainty analysis should account for clustering and multiple comparisons."
+      ],
+      "artifacts": {
+        "protocol": "Pinned source commit 62076b4f2d365b5879dafcf7f6dd072a1fe76df7",
+        "raw_outputs": "Not all committed; report says regenerate from scripts",
+        "model_hash": "Exact evaluated binary not independently hashed here"
+      },
+      "reproduced_here": false
+    },
+    {
+      "id": "E04",
+      "title": "GLiNER2.5-Decide: keep a newly reported suite in its proper scope",
+      "model_ids": [
+        "gliner-decide"
+      ],
+      "source_ids": [
+        "gliner-decide"
+      ],
+      "evidence_type": "author_reported",
+      "reviewed_on": "2026-09-25",
+      "report_date": null,
+      "model_revision": null,
+      "protocol": {
+        "task": "fastino/fast-decisions classification",
+        "test_unit": "17 domains × 300 held-out examples = 5,100 records, as reported",
+        "split": "Author-described held-out split; independent dataset inspection incomplete",
+        "reference": "Label provenance and benchmark construction not fully audited here",
+        "training": "Checkpoint-specific models; training/test overlap not independently established",
+        "measurement": "Average exact-match accuracy on an English suite",
+        "hardware": "No speed conclusion imported"
+      },
+      "metrics": [
+        {
+          "label": "GLiNER2.5-Decide 340M, cross-reported in the 1B card",
+          "value": 0.602,
+          "unit": "fraction"
+        },
+        {
+          "label": "GLiNER2.5-Decide-1B",
+          "value": 0.596,
+          "unit": "fraction"
+        }
+      ],
+      "conclusion": "The card supports including this family in local classification experiments, not declaring it universally better than Jev or Laya.",
+      "caveats": [
+        "The accessible source is the 1B card, not an independently audited 340M release.",
+        "The table contains JevK5, not TypeSafe Jev.",
+        "The English suite cannot establish multilingual production quality.",
+        "A larger model does not automatically win this particular reported suite."
+      ],
+      "artifacts": {
+        "protocol": "Model card; referenced dataset card was not fully accessible during review",
+        "raw_outputs": "Not independently inspected",
+        "model_hash": "not captured"
+      },
+      "reproduced_here": false
+    },
+    {
+      "id": "E05",
+      "title": "Kev: preserve development/test and source-domain distinctions",
+      "model_ids": [
+        "kev"
+      ],
+      "source_ids": [
+        "kev",
+        "kev4b"
+      ],
+      "evidence_type": "author_reported",
+      "reviewed_on": "2026-09-25",
+      "report_date": null,
+      "model_revision": null,
+      "protocol": {
+        "task": "Typed decisions on the project’s new-source suite",
+        "test_unit": "Dataset/sample definitions must be read with the pinned repository report",
+        "split": "New-source development and held-out test are separate; trained-source results are a different slice",
+        "reference": "Project benchmark references; not treated here as real-world outcome labels",
+        "training": "Kev-4B release represented in the pinned README; model revisions can move independently of repository commits",
+        "measurement": "New Sources accuracy reported as development / test",
+        "hardware": "No hardware ranking imported"
+      },
+      "metrics": [
+        {
+          "label": "Kev-4B new-source development accuracy",
+          "value": 0.817,
+          "unit": "fraction"
+        },
+        {
+          "label": "Kev-4B new-source test accuracy",
+          "value": 0.838,
+          "unit": "fraction"
+        }
+      ],
+      "conclusion": "The split distinction is more informative than copying a single score. This record is an archival source snapshot, not a claim about the latest downloaded weights.",
+      "caveats": [
+        "Model selection on development results is not a blind final evaluation.",
+        "A pinned README commit fixes the source text, not the weights served by a live model ID.",
+        "Do not compare these numbers with a different task mix or a Jev result from another split."
+      ],
+      "artifacts": {
+        "protocol": "Pinned source commit 2855ba2a55a80579176a459f78b95d03548cabb5",
+        "raw_outputs": "Not independently replayed or fully audited",
+        "model_hash": "not captured"
+      },
+      "reproduced_here": false
+    }
+  ]
+}

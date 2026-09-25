@@ -1,0 +1,27 @@
+name: Validate curated data
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: validation-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  validate:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - name: Check generated documents and records
+        run: python3 scripts/validate.py
+      - name: Run offline tests
+        run: python3 -m unittest discover -s tests -v
+      - name: Check publishing script syntax
+        run: bash -n scripts/publish.sh
+      - name: Test publishing against local disposable remotes
+        run: python3 tests/integration_publish.py

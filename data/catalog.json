@@ -1,0 +1,1254 @@
+{
+  "schema_version": 1,
+  "reviewed_on": "2026-09-25",
+  "scope": "Evidence-backed models, methods and evaluation for bounded decisions in AI systems.",
+  "sources": [
+    {
+      "id": "jev-launch",
+      "title": "Introducing System One Models & Jev",
+      "url": "https://typesafe.ai/blog/introducing-system-one-models-and-jev",
+      "kind": "official_publication",
+      "reviewed_on": "2026-09-25",
+      "review_depth": "content_reviewed",
+      "source_revision": null,
+      "review_note": ""
+    },
+    {
+      "id": "jev-primitives",
+      "title": "TypeSafe primitives",
+      "url": "https://docs.typesafe.ai/primitives",
+      "kind": "official_docs",
+      "reviewed_on": "2026-09-25",
+      "review_depth": "content_reviewed",
+      "source_revision": null,
+      "review_note": ""
+    },
+    {
+      "id": "jev-confidence",
+      "title": "TypeSafe confidence semantics",
+      "url": "https://docs.typesafe.ai/confidence",
+      "kind": "official_docs",
+      "reviewed_on": "2026-09-25",
+      "review_depth": "content_reviewed",
+      "source_revision": null,
+      "review_note": ""
+    },
+    {
+      "id": "laya-family",
+      "title": "Laya model family",
+      "url": "https://huggingface.co/convaiinnovations/laya",
+      "kind": "model_card",
+      "reviewed_on": "2026-09-25",
+      "review_depth": "content_reviewed",
+      "source_revision": null,
+      "review_note": ""
+    },
+    {
+      "id": "laya-specialist",
+      "title": "Laya Typed-Decisions model card",
+      "url": "https://huggingface.co/convaiinnovations/laya-typed-decisions",
+      "kind": "model_card",
+      "reviewed_on": "2026-09-25",
+      "review_depth": "content_reviewed",
+      "source_revision": null,
+      "review_note": "Includes a released-checkpoint calibration warning; the Jev numbers are explicitly an external comparison."
+    },
+    {
+      "id": "kev",
+      "title": "Kev repository",
+      "url": "https://github.com/jaredpalmer/kev/blob/2855ba2a55a80579176a459f78b95d03548cabb5/README.md",
+      "kind": "repository",
+      "reviewed_on": "2026-09-25",
+      "review_depth": "content_reviewed",
+      "source_revision": "2855ba2a55a80579176a459f78b95d03548cabb5",
+      "review_note": ""
+    },
+    {
+      "id": "kev4b",
+      "title": "Kev-4B model card",
+      "url": "https://huggingface.co/jaredpalmer/kev-4b",
+      "kind": "model_card",
+      "reviewed_on": "2026-09-25",
+      "review_depth": "content_reviewed",
+      "source_revision": null,
+      "review_note": ""
+    },
+    {
+      "id": "clm",
+      "title": "CLM repository",
+      "url": "https://github.com/Contrastive-LM/CLM/blob/bb42c6c5bf914fd449bed2f6ca65be80602cb1f7/README.md",
+      "kind": "repository",
+      "reviewed_on": "2026-09-25",
+      "review_depth": "content_reviewed",
+      "source_revision": "bb42c6c5bf914fd449bed2f6ca65be80602cb1f7",
+      "review_note": ""
+    },
+    {
+      "id": "clm-base",
+      "title": "CLM v0.1-8B model card",
+      "url": "https://huggingface.co/Contrastive-LM/CLM-v0.1-8B",
+      "kind": "model_card",
+      "reviewed_on": "2026-09-25",
+      "review_depth": "content_reviewed",
+      "source_revision": null,
+      "review_note": ""
+    },
+    {
+      "id": "clm-deepswe",
+      "title": "DeepSWE fixed-split projection head",
+      "url": "https://huggingface.co/Contrastive-LM/deepswe-clm-heads-8k",
+      "kind": "model_card",
+      "reviewed_on": "2026-09-25",
+      "review_depth": "content_reviewed",
+      "source_revision": null,
+      "review_note": "Checkpoint and held-out-list SHA-256 values are supplied by the author; binaries were not downloaded or verified here."
+    },
+    {
+      "id": "nimble",
+      "title": "Bespoke Nimble model card",
+      "url": "https://huggingface.co/bespokelabs/Bespoke-Nimble-9B",
+      "kind": "model_card",
+      "reviewed_on": "2026-09-25",
+      "review_depth": "content_reviewed",
+      "source_revision": null,
+      "review_note": ""
+    },
+    {
+      "id": "nimble-eval",
+      "title": "Nimble public human-reference benchmark protocol and results",
+      "url": "https://github.com/bespokelabsai/nimble/blob/62076b4f2d365b5879dafcf7f6dd072a1fe76df7/docs/PUBLIC_BENCHMARKS.md",
+      "kind": "evaluation_report",
+      "reviewed_on": "2026-09-25",
+      "review_depth": "content_reviewed",
+      "source_revision": "62076b4f2d365b5879dafcf7f6dd072a1fe76df7",
+      "review_note": "Project-author-run comparison. Per-run result files are gitignored; protocol/manifests do not amount to a complete public raw-output archive."
+    },
+    {
+      "id": "gliner-decide",
+      "title": "GLiNER2.5-Decide-1B model card",
+      "url": "https://huggingface.co/fastino/GLiNER2.5-Decide-1B",
+      "kind": "model_card",
+      "reviewed_on": "2026-09-25",
+      "review_depth": "content_reviewed",
+      "source_revision": null,
+      "review_note": "The 1B card was readable and cross-reports the 340M model. The separate 340M card and fast-decisions dataset card could not be fully inspected in this review."
+    },
+    {
+      "id": "gliner-runtime",
+      "title": "GLiNER2 runtime",
+      "url": "https://github.com/fastino-ai/GLiNER2",
+      "kind": "repository",
+      "reviewed_on": "2026-09-25",
+      "review_depth": "content_reviewed",
+      "source_revision": null,
+      "review_note": ""
+    },
+    {
+      "id": "gliclass",
+      "title": "GLiClass",
+      "url": "https://github.com/Knowledgator/GLiClass",
+      "kind": "repository",
+      "reviewed_on": "2026-09-25",
+      "review_depth": "content_reviewed",
+      "source_revision": null,
+      "review_note": ""
+    },
+    {
+      "id": "setfit",
+      "title": "SetFit",
+      "url": "https://github.com/huggingface/setfit",
+      "kind": "repository",
+      "reviewed_on": "2026-09-25",
+      "review_depth": "content_reviewed",
+      "source_revision": null,
+      "review_note": ""
+    },
+    {
+      "id": "qwen-reranker",
+      "title": "Qwen3-Reranker-0.6B model card",
+      "url": "https://huggingface.co/Qwen/Qwen3-Reranker-0.6B",
+      "kind": "model_card",
+      "reviewed_on": "2026-09-25",
+      "review_depth": "content_reviewed",
+      "source_revision": null,
+      "review_note": ""
+    },
+    {
+      "id": "outlines",
+      "title": "Outlines",
+      "url": "https://github.com/dottxt-ai/outlines",
+      "kind": "repository",
+      "reviewed_on": "2026-09-25",
+      "review_depth": "content_reviewed",
+      "source_revision": null,
+      "review_note": ""
+    },
+    {
+      "id": "tabicl",
+      "title": "TabICLv2: A better, faster, scalable, and open tabular foundation model",
+      "url": "https://arxiv.org/abs/2602.11139",
+      "kind": "paper",
+      "reviewed_on": "2026-09-25",
+      "review_depth": "abstract_reviewed",
+      "source_revision": null,
+      "review_note": "Version 2 dated 2026-09-16; listed as ICML 2026. Abstract and release metadata reviewed, not an independent benchmark audit."
+    },
+    {
+      "id": "routellm",
+      "title": "RouteLLM",
+      "url": "https://github.com/lm-sys/RouteLLM",
+      "kind": "repository",
+      "reviewed_on": "2026-09-25",
+      "review_depth": "content_reviewed",
+      "source_revision": null,
+      "review_note": ""
+    },
+    {
+      "id": "llmrouter",
+      "title": "LLMRouter",
+      "url": "https://github.com/ulab-uiuc/LLMRouter",
+      "kind": "repository",
+      "reviewed_on": "2026-09-25",
+      "review_depth": "content_reviewed",
+      "source_revision": null,
+      "review_note": ""
+    },
+    {
+      "id": "llmrouter-paper",
+      "title": "LLMRouter: Unified Infrastructure for Developing, Evaluating, and Deploying LLM Routers",
+      "url": "https://arxiv.org/abs/2608.06867",
+      "kind": "paper",
+      "reviewed_on": "2026-09-25",
+      "review_depth": "abstract_reviewed",
+      "source_revision": null,
+      "review_note": "2026-08-07 preprint; do not infer peer review from availability on arXiv."
+    },
+    {
+      "id": "vw",
+      "title": "Vowpal Wabbit contextual bandits tutorial",
+      "url": "https://vowpalwabbit.org/docs/vowpal_wabbit/python/latest/tutorials/python_Contextual_bandits_and_Vowpal_Wabbit.html",
+      "kind": "official_docs",
+      "reviewed_on": "2026-09-25",
+      "review_depth": "content_reviewed",
+      "source_revision": null,
+      "review_note": ""
+    },
+    {
+      "id": "mapie",
+      "title": "MAPIE",
+      "url": "https://github.com/scikit-learn-contrib/MAPIE",
+      "kind": "repository",
+      "reviewed_on": "2026-09-25",
+      "review_depth": "content_reviewed",
+      "source_revision": null,
+      "review_note": ""
+    },
+    {
+      "id": "scoring",
+      "title": "Strictly Proper Scoring Rules, Prediction, and Estimation",
+      "url": "https://doi.org/10.1198/016214506000001437",
+      "kind": "paper",
+      "reviewed_on": "2026-09-25",
+      "review_depth": "abstract_reviewed",
+      "source_revision": null,
+      "review_note": "Gneiting and Raftery, JASA 2007. Publisher/index abstract reviewed."
+    },
+    {
+      "id": "calibration",
+      "title": "On Calibration of Modern Neural Networks",
+      "url": "https://proceedings.mlr.press/v70/guo17a.html",
+      "kind": "paper",
+      "reviewed_on": "2026-09-25",
+      "review_depth": "abstract_reviewed",
+      "source_revision": null,
+      "review_note": "Guo et al., ICML 2017. Proceedings abstract/metadata reviewed."
+    },
+    {
+      "id": "selective",
+      "title": "Selective Classification for Deep Neural Networks",
+      "url": "https://arxiv.org/abs/1705.08500v2",
+      "kind": "paper",
+      "reviewed_on": "2026-09-25",
+      "review_depth": "abstract_reviewed",
+      "source_revision": null,
+      "review_note": "Geifman and El-Yaniv, 2017. Legacy image-classification setting is not an LLM deployment guarantee."
+    },
+    {
+      "id": "defer",
+      "title": "Consistent Estimators for Learning to Defer to an Expert",
+      "url": "https://proceedings.mlr.press/v119/mozannar20b.html",
+      "kind": "paper",
+      "reviewed_on": "2026-09-25",
+      "review_depth": "abstract_reviewed",
+      "source_revision": null,
+      "review_note": "Mozannar and Sontag, ICML 2020."
+    },
+    {
+      "id": "crc",
+      "title": "Conformal Risk Control",
+      "url": "https://arxiv.org/abs/2208.02814v4",
+      "kind": "paper",
+      "reviewed_on": "2026-09-25",
+      "review_depth": "abstract_reviewed",
+      "source_revision": null,
+      "review_note": "First submitted 2022; reviewed version v4, 2025. Distinguish original monotonicity assumptions from later generalizations."
+    },
+    {
+      "id": "crc-2026",
+      "title": "Conformal Risk Control for Non-Monotonic Losses",
+      "url": "https://arxiv.org/abs/2602.20151v1",
+      "kind": "paper",
+      "reviewed_on": "2026-09-25",
+      "review_depth": "abstract_reviewed",
+      "source_revision": null,
+      "review_note": "2026-02-23 preprint. Stability-dependent guarantees are not universal per-decision guarantees."
+    },
+    {
+      "id": "scoring-review",
+      "title": "Proper Scoring Rules for Estimation and Forecast Evaluation",
+      "url": "https://doi.org/10.1146/annurev-statistics-042424-050626",
+      "kind": "paper",
+      "reviewed_on": "2026-09-25",
+      "review_depth": "abstract_reviewed",
+      "source_revision": null,
+      "review_note": "Waghmare and Ziegel, Annual Review of Statistics and Its Application, 2026 volume; first online 2025. Abstract/index only."
+    },
+    {
+      "id": "causal-defer",
+      "title": "A Causal Target for Learning to Defer Under Hidden Confounding",
+      "url": "https://ojs.aaai.org/index.php/AAAI/article/view/39493",
+      "kind": "paper",
+      "reviewed_on": "2026-09-25",
+      "review_depth": "abstract_reviewed",
+      "source_revision": null,
+      "review_note": "AAAI 2026 proceedings abstract. Adjacent research, not a ready-to-deploy router."
+    },
+    {
+      "id": "decision-index",
+      "title": "Decision Index 0.2 release",
+      "url": "https://huggingface.co/spaces/multimodalart/jev-decision-index/commit/180e621de8bf96962b11a4156b5688d834a47139",
+      "kind": "evaluation_report",
+      "reviewed_on": "2026-09-25",
+      "review_depth": "content_reviewed",
+      "source_revision": "180e621de8bf96962b11a4156b5688d834a47139",
+      "review_note": "Methodology/release inspected; models and leaderboard were not rerun. Composite index is not raw accuracy."
+    },
+    {
+      "id": "independent-bench",
+      "title": "Decision-model benchmark",
+      "url": "https://github.com/nibzard/decision-model-benchmark",
+      "kind": "evaluation_report",
+      "reviewed_on": "2026-09-25",
+      "review_depth": "content_reviewed",
+      "source_revision": null,
+      "review_note": "Third-party repository/protocol reviewed; this list does not certify every artifact or headline result."
+    },
+    {
+      "id": "awesome-system-one",
+      "title": "Awesome System One",
+      "url": "https://github.com/andyrewlee/awesome-system-one",
+      "kind": "curated_list",
+      "reviewed_on": "2026-09-25",
+      "review_depth": "content_reviewed",
+      "source_revision": null,
+      "review_note": ""
+    },
+    {
+      "id": "awesome-jev-zh",
+      "title": "Awesome Jev 中文",
+      "url": "https://github.com/yzfly/awesome-jev-zh",
+      "kind": "curated_list",
+      "reviewed_on": "2026-09-25",
+      "review_depth": "content_reviewed",
+      "source_revision": null,
+      "review_note": ""
+    },
+    {
+      "id": "awesome-routing",
+      "title": "Awesome LLM Routing and Cascading",
+      "url": "https://github.com/ymoslem/awesome-llm-routing-cascading",
+      "kind": "curated_list",
+      "reviewed_on": "2026-09-25",
+      "review_depth": "content_reviewed",
+      "source_revision": null,
+      "review_note": ""
+    },
+    {
+      "id": "awesome-conformal",
+      "title": "Awesome Conformal Prediction",
+      "url": "https://github.com/valeman/awesome-conformal-prediction",
+      "kind": "curated_list",
+      "reviewed_on": "2026-09-25",
+      "review_depth": "content_reviewed",
+      "source_revision": null,
+      "review_note": ""
+    },
+    {
+      "id": "codex-skills",
+      "title": "OpenAI skill documentation",
+      "url": "https://developers.openai.com/codex/skills/",
+      "kind": "official_docs",
+      "reviewed_on": "2026-09-25",
+      "review_depth": "content_reviewed",
+      "source_revision": null,
+      "review_note": "Repository-scoped skills do not grant credentials, start schedules, or install themselves into this chat."
+    },
+    {
+      "id": "github-schedule",
+      "title": "GitHub Actions trigger reference",
+      "url": "https://docs.github.com/en/actions/reference/workflows-and-actions/events-that-trigger-workflows",
+      "kind": "official_docs",
+      "reviewed_on": "2026-09-25",
+      "review_depth": "content_reviewed",
+      "source_revision": null,
+      "review_note": ""
+    },
+    {
+      "id": "gh-clone",
+      "title": "GitHub CLI: gh repo clone",
+      "url": "https://cli.github.com/manual/gh_repo_clone",
+      "kind": "official_docs",
+      "reviewed_on": "2026-09-25",
+      "review_depth": "content_reviewed",
+      "source_revision": null,
+      "review_note": ""
+    }
+  ],
+  "entries": [
+    {
+      "id": "jev",
+      "name": "Jev / TypeSafe",
+      "category": "core_models",
+      "url": "https://typesafe.ai",
+      "source_ids": [
+        "jev-launch",
+        "jev-primitives",
+        "jev-confidence"
+      ],
+      "summary": {
+        "en": "Hosted typed judgments: probabilities over supplied choices, propositions and ordinal rubrics.",
+        "zh": "托管的结构化判断服务：对选项、命题与有序评分标准输出分布。"
+      },
+      "use": {
+        "en": "A managed comparator when testing whether a judgment node is useful.",
+        "zh": "验证判断节点价值时，可作为无需自建部署的对照。"
+      },
+      "caveat": {
+        "en": "RLCD is vendor-described; the full training recipe is not public. Valid schemas and confidence fields do not establish semantic reliability.",
+        "zh": "RLCD 的完整训练配方未公开；格式合法与置信度字段不等于语义可靠。"
+      },
+      "reviewed_on": "2026-09-25",
+      "mechanism": {
+        "en": "Proprietary decision model; public API is more inspectable than its internals.",
+        "zh": "专有判断模型；接口可查，内部实现公开程度有限。"
+      },
+      "training": {
+        "en": "Vendor-described RLCD; controlled independent ablations not established here.",
+        "zh": "官方称采用 RLCD；本版未取得受控独立消融证据。"
+      },
+      "availability": {
+        "en": "Hosted API; no public weights verified.",
+        "zh": "托管 API；本版未核实公开权重。"
+      },
+      "license_note": "Commercial service terms; no open-weight license implied.",
+      "weight_revision": null,
+      "tags": [
+        "typed-decisions",
+        "hosted",
+        "probabilistic-output"
+      ],
+      "scale": {
+        "en": "Not publicly established by the reviewed material.",
+        "zh": "核对的公开资料未明确参数规模。"
+      }
+    },
+    {
+      "id": "laya",
+      "name": "Laya",
+      "category": "core_models",
+      "url": "https://github.com/NandhaKishorM/laya",
+      "source_ids": [
+        "laya-family",
+        "laya-specialist"
+      ],
+      "summary": {
+        "en": "Compact encoder family with dynamic option heads; general, multilingual and workflow-specialized checkpoints.",
+        "zh": "小型编码器与动态选项判断头；包含通用、多语言及工作流专项检查点。"
+      },
+      "use": {
+        "en": "Narrow, high-volume judgments with domain training and measured hardware costs.",
+        "zh": "适合有领域训练数据、需要控制高频调用成本的窄域判断。"
+      },
+      "caveat": {
+        "en": "Do not mix base and specialized scores. The typed checkpoint currently discloses training/calibration overlap and inherited-temperature conflicts.",
+        "zh": "不可混用基础版与专项版成绩；专项卡明确披露训练与校准数据重叠及温度配置冲突。"
+      },
+      "reviewed_on": "2026-09-25",
+      "mechanism": {
+        "en": "Bidirectional encoder plus option-conditioned decision head.",
+        "zh": "双向编码器加选项条件化判断头。"
+      },
+      "training": {
+        "en": "Proper-score rewards and policy gradients; the typed specialist also uses soft cross-entropy. Not a confirmed reproduction of Jev training.",
+        "zh": "适当评分奖励与策略梯度；专项训练还使用软交叉熵。不是已确认的 Jev 训练复现。"
+      },
+      "availability": {
+        "en": "Local weights/runtime; checkpoint and language must be selected explicitly.",
+        "zh": "本地权重与运行库；应明确检查点及语言。"
+      },
+      "license_note": "Reviewed family/specialist cards declare Apache-2.0; verify each selected artifact.",
+      "weight_revision": null,
+      "tags": [
+        "typed-decisions",
+        "encoder",
+        "local",
+        "rlcd"
+      ],
+      "scale": {
+        "en": "English and workflow specialist: about 421M; multilingual: about 322M.",
+        "zh": "英语及专项版约 421M；多语言版约 322M。"
+      }
+    },
+    {
+      "id": "kev",
+      "name": "Kev",
+      "category": "core_models",
+      "url": "https://github.com/jaredpalmer/kev",
+      "source_ids": [
+        "kev",
+        "kev4b"
+      ],
+      "summary": {
+        "en": "Qwen-based adapters and a dynamic pointer head for typed decisions, with training and serving tools.",
+        "zh": "Qwen 骨干、适配器及动态 pointer head，配套类型化判断训练和部署工具。"
+      },
+      "use": {
+        "en": "An inspectable starting point for domain-supervised decision models.",
+        "zh": "可检查、可微调的领域监督判断实验底座。"
+      },
+      "caveat": {
+        "en": "New-source development, held-out tests and trained-source scores are distinct. Adapter size is not deployment memory.",
+        "zh": "新来源开发集、最终测试集与已训练来源成绩不同；适配器大小不是部署内存。"
+      },
+      "reviewed_on": "2026-09-25",
+      "mechanism": {
+        "en": "Dynamic option readout on a language-model backbone; several model sizes.",
+        "zh": "在语言模型骨干上动态读出选项分数；提供多个规模。"
+      },
+      "training": {
+        "en": "Supervised cross-entropy, LoRA and post-hoc temperature calibration.",
+        "zh": "监督交叉熵、LoRA 与事后温度校准。"
+      },
+      "availability": {
+        "en": "Open implementation and published checkpoints; the underlying backbone is still required.",
+        "zh": "公开实现及检查点；部署仍需基础模型。"
+      },
+      "license_note": "Repository describes Apache-2.0; confirm adapter and backbone terms separately.",
+      "weight_revision": null,
+      "tags": [
+        "typed-decisions",
+        "supervised",
+        "local",
+        "fine-tuning"
+      ],
+      "scale": {
+        "en": "Released family spans 0.8B, 4B, 9B and 27B; inspect the exact backbone/card.",
+        "zh": "公开系列覆盖 0.8B、4B、9B、27B；须核对具体骨干与模型卡。"
+      }
+    },
+    {
+      "id": "clm",
+      "name": "Contrastive Language Models (CLM)",
+      "category": "core_models",
+      "url": "https://github.com/Contrastive-LM/CLM",
+      "source_ids": [
+        "clm",
+        "clm-base",
+        "clm-deepswe"
+      ],
+      "summary": {
+        "en": "Separate state and action representations with learned projection heads on a frozen language-model encoder.",
+        "zh": "冻结语言模型编码器，分别表示状态与动作，再用可训练投影头匹配。"
+      },
+      "use": {
+        "en": "Reusable candidate catalogs, tool selection and domain-trained Best-of-N selection.",
+        "zh": "适合候选可复用的工具目录、排序及领域 Best-of-N 选择。"
+      },
+      "caveat": {
+        "en": "Relative ranking cannot detect every all-wrong candidate set. Best-of-N scores include supplied candidates, not autonomous task-solving ability.",
+        "zh": "相对排序不能保证识别“全部候选都错”；Best-of-N 成绩不代表模型独立解题能力。"
+      },
+      "reviewed_on": "2026-09-25",
+      "mechanism": {
+        "en": "Dual encoding permits candidate caching; released base uses frozen Qwen3-8B.",
+        "zh": "双侧编码允许缓存候选；发布的基础版使用冻结 Qwen3-8B。"
+      },
+      "training": {
+        "en": "Contrastive InfoNCE with negatives; specialized heads require their own evidence.",
+        "zh": "含负例的 InfoNCE 对比学习；专项投影头需单独评测。"
+      },
+      "availability": {
+        "en": "Local code and weights; backbone still runs at inference.",
+        "zh": "公开代码与权重；推理仍需运行骨干。"
+      },
+      "license_note": "Base card: Apache-2.0. Reviewed DeepSWE head card: MIT. Do not assign one license to the whole family.",
+      "weight_revision": null,
+      "tags": [
+        "ranking",
+        "dual-encoder",
+        "contrastive",
+        "verifier"
+      ],
+      "scale": {
+        "en": "8B base encoder plus learned heads in the reviewed release.",
+        "zh": "本版核对的发布使用 8B 骨干及可训练投影头。"
+      }
+    },
+    {
+      "id": "nimble",
+      "name": "Bespoke Nimble",
+      "category": "core_models",
+      "url": "https://github.com/bespokelabsai/nimble",
+      "source_ids": [
+        "nimble",
+        "nimble-eval"
+      ],
+      "summary": {
+        "en": "Qwen-based supervised adapter that reads answer-label logits instead of generating an explanation.",
+        "zh": "Qwen 监督适配器，直接读取答案标签 logits，而非生成解释。"
+      },
+      "use": {
+        "en": "A transparent baseline for evidence-sensitive judgments and minimal-edit training examples.",
+        "zh": "适合证据敏感的判断，也可借鉴最小差异训练样本。"
+      },
+      "caveat": {
+        "en": "Contrastive data construction is not CLM-style contrastive embedding training. Public benchmark reporting is author-run and raw run outputs are not all committed.",
+        "zh": "对比式样本构造不等于 CLM 的对比表示训练；公开比较由项目方运行，完整逐行输出并未全部提交。"
+      },
+      "reviewed_on": "2026-09-25",
+      "mechanism": {
+        "en": "Qwen3.5-9B plus LoRA, scoring allowed answer tokens.",
+        "zh": "Qwen3.5-9B 加 LoRA，对允许的答案 token 评分。"
+      },
+      "training": {
+        "en": "Supervised learning; minimal changes to decisive evidence help define the boundary.",
+        "zh": "监督学习；用决定性证据的最小变化构造判断边界。"
+      },
+      "availability": {
+        "en": "Adapter and code are public; load the base model as well.",
+        "zh": "公开适配器与代码；仍需加载基础模型。"
+      },
+      "license_note": "Reviewed model card declares Apache-2.0; inherited dependencies retain their terms.",
+      "weight_revision": null,
+      "tags": [
+        "typed-decisions",
+        "supervised",
+        "label-logits",
+        "local"
+      ],
+      "scale": {
+        "en": "9B backbone plus adapter; adapter bytes alone are not required memory.",
+        "zh": "9B 骨干加适配器；适配器文件大小不等于所需内存。"
+      }
+    },
+    {
+      "id": "gliner-decide",
+      "name": "GLiNER2.5-Decide",
+      "category": "core_models",
+      "url": "https://huggingface.co/fastino/GLiNER2.5-Decide-1B",
+      "source_ids": [
+        "gliner-decide",
+        "gliner-runtime"
+      ],
+      "summary": {
+        "en": "Schema-conditioned local classification with runtime labels and multiple decision heads.",
+        "zh": "通过运行时标签与多个判断头实现模式条件化的本地分类。"
+      },
+      "use": {
+        "en": "Compact operational classification; inspect the runtime for supported cross-field constraints.",
+        "zh": "适合轻量业务分类；跨字段约束需核对具体运行库支持。"
+      },
+      "caveat": {
+        "en": "This review inspected the 1B card, which cross-reports 340M results. Dataset audit is incomplete; JevK5 in that table is not TypeSafe Jev.",
+        "zh": "本版核对的是 1B 模型卡，其中交叉报告 340M 成绩；数据集审计未完成，表中 JevK5 不是 TypeSafe Jev。"
+      },
+      "reviewed_on": "2026-09-25",
+      "mechanism": {
+        "en": "Encoder-style classification; single-label and multilabel outputs.",
+        "zh": "编码器式分类；支持单标签与多标签输出。"
+      },
+      "training": {
+        "en": "Treat checkpoint-specific training details as documented, not inferred from sibling models.",
+        "zh": "训练细节按具体检查点文档记录，不从同系列模型推断。"
+      },
+      "availability": {
+        "en": "Published local checkpoints and GLiNER2 runtime; use version-matched examples.",
+        "zh": "公开本地检查点及 GLiNER2 运行库；示例须匹配版本。"
+      },
+      "license_note": "Reviewed 1B card declares Apache-2.0; other checkpoints need separate checks.",
+      "weight_revision": null,
+      "tags": [
+        "typed-decisions",
+        "encoder",
+        "multilabel",
+        "constraints"
+      ],
+      "scale": {
+        "en": "1B card directly reviewed; 340M and 287M sibling results/links are cross-reported there.",
+        "zh": "直接核对 1B 卡；340M 与 287M 同系列资料由该卡交叉报告。"
+      }
+    },
+    {
+      "id": "gliclass",
+      "name": "GLiClass",
+      "category": "core_models",
+      "url": "https://github.com/Knowledgator/GLiClass",
+      "source_ids": [
+        "gliclass"
+      ],
+      "summary": {
+        "en": "Label-conditioned text classification with user-supplied labels, including multilabel tasks.",
+        "zh": "以用户提供的标签为条件进行文本分类，包含多标签任务。"
+      },
+      "use": {
+        "en": "An adjacent baseline for dynamic intent and label classification.",
+        "zh": "动态意图与标签分类的重要相邻基线。"
+      },
+      "caveat": {
+        "en": "Classification capability does not establish general workflow verification or calibrated operational risk.",
+        "zh": "分类能力不等于通用工作流验收能力，也不保证业务风险已校准。"
+      },
+      "reviewed_on": "2026-09-25",
+      "mechanism": {
+        "en": "Joint text/label representation and label scoring.",
+        "zh": "联合表示文本与标签，再对标签评分。"
+      },
+      "training": {
+        "en": "Consult the selected checkpoint; do not attribute every GLiClass variant one recipe.",
+        "zh": "以具体检查点为准，不给所有版本统一指定训练配方。"
+      },
+      "availability": {
+        "en": "Open repository with links to model checkpoints.",
+        "zh": "公开仓库，并链接模型检查点。"
+      },
+      "license_note": "Consult repository and chosen checkpoint license; not fully audited in this edition.",
+      "weight_revision": null,
+      "tags": [
+        "classification",
+        "dynamic-labels",
+        "baseline"
+      ],
+      "scale": {
+        "en": "Checkpoint-dependent; no single family-wide parameter claim made here.",
+        "zh": "依具体检查点而定；本版不为整个系列指定单一参数量。"
+      }
+    },
+    {
+      "id": "setfit",
+      "name": "SetFit",
+      "category": "baselines",
+      "url": "https://github.com/huggingface/setfit",
+      "source_ids": [
+        "setfit"
+      ],
+      "summary": {
+        "en": "Few-shot sentence-transformer adaptation followed by a classification head.",
+        "zh": "少样本句向量适配，再训练分类头。"
+      },
+      "use": {
+        "en": "Fixed-label tasks with labeled examples.",
+        "zh": "有标注数据的固定标签任务。"
+      },
+      "caveat": {
+        "en": "Not an arbitrary typed-question API.",
+        "zh": "不等于任意类型化问题接口。"
+      },
+      "reviewed_on": "2026-09-25"
+    },
+    {
+      "id": "qwen-reranker",
+      "name": "Qwen3-Reranker",
+      "category": "baselines",
+      "url": "https://huggingface.co/Qwen/Qwen3-Reranker-0.6B",
+      "source_ids": [
+        "qwen-reranker"
+      ],
+      "summary": {
+        "en": "Task-trained query/document reranking.",
+        "zh": "面向查询与文档的任务专用重排。"
+      },
+      "use": {
+        "en": "A relevant baseline before training a general candidate selector.",
+        "zh": "训练通用选择器之前应测试的相关性基线。"
+      },
+      "caveat": {
+        "en": "A relevance score is not a probability of business correctness.",
+        "zh": "相关性分数不是业务正确概率。"
+      },
+      "reviewed_on": "2026-09-25"
+    },
+    {
+      "id": "outlines",
+      "name": "Outlines",
+      "category": "baselines",
+      "url": "https://github.com/dottxt-ai/outlines",
+      "source_ids": [
+        "outlines"
+      ],
+      "summary": {
+        "en": "Constrained structured output for ordinary language models.",
+        "zh": "为普通语言模型提供受约束结构化输出。"
+      },
+      "use": {
+        "en": "Separate the benefit of an output contract from the benefit of a new model.",
+        "zh": "区分输出约束的收益与新模型的收益。"
+      },
+      "caveat": {
+        "en": "Schema validity does not guarantee factual validity.",
+        "zh": "模式合法不保证事实正确。"
+      },
+      "reviewed_on": "2026-09-25"
+    },
+    {
+      "id": "tabicl",
+      "name": "TabICLv2",
+      "category": "baselines",
+      "url": "https://arxiv.org/abs/2602.11139",
+      "source_ids": [
+        "tabicl"
+      ],
+      "summary": {
+        "en": "A tabular foundation model for classification and regression.",
+        "zh": "用于表格分类与回归的基础模型。"
+      },
+      "use": {
+        "en": "Structured numerical/categorical inputs; an adjacent alternative, not a direct Jev replacement.",
+        "zh": "数值与类别型输入；属于相邻方案，不是 Jev 的直接替代。"
+      },
+      "caveat": {
+        "en": "Paper-level inclusion; no local reproduction or natural-language claim.",
+        "zh": "按论文收录；未本地复现，不外推自然语言能力。"
+      },
+      "reviewed_on": "2026-09-25"
+    },
+    {
+      "id": "routellm",
+      "name": "RouteLLM",
+      "category": "routing",
+      "url": "https://github.com/lm-sys/RouteLLM",
+      "source_ids": [
+        "routellm"
+      ],
+      "summary": {
+        "en": "Routes between stronger and cheaper language models using learned signals.",
+        "zh": "利用学习到的信号在强模型与便宜模型间路由。"
+      },
+      "use": {
+        "en": "Quality/cost routing baselines.",
+        "zh": "质量与成本权衡的路由基线。"
+      },
+      "caveat": {
+        "en": "Performance depends on the model pair, traffic and router training distribution.",
+        "zh": "效果依赖候选模型、流量与路由训练分布。"
+      },
+      "reviewed_on": "2026-09-25"
+    },
+    {
+      "id": "llmrouter",
+      "name": "LLMRouter",
+      "category": "routing",
+      "url": "https://github.com/ulab-uiuc/LLMRouter",
+      "source_ids": [
+        "llmrouter",
+        "llmrouter-paper"
+      ],
+      "summary": {
+        "en": "Research infrastructure for building and comparing routing strategies.",
+        "zh": "构建和比较路由策略的研究基础设施。"
+      },
+      "use": {
+        "en": "Compare alternative routers using common quality/cost measurements.",
+        "zh": "在共同质量与成本指标下比较路由方法。"
+      },
+      "caveat": {
+        "en": "The August 2026 paper is a preprint; do not equate infrastructure with a proven best policy.",
+        "zh": "2026 年 8 月论文为预印本；基础设施不是已证明的最优策略。"
+      },
+      "reviewed_on": "2026-09-25"
+    },
+    {
+      "id": "vw",
+      "name": "Vowpal Wabbit",
+      "category": "routing",
+      "url": "https://github.com/VowpalWabbit/vowpal_wabbit",
+      "source_ids": [
+        "vw"
+      ],
+      "summary": {
+        "en": "Online-learning and contextual-bandit tooling.",
+        "zh": "在线学习与上下文老虎机工具。"
+      },
+      "use": {
+        "en": "Decisions whose feedback is observed only for the action taken.",
+        "zh": "只能观察已执行动作反馈的决策问题。"
+      },
+      "caveat": {
+        "en": "Requires appropriate logging, exploration and evaluation assumptions.",
+        "zh": "需要合适的日志、探索与评估假设。"
+      },
+      "reviewed_on": "2026-09-25"
+    },
+    {
+      "id": "mapie",
+      "name": "MAPIE",
+      "category": "reliability",
+      "url": "https://github.com/scikit-learn-contrib/MAPIE",
+      "source_ids": [
+        "mapie"
+      ],
+      "summary": {
+        "en": "Prediction-set, uncertainty and conformal-risk tooling.",
+        "zh": "预测集合、不确定性与保形风险工具。"
+      },
+      "use": {
+        "en": "Separate risk control from the model generating a score.",
+        "zh": "将风险控制与生成分数的模型分开。"
+      },
+      "caveat": {
+        "en": "Guarantees depend on the procedure, target risk and data assumptions.",
+        "zh": "保证依赖方法、风险目标及数据假设。"
+      },
+      "reviewed_on": "2026-09-25"
+    },
+    {
+      "id": "decision-index",
+      "name": "Decision Index 0.2",
+      "category": "evaluation",
+      "url": "https://huggingface.co/spaces/multimodalart/jev-decision-index",
+      "source_ids": [
+        "decision-index"
+      ],
+      "summary": {
+        "en": "A broader decision benchmark index with explicit aggregation rules.",
+        "zh": "具有明确聚合规则的较广覆盖决策评测指数。"
+      },
+      "use": {
+        "en": "Inspect task coverage and aggregation before interpreting a ranking.",
+        "zh": "先检查任务覆盖和聚合方式，再解读排序。"
+      },
+      "caveat": {
+        "en": "Composite scores are not raw accuracy; API/GPU timings are not a controlled hardware experiment.",
+        "zh": "综合指数不是准确率；API 与 GPU 延迟并非受控硬件实验。"
+      },
+      "reviewed_on": "2026-09-25"
+    },
+    {
+      "id": "nimble-evaluation",
+      "name": "Nimble public evaluations",
+      "category": "evaluation",
+      "url": "https://github.com/bespokelabsai/nimble/blob/62076b4f2d365b5879dafcf7f6dd072a1fe76df7/docs/PUBLIC_BENCHMARKS.md",
+      "source_ids": [
+        "nimble-eval"
+      ],
+      "summary": {
+        "en": "Human-reference subsets, paired comparisons and calibration reporting.",
+        "zh": "人工参考标签子集、配对比较及校准报告。"
+      },
+      "use": {
+        "en": "A useful protocol to inspect and adapt, with artifact limitations recorded.",
+        "zh": "可检查并借鉴协议，同时保留产物公开范围限制。"
+      },
+      "caveat": {
+        "en": "Project-author-run, not independently reproduced by this list.",
+        "zh": "由项目方运行；本列表未独立复现。"
+      },
+      "reviewed_on": "2026-09-25"
+    },
+    {
+      "id": "independent-bench",
+      "name": "Decision-model benchmark",
+      "category": "evaluation",
+      "url": "https://github.com/nibzard/decision-model-benchmark",
+      "source_ids": [
+        "independent-bench"
+      ],
+      "summary": {
+        "en": "Third-party code and protocols for decision-model comparisons.",
+        "zh": "用于判断模型比较的第三方代码与协议。"
+      },
+      "use": {
+        "en": "A second perspective beyond model authors.",
+        "zh": "提供模型作者之外的另一种观察。"
+      },
+      "caveat": {
+        "en": "Third-party status alone does not certify methodology or labels.",
+        "zh": "第三方身份本身不保证方法或标签可靠。"
+      },
+      "reviewed_on": "2026-09-25"
+    },
+    {
+      "id": "scoring",
+      "name": "Strictly Proper Scoring Rules (2007)",
+      "category": "foundations",
+      "url": "https://doi.org/10.1198/016214506000001437",
+      "source_ids": [
+        "scoring"
+      ],
+      "summary": {
+        "en": "Why log loss and other proper scores target truthful distributions.",
+        "zh": "为什么对数损失等适当评分规则以真实分布为目标。"
+      },
+      "use": {
+        "en": "Start with what a probability score means.",
+        "zh": "先理解概率评分的含义。"
+      },
+      "caveat": {
+        "en": "An ideal optimization target is not proof of deployment calibration.",
+        "zh": "理想优化目标不等于部署已校准。"
+      },
+      "reviewed_on": "2026-09-25"
+    },
+    {
+      "id": "calibration",
+      "name": "On Calibration of Modern Neural Networks (2017)",
+      "category": "foundations",
+      "url": "https://proceedings.mlr.press/v70/guo17a.html",
+      "source_ids": [
+        "calibration"
+      ],
+      "summary": {
+        "en": "Empirical calibration and post-hoc temperature scaling.",
+        "zh": "经验校准及事后温度缩放。"
+      },
+      "use": {
+        "en": "Understand calibration as a measured property.",
+        "zh": "把校准理解为需要测量的性质。"
+      },
+      "caveat": {
+        "en": "Calibration cannot repair incorrect rankings or missing evidence.",
+        "zh": "校准不能修复错误排序或证据缺失。"
+      },
+      "reviewed_on": "2026-09-25"
+    },
+    {
+      "id": "selective",
+      "name": "Selective Classification (2017)",
+      "category": "foundations",
+      "url": "https://arxiv.org/abs/1705.08500v2",
+      "source_ids": [
+        "selective"
+      ],
+      "summary": {
+        "en": "Classification with abstention and risk/coverage trade-offs.",
+        "zh": "带拒判的分类与风险／覆盖率权衡。"
+      },
+      "use": {
+        "en": "Measure how much work can be safely automated.",
+        "zh": "测量有多少工作能在风险限制下自动处理。"
+      },
+      "caveat": {
+        "en": "Source experiments are not guarantees for unrelated LLM tasks.",
+        "zh": "原始实验不是无关 LLM 任务的保证。"
+      },
+      "reviewed_on": "2026-09-25"
+    },
+    {
+      "id": "defer",
+      "name": "Learning to Defer to an Expert (2020)",
+      "category": "foundations",
+      "url": "https://proceedings.mlr.press/v119/mozannar20b.html",
+      "source_ids": [
+        "defer"
+      ],
+      "summary": {
+        "en": "Jointly learn prediction and handoff to an expert.",
+        "zh": "联合学习预测与向专家交接。"
+      },
+      "use": {
+        "en": "Model executor complementarity, not task difficulty alone.",
+        "zh": "学习执行者互补性，而非仅给任务打难度分。"
+      },
+      "caveat": {
+        "en": "Humans and tools are not assumed infallible.",
+        "zh": "不能假设人工与工具不会犯错。"
+      },
+      "reviewed_on": "2026-09-25"
+    },
+    {
+      "id": "crc",
+      "name": "Conformal Risk Control (2022; reviewed v4)",
+      "category": "foundations",
+      "url": "https://arxiv.org/abs/2208.02814v4",
+      "source_ids": [
+        "crc"
+      ],
+      "summary": {
+        "en": "Calibrate risk-controlling procedures under stated conditions.",
+        "zh": "在明确条件下校准风险控制程序。"
+      },
+      "use": {
+        "en": "Separate a statistical guarantee from a confidence field.",
+        "zh": "区分统计保证与置信度字段。"
+      },
+      "caveat": {
+        "en": "Read exchangeability, loss and monotonicity assumptions.",
+        "zh": "检查交换性、损失与单调性等假设。"
+      },
+      "reviewed_on": "2026-09-25"
+    },
+    {
+      "id": "crc-2026",
+      "name": "Non-Monotonic Conformal Risk Control (2026)",
+      "category": "foundations",
+      "url": "https://arxiv.org/abs/2602.20151v1",
+      "source_ids": [
+        "crc-2026"
+      ],
+      "summary": {
+        "en": "Extends the risk-control discussion beyond monotone losses.",
+        "zh": "将风险控制讨论扩展到非单调损失。"
+      },
+      "use": {
+        "en": "Relevant when selective-risk objectives need more careful treatment.",
+        "zh": "选择性风险目标需要更谨慎处理时值得阅读。"
+      },
+      "caveat": {
+        "en": "Preprint; stability-dependent bounds, not unconditional safety.",
+        "zh": "预印本；依赖稳定性的界，不是无条件安全。"
+      },
+      "reviewed_on": "2026-09-25"
+    },
+    {
+      "id": "scoring-review",
+      "name": "Proper Scoring Rules: 2026 review",
+      "category": "foundations",
+      "url": "https://doi.org/10.1146/annurev-statistics-042424-050626",
+      "source_ids": [
+        "scoring-review"
+      ],
+      "summary": {
+        "en": "A recent review of estimation and forecast evaluation.",
+        "zh": "近期关于估计与预测评估的适当评分综述。"
+      },
+      "use": {
+        "en": "A deeper mathematical reading path.",
+        "zh": "进一步理解数学基础的阅读路径。"
+      },
+      "caveat": {
+        "en": "Included from the abstract and publication metadata.",
+        "zh": "基于摘要与出版元数据收录。"
+      },
+      "reviewed_on": "2026-09-25"
+    },
+    {
+      "id": "causal-defer",
+      "name": "Causal Learning to Defer (AAAI 2026)",
+      "category": "foundations",
+      "url": "https://ojs.aaai.org/index.php/AAAI/article/view/39493",
+      "source_ids": [
+        "causal-defer"
+      ],
+      "summary": {
+        "en": "Studies handoff learning with hidden confounding.",
+        "zh": "研究存在隐藏混杂时的交接学习。"
+      },
+      "use": {
+        "en": "A warning against treating observational routing logs as causal truth.",
+        "zh": "提醒不要把观察性路由日志当成因果真相。"
+      },
+      "caveat": {
+        "en": "Adjacent research, not a turnkey production router.",
+        "zh": "相邻研究，不是即用型生产路由器。"
+      },
+      "reviewed_on": "2026-09-25"
+    },
+    {
+      "id": "awesome-system-one",
+      "name": "Awesome System One",
+      "category": "related_lists",
+      "url": "https://github.com/andyrewlee/awesome-system-one",
+      "source_ids": [
+        "awesome-system-one"
+      ],
+      "summary": {
+        "en": "Closest ecosystem list; useful for discovery.",
+        "zh": "最接近主题的生态列表，适合发现项目。"
+      },
+      "use": {
+        "en": "Use for discovery; follow each original source.",
+        "zh": "用于发现资料；事实仍应追溯原始来源。"
+      },
+      "caveat": {
+        "en": "Inclusion here does not endorse every linked item.",
+        "zh": "本版收录不代表认可其中每个条目。"
+      },
+      "reviewed_on": "2026-09-25"
+    },
+    {
+      "id": "awesome-jev-zh",
+      "name": "Awesome Jev 中文",
+      "category": "related_lists",
+      "url": "https://github.com/yzfly/awesome-jev-zh",
+      "source_ids": [
+        "awesome-jev-zh"
+      ],
+      "summary": {
+        "en": "Chinese-language Jev ecosystem resources.",
+        "zh": "Jev 生态的中文资料。"
+      },
+      "use": {
+        "en": "Use for discovery; follow each original source.",
+        "zh": "用于发现资料；事实仍应追溯原始来源。"
+      },
+      "caveat": {
+        "en": "Inclusion here does not endorse every linked item.",
+        "zh": "本版收录不代表认可其中每个条目。"
+      },
+      "reviewed_on": "2026-09-25"
+    },
+    {
+      "id": "awesome-routing",
+      "name": "Awesome LLM Routing and Cascading",
+      "category": "related_lists",
+      "url": "https://github.com/ymoslem/awesome-llm-routing-cascading",
+      "source_ids": [
+        "awesome-routing"
+      ],
+      "summary": {
+        "en": "Specialist routing and cascading bibliography.",
+        "zh": "专门的路由与级联文献目录。"
+      },
+      "use": {
+        "en": "Use for discovery; follow each original source.",
+        "zh": "用于发现资料；事实仍应追溯原始来源。"
+      },
+      "caveat": {
+        "en": "Inclusion here does not endorse every linked item.",
+        "zh": "本版收录不代表认可其中每个条目。"
+      },
+      "reviewed_on": "2026-09-25"
+    },
+    {
+      "id": "awesome-conformal",
+      "name": "Awesome Conformal Prediction",
+      "category": "related_lists",
+      "url": "https://github.com/valeman/awesome-conformal-prediction",
+      "source_ids": [
+        "awesome-conformal"
+      ],
+      "summary": {
+        "en": "Specialist uncertainty and conformal prediction resources.",
+        "zh": "专门的不确定性与保形预测资料。"
+      },
+      "use": {
+        "en": "Use for discovery; follow each original source.",
+        "zh": "用于发现资料；事实仍应追溯原始来源。"
+      },
+      "caveat": {
+        "en": "Inclusion here does not endorse every linked item.",
+        "zh": "本版收录不代表认可其中每个条目。"
+      },
+      "reviewed_on": "2026-09-25"
+    }
+  ]
+}

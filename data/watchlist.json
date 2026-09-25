@@ -1,0 +1,77 @@
+{
+  "schema_version": 1,
+  "sources": [
+    {
+      "id": "kev-readme",
+      "kind": "github_file",
+      "url": "https://api.github.com/repos/jaredpalmer/kev/contents/README.md",
+      "meaning": "Documentation changed; inspect linked weight revisions separately."
+    },
+    {
+      "id": "clm-readme",
+      "kind": "github_file",
+      "url": "https://api.github.com/repos/Contrastive-LM/CLM/contents/README.md",
+      "meaning": "Source documentation changed; not proof that model weights changed."
+    },
+    {
+      "id": "nimble-evaluations",
+      "kind": "github_file",
+      "url": "https://api.github.com/repos/bespokelabsai/nimble/contents/docs/PUBLIC_BENCHMARKS.md",
+      "meaning": "Comparison report changed; preserve the previous evidence record."
+    },
+    {
+      "id": "gliner-runtime",
+      "kind": "github_file",
+      "url": "https://api.github.com/repos/fastino-ai/GLiNER2/contents/README.md",
+      "meaning": "Runtime/API documentation changed; check compatibility."
+    },
+    {
+      "id": "laya-typed",
+      "kind": "hf_model",
+      "url": "https://huggingface.co/api/models/convaiinnovations/laya-typed-decisions",
+      "meaning": "Model repository revision changed; determine whether this is weights, calibration or documentation."
+    },
+    {
+      "id": "laya-family",
+      "kind": "hf_model",
+      "url": "https://huggingface.co/api/models/convaiinnovations/laya",
+      "meaning": "Model repository revision changed; inspect files before claiming a new checkpoint."
+    },
+    {
+      "id": "kev4b",
+      "kind": "hf_model",
+      "url": "https://huggingface.co/api/models/jaredpalmer/kev-4b",
+      "meaning": "Model repository revision changed; inspect binary and card revisions separately."
+    },
+    {
+      "id": "clm-head",
+      "kind": "hf_model",
+      "url": "https://huggingface.co/api/models/Contrastive-LM/deepswe-clm-heads-8k",
+      "meaning": "Specialized head repository changed; compare hashes and held-out split."
+    },
+    {
+      "id": "nimble-model",
+      "kind": "hf_model",
+      "url": "https://huggingface.co/api/models/bespokelabs/Bespoke-Nimble-9B",
+      "meaning": "Adapter repository changed; do not attribute old evaluations to new weights."
+    },
+    {
+      "id": "gliner-decide",
+      "kind": "hf_model",
+      "url": "https://huggingface.co/api/models/fastino/GLiNER2.5-Decide-1B",
+      "meaning": "Checkpoint repository changed; check the evaluation protocol."
+    },
+    {
+      "id": "jev-primitives",
+      "kind": "web_page",
+      "url": "https://docs.typesafe.ai/primitives",
+      "meaning": "Raw page changed; dynamic HTML can cause false positives."
+    },
+    {
+      "id": "jev-confidence",
+      "kind": "web_page",
+      "url": "https://docs.typesafe.ai/confidence",
+      "meaning": "Raw page changed; a reviewer must decide whether confidence semantics changed."
+    }
+  ]
+}

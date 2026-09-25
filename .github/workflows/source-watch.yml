@@ -1,0 +1,33 @@
+name: Weekly source watch
+on:
+  schedule:
+    - cron: '17 6 * * 1' # Monday 06:17 UTC; best-effort GitHub scheduling
+  workflow_dispatch:
+permissions:
+  contents: read
+  issues: write
+concurrency:
+  group: decision-model-source-watch
+  cancel-in-progress: false
+jobs:
+  watch:
+    # A fork should opt in explicitly instead of creating unsolicited issues.
+    if: github.repository == 'leoncuhk/awesome-decision-models'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - name: Validate trusted watch configuration
+        run: python3 scripts/validate.py
+      - name: Detect source changes and maintain review issue
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: python3 scripts/watch_sources.py --issue
+      - name: Show source-watch report
+        if: always()
+        run: |
+          if [ -f reports/source-watch.md ]; then
+            cat reports/source-watch.md >> "$GITHUB_STEP_SUMMARY"
+          fi
