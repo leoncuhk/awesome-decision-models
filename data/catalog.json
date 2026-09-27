@@ -412,6 +412,26 @@
       "review_depth": "content_reviewed",
       "source_revision": null,
       "review_note": ""
+    },
+    {
+      "id": "jevos-repo",
+      "title": "jevos repository README",
+      "url": "https://github.com/feder-cr/jev",
+      "kind": "repository",
+      "reviewed_on": "2026-09-27",
+      "review_depth": "content_reviewed",
+      "source_revision": "eb74cf78e5377e85fcaa76f6ebc9f82e8b517250",
+      "review_note": "Submitted by one of the project's authors (feder-cr)."
+    },
+    {
+      "id": "jevos-release",
+      "title": "jevos release (jevos-q4_k_m.gguf, jevos-q8_0.gguf)",
+      "url": "https://github.com/feder-cr/jev/releases/tag/jevos",
+      "kind": "repository",
+      "reviewed_on": "2026-09-27",
+      "review_depth": "content_reviewed",
+      "source_revision": null,
+      "review_note": "Release assets and SHA256SUMS.txt inspected; not an independent benchmark reproduction of the README's own latency/accuracy numbers."
     }
   ],
   "entries": [
@@ -741,6 +761,54 @@
       "scale": {
         "en": "Checkpoint-dependent; no single family-wide parameter claim made here.",
         "zh": "依具体检查点而定；本版不为整个系列指定单一参数量。"
+      }
+    },
+    {
+      "id": "jevos",
+      "name": "jevos",
+      "category": "core_models",
+      "url": "https://github.com/feder-cr/jev",
+      "source_ids": [
+        "jevos-repo",
+        "jevos-release"
+      ],
+      "summary": {
+        "en": "Local, CPU-only alternative to Jev for yes/no decisions: a 1B model (MiniCPM5 cut to 17 layers with a single-logit output head) served as GGUF via llama.cpp, over the same wire format as Jev's API.",
+        "zh": "面向是非判断的本地纯 CPU 版 Jev 替代：将 MiniCPM5 裁剪至 17 层并加单 logit 输出头的 1B 模型，通过 llama.cpp 以 GGUF 格式提供服务，接口与 Jev API 同线格式。"
+      },
+      "use": {
+        "en": "A drop-in endpoint for TypeSafe's Jev SDK when only yes/no (`noul`) questions are needed and running fully offline on a laptop CPU is preferred over the hosted service.",
+        "zh": "只需要是非（`noul`）判断、且希望完全离线在笔记本 CPU 上运行时，可作为 TypeSafe Jev SDK 的直接替换端点。"
+      },
+      "caveat": {
+        "en": "Only yes/no questions are supported; `choice` and `score` requests return 422. On 2,000 yes/no questions from policies unseen in training it scored 0.815 accuracy versus the vendor's reported 0.927 for Jev (Laya 0.489 on the same set) — the author's own comparison, not an independent reproduction.",
+        "zh": "仅支持是非问题；`choice` 与 `score` 请求返回 422。在 2,000 道训练时未见过的策略是非题上，作者自测准确率为 0.815，低于其对比的 Jev（官方称 0.927，同一测试集 Laya 为 0.489）— 这是作者自评，不是独立复现。"
+      },
+      "reviewed_on": "2026-09-27",
+      "mechanism": {
+        "en": "MiniCPM5 truncated to 17 layers with a single-logit output head; one forward pass per question, no text generation.",
+        "zh": "MiniCPM5 裁剪至 17 层并加单 logit 输出头；每个问题一次前向传播，不生成文本。"
+      },
+      "training": {
+        "en": "Not established by the reviewed material beyond the architecture change (layer pruning plus a single-logit head); no training recipe or dataset is published.",
+        "zh": "除架构改动（裁剪层数并加单 logit 头）外，训练方案与数据集本版未见公开，不作推断。"
+      },
+      "availability": {
+        "en": "Open weights (GGUF: q4_k_m 619 MB and q8_0) under MIT; runs fully offline via llama.cpp, CPU only, no GPU required.",
+        "zh": "开放权重（GGUF 格式：q4_k_m 619 MB 及 q8_0），MIT 许可；通过 llama.cpp 完全离线运行，仅需 CPU，无需 GPU。"
+      },
+      "license_note": "Repository and release declare MIT.",
+      "weight_revision": "677d126a67d48a6ae965ce80973e7e68c7ab0b13b590a557d8f0cc29a178499f",
+      "tags": [
+        "typed-decisions",
+        "local",
+        "cpu-only",
+        "open-weight",
+        "gguf"
+      ],
+      "scale": {
+        "en": "1B parameters (MiniCPM5 base cut to 17 layers).",
+        "zh": "1B 参数（MiniCPM5 基座裁剪至 17 层）。"
       }
     },
     {

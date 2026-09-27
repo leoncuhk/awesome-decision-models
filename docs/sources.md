@@ -310,3 +310,19 @@
 - Kind: `official_docs`; review depth: `content_reviewed`; reviewed: 2026-09-25
 - Source revision: `not captured / live URL`
 
+<a id="jevos-repo"></a>
+## jevos repository README
+
+- Source: https://github.com/feder-cr/jev
+- Kind: `repository`; review depth: `content_reviewed`; reviewed: 2026-09-27
+- Source revision: `eb74cf78e5377e85fcaa76f6ebc9f82e8b517250`
+- Note: Submitted by one of the project's authors (feder-cr).
+
+<a id="jevos-release"></a>
+## jevos release (jevos-q4_k_m.gguf, jevos-q8_0.gguf)
+
+- Source: https://github.com/feder-cr/jev/releases/tag/jevos
+- Kind: `repository`; review depth: `content_reviewed`; reviewed: 2026-09-27
+- Source revision: `not captured / live URL`
+- Note: Release assets and SHA256SUMS.txt inspected; not an independent benchmark reproduction of the README's own latency/accuracy numbers.
+
