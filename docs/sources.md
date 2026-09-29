@@ -244,6 +244,14 @@
 - Source revision: `not captured / live URL`
 - Note: AAAI 2026 proceedings abstract. Adjacent research, not a ready-to-deploy router.
 
+<a id="jev-in-the-wild"></a>
+## Jev in the Wild: A Data-Driven Analysis of the Jev Model's Functionality, Applications and Ecosystem
+
+- Source: https://arxiv.org/abs/2609.30216
+- Kind: `paper`; review depth: `abstract_reviewed`; reviewed: 2026-09-29
+- Source revision: `not captured / live URL`
+- Note: Jev application ecosystem survey; the abstract was reviewed, but project coding and results were not independently reproduced.
+
 <a id="decision-index"></a>
 ## Decision Index 0.2 release
 

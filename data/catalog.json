@@ -324,6 +324,16 @@
       "review_note": "AAAI 2026 proceedings abstract. Adjacent research, not a ready-to-deploy router."
     },
     {
+      "id": "jev-in-the-wild",
+      "title": "Jev in the Wild: A Data-Driven Analysis of the Jev Model's Functionality, Applications and Ecosystem",
+      "url": "https://arxiv.org/abs/2609.30216",
+      "kind": "paper",
+      "reviewed_on": "2026-09-29",
+      "review_depth": "abstract_reviewed",
+      "source_revision": null,
+      "review_note": "Jev application ecosystem survey; the abstract was reviewed, but project coding and results were not independently reproduced."
+    },
+    {
       "id": "decision-index",
       "title": "Decision Index 0.2 release",
       "url": "https://huggingface.co/spaces/multimodalart/jev-decision-index/commit/180e621de8bf96962b11a4156b5688d834a47139",
@@ -1161,6 +1171,28 @@
         "zh": "相邻研究，不是即用型生产路由器。"
       },
       "reviewed_on": "2026-09-25"
+    },
+    {
+      "id": "jev-in-the-wild",
+      "name": "Jev in the Wild (2026)",
+      "category": "foundations",
+      "url": "https://arxiv.org/abs/2609.30216",
+      "source_ids": [
+        "jev-in-the-wild"
+      ],
+      "summary": {
+        "en": "Data-driven survey and analysis of 2,170 public GitHub Jev projects, including early growth, application domains and decision-use patterns.",
+        "zh": "基于 2,170 个公开 GitHub Jev 项目的数据驱动综述与分析，涵盖早期增长、应用领域及决策用途分布。"
+      },
+      "use": {
+        "en": "Understand where typed decision models appear in public projects before choosing evaluation tasks.",
+        "zh": "在选择评测任务前，了解类型化决策模型在公开项目中的应用场景。"
+      },
+      "caveat": {
+        "en": "Public repository counts do not establish deployment adoption or model accuracy; included from the abstract, not an independent reproduction.",
+        "zh": "公开仓库数量不能证明实际部署规模或模型准确率；此处仅核读摘要，未独立复现。"
+      },
+      "reviewed_on": "2026-09-29"
     },
     {
       "id": "awesome-system-one",
