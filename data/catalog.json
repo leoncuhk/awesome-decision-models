@@ -451,7 +451,7 @@
       "reviewed_on": "2026-09-30",
       "review_depth": "content_reviewed",
       "source_revision": "9e7d9e8a24e9605bec249045a39df91ff2b58b0d",
-      "review_note": "Reviewed README, LICENSE, API translation/backend code, wiki/small-language-models-explained.md, wiki/measurements.md and wiki/llm-policy-decisions-put-the-rule-in-the-question.md. Documentation describes a 1B model and says criteria is ignored for jevos. Base-model provenance, layer count and training recipe were not established. This is source review, not runtime/SDK conformance testing."
+      "review_note": "Reviewed README, LICENSE, CLI binary-mode selection, API translation/backend code, engine/engine.py, engine/prompts.py, engine/decisions.py, wiki/small-language-models-explained.md, wiki/measurements.md and wiki/llm-policy-decisions-put-the-rule-in-the-question.md. Documentation describes a 1B model; binary prompt compilation uses instructions and fixed 0/1 answer slots, with logits normalized to P(yes). Base-model provenance, layer count and training recipe were not established. This is source review, not runtime/SDK conformance testing."
     },
     {
       "id": "jevos-v2-release",
@@ -817,8 +817,8 @@
       },
       "reviewed_on": "2026-09-30",
       "mechanism": {
-        "en": "A local GGUF yes/no model returning P(yes), without generating a text answer. The reviewed sources do not establish the submitted MiniCPM5 base, 17-layer count or exact readout implementation.",
-        "zh": "本地 GGUF 是非模型，返回 P(yes) 而不生成文本答案。本次核读资料未确证投稿所述 MiniCPM5 基座、17 层结构或确切读出实现。"
+        "en": "The inspected binary runtime reads logits at fixed 0/1 answer-token slots and applies softmax to return P(yes), without text generation. The submitted MiniCPM5 base and 17-layer count remain unestablished; this code path was not executed here.",
+        "zh": "核读源码的二元模式读取固定 0/1 答案 token 槽的 logits，再通过 softmax 返回 P(yes)，不生成文本。投稿所述 MiniCPM5 基座和 17 层结构仍未确证；本次没有执行这条代码路径。"
       },
       "training": {
         "en": "Training recipe, dataset and base-checkpoint provenance were not established by the reviewed sources; no independent training reproduction.",

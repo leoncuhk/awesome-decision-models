@@ -340,7 +340,7 @@
 - Source: https://github.com/feder-cr/jev/tree/9e7d9e8a24e9605bec249045a39df91ff2b58b0d
 - Kind: `repository`; review depth: `content_reviewed`; reviewed: 2026-09-30
 - Source revision: `9e7d9e8a24e9605bec249045a39df91ff2b58b0d`
-- Note: Reviewed README, LICENSE, API translation/backend code, wiki/small-language-models-explained.md, wiki/measurements.md and wiki/llm-policy-decisions-put-the-rule-in-the-question.md. Documentation describes a 1B model and says criteria is ignored for jevos. Base-model provenance, layer count and training recipe were not established. This is source review, not runtime/SDK conformance testing.
+- Note: Reviewed README, LICENSE, CLI binary-mode selection, API translation/backend code, engine/engine.py, engine/prompts.py, engine/decisions.py, wiki/small-language-models-explained.md, wiki/measurements.md and wiki/llm-policy-decisions-put-the-rule-in-the-question.md. Documentation describes a 1B model; binary prompt compilation uses instructions and fixed 0/1 answer slots, with logits normalized to P(yes). Base-model provenance, layer count and training recipe were not established. This is source review, not runtime/SDK conformance testing.
 
 <a id="jevos-v2-release"></a>
 ## jevos-v2 release and asset metadata
