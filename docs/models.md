@@ -4,7 +4,7 @@
 
 Source review: 2026-09-30. These are source-backed descriptions and curatorial use cases, not production certifications.
 
-`Unknown` is intentional. An inspected source revision does not identify the deployed weight revision. Language support, licenses and resource requirements must be checked for the exact artifact.
+`Unknown` is intentional. An inspected source revision does not identify the deployed weight revision. Language support, licenses and resource requirements must be checked for the exact artifact. Recorded weight identifiers are source-reported unless a local binary verification is explicitly documented; recording an identifier is not a claim that the weights were downloaded or hashed here.
 
 <a id="jev"></a>
 ## Jev / TypeSafe
@@ -24,7 +24,7 @@ Hosted typed judgments: probabilities over supplied choices, propositions and or
 | Boundary | RLCD is vendor-described; the full training recipe is not public. Valid schemas and confidence fields do not establish semantic reliability. | RLCD 的完整训练配方未公开；格式合法与置信度字段不等于语义可靠。 |
 
 **License note:** Commercial service terms; no open-weight license implied.
-**Weight revision audited here:** Unknown / not pinned
+**Recorded weight identifier:** Unknown / not pinned
 
 **Sources:** [Introducing System One Models & Jev](https://typesafe.ai/blog/introducing-system-one-models-and-jev); [TypeSafe primitives](https://docs.typesafe.ai/primitives); [TypeSafe confidence semantics](https://docs.typesafe.ai/confidence)
 
@@ -46,7 +46,7 @@ Compact encoder family with dynamic option heads; general, multilingual and work
 | Boundary | Do not mix base and specialized scores. The typed checkpoint currently discloses training/calibration overlap and inherited-temperature conflicts. | 不可混用基础版与专项版成绩；专项卡明确披露训练与校准数据重叠及温度配置冲突。 |
 
 **License note:** Reviewed family/specialist cards declare Apache-2.0; verify each selected artifact.
-**Weight revision audited here:** Unknown / not pinned
+**Recorded weight identifier:** Unknown / not pinned
 
 **Sources:** [Laya model family](https://huggingface.co/convaiinnovations/laya); [Laya Typed-Decisions model card](https://huggingface.co/convaiinnovations/laya-typed-decisions)
 
@@ -68,7 +68,7 @@ Qwen 骨干、适配器及动态 pointer head，配套类型化判断训练和�
 | Boundary | New-source development, held-out tests and trained-source scores are distinct. Adapter size is not deployment memory. | 新来源开发集、最终测试集与已训练来源成绩不同；适配器大小不是部署内存。 |
 
 **License note:** Repository describes Apache-2.0; confirm adapter and backbone terms separately.
-**Weight revision audited here:** Unknown / not pinned
+**Recorded weight identifier:** Unknown / not pinned
 
 **Sources:** [Kev repository](https://github.com/jaredpalmer/kev/blob/2855ba2a55a80579176a459f78b95d03548cabb5/README.md); [Kev-4B model card](https://huggingface.co/jaredpalmer/kev-4b)
 
@@ -90,7 +90,7 @@ Separate state and action representations with learned projection heads on a fro
 | Boundary | Relative ranking cannot detect every all-wrong candidate set. Best-of-N scores include supplied candidates, not autonomous task-solving ability. | 相对排序不能保证识别“全部候选都错”；Best-of-N 成绩不代表模型独立解题能力。 |
 
 **License note:** Base card: Apache-2.0. Reviewed DeepSWE head card: MIT. Do not assign one license to the whole family.
-**Weight revision audited here:** Unknown / not pinned
+**Recorded weight identifier:** Unknown / not pinned
 
 **Sources:** [CLM repository](https://github.com/Contrastive-LM/CLM/blob/bb42c6c5bf914fd449bed2f6ca65be80602cb1f7/README.md); [CLM v0.1-8B model card](https://huggingface.co/Contrastive-LM/CLM-v0.1-8B); [DeepSWE fixed-split projection head](https://huggingface.co/Contrastive-LM/deepswe-clm-heads-8k)
 
@@ -112,7 +112,7 @@ Qwen 监督适配器，直接读取答案标签 logits，而非生成解释。
 | Boundary | Contrastive data construction is not CLM-style contrastive embedding training. Public benchmark reporting is author-run and raw run outputs are not all committed. | 对比式样本构造不等于 CLM 的对比表示训练；公开比较由项目方运行，完整逐行输出并未全部提交。 |
 
 **License note:** Reviewed model card declares Apache-2.0; inherited dependencies retain their terms.
-**Weight revision audited here:** Unknown / not pinned
+**Recorded weight identifier:** Unknown / not pinned
 
 **Sources:** [Bespoke Nimble model card](https://huggingface.co/bespokelabs/Bespoke-Nimble-9B); [Nimble public human-reference benchmark protocol and results](https://github.com/bespokelabsai/nimble/blob/62076b4f2d365b5879dafcf7f6dd072a1fe76df7/docs/PUBLIC_BENCHMARKS.md)
 
@@ -134,7 +134,7 @@ Schema-conditioned local classification with runtime labels and multiple decisio
 | Boundary | This review inspected the 1B card, which cross-reports 340M results. Dataset audit is incomplete; JevK5 in that table is not TypeSafe Jev. | 本版核对的是 1B 模型卡，其中交叉报告 340M 成绩；数据集审计未完成，表中 JevK5 不是 TypeSafe Jev。 |
 
 **License note:** Reviewed 1B card declares Apache-2.0; other checkpoints need separate checks.
-**Weight revision audited here:** Unknown / not pinned
+**Recorded weight identifier:** Unknown / not pinned
 
 **Sources:** [GLiNER2.5-Decide-1B model card](https://huggingface.co/fastino/GLiNER2.5-Decide-1B); [GLiNER2 runtime](https://github.com/fastino-ai/GLiNER2)
 
@@ -156,7 +156,7 @@ Label-conditioned text classification with user-supplied labels, including multi
 | Boundary | Classification capability does not establish general workflow verification or calibrated operational risk. | 分类能力不等于通用工作流验收能力，也不保证业务风险已校准。 |
 
 **License note:** Consult repository and chosen checkpoint license; not fully audited in this edition.
-**Weight revision audited here:** Unknown / not pinned
+**Recorded weight identifier:** Unknown / not pinned
 
 **Sources:** [GLiClass](https://github.com/Knowledgator/GLiClass)
 
@@ -178,7 +178,7 @@ Local yes/no decision model served as GGUF through llama.cpp, with a TypeSafe Je
 | Boundary | Yes/no only: `choice` and `score` return 422, and the jevos documentation says `criteria` is accepted but ignored. Wire-format compatibility is not semantic equivalence. Arithmetic/date errors and benchmark sensitivity are author-reported; old README results do not identify v2 performance. | 仅支持是非判断：`choice`、`score` 返回 422，jevos 文档说明 `criteria` 虽被接受却不参与判断。接口格式兼容不等于语义等价。算术、日期错误及评测敏感性由作者自报；旧版 README 的成绩不能代表 v2。 |
 
 **License note:** Repository LICENSE is MIT; reviewed release metadata does not separately establish base-weight license provenance.
-**Weight revision audited here:** 3cbf010ce06cba932af73346ee683ee98d375dc284c029967eb418472a4993f3
+**Recorded weight identifier:** 3cbf010ce06cba932af73346ee683ee98d375dc284c029967eb418472a4993f3
 
 **Sources:** [jevos pinned README and runtime documentation](https://github.com/feder-cr/jev/tree/9e7d9e8a24e9605bec249045a39df91ff2b58b0d); [jevos-v2 release and asset metadata](https://github.com/feder-cr/jev/releases/tag/jevos-v2); [jevos repository README](https://github.com/feder-cr/jev/blob/eb74cf78e5377e85fcaa76f6ebc9f82e8b517250/README.md)
 
