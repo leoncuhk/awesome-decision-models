@@ -1,4 +1,4 @@
-# Awesome Decision Models
+# Awesome Decision Models [![Awesome](https://awesome.re/badge.svg)](https://awesome.re)
 
 **Models, methods and evidence for reliable decisions in AI systems.**
 
@@ -6,7 +6,7 @@
 
 A curated guide to systems that **classify, score, rank, verify, route or abstain** rather than primarily generate prose. The central question is not which model has the most impressive headline, but **which method delivers acceptable outcomes at acceptable risk and total cost for a particular task**.
 
-**Source review: 2026-09-30.** 32 selected resources, including 8 core model families and 5 contextualized evidence records. This edition reviews public sources; **it does not claim independent model reproduction**. Review depth and unresolved gaps are recorded in the [source register](docs/sources.md). Inclusion is not an endorsement or a production-readiness certification.
+**Source review: 2026-09-30.** 33 selected resources, including 8 core model families and 5 contextualized evidence records. This edition reviews public sources; **it does not claim independent model reproduction**. Review depth and unresolved gaps are recorded in the [source register](docs/sources.md). Inclusion is not an endorsement or a production-readiness certification.
 
 ## Contents
 
@@ -109,6 +109,7 @@ These maintainers provide complementary discovery paths. This repository adds a 
 - **[Awesome Jev 中文](https://github.com/yzfly/awesome-jev-zh)** — Chinese-language Jev ecosystem resources. Inclusion here does not endorse every linked item.
 - **[Awesome LLM Routing and Cascading](https://github.com/ymoslem/awesome-llm-routing-cascading)** — Specialist routing and cascading bibliography. Inclusion here does not endorse every linked item.
 - **[Awesome Conformal Prediction](https://github.com/valeman/awesome-conformal-prediction)** — Specialist uncertainty and conformal prediction resources. Inclusion here does not endorse every linked item.
+- **[Awesome Martech AI](https://github.com/leoncuhk/awesome-martech-ai)** — Marketing data, intelligence, decision, activation and measurement resources with applied playbooks. Companion navigation, not independent product validation; its synthetic demo does not establish customer uplift.
 
 ## Maintenance and contribution
 

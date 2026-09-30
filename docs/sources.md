@@ -340,7 +340,7 @@
 - Source: https://github.com/feder-cr/jev/tree/9e7d9e8a24e9605bec249045a39df91ff2b58b0d
 - Kind: `repository`; review depth: `content_reviewed`; reviewed: 2026-09-30
 - Source revision: `9e7d9e8a24e9605bec249045a39df91ff2b58b0d`
-- Note: Reviewed README, LICENSE, API translation/backend code, wiki/small-language-models-explained.md, wiki/measurements.md and wiki/llm-policy-decisions-put-the-rule-in-the-question.md. Documentation describes a 1B model and says criteria is ignored for jevos. Base-model provenance, layer count and training recipe were not established. This is source review, not runtime/SDK conformance testing.
+- Note: Reviewed README, LICENSE, CLI binary-mode selection, API translation/backend code, engine/engine.py, engine/prompts.py, engine/decisions.py, wiki/small-language-models-explained.md, wiki/measurements.md and wiki/llm-policy-decisions-put-the-rule-in-the-question.md. Documentation describes a 1B model; binary prompt compilation uses instructions and fixed 0/1 answer slots, with logits normalized to P(yes). Base-model provenance, layer count and training recipe were not established. This is source review, not runtime/SDK conformance testing.
 
 <a id="jevos-v2-release"></a>
 ## jevos-v2 release and asset metadata
@@ -349,4 +349,12 @@
 - Kind: `repository`; review depth: `content_reviewed`; reviewed: 2026-09-30
 - Source revision: `not captured / live URL`
 - Note: Published 2026-09-29 UTC. Release describes 0.795 on 999 hand-written questions versus 0.757 previously; author-reported, not directly comparable with the old 2,000-question README figure. GitHub API lists jevos-v2-q4_k_m.gguf (619289280 bytes, SHA-256 3cbf010ce06cba932af73346ee683ee98d375dc284c029967eb418472a4993f3) and q8_0. Asset metadata was inspected; binaries were not downloaded or hashed locally.
+
+<a id="awesome-martech-ai"></a>
+## Awesome Martech AI guide
+
+- Source: https://github.com/leoncuhk/awesome-martech-ai/blob/d5b63876af2ba6128f4582f2be1c8edf0517dd3d/README.md
+- Kind: `repository`; review depth: `content_reviewed`; reviewed: 2026-09-30
+- Source revision: `d5b63876af2ba6128f4582f2be1c8edf0517dd3d`
+- Note: Companion maintained by the same repository owner. Reviewed five-layer scope, measurement/evidence standards, applied playbooks and synthetic incrementality-demo limits; navigation inclusion is not independent certification of its linked products.
 
