@@ -1,4 +1,4 @@
-# Awesome Decision Models
+# Awesome Decision Models [![Awesome](https://awesome.re/badge.svg)](https://awesome.re)
 
 **Models, methods and evidence for reliable decisions in AI systems.**
 

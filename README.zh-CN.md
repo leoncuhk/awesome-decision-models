@@ -1,4 +1,4 @@
-# Awesome Decision Models
+# Awesome Decision Models [![Awesome](https://awesome.re/badge.svg)](https://awesome.re)
 
 **面向 AI 系统可靠判断的模型、方法与实证资料。**
 
