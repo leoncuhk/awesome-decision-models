@@ -6,7 +6,7 @@
 
 A curated guide to systems that **classify, score, rank, verify, route or abstain** rather than primarily generate prose. The central question is not which model has the most impressive headline, but **which method delivers acceptable outcomes at acceptable risk and total cost for a particular task**.
 
-**Source review: 2026-09-25.** 31 selected resources, including 8 core model families and 5 contextualized evidence records. This edition reviews public sources; **it does not claim independent model reproduction**. Review depth and unresolved gaps are recorded in the [source register](docs/sources.md). Inclusion is not an endorsement or a production-readiness certification.
+**Source review: 2026-09-25.** 32 selected resources, including 8 core model families and 5 contextualized evidence records. This edition reviews public sources; **it does not claim independent model reproduction**. Review depth and unresolved gaps are recorded in the [source register](docs/sources.md). Inclusion is not an endorsement or a production-readiness certification.
 
 ## Contents
 
@@ -99,6 +99,7 @@ Reading order: probability quality → abstention → executor handoff → risk 
 - **[Non-Monotonic Conformal Risk Control (2026)](https://arxiv.org/abs/2602.20151v1)** — Extends the risk-control discussion beyond monotone losses. Preprint; stability-dependent bounds, not unconditional safety.
 - **[Proper Scoring Rules: 2026 review](https://doi.org/10.1146/annurev-statistics-042424-050626)** — A recent review of estimation and forecast evaluation. Included from the abstract and publication metadata.
 - **[Causal Learning to Defer (AAAI 2026)](https://ojs.aaai.org/index.php/AAAI/article/view/39493)** — Studies handoff learning with hidden confounding. Adjacent research, not a turnkey production router.
+- **[Jev in the Wild (2026)](https://arxiv.org/abs/2609.30216)** — Data-driven survey and analysis of 2,170 public GitHub Jev projects, including early growth, application domains and decision-use patterns. Public repository counts do not establish deployment adoption or model accuracy; included from the abstract, not an independent reproduction.
 
 ## Related lists
 
