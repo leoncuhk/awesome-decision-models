@@ -2,7 +2,7 @@
 
 [Home](../README.md) · [中文首页](../README.zh-CN.md) · [Evidence](evidence.md)
 
-Source review: 2026-09-25. These are source-backed descriptions and curatorial use cases, not production certifications.
+Source review: 2026-09-30. These are source-backed descriptions and curatorial use cases, not production certifications.
 
 `Unknown` is intentional. An inspected source revision does not identify the deployed weight revision. Language support, licenses and resource requirements must be checked for the exact artifact.
 
@@ -165,20 +165,20 @@ Label-conditioned text classification with user-supplied labels, including multi
 
 [Project / model](https://github.com/feder-cr/jev)
 
-Local, CPU-only alternative to Jev for yes/no decisions: a 1B model (MiniCPM5 cut to 17 layers with a single-logit output head) served as GGUF via llama.cpp, over the same wire format as Jev's API.
-面向是非判断的本地纯 CPU 版 Jev 替代：将 MiniCPM5 裁剪至 17 层并加单 logit 输出头的 1B 模型，通过 llama.cpp 以 GGUF 格式提供服务，接口与 Jev API 同线格式。
+Local yes/no decision model served as GGUF through llama.cpp, with a TypeSafe Jev-compatible request/response shape for `noul` questions.
+通过 llama.cpp 以 GGUF 格式提供本地是非判断，`noul` 请求与响应采用 TypeSafe Jev 的接口格式。
 
 | Dimension | English | 中文 |
 | --- | --- | --- |
-| Scale | 1B parameters (MiniCPM5 base cut to 17 layers). | 1B 参数（MiniCPM5 基座裁剪至 17 层）。 |
-| Mechanism | MiniCPM5 truncated to 17 layers with a single-logit output head; one forward pass per question, no text generation. | MiniCPM5 裁剪至 17 层并加单 logit 输出头；每个问题一次前向传播，不生成文本。 |
-| Training | Not established by the reviewed material beyond the architecture change (layer pruning plus a single-logit head); no training recipe or dataset is published. | 除架构改动（裁剪层数并加单 logit 头）外，训练方案与数据集本版未见公开，不作推断。 |
-| Deployment | Open weights (GGUF: q4_k_m 619 MB and q8_0) under MIT; runs fully offline via llama.cpp, CPU only, no GPU required. | 开放权重（GGUF 格式：q4_k_m 619 MB 及 q8_0），MIT 许可；通过 llama.cpp 完全离线运行，仅需 CPU，无需 GPU。 |
-| Suggested use | A drop-in endpoint for TypeSafe's Jev SDK when only yes/no (`noul`) questions are needed and running fully offline on a laptop CPU is preferred over the hosted service. | 只需要是非（`noul`）判断、且希望完全离线在笔记本 CPU 上运行时，可作为 TypeSafe Jev SDK 的直接替换端点。 |
-| Boundary | Only yes/no questions are supported; `choice` and `score` requests return 422. On 2,000 yes/no questions from policies unseen in training it scored 0.815 accuracy versus the vendor's reported 0.927 for Jev (Laya 0.489 on the same set) — the author's own comparison, not an independent reproduction. | 仅支持是非问题；`choice` 与 `score` 请求返回 422。在 2,000 道训练时未见过的策略是非题上，作者自测准确率为 0.815，低于其对比的 Jev（官方称 0.927，同一测试集 Laya 为 0.489）— 这是作者自评，不是独立复现。 |
+| Scale | Project documentation describes 1B parameters; this review did not inspect the weight tensors or independently count parameters. | 项目文档称为 1B 参数；本次没有检查权重张量或独立核算参数量。 |
+| Mechanism | A local GGUF yes/no model returning P(yes), without generating a text answer. The reviewed sources do not establish the submitted MiniCPM5 base, 17-layer count or exact readout implementation. | 本地 GGUF 是非模型，返回 P(yes) 而不生成文本答案。本次核读资料未确证投稿所述 MiniCPM5 基座、17 层结构或确切读出实现。 |
+| Training | Training recipe, dataset and base-checkpoint provenance were not established by the reviewed sources; no independent training reproduction. | 核读来源未确证训练配方、数据集和基座检查点来源；没有独立训练复现。 |
+| Deployment | The v2 release lists q4_k_m (619,289,280 bytes) and q8_0 GGUF assets. Documentation describes offline CPU use via llama.cpp. Listed hashes are publisher/API metadata, not local binary verification. | v2 发布页列出 q4_k_m（619,289,280 字节）和 q8_0 GGUF 权重，文档说明可通过 llama.cpp 在 CPU 上离线运行。记录的哈希来自发布方/API 元数据，未经本地下载核验。 |
+| Suggested use | Experiment with CPU-local reading and triage questions; put the full policy in `instructions` and validate behavior on your own labeled cases. | 用于探索 CPU 本地文本判读与分流；将完整规则写入 `instructions`，并用自己的标注样例验证行为。 |
+| Boundary | Yes/no only: `choice` and `score` return 422, and the jevos documentation says `criteria` is accepted but ignored. Wire-format compatibility is not semantic equivalence. Arithmetic/date errors and benchmark sensitivity are author-reported; old README results do not identify v2 performance. | 仅支持是非判断：`choice`、`score` 返回 422，jevos 文档说明 `criteria` 虽被接受却不参与判断。接口格式兼容不等于语义等价。算术、日期错误及评测敏感性由作者自报；旧版 README 的成绩不能代表 v2。 |
 
-**License note:** Repository and release declare MIT.
-**Weight revision audited here:** 677d126a67d48a6ae965ce80973e7e68c7ab0b13b590a557d8f0cc29a178499f
+**License note:** Repository LICENSE is MIT; reviewed release metadata does not separately establish base-weight license provenance.
+**Weight revision audited here:** 3cbf010ce06cba932af73346ee683ee98d375dc284c029967eb418472a4993f3
 
-**Sources:** [jevos repository README](https://github.com/feder-cr/jev); [jevos release (jevos-q4_k_m.gguf, jevos-q8_0.gguf)](https://github.com/feder-cr/jev/releases/tag/jevos)
+**Sources:** [jevos pinned README and runtime documentation](https://github.com/feder-cr/jev/tree/9e7d9e8a24e9605bec249045a39df91ff2b58b0d); [jevos-v2 release and asset metadata](https://github.com/feder-cr/jev/releases/tag/jevos-v2); [jevos repository README](https://github.com/feder-cr/jev/blob/eb74cf78e5377e85fcaa76f6ebc9f82e8b517250/README.md)
 
