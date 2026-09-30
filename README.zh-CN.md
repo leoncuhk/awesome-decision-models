@@ -6,7 +6,7 @@
 
 收录用于**分类、评分、排序、验证、路由与拒判**的模型和方法。我们关心的不是谁的宣传数字更高，而是：**在具体任务中，哪种方法能以可接受的风险和总成本，交付可验收的结果。**
 
-**本版来源核验日期：2026-09-30。** 精选 32 项资源，其中 8 个核心模型系列、5 条带协议背景的评测记录。本版完成的是公开资料核验，**没有宣称独立运行并复现这些模型**。阅读深度、版本固定情况与未解决的资料缺口均见[来源登记](docs/sources.md)。收录不等于背书，也不等于通过生产可靠性认证。
+**本版来源核验日期：2026-09-30。** 精选 33 项资源，其中 8 个核心模型系列、5 条带协议背景的评测记录。本版完成的是公开资料核验，**没有宣称独立运行并复现这些模型**。阅读深度、版本固定情况与未解决的资料缺口均见[来源登记](docs/sources.md)。收录不等于背书，也不等于通过生产可靠性认证。
 
 ## 目录
 
@@ -109,6 +109,7 @@
 - **[Awesome Jev 中文](https://github.com/yzfly/awesome-jev-zh)** — Jev 生态的中文资料。 本版收录不代表认可其中每个条目。
 - **[Awesome LLM Routing and Cascading](https://github.com/ymoslem/awesome-llm-routing-cascading)** — 专门的路由与级联文献目录。 本版收录不代表认可其中每个条目。
 - **[Awesome Conformal Prediction](https://github.com/valeman/awesome-conformal-prediction)** — 专门的不确定性与保形预测资料。 本版收录不代表认可其中每个条目。
+- **[Awesome Martech AI](https://github.com/leoncuhk/awesome-martech-ai)** — 涵盖营销数据、智能、决策、激活和测量的资源及实践指南。 相关导航不构成独立产品验证；合成演示不证明客户业务增量。
 
 ## 维护与贡献
 
