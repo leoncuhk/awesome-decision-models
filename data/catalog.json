@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "reviewed_on": "2026-09-25",
+  "reviewed_on": "2026-09-30",
   "scope": "Evidence-backed models, methods and evaluation for bounded decisions in AI systems.",
   "sources": [
     {
@@ -422,6 +422,46 @@
       "review_depth": "content_reviewed",
       "source_revision": null,
       "review_note": ""
+    },
+    {
+      "id": "jevos-repo",
+      "title": "jevos repository README",
+      "url": "https://github.com/feder-cr/jev/blob/eb74cf78e5377e85fcaa76f6ebc9f82e8b517250/README.md",
+      "kind": "repository",
+      "reviewed_on": "2026-09-27",
+      "review_depth": "content_reviewed",
+      "source_revision": "eb74cf78e5377e85fcaa76f6ebc9f82e8b517250",
+      "review_note": "Historical README submitted by project author feder-cr in PR #1. Its 0.815 / 2,000 comparison is author-reported, including the Jev 0.927 result; it is not a vendor-certified score or a result for the later v2 weights."
+    },
+    {
+      "id": "jevos-release",
+      "title": "jevos release (jevos-q4_k_m.gguf, jevos-q8_0.gguf)",
+      "url": "https://github.com/feder-cr/jev/releases/tag/jevos",
+      "kind": "repository",
+      "reviewed_on": "2026-09-27",
+      "review_depth": "metadata_only",
+      "source_revision": null,
+      "review_note": "Historical release URL submitted in PR #1. It returned HTTP 404 at maintainer review on 2026-09-30; the submitted q4 hash 677d126a67d48a6ae965ce80973e7e68c7ab0b13b590a557d8f0cc29a178499f was not independently verified. Preserve this record; see the separate v2 release source."
+    },
+    {
+      "id": "jevos-current",
+      "title": "jevos pinned README and runtime documentation",
+      "url": "https://github.com/feder-cr/jev/tree/9e7d9e8a24e9605bec249045a39df91ff2b58b0d",
+      "kind": "repository",
+      "reviewed_on": "2026-09-30",
+      "review_depth": "content_reviewed",
+      "source_revision": "9e7d9e8a24e9605bec249045a39df91ff2b58b0d",
+      "review_note": "Reviewed README, LICENSE, API translation/backend code, wiki/small-language-models-explained.md, wiki/measurements.md and wiki/llm-policy-decisions-put-the-rule-in-the-question.md. Documentation describes a 1B model and says criteria is ignored for jevos. Base-model provenance, layer count and training recipe were not established. This is source review, not runtime/SDK conformance testing."
+    },
+    {
+      "id": "jevos-v2-release",
+      "title": "jevos-v2 release and asset metadata",
+      "url": "https://github.com/feder-cr/jev/releases/tag/jevos-v2",
+      "kind": "repository",
+      "reviewed_on": "2026-09-30",
+      "review_depth": "content_reviewed",
+      "source_revision": null,
+      "review_note": "Published 2026-09-29 UTC. Release describes 0.795 on 999 hand-written questions versus 0.757 previously; author-reported, not directly comparable with the old 2,000-question README figure. GitHub API lists jevos-v2-q4_k_m.gguf (619289280 bytes, SHA-256 3cbf010ce06cba932af73346ee683ee98d375dc284c029967eb418472a4993f3) and q8_0. Asset metadata was inspected; binaries were not downloaded or hashed locally."
     }
   ],
   "entries": [
@@ -751,6 +791,55 @@
       "scale": {
         "en": "Checkpoint-dependent; no single family-wide parameter claim made here.",
         "zh": "依具体检查点而定；本版不为整个系列指定单一参数量。"
+      }
+    },
+    {
+      "id": "jevos",
+      "name": "jevos",
+      "category": "core_models",
+      "url": "https://github.com/feder-cr/jev",
+      "source_ids": [
+        "jevos-current",
+        "jevos-v2-release",
+        "jevos-repo"
+      ],
+      "summary": {
+        "en": "Local yes/no decision model served as GGUF through llama.cpp, with a TypeSafe Jev-compatible request/response shape for `noul` questions.",
+        "zh": "通过 llama.cpp 以 GGUF 格式提供本地是非判断，`noul` 请求与响应采用 TypeSafe Jev 的接口格式。"
+      },
+      "use": {
+        "en": "Experiment with CPU-local reading and triage questions; put the full policy in `instructions` and validate behavior on your own labeled cases.",
+        "zh": "用于探索 CPU 本地文本判读与分流；将完整规则写入 `instructions`，并用自己的标注样例验证行为。"
+      },
+      "caveat": {
+        "en": "Yes/no only: `choice` and `score` return 422, and the jevos documentation says `criteria` is accepted but ignored. Wire-format compatibility is not semantic equivalence. Arithmetic/date errors and benchmark sensitivity are author-reported; old README results do not identify v2 performance.",
+        "zh": "仅支持是非判断：`choice`、`score` 返回 422，jevos 文档说明 `criteria` 虽被接受却不参与判断。接口格式兼容不等于语义等价。算术、日期错误及评测敏感性由作者自报；旧版 README 的成绩不能代表 v2。"
+      },
+      "reviewed_on": "2026-09-30",
+      "mechanism": {
+        "en": "A local GGUF yes/no model returning P(yes), without generating a text answer. The reviewed sources do not establish the submitted MiniCPM5 base, 17-layer count or exact readout implementation.",
+        "zh": "本地 GGUF 是非模型，返回 P(yes) 而不生成文本答案。本次核读资料未确证投稿所述 MiniCPM5 基座、17 层结构或确切读出实现。"
+      },
+      "training": {
+        "en": "Training recipe, dataset and base-checkpoint provenance were not established by the reviewed sources; no independent training reproduction.",
+        "zh": "核读来源未确证训练配方、数据集和基座检查点来源；没有独立训练复现。"
+      },
+      "availability": {
+        "en": "The v2 release lists q4_k_m (619,289,280 bytes) and q8_0 GGUF assets. Documentation describes offline CPU use via llama.cpp. Listed hashes are publisher/API metadata, not local binary verification.",
+        "zh": "v2 发布页列出 q4_k_m（619,289,280 字节）和 q8_0 GGUF 权重，文档说明可通过 llama.cpp 在 CPU 上离线运行。记录的哈希来自发布方/API 元数据，未经本地下载核验。"
+      },
+      "license_note": "Repository LICENSE is MIT; reviewed release metadata does not separately establish base-weight license provenance.",
+      "weight_revision": "3cbf010ce06cba932af73346ee683ee98d375dc284c029967eb418472a4993f3",
+      "tags": [
+        "typed-decisions",
+        "local",
+        "cpu-capable",
+        "open-weight",
+        "gguf"
+      ],
+      "scale": {
+        "en": "Project documentation describes 1B parameters; this review did not inspect the weight tensors or independently count parameters.",
+        "zh": "项目文档称为 1B 参数；本次没有检查权重张量或独立核算参数量。"
       }
     },
     {

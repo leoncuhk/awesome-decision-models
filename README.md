@@ -6,7 +6,7 @@
 
 A curated guide to systems that **classify, score, rank, verify, route or abstain** rather than primarily generate prose. The central question is not which model has the most impressive headline, but **which method delivers acceptable outcomes at acceptable risk and total cost for a particular task**.
 
-**Source review: 2026-09-25.** 31 selected resources, including 7 core model families and 5 contextualized evidence records. This edition reviews public sources; **it does not claim independent model reproduction**. Review depth and unresolved gaps are recorded in the [source register](docs/sources.md). Inclusion is not an endorsement or a production-readiness certification.
+**Source review: 2026-09-30.** 32 selected resources, including 8 core model families and 5 contextualized evidence records. This edition reviews public sources; **it does not claim independent model reproduction**. Review depth and unresolved gaps are recorded in the [source register](docs/sources.md). Inclusion is not an endorsement or a production-readiness certification.
 
 ## Contents
 
@@ -46,6 +46,7 @@ The table compares mechanisms and use cases, **not incompatible benchmark scores
 | [Bespoke Nimble](https://github.com/bespokelabsai/nimble) | Qwen-based supervised adapter that reads answer-label logits instead of generating an explanation. | A transparent baseline for evidence-sensitive judgments and minimal-edit training examples. | Contrastive data construction is not CLM-style contrastive embedding training. Public benchmark reporting is author-run and raw run outputs are not all committed. |
 | [GLiNER2.5-Decide](https://huggingface.co/fastino/GLiNER2.5-Decide-1B) | Schema-conditioned local classification with runtime labels and multiple decision heads. | Compact operational classification; inspect the runtime for supported cross-field constraints. | This review inspected the 1B card, which cross-reports 340M results. Dataset audit is incomplete; JevK5 in that table is not TypeSafe Jev. |
 | [GLiClass](https://github.com/Knowledgator/GLiClass) | Label-conditioned text classification with user-supplied labels, including multilabel tasks. | An adjacent baseline for dynamic intent and label classification. | Classification capability does not establish general workflow verification or calibrated operational risk. |
+| [jevos](https://github.com/feder-cr/jev) | Local yes/no decision model served as GGUF through llama.cpp, with a TypeSafe Jev-compatible request/response shape for `noul` questions. | Experiment with CPU-local reading and triage questions; put the full policy in `instructions` and validate behavior on your own labeled cases. | Yes/no only: `choice` and `score` return 422, and the jevos documentation says `criteria` is accepted but ignored. Wire-format compatibility is not semantic equivalence. Arithmetic/date errors and benchmark sensitivity are author-reported; old README results do not identify v2 performance. |
 
 ### Read these results in context
 

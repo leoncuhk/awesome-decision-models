@@ -318,3 +318,35 @@
 - Kind: `official_docs`; review depth: `content_reviewed`; reviewed: 2026-09-25
 - Source revision: `not captured / live URL`
 
+<a id="jevos-repo"></a>
+## jevos repository README
+
+- Source: https://github.com/feder-cr/jev/blob/eb74cf78e5377e85fcaa76f6ebc9f82e8b517250/README.md
+- Kind: `repository`; review depth: `content_reviewed`; reviewed: 2026-09-27
+- Source revision: `eb74cf78e5377e85fcaa76f6ebc9f82e8b517250`
+- Note: Historical README submitted by project author feder-cr in PR #1. Its 0.815 / 2,000 comparison is author-reported, including the Jev 0.927 result; it is not a vendor-certified score or a result for the later v2 weights.
+
+<a id="jevos-release"></a>
+## jevos release (jevos-q4_k_m.gguf, jevos-q8_0.gguf)
+
+- Source: https://github.com/feder-cr/jev/releases/tag/jevos
+- Kind: `repository`; review depth: `metadata_only`; reviewed: 2026-09-27
+- Source revision: `not captured / live URL`
+- Note: Historical release URL submitted in PR #1. It returned HTTP 404 at maintainer review on 2026-09-30; the submitted q4 hash 677d126a67d48a6ae965ce80973e7e68c7ab0b13b590a557d8f0cc29a178499f was not independently verified. Preserve this record; see the separate v2 release source.
+
+<a id="jevos-current"></a>
+## jevos pinned README and runtime documentation
+
+- Source: https://github.com/feder-cr/jev/tree/9e7d9e8a24e9605bec249045a39df91ff2b58b0d
+- Kind: `repository`; review depth: `content_reviewed`; reviewed: 2026-09-30
+- Source revision: `9e7d9e8a24e9605bec249045a39df91ff2b58b0d`
+- Note: Reviewed README, LICENSE, API translation/backend code, wiki/small-language-models-explained.md, wiki/measurements.md and wiki/llm-policy-decisions-put-the-rule-in-the-question.md. Documentation describes a 1B model and says criteria is ignored for jevos. Base-model provenance, layer count and training recipe were not established. This is source review, not runtime/SDK conformance testing.
+
+<a id="jevos-v2-release"></a>
+## jevos-v2 release and asset metadata
+
+- Source: https://github.com/feder-cr/jev/releases/tag/jevos-v2
+- Kind: `repository`; review depth: `content_reviewed`; reviewed: 2026-09-30
+- Source revision: `not captured / live URL`
+- Note: Published 2026-09-29 UTC. Release describes 0.795 on 999 hand-written questions versus 0.757 previously; author-reported, not directly comparable with the old 2,000-question README figure. GitHub API lists jevos-v2-q4_k_m.gguf (619289280 bytes, SHA-256 3cbf010ce06cba932af73346ee683ee98d375dc284c029967eb418472a4993f3) and q8_0. Asset metadata was inspected; binaries were not downloaded or hashed locally.
+
