@@ -91,6 +91,6 @@ python3 -m unittest discover -s tests -v
 
 仓库包含[资料维护 Skill](.agents/skills/decision-models-curator/SKILL.md)和[每周来源检查工作流](.github/workflows/source-watch.yml)。前者规定怎样研究，后者发现来源变化并维护待审核 Issue。**工作流不会自动运行 AI 研究、改写结论或合并代码，也不需要付费模型 API。** 启用条件、调度限制和手动运行方式见[维护说明](docs/maintenance.md)。
 
-新增项目或成绩前请阅读 [CONTRIBUTING](CONTRIBUTING.md)。欢迎负面结果、假设变化与纠错。[首版核验记录](updates/2026-09-25.md)说明关键限制；[发布说明](PUBLISHING.md)提供面向空仓库的安全初始化步骤。
+新增项目或成绩前请阅读 [CONTRIBUTING](CONTRIBUTING.md)。欢迎负面结果、假设变化与纠错。[首版核验记录](updates/2026-09-25.md)保留原始限制；[10 月 6 日发布核验记录](updates/2026-10-06-release-boundaries.md)说明本次新增、修正及证据缺口；[发布说明](PUBLISHING.md)提供面向空仓库的安全初始化步骤。
 
 原创代码与整理文字使用 [MIT](LICENSE)；链接的项目、模型、数据与论文保留各自许可证。固定来源文档的提交版本，**不等于**固定模型权重。

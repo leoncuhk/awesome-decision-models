@@ -24,8 +24,9 @@
 ## TypeSafe confidence semantics
 
 - Source: https://docs.typesafe.ai/confidence
-- Kind: `official_docs`; review depth: `content_reviewed`; reviewed: 2026-09-25
+- Kind: `official_docs`; review depth: `content_reviewed`; reviewed: 2026-10-06
 - Source revision: `not captured / live URL`
+- Note: Current formulas and Noul field semantics reviewed. Distribution concentration is not a calibrated operational success rate.
 
 <a id="laya-family"></a>
 ## Laya model family
@@ -357,4 +358,180 @@
 - Kind: `repository`; review depth: `content_reviewed`; reviewed: 2026-09-30
 - Source revision: `d5b63876af2ba6128f4582f2be1c8edf0517dd3d`
 - Note: Companion maintained by the same repository owner. Reviewed five-layer scope, measurement/evidence standards, applied playbooks and synthetic incrementality-demo limits; navigation inclusion is not independent certification of its linked products.
+
+<a id="clef-launch"></a>
+## Cloudflare Clef launch and evaluation report
+
+- Source: https://blog.cloudflare.com/clef-decision-models/
+- Kind: `official_publication`; review depth: `content_reviewed`; reviewed: 2026-10-02
+- Source revision: `not captured / live URL`
+- Note: Published 2026-10-01. Architecture, training description and benchmark table reviewed. Results are vendor-reported; no inference or raw-output audit performed.
+
+<a id="clef-card"></a>
+## Clef 27B model card
+
+- Source: https://huggingface.co/Cloudflare/clef/blob/2f3de3dd85f379784083b0814d997ab627200f0c/README.md
+- Kind: `model_card`; review depth: `content_reviewed`; reviewed: 2026-10-02
+- Source revision: `2f3de3dd85f379784083b0814d997ab627200f0c`
+- Note: Pinned card describes the joint schema head, Jev/SystemOne wrapper and local encoder default. Repository revision pins reviewed text, not a verified weight hash or the hosted/evaluated deployment.
+
+<a id="clef-flash-card"></a>
+## Clef-Flash 9B model card
+
+- Source: https://huggingface.co/Cloudflare/clef-flash/blob/17f0b0ad64efb65d273590632833508766b2aae6/README.md
+- Kind: `model_card`; review depth: `content_reviewed`; reviewed: 2026-10-02
+- Source revision: `17f0b0ad64efb65d273590632833508766b2aae6`
+- Note: Pinned card and configuration inspected; inference examples require the custom joint-schema implementation. No model weights downloaded or executed.
+
+<a id="strands-repo"></a>
+## Strands Decider repository
+
+- Source: https://github.com/strands-labs/strands-decider/blob/aa92b075ff297d7bf17c18bf6c676ab4df0fa9a9/README.md
+- Kind: `repository`; review depth: `content_reviewed`; reviewed: 2026-10-02
+- Source revision: `aa92b075ff297d7bf17c18bf6c676ab4df0fa9a9`
+- Note: Reference recipe v19; mechanism and local serving reviewed. Source commit is not an evaluated-weight identifier.
+
+<a id="strands-architecture"></a>
+## Strands Decider architecture
+
+- Source: https://github.com/strands-labs/strands-decider/blob/aa92b075ff297d7bf17c18bf6c676ab4df0fa9a9/docs/architecture.md
+- Kind: `official_docs`; review depth: `content_reviewed`; reviewed: 2026-10-02
+- Source revision: `aa92b075ff297d7bf17c18bf6c676ab4df0fa9a9`
+- Note: Pointer readout, confidence semantics and calibration inspected. For v19 teacher targets, the exact experiment config and results take precedence over the general training description.
+
+<a id="strands-v19-config"></a>
+## Strands Decider v19 experiment configuration
+
+- Source: https://github.com/strands-labs/strands-decider/blob/aa92b075ff297d7bf17c18bf6c676ab4df0fa9a9/configs/experiments/v19.yaml
+- Kind: `repository`; review depth: `content_reviewed`; reviewed: 2026-10-02
+- Source revision: `aa92b075ff297d7bf17c18bf6c676ab4df0fa9a9`
+- Note: Inspected configuration: rank-16 LoRA, frozen-torso KL and v14 replay on multi-step rows. The source was read, not executed.
+
+<a id="strands-evaluation"></a>
+## Strands Decider evaluation and limitations
+
+- Source: https://github.com/strands-labs/strands-decider/blob/aa92b075ff297d7bf17c18bf6c676ab4df0fa9a9/evaluation/README.md
+- Kind: `evaluation_report`; review depth: `content_reviewed`; reviewed: 2026-10-02
+- Source revision: `aa92b075ff297d7bf17c18bf6c676ab4df0fa9a9`
+- Note: Author-reported limitations reviewed, including instruction sensitivity and confidence drift outside short classification.
+
+<a id="strands-probe"></a>
+## Strands Decider held-out choice probe results
+
+- Source: https://github.com/strands-labs/strands-decider/blob/aa92b075ff297d7bf17c18bf6c676ab4df0fa9a9/research/data/probe_heldout_choice.csv
+- Kind: `evaluation_report`; review depth: `content_reviewed`; reviewed: 2026-10-02
+- Source revision: `aa92b075ff297d7bf17c18bf6c676ab4df0fa9a9`
+- Note: v19 first/last/not/irrelevant rows inspected. These are aggregate CSVs; underlying qsens_hobson-2b-v19.json, per-item predictions and actual sample count were not available in the checkout.
+
+<a id="strands-probe-method"></a>
+## Strands Decider question-sensitivity protocol
+
+- Source: https://github.com/strands-labs/strands-decider/blob/aa92b075ff297d7bf17c18bf6c676ab4df0fa9a9/evaluation/question_sensitivity.py
+- Kind: `repository`; review depth: `content_reviewed`; reviewed: 2026-10-02
+- Source revision: `aa92b075ff297d7bf17c18bf6c676ab4df0fa9a9`
+- Note: Read probe construction and aggregation without executing code. research/scripts/collect.py confirms the CSV uses the held-out choice slice (emotion and massive_intent). Default sampling is not proof of the recorded run denominator.
+
+<a id="strands-research"></a>
+## Strands Decider experiment record
+
+- Source: https://github.com/strands-labs/strands-decider/blob/aa92b075ff297d7bf17c18bf6c676ab4df0fa9a9/research/README.md
+- Kind: `evaluation_report`; review depth: `content_reviewed`; reviewed: 2026-10-02
+- Source revision: `aa92b075ff297d7bf17c18bf6c676ab4df0fa9a9`
+- Note: Records five promotions despite missed preregistered bars (v13/v14/v16/v17/v18); v19 met its four predictions. Also read v19-seed1 preregistration: stopped at step 1,420 on 2026-09-28, no results taken.
+
+<a id="strands-results"></a>
+## Strands Decider original and AWS retrain results
+
+- Source: https://github.com/strands-labs/strands-decider/blob/aa92b075ff297d7bf17c18bf6c676ab4df0fa9a9/evaluation/results.md
+- Kind: `evaluation_report`; review depth: `content_reviewed`; reviewed: 2026-10-02
+- Source revision: `aa92b075ff297d7bf17c18bf6c676ab4df0fa9a9`
+- Note: Original research v19 and AWS retrain are separate runs. No historical probe score is assigned to the published adapter by name alone.
+
+<a id="strands-card"></a>
+## Strands Decider published v19 adapter card
+
+- Source: https://huggingface.co/StrandsAgents/strands-decider-2B-hobson-v19/blob/bb282d786bc251fd4e3068de3ada9ddbb38127cd/README.md
+- Kind: `model_card`; review depth: `content_reviewed`; reviewed: 2026-10-02
+- Source revision: `bb282d786bc251fd4e3068de3ada9ddbb38127cd`
+- Note: Published adapter/head card and LICENSE.md inspected. This release is distinguished from the original research v19 run; no weight bytes were downloaded or independently hashed.
+
+<a id="strands-provenance"></a>
+## Strands Decider published adapter provenance
+
+- Source: https://huggingface.co/StrandsAgents/strands-decider-2B-hobson-v19/blob/bb282d786bc251fd4e3068de3ada9ddbb38127cd/provenance.json
+- Kind: `model_card`; review depth: `content_reviewed`; reviewed: 2026-10-02
+- Source revision: `bb282d786bc251fd4e3068de3ada9ddbb38127cd`
+- Note: Publisher identifies AWS run v19-p5-run1. Its base revision is explicitly inferred rather than training-time pinned; repository revision and author-supplied provenance are not independently verified weight bytes.
+
+<a id="kev-1-0"></a>
+## Kev 1.0 release baseline
+
+- Source: https://github.com/jaredpalmer/kev/blob/5e42a7a03f28134853dd3ff77461457e921e5ec1/docs/releases/kev-1.0.md
+- Kind: `official_publication`; review depth: `content_reviewed`; reviewed: 2026-10-06
+- Source revision: `5e42a7a03f28134853dd3ff77461457e921e5ec1`
+- Note: Released 2026-10-01; explicitly introduces no newly trained checkpoint. Reviewed context validation, calibration, v2 regressions and release provenance; source pin is not a weight hash.
+
+<a id="kev27-v2"></a>
+## Kev-27B v2 model card
+
+- Source: https://github.com/jaredpalmer/kev/blob/5e42a7a03f28134853dd3ff77461457e921e5ec1/docs/model-cards/kev-27b.md
+- Kind: `model_card`; review depth: `content_reviewed`; reviewed: 2026-10-06
+- Source revision: `5e42a7a03f28134853dd3ff77461457e921e5ec1`
+- Note: Relevant source text reviewed; no model execution or weight-byte verification.
+
+<a id="strands-v21-results"></a>
+## Strands Decider v21 release and same-host seed results
+
+- Source: https://github.com/strands-labs/strands-decider/blob/3e94e9d84c620ed5a95f1a3310c3decb971e261c/evaluation/results.md
+- Kind: `evaluation_report`; review depth: `content_reviewed`; reviewed: 2026-10-06
+- Source revision: `3e94e9d84c620ed5a95f1a3310c3decb971e261c`
+- Note: v21 release seed, six-seed selection rule and separate same-host v19/v21b comparison inspected. Historical v19 evidence remains separate; no raw-output replay.
+
+<a id="strands-v21-config"></a>
+## Strands Decider released v21b recipe
+
+- Source: https://github.com/strands-labs/strands-decider/blob/3e94e9d84c620ed5a95f1a3310c3decb971e261c/configs/experiments/v21b.yaml
+- Kind: `repository`; review depth: `content_reviewed`; reviewed: 2026-10-06
+- Source revision: `3e94e9d84c620ed5a95f1a3310c3decb971e261c`
+- Note: Relevant source text reviewed; no model execution or weight-byte verification.
+
+<a id="laya-limits"></a>
+## Laya documented operational limitations
+
+- Source: https://github.com/NandhaKishorM/laya/blob/a4a8921afebfd852bba0000475cfb6ab737a124c/README.md#honest-limits
+- Kind: `official_docs`; review depth: `content_reviewed`; reviewed: 2026-10-06
+- Source revision: `a4a8921afebfd852bba0000475cfb6ab737a124c`
+- Note: Read the current documented label sensitivity, negation examples and unusable act_probability warning. These include previously reported problems, not newly discovered defects or tests run here.
+
+<a id="clef-hosted"></a>
+## Clef Workers AI interface and context limit
+
+- Source: https://developers.cloudflare.com/workers-ai/models/clef/
+- Kind: `official_docs`; review depth: `content_reviewed`; reviewed: 2026-10-06
+- Source revision: `not captured / live URL`
+- Note: Hosted context is 65,536 tokens; local encode_record default is a separate setting. Interface schema reviewed, not called.
+
+<a id="pplx-card"></a>
+## Perplexity pplx-decider-v1-27b model card
+
+- Source: https://huggingface.co/perplexity-ai/pplx-decider-v1-27b
+- Kind: `model_card`; review depth: `content_reviewed`; reviewed: 2026-10-06
+- Source revision: `not captured / live URL`
+- Note: Card, file listing and API evaluation boundary inspected. The card history link identifies commit 5117a6c7fe73b19308dc1a6b0fb529a40c2ecad4, but the immutable body could not be fetched; this record retains the reviewed live URL rather than claiming a verified source pin. Training data and raw calibration/evaluation artifacts were not established.
+
+<a id="pplx-inference"></a>
+## Perplexity local inference wrapper
+
+- Source: https://huggingface.co/perplexity-ai/pplx-decider-v1-27b/blob/main/inference.py
+- Kind: `repository`; review depth: `content_reviewed`; reviewed: 2026-10-06
+- Source revision: `not captured / live URL`
+- Note: Read only: custom autojev runtime, choice/noul/score and image input, saved-temperature inference. No dependencies installed and no model code executed.
+
+<a id="pplx-config"></a>
+## Perplexity released decision configuration
+
+- Source: https://huggingface.co/perplexity-ai/pplx-decider-v1-27b/blob/main/decision_config.json
+- Kind: `repository`; review depth: `content_reviewed`; reviewed: 2026-10-06
+- Source revision: `not captured / live URL`
+- Note: Saved temperature 2.207568021892729 and author-supplied run/data/code hashes inspected; hashes alone do not supply the underlying training or calibration datasets.
 

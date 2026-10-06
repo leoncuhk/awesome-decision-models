@@ -91,6 +91,6 @@ python3 -m unittest discover -s tests -v
 
 A [repository-scoped curator skill](.agents/skills/decision-models-curator/SKILL.md) defines the research/review procedure. A [weekly source watcher](.github/workflows/source-watch.yml) checks selected sources for changes and maintains an issue for review. **It does not run an AI researcher, update scientific claims, merge changes or require a paid model API.** See [maintenance](docs/maintenance.md) for setup, security, scheduling limits and manual use.
 
-Read [CONTRIBUTING](CONTRIBUTING.md) before adding a project or result. Negative findings, changed assumptions and corrections are welcome. [Initial review notes](updates/2026-09-25.md) document this edition's important qualifications. [Publishing instructions](PUBLISHING.md) explain how to initialize an empty repository safely.
+Read [CONTRIBUTING](CONTRIBUTING.md) before adding a project or result. Negative findings, changed assumptions and corrections are welcome. [Initial review notes](updates/2026-09-25.md) preserve the original qualifications; the [October 6 release review](updates/2026-10-06-release-boundaries.md) records the latest additions, corrections and remaining gaps. [Publishing instructions](PUBLISHING.md) explain how to initialize an empty repository safely.
 
 Original code and curation text: [MIT](LICENSE). Linked projects, model weights, datasets and papers retain their own licenses. A source-text revision does **not** pin a model's weights.

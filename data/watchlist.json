@@ -72,6 +72,48 @@
       "kind": "web_page",
       "url": "https://docs.typesafe.ai/confidence",
       "meaning": "Raw page changed; a reviewer must decide whether confidence semantics changed."
+    },
+    {
+      "id": "clef-model",
+      "kind": "hf_model",
+      "url": "https://huggingface.co/api/models/Cloudflare/clef",
+      "meaning": "Model repository revision changed; separate card/runtime changes from weight changes and recheck task-specific evidence."
+    },
+    {
+      "id": "clef-flash-model",
+      "kind": "hf_model",
+      "url": "https://huggingface.co/api/models/Cloudflare/clef-flash",
+      "meaning": "Model repository revision changed; separate card/runtime changes from weight changes and recheck task-specific evidence."
+    },
+    {
+      "id": "strands-evaluation",
+      "kind": "github_file",
+      "url": "https://api.github.com/repos/strands-labs/strands-decider/contents/evaluation/README.md",
+      "meaning": "Evaluation or limitations changed; preserve old research results and distinguish source commits from evaluated weights."
+    },
+    {
+      "id": "strands-research",
+      "kind": "github_file",
+      "url": "https://api.github.com/repos/strands-labs/strands-decider/contents/research/README.md",
+      "meaning": "Experiment record changed; inspect preregistered criteria, promotion decisions and unfinished replicates before changing conclusions."
+    },
+    {
+      "id": "strands-model",
+      "kind": "hf_model",
+      "url": "https://huggingface.co/api/models/StrandsAgents/strands-decider-2B-hobson-v19",
+      "meaning": "Published adapter repository changed; distinguish retrained releases from original research checkpoint results and inspect card/weight changes separately."
+    },
+    {
+      "id": "strands-v21-model",
+      "kind": "hf_model",
+      "url": "https://huggingface.co/api/models/StrandsAgents/strands-decider-2B-hobson-v21",
+      "meaning": "Current adapter/card changed; compare exact release provenance, not historical v19 scores."
+    },
+    {
+      "id": "pplx-decider-model",
+      "kind": "hf_model",
+      "url": "https://huggingface.co/api/models/perplexity-ai/pplx-decider-v1-27b",
+      "meaning": "Inspect card/runtime/weight changes separately; API benchmark numbers do not certify local equivalence."
     }
   ]
 }

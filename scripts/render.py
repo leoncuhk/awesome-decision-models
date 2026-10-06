@@ -28,7 +28,10 @@ def outputs(root: Path = ROOT) -> dict[Path, str]:
           'E02':'CLM：在 38 个保留任务上选择候选，不是独立完成编码。',
           'E03':'Nimble / Jev：配对人工标签评测仍须按任务解读。',
           'E04':'GLiNER2.5-Decide：新评测范围、来源可见性与名称辨别。',
-          'E05':'Kev：区分开发集、测试集与来源域。'}
+          'E05':'Kev：区分开发集、测试集与来源域。',
+          'E06':'Clef：厂商比较中的任务取舍，不是通用胜出。',
+          'E07':'Strands Decider：问题指令敏感性与实验选择限制。',
+          'E08':'Strands v21：发布种子与同机多种子比较。'}
         replacements['EVIDENCE_LINKS']='\n'.join(f"- [{e['id']} — {e['title'] if lang=='en' else short_zh[e['id']]}](docs/evidence.md#{e['id'].lower()})" for e in evs)
         for category in ['baselines','routing','reliability','evaluation','foundations','related_lists']:
             lines=[]
@@ -46,7 +49,7 @@ def outputs(root: Path = ROOT) -> dict[Path, str]:
             models.append('| '+label+' | '+cell(e[key]['en'])+' | '+cell(e[key]['zh'])+' |')
         models += ['',f"**License note:** {e['license_note']}",f"**Recorded weight identifier:** {e['weight_revision'] or 'Unknown / not pinned'}",'','**Sources:** '+'; '.join(f"[{sources[s]['title']}]({sources[s]['url']})" for s in e['source_ids']), '']
     out[root/'docs/models.md']='\n'.join(models)+'\n'
-    evid=['# Evidence ledger / 评测证据','', '[Home](../README.md) · [中文首页](../README.zh-CN.md) · [Methodology](methodology.md)','','These are **archival claim records**, not a common leaderboard. None was rerun by this repository. A source review checks what was reported, not whether the underlying experiment is reproducible or unbiased.','','本页保存带条件的历史声明，不生成混合排名。五项记录均为来源报告，不是本仓库独立复现。来源阅读、产物审计与实验复现是三种不同工作。','', 'Reported fractions are displayed as percentages where appropriate. More printed digits do not imply greater statistical precision. Source publication dates remain unknown unless independently established.','']
+    evid=['# Evidence ledger / 评测证据','', '[Home](../README.md) · [中文首页](../README.zh-CN.md) · [Methodology](methodology.md)','','These are **archival claim records**, not a common leaderboard. None was rerun by this repository. A source review checks what was reported, not whether the underlying experiment is reproducible or unbiased.','','本页保存带条件的历史声明，不生成混合排名。所列记录均为来源报告，不是本仓库独立复现。来源阅读、产物审计与实验复现是三种不同工作。','', 'Reported fractions are displayed as percentages where appropriate. More printed digits do not imply greater statistical precision. Source publication dates remain unknown unless independently established.','']
     for e in evs:
         evid += [f"<a id=\"{e['id'].lower()}\"></a>",f"## {e['id']} · {e['title']}",'',f"**Evidence:** `{e['evidence_type']}` · **Reviewed:** {e['reviewed_on']} · **Reproduced here:** no",'', '| Protocol | Recorded context |','| --- | --- |']
         for k,v in e['protocol'].items():evid.append('| '+k.replace('_',' ').capitalize()+' | '+cell(v)+' |')

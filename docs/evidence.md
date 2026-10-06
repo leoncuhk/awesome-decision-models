@@ -4,7 +4,7 @@
 
 These are **archival claim records**, not a common leaderboard. None was rerun by this repository. A source review checks what was reported, not whether the underlying experiment is reproducible or unbiased.
 
-本页保存带条件的历史声明，不生成混合排名。五项记录均为来源报告，不是本仓库独立复现。来源阅读、产物审计与实验复现是三种不同工作。
+本页保存带条件的历史声明，不生成混合排名。所列记录均为来源报告，不是本仓库独立复现。来源阅读、产物审计与实验复现是三种不同工作。
 
 Reported fractions are displayed as percentages where appropriate. More printed digits do not imply greater statistical precision. Source publication dates remain unknown unless independently established.
 
@@ -177,4 +177,119 @@ Reported fractions are displayed as percentages where appropriate. More printed 
 - model hash: not captured
 
 **Sources:** [Kev repository](https://github.com/jaredpalmer/kev/blob/2855ba2a55a80579176a459f78b95d03548cabb5/README.md); [Kev-4B model card](https://huggingface.co/jaredpalmer/kev-4b)
+
+<a id="e06"></a>
+## E06 · Clef: a vendor comparison has task-specific reversals
+
+**Evidence:** `author_reported` · **Reviewed:** 2026-10-02 · **Reproduced here:** no
+
+| Protocol | Recorded context |
+| --- | --- |
+| Task | When2Call multiple-choice accuracy in Cloudflare's Decision Index comparison; the model card names suite version 0.2.1 |
+| Test unit | Decision items; exact item count and independence unit not established by the reviewed launch table/card |
+| Split | Exact sampled cohort, dataset revision and train/calibration/test overlap not established here |
+| Reference | Benchmark answer labels; construction and item-level mappings not independently audited |
+| Training | Cloudflare post-trained Clef/Clef-Flash; no claim that all compared models share training data, tuning or model-selection conditions |
+| Measurement | Percentage accuracy as printed in the launch table; card rounds these results to one decimal. No cross-benchmark aggregate or latency ranking imported |
+| Hardware | No hardware-dependent measurement included; exact serving versions for the compared endpoints are not pinned |
+
+| Reported measurement | Value |
+| --- | --- |
+| Clef When2Call accuracy | 72.37% |
+| Clef-Flash When2Call accuracy | 65.58% |
+| Jev When2Call accuracy (reported by Cloudflare) | 80.97% |
+
+**Interpretation:** This author-run comparison contains a task where Jev scores above both Clef variants. It supports preserving task-level trade-offs, not a universal winner or a production recommendation.
+
+- The reporter is Cloudflare, author of Clef; the comparison was not reproduced by this repository.
+- Pinned model-card revisions identify reviewed text, not the weights or API deployment used for these measurements.
+- Missing cohort, failure accounting and uncertainty estimates limit what can be inferred about a new application.
+- The announcement's speed and overall-leadership claims are not imported as a common leaderboard or an end-to-end cost guarantee.
+
+**Artifacts and limits:**
+- protocol: Launch table and pinned model cards inspected; linked live benchmark application not audited
+- raw outputs: Not inspected
+- model hash: None
+- serving version: None
+
+**Sources:** [Cloudflare Clef launch and evaluation report](https://blog.cloudflare.com/clef-decision-models/); [Clef 27B model card](https://huggingface.co/Cloudflare/clef/blob/2f3de3dd85f379784083b0814d997ab627200f0c/README.md); [Clef-Flash 9B model card](https://huggingface.co/Cloudflare/clef-flash/blob/17f0b0ad64efb65d273590632833508766b2aae6/README.md)
+
+<a id="e07"></a>
+## E07 · Strands Decider: instruction sensitivity and experiment-selection limits
+
+**Evidence:** `author_reported` · **Reviewed:** 2026-10-02 · **Reproduced here:** no
+
+| Protocol | Recorded context |
+| --- | --- |
+| Task | Question-sensitivity probe on original research v19: keep state and option text/order fixed, replace the real instruction with first-option, last-option, NOT-fit or unrelated-task questions |
+| Test unit | Same-answer comparisons paired by original example. Actual recorded denominator unknown; code defaults to at most 200 examples per task, which must not be treated as a verified run count |
+| Split | Held-out choice tasks emotion and massive_intent; options restricted to 3–9 and shuffled once per example with original gold neither first nor last |
+| Reference | Agreement with the same model's original-question answer, not correctness against the changed instruction or a human safety judgment |
+| Training | Original research v19 adapter/pointer-head run; source-code pin does not establish its weight identity or make it identical to the later published adapter/AWS retrain |
+| Measurement | Fraction of changed-instruction predictions identical to the original-question prediction, separately by perturbation; repeated variants of one example are not independent samples |
+| Hardware | Probe code targets CUDA; exact hardware and command of the archived CSV run not established. No latency comparison imported |
+
+| Reported measurement | Value |
+| --- | --- |
+| v19 same answer when asked for the first option | 95.00% |
+| v19 same answer when asked for the last option | 93.50% |
+| v19 same answer with NOT-fit instruction | 94.75% |
+| v19 same answer with unrelated-task instruction | 92.25% |
+
+**Interpretation:** The reported probe exposes weak sensitivity to changed instructions in this held-out choice setting. It is not an overall error rate, universal instruction-following result or measurement of the published adapter.
+
+- The source describes roughly 94% answer retention; the four recorded conditions are preserved separately rather than given a fabricated sample denominator.
+- The CSV is public, but its referenced raw JSON and item-level predictions were not committed in the inspected checkout; no reproduction was run here.
+- Author documentation limits confidence-band evidence to short classification and reports drift on long documents and answer-adequacy inputs; thresholds need application-specific calibration.
+- The experiment record explicitly lists v13, v14, v16, v17 and v18 as promoted despite missed preregistered bars. v19 itself met all four predictions; the later v20 did not replace it.
+- The v19-seed1 preregistration says the run stopped at step 1,420 with no results. Separate AWS retraining evidence exists, but does not turn this unfinished seed-only comparison into a completed experiment.
+- This is an archival v19 record. The 2026-10-05 hobson-v21 release and same-host multi-seed comparison are recorded separately in E08.
+
+**Artifacts and limits:**
+- protocol: Pinned probe code and collection script read; no execution
+- aggregate results: https://github.com/strands-labs/strands-decider/blob/aa92b075ff297d7bf17c18bf6c676ab4df0fa9a9/research/data/probe_heldout_choice.csv
+- raw outputs: reports/qsens_hobson-2b-v19.json referenced by CSV but absent from inspected checkout
+- seed replicate: https://github.com/strands-labs/strands-decider/blob/aa92b075ff297d7bf17c18bf6c676ab4df0fa9a9/research/preregistrations/PREREGISTRATION-v19-seed1.md
+- model hash: None
+
+**Sources:** [Strands Decider held-out choice probe results](https://github.com/strands-labs/strands-decider/blob/aa92b075ff297d7bf17c18bf6c676ab4df0fa9a9/research/data/probe_heldout_choice.csv); [Strands Decider question-sensitivity protocol](https://github.com/strands-labs/strands-decider/blob/aa92b075ff297d7bf17c18bf6c676ab4df0fa9a9/evaluation/question_sensitivity.py); [Strands Decider evaluation and limitations](https://github.com/strands-labs/strands-decider/blob/aa92b075ff297d7bf17c18bf6c676ab4df0fa9a9/evaluation/README.md); [Strands Decider experiment record](https://github.com/strands-labs/strands-decider/blob/aa92b075ff297d7bf17c18bf6c676ab4df0fa9a9/research/README.md); [Strands Decider original and AWS retrain results](https://github.com/strands-labs/strands-decider/blob/aa92b075ff297d7bf17c18bf6c676ab4df0fa9a9/evaluation/results.md); [Strands Decider published v19 adapter card](https://huggingface.co/StrandsAgents/strands-decider-2B-hobson-v19/blob/bb282d786bc251fd4e3068de3ada9ddbb38127cd/README.md)
+
+<a id="e08"></a>
+## E08 · Strands Decider v21: release seed and controlled retrain comparison
+
+**Evidence:** `author_reported` · **Reviewed:** 2026-10-06 · **Reproduced here:** no
+
+| Protocol | Recorded context |
+| --- | --- |
+| Task | JevBench public set at window 4096; release v21 is research v21b, seed 5 |
+| Test unit | 231 public tasks; six independently trained seeds per recipe in the same-host comparison |
+| Split | Public evaluation set, not a new sequestered test; seed selection also uses four named internal/transfer measures |
+| Reference | Public JevBench labels through its harness; labels and item-level results not independently audited here |
+| Training | Rank-16 LoRA plus pointer head; one epoch, 3738 steps; v21b adds paraphrases and agreement-filtered 4B distillation to v19 |
+| Measurement | Released seed tasks correct and Brier; compare recipe means only within one host. Release seed selected by minimum standardized distance from the six-seed mean across five measures |
+| Hardware | Release training: p5.48xlarge, 8 H100 GPUs, FAST settings. Text release check: L40S via main. Same-host ablation is separate from this release host |
+
+| Reported measurement | Value |
+| --- | --- |
+| Released v21 seed JevBench tasks correct | 176/231 (76.19%) |
+| Released v21 Brier | 0.323 |
+| Same-host v19 recipe mean tasks correct (six seeds) | 172.8 |
+| Same-host v21b mean tasks correct (six seeds) | 172.3 |
+| Same-host v19 mean Brier | 0.341 |
+| Same-host v21b mean Brier | 0.331 |
+
+**Interpretation:** The same-host comparison supports a lower reported mean Brier, not a demonstrated accuracy gain. The released seed score cannot be subtracted from a historical v19 single run to estimate a recipe improvement.
+
+- Author-reported, not reproduced here; raw predictions and uncertainty analyses were not independently replayed.
+- The other release host has a v21b mean of 175.0 tasks; host means must not be mixed as if only the recipe changed.
+- The release selection rule uses public benchmark and other evaluation measures; this is not independent final-test model selection.
+- Historical v19 confidence bands and question-change probes do not establish the current release behavior.
+
+**Artifacts and limits:**
+- protocol: Pinned results and v21b config inspected
+- raw outputs: Not independently audited
+- weight hash: None
+- release identity: StrandsAgents/strands-decider-2B-hobson-v21; source-text commit is not a verified weight hash
+
+**Sources:** [Strands Decider v21 release and same-host seed results](https://github.com/strands-labs/strands-decider/blob/3e94e9d84c620ed5a95f1a3310c3decb971e261c/evaluation/results.md); [Strands Decider released v21b recipe](https://github.com/strands-labs/strands-decider/blob/3e94e9d84c620ed5a95f1a3310c3decb971e261c/configs/experiments/v21b.yaml)
 

@@ -6,7 +6,7 @@
 
 收录用于**分类、评分、排序、验证、路由与拒判**的模型和方法。我们关心的不是谁的宣传数字更高，而是：**在具体任务中，哪种方法能以可接受的风险和总成本，交付可验收的结果。**
 
-**本版来源核验日期：2026-09-30。** 精选 33 项资源，其中 8 个核心模型系列、5 条带协议背景的评测记录。本版完成的是公开资料核验，**没有宣称独立运行并复现这些模型**。阅读深度、版本固定情况与未解决的资料缺口均见[来源登记](docs/sources.md)。收录不等于背书，也不等于通过生产可靠性认证。
+**本版来源核验日期：2026-10-06。** 精选 36 项资源，其中 11 个核心模型系列、8 条带协议背景的评测记录。本版完成的是公开资料核验，**没有宣称独立运行并复现这些模型**。阅读深度、版本固定情况与未解决的资料缺口均见[来源登记](docs/sources.md)。收录不等于背书，也不等于通过生产可靠性认证。
 
 ## 目录
 
@@ -40,13 +40,16 @@
 | 模型 | 机制／定位 | 适合的实验 | 重要限制 |
 | --- | --- | --- | --- |
 | [Jev / TypeSafe](https://typesafe.ai) | 托管的结构化判断服务：对选项、命题与有序评分标准输出分布。 | 验证判断节点价值时，可作为无需自建部署的对照。 | RLCD 的完整训练配方未公开；格式合法与置信度字段不等于语义可靠。 |
-| [Laya](https://github.com/NandhaKishorM/laya) | 小型编码器与动态选项判断头；包含通用、多语言及工作流专项检查点。 | 适合有领域训练数据、需要控制高频调用成本的窄域判断。 | 不可混用基础版与专项版成绩；专项卡明确披露训练与校准数据重叠及温度配置冲突。 |
-| [Kev](https://github.com/jaredpalmer/kev) | Qwen 骨干、适配器及动态 pointer head，配套类型化判断训练和部署工具。 | 可检查、可微调的领域监督判断实验底座。 | 新来源开发集、最终测试集与已训练来源成绩不同；适配器大小不是部署内存。 |
+| [Laya](https://github.com/NandhaKishorM/laya) | 小型编码器与动态选项判断头；包含通用、多语言及工作流专项检查点。 | 适合有领域训练数据、需要控制高频调用成本的窄域判断。 | 不可混用基础版／专项版成绩；专项卡披露训练／校准重叠和继承温度冲突。布尔标签可能主导 noul／choice；语义标签也不能保证否定句安全。官方称 action.act_probability 几乎恒为 1，不适合作为执行门槛；confidence 也需在实际任务上验证。 |
+| [Kev](https://github.com/jaredpalmer/kev) | Qwen 骨干与动态 pointer head 的类型化判断系列；Kev 1.0 将现有检查点固定为发布基线。 | 可检查、可微调的领域监督判断实验底座。 | 须区分训练任务族测试与迁移测试。27B v2 在长合同上退步且过度自信（CUAD ECE 0.053，v1 为 0.007）；可接收长度和拟合温度不保证新任务的准确率或校准。 |
 | [Contrastive Language Models (CLM)](https://github.com/Contrastive-LM/CLM) | 冻结语言模型编码器，分别表示状态与动作，再用可训练投影头匹配。 | 适合候选可复用的工具目录、排序及领域 Best-of-N 选择。 | 相对排序不能保证识别“全部候选都错”；Best-of-N 成绩不代表模型独立解题能力。 |
 | [Bespoke Nimble](https://github.com/bespokelabsai/nimble) | Qwen 监督适配器，直接读取答案标签 logits，而非生成解释。 | 适合证据敏感的判断，也可借鉴最小差异训练样本。 | 对比式样本构造不等于 CLM 的对比表示训练；公开比较由项目方运行，完整逐行输出并未全部提交。 |
 | [GLiNER2.5-Decide](https://huggingface.co/fastino/GLiNER2.5-Decide-1B) | 通过运行时标签与多个判断头实现模式条件化的本地分类。 | 适合轻量业务分类；跨字段约束需核对具体运行库支持。 | 本版核对的是 1B 模型卡，其中交叉报告 340M 成绩；数据集审计未完成，表中 JevK5 不是 TypeSafe Jev。 |
 | [GLiClass](https://github.com/Knowledgator/GLiClass) | 以用户提供的标签为条件进行文本分类，包含多标签任务。 | 动态意图与标签分类的重要相邻基线。 | 分类能力不等于通用工作流验收能力，也不保证业务风险已校准。 |
 | [jevos](https://github.com/feder-cr/jev) | 通过 llama.cpp 以 GGUF 格式提供本地是非判断，`noul` 请求与响应采用 TypeSafe Jev 的接口格式。 | 用于探索 CPU 本地文本判读与分流；将完整规则写入 `instructions`，并用自己的标注样例验证行为。 | 仅支持是非判断：`choice`、`score` 返回 422，jevos 文档说明 `criteria` 虽被接受却不参与判断。接口格式兼容不等于语义等价。算术、日期错误及评测敏感性由作者自报；旧版 README 的成绩不能代表 v2。 |
+| [Clef / Clef-Flash](https://huggingface.co/Cloudflare/clef) | 多模态 Qwen 骨干加联合 schema 判断头，输出类型化决策，提供 Jev/SystemOne 兼容封装。 | 比较文本／图像分类、分流与有序评分，并按具体任务衡量错误成本。 | 厂商评测存在任务间取舍；接口兼容和概率输出不等于业务风险已校准，本地推理需要定制 schema 运行代码。 |
+| [Strands Decider](https://github.com/strands-labs/strands-decider) | 基于 Qwen、pointer head 和 rank-16 LoRA 的类型化判断模型，公开实验演进记录。 | 可作为短文本分类和领域监督判断的本地基线；用实际流量测试问题变化、选项顺序和风险—覆盖率。 | 同机多种子证据未确立 JevBench 准确率超过 v19 配方，虽平均 Brier 更低。旧 v19 的指令敏感性探针和短分类置信分段不能当作 v21 保证；需在目标任务上校准。 |
+| [Perplexity pplx-decider-v1-27b](https://huggingface.co/perplexity-ai/pplx-decider-v1-27b) | Qwen3.8-27B 微调模型，公开权重与类型化判断运行代码，支持图像输入。 | 经具体任务验证后，作为文本／图像判读的自部署对照。 | 模型卡成绩来自 Perplexity API；与本地权重是否等价未验证。完整训练数据、校准验证及原始评测产物尚未确证。 |
 
 ### 重要成绩必须连同条件阅读
 
@@ -55,6 +58,9 @@
 - [E03 — Nimble / Jev：配对人工标签评测仍须按任务解读。](docs/evidence.md#e03)
 - [E04 — GLiNER2.5-Decide：新评测范围、来源可见性与名称辨别。](docs/evidence.md#e04)
 - [E05 — Kev：区分开发集、测试集与来源域。](docs/evidence.md#e05)
+- [E06 — Clef：厂商比较中的任务取舍，不是通用胜出。](docs/evidence.md#e06)
+- [E07 — Strands Decider：问题指令敏感性与实验选择限制。](docs/evidence.md#e07)
+- [E08 — Strands v21：发布种子与同机多种子比较。](docs/evidence.md#e08)
 
 零样本分类、专项微调与 Best-of-N 选择不是同一个问题。本地 GPU 前向耗时与远程 API 往返耗时，也不是同一种性能测量。
 
@@ -123,6 +129,6 @@ python3 -m unittest discover -s tests -v
 
 仓库包含[资料维护 Skill](.agents/skills/decision-models-curator/SKILL.md)和[每周来源检查工作流](.github/workflows/source-watch.yml)。前者规定怎样研究，后者发现来源变化并维护待审核 Issue。**工作流不会自动运行 AI 研究、改写结论或合并代码，也不需要付费模型 API。** 启用条件、调度限制和手动运行方式见[维护说明](docs/maintenance.md)。
 
-新增项目或成绩前请阅读 [CONTRIBUTING](CONTRIBUTING.md)。欢迎负面结果、假设变化与纠错。[首版核验记录](updates/2026-09-25.md)说明关键限制；[发布说明](PUBLISHING.md)提供面向空仓库的安全初始化步骤。
+新增项目或成绩前请阅读 [CONTRIBUTING](CONTRIBUTING.md)。欢迎负面结果、假设变化与纠错。[首版核验记录](updates/2026-09-25.md)保留原始限制；[10 月 6 日发布核验记录](updates/2026-10-06-release-boundaries.md)说明本次新增、修正及证据缺口；[发布说明](PUBLISHING.md)提供面向空仓库的安全初始化步骤。
 
 原创代码与整理文字使用 [MIT](LICENSE)；链接的项目、模型、数据与论文保留各自许可证。固定来源文档的提交版本，**不等于**固定模型权重。

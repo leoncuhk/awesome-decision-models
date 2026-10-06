@@ -45,6 +45,24 @@ class CatalogTests(unittest.TestCase):
         self.assertTrue(any('unsafe' in e for e in self.errors()))
     def test_generated_documents_synced(self):
         for path,text in render.outputs().items():self.assertEqual(path.read_text(),text,str(path))
+    def test_new_evidence_links_render_in_both_languages(self):
+        rendered=render.outputs()
+        for name in ('README.md','README.zh-CN.md'):
+            for eid in ('e06','e07','e08'):
+                self.assertIn(f'(docs/evidence.md#{eid})',rendered[ROOT/name])
+    def test_evidence_intro_does_not_freeze_record_count(self):
+        self.assertNotIn('五项记录',render.outputs()[ROOT/'docs/evidence.md'])
+    def test_current_and_historical_strands_evidence_are_separate(self):
+        records={r['id']:r for r in self.ev['records']}
+        self.assertIn('v19',records['E07']['protocol']['task'])
+        self.assertIn('v21',records['E08']['protocol']['task'])
+        self.assertEqual(records['E08']['metrics'][0]['denominator'],231)
+        self.assertEqual(records['E08']['metrics'][0]['numerator'],176)
+    def test_new_models_and_watch_ids_remain_unique(self):
+        ids={e['id'] for e in self.cat['entries']}
+        self.assertTrue({'clef','strands-decider','pplx-decider'} <= ids)
+        watch={e['id'] for e in self.watch['sources']}
+        self.assertTrue({'strands-model','strands-v21-model','pplx-decider-model'} <= watch)
     def test_local_links_valid(self):self.assertEqual(validate.validate_local_links(ROOT),[])
     def test_escaping_local_link_rejected(self):
         with tempfile.TemporaryDirectory() as d:

@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "reviewed_on": "2026-09-30",
+  "reviewed_on": "2026-10-06",
   "scope": "Evidence-backed models, methods and evaluation for bounded decisions in AI systems.",
   "sources": [
     {
@@ -28,10 +28,10 @@
       "title": "TypeSafe confidence semantics",
       "url": "https://docs.typesafe.ai/confidence",
       "kind": "official_docs",
-      "reviewed_on": "2026-09-25",
+      "reviewed_on": "2026-10-06",
       "review_depth": "content_reviewed",
       "source_revision": null,
-      "review_note": ""
+      "review_note": "Current formulas and Noul field semantics reviewed. Distribution concentration is not a calibrated operational success rate."
     },
     {
       "id": "laya-family",
@@ -472,6 +472,226 @@
       "review_depth": "content_reviewed",
       "source_revision": "d5b63876af2ba6128f4582f2be1c8edf0517dd3d",
       "review_note": "Companion maintained by the same repository owner. Reviewed five-layer scope, measurement/evidence standards, applied playbooks and synthetic incrementality-demo limits; navigation inclusion is not independent certification of its linked products."
+    },
+    {
+      "id": "clef-launch",
+      "title": "Cloudflare Clef launch and evaluation report",
+      "url": "https://blog.cloudflare.com/clef-decision-models/",
+      "kind": "official_publication",
+      "reviewed_on": "2026-10-02",
+      "review_depth": "content_reviewed",
+      "source_revision": null,
+      "review_note": "Published 2026-10-01. Architecture, training description and benchmark table reviewed. Results are vendor-reported; no inference or raw-output audit performed."
+    },
+    {
+      "id": "clef-card",
+      "title": "Clef 27B model card",
+      "url": "https://huggingface.co/Cloudflare/clef/blob/2f3de3dd85f379784083b0814d997ab627200f0c/README.md",
+      "kind": "model_card",
+      "reviewed_on": "2026-10-02",
+      "review_depth": "content_reviewed",
+      "source_revision": "2f3de3dd85f379784083b0814d997ab627200f0c",
+      "review_note": "Pinned card describes the joint schema head, Jev/SystemOne wrapper and local encoder default. Repository revision pins reviewed text, not a verified weight hash or the hosted/evaluated deployment."
+    },
+    {
+      "id": "clef-flash-card",
+      "title": "Clef-Flash 9B model card",
+      "url": "https://huggingface.co/Cloudflare/clef-flash/blob/17f0b0ad64efb65d273590632833508766b2aae6/README.md",
+      "kind": "model_card",
+      "reviewed_on": "2026-10-02",
+      "review_depth": "content_reviewed",
+      "source_revision": "17f0b0ad64efb65d273590632833508766b2aae6",
+      "review_note": "Pinned card and configuration inspected; inference examples require the custom joint-schema implementation. No model weights downloaded or executed."
+    },
+    {
+      "id": "strands-repo",
+      "title": "Strands Decider repository",
+      "url": "https://github.com/strands-labs/strands-decider/blob/aa92b075ff297d7bf17c18bf6c676ab4df0fa9a9/README.md",
+      "kind": "repository",
+      "reviewed_on": "2026-10-02",
+      "review_depth": "content_reviewed",
+      "source_revision": "aa92b075ff297d7bf17c18bf6c676ab4df0fa9a9",
+      "review_note": "Reference recipe v19; mechanism and local serving reviewed. Source commit is not an evaluated-weight identifier."
+    },
+    {
+      "id": "strands-architecture",
+      "title": "Strands Decider architecture",
+      "url": "https://github.com/strands-labs/strands-decider/blob/aa92b075ff297d7bf17c18bf6c676ab4df0fa9a9/docs/architecture.md",
+      "kind": "official_docs",
+      "reviewed_on": "2026-10-02",
+      "review_depth": "content_reviewed",
+      "source_revision": "aa92b075ff297d7bf17c18bf6c676ab4df0fa9a9",
+      "review_note": "Pointer readout, confidence semantics and calibration inspected. For v19 teacher targets, the exact experiment config and results take precedence over the general training description."
+    },
+    {
+      "id": "strands-v19-config",
+      "title": "Strands Decider v19 experiment configuration",
+      "url": "https://github.com/strands-labs/strands-decider/blob/aa92b075ff297d7bf17c18bf6c676ab4df0fa9a9/configs/experiments/v19.yaml",
+      "kind": "repository",
+      "reviewed_on": "2026-10-02",
+      "review_depth": "content_reviewed",
+      "source_revision": "aa92b075ff297d7bf17c18bf6c676ab4df0fa9a9",
+      "review_note": "Inspected configuration: rank-16 LoRA, frozen-torso KL and v14 replay on multi-step rows. The source was read, not executed."
+    },
+    {
+      "id": "strands-evaluation",
+      "title": "Strands Decider evaluation and limitations",
+      "url": "https://github.com/strands-labs/strands-decider/blob/aa92b075ff297d7bf17c18bf6c676ab4df0fa9a9/evaluation/README.md",
+      "kind": "evaluation_report",
+      "reviewed_on": "2026-10-02",
+      "review_depth": "content_reviewed",
+      "source_revision": "aa92b075ff297d7bf17c18bf6c676ab4df0fa9a9",
+      "review_note": "Author-reported limitations reviewed, including instruction sensitivity and confidence drift outside short classification."
+    },
+    {
+      "id": "strands-probe",
+      "title": "Strands Decider held-out choice probe results",
+      "url": "https://github.com/strands-labs/strands-decider/blob/aa92b075ff297d7bf17c18bf6c676ab4df0fa9a9/research/data/probe_heldout_choice.csv",
+      "kind": "evaluation_report",
+      "reviewed_on": "2026-10-02",
+      "review_depth": "content_reviewed",
+      "source_revision": "aa92b075ff297d7bf17c18bf6c676ab4df0fa9a9",
+      "review_note": "v19 first/last/not/irrelevant rows inspected. These are aggregate CSVs; underlying qsens_hobson-2b-v19.json, per-item predictions and actual sample count were not available in the checkout."
+    },
+    {
+      "id": "strands-probe-method",
+      "title": "Strands Decider question-sensitivity protocol",
+      "url": "https://github.com/strands-labs/strands-decider/blob/aa92b075ff297d7bf17c18bf6c676ab4df0fa9a9/evaluation/question_sensitivity.py",
+      "kind": "repository",
+      "reviewed_on": "2026-10-02",
+      "review_depth": "content_reviewed",
+      "source_revision": "aa92b075ff297d7bf17c18bf6c676ab4df0fa9a9",
+      "review_note": "Read probe construction and aggregation without executing code. research/scripts/collect.py confirms the CSV uses the held-out choice slice (emotion and massive_intent). Default sampling is not proof of the recorded run denominator."
+    },
+    {
+      "id": "strands-research",
+      "title": "Strands Decider experiment record",
+      "url": "https://github.com/strands-labs/strands-decider/blob/aa92b075ff297d7bf17c18bf6c676ab4df0fa9a9/research/README.md",
+      "kind": "evaluation_report",
+      "reviewed_on": "2026-10-02",
+      "review_depth": "content_reviewed",
+      "source_revision": "aa92b075ff297d7bf17c18bf6c676ab4df0fa9a9",
+      "review_note": "Records five promotions despite missed preregistered bars (v13/v14/v16/v17/v18); v19 met its four predictions. Also read v19-seed1 preregistration: stopped at step 1,420 on 2026-09-28, no results taken."
+    },
+    {
+      "id": "strands-results",
+      "title": "Strands Decider original and AWS retrain results",
+      "url": "https://github.com/strands-labs/strands-decider/blob/aa92b075ff297d7bf17c18bf6c676ab4df0fa9a9/evaluation/results.md",
+      "kind": "evaluation_report",
+      "reviewed_on": "2026-10-02",
+      "review_depth": "content_reviewed",
+      "source_revision": "aa92b075ff297d7bf17c18bf6c676ab4df0fa9a9",
+      "review_note": "Original research v19 and AWS retrain are separate runs. No historical probe score is assigned to the published adapter by name alone."
+    },
+    {
+      "id": "strands-card",
+      "title": "Strands Decider published v19 adapter card",
+      "url": "https://huggingface.co/StrandsAgents/strands-decider-2B-hobson-v19/blob/bb282d786bc251fd4e3068de3ada9ddbb38127cd/README.md",
+      "kind": "model_card",
+      "reviewed_on": "2026-10-02",
+      "review_depth": "content_reviewed",
+      "source_revision": "bb282d786bc251fd4e3068de3ada9ddbb38127cd",
+      "review_note": "Published adapter/head card and LICENSE.md inspected. This release is distinguished from the original research v19 run; no weight bytes were downloaded or independently hashed."
+    },
+    {
+      "id": "strands-provenance",
+      "title": "Strands Decider published adapter provenance",
+      "url": "https://huggingface.co/StrandsAgents/strands-decider-2B-hobson-v19/blob/bb282d786bc251fd4e3068de3ada9ddbb38127cd/provenance.json",
+      "kind": "model_card",
+      "reviewed_on": "2026-10-02",
+      "review_depth": "content_reviewed",
+      "source_revision": "bb282d786bc251fd4e3068de3ada9ddbb38127cd",
+      "review_note": "Publisher identifies AWS run v19-p5-run1. Its base revision is explicitly inferred rather than training-time pinned; repository revision and author-supplied provenance are not independently verified weight bytes."
+    },
+    {
+      "id": "kev-1-0",
+      "title": "Kev 1.0 release baseline",
+      "url": "https://github.com/jaredpalmer/kev/blob/5e42a7a03f28134853dd3ff77461457e921e5ec1/docs/releases/kev-1.0.md",
+      "kind": "official_publication",
+      "reviewed_on": "2026-10-06",
+      "review_depth": "content_reviewed",
+      "source_revision": "5e42a7a03f28134853dd3ff77461457e921e5ec1",
+      "review_note": "Released 2026-10-01; explicitly introduces no newly trained checkpoint. Reviewed context validation, calibration, v2 regressions and release provenance; source pin is not a weight hash."
+    },
+    {
+      "id": "kev27-v2",
+      "title": "Kev-27B v2 model card",
+      "url": "https://github.com/jaredpalmer/kev/blob/5e42a7a03f28134853dd3ff77461457e921e5ec1/docs/model-cards/kev-27b.md",
+      "kind": "model_card",
+      "reviewed_on": "2026-10-06",
+      "review_depth": "content_reviewed",
+      "source_revision": "5e42a7a03f28134853dd3ff77461457e921e5ec1",
+      "review_note": "Relevant source text reviewed; no model execution or weight-byte verification."
+    },
+    {
+      "id": "strands-v21-results",
+      "title": "Strands Decider v21 release and same-host seed results",
+      "url": "https://github.com/strands-labs/strands-decider/blob/3e94e9d84c620ed5a95f1a3310c3decb971e261c/evaluation/results.md",
+      "kind": "evaluation_report",
+      "reviewed_on": "2026-10-06",
+      "review_depth": "content_reviewed",
+      "source_revision": "3e94e9d84c620ed5a95f1a3310c3decb971e261c",
+      "review_note": "v21 release seed, six-seed selection rule and separate same-host v19/v21b comparison inspected. Historical v19 evidence remains separate; no raw-output replay."
+    },
+    {
+      "id": "strands-v21-config",
+      "title": "Strands Decider released v21b recipe",
+      "url": "https://github.com/strands-labs/strands-decider/blob/3e94e9d84c620ed5a95f1a3310c3decb971e261c/configs/experiments/v21b.yaml",
+      "kind": "repository",
+      "reviewed_on": "2026-10-06",
+      "review_depth": "content_reviewed",
+      "source_revision": "3e94e9d84c620ed5a95f1a3310c3decb971e261c",
+      "review_note": "Relevant source text reviewed; no model execution or weight-byte verification."
+    },
+    {
+      "id": "laya-limits",
+      "title": "Laya documented operational limitations",
+      "url": "https://github.com/NandhaKishorM/laya/blob/a4a8921afebfd852bba0000475cfb6ab737a124c/README.md#honest-limits",
+      "kind": "official_docs",
+      "reviewed_on": "2026-10-06",
+      "review_depth": "content_reviewed",
+      "source_revision": "a4a8921afebfd852bba0000475cfb6ab737a124c",
+      "review_note": "Read the current documented label sensitivity, negation examples and unusable act_probability warning. These include previously reported problems, not newly discovered defects or tests run here."
+    },
+    {
+      "id": "clef-hosted",
+      "title": "Clef Workers AI interface and context limit",
+      "url": "https://developers.cloudflare.com/workers-ai/models/clef/",
+      "kind": "official_docs",
+      "reviewed_on": "2026-10-06",
+      "review_depth": "content_reviewed",
+      "source_revision": null,
+      "review_note": "Hosted context is 65,536 tokens; local encode_record default is a separate setting. Interface schema reviewed, not called."
+    },
+    {
+      "id": "pplx-card",
+      "title": "Perplexity pplx-decider-v1-27b model card",
+      "url": "https://huggingface.co/perplexity-ai/pplx-decider-v1-27b",
+      "kind": "model_card",
+      "reviewed_on": "2026-10-06",
+      "review_depth": "content_reviewed",
+      "source_revision": null,
+      "review_note": "Card, file listing and API evaluation boundary inspected. The card history link identifies commit 5117a6c7fe73b19308dc1a6b0fb529a40c2ecad4, but the immutable body could not be fetched; this record retains the reviewed live URL rather than claiming a verified source pin. Training data and raw calibration/evaluation artifacts were not established."
+    },
+    {
+      "id": "pplx-inference",
+      "title": "Perplexity local inference wrapper",
+      "url": "https://huggingface.co/perplexity-ai/pplx-decider-v1-27b/blob/main/inference.py",
+      "kind": "repository",
+      "reviewed_on": "2026-10-06",
+      "review_depth": "content_reviewed",
+      "source_revision": null,
+      "review_note": "Read only: custom autojev runtime, choice/noul/score and image input, saved-temperature inference. No dependencies installed and no model code executed."
+    },
+    {
+      "id": "pplx-config",
+      "title": "Perplexity released decision configuration",
+      "url": "https://huggingface.co/perplexity-ai/pplx-decider-v1-27b/blob/main/decision_config.json",
+      "kind": "repository",
+      "reviewed_on": "2026-10-06",
+      "review_depth": "content_reviewed",
+      "source_revision": null,
+      "review_note": "Saved temperature 2.207568021892729 and author-supplied run/data/code hashes inspected; hashes alone do not supply the underlying training or calibration datasets."
     }
   ],
   "entries": [
@@ -497,10 +717,10 @@
         "en": "RLCD is vendor-described; the full training recipe is not public. Valid schemas and confidence fields do not establish semantic reliability.",
         "zh": "RLCD 的完整训练配方未公开；格式合法与置信度字段不等于语义可靠。"
       },
-      "reviewed_on": "2026-09-25",
+      "reviewed_on": "2026-10-06",
       "mechanism": {
-        "en": "Proprietary decision model; public API is more inspectable than its internals.",
-        "zh": "专有判断模型；接口可查，内部实现公开程度有限。"
+        "en": "Proprietary model. Choice/Score confidence summarizes the returned distribution; it is not a separate probability-of-correctness estimate. Noul returns P(yes) with no separate confidence field.",
+        "zh": "专有模型。Choice／Score 的 confidence 是返回分布的统计量，并非独立预测的正确概率；Noul 返回 P(yes)，没有单独 confidence 字段。"
       },
       "training": {
         "en": "Vendor-described RLCD; controlled independent ablations not established here.",
@@ -529,7 +749,8 @@
       "url": "https://github.com/NandhaKishorM/laya",
       "source_ids": [
         "laya-family",
-        "laya-specialist"
+        "laya-specialist",
+        "laya-limits"
       ],
       "summary": {
         "en": "Compact encoder family with dynamic option heads; general, multilingual and workflow-specialized checkpoints.",
@@ -540,10 +761,10 @@
         "zh": "适合有领域训练数据、需要控制高频调用成本的窄域判断。"
       },
       "caveat": {
-        "en": "Do not mix base and specialized scores. The typed checkpoint currently discloses training/calibration overlap and inherited-temperature conflicts.",
-        "zh": "不可混用基础版与专项版成绩；专项卡明确披露训练与校准数据重叠及温度配置冲突。"
+        "en": "Do not mix base/specialist scores; the typed card discloses training/calibration overlap and inherited-temperature conflicts. Boolean labels can dominate noul/choice; semantic labels alone do not make negation safe. action.act_probability is documented as nearly constant at 1 and unsuitable as an execution gate. Validate confidence on your workload instead.",
+        "zh": "不可混用基础版／专项版成绩；专项卡披露训练／校准重叠和继承温度冲突。布尔标签可能主导 noul／choice；语义标签也不能保证否定句安全。官方称 action.act_probability 几乎恒为 1，不适合作为执行门槛；confidence 也需在实际任务上验证。"
       },
-      "reviewed_on": "2026-09-25",
+      "reviewed_on": "2026-10-06",
       "mechanism": {
         "en": "Bidirectional encoder plus option-conditioned decision head.",
         "zh": "双向编码器加选项条件化判断头。"
@@ -576,34 +797,36 @@
       "url": "https://github.com/jaredpalmer/kev",
       "source_ids": [
         "kev",
-        "kev4b"
+        "kev4b",
+        "kev-1-0",
+        "kev27-v2"
       ],
       "summary": {
-        "en": "Qwen-based adapters and a dynamic pointer head for typed decisions, with training and serving tools.",
-        "zh": "Qwen 骨干、适配器及动态 pointer head，配套类型化判断训练和部署工具。"
+        "en": "Qwen-based typed decision family with a dynamic pointer head; Kev 1.0 freezes existing checkpoints as a release baseline.",
+        "zh": "Qwen 骨干与动态 pointer head 的类型化判断系列；Kev 1.0 将现有检查点固定为发布基线。"
       },
       "use": {
         "en": "An inspectable starting point for domain-supervised decision models.",
         "zh": "可检查、可微调的领域监督判断实验底座。"
       },
       "caveat": {
-        "en": "New-source development, held-out tests and trained-source scores are distinct. Adapter size is not deployment memory.",
-        "zh": "新来源开发集、最终测试集与已训练来源成绩不同；适配器大小不是部署内存。"
+        "en": "Keep trained-family tests separate from transfer. 27B v2 is worse and overconfident on long contracts (CUAD ECE 0.053 versus v1 0.007). Serving capacity and fitted temperature do not guarantee accuracy or calibration on new workloads.",
+        "zh": "须区分训练任务族测试与迁移测试。27B v2 在长合同上退步且过度自信（CUAD ECE 0.053，v1 为 0.007）；可接收长度和拟合温度不保证新任务的准确率或校准。"
       },
-      "reviewed_on": "2026-09-25",
+      "reviewed_on": "2026-10-06",
       "mechanism": {
         "en": "Dynamic option readout on a language-model backbone; several model sizes.",
         "zh": "在语言模型骨干上动态读出选项分数；提供多个规模。"
       },
       "training": {
-        "en": "Supervised cross-entropy, LoRA and post-hoc temperature calibration.",
-        "zh": "监督交叉熵、LoRA 与事后温度校准。"
+        "en": "0.8B/4B/9B use LoRA plus a head. 27B v2 fully fine-tunes Qwen3.8-27B, then averages weights 0.85/0.15 with v1. Temperature fitting is distribution-specific; 0.8B/4B use held-out items from trained families.",
+        "zh": "0.8B／4B／9B 使用 LoRA 与判断头；27B v2 全参数微调 Qwen3.8-27B，再按 0.85／0.15 与 v1 平均权重。温度拟合依赖分布；0.8B／4B 使用训练任务族的保留样本。"
       },
       "availability": {
-        "en": "Open implementation and published checkpoints; the underlying backbone is still required.",
-        "zh": "公开实现及检查点；部署仍需基础模型。"
+        "en": "Small releases require the base plus adapter/head; 27B v2 ships about 51 GB of full bf16 weights plus head. Served limit: 65,536 tokens. Author-validated CUAD context: 8,192 for 0.8B/4B/9B, 65,536 for 27B, under the stated 3-pp non-inferiority rule.",
+        "zh": "小型号需基座、适配器与判断头；27B v2 发布约 51 GB 的完整 bf16 权重与判断头。服务上限 65,536 token；按作者 CUAD 的 3 个百分点非劣效规则，0.8B／4B／9B 仅验证至 8,192，27B 至 65,536。"
       },
-      "license_note": "Repository describes Apache-2.0; confirm adapter and backbone terms separately.",
+      "license_note": "Kev 1.0 cards declare Apache-2.0 for the released weights/head and listed bases; verify the exact artifact. A family entry has no single weight revision.",
       "weight_revision": null,
       "tags": [
         "typed-decisions",
@@ -850,6 +1073,112 @@
       "scale": {
         "en": "Project documentation describes 1B parameters; this review did not inspect the weight tensors or independently count parameters.",
         "zh": "项目文档称为 1B 参数；本次没有检查权重张量或独立核算参数量。"
+      }
+    },
+    {
+      "id": "clef",
+      "name": "Clef / Clef-Flash",
+      "category": "core_models",
+      "url": "https://huggingface.co/Cloudflare/clef",
+      "source_ids": [
+        "clef-launch",
+        "clef-card",
+        "clef-flash-card",
+        "clef-hosted"
+      ],
+      "summary": {
+        "en": "Multimodal Qwen backbones with a joint schema head for typed decisions and a Jev/SystemOne-compatible wrapper.",
+        "zh": "多模态 Qwen 骨干加联合 schema 判断头，输出类型化决策，提供 Jev/SystemOne 兼容封装。"
+      },
+      "use": {
+        "en": "Compare text/image-based classification, triage and ordinal judgments with task-specific error costs.",
+        "zh": "比较文本／图像分类、分流与有序评分，并按具体任务衡量错误成本。"
+      },
+      "caveat": {
+        "en": "Vendor benchmarks have task-specific trade-offs. API compatibility and probability outputs do not establish calibrated business risk; local inference needs the custom schema runtime.",
+        "zh": "厂商评测存在任务间取舍；接口兼容和概率输出不等于业务风险已校准，本地推理需要定制 schema 运行代码。"
+      },
+      "reviewed_on": "2026-10-06",
+      "mechanism": {
+        "en": "Joint transformer head routes state evidence to questions and jointly scores their allowed options in one forward pass; no free-form answer generation.",
+        "zh": "联合 Transformer 判断头把状态证据路由到问题，在一次前向计算中对各题允许的选项评分，不生成自由文本答案。"
+      },
+      "training": {
+        "en": "Cloudflare reports rank-256 LoRA plus the routing head, label-smoothed cross-entropy, Brier loss and a secondary RLCD objective on internal synthetic data; the full data/recipe was not audited.",
+        "zh": "Cloudflare 称使用 rank-256 LoRA 与路由头、标签平滑交叉熵、Brier 损失及辅助 RLCD 目标，训练数据为内部合成数据；完整数据和配方未审计。"
+      },
+      "availability": {
+        "en": "Public weights and custom load_release_model/systemone helpers; also Workers AI. The hosted Clef page lists 65,536 tokens, while local encode_record defaults to 16,384. Check the specific endpoint schema for supported media and truncation.",
+        "zh": "公开权重及定制 load_release_model／systemone 函数，另有 Workers AI。Clef 托管页面列 65,536 token，本地 encode_record 默认 16,384；媒体支持与截断行为须核对具体接口。"
+      },
+      "license_note": "Both reviewed release cards declare Apache-2.0; this does not establish that all training data or the full training recipe are public.",
+      "weight_revision": null,
+      "tags": [
+        "typed-decisions",
+        "multimodal",
+        "joint-schema",
+        "local",
+        "hosted"
+      ],
+      "scale": {
+        "en": "Cards describe Clef as 27B (Qwen3.8-27B) and Clef-Flash as 9B (Qwen3.5-9B), each retaining a vision encoder; parameter counts are source-reported.",
+        "zh": "模型卡称 Clef 为 27B（Qwen3.8-27B），Clef-Flash 为 9B（Qwen3.5-9B），均保留视觉编码器；参数量为来源自报。"
+      }
+    },
+    {
+      "id": "strands-decider",
+      "name": "Strands Decider",
+      "category": "core_models",
+      "url": "https://github.com/strands-labs/strands-decider",
+      "source_ids": [
+        "strands-repo",
+        "strands-architecture",
+        "strands-v19-config",
+        "strands-evaluation",
+        "strands-research",
+        "strands-results",
+        "strands-card",
+        "strands-provenance",
+        "strands-v21-results",
+        "strands-v21-config"
+      ],
+      "summary": {
+        "en": "Qwen-based pointer-head decision model with rank-16 LoRA, typed outputs and a documented experiment history.",
+        "zh": "基于 Qwen、pointer head 和 rank-16 LoRA 的类型化判断模型，公开实验演进记录。"
+      },
+      "use": {
+        "en": "A local baseline for short classification and domain-supervised decisions; test question changes, option order and risk–coverage on your own traffic.",
+        "zh": "可作为短文本分类和领域监督判断的本地基线；用实际流量测试问题变化、选项顺序和风险—覆盖率。"
+      },
+      "caveat": {
+        "en": "Same-host multi-seed evidence does not establish higher JevBench accuracy than the v19 recipe, although mean Brier is lower. Historical v19 instruction-sensitivity probes and short-classification confidence bands are not v21 guarantees; calibrate on the target workload.",
+        "zh": "同机多种子证据未确立 JevBench 准确率超过 v19 配方，虽平均 Brier 更低。旧 v19 的指令敏感性探针和短分类置信分段不能当作 v21 保证；需在目标任务上校准。"
+      },
+      "reviewed_on": "2026-10-06",
+      "mechanism": {
+        "en": "Replaces the language-model head with a dynamic pointer readout comparing the answer-position state to option-token states; one forward pass for noul, choice or score. Confidence is derived from the distribution, not a separate correctness predictor.",
+        "zh": "以动态 pointer 读出替代语言模型输出头，比较答案位置与选项 token 的隐状态，一次前向计算支持 noul、choice、score。置信度由分布推导，并非独立正确率预测器。"
+      },
+      "training": {
+        "en": "Current hobson-v21 is research v21b: v19 recipe plus checked question paraphrases and Qwen3.5-4B distillation where teacher and gold agree; no catch-all rows or instruction flips. Rank-16 LoRA and pointer head, with per-primitive calibration.",
+        "zh": "当前 hobson-v21 对应研究 v21b：v19 配方加核查过的问题改写，以及教师与金标签一致处的 Qwen3.5-4B 蒸馏；不含兜底选项样本或指令翻转。使用 rank-16 LoRA、pointer head 与按判断类型的校准。"
+      },
+      "availability": {
+        "en": "Current release: StrandsAgents/strands-decider-2B-hobson-v21, seed 5 selected by a predeclared representativeness rule among six seeds. Adapter/head require separate base weights. Serving window 4,096; training rows at most 3,072 tokens. Earlier v19/AWS artifacts remain historical evidence.",
+        "zh": "当前发布为 StrandsAgents/strands-decider-2B-hobson-v21，按预先声明的代表性规则从六个种子中选 seed 5。适配器／判断头仍需基座权重；服务窗口 4,096，训练样本不超过 3,072 token。旧 v19／AWS 产物保留为历史证据。"
+      },
+      "license_note": "Repository and published adapter/head declare Apache-2.0. The release contains adapter/head files only; base weights load separately. Check base-model and dataset terms separately.",
+      "weight_revision": null,
+      "tags": [
+        "typed-decisions",
+        "pointer-head",
+        "local",
+        "fine-tuning",
+        "calibration"
+      ],
+      "scale": {
+        "en": "Source-reported 1.9B Qwen3.5-2B-Base torso plus an approximately 1M-parameter pointer head and LoRA; adapter size does not represent deployment memory.",
+        "zh": "来源称使用 1.9B Qwen3.5-2B-Base 骨干、约 1M 参数 pointer head 和 LoRA；适配器大小不等于部署内存。"
       }
     },
     {
@@ -1402,6 +1731,54 @@
         "zh": "相关导航不构成独立产品验证；合成演示不证明客户业务增量。"
       },
       "reviewed_on": "2026-09-30"
+    },
+    {
+      "id": "pplx-decider",
+      "name": "Perplexity pplx-decider-v1-27b",
+      "category": "core_models",
+      "url": "https://huggingface.co/perplexity-ai/pplx-decider-v1-27b",
+      "source_ids": [
+        "pplx-card",
+        "pplx-inference",
+        "pplx-config"
+      ],
+      "reviewed_on": "2026-10-06",
+      "summary": {
+        "en": "Qwen3.8-27B fine-tune with published weights and a custom typed-decision runtime, including image inputs.",
+        "zh": "Qwen3.8-27B 微调模型，公开权重与类型化判断运行代码，支持图像输入。"
+      },
+      "use": {
+        "en": "A self-hosted comparator for text/image judgments after task-specific validation.",
+        "zh": "经具体任务验证后，作为文本／图像判读的自部署对照。"
+      },
+      "caveat": {
+        "en": "The card reports Perplexity API results; equivalence to local weights is unverified. Full training data, calibration validation and raw benchmark artifacts were not established.",
+        "zh": "模型卡成绩来自 Perplexity API；与本地权重是否等价未验证。完整训练数据、校准验证及原始评测产物尚未确证。"
+      },
+      "mechanism": {
+        "en": "Custom autojev DecisionModel returns option probabilities through choice, noul or score helpers; inference uses a saved temperature.",
+        "zh": "定制 autojev DecisionModel 通过 choice、noul、score 函数返回选项概率；推理使用保存的温度。"
+      },
+      "training": {
+        "en": "Fine-tuned from Qwen3.8-27B; configuration records provenance hashes and temperature 2.207568. Hashes do not make the full training/calibration protocol reproducible.",
+        "zh": "基于 Qwen3.8-27B 微调；配置记录来源哈希及温度 2.207568。仅有哈希不能使完整训练／校准过程可复现。"
+      },
+      "availability": {
+        "en": "Public full weights and readout; card requests Python 3.12+ and CUDA with about 49 GiB for weights plus working memory. Custom inference example was read, not executed.",
+        "zh": "公开完整权重与读出头；模型卡要求 Python 3.12+、CUDA，以及约 49 GiB 权重内存和额外工作空间。本次仅阅读推理示例。"
+      },
+      "scale": {
+        "en": "27B-class Qwen3.8 backbone; no independent tensor count.",
+        "zh": "27B 级 Qwen3.8 骨干；未独立统计张量参数。"
+      },
+      "license_note": "Official model card declares Apache-2.0; public weights do not imply public training data.",
+      "weight_revision": null,
+      "tags": [
+        "typed-decisions",
+        "multimodal",
+        "local",
+        "open-weight"
+      ]
     }
   ]
 }
