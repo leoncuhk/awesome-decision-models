@@ -293,3 +293,110 @@ Reported fractions are displayed as percentages where appropriate. More printed 
 
 **Sources:** [Strands Decider v21 release and same-host seed results](https://github.com/strands-labs/strands-decider/blob/3e94e9d84c620ed5a95f1a3310c3decb971e261c/evaluation/results.md); [Strands Decider released v21b recipe](https://github.com/strands-labs/strands-decider/blob/3e94e9d84c620ed5a95f1a3310c3decb971e261c/configs/experiments/v21b.yaml)
 
+<a id="e09"></a>
+## E09 · Drex v1.5: public-suite ties and benchmark-training overlap
+
+**Evidence:** `author_reported` · **Reviewed:** 2026-10-11 · **Reproduced here:** no
+
+| Protocol | Recorded context |
+| --- | --- |
+| Task | JevBench public closed-option questions; separate from Decision Index 0.3.1 |
+| Test unit | 231 public items; no audited item-level pairing |
+| Split | Public evaluation; Nace discloses training on official training splits of Index tasks, not unseen-domain zero-shot |
+| Reference | Public benchmark labels, not real-world operational outcomes |
+| Training | Drex v1.5 task-trained; exact checkpoint and API deployment hashes not established |
+| Measurement | Reported hard-answer accuracy; no latency or aggregate Index metric combined here |
+| Hardware | Own APIs as reported on product page; hardware and end-to-end cost unverified |
+
+| Reported measurement | Value |
+| --- | --- |
+| Drex v1.5 public tasks correct | 199/231 (86.15%) |
+| Jev 1.13.0 public tasks correct (Nace report) | 201/231 (87.01%) |
+
+**Interpretation:** Two items do not establish a general winner. The newer public Index table declares Drex/Jev/Nimble within its tie band.
+
+- Pinned repository reports Index 0.3.1: 37 public benchmarks, no private tests, 0.9-point tie band. Website 0.2.1: 38 tests, 0.25 band. Do not merge editions.
+- Nace reports its own Drex run; other Index rows are copied from the board, not a common independently rerun comparison.
+- Public benchmark train/test separation does not establish absence of pretraining overlap or sequestered final-test model selection.
+- Local/API equivalence, calibration splits and raw predictions were not audited.
+
+**Artifacts and limits:**
+- protocol: Pinned release page and live training FAQ
+- raw outputs: Not audited
+- weight hash: None
+- serving version: None
+
+**Sources:** [Drex v1.5 release and public evaluation](https://github.com/nace-ai/drex-decision-models/blob/5c3d2220713c732a6820c4cdda51c7c38db991f5/models/drex-v1.5/README.md); [Nace Drex training-overlap disclosure](https://www.nace.ai/drex)
+
+<a id="e10"></a>
+## E10 · Microsoft-Decision-1: perturbation stability is an author claim
+
+**Evidence:** `author_reported` · **Reviewed:** 2026-10-11 · **Reproduced here:** no
+
+| Protocol | Recorded context |
+| --- | --- |
+| Task | Eight request perturbations including option order and paraphrases |
+| Test unit | Perturbations; sample denominator and clustering unknown |
+| Split | Author says broader 36-benchmark comparison is blind from training; exact perturbation cohort and overlap unverified |
+| Reference | Decision agreement under perturbation, not correctness or calibrated risk |
+| Training | Microsoft post-trained Qwen3.5-9B; calibration split/recipe undisclosed in inspected sources |
+| Measurement | Average decision flip rate reported in launch text; aggregation/weighting not specified |
+| Hardware | No latency comparison imported; serving versions and hardware not pinned |
+
+| Reported measurement | Value |
+| --- | --- |
+| Author-reported average perturbation flip rate | 1.30% |
+
+**Interpretation:** Low reported flip rate does not establish correctness, instruction sensitivity or production-safe acceptance thresholds.
+
+- No raw perturbations/predictions or uncertainty analysis inspected; this is not independent reproduction.
+- The 36-benchmark headline and this perturbation probe do not necessarily share the same denominator.
+- Official deployment docs still warn about wording/order sensitivity, familiar-task calibration and harmful/benign classification errors.
+
+**Artifacts and limits:**
+- protocol: Live launch article; no immutable revision supplied
+- raw outputs: Not inspected
+- weight hash: None
+- serving version: None
+
+**Sources:** [Microsoft-Decision-1 launch, 2026-10-09](https://commandline.microsoft.com/microsoft-decision-1-model-foundry/); [Microsoft Foundry decision API and limitations](https://learn.microsoft.com/en-us/azure/foundry/foundry-models/how-to/use-foundry-models-microsoft-decision)
+
+<a id="e11"></a>
+## E11 · Strands Qwen3.5 v1: new recipe, soup and missing-image limits
+
+**Evidence:** `author_reported` · **Reviewed:** 2026-10-11 · **Reproduced here:** no
+
+| Protocol | Recorded context |
+| --- | --- |
+| Task | JevBench public set and separate missing-image POPE probe |
+| Test unit | 231 public JevBench tasks; three training seeds; POPE denominator not established here |
+| Split | 4096-token public evaluation; MuSiQue/ContractNLI/BoardgameQA dev splits have train splits in training; HotpotQA held out of training. Some short held-out tasks also serve calibration |
+| Reference | Benchmark labels; missing-image experiment removes required evidence rather than creating an answerable task |
+| Training | 246678-row balanced Qwen v1 mix, Gemma-4-31B teacher with gold agreement, v19 KL anchor, three-seed soup then calibration; builders absent from main |
+| Measurement | Released soup through main versus separate seed/harness scores; do not infer recipe gain from two release runs |
+| Hardware | Soup on NVIDIA L4 via main; seeds on 8 A100; paired image comparison on one L4 |
+
+| Reported measurement | Value |
+| --- | --- |
+| Released Qwen v1 JevBench tasks correct | 180/231 (77.92%) |
+| Released Qwen v1 Brier | 0.28 |
+| Released Qwen v1 ECE | 0.072 |
+| POPE missing-image Qwen v1 ECE | 0.334 |
+| POPE missing-image v21 ECE | 0.292 |
+
+**Interpretation:** This is new training and a calibrated soup, not a rename of v21. Reported text results do not imply improved reliability when essential image evidence is missing.
+
+- Training harness scores 181/231; release code scores 180, with one near tie. Neither is silently substituted for the other.
+- Public benchmark model selection and absent data builders limit independent reproducibility; weight bytes and raw runs not audited here.
+- Author reports missing-image POPE ECE difference +0.042 (paired-bootstrap 95% CI +0.039 to +0.044); confidence does not detect absent images.
+- Gemma v1 uses another data mix/teacher and is text-only. E2B pre-fix Decision Index is not a post-fix capability claim.
+- E07/E08 preserve v19/v21 evidence; no controlled same-host recipe improvement inferred for v1.
+
+**Artifacts and limits:**
+- protocol: https://github.com/strands-labs/strands-decider/blob/0ac22a97e584f3ccf87cc9b8cc5fdbad57cdf534/evaluation/results.md
+- vision protocol: https://github.com/strands-labs/strands-decider/blob/0ac22a97e584f3ccf87cc9b8cc5fdbad57cdf534/docs/vision.md
+- raw outputs: Linked author runs not independently audited
+- weight hash: None
+
+**Sources:** [Strands Qwen3.5 / Gemma 4 v1 results](https://github.com/strands-labs/strands-decider/blob/0ac22a97e584f3ccf87cc9b8cc5fdbad57cdf534/evaluation/results.md); [Strands Qwen v1 missing-image reliability](https://github.com/strands-labs/strands-decider/blob/0ac22a97e584f3ccf87cc9b8cc5fdbad57cdf534/docs/vision.md); [Strands dataset/source inventory](https://github.com/strands-labs/strands-decider/blob/0ac22a97e584f3ccf87cc9b8cc5fdbad57cdf534/data/sources.md)
+

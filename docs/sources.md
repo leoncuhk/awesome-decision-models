@@ -535,3 +535,99 @@
 - Source revision: `not captured / live URL`
 - Note: Saved temperature 2.207568021892729 and author-supplied run/data/code hashes inspected; hashes alone do not supply the underlying training or calibration datasets.
 
+<a id="ms-decision-launch"></a>
+## Microsoft-Decision-1 launch, 2026-10-09
+
+- Source: https://commandline.microsoft.com/microsoft-decision-1-model-foundry/
+- Kind: `official_publication`; review depth: `content_reviewed`; reviewed: 2026-10-11
+- Source revision: `not captured / live URL`
+- Note: Launch text reviewed, including the note that Jev comparisons were added. Vendor evaluation, not independent reproduction; charts and raw items not audited.
+
+<a id="ms-decision-docs"></a>
+## Microsoft Foundry decision API and limitations
+
+- Source: https://learn.microsoft.com/en-us/azure/foundry/foundry-models/how-to/use-foundry-models-microsoft-decision
+- Kind: `official_docs`; review depth: `content_reviewed`; reviewed: 2026-10-11
+- Source revision: `not captured / live URL`
+- Note: Public article body read: model version 1, text/JSON request contract, deployment endpoint and known calibration/wording/safety limits. No deployment created.
+
+<a id="openai-decisions"></a>
+## OpenAI Decisions public beta guide
+
+- Source: https://developers.openai.com/api/docs/guides/decisions
+- Kind: `official_docs`; review depth: `content_reviewed`; reviewed: 2026-10-11
+- Source revision: `not captured / live URL`
+- Note: Guide body, output examples and refusal branches reviewed. Live documentation has no immutable source/serving pin here. No paid API call. Latency headline is not imported as a measured comparison.
+
+<a id="drex-release"></a>
+## Drex v1.5 release and public evaluation
+
+- Source: https://github.com/nace-ai/drex-decision-models/blob/5c3d2220713c732a6820c4cdda51c7c38db991f5/models/drex-v1.5/README.md
+- Kind: `repository`; review depth: `content_reviewed`; reviewed: 2026-10-11
+- Source revision: `5c3d2220713c732a6820c4cdda51c7c38db991f5`
+- Note: Pinned release page read. Decision Index 0.3.1 is public-only, 37 tests with a 0.9 tie band; distinguish the older 0.2.1 website. Runner parity checks cover two requests only. Hugging Face card/history unavailable in this review; no weight hash established.
+
+<a id="drex-context"></a>
+## Drex local context limits
+
+- Source: https://github.com/nace-ai/drex-decision-models/blob/5c3d2220713c732a6820c4cdda51c7c38db991f5/docs/context-length.md
+- Kind: `official_docs`; review depth: `content_reviewed`; reviewed: 2026-10-11
+- Source revision: `5c3d2220713c732a6820c4cdda51c7c38db991f5`
+- Note: Default and maximum apply to state plus one question, with runner-specific slot/limit settings; distinct from the hosted API limits.
+
+<a id="drex-license"></a>
+## Drex v1.5 modified Open RAIL-M license
+
+- Source: https://github.com/nace-ai/drex-decision-models/blob/5c3d2220713c732a6820c4cdda51c7c38db991f5/models/drex-v1.5/LICENSE
+- Kind: `repository`; review depth: `content_reviewed`; reviewed: 2026-10-11
+- Source revision: `5c3d2220713c732a6820c4cdda51c7c38db991f5`
+- Note: Weight-license text read; restrictive model terms differ from the repository Apache-2.0 code license. No deployment/legal suitability judgment.
+
+<a id="drex-training"></a>
+## Nace Drex training-overlap disclosure
+
+- Source: https://www.nace.ai/drex
+- Kind: `official_publication`; review depth: `content_reviewed`; reviewed: 2026-10-11
+- Source revision: `not captured / live URL`
+- Note: Live FAQ reports official benchmark training splits plus procedural data. Held-out evaluation is task-trained, not wholly unseen-domain zero-shot. Website 0.2.1 results and later pinned repository 0.3.1 results are separate.
+
+<a id="strands-v1-release"></a>
+## Strands October 9 v1 releases
+
+- Source: https://github.com/strands-labs/strands-decider/blob/0ac22a97e584f3ccf87cc9b8cc5fdbad57cdf534/CHANGELOG.md
+- Kind: `repository`; review depth: `content_reviewed`; reviewed: 2026-10-11
+- Source revision: `0ac22a97e584f3ccf87cc9b8cc5fdbad57cdf534`
+- Note: Qwen3.5 v1 and four Gemma 4 variants are new recipes/checkpoints; v1 across backbones is not one identical recipe.
+
+<a id="strands-v1-results"></a>
+## Strands Qwen3.5 / Gemma 4 v1 results
+
+- Source: https://github.com/strands-labs/strands-decider/blob/0ac22a97e584f3ccf87cc9b8cc5fdbad57cdf534/evaluation/results.md
+- Kind: `repository`; review depth: `content_reviewed`; reviewed: 2026-10-11
+- Source revision: `0ac22a97e584f3ccf87cc9b8cc5fdbad57cdf534`
+- Note: Release soups, seeds, serving/harness differences and training-overlap disclosures read. Qwen v1 builders not yet on main; raw predictions and weights not audited.
+
+<a id="strands-v1-runtime"></a>
+## Strands Gemma 4 serving limits and attention fix
+
+- Source: https://github.com/strands-labs/strands-decider/blob/0ac22a97e584f3ccf87cc9b8cc5fdbad57cdf534/docs/inference.md
+- Kind: `repository`; review depth: `content_reviewed`; reviewed: 2026-10-11
+- Source revision: `0ac22a97e584f3ccf87cc9b8cc5fdbad57cdf534`
+- Note: Gemma models are text-only, main-only at this source revision; 4096 training/serving window. E2B CUDA eager-attention fix changes numerical behavior; pre-fix index is not a reliable post-fix baseline.
+
+<a id="strands-v1-vision"></a>
+## Strands Qwen v1 missing-image reliability
+
+- Source: https://github.com/strands-labs/strands-decider/blob/0ac22a97e584f3ccf87cc9b8cc5fdbad57cdf534/docs/vision.md
+- Kind: `repository`; review depth: `content_reviewed`; reviewed: 2026-10-11
+- Source revision: `0ac22a97e584f3ccf87cc9b8cc5fdbad57cdf534`
+- Note: Author paired comparison: missing-image POPE confidence/calibration worsens against v21. Source review, not model reproduction.
+
+<a id="strands-v1-data"></a>
+## Strands dataset/source inventory
+
+- Source: https://github.com/strands-labs/strands-decider/blob/0ac22a97e584f3ccf87cc9b8cc5fdbad57cdf534/data/sources.md
+- Kind: `repository`; review depth: `content_reviewed`; reviewed: 2026-10-11
+- Source revision: `0ac22a97e584f3ccf87cc9b8cc5fdbad57cdf534`
+- Note: Inventory separates training, held-out short calibration/evaluation and dev splits; several dataset revisions remain unpinned. License declarations are source claims.
+

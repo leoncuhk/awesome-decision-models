@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "reviewed_on": "2026-10-06",
+  "reviewed_on": "2026-10-11",
   "scope": "Evidence-backed models, methods and evaluation for bounded decisions in AI systems.",
   "sources": [
     {
@@ -692,6 +692,126 @@
       "review_depth": "content_reviewed",
       "source_revision": null,
       "review_note": "Saved temperature 2.207568021892729 and author-supplied run/data/code hashes inspected; hashes alone do not supply the underlying training or calibration datasets."
+    },
+    {
+      "id": "ms-decision-launch",
+      "title": "Microsoft-Decision-1 launch, 2026-10-09",
+      "url": "https://commandline.microsoft.com/microsoft-decision-1-model-foundry/",
+      "kind": "official_publication",
+      "reviewed_on": "2026-10-11",
+      "review_depth": "content_reviewed",
+      "source_revision": null,
+      "review_note": "Launch text reviewed, including the note that Jev comparisons were added. Vendor evaluation, not independent reproduction; charts and raw items not audited."
+    },
+    {
+      "id": "ms-decision-docs",
+      "title": "Microsoft Foundry decision API and limitations",
+      "url": "https://learn.microsoft.com/en-us/azure/foundry/foundry-models/how-to/use-foundry-models-microsoft-decision",
+      "kind": "official_docs",
+      "reviewed_on": "2026-10-11",
+      "review_depth": "content_reviewed",
+      "source_revision": null,
+      "review_note": "Public article body read: model version 1, text/JSON request contract, deployment endpoint and known calibration/wording/safety limits. No deployment created."
+    },
+    {
+      "id": "openai-decisions",
+      "title": "OpenAI Decisions public beta guide",
+      "url": "https://developers.openai.com/api/docs/guides/decisions",
+      "kind": "official_docs",
+      "reviewed_on": "2026-10-11",
+      "review_depth": "content_reviewed",
+      "source_revision": null,
+      "review_note": "Guide body, output examples and refusal branches reviewed. Live documentation has no immutable source/serving pin here. No paid API call. Latency headline is not imported as a measured comparison."
+    },
+    {
+      "id": "drex-release",
+      "title": "Drex v1.5 release and public evaluation",
+      "url": "https://github.com/nace-ai/drex-decision-models/blob/5c3d2220713c732a6820c4cdda51c7c38db991f5/models/drex-v1.5/README.md",
+      "kind": "repository",
+      "reviewed_on": "2026-10-11",
+      "review_depth": "content_reviewed",
+      "source_revision": "5c3d2220713c732a6820c4cdda51c7c38db991f5",
+      "review_note": "Pinned release page read. Decision Index 0.3.1 is public-only, 37 tests with a 0.9 tie band; distinguish the older 0.2.1 website. Runner parity checks cover two requests only. Hugging Face card/history unavailable in this review; no weight hash established."
+    },
+    {
+      "id": "drex-context",
+      "title": "Drex local context limits",
+      "url": "https://github.com/nace-ai/drex-decision-models/blob/5c3d2220713c732a6820c4cdda51c7c38db991f5/docs/context-length.md",
+      "kind": "official_docs",
+      "reviewed_on": "2026-10-11",
+      "review_depth": "content_reviewed",
+      "source_revision": "5c3d2220713c732a6820c4cdda51c7c38db991f5",
+      "review_note": "Default and maximum apply to state plus one question, with runner-specific slot/limit settings; distinct from the hosted API limits."
+    },
+    {
+      "id": "drex-license",
+      "title": "Drex v1.5 modified Open RAIL-M license",
+      "url": "https://github.com/nace-ai/drex-decision-models/blob/5c3d2220713c732a6820c4cdda51c7c38db991f5/models/drex-v1.5/LICENSE",
+      "kind": "repository",
+      "reviewed_on": "2026-10-11",
+      "review_depth": "content_reviewed",
+      "source_revision": "5c3d2220713c732a6820c4cdda51c7c38db991f5",
+      "review_note": "Weight-license text read; restrictive model terms differ from the repository Apache-2.0 code license. No deployment/legal suitability judgment."
+    },
+    {
+      "id": "drex-training",
+      "title": "Nace Drex training-overlap disclosure",
+      "url": "https://www.nace.ai/drex",
+      "kind": "official_publication",
+      "reviewed_on": "2026-10-11",
+      "review_depth": "content_reviewed",
+      "source_revision": null,
+      "review_note": "Live FAQ reports official benchmark training splits plus procedural data. Held-out evaluation is task-trained, not wholly unseen-domain zero-shot. Website 0.2.1 results and later pinned repository 0.3.1 results are separate."
+    },
+    {
+      "id": "strands-v1-release",
+      "title": "Strands October 9 v1 releases",
+      "url": "https://github.com/strands-labs/strands-decider/blob/0ac22a97e584f3ccf87cc9b8cc5fdbad57cdf534/CHANGELOG.md",
+      "kind": "repository",
+      "reviewed_on": "2026-10-11",
+      "review_depth": "content_reviewed",
+      "source_revision": "0ac22a97e584f3ccf87cc9b8cc5fdbad57cdf534",
+      "review_note": "Qwen3.5 v1 and four Gemma 4 variants are new recipes/checkpoints; v1 across backbones is not one identical recipe."
+    },
+    {
+      "id": "strands-v1-results",
+      "title": "Strands Qwen3.5 / Gemma 4 v1 results",
+      "url": "https://github.com/strands-labs/strands-decider/blob/0ac22a97e584f3ccf87cc9b8cc5fdbad57cdf534/evaluation/results.md",
+      "kind": "repository",
+      "reviewed_on": "2026-10-11",
+      "review_depth": "content_reviewed",
+      "source_revision": "0ac22a97e584f3ccf87cc9b8cc5fdbad57cdf534",
+      "review_note": "Release soups, seeds, serving/harness differences and training-overlap disclosures read. Qwen v1 builders not yet on main; raw predictions and weights not audited."
+    },
+    {
+      "id": "strands-v1-runtime",
+      "title": "Strands Gemma 4 serving limits and attention fix",
+      "url": "https://github.com/strands-labs/strands-decider/blob/0ac22a97e584f3ccf87cc9b8cc5fdbad57cdf534/docs/inference.md",
+      "kind": "repository",
+      "reviewed_on": "2026-10-11",
+      "review_depth": "content_reviewed",
+      "source_revision": "0ac22a97e584f3ccf87cc9b8cc5fdbad57cdf534",
+      "review_note": "Gemma models are text-only, main-only at this source revision; 4096 training/serving window. E2B CUDA eager-attention fix changes numerical behavior; pre-fix index is not a reliable post-fix baseline."
+    },
+    {
+      "id": "strands-v1-vision",
+      "title": "Strands Qwen v1 missing-image reliability",
+      "url": "https://github.com/strands-labs/strands-decider/blob/0ac22a97e584f3ccf87cc9b8cc5fdbad57cdf534/docs/vision.md",
+      "kind": "repository",
+      "reviewed_on": "2026-10-11",
+      "review_depth": "content_reviewed",
+      "source_revision": "0ac22a97e584f3ccf87cc9b8cc5fdbad57cdf534",
+      "review_note": "Author paired comparison: missing-image POPE confidence/calibration worsens against v21. Source review, not model reproduction."
+    },
+    {
+      "id": "strands-v1-data",
+      "title": "Strands dataset/source inventory",
+      "url": "https://github.com/strands-labs/strands-decider/blob/0ac22a97e584f3ccf87cc9b8cc5fdbad57cdf534/data/sources.md",
+      "kind": "repository",
+      "reviewed_on": "2026-10-11",
+      "review_depth": "content_reviewed",
+      "source_revision": "0ac22a97e584f3ccf87cc9b8cc5fdbad57cdf534",
+      "review_note": "Inventory separates training, held-out short calibration/evaluation and dev splits; several dataset revisions remain unpinned. License declarations are source claims."
     }
   ],
   "entries": [
@@ -1140,32 +1260,37 @@
         "strands-card",
         "strands-provenance",
         "strands-v21-results",
-        "strands-v21-config"
+        "strands-v21-config",
+        "strands-v1-release",
+        "strands-v1-results",
+        "strands-v1-runtime",
+        "strands-v1-vision",
+        "strands-v1-data"
       ],
       "summary": {
-        "en": "Qwen-based pointer-head decision model with rank-16 LoRA, typed outputs and a documented experiment history.",
-        "zh": "基于 Qwen、pointer head 和 rank-16 LoRA 的类型化判断模型，公开实验演进记录。"
+        "en": "Qwen3.5 and Gemma 4 pointer-head family; October v1 releases average three trained adapters/heads and then calibrate.",
+        "zh": "Qwen3.5 与 Gemma 4 pointer-head 系列；10 月 v1 发布平均三个训练适配器／判断头后再校准。"
       },
       "use": {
         "en": "A local baseline for short classification and domain-supervised decisions; test question changes, option order and risk–coverage on your own traffic.",
         "zh": "可作为短文本分类和领域监督判断的本地基线；用实际流量测试问题变化、选项顺序和风险—覆盖率。"
       },
       "caveat": {
-        "en": "Same-host multi-seed evidence does not establish higher JevBench accuracy than the v19 recipe, although mean Brier is lower. Historical v19 instruction-sensitivity probes and short-classification confidence bands are not v21 guarantees; calibrate on the target workload.",
-        "zh": "同机多种子证据未确立 JevBench 准确率超过 v19 配方，虽平均 Brier 更低。旧 v19 的指令敏感性探针和短分类置信分段不能当作 v21 保证；需在目标任务上校准。"
+        "en": "Qwen v1 data builders are not yet on main. Several dev evaluations have their train splits in the mix. E2B index predates a CUDA attention fix; Qwen v1 missing-image overconfidence worsens on POPE. E07/E08 remain historical, not current guarantees.",
+        "zh": "Qwen v1 数据构建器尚未进入 main；若干 dev 评测对应训练划分已用于训练。E2B index 先于 CUDA 注意力修复；Qwen v1 缺图时 POPE 过度自信恶化。E07／E08 保留为历史，不能当作当前保证。"
       },
-      "reviewed_on": "2026-10-06",
+      "reviewed_on": "2026-10-11",
       "mechanism": {
         "en": "Replaces the language-model head with a dynamic pointer readout comparing the answer-position state to option-token states; one forward pass for noul, choice or score. Confidence is derived from the distribution, not a separate correctness predictor.",
         "zh": "以动态 pointer 读出替代语言模型输出头，比较答案位置与选项 token 的隐状态，一次前向计算支持 noul、choice、score。置信度由分布推导，并非独立正确率预测器。"
       },
       "training": {
-        "en": "Current hobson-v21 is research v21b: v19 recipe plus checked question paraphrases and Qwen3.5-4B distillation where teacher and gold agree; no catch-all rows or instruction flips. Rank-16 LoRA and pointer head, with per-primitive calibration.",
-        "zh": "当前 hobson-v21 对应研究 v21b：v19 配方加核查过的问题改写，以及教师与金标签一致处的 Qwen3.5-4B 蒸馏；不含兜底选项样本或指令翻转。使用 rank-16 LoRA、pointer head 与按判断类型的校准。"
+        "en": "Qwen v1: 246678 balanced rows, Gemma-4-31B teacher and v19 KL anchor. Gemma v1: 135602 rows, Qwen3.5-4B teacher and v19 anchor. Three-seed soups store rank-48 LoRA plus three readouts; recipes differ by family.",
+        "zh": "Qwen v1：246678 条平衡样本、Gemma-4-31B 教师与 v19 KL 锚点。Gemma v1：135602 条样本、Qwen3.5-4B 教师与 v19 锚点。三种子平均保存 rank-48 LoRA 与三个读出头；不同系列配方不同。"
       },
       "availability": {
-        "en": "Current release: StrandsAgents/strands-decider-2B-hobson-v21, seed 5 selected by a predeclared representativeness rule among six seeds. Adapter/head require separate base weights. Serving window 4,096; training rows at most 3,072 tokens. Earlier v19/AWS artifacts remain historical evidence.",
-        "zh": "当前发布为 StrandsAgents/strands-decider-2B-hobson-v21，按预先声明的代表性规则从六个种子中选 seed 5。适配器／判断头仍需基座权重；服务窗口 4,096，训练样本不超过 3,072 token。旧 v19／AWS 产物保留为历史证据。"
+        "en": "Current Qwen: strands-decider-2B-qwen3.5-v1-2610; four Gemma v1 sizes are text-only and need runtime main at the reviewed revision. Separate base weights; 4096-token trained/served window. v19/v21 remain published.",
+        "zh": "当前 Qwen 为 strands-decider-2B-qwen3.5-v1-2610；四种 Gemma v1 仅文本，所核版本需运行库 main。另需基座权重，训练／服务窗口 4096 token；v19／v21 继续发布。"
       },
       "license_note": "Repository and published adapter/head declare Apache-2.0. The release contains adapter/head files only; base weights load separately. Check base-model and dataset terms separately.",
       "weight_revision": null,
@@ -1177,8 +1302,8 @@
         "calibration"
       ],
       "scale": {
-        "en": "Source-reported 1.9B Qwen3.5-2B-Base torso plus an approximately 1M-parameter pointer head and LoRA; adapter size does not represent deployment memory.",
-        "zh": "来源称使用 1.9B Qwen3.5-2B-Base 骨干、约 1M 参数 pointer head 和 LoRA；适配器大小不等于部署内存。"
+        "en": "Qwen3.5 2B and Gemma 4 E2B/E4B/12B/26B-A4B; active MoE size does not equal resident weight memory.",
+        "zh": "Qwen3.5 2B 与 Gemma 4 E2B／E4B／12B／26B-A4B；MoE 激活参数量不等于驻留权重内存。"
       }
     },
     {
@@ -1776,6 +1901,145 @@
       "tags": [
         "typed-decisions",
         "multimodal",
+        "local",
+        "open-weight"
+      ]
+    },
+    {
+      "category": "core_models",
+      "reviewed_on": "2026-10-11",
+      "weight_revision": null,
+      "id": "ms-decision",
+      "name": "Microsoft-Decision-1",
+      "url": "https://ai.azure.com/catalog/models/Microsoft-Decision-1",
+      "source_ids": [
+        "ms-decision-launch",
+        "ms-decision-docs"
+      ],
+      "summary": {
+        "en": "Hosted Qwen3.5-9B post-training for bounded option scoring.",
+        "zh": "托管的 Qwen3.5-9B 后训练模型，对有限选项评分。"
+      },
+      "use": {
+        "en": "Compare classification, routing and rubric judgments.",
+        "zh": "比较分类、路由和按标准评分。"
+      },
+      "caveat": {
+        "en": "Vendor comparisons lack audited item-level artifacts; familiar-task calibration need not transfer. Wording and safety errors remain.",
+        "zh": "厂商比较缺少已审计的逐项产物；熟悉任务的校准不保证迁移，措辞与安全判断仍可能出错。"
+      },
+      "scale": {
+        "en": "9B-class backbone, author described.",
+        "zh": "作者描述为 9B 级骨干。"
+      },
+      "mechanism": {
+        "en": "Single-pass scoring; Foundry uses state and named noul/choice/score questions.",
+        "zh": "单次前向评分；Foundry 接收 state 及命名的 noul／choice／score 问题。"
+      },
+      "training": {
+        "en": "Microsoft post-training; complete recipe, calibration splits and exact weights not verified.",
+        "zh": "Microsoft 后训练；完整配方、校准划分和精确权重未核实。"
+      },
+      "availability": {
+        "en": "Foundry model version 1 and OpenRouter; no public weights verified.",
+        "zh": "Foundry 模型版本 1 及 OpenRouter；未核实公开权重。"
+      },
+      "license_note": "Hosted service terms; Qwen backbone availability does not make the Microsoft checkpoint open-weight.",
+      "tags": [
+        "typed-decisions",
+        "hosted"
+      ]
+    },
+    {
+      "category": "core_models",
+      "reviewed_on": "2026-10-11",
+      "weight_revision": null,
+      "id": "openai-decisions",
+      "name": "OpenAI Decisions API / GPT-6 Luna",
+      "url": "https://developers.openai.com/api/docs/guides/decisions",
+      "source_ids": [
+        "openai-decisions"
+      ],
+      "summary": {
+        "en": "Public-beta typed judgment API for text and images.",
+        "zh": "面向文本与图像的类型化判断 API，处于公开测试。"
+      },
+      "use": {
+        "en": "Managed classification, routing and ordinal scoring.",
+        "zh": "托管分类、路由与有序评分。"
+      },
+      "caveat": {
+        "en": "Refusal is a separate answer variant, not calibrated abstention. Confidence needs target-task validation; training and serving identity are undisclosed here.",
+        "zh": "拒答为单独返回类型，不等于校准后的拒判；confidence 需在目标任务验证，训练与服务身份尚未披露。"
+      },
+      "scale": {
+        "en": "Not established by the guide.",
+        "zh": "指南未确立参数规模。"
+      },
+      "mechanism": {
+        "en": "POST /v1/decisions: input plus named predicate/choice/score questions; answers is an array.",
+        "zh": "POST /v1/decisions：input 加命名的 predicate／choice／score 问题；answers 为数组。"
+      },
+      "training": {
+        "en": "No audited recipe or held-out calibration protocol.",
+        "zh": "未取得已审计配方或独立留出校准流程。"
+      },
+      "availability": {
+        "en": "Only gpt-6-luna supported in the reviewed beta; paid hosted service.",
+        "zh": "所核测试版仅支持 gpt-6-luna；付费托管服务。"
+      },
+      "license_note": "Proprietary hosted API; no public-weight license established.",
+      "tags": [
+        "typed-decisions",
+        "hosted",
+        "multimodal"
+      ]
+    },
+    {
+      "category": "core_models",
+      "reviewed_on": "2026-10-11",
+      "weight_revision": null,
+      "id": "drex",
+      "name": "Nace Drex v1.5",
+      "url": "https://github.com/nace-ai/drex-decision-models",
+      "source_ids": [
+        "drex-release",
+        "drex-context",
+        "drex-license",
+        "drex-training"
+      ],
+      "summary": {
+        "en": "MiMo-V2.6-Distill-Qwen-9B backbone with a Kev pointer head and public-weight release links.",
+        "zh": "MiMo-V2.6-Distill-Qwen-9B 骨干加 Kev pointer head，提供公开权重发布链接。"
+      },
+      "use": {
+        "en": "Local candidate for text/JSON decisions, including long inputs.",
+        "zh": "本地文本／JSON 判断候选，可测试长输入。"
+      },
+      "caveat": {
+        "en": "Benchmark training splits are used; results are not unseen-domain zero-shot. Public Index 0.3.1 leaders fall inside its tie band. Small runner checks do not establish broad parity.",
+        "zh": "使用基准训练划分，不能视为未知领域零样本；公开 Index 0.3.1 前列处于平局带内，小规模运行器核对不证明普遍等价。"
+      },
+      "scale": {
+        "en": "Approximately 9B, author described; memory depends on context and precision.",
+        "zh": "作者描述约 9B；内存随上下文和精度变化。"
+      },
+      "mechanism": {
+        "en": "One pass per question; pointer head scores supplied noul/choice/score options. Forked llama.cpp shares the encoded state.",
+        "zh": "每题一次前向；pointer head 对 noul／choice／score 选项评分，定制 llama.cpp 共享状态编码。"
+      },
+      "training": {
+        "en": "Official benchmark training splits plus procedural data; full training/calibration artifacts unverified.",
+        "zh": "官方基准训练划分加程序生成数据；完整训练／校准产物未核实。"
+      },
+      "availability": {
+        "en": "Python CUDA and Nace llama.cpp/Ollama forks; default 16384, configurable maximum 131072 tokens for state plus one question. HF card/weight hash not obtained.",
+        "zh": "Python CUDA 及 Nace 的 llama.cpp／Ollama 分支；状态加一题默认 16384、可配置最大 131072 token，未取得 HF 模型卡／权重哈希。"
+      },
+      "license_note": "Code Apache-2.0; weights use modified Nace.AI Open RAIL-M with commercial thresholds, competitor exclusions and use restrictions. Public access does not imply unrestricted open source.",
+      "tags": [
+        "typed-decisions",
+        "pointer-head",
         "local",
         "open-weight"
       ]

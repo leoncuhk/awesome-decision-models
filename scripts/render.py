@@ -31,7 +31,10 @@ def outputs(root: Path = ROOT) -> dict[Path, str]:
           'E05':'Kev：区分开发集、测试集与来源域。',
           'E06':'Clef：厂商比较中的任务取舍，不是通用胜出。',
           'E07':'Strands Decider：问题指令敏感性与实验选择限制。',
-          'E08':'Strands v21：发布种子与同机多种子比较。'}
+          'E08':'Strands v21：发布种子与同机多种子比较。',
+          'E09':'Drex v1.5：公开套件平局与基准训练重叠。',
+          'E10':'Microsoft-Decision-1：作者报告的扰动稳定性。',
+          'E11':'Strands Qwen v1：新配方、种子平均及缺图限制。'}
         replacements['EVIDENCE_LINKS']='\n'.join(f"- [{e['id']} — {e['title'] if lang=='en' else short_zh[e['id']]}](docs/evidence.md#{e['id'].lower()})" for e in evs)
         for category in ['baselines','routing','reliability','evaluation','foundations','related_lists']:
             lines=[]

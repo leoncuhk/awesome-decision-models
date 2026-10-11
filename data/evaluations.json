@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "reviewed_on": "2026-10-06",
+  "reviewed_on": "2026-10-11",
   "records": [
     {
       "id": "E01",
@@ -452,6 +452,174 @@
         "raw_outputs": "Not independently audited",
         "weight_hash": null,
         "release_identity": "StrandsAgents/strands-decider-2B-hobson-v21; source-text commit is not a verified weight hash"
+      },
+      "reproduced_here": false
+    },
+    {
+      "id": "E09",
+      "title": "Drex v1.5: public-suite ties and benchmark-training overlap",
+      "model_ids": [
+        "drex",
+        "jev"
+      ],
+      "source_ids": [
+        "drex-release",
+        "drex-training"
+      ],
+      "evidence_type": "author_reported",
+      "reviewed_on": "2026-10-11",
+      "report_date": null,
+      "model_revision": null,
+      "protocol": {
+        "task": "JevBench public closed-option questions; separate from Decision Index 0.3.1",
+        "test_unit": "231 public items; no audited item-level pairing",
+        "split": "Public evaluation; Nace discloses training on official training splits of Index tasks, not unseen-domain zero-shot",
+        "reference": "Public benchmark labels, not real-world operational outcomes",
+        "training": "Drex v1.5 task-trained; exact checkpoint and API deployment hashes not established",
+        "measurement": "Reported hard-answer accuracy; no latency or aggregate Index metric combined here",
+        "hardware": "Own APIs as reported on product page; hardware and end-to-end cost unverified"
+      },
+      "metrics": [
+        {
+          "label": "Drex v1.5 public tasks correct",
+          "value": 0.8614718614718615,
+          "unit": "fraction",
+          "numerator": 199,
+          "denominator": 231
+        },
+        {
+          "label": "Jev 1.13.0 public tasks correct (Nace report)",
+          "value": 0.8701298701298701,
+          "unit": "fraction",
+          "numerator": 201,
+          "denominator": 231
+        }
+      ],
+      "conclusion": "Two items do not establish a general winner. The newer public Index table declares Drex/Jev/Nimble within its tie band.",
+      "caveats": [
+        "Pinned repository reports Index 0.3.1: 37 public benchmarks, no private tests, 0.9-point tie band. Website 0.2.1: 38 tests, 0.25 band. Do not merge editions.",
+        "Nace reports its own Drex run; other Index rows are copied from the board, not a common independently rerun comparison.",
+        "Public benchmark train/test separation does not establish absence of pretraining overlap or sequestered final-test model selection.",
+        "Local/API equivalence, calibration splits and raw predictions were not audited."
+      ],
+      "artifacts": {
+        "protocol": "Pinned release page and live training FAQ",
+        "raw_outputs": "Not audited",
+        "weight_hash": null,
+        "serving_version": null
+      },
+      "reproduced_here": false
+    },
+    {
+      "id": "E10",
+      "title": "Microsoft-Decision-1: perturbation stability is an author claim",
+      "model_ids": [
+        "ms-decision"
+      ],
+      "source_ids": [
+        "ms-decision-launch",
+        "ms-decision-docs"
+      ],
+      "evidence_type": "author_reported",
+      "reviewed_on": "2026-10-11",
+      "report_date": "2026-10-09",
+      "model_revision": null,
+      "protocol": {
+        "task": "Eight request perturbations including option order and paraphrases",
+        "test_unit": "Perturbations; sample denominator and clustering unknown",
+        "split": "Author says broader 36-benchmark comparison is blind from training; exact perturbation cohort and overlap unverified",
+        "reference": "Decision agreement under perturbation, not correctness or calibrated risk",
+        "training": "Microsoft post-trained Qwen3.5-9B; calibration split/recipe undisclosed in inspected sources",
+        "measurement": "Average decision flip rate reported in launch text; aggregation/weighting not specified",
+        "hardware": "No latency comparison imported; serving versions and hardware not pinned"
+      },
+      "metrics": [
+        {
+          "label": "Author-reported average perturbation flip rate",
+          "value": 0.013,
+          "unit": "fraction"
+        }
+      ],
+      "conclusion": "Low reported flip rate does not establish correctness, instruction sensitivity or production-safe acceptance thresholds.",
+      "caveats": [
+        "No raw perturbations/predictions or uncertainty analysis inspected; this is not independent reproduction.",
+        "The 36-benchmark headline and this perturbation probe do not necessarily share the same denominator.",
+        "Official deployment docs still warn about wording/order sensitivity, familiar-task calibration and harmful/benign classification errors."
+      ],
+      "artifacts": {
+        "protocol": "Live launch article; no immutable revision supplied",
+        "raw_outputs": "Not inspected",
+        "weight_hash": null,
+        "serving_version": null
+      },
+      "reproduced_here": false
+    },
+    {
+      "id": "E11",
+      "title": "Strands Qwen3.5 v1: new recipe, soup and missing-image limits",
+      "model_ids": [
+        "strands-decider"
+      ],
+      "source_ids": [
+        "strands-v1-results",
+        "strands-v1-vision",
+        "strands-v1-data"
+      ],
+      "evidence_type": "author_reported",
+      "reviewed_on": "2026-10-11",
+      "report_date": "2026-10-09",
+      "model_revision": null,
+      "protocol": {
+        "task": "JevBench public set and separate missing-image POPE probe",
+        "test_unit": "231 public JevBench tasks; three training seeds; POPE denominator not established here",
+        "split": "4096-token public evaluation; MuSiQue/ContractNLI/BoardgameQA dev splits have train splits in training; HotpotQA held out of training. Some short held-out tasks also serve calibration",
+        "reference": "Benchmark labels; missing-image experiment removes required evidence rather than creating an answerable task",
+        "training": "246678-row balanced Qwen v1 mix, Gemma-4-31B teacher with gold agreement, v19 KL anchor, three-seed soup then calibration; builders absent from main",
+        "measurement": "Released soup through main versus separate seed/harness scores; do not infer recipe gain from two release runs",
+        "hardware": "Soup on NVIDIA L4 via main; seeds on 8 A100; paired image comparison on one L4"
+      },
+      "metrics": [
+        {
+          "label": "Released Qwen v1 JevBench tasks correct",
+          "value": 0.7792207792207793,
+          "unit": "fraction",
+          "numerator": 180,
+          "denominator": 231
+        },
+        {
+          "label": "Released Qwen v1 Brier",
+          "value": 0.28,
+          "unit": "brier"
+        },
+        {
+          "label": "Released Qwen v1 ECE",
+          "value": 0.072,
+          "unit": "ece"
+        },
+        {
+          "label": "POPE missing-image Qwen v1 ECE",
+          "value": 0.334,
+          "unit": "ece"
+        },
+        {
+          "label": "POPE missing-image v21 ECE",
+          "value": 0.292,
+          "unit": "ece"
+        }
+      ],
+      "conclusion": "This is new training and a calibrated soup, not a rename of v21. Reported text results do not imply improved reliability when essential image evidence is missing.",
+      "caveats": [
+        "Training harness scores 181/231; release code scores 180, with one near tie. Neither is silently substituted for the other.",
+        "Public benchmark model selection and absent data builders limit independent reproducibility; weight bytes and raw runs not audited here.",
+        "Author reports missing-image POPE ECE difference +0.042 (paired-bootstrap 95% CI +0.039 to +0.044); confidence does not detect absent images.",
+        "Gemma v1 uses another data mix/teacher and is text-only. E2B pre-fix Decision Index is not a post-fix capability claim.",
+        "E07/E08 preserve v19/v21 evidence; no controlled same-host recipe improvement inferred for v1."
+      ],
+      "artifacts": {
+        "protocol": "https://github.com/strands-labs/strands-decider/blob/0ac22a97e584f3ccf87cc9b8cc5fdbad57cdf534/evaluation/results.md",
+        "vision_protocol": "https://github.com/strands-labs/strands-decider/blob/0ac22a97e584f3ccf87cc9b8cc5fdbad57cdf534/docs/vision.md",
+        "raw_outputs": "Linked author runs not independently audited",
+        "weight_hash": null
       },
       "reproduced_here": false
     }

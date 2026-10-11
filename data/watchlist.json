@@ -114,6 +114,24 @@
       "kind": "hf_model",
       "url": "https://huggingface.co/api/models/perplexity-ai/pplx-decider-v1-27b",
       "meaning": "Inspect card/runtime/weight changes separately; API benchmark numbers do not certify local equivalence."
+    },
+    {
+      "id": "drex-release",
+      "url": "https://api.github.com/repos/nace-ai/drex-decision-models/contents/models/drex-v1.5/README.md",
+      "kind": "github_file",
+      "meaning": "Release/evaluation documentation changed; inspect edition, task overlap and weights separately."
+    },
+    {
+      "id": "drex-model",
+      "url": "https://huggingface.co/api/models/nace-ai/drex-v1.5",
+      "kind": "hf_model",
+      "meaning": "Repository revision is not a verified new weight or quality gain."
+    },
+    {
+      "id": "strands-v1-qwen-model",
+      "url": "https://huggingface.co/api/models/StrandsAgents/strands-decider-2B-qwen3.5-v1-2610",
+      "kind": "hf_model",
+      "meaning": "Separate soup, calibration, weight and documentation changes; v19/v21 evidence stays historical."
     }
   ]
 }

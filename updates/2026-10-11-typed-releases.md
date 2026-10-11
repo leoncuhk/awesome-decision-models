@@ -1,0 +1,22 @@
+# 2026-10-11 · Typed releases and reliability limits
+
+[Home](../README.md) · [中文首页](../README.zh-CN.md) · [Models](../docs/models.md) · [Evidence](../docs/evidence.md)
+
+This review adds three verified primary-source releases/services and refreshes Strands. It does not infer accuracy gains from version numbers or source hashes. E01–E08 and their source pins remain historical records.
+
+- **Microsoft-Decision-1:** the [October 9 announcement](https://commandline.microsoft.com/microsoft-decision-1-model-foundry/) establishes a hosted Qwen3.5-9B post-training release. E10 records the author-reported perturbation flip rate, with its missing denominator and protocol. The [deployment guide](https://learn.microsoft.com/en-us/azure/foundry/foundry-models/how-to/use-foundry-models-microsoft-decision) still warns about wording, familiar-task calibration and safety errors. No broad speed or quality winner is declared.
+- **OpenAI Decisions:** the [official guide](https://developers.openai.com/api/docs/guides/decisions) establishes a public-beta API for text/image judgments. Its predicate/input/answers-array contract differs from the noul/state/named-object convention. Handle refusal answers separately; a refusal variant does not establish risk-controlled abstention. Training, calibration and exact serving provenance remain unknown here.
+- **Drex v1.5:** the [pinned release page](https://github.com/nace-ai/drex-decision-models/blob/5c3d2220713c732a6820c4cdda51c7c38db991f5/models/drex-v1.5/README.md) establishes the MiMo-derived 9B backbone, Kev head and local runners. E09 separates public Index 0.3.1 from the older website edition; its tie band prevents an overall superiority claim. The [training FAQ](https://www.nace.ai/drex) explicitly discloses benchmark training splits. The [local context guide](https://github.com/nace-ai/drex-decision-models/blob/5c3d2220713c732a6820c4cdda51c7c38db991f5/docs/context-length.md) distinguishes default acceptance from maximum context; neither is a general quality guarantee. Two runner-parity requests cannot certify all inputs or precisions. Code is Apache-2.0; [weight terms](https://github.com/nace-ai/drex-decision-models/blob/5c3d2220713c732a6820c4cdda51c7c38db991f5/models/drex-v1.5/LICENSE) are restrictive modified Open RAIL-M. Hugging Face card/history were inaccessible; no verified weight hash is supplied.
+- **Strands:** [October 9 releases](https://github.com/strands-labs/strands-decider/blob/0ac22a97e584f3ccf87cc9b8cc5fdbad57cdf534/CHANGELOG.md) introduce Qwen3.5 v1 and four text-only Gemma 4 sizes. These are new recipes and three-seed soups, not a v21 rename. [E11](../docs/evidence.md#e11) preserves release/harness differences, overlapping task domains and missing data builders. The [Gemma E2B CUDA attention fix](https://github.com/strands-labs/strands-decider/blob/0ac22a97e584f3ccf87cc9b8cc5fdbad57cdf534/docs/inference.md#gemma-4-models) changes inference behavior; its earlier Index score is not a post-fix measurement. Qwen v1's [missing-image POPE result](https://github.com/strands-labs/strands-decider/blob/0ac22a97e584f3ccf87cc9b8cc5fdbad57cdf534/docs/vision.md#v1) worsens overconfidence despite the text release's lower Brier.
+
+Kev's inspected October 9–10 commits concern accelerator startup probes, packaging and null diagnostics; no new weight or controlled capability gain was established from those changes. The source-watch issue remains a detection queue, not reproduction evidence. Discovery was bounded; this is not an exhaustive weekly literature survey.
+
+## Validation and scope
+
+Canonical JSON, bilingual generation and source history remain the workflow. Three compatible watch endpoints are added without changing host permissions or scheduling. Offline checks: renderer consistency, schema/references/numerical records/local links, 38 unit tests, three disposable-local-remote publishing cases, shell/Python syntax and manifest hashes. Published CI is verified separately against the exact commit.
+
+No model inference, dependency installation, weight download/hash verification, paid API call or independent benchmark reproduction was performed. Source availability and source claims are recorded separately from measured effectiveness.
+
+## 中文摘要
+
+新增 Microsoft-Decision-1、OpenAI Decisions API 和 Drex v1.5，并更新 Strands 10 月 v1 系列。区分托管 API、训练／检查点、校准、运行器和文档变更；保留 v19／v21 历史证据。Drex 使用基准训练划分、不同 Index 版本不可混排；公开权重许可证有额外限制。Strands 新配方的数据构建器尚未公开，E2B 修复前成绩和 Qwen v1 缺图过度自信均保留为限制。新服务增加测试候选，不产生通用胜者；校准、拒判、长上下文与完整成本仍需实际任务验证。

@@ -2,7 +2,7 @@
 
 [Home](../README.md) · [中文首页](../README.zh-CN.md) · [Evidence](evidence.md)
 
-Source review: 2026-10-06. These are source-backed descriptions and curatorial use cases, not production certifications.
+Source review: 2026-10-11. These are source-backed descriptions and curatorial use cases, not production certifications.
 
 `Unknown` is intentional. An inspected source revision does not identify the deployed weight revision. Language support, licenses and resource requirements must be checked for the exact artifact. Recorded weight identifiers are source-reported unless a local binary verification is explicitly documented; recording an identifier is not a claim that the weights were downloaded or hashed here.
 
@@ -209,22 +209,22 @@ Multimodal Qwen backbones with a joint schema head for typed decisions and a Jev
 
 [Project / model](https://github.com/strands-labs/strands-decider)
 
-Qwen-based pointer-head decision model with rank-16 LoRA, typed outputs and a documented experiment history.
-基于 Qwen、pointer head 和 rank-16 LoRA 的类型化判断模型，公开实验演进记录。
+Qwen3.5 and Gemma 4 pointer-head family; October v1 releases average three trained adapters/heads and then calibrate.
+Qwen3.5 与 Gemma 4 pointer-head 系列；10 月 v1 发布平均三个训练适配器／判断头后再校准。
 
 | Dimension | English | 中文 |
 | --- | --- | --- |
-| Scale | Source-reported 1.9B Qwen3.5-2B-Base torso plus an approximately 1M-parameter pointer head and LoRA; adapter size does not represent deployment memory. | 来源称使用 1.9B Qwen3.5-2B-Base 骨干、约 1M 参数 pointer head 和 LoRA；适配器大小不等于部署内存。 |
+| Scale | Qwen3.5 2B and Gemma 4 E2B/E4B/12B/26B-A4B; active MoE size does not equal resident weight memory. | Qwen3.5 2B 与 Gemma 4 E2B／E4B／12B／26B-A4B；MoE 激活参数量不等于驻留权重内存。 |
 | Mechanism | Replaces the language-model head with a dynamic pointer readout comparing the answer-position state to option-token states; one forward pass for noul, choice or score. Confidence is derived from the distribution, not a separate correctness predictor. | 以动态 pointer 读出替代语言模型输出头，比较答案位置与选项 token 的隐状态，一次前向计算支持 noul、choice、score。置信度由分布推导，并非独立正确率预测器。 |
-| Training | Current hobson-v21 is research v21b: v19 recipe plus checked question paraphrases and Qwen3.5-4B distillation where teacher and gold agree; no catch-all rows or instruction flips. Rank-16 LoRA and pointer head, with per-primitive calibration. | 当前 hobson-v21 对应研究 v21b：v19 配方加核查过的问题改写，以及教师与金标签一致处的 Qwen3.5-4B 蒸馏；不含兜底选项样本或指令翻转。使用 rank-16 LoRA、pointer head 与按判断类型的校准。 |
-| Deployment | Current release: StrandsAgents/strands-decider-2B-hobson-v21, seed 5 selected by a predeclared representativeness rule among six seeds. Adapter/head require separate base weights. Serving window 4,096; training rows at most 3,072 tokens. Earlier v19/AWS artifacts remain historical evidence. | 当前发布为 StrandsAgents/strands-decider-2B-hobson-v21，按预先声明的代表性规则从六个种子中选 seed 5。适配器／判断头仍需基座权重；服务窗口 4,096，训练样本不超过 3,072 token。旧 v19／AWS 产物保留为历史证据。 |
+| Training | Qwen v1: 246678 balanced rows, Gemma-4-31B teacher and v19 KL anchor. Gemma v1: 135602 rows, Qwen3.5-4B teacher and v19 anchor. Three-seed soups store rank-48 LoRA plus three readouts; recipes differ by family. | Qwen v1：246678 条平衡样本、Gemma-4-31B 教师与 v19 KL 锚点。Gemma v1：135602 条样本、Qwen3.5-4B 教师与 v19 锚点。三种子平均保存 rank-48 LoRA 与三个读出头；不同系列配方不同。 |
+| Deployment | Current Qwen: strands-decider-2B-qwen3.5-v1-2610; four Gemma v1 sizes are text-only and need runtime main at the reviewed revision. Separate base weights; 4096-token trained/served window. v19/v21 remain published. | 当前 Qwen 为 strands-decider-2B-qwen3.5-v1-2610；四种 Gemma v1 仅文本，所核版本需运行库 main。另需基座权重，训练／服务窗口 4096 token；v19／v21 继续发布。 |
 | Suggested use | A local baseline for short classification and domain-supervised decisions; test question changes, option order and risk–coverage on your own traffic. | 可作为短文本分类和领域监督判断的本地基线；用实际流量测试问题变化、选项顺序和风险—覆盖率。 |
-| Boundary | Same-host multi-seed evidence does not establish higher JevBench accuracy than the v19 recipe, although mean Brier is lower. Historical v19 instruction-sensitivity probes and short-classification confidence bands are not v21 guarantees; calibrate on the target workload. | 同机多种子证据未确立 JevBench 准确率超过 v19 配方，虽平均 Brier 更低。旧 v19 的指令敏感性探针和短分类置信分段不能当作 v21 保证；需在目标任务上校准。 |
+| Boundary | Qwen v1 data builders are not yet on main. Several dev evaluations have their train splits in the mix. E2B index predates a CUDA attention fix; Qwen v1 missing-image overconfidence worsens on POPE. E07/E08 remain historical, not current guarantees. | Qwen v1 数据构建器尚未进入 main；若干 dev 评测对应训练划分已用于训练。E2B index 先于 CUDA 注意力修复；Qwen v1 缺图时 POPE 过度自信恶化。E07／E08 保留为历史，不能当作当前保证。 |
 
 **License note:** Repository and published adapter/head declare Apache-2.0. The release contains adapter/head files only; base weights load separately. Check base-model and dataset terms separately.
 **Recorded weight identifier:** Unknown / not pinned
 
-**Sources:** [Strands Decider repository](https://github.com/strands-labs/strands-decider/blob/aa92b075ff297d7bf17c18bf6c676ab4df0fa9a9/README.md); [Strands Decider architecture](https://github.com/strands-labs/strands-decider/blob/aa92b075ff297d7bf17c18bf6c676ab4df0fa9a9/docs/architecture.md); [Strands Decider v19 experiment configuration](https://github.com/strands-labs/strands-decider/blob/aa92b075ff297d7bf17c18bf6c676ab4df0fa9a9/configs/experiments/v19.yaml); [Strands Decider evaluation and limitations](https://github.com/strands-labs/strands-decider/blob/aa92b075ff297d7bf17c18bf6c676ab4df0fa9a9/evaluation/README.md); [Strands Decider experiment record](https://github.com/strands-labs/strands-decider/blob/aa92b075ff297d7bf17c18bf6c676ab4df0fa9a9/research/README.md); [Strands Decider original and AWS retrain results](https://github.com/strands-labs/strands-decider/blob/aa92b075ff297d7bf17c18bf6c676ab4df0fa9a9/evaluation/results.md); [Strands Decider published v19 adapter card](https://huggingface.co/StrandsAgents/strands-decider-2B-hobson-v19/blob/bb282d786bc251fd4e3068de3ada9ddbb38127cd/README.md); [Strands Decider published adapter provenance](https://huggingface.co/StrandsAgents/strands-decider-2B-hobson-v19/blob/bb282d786bc251fd4e3068de3ada9ddbb38127cd/provenance.json); [Strands Decider v21 release and same-host seed results](https://github.com/strands-labs/strands-decider/blob/3e94e9d84c620ed5a95f1a3310c3decb971e261c/evaluation/results.md); [Strands Decider released v21b recipe](https://github.com/strands-labs/strands-decider/blob/3e94e9d84c620ed5a95f1a3310c3decb971e261c/configs/experiments/v21b.yaml)
+**Sources:** [Strands Decider repository](https://github.com/strands-labs/strands-decider/blob/aa92b075ff297d7bf17c18bf6c676ab4df0fa9a9/README.md); [Strands Decider architecture](https://github.com/strands-labs/strands-decider/blob/aa92b075ff297d7bf17c18bf6c676ab4df0fa9a9/docs/architecture.md); [Strands Decider v19 experiment configuration](https://github.com/strands-labs/strands-decider/blob/aa92b075ff297d7bf17c18bf6c676ab4df0fa9a9/configs/experiments/v19.yaml); [Strands Decider evaluation and limitations](https://github.com/strands-labs/strands-decider/blob/aa92b075ff297d7bf17c18bf6c676ab4df0fa9a9/evaluation/README.md); [Strands Decider experiment record](https://github.com/strands-labs/strands-decider/blob/aa92b075ff297d7bf17c18bf6c676ab4df0fa9a9/research/README.md); [Strands Decider original and AWS retrain results](https://github.com/strands-labs/strands-decider/blob/aa92b075ff297d7bf17c18bf6c676ab4df0fa9a9/evaluation/results.md); [Strands Decider published v19 adapter card](https://huggingface.co/StrandsAgents/strands-decider-2B-hobson-v19/blob/bb282d786bc251fd4e3068de3ada9ddbb38127cd/README.md); [Strands Decider published adapter provenance](https://huggingface.co/StrandsAgents/strands-decider-2B-hobson-v19/blob/bb282d786bc251fd4e3068de3ada9ddbb38127cd/provenance.json); [Strands Decider v21 release and same-host seed results](https://github.com/strands-labs/strands-decider/blob/3e94e9d84c620ed5a95f1a3310c3decb971e261c/evaluation/results.md); [Strands Decider released v21b recipe](https://github.com/strands-labs/strands-decider/blob/3e94e9d84c620ed5a95f1a3310c3decb971e261c/configs/experiments/v21b.yaml); [Strands October 9 v1 releases](https://github.com/strands-labs/strands-decider/blob/0ac22a97e584f3ccf87cc9b8cc5fdbad57cdf534/CHANGELOG.md); [Strands Qwen3.5 / Gemma 4 v1 results](https://github.com/strands-labs/strands-decider/blob/0ac22a97e584f3ccf87cc9b8cc5fdbad57cdf534/evaluation/results.md); [Strands Gemma 4 serving limits and attention fix](https://github.com/strands-labs/strands-decider/blob/0ac22a97e584f3ccf87cc9b8cc5fdbad57cdf534/docs/inference.md); [Strands Qwen v1 missing-image reliability](https://github.com/strands-labs/strands-decider/blob/0ac22a97e584f3ccf87cc9b8cc5fdbad57cdf534/docs/vision.md); [Strands dataset/source inventory](https://github.com/strands-labs/strands-decider/blob/0ac22a97e584f3ccf87cc9b8cc5fdbad57cdf534/data/sources.md)
 
 <a id="pplx-decider"></a>
 ## Perplexity pplx-decider-v1-27b
@@ -247,4 +247,70 @@ Qwen3.8-27B 微调模型，公开权重与类型化判断运行代码，支持�
 **Recorded weight identifier:** Unknown / not pinned
 
 **Sources:** [Perplexity pplx-decider-v1-27b model card](https://huggingface.co/perplexity-ai/pplx-decider-v1-27b); [Perplexity local inference wrapper](https://huggingface.co/perplexity-ai/pplx-decider-v1-27b/blob/main/inference.py); [Perplexity released decision configuration](https://huggingface.co/perplexity-ai/pplx-decider-v1-27b/blob/main/decision_config.json)
+
+<a id="ms-decision"></a>
+## Microsoft-Decision-1
+
+[Project / model](https://ai.azure.com/catalog/models/Microsoft-Decision-1)
+
+Hosted Qwen3.5-9B post-training for bounded option scoring.
+托管的 Qwen3.5-9B 后训练模型，对有限选项评分。
+
+| Dimension | English | 中文 |
+| --- | --- | --- |
+| Scale | 9B-class backbone, author described. | 作者描述为 9B 级骨干。 |
+| Mechanism | Single-pass scoring; Foundry uses state and named noul/choice/score questions. | 单次前向评分；Foundry 接收 state 及命名的 noul／choice／score 问题。 |
+| Training | Microsoft post-training; complete recipe, calibration splits and exact weights not verified. | Microsoft 后训练；完整配方、校准划分和精确权重未核实。 |
+| Deployment | Foundry model version 1 and OpenRouter; no public weights verified. | Foundry 模型版本 1 及 OpenRouter；未核实公开权重。 |
+| Suggested use | Compare classification, routing and rubric judgments. | 比较分类、路由和按标准评分。 |
+| Boundary | Vendor comparisons lack audited item-level artifacts; familiar-task calibration need not transfer. Wording and safety errors remain. | 厂商比较缺少已审计的逐项产物；熟悉任务的校准不保证迁移，措辞与安全判断仍可能出错。 |
+
+**License note:** Hosted service terms; Qwen backbone availability does not make the Microsoft checkpoint open-weight.
+**Recorded weight identifier:** Unknown / not pinned
+
+**Sources:** [Microsoft-Decision-1 launch, 2026-10-09](https://commandline.microsoft.com/microsoft-decision-1-model-foundry/); [Microsoft Foundry decision API and limitations](https://learn.microsoft.com/en-us/azure/foundry/foundry-models/how-to/use-foundry-models-microsoft-decision)
+
+<a id="openai-decisions"></a>
+## OpenAI Decisions API / GPT-6 Luna
+
+[Project / model](https://developers.openai.com/api/docs/guides/decisions)
+
+Public-beta typed judgment API for text and images.
+面向文本与图像的类型化判断 API，处于公开测试。
+
+| Dimension | English | 中文 |
+| --- | --- | --- |
+| Scale | Not established by the guide. | 指南未确立参数规模。 |
+| Mechanism | POST /v1/decisions: input plus named predicate/choice/score questions; answers is an array. | POST /v1/decisions：input 加命名的 predicate／choice／score 问题；answers 为数组。 |
+| Training | No audited recipe or held-out calibration protocol. | 未取得已审计配方或独立留出校准流程。 |
+| Deployment | Only gpt-6-luna supported in the reviewed beta; paid hosted service. | 所核测试版仅支持 gpt-6-luna；付费托管服务。 |
+| Suggested use | Managed classification, routing and ordinal scoring. | 托管分类、路由与有序评分。 |
+| Boundary | Refusal is a separate answer variant, not calibrated abstention. Confidence needs target-task validation; training and serving identity are undisclosed here. | 拒答为单独返回类型，不等于校准后的拒判；confidence 需在目标任务验证，训练与服务身份尚未披露。 |
+
+**License note:** Proprietary hosted API; no public-weight license established.
+**Recorded weight identifier:** Unknown / not pinned
+
+**Sources:** [OpenAI Decisions public beta guide](https://developers.openai.com/api/docs/guides/decisions)
+
+<a id="drex"></a>
+## Nace Drex v1.5
+
+[Project / model](https://github.com/nace-ai/drex-decision-models)
+
+MiMo-V2.6-Distill-Qwen-9B backbone with a Kev pointer head and public-weight release links.
+MiMo-V2.6-Distill-Qwen-9B 骨干加 Kev pointer head，提供公开权重发布链接。
+
+| Dimension | English | 中文 |
+| --- | --- | --- |
+| Scale | Approximately 9B, author described; memory depends on context and precision. | 作者描述约 9B；内存随上下文和精度变化。 |
+| Mechanism | One pass per question; pointer head scores supplied noul/choice/score options. Forked llama.cpp shares the encoded state. | 每题一次前向；pointer head 对 noul／choice／score 选项评分，定制 llama.cpp 共享状态编码。 |
+| Training | Official benchmark training splits plus procedural data; full training/calibration artifacts unverified. | 官方基准训练划分加程序生成数据；完整训练／校准产物未核实。 |
+| Deployment | Python CUDA and Nace llama.cpp/Ollama forks; default 16384, configurable maximum 131072 tokens for state plus one question. HF card/weight hash not obtained. | Python CUDA 及 Nace 的 llama.cpp／Ollama 分支；状态加一题默认 16384、可配置最大 131072 token，未取得 HF 模型卡／权重哈希。 |
+| Suggested use | Local candidate for text/JSON decisions, including long inputs. | 本地文本／JSON 判断候选，可测试长输入。 |
+| Boundary | Benchmark training splits are used; results are not unseen-domain zero-shot. Public Index 0.3.1 leaders fall inside its tie band. Small runner checks do not establish broad parity. | 使用基准训练划分，不能视为未知领域零样本；公开 Index 0.3.1 前列处于平局带内，小规模运行器核对不证明普遍等价。 |
+
+**License note:** Code Apache-2.0; weights use modified Nace.AI Open RAIL-M with commercial thresholds, competitor exclusions and use restrictions. Public access does not imply unrestricted open source.
+**Recorded weight identifier:** Unknown / not pinned
+
+**Sources:** [Drex v1.5 release and public evaluation](https://github.com/nace-ai/drex-decision-models/blob/5c3d2220713c732a6820c4cdda51c7c38db991f5/models/drex-v1.5/README.md); [Drex local context limits](https://github.com/nace-ai/drex-decision-models/blob/5c3d2220713c732a6820c4cdda51c7c38db991f5/docs/context-length.md); [Drex v1.5 modified Open RAIL-M license](https://github.com/nace-ai/drex-decision-models/blob/5c3d2220713c732a6820c4cdda51c7c38db991f5/models/drex-v1.5/LICENSE); [Nace Drex training-overlap disclosure](https://www.nace.ai/drex)
 

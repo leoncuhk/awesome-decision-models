@@ -8,7 +8,7 @@ The skill defines **how to investigate**. GitHub permissions determine **what ca
 
 ## What the included watcher does
 
-`data/watchlist.json` selects 19 primary-source endpoints. The watcher checks GitHub file blobs, Hugging Face model-repository revisions and two official documentation pages. These are **change signals**, not semantic reviews. A Hugging Face revision may change only a README; an HTML hash may change because of page rendering.
+`data/watchlist.json` selects 22 primary-source endpoints. The watcher checks GitHub file blobs, Hugging Face model-repository revisions and two official documentation pages. These are **change signals**, not semantic reviews. A Hugging Face revision may change only a README; an HTML hash may change because of page rendering.
 
 The first successful run establishes a baseline. Later runs compare against it. Network/API errors preserve the last successful value and are separately reported; partial failure also makes the run fail visibly. The watcher never downloads weights, executes model code, calls a paid AI API, edits scientific claims or auto-merges changes.
 
