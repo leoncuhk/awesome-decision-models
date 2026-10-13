@@ -132,6 +132,84 @@
       "url": "https://huggingface.co/api/models/StrandsAgents/strands-decider-2B-qwen3.5-v1-2610",
       "kind": "hf_model",
       "meaning": "Separate soup, calibration, weight and documentation changes; v19/v21 evidence stays historical."
+    },
+    {
+      "id": "decision3-d3-model",
+      "kind": "hf_model",
+      "url": "https://huggingface.co/api/models/vllm-sr/d3",
+      "meaning": "Repository revision changed; compare card, runtime, manifest and weight-file identities separately. No automatic accuracy or calibration inference."
+    },
+    {
+      "id": "decision3-d3-flash-model",
+      "kind": "hf_model",
+      "url": "https://huggingface.co/api/models/vllm-sr/d3-flash",
+      "meaning": "Repository revision changed; compare card, runtime, manifest and weight-file identities separately. No automatic accuracy or calibration inference."
+    },
+    {
+      "id": "decision3-d3-mini-model",
+      "kind": "hf_model",
+      "url": "https://huggingface.co/api/models/vllm-sr/d3-mini",
+      "meaning": "Repository revision changed; compare card, runtime, manifest and weight-file identities separately. No automatic accuracy or calibration inference."
+    },
+    {
+      "id": "decision3-d3-nano-model",
+      "kind": "hf_model",
+      "url": "https://huggingface.co/api/models/vllm-sr/d3-nano",
+      "meaning": "Repository revision changed; compare card, runtime, manifest and weight-file identities separately. No automatic accuracy or calibration inference."
+    },
+    {
+      "id": "decision3-d3-lite-model",
+      "kind": "hf_model",
+      "url": "https://huggingface.co/api/models/vllm-sr/d3-lite",
+      "meaning": "Repository revision changed; compare card, runtime, manifest and weight-file identities separately. No automatic accuracy or calibration inference."
+    },
+    {
+      "id": "decision3-d3-edge-model",
+      "kind": "hf_model",
+      "url": "https://huggingface.co/api/models/vllm-sr/d3-edge",
+      "meaning": "Repository revision changed; compare card, runtime, manifest and weight-file identities separately. No automatic accuracy or calibration inference."
+    },
+    {
+      "id": "fluiduse-readme",
+      "kind": "github_file",
+      "url": "https://api.github.com/repos/FluidInference/FluidUse/contents/README.md",
+      "meaning": "Deployment documentation changed; verify runtime/conversion revisions, precision, media and limits before transferring parity claims."
+    },
+    {
+      "id": "fluiduse-support",
+      "kind": "github_file",
+      "url": "https://api.github.com/repos/FluidInference/FluidUse/contents/Documentation/DecisionModelSupport.md",
+      "meaning": "Support matrix or bridge behavior changed; smoke checks do not establish quality or a new model release."
+    },
+    {
+      "id": "decision3-coreml",
+      "kind": "hf_model",
+      "url": "https://huggingface.co/api/models/FluidInference/d3-coreml",
+      "meaning": "Conversion revision changed; inspect package files and parity protocol rather than assigning upstream scores to converted artifacts."
+    },
+    {
+      "id": "intern-0.8b-model",
+      "kind": "hf_model",
+      "url": "https://huggingface.co/api/models/internlm/Intern-Decision-0.8B",
+      "meaning": "Checkpoint repository changed; compare weights, compiler, template and size-specific calibration separately. Do not transplant a temperature across sizes/backends."
+    },
+    {
+      "id": "intern-2b-model",
+      "kind": "hf_model",
+      "url": "https://huggingface.co/api/models/internlm/Intern-Decision-2B",
+      "meaning": "Checkpoint repository changed; compare weights, compiler, template and size-specific calibration separately. Do not transplant a temperature across sizes/backends."
+    },
+    {
+      "id": "intern-4b-model",
+      "kind": "hf_model",
+      "url": "https://huggingface.co/api/models/internlm/Intern-Decision-4B",
+      "meaning": "Checkpoint repository changed; compare weights, compiler, template and size-specific calibration separately. Do not transplant a temperature across sizes/backends."
+    },
+    {
+      "id": "verdict-model",
+      "kind": "hf_model",
+      "url": "https://huggingface.co/api/models/heman10x/rlcd-modernbert-151m",
+      "meaning": "Weights, renderer or per-K calibrator may change independently; preserve evaluation-versus-serving calibration distinctions and negative abstention findings."
     }
   ]
 }

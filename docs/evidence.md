@@ -400,3 +400,347 @@ Reported fractions are displayed as percentages where appropriate. More printed 
 
 **Sources:** [Strands Qwen3.5 / Gemma 4 v1 results](https://github.com/strands-labs/strands-decider/blob/0ac22a97e584f3ccf87cc9b8cc5fdbad57cdf534/evaluation/results.md); [Strands Qwen v1 missing-image reliability](https://github.com/strands-labs/strands-decider/blob/0ac22a97e584f3ccf87cc9b8cc5fdbad57cdf534/docs/vision.md); [Strands dataset/source inventory](https://github.com/strands-labs/strands-decider/blob/0ac22a97e584f3ccf87cc9b8cc5fdbad57cdf534/data/sources.md)
 
+<a id="e12"></a>
+## E12 · Decision 3.0: internal Index and device timing are bounded author reports
+
+**Evidence:** `author_reported` · **Reviewed:** 2026-10-13 · **Reproduced here:** no
+
+| Protocol | Recorded context |
+| --- | --- |
+| Task | d3 text Decision Index 0.3.1 and vision board 0.3.1; separate text/image/10-second-video timing workloads |
+| Test unit | Card does not provide all internal/private item counts or raw paired outputs; timing workload counts not fully specified |
+| Split | Public, same-skill/new-domain text and public/private vision components; complete private splits inaccessible |
+| Reference | Index composite aggregates, not raw classification accuracy; four visual datasets marked approximate rebuild (CharXiv, InfographicVQA, Mind2Web, KIE) |
+| Training | Released d3 v3.1.0; public training-overlap/decontamination/calibration artifacts not established |
+| Measurement | Internal author evaluation; competitors imported from text board 2026-10-10 and vision board 2026-10-09. Timings are medians per input type, not end-to-end P95 |
+| Hardware | One AMD Instinct MI325X, one request at a time; reviewed runtime BF16 backbone / FP32 readout. Full preprocessing/network/queue/retry cost not established |
+
+| Reported measurement | Value |
+| --- | --- |
+| d3 internal text Index 0.3.1 | 64.7 |
+| d3 internal vision Index 0.3.1 | 71.6 |
+| d3 text request median (ms) | 55 |
+| d3 one-image request median (ms) | 273 |
+| d3 10-second-video request median (ms) | 553 |
+
+**Interpretation:** This establishes a reported release benchmark and hardware-specific timing scope, not current first place or a calibrated production risk.
+
+- Live page title is 0.3.2; complete dynamic ranks and exact current models were not audited. No current leader is asserted.
+- Imported competitor scores are not a same-hardware, same-day rerun.
+- Approximate visual rebuilds and private components prevent treating every row as the identical official protocol.
+- Training overlap remains unknown; absence of an audit is not evidence that contamination occurred.
+
+**Artifacts and limits:**
+- protocol: Pinned v3.1.0 card at 093cffbaa7be6f5dfe14252ae7e80c396c06dbd9
+- raw outputs: Complete internal/private raw run archive not audited
+- weight identity: Author-supplied package manifest; binary bytes unverified
+
+**Sources:** [Decision 3.0 d3 v3.1.0 model card](https://huggingface.co/vllm-sr/d3/blob/093cffbaa7be6f5dfe14252ae7e80c396c06dbd9/README.md); [Decision 3.0 code readout and multimodal runtime](https://huggingface.co/vllm-sr/d3/blob/093cffbaa7be6f5dfe14252ae7e80c396c06dbd9/d3_runtime.py); [Decision Index live 0.3.2 title](https://multimodalart-jev-decision-index.static.hf.space/index.html)
+
+<a id="e13"></a>
+## E13 · Decision 3.0: the full public kit is not the internal composite or JevBench
+
+**Evidence:** `author_reported` · **Reviewed:** 2026-10-13 · **Reproduced here:** no
+
+| Protocol | Recorded context |
+| --- | --- |
+| Task | Official Decision Index 0.3 public-suite kit, scored on each released Decision 3.0 checkpoint |
+| Test unit | 140178 public requests per checkpoint; author reports all answered, zero unsupported. Requests are not 140178 independent task families |
+| Split | Public suite only; no private/same-skill/new-domain composite imported |
+| Reference | Public kit references and chance-corrected aggregation; not raw hard-label accuracy |
+| Training | Six v3.1.0 checkpoints; train/test overlap and source-domain exclusion not established publicly |
+| Measurement | Card headline public-only index values at the pinned revisions; separate from rounded public columns in internal 0.3.1 tables |
+| Hardware | No common hardware or complete serving cost established for comparisons; no speed ranking imported |
+
+| Reported measurement | Value |
+| --- | --- |
+| d3 public-suite index | 65.45 |
+| d3-flash public-suite index | 57.79 |
+| d3-mini public-suite index | 54.9 |
+| d3-nano public-suite index | 42.22 |
+| d3-lite public-suite index | 36.93 |
+| d3-edge public-suite index | 28.82 |
+
+**Interpretation:** The six public-kit reports are useful release records under one stated suite; they do not transfer to private composite scores or the 231-task exact-label JevBench.
+
+- The report is from the model team, not an independent reproduction.
+- Exact raw outputs, task clustering, uncertainty and failure accounting were not fully audited here.
+- Public accessibility does not establish training disjointness.
+
+**Artifacts and limits:**
+- protocol: Six pinned cards; official-kit claim reviewed
+- raw outputs: No model run or complete output audit here
+- evaluated version: Cards say released weights; six repository pins and manifest identities recorded separately
+
+**Sources:** [Decision 3.0 d3 v3.1.0 model card](https://huggingface.co/vllm-sr/d3/blob/093cffbaa7be6f5dfe14252ae7e80c396c06dbd9/README.md); [Decision 3.0 d3-flash v3.1.0 model card](https://huggingface.co/vllm-sr/d3-flash/blob/f6075bff3c0f7d5704e353d0fb2ebf94888d1691/README.md); [Decision 3.0 d3-mini v3.1.0 model card](https://huggingface.co/vllm-sr/d3-mini/blob/0e78bbdbe3cf480ed1461c185c9e0c4fa9258011/README.md); [Decision 3.0 d3-nano v3.1.0 model card](https://huggingface.co/vllm-sr/d3-nano/blob/9d9b937f5f117f78c030ea7ba677c0b3d328ec58/README.md); [Decision 3.0 d3-lite v3.1.0 model card](https://huggingface.co/vllm-sr/d3-lite/blob/3c49f5c0bd48a4b28e29b8ec1f38f56e199f3d61/README.md); [Decision 3.0 d3-edge v3.1.0 model card](https://huggingface.co/vllm-sr/d3-edge/blob/20c745653400d191ecacd99c4eafc0c5900dc15e/README.md)
+
+<a id="e14"></a>
+## E14 · Decision 3.0 video: sampled-frame QA does not validate audio or streaming reliability
+
+**Evidence:** `author_reported` · **Reviewed:** 2026-10-13 · **Reproduced here:** no
+
+| Protocol | Recorded context |
+| --- | --- |
+| Task | Perception Test validation multiple-choice video QA |
+| Test unit | All 19140 questions, reported by the card |
+| Split | Validation split; no independent blind final-test run here |
+| Reference | Three choices per question, top-1 accuracy; chance 1/3 |
+| Training | d3 v3.1.0; overlap with training data unknown |
+| Measurement | Default 2 fps, minimum 4 / maximum 32 frames spread across the video, up to about 0.2 MP per frame; shared frames visible to each question |
+| Hardware | Accuracy statement; video median in E12 is a separate MI325X workload |
+
+| Reported measurement | Value |
+| --- | --- |
+| d3 Perception Test validation top-1 accuracy | 77.40% |
+
+**Interpretation:** This is an author-reported sampled-visual QA result; it does not validate audio understanding, live alerts or missed short events.
+
+- Sparse sampling can omit brief events; long videos still use at most 32 sampled frames.
+- Multiple questions about shared videos require grouped uncertainty, not an independent-question assumption.
+- No audio evaluation, continuous-stream P95 or real-world monitoring failure rate was established.
+
+**Artifacts and limits:**
+- protocol: Pinned card and video sampling code read
+- raw outputs: Not independently inspected
+- weights: No download or run here
+
+**Sources:** [Decision 3.0 d3 v3.1.0 model card](https://huggingface.co/vllm-sr/d3/blob/093cffbaa7be6f5dfe14252ae7e80c396c06dbd9/README.md); [Decision 3.0 code readout and multimodal runtime](https://huggingface.co/vllm-sr/d3/blob/093cffbaa7be6f5dfe14252ae7e80c396c06dbd9/d3_runtime.py)
+
+<a id="e15"></a>
+## E15 · Decision 3.0 on Apple: conversion and public-harness evidence
+
+**Evidence:** `author_reported` · **Reviewed:** 2026-10-13 · **Reproduced here:** no
+
+| Protocol | Recorded context |
+| --- | --- |
+| Task | Core ML lite/nano/mini versus upstream PyTorch; separate JevBench and typed-decisions tasks |
+| Test unit | JevBench 231 public tasks; typed-decisions TEST 2000 questions |
+| Split | Public JevBench suite and typed-decisions TEST; not official sealed Decision Index ranking |
+| Reference | Exact-label JevBench accuracy; typed-decisions gold labels with multiple annotators and disagreement |
+| Training | Converted upstream releases; full evaluated upstream/package hashes for the article table not independently tied to binary bytes here |
+| Measurement | Unchanged System One adapter/scorer reported; one request at a time, local HTTP round trip included. Median latency, not P95. Displayed percentages are rounded reports |
+| Hardware | MacBook Pro M5 Pro 24 GB GPU; PyTorch bf16 reference DeltaNet path versus Core ML text fp16 compute/int8 weights, FP32 vision/readout. These optimizations and the Mac reference backend are part of the comparison |
+
+| Reported measurement | Value |
+| --- | --- |
+| d3-lite JevBench PyTorch accuracy | 73.20% |
+| d3-lite JevBench Core ML accuracy | 74.00% |
+| d3-lite typed-decisions PyTorch accuracy | 51.60% |
+| d3-lite typed-decisions Core ML accuracy | 51.60% |
+| d3-lite JevBench median PyTorch request (ms) | 204 |
+| d3-lite JevBench median Core ML request (ms) | 53 |
+| d3-nano JevBench PyTorch accuracy | 75.30% |
+| d3-nano JevBench Core ML accuracy | 75.80% |
+| d3-nano typed-decisions PyTorch accuracy | 62.70% |
+| d3-nano typed-decisions Core ML accuracy | 62.70% |
+| d3-nano JevBench median PyTorch request (ms) | 173 |
+| d3-nano JevBench median Core ML request (ms) | 69 |
+| d3-mini JevBench PyTorch accuracy | 81.80% |
+| d3-mini JevBench Core ML accuracy | 81.80% |
+| d3-mini typed-decisions PyTorch accuracy | 73.60% |
+| d3-mini typed-decisions Core ML accuracy | 73.90% |
+| d3-mini JevBench median PyTorch request (ms) | 438 |
+| d3-mini JevBench median Core ML request (ms) | 169 |
+
+**Interpretation:** A concrete Apple deployment candidate with converter-reported quality and latency; the same-device speedup does not predict CUDA speed or production correctness.
+
+- Alex Weng / Fluid Inference authored the conversion and received early model access; label retained as author_reported, not independent.
+- Small parity suites can contain near-tie flips; exact universal equivalence is not established.
+- 37 JevBench tasks exceed 1536 tokens, maximum 3970; the article reports a 4096-token graph. Inspect each artifact and reject overlength inputs.
+- Article/Hub/Swift snapshots differ in names, sizes and supported paths; later flash/Mario prose is not evidence that the pinned lite/nano/mini Hub package contains flash.
+- No cold-start P95, concurrent-load benchmark, full energy/cost accounting or model reproduction here.
+
+**Artifacts and limits:**
+- protocol: October 11 live article plus fixed Core ML/Swift source revisions
+- raw outputs: Converter-run results reviewed, not rerun
+- source revision: d278e17df85e39e8c21bb64a467da81c39576fcd
+- converted package revision: 62b6a996e15342bdd3d608030d8f445f11a52367
+
+**Sources:** [Decision 3.0 on Apple Silicon](https://vllm-sr.ai/blog/decision-3-0-on-apple-silicon/); [Decision 3.0 Core ML conversion packages](https://huggingface.co/FluidInference/d3-coreml/blob/62b6a996e15342bdd3d608030d8f445f11a52367/README.md); [FluidUse native Swift/Core ML runtime](https://github.com/FluidInference/FluidUse/blob/d278e17df85e39e8c21bb64a467da81c39576fcd/README.md)
+
+<a id="e16"></a>
+## E16 · Decision 3.0 PR triage: throughput and real-label agreement are different tests
+
+**Evidence:** `author_reported` · **Reviewed:** 2026-10-13 · **Reproduced here:** no
+
+| Protocol | Recorded context |
+| --- | --- |
+| Task | PR workgroup (seven choices) and change-type triage |
+| Test unit | 1000 sample PRs for d3-lite throughput; separate real labeled PR sets for d3-mini: 168 workgroups / 182 types |
+| Split | Business-label sample provenance and source/time separation not fully specified |
+| Reference | Real vLLM-SR maintainer labels for agreement; 1000-sample throughput has no imported correctness denominator |
+| Training | Public model family; use of PR-domain training data not established |
+| Measurement | Title, start of description and changed files; two decisions per sample PR. Real-label agreement is separate from timed demo |
+| Hardware | M5 Pro local Core ML deployment, as reported by converter article; complete queue/review/correction cost absent |
+
+| Reported measurement | Value |
+| --- | --- |
+| d3-lite sample PR throughput time (seconds / PR, two questions) | 0.12 |
+| d3-mini workgroup label agreement | 134/168 (79.76%) |
+| d3-mini change-type label agreement | 153/182 (84.07%) |
+
+**Interpretation:** The deployment demo motivates a shadow triage test; it cannot turn throughput into an accuracy or workflow-success claim.
+
+- The timing and label-agreement tests use different model sizes and populations.
+- Maintainer label agreement is a useful reference but not independently observed downstream business success.
+- No paired uncertainty or critical misrouting/error-cost analysis supplied.
+
+**Artifacts and limits:**
+- protocol: Article PR triage section
+- raw outputs: PR IDs, predictions and independently adjudicated outcomes not fully audited
+- tested binary: Exact conversion/evaluated weight hashes not established for these demos
+
+**Sources:** [Decision 3.0 on Apple Silicon](https://vllm-sr.ai/blog/decision-3-0-on-apple-silicon/)
+
+<a id="e17"></a>
+## E17 · WebMCP application test: small differences and preprocessing errors
+
+**Evidence:** `third_party_reported` · **Reviewed:** 2026-10-13 · **Reproduced here:** no
+
+| Protocol | Recorded context |
+| --- | --- |
+| Task | Five Schema Usage page actions with month/type/bucket details; off-topic inputs should cause no action |
+| Test unit | 75 frozen test questions, roughly half English / half Spanish; 75 development and 20 original cases separately described |
+| Split | Evaluator-authored labels; Nano adjusted variant chosen after looking at test, so that row is selection-biased |
+| Reference | Full action and all required details correct; shared extraction/pre-routing rules. Three shared failures bypassed the compared models |
+| Training | Cloud systems treated as untuned for this test; checkpoint/serving revisions not frozen for all compared models |
+| Measurement | Baseline rule-on test counts below. Removing the term rule is a separate post-test intervention. Three common option permutations and paired McNemar comparisons reported |
+| Hardware | Local d3 Python on M5 Pro; Microsoft via decisions-api.dev (report says OpenRouter upstream); Jev via jev-ai.pro and decisions-api.dev. No direct official TypeSafe timing or cost comparison established |
+
+| Reported measurement | Value |
+| --- | --- |
+| Microsoft-Decision-1 rule-on full-call correctness | 71/75 (94.67%) |
+| d3-flash rule-on full-call correctness | 70/75 (93.33%) |
+| d3-mini rule-on full-call correctness (technical discussion) | 70/75 (93.33%) |
+| Jev rule-on full-call correctness | 69/75 (92.00%) |
+
+**Interpretation:** A useful application-level failure analysis, not a clear statistical winner among Microsoft, d3 flash/mini and Jev.
+
+- No pooled ranking with Index, JevBench or typed-decisions is justified.
+- Three errors came from a term-matching pre-rule: the model never saw those questions. Test the rule layer independently.
+- Post-test Nano selection and rule-removal results cannot be called untouched hold-out improvements.
+- jev-ai.pro is an independent platform; its upstream connection is self-reported. Microsoft was tested only through an intermediary. Reported latency/pricing belongs to those paths.
+- Missing immutable evaluated versions and a complete output audit limit reproduction and generalization.
+
+**Artifacts and limits:**
+- protocol: Original report and technical appendix
+- raw outputs: Report describes stored probabilities; complete frozen output/code archive not audited here
+- version: Model names reported; exact evaluated weight/API revisions unknown
+
+**Sources:** [Natzir Turrado: Schema Usage / WebMCP application test](https://natzir.com/posicionamiento-buscadores/modelos-decision-en-webmcp/); [Jev AI independent platform disclosure](https://jev-ai.pro/about)
+
+<a id="e18"></a>
+## E18 · Intern-Decision: exact-distribution calibration pilot, not hard-label accuracy
+
+**Evidence:** `author_reported` · **Reviewed:** 2026-10-13 · **Reproduced here:** no
+
+| Protocol | Recorded context |
+| --- | --- |
+| Task | Known-distribution-pilot-v1: predict probabilities of random outcomes under stated mechanisms |
+| Test unit | 96 cases, six categories, 24 families and 48 paired settings; all settings report 96 valid predictions |
+| Split | Evaluation-only pilot; author says no fit/selection on its references. 4B temperature fitted separately; private calibration/validation records not released |
+| Reference | Exact rational outcome distributions, separate from inference inputs; not sampled hard labels |
+| Training | Final Intern-Decision-4B; XTuner backend fixed T=1.992418; Jev 1.13.0 comparator. Evaluated binary/hash not independently authenticated against current HF weights |
+| Measurement | Expected multiclass Brier (including irreducible randomness); expected ECE with 10 equal-width bins, returned confidence or max(P) fallback. Pooled ECE recomputed, not mean category ECE |
+| Hardware | Probability metrics only; RTX4090 latency table and HF/Core ML timings are different protocols |
+
+| Reported measurement | Value |
+| --- | --- |
+| 4B uncalibrated expected Brier | 0.628 |
+| 4B calibrated expected Brier | 0.55 |
+| 4B uncalibrated expected ECE | 21.30% |
+| 4B calibrated expected ECE | 8.90% |
+| Jev 1.13.0 expected Brier on this pilot | 0.595 |
+| Jev 1.13.0 expected ECE on this pilot | 13.00% |
+
+**Interpretation:** The within-model calibration contrast is useful on these exact-reference problems; it establishes neither an overall model winner nor production risk control.
+
+- Author-run small diagnostic; paired variants are not 96 independent observations.
+- NLL-fitting records are private and full training-overlap audit unavailable.
+- Backend-specific calibration must be matched to the actual inference path; HF and XTuner numerics need separate validation.
+- Exact-distribution ECE/Brier must not be merged with hard-label suite scores or interpreted as future realized-outcome accuracy.
+
+**Artifacts and limits:**
+- protocol: Pinned repository, pilot documentation and public reference/scorer paths read
+- raw outputs: Complete replay not performed here
+- temperature: Author-provided preset; private fitting/validation records unavailable
+
+**Sources:** [Intern-Decision architecture and release scope](https://github.com/internlm/Intern-Decision/blob/3572c8a68b5df5dafe02d0e093989ba8ec0183bc/README.md); [Intern-Decision known-distribution calibration pilot](https://github.com/internlm/Intern-Decision/blob/3572c8a68b5df5dafe02d0e093989ba8ec0183bc/docs/CALIBRATION_BENCHMARK.md); [Intern-Decision evaluation protocol](https://github.com/internlm/Intern-Decision/blob/3572c8a68b5df5dafe02d0e093989ba8ec0183bc/docs/EVALUATION.md); [Intern-Decision-4B model card](https://huggingface.co/internlm/Intern-Decision-4B/blob/0e5e6aa7d6d750e2b1504ba11a8136cb58aeb3cd/README.md)
+
+<a id="e19"></a>
+## E19 · Verdict deployment: evaluator calibration is not shipped serving calibration
+
+**Evidence:** `third_party_reported` · **Reviewed:** 2026-10-13 · **Reproduced here:** no
+
+| Protocol | Recorded context |
+| --- | --- |
+| Task | Verdict Core ML on author-held-out Banking77 / CLINC-OOS protocol, then actual answer serving path |
+| Test unit | 1000 test requests; 500 calibration separate; full report also includes 1000 challenge-slice records |
+| Split | Author public cal/test files at pinned Verdict commit; converter refit single T on calibration only |
+| Reference | Same held-out labels; evaluator raw rendering differs from hypothesis-style answer renderer and abstention placement |
+| Training | Pinned trained 151M checkpoint; conversion reporter states identity with author checkpoint, not locally verified here |
+| Measurement | Compare author-protocol raw logits with separately fitted single T against shipped answer() per-K calibration; same answer logits with T=1 is an ablation |
+| Hardware | FluidUse Swift Core ML FP16 on Apple M5 Pro; no pooled latency claim with author WASM proxy |
+
+| Reported measurement | Value |
+| --- | --- |
+| Core ML author-protocol top-1 accuracy | 95.00% |
+| Core ML author-protocol ECE | 3.38% |
+| Shipped answer() top-1 accuracy | 93.10% |
+| Shipped answer() ECE | 21.20% |
+| Same answer logits with T=1 ECE | 1.90% |
+| Shipped answer() NLL | 0.395 |
+| Shipped answer() Brier | 0.167 |
+| Raw-logit reference decision agreement | 998/1000 (99.80%) |
+
+**Interpretation:** Converter-reported findings show why deployment acceptance must test the actual renderer and calibrator, even when ported logits are close.
+
+- Independent of the upstream model authors but reported by the port maintainer; not a detached audit, and not reproduced_here.
+- The open-domain shipped calibrator is under-confident on this in-domain test; this does not establish that globally disabling calibration is preferable.
+- Raw-evaluator 95% is not the answer-path accuracy; rendering and calibrator differences must remain explicit.
+- Converter LUT8 failed its agreement gate; FP16 parity does not certify quantized abstention behavior.
+
+**Artifacts and limits:**
+- protocol: Fixed FluidUse OfficialBenchmarks.md; author code and calibrator text independently read
+- raw outputs: Reporter describes saved artifacts and row agreement; complete archive not rerun/audited here
+- upstream revision: 30f15564821626ca5c1ad5b2638c4eb7078787dd
+- model repository revision: 8af2496eb63c7fa66d7d234e1f62629380030eb4
+- conversion revision: 835208c443699f1f95c4bed1b177dc916300cffe
+
+**Sources:** [FluidUse official-harness and application-path reports](https://github.com/FluidInference/FluidUse/blob/d278e17df85e39e8c21bb64a467da81c39576fcd/Documentation/OfficialBenchmarks.md); [Verdict typed serving renderer and calibration path](https://github.com/Heman10x-NGU/Verdict-open-jev/blob/30f15564821626ca5c1ad5b2638c4eb7078787dd/core/engine_encoder.py); [Verdict shipped per-K calibration artifact](https://huggingface.co/heman10x/rlcd-modernbert-151m/blob/8af2496eb63c7fa66d7d234e1f62629380030eb4/calibrator.json); [Verdict Core ML conversion and rejected quantization](https://huggingface.co/FluidInference/verdict-coreml/blob/835208c443699f1f95c4bed1b177dc916300cffe/README.md)
+
+<a id="e20"></a>
+## E20 · Verdict abstention: preserve hard-negative and synonym failures
+
+**Evidence:** `author_reported` · **Reviewed:** 2026-10-13 · **Reproduced here:** no
+
+| Protocol | Recorded context |
+| --- | --- |
+| Task | Missing-correct-option abstention, standard versus hard-negative K=9 / synonym / combined conditions |
+| Test unit | 200 cases per condition; paired perturbations, not 800 independent cases |
+| Split | Author diagnostic report; exact independence from training/calibration not fully audited |
+| Reference | Correct action is abstain because the valid intent is absent from the candidate menu |
+| Training | Verdict v2 reported model; evaluated tensor hash not independently tied to current HF binary here |
+| Measurement | Abstention recall; raw JSON reports true abstentions and false negatives, zero false positives in these all-abstain slices |
+| Hardware | Quality failure analysis only; no hardware-performance conclusion |
+
+| Reported measurement | Value |
+| --- | --- |
+| Standard missing-option abstention recall | 151/200 (75.50%) |
+| Hard-negative K=9 abstention recall | 36/200 (18.00%) |
+| Synonym phrasing abstention recall | 47/200 (23.50%) |
+| Combined hard negatives and synonym abstention recall | 20/200 (10.00%) |
+
+**Interpretation:** An explicit abstention candidate can fail under plausible schema perturbations; production acceptance needs more than a high distant-OOS score.
+
+- Recall on an all-abstain slice does not measure precision on realistic mixed traffic.
+- Variants share base examples; report family-aware paired uncertainty.
+- Preserve this negative result separately from author marketing about guaranteed calibration/abstention.
+
+**Artifacts and limits:**
+- protocol: Pinned raw exp_e5 report read
+- raw outputs: Aggregate counts public; per-example inference not replayed here
+- upstream revision: 30f15564821626ca5c1ad5b2638c4eb7078787dd
+
+**Sources:** [Verdict / OpenJev mechanism and negative findings](https://github.com/Heman10x-NGU/Verdict-open-jev/blob/30f15564821626ca5c1ad5b2638c4eb7078787dd/README.md); [Verdict raw abstention-generalization report](https://github.com/Heman10x-NGU/Verdict-open-jev/blob/30f15564821626ca5c1ad5b2638c4eb7078787dd/reports/v2/exp_e5_abstention_generalization.json)
+

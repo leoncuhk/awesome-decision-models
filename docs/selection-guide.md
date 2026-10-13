@@ -74,6 +74,20 @@ The gate may request evidence, spend more computation, use another executor or a
 
 Maintain rollback, versioned rules, outcome maturation windows and privacy-aware logging. A new model's shadow evaluation should not silently change the live acceptance threshold. Human review has cost, delay and error; measure it rather than assuming it solves all uncertainty.
 
+## 6. October 2026 deployment checks / 10 月部署验收
+
+The newer releases add distinct experiments; they do not replace task-specific acceptance. See [Decision 3.0](models.md#decision3), [Intern-Decision](models.md#intern-decision), [Verdict](models.md#verdict) and the [deployment evidence](evidence.md#e15).
+
+| Decision constraint | Concrete experiment | Acceptance boundary |
+| --- | --- | --- |
+| Many questions about one state | Compare Decision 3.0's separate question rows with Intern-Decision's shared causal schema skeleton and a hosted reference | Measure total tokens, memory, p50/p95 and field/order effects. One HTTP call, one prompt row and one backbone pass are different units. |
+| Private text/image/video processing on Apple devices | Test the exact FluidUse/Core ML package against its upstream renderer on the same labeled inputs | Match precision, length bucket, image/video path, near-tie decisions, cold start and concurrent queue. Conversion parity does not certify task accuracy. |
+| Missing correct option or incomplete evidence | Test explicit abstention alongside external evidence checks and risk–coverage thresholds | Include hard-negative options, synonyms, missing images and mixed in/out-of-scope traffic. Verdict's negative findings in [E20](evidence.md#e20) rule out trusting a named abstention option alone. |
+| Probability-based automation | Evaluate the deployed renderer and calibrator on separate calibration and final test splits | A published temperature may be size/backend/candidate-count specific. [E19](evidence.md#e19) shows an evaluator and serving path yielding different calibration. |
+| Tool or team routing with preprocessing rules | Freeze the whole pipeline, then score rules and model calls separately | Count bypassed-model failures, retries and human clarification. [E17](evidence.md#e17) illustrates how a helpful rule can become the dominant error source. |
+
+中文：新增型号扩大可测试的方案空间。验收必须固定模型／转换包、schema、规则、校准器和完整测量边界；“多题一次调用”不意味着每种模型都只编码一次。公共 Index、231-task JevBench、业务标签一致率、转换等价和吞吐演示分别回答不同问题，不能相互代替。先以影子评测验证关键错误、校准、拒答和总成本，再决定是否上线。
+
 ## 中文：一页决策建议
 
 **先定义判断契约。** 输入证据是什么、输出有哪些、怎样才算正确、错判代价是多少、证据不够怎么办。判断“是什么”、预测“谁能做”、学习“怎样能改善结果”，需要的标签和方法不同。

@@ -34,7 +34,16 @@ def outputs(root: Path = ROOT) -> dict[Path, str]:
           'E08':'Strands v21：发布种子与同机多种子比较。',
           'E09':'Drex v1.5：公开套件平局与基准训练重叠。',
           'E10':'Microsoft-Decision-1：作者报告的扰动稳定性。',
-          'E11':'Strands Qwen v1：新配方、种子平均及缺图限制。'}
+          'E11':'Strands Qwen v1：新配方、种子平均及缺图限制。',
+          'E12':'Decision 3.0：内部 Index 与单设备延迟边界。',
+          'E13':'Decision 3.0：完整公共套件与其他协议分开。',
+          'E14':'Decision 3.0 视频：采样帧问答不验证音频或实时可靠性。',
+          'E15':'Decision 3.0 Core ML：转换与公共评测证据。',
+          'E16':'Decision 3.0 PR 分流：吞吐与真实标签一致率分开。',
+          'E17':'WebMCP 应用：小样本差异与前置规则错误。',
+          'E18':'Intern-Decision：精确分布校准试验。',
+          'E19':'Verdict 部署：评测校准不等于实际服务校准。',
+          'E20':'Verdict 拒答：保留 hard negative 与同义改写失败。'}
         replacements['EVIDENCE_LINKS']='\n'.join(f"- [{e['id']} — {e['title'] if lang=='en' else short_zh[e['id']]}](docs/evidence.md#{e['id'].lower()})" for e in evs)
         for category in ['baselines','routing','reliability','evaluation','foundations','related_lists']:
             lines=[]

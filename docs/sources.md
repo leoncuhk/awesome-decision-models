@@ -17,16 +17,17 @@
 ## TypeSafe primitives
 
 - Source: https://docs.typesafe.ai/primitives
-- Kind: `official_docs`; review depth: `content_reviewed`; reviewed: 2026-09-25
+- Kind: `official_docs`; review depth: `content_reviewed`; reviewed: 2026-10-13
 - Source revision: `not captured / live URL`
+- Note: Current body reviewed; raw HTML SHA-256 382541e3f343c9e543f3654e1f58bb3e02e893266e684bfc1cc262b19d5184ac. No authenticated previous-body diff: dynamic HTML hash changes do not identify the semantic change. Documentation still defines independent questions, Choice/Score distribution-derived confidence and Noul P(yes) without a separate confidence. Threshold examples are guidance, not validated business calibration or risk bounds.
 
 <a id="jev-confidence"></a>
 ## TypeSafe confidence semantics
 
 - Source: https://docs.typesafe.ai/confidence
-- Kind: `official_docs`; review depth: `content_reviewed`; reviewed: 2026-10-06
+- Kind: `official_docs`; review depth: `content_reviewed`; reviewed: 2026-10-13
 - Source revision: `not captured / live URL`
-- Note: Current formulas and Noul field semantics reviewed. Distribution concentration is not a calibrated operational success rate.
+- Note: Current body reviewed; raw HTML SHA-256 37a170671fae8d21c2b6fdcd9f07268e37db3934681e448f7c3321900f4b35a7. No authenticated previous-body diff: dynamic HTML hash changes do not identify the semantic change. Documentation still defines independent questions, Choice/Score distribution-derived confidence and Noul P(yes) without a separate confidence. Threshold examples are guidance, not validated business calibration or risk bounds.
 
 <a id="laya-family"></a>
 ## Laya model family
@@ -630,4 +631,324 @@
 - Kind: `repository`; review depth: `content_reviewed`; reviewed: 2026-10-11
 - Source revision: `0ac22a97e584f3ccf87cc9b8cc5fdbad57cdf534`
 - Note: Inventory separates training, held-out short calibration/evaluation and dev splits; several dataset revisions remain unpinned. License declarations are source claims.
+
+<a id="decision3-d3"></a>
+## Decision 3.0 d3 v3.1.0 model card
+
+- Source: https://huggingface.co/vllm-sr/d3/blob/093cffbaa7be6f5dfe14252ae7e80c396c06dbd9/README.md
+- Kind: `model_card`; review depth: `content_reviewed`; reviewed: 2026-10-13
+- Source revision: `093cffbaa7be6f5dfe14252ae7e80c396c06dbd9`
+- Note: Card, MODEL_MANIFEST.json, config.json, modeling_d3.py, d3_runtime.py and repository history read at this revision. October 12 commits describe server/runtime/docs changes after the October 11 v3.1.0 release; a repository revision is not a new capability result. Cards declare text/image/video inputs and Apache-2.0. History: https://huggingface.co/vllm-sr/d3/commits/093cffbaa7be6f5dfe14252ae7e80c396c06dbd9.
+
+<a id="decision3-d3-manifest"></a>
+## d3 package manifest
+
+- Source: https://huggingface.co/vllm-sr/d3/blob/093cffbaa7be6f5dfe14252ae7e80c396c06dbd9/MODEL_MANIFEST.json
+- Kind: `repository`; review depth: `content_reviewed`; reviewed: 2026-10-13
+- Source revision: `093cffbaa7be6f5dfe14252ae7e80c396c06dbd9`
+- Note: Author-supplied package model_sha256: 0e439bebbbbf80d9e1b601c56c55a6fc3a6502b4e396cbbb5f3c3f3acc1d607b; built_utc: 2026-10-11T03:30:34+00:00; loaded parameters including readout: 26086635760. Text/vision/readout counts and base revision are declared by the manifest, not independently counted from tensor bytes. Downloaded modeling_d3.py and d3_runtime.py text hashes match the manifest; no weight bytes were downloaded or hashed.
+
+<a id="decision3-d3-flash"></a>
+## Decision 3.0 d3-flash v3.1.0 model card
+
+- Source: https://huggingface.co/vllm-sr/d3-flash/blob/f6075bff3c0f7d5704e353d0fb2ebf94888d1691/README.md
+- Kind: `model_card`; review depth: `content_reviewed`; reviewed: 2026-10-13
+- Source revision: `f6075bff3c0f7d5704e353d0fb2ebf94888d1691`
+- Note: Card, MODEL_MANIFEST.json, config.json, modeling_d3.py, d3_runtime.py and repository history read at this revision. October 12 commits describe server/runtime/docs changes after the October 11 v3.1.0 release; a repository revision is not a new capability result. Cards declare text/image/video inputs and Apache-2.0. History: https://huggingface.co/vllm-sr/d3-flash/commits/f6075bff3c0f7d5704e353d0fb2ebf94888d1691.
+
+<a id="decision3-d3-flash-manifest"></a>
+## d3-flash package manifest
+
+- Source: https://huggingface.co/vllm-sr/d3-flash/blob/f6075bff3c0f7d5704e353d0fb2ebf94888d1691/MODEL_MANIFEST.json
+- Kind: `repository`; review depth: `content_reviewed`; reviewed: 2026-10-13
+- Source revision: `f6075bff3c0f7d5704e353d0fb2ebf94888d1691`
+- Note: Author-supplied package model_sha256: 74b71d370f3d9e5731c603dafcb8af4e9134fd2c769c89c5169b031a0418799b; built_utc: 2026-10-11T03:28:26+00:00; loaded parameters including readout: 8393739504. Text/vision/readout counts and base revision are declared by the manifest, not independently counted from tensor bytes. Downloaded modeling_d3.py and d3_runtime.py text hashes match the manifest; no weight bytes were downloaded or hashed.
+
+<a id="decision3-d3-mini"></a>
+## Decision 3.0 d3-mini v3.1.0 model card
+
+- Source: https://huggingface.co/vllm-sr/d3-mini/blob/0e78bbdbe3cf480ed1461c185c9e0c4fa9258011/README.md
+- Kind: `model_card`; review depth: `content_reviewed`; reviewed: 2026-10-13
+- Source revision: `0e78bbdbe3cf480ed1461c185c9e0c4fa9258011`
+- Note: Card, MODEL_MANIFEST.json, config.json, modeling_d3.py, d3_runtime.py and repository history read at this revision. October 12 commits describe server/runtime/docs changes after the October 11 v3.1.0 release; a repository revision is not a new capability result. Cards declare text/image/video inputs and Apache-2.0. History: https://huggingface.co/vllm-sr/d3-mini/commits/0e78bbdbe3cf480ed1461c185c9e0c4fa9258011.
+
+<a id="decision3-d3-mini-manifest"></a>
+## d3-mini package manifest
+
+- Source: https://huggingface.co/vllm-sr/d3-mini/blob/0e78bbdbe3cf480ed1461c185c9e0c4fa9258011/MODEL_MANIFEST.json
+- Kind: `repository`; review depth: `content_reviewed`; reviewed: 2026-10-13
+- Source revision: `0e78bbdbe3cf480ed1461c185c9e0c4fa9258011`
+- Note: Author-supplied package model_sha256: 9ac186bb30b30c129d7aae03d73932600424963bd4644c2041a9d7120f029af5; built_utc: 2026-10-11T03:27:45+00:00; loaded parameters including readout: 4539918336. Text/vision/readout counts and base revision are declared by the manifest, not independently counted from tensor bytes. Downloaded modeling_d3.py and d3_runtime.py text hashes match the manifest; no weight bytes were downloaded or hashed.
+
+<a id="decision3-d3-nano"></a>
+## Decision 3.0 d3-nano v3.1.0 model card
+
+- Source: https://huggingface.co/vllm-sr/d3-nano/blob/9d9b937f5f117f78c030ea7ba677c0b3d328ec58/README.md
+- Kind: `model_card`; review depth: `content_reviewed`; reviewed: 2026-10-13
+- Source revision: `9d9b937f5f117f78c030ea7ba677c0b3d328ec58`
+- Note: Card, MODEL_MANIFEST.json, config.json, modeling_d3.py, d3_runtime.py and repository history read at this revision. October 12 commits describe server/runtime/docs changes after the October 11 v3.1.0 release; a repository revision is not a new capability result. Cards declare text/image/video inputs and Apache-2.0. History: https://huggingface.co/vllm-sr/d3-nano/commits/9d9b937f5f117f78c030ea7ba677c0b3d328ec58.
+
+<a id="decision3-d3-nano-manifest"></a>
+## d3-nano package manifest
+
+- Source: https://huggingface.co/vllm-sr/d3-nano/blob/9d9b937f5f117f78c030ea7ba677c0b3d328ec58/MODEL_MANIFEST.json
+- Kind: `repository`; review depth: `content_reviewed`; reviewed: 2026-10-13
+- Source revision: `9d9b937f5f117f78c030ea7ba677c0b3d328ec58`
+- Note: Author-supplied package model_sha256: a2a6dce5e40298a43f904dfbffe799e09e675d964df7477683ee2bc9db04cdd8; built_utc: 2026-10-11T04:33:06+00:00; loaded parameters including readout: 2213763904. Text/vision/readout counts and base revision are declared by the manifest, not independently counted from tensor bytes. Downloaded modeling_d3.py and d3_runtime.py text hashes match the manifest; no weight bytes were downloaded or hashed.
+
+<a id="decision3-d3-lite"></a>
+## Decision 3.0 d3-lite v3.1.0 model card
+
+- Source: https://huggingface.co/vllm-sr/d3-lite/blob/3c49f5c0bd48a4b28e29b8ec1f38f56e199f3d61/README.md
+- Kind: `model_card`; review depth: `content_reviewed`; reviewed: 2026-10-13
+- Source revision: `3c49f5c0bd48a4b28e29b8ec1f38f56e199f3d61`
+- Note: Card, MODEL_MANIFEST.json, config.json, modeling_d3.py, d3_runtime.py and repository history read at this revision. October 12 commits describe server/runtime/docs changes after the October 11 v3.1.0 release; a repository revision is not a new capability result. Cards declare text/image/video inputs and Apache-2.0. History: https://huggingface.co/vllm-sr/d3-lite/commits/3c49f5c0bd48a4b28e29b8ec1f38f56e199f3d61.
+
+<a id="decision3-d3-lite-manifest"></a>
+## d3-lite package manifest
+
+- Source: https://huggingface.co/vllm-sr/d3-lite/blob/3c49f5c0bd48a4b28e29b8ec1f38f56e199f3d61/MODEL_MANIFEST.json
+- Kind: `repository`; review depth: `content_reviewed`; reviewed: 2026-10-13
+- Source revision: `3c49f5c0bd48a4b28e29b8ec1f38f56e199f3d61`
+- Note: Author-supplied package model_sha256: fda5cfc7bc9063fbb7cd40b50fa9a0963d83a4790a3d6a11a356833fd1171992; built_utc: 2026-10-11T03:45:52+00:00; loaded parameters including readout: 853247040. Text/vision/readout counts and base revision are declared by the manifest, not independently counted from tensor bytes. Downloaded modeling_d3.py and d3_runtime.py text hashes match the manifest; no weight bytes were downloaded or hashed.
+
+<a id="decision3-d3-edge"></a>
+## Decision 3.0 d3-edge v3.1.0 model card
+
+- Source: https://huggingface.co/vllm-sr/d3-edge/blob/20c745653400d191ecacd99c4eafc0c5900dc15e/README.md
+- Kind: `model_card`; review depth: `content_reviewed`; reviewed: 2026-10-13
+- Source revision: `20c745653400d191ecacd99c4eafc0c5900dc15e`
+- Note: Card, MODEL_MANIFEST.json, config.json, modeling_d3.py, d3_runtime.py and repository history read at this revision. October 12 commits describe server/runtime/docs changes after the October 11 v3.1.0 release; a repository revision is not a new capability result. Cards declare text/image/video inputs and Apache-2.0. History: https://huggingface.co/vllm-sr/d3-edge/commits/20c745653400d191ecacd99c4eafc0c5900dc15e.
+
+<a id="decision3-d3-edge-manifest"></a>
+## d3-edge package manifest
+
+- Source: https://huggingface.co/vllm-sr/d3-edge/blob/20c745653400d191ecacd99c4eafc0c5900dc15e/MODEL_MANIFEST.json
+- Kind: `repository`; review depth: `content_reviewed`; reviewed: 2026-10-13
+- Source revision: `20c745653400d191ecacd99c4eafc0c5900dc15e`
+- Note: Author-supplied package model_sha256: 6e00d04abbdbdf6d35c9e12065769d9edaacc3bfe9404583891797718d239dc8; built_utc: 2026-10-11T05:44:01+00:00; loaded parameters including readout: 594582720. Text/vision/readout counts and base revision are declared by the manifest, not independently counted from tensor bytes. Downloaded modeling_d3.py and d3_runtime.py text hashes match the manifest; no weight bytes were downloaded or hashed.
+
+<a id="decision3-config"></a>
+## d3 backbone/runtime architecture configuration
+
+- Source: https://huggingface.co/vllm-sr/d3/blob/093cffbaa7be6f5dfe14252ae7e80c396c06dbd9/config.json
+- Kind: `repository`; review depth: `content_reviewed`; reviewed: 2026-10-13
+- Source revision: `093cffbaa7be6f5dfe14252ae7e80c396c06dbd9`
+- Note: The manifest names Qwen3.8-27B while runtime model_type is qwen3_5. These identify different layers; no contradiction is inferred. max_position_embeddings is configuration, not validated context quality.
+
+<a id="decision3-loader"></a>
+## Decision 3.0 Transformers loader
+
+- Source: https://huggingface.co/vllm-sr/d3/blob/093cffbaa7be6f5dfe14252ae7e80c396c06dbd9/modeling_d3.py
+- Kind: `repository`; review depth: `content_reviewed`; reviewed: 2026-10-13
+- Source revision: `093cffbaa7be6f5dfe14252ae7e80c396c06dbd9`
+- Note: Custom AutoModel loader delegates to d3_runtime; stock backbone loading without the custom decision path does not establish System One behavior.
+
+<a id="decision3-runtime"></a>
+## Decision 3.0 code readout and multimodal runtime
+
+- Source: https://huggingface.co/vllm-sr/d3/blob/093cffbaa7be6f5dfe14252ae7e80c396c06dbd9/d3_runtime.py
+- Kind: `repository`; review depth: `content_reviewed`; reviewed: 2026-10-13
+- Source revision: `093cffbaa7be6f5dfe14252ae7e80c396c06dbd9`
+- Note: Independent prompt rows, last-position 255-code readout, per-row masking and softmax; default question batch size 8. Optional reversed-choice permutation averaging is off by default. Read only, never imported or executed.
+
+<a id="decision-index-current"></a>
+## Decision Index live 0.3.2 title
+
+- Source: https://multimodalart-jev-decision-index.static.hf.space/index.html
+- Kind: `evaluation_report`; review depth: `metadata_only`; reviewed: 2026-10-13
+- Source revision: `not captured / live URL`
+- Note: Static title says 0.3.2 on review day. The complete dynamic ranking and its evaluated versions were not audited. This source does not support a current first-place claim.
+
+<a id="fluiduse"></a>
+## FluidUse native Swift/Core ML runtime
+
+- Source: https://github.com/FluidInference/FluidUse/blob/d278e17df85e39e8c21bb64a467da81c39576fcd/README.md
+- Kind: `repository`; review depth: `content_reviewed`; reviewed: 2026-10-13
+- Source revision: `d278e17df85e39e8c21bb64a467da81c39576fcd`
+- Note: Decision-model sections inspected, not unrelated OCR/agent functionality. D3Manager, InternDecisionManager and conversion fidelity described. Native managers and Python-assisted bridges are different deployment paths.
+
+<a id="fluiduse-support"></a>
+## FluidUse decision-model support and bridge limits
+
+- Source: https://github.com/FluidInference/FluidUse/blob/d278e17df85e39e8c21bb64a467da81c39576fcd/Documentation/DecisionModelSupport.md
+- Kind: `repository`; review depth: `content_reviewed`; reviewed: 2026-10-13
+- Source revision: `d278e17df85e39e8c21bb64a467da81c39576fcd`
+- Note: Support matrix, candidate/context limits, serial queue, timeout/cancellation shutdown and per-model quirks read. Smoke checks are serving-path checks, not common quality scores.
+
+<a id="fluiduse-bench"></a>
+## FluidUse official-harness and application-path reports
+
+- Source: https://github.com/FluidInference/FluidUse/blob/d278e17df85e39e8c21bb64a467da81c39576fcd/Documentation/OfficialBenchmarks.md
+- Kind: `evaluation_report`; review depth: `content_reviewed`; reviewed: 2026-10-13
+- Source revision: `d278e17df85e39e8c21bb64a467da81c39576fcd`
+- Note: Converter-run reports read, especially Verdict raw-logit evaluation versus shipped answer path. The reporter claims reproduction; this repository only reviewed those reports. Raw runs not replayed here.
+
+<a id="decision3-apple"></a>
+## Decision 3.0 on Apple Silicon
+
+- Source: https://vllm-sr.ai/blog/decision-3-0-on-apple-silicon/
+- Kind: `official_publication`; review depth: `content_reviewed`; reviewed: 2026-10-13
+- Source revision: `not captured / live URL`
+- Note: October 11 article by Alex Weng / Fluid Inference, reviewed October 13; acknowledges early access from the model team. Converter/team-associated deployment report, not an independent audit. Live post later mentions flash/Mario; inspected d3-coreml revision lists lite/nano/mini only. Download sizes and runtime names differ from FluidUse README snapshots; verify exact package.
+
+<a id="decision3-coreml"></a>
+## Decision 3.0 Core ML conversion packages
+
+- Source: https://huggingface.co/FluidInference/d3-coreml/blob/62b6a996e15342bdd3d608030d8f445f11a52367/README.md
+- Kind: `model_card`; review depth: `content_reviewed`; reviewed: 2026-10-13
+- Source revision: `62b6a996e15342bdd3d608030d8f445f11a52367`
+- Note: Pinned card and public file inventory inspected: lite, nano and mini. Conversion package bytes were not downloaded or verified. Video host is Python; do not assume all native Swift paths support every media type.
+
+<a id="webmcp-test"></a>
+## Natzir Turrado: Schema Usage / WebMCP application test
+
+- Source: https://natzir.com/posicionamiento-buscadores/modelos-decision-en-webmcp/
+- Kind: `evaluation_report`; review depth: `content_reviewed`; reviewed: 2026-10-13
+- Source revision: `not captured / live URL`
+- Note: Original evaluator report and technical appendix read. Small rule+model pipeline test; test-selected Nano variant disclosed. Prices and times include specific providers/intermediaries, not official direct vendor baselines. Frozen per-model serving/weight revisions not established.
+
+<a id="jev-ai-about"></a>
+## Jev AI independent platform disclosure
+
+- Source: https://jev-ai.pro/about
+- Kind: `official_docs`; review depth: `content_reviewed`; reviewed: 2026-10-13
+- Source revision: `not captured / live URL`
+- Note: Platform explicitly says it is independently operated from TypeSafe and self-reports a primary TypeSafe API connection. This verifies its disclosure, not its upstream account or served binary. Do not call jev-ai.pro an official direct TypeSafe endpoint.
+
+<a id="intern-repo"></a>
+## Intern-Decision architecture and release scope
+
+- Source: https://github.com/internlm/Intern-Decision/blob/3572c8a68b5df5dafe02d0e093989ba8ec0183bc/README.md
+- Kind: `repository`; review depth: `content_reviewed`; reviewed: 2026-10-13
+- Source revision: `3572c8a68b5df5dafe02d0e093989ba8ec0183bc`
+- Note: Qwen3.5 language-backbone decision tuning with frozen vision tower/projector. Code/test records/scorers are public; training data, private calibration/validation records and preparation pipelines are omitted. Do not equate a released training script with the original data recipe.
+
+<a id="intern-evaluation"></a>
+## Intern-Decision evaluation protocol
+
+- Source: https://github.com/internlm/Intern-Decision/blob/3572c8a68b5df5dafe02d0e093989ba8ec0183bc/docs/EVALUATION.md
+- Kind: `evaluation_report`; review depth: `content_reviewed`; reviewed: 2026-10-13
+- Source revision: `3572c8a68b5df5dafe02d0e093989ba8ec0183bc`
+- Note: Exact test record paths/counts, backend-specific temperature presets and hash-binding workflow reviewed; no commands run here.
+
+<a id="intern-calibration"></a>
+## Intern-Decision known-distribution calibration pilot
+
+- Source: https://github.com/internlm/Intern-Decision/blob/3572c8a68b5df5dafe02d0e093989ba8ec0183bc/docs/CALIBRATION_BENCHMARK.md
+- Kind: `evaluation_report`; review depth: `content_reviewed`; reviewed: 2026-10-13
+- Source revision: `3572c8a68b5df5dafe02d0e093989ba8ec0183bc`
+- Note: Exact distribution references separate from model-facing inputs; expected Brier includes irreducible randomness; expected ECE uses 10 equal-width bins. Paired families require grouped uncertainty.
+
+<a id="intern-0.8b"></a>
+## Intern-Decision-0.8B model card
+
+- Source: https://huggingface.co/internlm/Intern-Decision-0.8B/blob/85a0cc5a99d67ea8d56dfe98115689212867171d/README.md
+- Kind: `model_card`; review depth: `content_reviewed`; reviewed: 2026-10-13
+- Source revision: `85a0cc5a99d67ea8d56dfe98115689212867171d`
+- Note: Card read at fixed revision. Separate size-specific temperatures and image support; training overlap and original private calibration records not independently audited.
+
+<a id="intern-2b"></a>
+## Intern-Decision-2B model card
+
+- Source: https://huggingface.co/internlm/Intern-Decision-2B/blob/8797836c65fc91a2435b1fb6850b5f0aabd75cc3/README.md
+- Kind: `model_card`; review depth: `content_reviewed`; reviewed: 2026-10-13
+- Source revision: `8797836c65fc91a2435b1fb6850b5f0aabd75cc3`
+- Note: Card read at fixed revision. Separate size-specific temperatures and image support; training overlap and original private calibration records not independently audited.
+
+<a id="intern-4b"></a>
+## Intern-Decision-4B model card
+
+- Source: https://huggingface.co/internlm/Intern-Decision-4B/blob/0e5e6aa7d6d750e2b1504ba11a8136cb58aeb3cd/README.md
+- Kind: `model_card`; review depth: `content_reviewed`; reviewed: 2026-10-13
+- Source revision: `0e5e6aa7d6d750e2b1504ba11a8136cb58aeb3cd`
+- Note: Card read at fixed revision. Separate size-specific temperatures and image support; training overlap and original private calibration records not independently audited.
+
+<a id="intern-inference"></a>
+## Intern-Decision 4B masked-next-token inference
+
+- Source: https://huggingface.co/internlm/Intern-Decision-4B/blob/0e5e6aa7d6d750e2b1504ba11a8136cb58aeb3cd/inference.py
+- Kind: `repository`; review depth: `content_reviewed`; reviewed: 2026-10-13
+- Source revision: `0e5e6aa7d6d750e2b1504ba11a8136cb58aeb3cd`
+- Note: Complete causal masked assistant skeleton, pre-placeholder logits, per-field candidate softmax and fixed temperature read; no generate call. Causal schema positions may depend on prior field/option text even without gold/predicted answers. Code was not executed.
+
+<a id="verdict-repo"></a>
+## Verdict / OpenJev mechanism and negative findings
+
+- Source: https://github.com/Heman10x-NGU/Verdict-open-jev/blob/30f15564821626ca5c1ad5b2638c4eb7078787dd/README.md
+- Kind: `repository`; review depth: `content_reviewed`; reviewed: 2026-10-13
+- Source revision: `30f15564821626ca5c1ad5b2638c4eb7078787dd`
+- Note: ModernBERT/GLiClass bounded candidate model, author calibration/abstention tests and severe synonym/hard-negative failures read. Marketing guarantee language is not accepted as a statistical risk guarantee; unrelated overall-rank claims not imported.
+
+<a id="verdict-engine"></a>
+## Verdict typed serving renderer and calibration path
+
+- Source: https://github.com/Heman10x-NGU/Verdict-open-jev/blob/30f15564821626ca5c1ad5b2638c4eb7078787dd/core/engine_encoder.py
+- Kind: `repository`; review depth: `content_reviewed`; reviewed: 2026-10-13
+- Source revision: `30f15564821626ca5c1ad5b2638c4eb7078787dd`
+- Note: Serving auto-loads per-K calibrator and templates candidate labels; source reviewed only. Code/evaluation renderer and fitted calibrator are distinct.
+
+<a id="verdict-abstention"></a>
+## Verdict raw abstention-generalization report
+
+- Source: https://github.com/Heman10x-NGU/Verdict-open-jev/blob/30f15564821626ca5c1ad5b2638c4eb7078787dd/reports/v2/exp_e5_abstention_generalization.json
+- Kind: `evaluation_report`; review depth: `content_reviewed`; reviewed: 2026-10-13
+- Source revision: `30f15564821626ca5c1ad5b2638c4eb7078787dd`
+- Note: 200 missing-option cases per condition; preserved baseline and hard/synonym/combined counts. Raw report read, experiment not rerun.
+
+<a id="verdict-card"></a>
+## Verdict 151M release model card
+
+- Source: https://huggingface.co/heman10x/rlcd-modernbert-151m/blob/8af2496eb63c7fa66d7d234e1f62629380030eb4/README.md
+- Kind: `model_card`; review depth: `content_reviewed`; reviewed: 2026-10-13
+- Source revision: `8af2496eb63c7fa66d7d234e1f62629380030eb4`
+- Note: Card declares Apache-2.0, 25-slot capacity and CE+Brier training. Card prose T=1.0716 differs from the shipped per-K artifact and current evaluation T≈1.4265; do not assign its calibration claims to every serving path.
+
+<a id="verdict-calibrator"></a>
+## Verdict shipped per-K calibration artifact
+
+- Source: https://huggingface.co/heman10x/rlcd-modernbert-151m/blob/8af2496eb63c7fa66d7d234e1f62629380030eb4/calibrator.json
+- Kind: `repository`; review depth: `content_reviewed`; reviewed: 2026-10-13
+- Source revision: `8af2496eb63c7fa66d7d234e1f62629380030eb4`
+- Note: Global T=2.8039; per-K values include K=5 T=3.0560, with K including abstention. Fitting provenance is author supplied; artifact bytes read but weight bytes not verified.
+
+<a id="verdict-coreml"></a>
+## Verdict Core ML conversion and rejected quantization
+
+- Source: https://huggingface.co/FluidInference/verdict-coreml/blob/835208c443699f1f95c4bed1b177dc916300cffe/README.md
+- Kind: `model_card`; review depth: `content_reviewed`; reviewed: 2026-10-13
+- Source revision: `835208c443699f1f95c4bed1b177dc916300cffe`
+- Note: Converter report: FP16 L128/L512, 24 substantive candidates plus abstention. LUT8 failed its 99/100 agreement gate (96/100, four abstention flips) and is not included as a validated package. Published Index-era identity not authenticated against current release.
+
+<a id="kev-current"></a>
+## Kev current serving and source-watch review
+
+- Source: https://github.com/jaredpalmer/kev/blob/85ccf56a0afb952323c621055b02876e8498d60c/README.md
+- Kind: `repository`; review depth: `content_reviewed`; reviewed: 2026-10-13
+- Source revision: `85ccf56a0afb952323c621055b02876e8498d60c`
+- Note: October 9 README changes add isolated accelerator probes, explicit device fail-closed behavior and MLX handling; latest October 12 commit changes Modal concurrency. These are runtime/serving changes, not new weight or calibration results. Historical Kev evidence retained.
+
+<a id="clm-current"></a>
+## CLM citation-only source-watch review
+
+- Source: https://github.com/Contrastive-LM/CLM/blob/d5f9ef0fd9bde185df0ceaad4f4ecc6cfe8c34f6/README.md
+- Kind: `repository`; review depth: `content_reviewed`; reviewed: 2026-10-13
+- Source revision: `d5f9ef0fd9bde185df0ceaad4f4ecc6cfe8c34f6`
+- Note: Compared README at bb42c6c5bf914fd449bed2f6ca65be80602cb1f7 with d5f9ef0fd9bde185df0ceaad4f4ecc6cfe8c34f6: only BibTeX title shortened. No new result, weights or calibration inferred.
+
+<a id="gliner-runtime-current"></a>
+## GLiNER2 runtime compatibility review
+
+- Source: https://github.com/fastino-ai/GLiNER2/blob/b86d35c02f2c1a4d9840ea50197bd1b6d13b031e/README.md
+- Kind: `repository`; review depth: `content_reviewed`; reviewed: 2026-10-13
+- Source revision: `b86d35c02f2c1a4d9840ea50197bd1b6d13b031e`
+- Note: README/history reviewed: Transformers 5 compatibility/dependency caps and DisentangledFlash packed runtime documentation. Schema-extraction loader support changes interface/compatibility; controlled quality or end-to-end speed gain not established here.
+
+<a id="gliner-decide-current"></a>
+## GLiNER2.5-Decide-1B current compatibility metadata
+
+- Source: https://huggingface.co/fastino/GLiNER2.5-Decide-1B/blob/67af949e17bebd20f05fe020a971079889e7a462/README.md
+- Kind: `model_card`; review depth: `content_reviewed`; reviewed: 2026-10-13
+- Source revision: `67af949e17bebd20f05fe020a971079889e7a462`
+- Note: Compared Hub trees 688cd7ba8917a0855ad3ce929cba5a9998932e79 → 67af949e17bebd20f05fe020a971079889e7a462: README/config change; model.safetensors LFS oid remains 02c567d791aed26550d300064c7f0c0094fd65291503c65969b45b30786e33b3 (4755208228 bytes), tokenizer blobs unchanged. This is repository metadata comparison, not local weight-byte hash verification or a retrain/performance claim.
 

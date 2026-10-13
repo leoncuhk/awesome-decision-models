@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "reviewed_on": "2026-10-11",
+  "reviewed_on": "2026-10-13",
   "records": [
     {
       "id": "E01",
@@ -620,6 +620,671 @@
         "vision_protocol": "https://github.com/strands-labs/strands-decider/blob/0ac22a97e584f3ccf87cc9b8cc5fdbad57cdf534/docs/vision.md",
         "raw_outputs": "Linked author runs not independently audited",
         "weight_hash": null
+      },
+      "reproduced_here": false
+    },
+    {
+      "id": "E12",
+      "title": "Decision 3.0: internal Index and device timing are bounded author reports",
+      "model_ids": [
+        "decision3"
+      ],
+      "source_ids": [
+        "decision3-d3",
+        "decision3-runtime",
+        "decision-index-current"
+      ],
+      "evidence_type": "author_reported",
+      "reviewed_on": "2026-10-13",
+      "report_date": null,
+      "model_revision": "093cffbaa7be6f5dfe14252ae7e80c396c06dbd9",
+      "protocol": {
+        "task": "d3 text Decision Index 0.3.1 and vision board 0.3.1; separate text/image/10-second-video timing workloads",
+        "test_unit": "Card does not provide all internal/private item counts or raw paired outputs; timing workload counts not fully specified",
+        "split": "Public, same-skill/new-domain text and public/private vision components; complete private splits inaccessible",
+        "reference": "Index composite aggregates, not raw classification accuracy; four visual datasets marked approximate rebuild (CharXiv, InfographicVQA, Mind2Web, KIE)",
+        "training": "Released d3 v3.1.0; public training-overlap/decontamination/calibration artifacts not established",
+        "measurement": "Internal author evaluation; competitors imported from text board 2026-10-10 and vision board 2026-10-09. Timings are medians per input type, not end-to-end P95",
+        "hardware": "One AMD Instinct MI325X, one request at a time; reviewed runtime BF16 backbone / FP32 readout. Full preprocessing/network/queue/retry cost not established"
+      },
+      "metrics": [
+        {
+          "label": "d3 internal text Index 0.3.1",
+          "value": 64.7,
+          "unit": "index_points"
+        },
+        {
+          "label": "d3 internal vision Index 0.3.1",
+          "value": 71.6,
+          "unit": "index_points"
+        },
+        {
+          "label": "d3 text request median (ms)",
+          "value": 55,
+          "unit": "milliseconds"
+        },
+        {
+          "label": "d3 one-image request median (ms)",
+          "value": 273,
+          "unit": "milliseconds"
+        },
+        {
+          "label": "d3 10-second-video request median (ms)",
+          "value": 553,
+          "unit": "milliseconds"
+        }
+      ],
+      "conclusion": "This establishes a reported release benchmark and hardware-specific timing scope, not current first place or a calibrated production risk.",
+      "caveats": [
+        "Live page title is 0.3.2; complete dynamic ranks and exact current models were not audited. No current leader is asserted.",
+        "Imported competitor scores are not a same-hardware, same-day rerun.",
+        "Approximate visual rebuilds and private components prevent treating every row as the identical official protocol.",
+        "Training overlap remains unknown; absence of an audit is not evidence that contamination occurred."
+      ],
+      "artifacts": {
+        "protocol": "Pinned v3.1.0 card at 093cffbaa7be6f5dfe14252ae7e80c396c06dbd9",
+        "raw_outputs": "Complete internal/private raw run archive not audited",
+        "weight_identity": "Author-supplied package manifest; binary bytes unverified"
+      },
+      "reproduced_here": false
+    },
+    {
+      "id": "E13",
+      "title": "Decision 3.0: the full public kit is not the internal composite or JevBench",
+      "model_ids": [
+        "decision3"
+      ],
+      "source_ids": [
+        "decision3-d3",
+        "decision3-d3-flash",
+        "decision3-d3-mini",
+        "decision3-d3-nano",
+        "decision3-d3-lite",
+        "decision3-d3-edge"
+      ],
+      "evidence_type": "author_reported",
+      "reviewed_on": "2026-10-13",
+      "report_date": null,
+      "model_revision": null,
+      "protocol": {
+        "task": "Official Decision Index 0.3 public-suite kit, scored on each released Decision 3.0 checkpoint",
+        "test_unit": "140178 public requests per checkpoint; author reports all answered, zero unsupported. Requests are not 140178 independent task families",
+        "split": "Public suite only; no private/same-skill/new-domain composite imported",
+        "reference": "Public kit references and chance-corrected aggregation; not raw hard-label accuracy",
+        "training": "Six v3.1.0 checkpoints; train/test overlap and source-domain exclusion not established publicly",
+        "measurement": "Card headline public-only index values at the pinned revisions; separate from rounded public columns in internal 0.3.1 tables",
+        "hardware": "No common hardware or complete serving cost established for comparisons; no speed ranking imported"
+      },
+      "metrics": [
+        {
+          "label": "d3 public-suite index",
+          "value": 65.45,
+          "unit": "index_points"
+        },
+        {
+          "label": "d3-flash public-suite index",
+          "value": 57.79,
+          "unit": "index_points"
+        },
+        {
+          "label": "d3-mini public-suite index",
+          "value": 54.9,
+          "unit": "index_points"
+        },
+        {
+          "label": "d3-nano public-suite index",
+          "value": 42.22,
+          "unit": "index_points"
+        },
+        {
+          "label": "d3-lite public-suite index",
+          "value": 36.93,
+          "unit": "index_points"
+        },
+        {
+          "label": "d3-edge public-suite index",
+          "value": 28.82,
+          "unit": "index_points"
+        }
+      ],
+      "conclusion": "The six public-kit reports are useful release records under one stated suite; they do not transfer to private composite scores or the 231-task exact-label JevBench.",
+      "caveats": [
+        "The report is from the model team, not an independent reproduction.",
+        "Exact raw outputs, task clustering, uncertainty and failure accounting were not fully audited here.",
+        "Public accessibility does not establish training disjointness."
+      ],
+      "artifacts": {
+        "protocol": "Six pinned cards; official-kit claim reviewed",
+        "raw_outputs": "No model run or complete output audit here",
+        "evaluated_version": "Cards say released weights; six repository pins and manifest identities recorded separately"
+      },
+      "reproduced_here": false
+    },
+    {
+      "id": "E14",
+      "title": "Decision 3.0 video: sampled-frame QA does not validate audio or streaming reliability",
+      "model_ids": [
+        "decision3"
+      ],
+      "source_ids": [
+        "decision3-d3",
+        "decision3-runtime"
+      ],
+      "evidence_type": "author_reported",
+      "reviewed_on": "2026-10-13",
+      "report_date": null,
+      "model_revision": "093cffbaa7be6f5dfe14252ae7e80c396c06dbd9",
+      "protocol": {
+        "task": "Perception Test validation multiple-choice video QA",
+        "test_unit": "All 19140 questions, reported by the card",
+        "split": "Validation split; no independent blind final-test run here",
+        "reference": "Three choices per question, top-1 accuracy; chance 1/3",
+        "training": "d3 v3.1.0; overlap with training data unknown",
+        "measurement": "Default 2 fps, minimum 4 / maximum 32 frames spread across the video, up to about 0.2 MP per frame; shared frames visible to each question",
+        "hardware": "Accuracy statement; video median in E12 is a separate MI325X workload"
+      },
+      "metrics": [
+        {
+          "label": "d3 Perception Test validation top-1 accuracy",
+          "value": 0.774,
+          "unit": "fraction"
+        }
+      ],
+      "conclusion": "This is an author-reported sampled-visual QA result; it does not validate audio understanding, live alerts or missed short events.",
+      "caveats": [
+        "Sparse sampling can omit brief events; long videos still use at most 32 sampled frames.",
+        "Multiple questions about shared videos require grouped uncertainty, not an independent-question assumption.",
+        "No audio evaluation, continuous-stream P95 or real-world monitoring failure rate was established."
+      ],
+      "artifacts": {
+        "protocol": "Pinned card and video sampling code read",
+        "raw_outputs": "Not independently inspected",
+        "weights": "No download or run here"
+      },
+      "reproduced_here": false
+    },
+    {
+      "id": "E15",
+      "title": "Decision 3.0 on Apple: conversion and public-harness evidence",
+      "model_ids": [
+        "decision3",
+        "fluiduse"
+      ],
+      "source_ids": [
+        "decision3-apple",
+        "decision3-coreml",
+        "fluiduse"
+      ],
+      "evidence_type": "author_reported",
+      "reviewed_on": "2026-10-13",
+      "report_date": "2026-10-11",
+      "model_revision": null,
+      "protocol": {
+        "task": "Core ML lite/nano/mini versus upstream PyTorch; separate JevBench and typed-decisions tasks",
+        "test_unit": "JevBench 231 public tasks; typed-decisions TEST 2000 questions",
+        "split": "Public JevBench suite and typed-decisions TEST; not official sealed Decision Index ranking",
+        "reference": "Exact-label JevBench accuracy; typed-decisions gold labels with multiple annotators and disagreement",
+        "training": "Converted upstream releases; full evaluated upstream/package hashes for the article table not independently tied to binary bytes here",
+        "measurement": "Unchanged System One adapter/scorer reported; one request at a time, local HTTP round trip included. Median latency, not P95. Displayed percentages are rounded reports",
+        "hardware": "MacBook Pro M5 Pro 24 GB GPU; PyTorch bf16 reference DeltaNet path versus Core ML text fp16 compute/int8 weights, FP32 vision/readout. These optimizations and the Mac reference backend are part of the comparison"
+      },
+      "metrics": [
+        {
+          "label": "d3-lite JevBench PyTorch accuracy",
+          "value": 0.732,
+          "unit": "fraction"
+        },
+        {
+          "label": "d3-lite JevBench Core ML accuracy",
+          "value": 0.74,
+          "unit": "fraction"
+        },
+        {
+          "label": "d3-lite typed-decisions PyTorch accuracy",
+          "value": 0.516,
+          "unit": "fraction"
+        },
+        {
+          "label": "d3-lite typed-decisions Core ML accuracy",
+          "value": 0.516,
+          "unit": "fraction"
+        },
+        {
+          "label": "d3-lite JevBench median PyTorch request (ms)",
+          "value": 204,
+          "unit": "milliseconds"
+        },
+        {
+          "label": "d3-lite JevBench median Core ML request (ms)",
+          "value": 53,
+          "unit": "milliseconds"
+        },
+        {
+          "label": "d3-nano JevBench PyTorch accuracy",
+          "value": 0.753,
+          "unit": "fraction"
+        },
+        {
+          "label": "d3-nano JevBench Core ML accuracy",
+          "value": 0.758,
+          "unit": "fraction"
+        },
+        {
+          "label": "d3-nano typed-decisions PyTorch accuracy",
+          "value": 0.627,
+          "unit": "fraction"
+        },
+        {
+          "label": "d3-nano typed-decisions Core ML accuracy",
+          "value": 0.627,
+          "unit": "fraction"
+        },
+        {
+          "label": "d3-nano JevBench median PyTorch request (ms)",
+          "value": 173,
+          "unit": "milliseconds"
+        },
+        {
+          "label": "d3-nano JevBench median Core ML request (ms)",
+          "value": 69,
+          "unit": "milliseconds"
+        },
+        {
+          "label": "d3-mini JevBench PyTorch accuracy",
+          "value": 0.818,
+          "unit": "fraction"
+        },
+        {
+          "label": "d3-mini JevBench Core ML accuracy",
+          "value": 0.818,
+          "unit": "fraction"
+        },
+        {
+          "label": "d3-mini typed-decisions PyTorch accuracy",
+          "value": 0.736,
+          "unit": "fraction"
+        },
+        {
+          "label": "d3-mini typed-decisions Core ML accuracy",
+          "value": 0.739,
+          "unit": "fraction"
+        },
+        {
+          "label": "d3-mini JevBench median PyTorch request (ms)",
+          "value": 438,
+          "unit": "milliseconds"
+        },
+        {
+          "label": "d3-mini JevBench median Core ML request (ms)",
+          "value": 169,
+          "unit": "milliseconds"
+        }
+      ],
+      "conclusion": "A concrete Apple deployment candidate with converter-reported quality and latency; the same-device speedup does not predict CUDA speed or production correctness.",
+      "caveats": [
+        "Alex Weng / Fluid Inference authored the conversion and received early model access; label retained as author_reported, not independent.",
+        "Small parity suites can contain near-tie flips; exact universal equivalence is not established.",
+        "37 JevBench tasks exceed 1536 tokens, maximum 3970; the article reports a 4096-token graph. Inspect each artifact and reject overlength inputs.",
+        "Article/Hub/Swift snapshots differ in names, sizes and supported paths; later flash/Mario prose is not evidence that the pinned lite/nano/mini Hub package contains flash.",
+        "No cold-start P95, concurrent-load benchmark, full energy/cost accounting or model reproduction here."
+      ],
+      "artifacts": {
+        "protocol": "October 11 live article plus fixed Core ML/Swift source revisions",
+        "raw_outputs": "Converter-run results reviewed, not rerun",
+        "source_revision": "d278e17df85e39e8c21bb64a467da81c39576fcd",
+        "converted_package_revision": "62b6a996e15342bdd3d608030d8f445f11a52367"
+      },
+      "reproduced_here": false
+    },
+    {
+      "id": "E16",
+      "title": "Decision 3.0 PR triage: throughput and real-label agreement are different tests",
+      "model_ids": [
+        "decision3",
+        "fluiduse"
+      ],
+      "source_ids": [
+        "decision3-apple"
+      ],
+      "evidence_type": "author_reported",
+      "reviewed_on": "2026-10-13",
+      "report_date": "2026-10-11",
+      "model_revision": null,
+      "protocol": {
+        "task": "PR workgroup (seven choices) and change-type triage",
+        "test_unit": "1000 sample PRs for d3-lite throughput; separate real labeled PR sets for d3-mini: 168 workgroups / 182 types",
+        "split": "Business-label sample provenance and source/time separation not fully specified",
+        "reference": "Real vLLM-SR maintainer labels for agreement; 1000-sample throughput has no imported correctness denominator",
+        "training": "Public model family; use of PR-domain training data not established",
+        "measurement": "Title, start of description and changed files; two decisions per sample PR. Real-label agreement is separate from timed demo",
+        "hardware": "M5 Pro local Core ML deployment, as reported by converter article; complete queue/review/correction cost absent"
+      },
+      "metrics": [
+        {
+          "label": "d3-lite sample PR throughput time (seconds / PR, two questions)",
+          "value": 0.12,
+          "unit": "seconds_per_pr"
+        },
+        {
+          "label": "d3-mini workgroup label agreement",
+          "value": 0.7976190476190477,
+          "unit": "fraction",
+          "numerator": 134,
+          "denominator": 168
+        },
+        {
+          "label": "d3-mini change-type label agreement",
+          "value": 0.8406593406593407,
+          "unit": "fraction",
+          "numerator": 153,
+          "denominator": 182
+        }
+      ],
+      "conclusion": "The deployment demo motivates a shadow triage test; it cannot turn throughput into an accuracy or workflow-success claim.",
+      "caveats": [
+        "The timing and label-agreement tests use different model sizes and populations.",
+        "Maintainer label agreement is a useful reference but not independently observed downstream business success.",
+        "No paired uncertainty or critical misrouting/error-cost analysis supplied."
+      ],
+      "artifacts": {
+        "protocol": "Article PR triage section",
+        "raw_outputs": "PR IDs, predictions and independently adjudicated outcomes not fully audited",
+        "tested_binary": "Exact conversion/evaluated weight hashes not established for these demos"
+      },
+      "reproduced_here": false
+    },
+    {
+      "id": "E17",
+      "title": "WebMCP application test: small differences and preprocessing errors",
+      "model_ids": [
+        "decision3",
+        "ms-decision",
+        "jev",
+        "openai-decisions"
+      ],
+      "source_ids": [
+        "webmcp-test",
+        "jev-ai-about"
+      ],
+      "evidence_type": "third_party_reported",
+      "reviewed_on": "2026-10-13",
+      "report_date": null,
+      "model_revision": null,
+      "protocol": {
+        "task": "Five Schema Usage page actions with month/type/bucket details; off-topic inputs should cause no action",
+        "test_unit": "75 frozen test questions, roughly half English / half Spanish; 75 development and 20 original cases separately described",
+        "split": "Evaluator-authored labels; Nano adjusted variant chosen after looking at test, so that row is selection-biased",
+        "reference": "Full action and all required details correct; shared extraction/pre-routing rules. Three shared failures bypassed the compared models",
+        "training": "Cloud systems treated as untuned for this test; checkpoint/serving revisions not frozen for all compared models",
+        "measurement": "Baseline rule-on test counts below. Removing the term rule is a separate post-test intervention. Three common option permutations and paired McNemar comparisons reported",
+        "hardware": "Local d3 Python on M5 Pro; Microsoft via decisions-api.dev (report says OpenRouter upstream); Jev via jev-ai.pro and decisions-api.dev. No direct official TypeSafe timing or cost comparison established"
+      },
+      "metrics": [
+        {
+          "label": "Microsoft-Decision-1 rule-on full-call correctness",
+          "value": 0.9466666666666667,
+          "unit": "fraction",
+          "numerator": 71,
+          "denominator": 75
+        },
+        {
+          "label": "d3-flash rule-on full-call correctness",
+          "value": 0.9333333333333333,
+          "unit": "fraction",
+          "numerator": 70,
+          "denominator": 75
+        },
+        {
+          "label": "d3-mini rule-on full-call correctness (technical discussion)",
+          "value": 0.9333333333333333,
+          "unit": "fraction",
+          "numerator": 70,
+          "denominator": 75
+        },
+        {
+          "label": "Jev rule-on full-call correctness",
+          "value": 0.92,
+          "unit": "fraction",
+          "numerator": 69,
+          "denominator": 75
+        }
+      ],
+      "conclusion": "A useful application-level failure analysis, not a clear statistical winner among Microsoft, d3 flash/mini and Jev.",
+      "caveats": [
+        "No pooled ranking with Index, JevBench or typed-decisions is justified.",
+        "Three errors came from a term-matching pre-rule: the model never saw those questions. Test the rule layer independently.",
+        "Post-test Nano selection and rule-removal results cannot be called untouched hold-out improvements.",
+        "jev-ai.pro is an independent platform; its upstream connection is self-reported. Microsoft was tested only through an intermediary. Reported latency/pricing belongs to those paths.",
+        "Missing immutable evaluated versions and a complete output audit limit reproduction and generalization."
+      ],
+      "artifacts": {
+        "protocol": "Original report and technical appendix",
+        "raw_outputs": "Report describes stored probabilities; complete frozen output/code archive not audited here",
+        "version": "Model names reported; exact evaluated weight/API revisions unknown"
+      },
+      "reproduced_here": false
+    },
+    {
+      "id": "E18",
+      "title": "Intern-Decision: exact-distribution calibration pilot, not hard-label accuracy",
+      "model_ids": [
+        "intern-decision",
+        "jev"
+      ],
+      "source_ids": [
+        "intern-repo",
+        "intern-calibration",
+        "intern-evaluation",
+        "intern-4b"
+      ],
+      "evidence_type": "author_reported",
+      "reviewed_on": "2026-10-13",
+      "report_date": null,
+      "model_revision": "3572c8a68b5df5dafe02d0e093989ba8ec0183bc",
+      "protocol": {
+        "task": "Known-distribution-pilot-v1: predict probabilities of random outcomes under stated mechanisms",
+        "test_unit": "96 cases, six categories, 24 families and 48 paired settings; all settings report 96 valid predictions",
+        "split": "Evaluation-only pilot; author says no fit/selection on its references. 4B temperature fitted separately; private calibration/validation records not released",
+        "reference": "Exact rational outcome distributions, separate from inference inputs; not sampled hard labels",
+        "training": "Final Intern-Decision-4B; XTuner backend fixed T=1.992418; Jev 1.13.0 comparator. Evaluated binary/hash not independently authenticated against current HF weights",
+        "measurement": "Expected multiclass Brier (including irreducible randomness); expected ECE with 10 equal-width bins, returned confidence or max(P) fallback. Pooled ECE recomputed, not mean category ECE",
+        "hardware": "Probability metrics only; RTX4090 latency table and HF/Core ML timings are different protocols"
+      },
+      "metrics": [
+        {
+          "label": "4B uncalibrated expected Brier",
+          "value": 0.628,
+          "unit": "brier"
+        },
+        {
+          "label": "4B calibrated expected Brier",
+          "value": 0.55,
+          "unit": "brier"
+        },
+        {
+          "label": "4B uncalibrated expected ECE",
+          "value": 0.213,
+          "unit": "fraction"
+        },
+        {
+          "label": "4B calibrated expected ECE",
+          "value": 0.089,
+          "unit": "fraction"
+        },
+        {
+          "label": "Jev 1.13.0 expected Brier on this pilot",
+          "value": 0.595,
+          "unit": "brier"
+        },
+        {
+          "label": "Jev 1.13.0 expected ECE on this pilot",
+          "value": 0.13,
+          "unit": "fraction"
+        }
+      ],
+      "conclusion": "The within-model calibration contrast is useful on these exact-reference problems; it establishes neither an overall model winner nor production risk control.",
+      "caveats": [
+        "Author-run small diagnostic; paired variants are not 96 independent observations.",
+        "NLL-fitting records are private and full training-overlap audit unavailable.",
+        "Backend-specific calibration must be matched to the actual inference path; HF and XTuner numerics need separate validation.",
+        "Exact-distribution ECE/Brier must not be merged with hard-label suite scores or interpreted as future realized-outcome accuracy."
+      ],
+      "artifacts": {
+        "protocol": "Pinned repository, pilot documentation and public reference/scorer paths read",
+        "raw_outputs": "Complete replay not performed here",
+        "temperature": "Author-provided preset; private fitting/validation records unavailable"
+      },
+      "reproduced_here": false
+    },
+    {
+      "id": "E19",
+      "title": "Verdict deployment: evaluator calibration is not shipped serving calibration",
+      "model_ids": [
+        "verdict",
+        "fluiduse"
+      ],
+      "source_ids": [
+        "fluiduse-bench",
+        "verdict-engine",
+        "verdict-calibrator",
+        "verdict-coreml"
+      ],
+      "evidence_type": "third_party_reported",
+      "reviewed_on": "2026-10-13",
+      "report_date": null,
+      "model_revision": null,
+      "protocol": {
+        "task": "Verdict Core ML on author-held-out Banking77 / CLINC-OOS protocol, then actual answer serving path",
+        "test_unit": "1000 test requests; 500 calibration separate; full report also includes 1000 challenge-slice records",
+        "split": "Author public cal/test files at pinned Verdict commit; converter refit single T on calibration only",
+        "reference": "Same held-out labels; evaluator raw rendering differs from hypothesis-style answer renderer and abstention placement",
+        "training": "Pinned trained 151M checkpoint; conversion reporter states identity with author checkpoint, not locally verified here",
+        "measurement": "Compare author-protocol raw logits with separately fitted single T against shipped answer() per-K calibration; same answer logits with T=1 is an ablation",
+        "hardware": "FluidUse Swift Core ML FP16 on Apple M5 Pro; no pooled latency claim with author WASM proxy"
+      },
+      "metrics": [
+        {
+          "label": "Core ML author-protocol top-1 accuracy",
+          "value": 0.95,
+          "unit": "fraction"
+        },
+        {
+          "label": "Core ML author-protocol ECE",
+          "value": 0.0338,
+          "unit": "fraction"
+        },
+        {
+          "label": "Shipped answer() top-1 accuracy",
+          "value": 0.931,
+          "unit": "fraction"
+        },
+        {
+          "label": "Shipped answer() ECE",
+          "value": 0.212,
+          "unit": "fraction"
+        },
+        {
+          "label": "Same answer logits with T=1 ECE",
+          "value": 0.019,
+          "unit": "fraction"
+        },
+        {
+          "label": "Shipped answer() NLL",
+          "value": 0.395,
+          "unit": "nll"
+        },
+        {
+          "label": "Shipped answer() Brier",
+          "value": 0.167,
+          "unit": "brier"
+        },
+        {
+          "label": "Raw-logit reference decision agreement",
+          "value": 0.998,
+          "unit": "fraction",
+          "numerator": 998,
+          "denominator": 1000
+        }
+      ],
+      "conclusion": "Converter-reported findings show why deployment acceptance must test the actual renderer and calibrator, even when ported logits are close.",
+      "caveats": [
+        "Independent of the upstream model authors but reported by the port maintainer; not a detached audit, and not reproduced_here.",
+        "The open-domain shipped calibrator is under-confident on this in-domain test; this does not establish that globally disabling calibration is preferable.",
+        "Raw-evaluator 95% is not the answer-path accuracy; rendering and calibrator differences must remain explicit.",
+        "Converter LUT8 failed its agreement gate; FP16 parity does not certify quantized abstention behavior."
+      ],
+      "artifacts": {
+        "protocol": "Fixed FluidUse OfficialBenchmarks.md; author code and calibrator text independently read",
+        "raw_outputs": "Reporter describes saved artifacts and row agreement; complete archive not rerun/audited here",
+        "upstream_revision": "30f15564821626ca5c1ad5b2638c4eb7078787dd",
+        "model_repository_revision": "8af2496eb63c7fa66d7d234e1f62629380030eb4",
+        "conversion_revision": "835208c443699f1f95c4bed1b177dc916300cffe"
+      },
+      "reproduced_here": false
+    },
+    {
+      "id": "E20",
+      "title": "Verdict abstention: preserve hard-negative and synonym failures",
+      "model_ids": [
+        "verdict"
+      ],
+      "source_ids": [
+        "verdict-repo",
+        "verdict-abstention"
+      ],
+      "evidence_type": "author_reported",
+      "reviewed_on": "2026-10-13",
+      "report_date": null,
+      "model_revision": "30f15564821626ca5c1ad5b2638c4eb7078787dd",
+      "protocol": {
+        "task": "Missing-correct-option abstention, standard versus hard-negative K=9 / synonym / combined conditions",
+        "test_unit": "200 cases per condition; paired perturbations, not 800 independent cases",
+        "split": "Author diagnostic report; exact independence from training/calibration not fully audited",
+        "reference": "Correct action is abstain because the valid intent is absent from the candidate menu",
+        "training": "Verdict v2 reported model; evaluated tensor hash not independently tied to current HF binary here",
+        "measurement": "Abstention recall; raw JSON reports true abstentions and false negatives, zero false positives in these all-abstain slices",
+        "hardware": "Quality failure analysis only; no hardware-performance conclusion"
+      },
+      "metrics": [
+        {
+          "label": "Standard missing-option abstention recall",
+          "value": 0.755,
+          "unit": "fraction",
+          "numerator": 151,
+          "denominator": 200
+        },
+        {
+          "label": "Hard-negative K=9 abstention recall",
+          "value": 0.18,
+          "unit": "fraction",
+          "numerator": 36,
+          "denominator": 200
+        },
+        {
+          "label": "Synonym phrasing abstention recall",
+          "value": 0.235,
+          "unit": "fraction",
+          "numerator": 47,
+          "denominator": 200
+        },
+        {
+          "label": "Combined hard negatives and synonym abstention recall",
+          "value": 0.1,
+          "unit": "fraction",
+          "numerator": 20,
+          "denominator": 200
+        }
+      ],
+      "conclusion": "An explicit abstention candidate can fail under plausible schema perturbations; production acceptance needs more than a high distant-OOS score.",
+      "caveats": [
+        "Recall on an all-abstain slice does not measure precision on realistic mixed traffic.",
+        "Variants share base examples; report family-aware paired uncertainty.",
+        "Preserve this negative result separately from author marketing about guaranteed calibration/abstention."
+      ],
+      "artifacts": {
+        "protocol": "Pinned raw exp_e5 report read",
+        "raw_outputs": "Aggregate counts public; per-example inference not replayed here",
+        "upstream_revision": "30f15564821626ca5c1ad5b2638c4eb7078787dd"
       },
       "reproduced_here": false
     }

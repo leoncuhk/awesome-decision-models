@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "reviewed_on": "2026-10-11",
+  "reviewed_on": "2026-10-13",
   "scope": "Evidence-backed models, methods and evaluation for bounded decisions in AI systems.",
   "sources": [
     {
@@ -18,20 +18,20 @@
       "title": "TypeSafe primitives",
       "url": "https://docs.typesafe.ai/primitives",
       "kind": "official_docs",
-      "reviewed_on": "2026-09-25",
+      "reviewed_on": "2026-10-13",
       "review_depth": "content_reviewed",
       "source_revision": null,
-      "review_note": ""
+      "review_note": "Current body reviewed; raw HTML SHA-256 382541e3f343c9e543f3654e1f58bb3e02e893266e684bfc1cc262b19d5184ac. No authenticated previous-body diff: dynamic HTML hash changes do not identify the semantic change. Documentation still defines independent questions, Choice/Score distribution-derived confidence and Noul P(yes) without a separate confidence. Threshold examples are guidance, not validated business calibration or risk bounds."
     },
     {
       "id": "jev-confidence",
       "title": "TypeSafe confidence semantics",
       "url": "https://docs.typesafe.ai/confidence",
       "kind": "official_docs",
-      "reviewed_on": "2026-10-06",
+      "reviewed_on": "2026-10-13",
       "review_depth": "content_reviewed",
       "source_revision": null,
-      "review_note": "Current formulas and Noul field semantics reviewed. Distribution concentration is not a calibrated operational success rate."
+      "review_note": "Current body reviewed; raw HTML SHA-256 37a170671fae8d21c2b6fdcd9f07268e37db3934681e448f7c3321900f4b35a7. No authenticated previous-body diff: dynamic HTML hash changes do not identify the semantic change. Documentation still defines independent questions, Choice/Score distribution-derived confidence and Noul P(yes) without a separate confidence. Threshold examples are guidance, not validated business calibration or risk bounds."
     },
     {
       "id": "laya-family",
@@ -812,6 +812,406 @@
       "review_depth": "content_reviewed",
       "source_revision": "0ac22a97e584f3ccf87cc9b8cc5fdbad57cdf534",
       "review_note": "Inventory separates training, held-out short calibration/evaluation and dev splits; several dataset revisions remain unpinned. License declarations are source claims."
+    },
+    {
+      "id": "decision3-d3",
+      "title": "Decision 3.0 d3 v3.1.0 model card",
+      "url": "https://huggingface.co/vllm-sr/d3/blob/093cffbaa7be6f5dfe14252ae7e80c396c06dbd9/README.md",
+      "kind": "model_card",
+      "reviewed_on": "2026-10-13",
+      "review_depth": "content_reviewed",
+      "source_revision": "093cffbaa7be6f5dfe14252ae7e80c396c06dbd9",
+      "review_note": "Card, MODEL_MANIFEST.json, config.json, modeling_d3.py, d3_runtime.py and repository history read at this revision. October 12 commits describe server/runtime/docs changes after the October 11 v3.1.0 release; a repository revision is not a new capability result. Cards declare text/image/video inputs and Apache-2.0. History: https://huggingface.co/vllm-sr/d3/commits/093cffbaa7be6f5dfe14252ae7e80c396c06dbd9."
+    },
+    {
+      "id": "decision3-d3-manifest",
+      "title": "d3 package manifest",
+      "url": "https://huggingface.co/vllm-sr/d3/blob/093cffbaa7be6f5dfe14252ae7e80c396c06dbd9/MODEL_MANIFEST.json",
+      "kind": "repository",
+      "reviewed_on": "2026-10-13",
+      "review_depth": "content_reviewed",
+      "source_revision": "093cffbaa7be6f5dfe14252ae7e80c396c06dbd9",
+      "review_note": "Author-supplied package model_sha256: 0e439bebbbbf80d9e1b601c56c55a6fc3a6502b4e396cbbb5f3c3f3acc1d607b; built_utc: 2026-10-11T03:30:34+00:00; loaded parameters including readout: 26086635760. Text/vision/readout counts and base revision are declared by the manifest, not independently counted from tensor bytes. Downloaded modeling_d3.py and d3_runtime.py text hashes match the manifest; no weight bytes were downloaded or hashed."
+    },
+    {
+      "id": "decision3-d3-flash",
+      "title": "Decision 3.0 d3-flash v3.1.0 model card",
+      "url": "https://huggingface.co/vllm-sr/d3-flash/blob/f6075bff3c0f7d5704e353d0fb2ebf94888d1691/README.md",
+      "kind": "model_card",
+      "reviewed_on": "2026-10-13",
+      "review_depth": "content_reviewed",
+      "source_revision": "f6075bff3c0f7d5704e353d0fb2ebf94888d1691",
+      "review_note": "Card, MODEL_MANIFEST.json, config.json, modeling_d3.py, d3_runtime.py and repository history read at this revision. October 12 commits describe server/runtime/docs changes after the October 11 v3.1.0 release; a repository revision is not a new capability result. Cards declare text/image/video inputs and Apache-2.0. History: https://huggingface.co/vllm-sr/d3-flash/commits/f6075bff3c0f7d5704e353d0fb2ebf94888d1691."
+    },
+    {
+      "id": "decision3-d3-flash-manifest",
+      "title": "d3-flash package manifest",
+      "url": "https://huggingface.co/vllm-sr/d3-flash/blob/f6075bff3c0f7d5704e353d0fb2ebf94888d1691/MODEL_MANIFEST.json",
+      "kind": "repository",
+      "reviewed_on": "2026-10-13",
+      "review_depth": "content_reviewed",
+      "source_revision": "f6075bff3c0f7d5704e353d0fb2ebf94888d1691",
+      "review_note": "Author-supplied package model_sha256: 74b71d370f3d9e5731c603dafcb8af4e9134fd2c769c89c5169b031a0418799b; built_utc: 2026-10-11T03:28:26+00:00; loaded parameters including readout: 8393739504. Text/vision/readout counts and base revision are declared by the manifest, not independently counted from tensor bytes. Downloaded modeling_d3.py and d3_runtime.py text hashes match the manifest; no weight bytes were downloaded or hashed."
+    },
+    {
+      "id": "decision3-d3-mini",
+      "title": "Decision 3.0 d3-mini v3.1.0 model card",
+      "url": "https://huggingface.co/vllm-sr/d3-mini/blob/0e78bbdbe3cf480ed1461c185c9e0c4fa9258011/README.md",
+      "kind": "model_card",
+      "reviewed_on": "2026-10-13",
+      "review_depth": "content_reviewed",
+      "source_revision": "0e78bbdbe3cf480ed1461c185c9e0c4fa9258011",
+      "review_note": "Card, MODEL_MANIFEST.json, config.json, modeling_d3.py, d3_runtime.py and repository history read at this revision. October 12 commits describe server/runtime/docs changes after the October 11 v3.1.0 release; a repository revision is not a new capability result. Cards declare text/image/video inputs and Apache-2.0. History: https://huggingface.co/vllm-sr/d3-mini/commits/0e78bbdbe3cf480ed1461c185c9e0c4fa9258011."
+    },
+    {
+      "id": "decision3-d3-mini-manifest",
+      "title": "d3-mini package manifest",
+      "url": "https://huggingface.co/vllm-sr/d3-mini/blob/0e78bbdbe3cf480ed1461c185c9e0c4fa9258011/MODEL_MANIFEST.json",
+      "kind": "repository",
+      "reviewed_on": "2026-10-13",
+      "review_depth": "content_reviewed",
+      "source_revision": "0e78bbdbe3cf480ed1461c185c9e0c4fa9258011",
+      "review_note": "Author-supplied package model_sha256: 9ac186bb30b30c129d7aae03d73932600424963bd4644c2041a9d7120f029af5; built_utc: 2026-10-11T03:27:45+00:00; loaded parameters including readout: 4539918336. Text/vision/readout counts and base revision are declared by the manifest, not independently counted from tensor bytes. Downloaded modeling_d3.py and d3_runtime.py text hashes match the manifest; no weight bytes were downloaded or hashed."
+    },
+    {
+      "id": "decision3-d3-nano",
+      "title": "Decision 3.0 d3-nano v3.1.0 model card",
+      "url": "https://huggingface.co/vllm-sr/d3-nano/blob/9d9b937f5f117f78c030ea7ba677c0b3d328ec58/README.md",
+      "kind": "model_card",
+      "reviewed_on": "2026-10-13",
+      "review_depth": "content_reviewed",
+      "source_revision": "9d9b937f5f117f78c030ea7ba677c0b3d328ec58",
+      "review_note": "Card, MODEL_MANIFEST.json, config.json, modeling_d3.py, d3_runtime.py and repository history read at this revision. October 12 commits describe server/runtime/docs changes after the October 11 v3.1.0 release; a repository revision is not a new capability result. Cards declare text/image/video inputs and Apache-2.0. History: https://huggingface.co/vllm-sr/d3-nano/commits/9d9b937f5f117f78c030ea7ba677c0b3d328ec58."
+    },
+    {
+      "id": "decision3-d3-nano-manifest",
+      "title": "d3-nano package manifest",
+      "url": "https://huggingface.co/vllm-sr/d3-nano/blob/9d9b937f5f117f78c030ea7ba677c0b3d328ec58/MODEL_MANIFEST.json",
+      "kind": "repository",
+      "reviewed_on": "2026-10-13",
+      "review_depth": "content_reviewed",
+      "source_revision": "9d9b937f5f117f78c030ea7ba677c0b3d328ec58",
+      "review_note": "Author-supplied package model_sha256: a2a6dce5e40298a43f904dfbffe799e09e675d964df7477683ee2bc9db04cdd8; built_utc: 2026-10-11T04:33:06+00:00; loaded parameters including readout: 2213763904. Text/vision/readout counts and base revision are declared by the manifest, not independently counted from tensor bytes. Downloaded modeling_d3.py and d3_runtime.py text hashes match the manifest; no weight bytes were downloaded or hashed."
+    },
+    {
+      "id": "decision3-d3-lite",
+      "title": "Decision 3.0 d3-lite v3.1.0 model card",
+      "url": "https://huggingface.co/vllm-sr/d3-lite/blob/3c49f5c0bd48a4b28e29b8ec1f38f56e199f3d61/README.md",
+      "kind": "model_card",
+      "reviewed_on": "2026-10-13",
+      "review_depth": "content_reviewed",
+      "source_revision": "3c49f5c0bd48a4b28e29b8ec1f38f56e199f3d61",
+      "review_note": "Card, MODEL_MANIFEST.json, config.json, modeling_d3.py, d3_runtime.py and repository history read at this revision. October 12 commits describe server/runtime/docs changes after the October 11 v3.1.0 release; a repository revision is not a new capability result. Cards declare text/image/video inputs and Apache-2.0. History: https://huggingface.co/vllm-sr/d3-lite/commits/3c49f5c0bd48a4b28e29b8ec1f38f56e199f3d61."
+    },
+    {
+      "id": "decision3-d3-lite-manifest",
+      "title": "d3-lite package manifest",
+      "url": "https://huggingface.co/vllm-sr/d3-lite/blob/3c49f5c0bd48a4b28e29b8ec1f38f56e199f3d61/MODEL_MANIFEST.json",
+      "kind": "repository",
+      "reviewed_on": "2026-10-13",
+      "review_depth": "content_reviewed",
+      "source_revision": "3c49f5c0bd48a4b28e29b8ec1f38f56e199f3d61",
+      "review_note": "Author-supplied package model_sha256: fda5cfc7bc9063fbb7cd40b50fa9a0963d83a4790a3d6a11a356833fd1171992; built_utc: 2026-10-11T03:45:52+00:00; loaded parameters including readout: 853247040. Text/vision/readout counts and base revision are declared by the manifest, not independently counted from tensor bytes. Downloaded modeling_d3.py and d3_runtime.py text hashes match the manifest; no weight bytes were downloaded or hashed."
+    },
+    {
+      "id": "decision3-d3-edge",
+      "title": "Decision 3.0 d3-edge v3.1.0 model card",
+      "url": "https://huggingface.co/vllm-sr/d3-edge/blob/20c745653400d191ecacd99c4eafc0c5900dc15e/README.md",
+      "kind": "model_card",
+      "reviewed_on": "2026-10-13",
+      "review_depth": "content_reviewed",
+      "source_revision": "20c745653400d191ecacd99c4eafc0c5900dc15e",
+      "review_note": "Card, MODEL_MANIFEST.json, config.json, modeling_d3.py, d3_runtime.py and repository history read at this revision. October 12 commits describe server/runtime/docs changes after the October 11 v3.1.0 release; a repository revision is not a new capability result. Cards declare text/image/video inputs and Apache-2.0. History: https://huggingface.co/vllm-sr/d3-edge/commits/20c745653400d191ecacd99c4eafc0c5900dc15e."
+    },
+    {
+      "id": "decision3-d3-edge-manifest",
+      "title": "d3-edge package manifest",
+      "url": "https://huggingface.co/vllm-sr/d3-edge/blob/20c745653400d191ecacd99c4eafc0c5900dc15e/MODEL_MANIFEST.json",
+      "kind": "repository",
+      "reviewed_on": "2026-10-13",
+      "review_depth": "content_reviewed",
+      "source_revision": "20c745653400d191ecacd99c4eafc0c5900dc15e",
+      "review_note": "Author-supplied package model_sha256: 6e00d04abbdbdf6d35c9e12065769d9edaacc3bfe9404583891797718d239dc8; built_utc: 2026-10-11T05:44:01+00:00; loaded parameters including readout: 594582720. Text/vision/readout counts and base revision are declared by the manifest, not independently counted from tensor bytes. Downloaded modeling_d3.py and d3_runtime.py text hashes match the manifest; no weight bytes were downloaded or hashed."
+    },
+    {
+      "id": "decision3-config",
+      "title": "d3 backbone/runtime architecture configuration",
+      "url": "https://huggingface.co/vllm-sr/d3/blob/093cffbaa7be6f5dfe14252ae7e80c396c06dbd9/config.json",
+      "kind": "repository",
+      "reviewed_on": "2026-10-13",
+      "review_depth": "content_reviewed",
+      "source_revision": "093cffbaa7be6f5dfe14252ae7e80c396c06dbd9",
+      "review_note": "The manifest names Qwen3.8-27B while runtime model_type is qwen3_5. These identify different layers; no contradiction is inferred. max_position_embeddings is configuration, not validated context quality."
+    },
+    {
+      "id": "decision3-loader",
+      "title": "Decision 3.0 Transformers loader",
+      "url": "https://huggingface.co/vllm-sr/d3/blob/093cffbaa7be6f5dfe14252ae7e80c396c06dbd9/modeling_d3.py",
+      "kind": "repository",
+      "reviewed_on": "2026-10-13",
+      "review_depth": "content_reviewed",
+      "source_revision": "093cffbaa7be6f5dfe14252ae7e80c396c06dbd9",
+      "review_note": "Custom AutoModel loader delegates to d3_runtime; stock backbone loading without the custom decision path does not establish System One behavior."
+    },
+    {
+      "id": "decision3-runtime",
+      "title": "Decision 3.0 code readout and multimodal runtime",
+      "url": "https://huggingface.co/vllm-sr/d3/blob/093cffbaa7be6f5dfe14252ae7e80c396c06dbd9/d3_runtime.py",
+      "kind": "repository",
+      "reviewed_on": "2026-10-13",
+      "review_depth": "content_reviewed",
+      "source_revision": "093cffbaa7be6f5dfe14252ae7e80c396c06dbd9",
+      "review_note": "Independent prompt rows, last-position 255-code readout, per-row masking and softmax; default question batch size 8. Optional reversed-choice permutation averaging is off by default. Read only, never imported or executed."
+    },
+    {
+      "id": "decision-index-current",
+      "title": "Decision Index live 0.3.2 title",
+      "url": "https://multimodalart-jev-decision-index.static.hf.space/index.html",
+      "kind": "evaluation_report",
+      "reviewed_on": "2026-10-13",
+      "review_depth": "metadata_only",
+      "source_revision": null,
+      "review_note": "Static title says 0.3.2 on review day. The complete dynamic ranking and its evaluated versions were not audited. This source does not support a current first-place claim."
+    },
+    {
+      "id": "fluiduse",
+      "title": "FluidUse native Swift/Core ML runtime",
+      "url": "https://github.com/FluidInference/FluidUse/blob/d278e17df85e39e8c21bb64a467da81c39576fcd/README.md",
+      "kind": "repository",
+      "reviewed_on": "2026-10-13",
+      "review_depth": "content_reviewed",
+      "source_revision": "d278e17df85e39e8c21bb64a467da81c39576fcd",
+      "review_note": "Decision-model sections inspected, not unrelated OCR/agent functionality. D3Manager, InternDecisionManager and conversion fidelity described. Native managers and Python-assisted bridges are different deployment paths."
+    },
+    {
+      "id": "fluiduse-support",
+      "title": "FluidUse decision-model support and bridge limits",
+      "url": "https://github.com/FluidInference/FluidUse/blob/d278e17df85e39e8c21bb64a467da81c39576fcd/Documentation/DecisionModelSupport.md",
+      "kind": "repository",
+      "reviewed_on": "2026-10-13",
+      "review_depth": "content_reviewed",
+      "source_revision": "d278e17df85e39e8c21bb64a467da81c39576fcd",
+      "review_note": "Support matrix, candidate/context limits, serial queue, timeout/cancellation shutdown and per-model quirks read. Smoke checks are serving-path checks, not common quality scores."
+    },
+    {
+      "id": "fluiduse-bench",
+      "title": "FluidUse official-harness and application-path reports",
+      "url": "https://github.com/FluidInference/FluidUse/blob/d278e17df85e39e8c21bb64a467da81c39576fcd/Documentation/OfficialBenchmarks.md",
+      "kind": "evaluation_report",
+      "reviewed_on": "2026-10-13",
+      "review_depth": "content_reviewed",
+      "source_revision": "d278e17df85e39e8c21bb64a467da81c39576fcd",
+      "review_note": "Converter-run reports read, especially Verdict raw-logit evaluation versus shipped answer path. The reporter claims reproduction; this repository only reviewed those reports. Raw runs not replayed here."
+    },
+    {
+      "id": "decision3-apple",
+      "title": "Decision 3.0 on Apple Silicon",
+      "url": "https://vllm-sr.ai/blog/decision-3-0-on-apple-silicon/",
+      "kind": "official_publication",
+      "reviewed_on": "2026-10-13",
+      "review_depth": "content_reviewed",
+      "source_revision": null,
+      "review_note": "October 11 article by Alex Weng / Fluid Inference, reviewed October 13; acknowledges early access from the model team. Converter/team-associated deployment report, not an independent audit. Live post later mentions flash/Mario; inspected d3-coreml revision lists lite/nano/mini only. Download sizes and runtime names differ from FluidUse README snapshots; verify exact package."
+    },
+    {
+      "id": "decision3-coreml",
+      "title": "Decision 3.0 Core ML conversion packages",
+      "url": "https://huggingface.co/FluidInference/d3-coreml/blob/62b6a996e15342bdd3d608030d8f445f11a52367/README.md",
+      "kind": "model_card",
+      "reviewed_on": "2026-10-13",
+      "review_depth": "content_reviewed",
+      "source_revision": "62b6a996e15342bdd3d608030d8f445f11a52367",
+      "review_note": "Pinned card and public file inventory inspected: lite, nano and mini. Conversion package bytes were not downloaded or verified. Video host is Python; do not assume all native Swift paths support every media type."
+    },
+    {
+      "id": "webmcp-test",
+      "title": "Natzir Turrado: Schema Usage / WebMCP application test",
+      "url": "https://natzir.com/posicionamiento-buscadores/modelos-decision-en-webmcp/",
+      "kind": "evaluation_report",
+      "reviewed_on": "2026-10-13",
+      "review_depth": "content_reviewed",
+      "source_revision": null,
+      "review_note": "Original evaluator report and technical appendix read. Small rule+model pipeline test; test-selected Nano variant disclosed. Prices and times include specific providers/intermediaries, not official direct vendor baselines. Frozen per-model serving/weight revisions not established."
+    },
+    {
+      "id": "jev-ai-about",
+      "title": "Jev AI independent platform disclosure",
+      "url": "https://jev-ai.pro/about",
+      "kind": "official_docs",
+      "reviewed_on": "2026-10-13",
+      "review_depth": "content_reviewed",
+      "source_revision": null,
+      "review_note": "Platform explicitly says it is independently operated from TypeSafe and self-reports a primary TypeSafe API connection. This verifies its disclosure, not its upstream account or served binary. Do not call jev-ai.pro an official direct TypeSafe endpoint."
+    },
+    {
+      "id": "intern-repo",
+      "title": "Intern-Decision architecture and release scope",
+      "url": "https://github.com/internlm/Intern-Decision/blob/3572c8a68b5df5dafe02d0e093989ba8ec0183bc/README.md",
+      "kind": "repository",
+      "reviewed_on": "2026-10-13",
+      "review_depth": "content_reviewed",
+      "source_revision": "3572c8a68b5df5dafe02d0e093989ba8ec0183bc",
+      "review_note": "Qwen3.5 language-backbone decision tuning with frozen vision tower/projector. Code/test records/scorers are public; training data, private calibration/validation records and preparation pipelines are omitted. Do not equate a released training script with the original data recipe."
+    },
+    {
+      "id": "intern-evaluation",
+      "title": "Intern-Decision evaluation protocol",
+      "url": "https://github.com/internlm/Intern-Decision/blob/3572c8a68b5df5dafe02d0e093989ba8ec0183bc/docs/EVALUATION.md",
+      "kind": "evaluation_report",
+      "reviewed_on": "2026-10-13",
+      "review_depth": "content_reviewed",
+      "source_revision": "3572c8a68b5df5dafe02d0e093989ba8ec0183bc",
+      "review_note": "Exact test record paths/counts, backend-specific temperature presets and hash-binding workflow reviewed; no commands run here."
+    },
+    {
+      "id": "intern-calibration",
+      "title": "Intern-Decision known-distribution calibration pilot",
+      "url": "https://github.com/internlm/Intern-Decision/blob/3572c8a68b5df5dafe02d0e093989ba8ec0183bc/docs/CALIBRATION_BENCHMARK.md",
+      "kind": "evaluation_report",
+      "reviewed_on": "2026-10-13",
+      "review_depth": "content_reviewed",
+      "source_revision": "3572c8a68b5df5dafe02d0e093989ba8ec0183bc",
+      "review_note": "Exact distribution references separate from model-facing inputs; expected Brier includes irreducible randomness; expected ECE uses 10 equal-width bins. Paired families require grouped uncertainty."
+    },
+    {
+      "id": "intern-0.8b",
+      "title": "Intern-Decision-0.8B model card",
+      "url": "https://huggingface.co/internlm/Intern-Decision-0.8B/blob/85a0cc5a99d67ea8d56dfe98115689212867171d/README.md",
+      "kind": "model_card",
+      "reviewed_on": "2026-10-13",
+      "review_depth": "content_reviewed",
+      "source_revision": "85a0cc5a99d67ea8d56dfe98115689212867171d",
+      "review_note": "Card read at fixed revision. Separate size-specific temperatures and image support; training overlap and original private calibration records not independently audited."
+    },
+    {
+      "id": "intern-2b",
+      "title": "Intern-Decision-2B model card",
+      "url": "https://huggingface.co/internlm/Intern-Decision-2B/blob/8797836c65fc91a2435b1fb6850b5f0aabd75cc3/README.md",
+      "kind": "model_card",
+      "reviewed_on": "2026-10-13",
+      "review_depth": "content_reviewed",
+      "source_revision": "8797836c65fc91a2435b1fb6850b5f0aabd75cc3",
+      "review_note": "Card read at fixed revision. Separate size-specific temperatures and image support; training overlap and original private calibration records not independently audited."
+    },
+    {
+      "id": "intern-4b",
+      "title": "Intern-Decision-4B model card",
+      "url": "https://huggingface.co/internlm/Intern-Decision-4B/blob/0e5e6aa7d6d750e2b1504ba11a8136cb58aeb3cd/README.md",
+      "kind": "model_card",
+      "reviewed_on": "2026-10-13",
+      "review_depth": "content_reviewed",
+      "source_revision": "0e5e6aa7d6d750e2b1504ba11a8136cb58aeb3cd",
+      "review_note": "Card read at fixed revision. Separate size-specific temperatures and image support; training overlap and original private calibration records not independently audited."
+    },
+    {
+      "id": "intern-inference",
+      "title": "Intern-Decision 4B masked-next-token inference",
+      "url": "https://huggingface.co/internlm/Intern-Decision-4B/blob/0e5e6aa7d6d750e2b1504ba11a8136cb58aeb3cd/inference.py",
+      "kind": "repository",
+      "reviewed_on": "2026-10-13",
+      "review_depth": "content_reviewed",
+      "source_revision": "0e5e6aa7d6d750e2b1504ba11a8136cb58aeb3cd",
+      "review_note": "Complete causal masked assistant skeleton, pre-placeholder logits, per-field candidate softmax and fixed temperature read; no generate call. Causal schema positions may depend on prior field/option text even without gold/predicted answers. Code was not executed."
+    },
+    {
+      "id": "verdict-repo",
+      "title": "Verdict / OpenJev mechanism and negative findings",
+      "url": "https://github.com/Heman10x-NGU/Verdict-open-jev/blob/30f15564821626ca5c1ad5b2638c4eb7078787dd/README.md",
+      "kind": "repository",
+      "reviewed_on": "2026-10-13",
+      "review_depth": "content_reviewed",
+      "source_revision": "30f15564821626ca5c1ad5b2638c4eb7078787dd",
+      "review_note": "ModernBERT/GLiClass bounded candidate model, author calibration/abstention tests and severe synonym/hard-negative failures read. Marketing guarantee language is not accepted as a statistical risk guarantee; unrelated overall-rank claims not imported."
+    },
+    {
+      "id": "verdict-engine",
+      "title": "Verdict typed serving renderer and calibration path",
+      "url": "https://github.com/Heman10x-NGU/Verdict-open-jev/blob/30f15564821626ca5c1ad5b2638c4eb7078787dd/core/engine_encoder.py",
+      "kind": "repository",
+      "reviewed_on": "2026-10-13",
+      "review_depth": "content_reviewed",
+      "source_revision": "30f15564821626ca5c1ad5b2638c4eb7078787dd",
+      "review_note": "Serving auto-loads per-K calibrator and templates candidate labels; source reviewed only. Code/evaluation renderer and fitted calibrator are distinct."
+    },
+    {
+      "id": "verdict-abstention",
+      "title": "Verdict raw abstention-generalization report",
+      "url": "https://github.com/Heman10x-NGU/Verdict-open-jev/blob/30f15564821626ca5c1ad5b2638c4eb7078787dd/reports/v2/exp_e5_abstention_generalization.json",
+      "kind": "evaluation_report",
+      "reviewed_on": "2026-10-13",
+      "review_depth": "content_reviewed",
+      "source_revision": "30f15564821626ca5c1ad5b2638c4eb7078787dd",
+      "review_note": "200 missing-option cases per condition; preserved baseline and hard/synonym/combined counts. Raw report read, experiment not rerun."
+    },
+    {
+      "id": "verdict-card",
+      "title": "Verdict 151M release model card",
+      "url": "https://huggingface.co/heman10x/rlcd-modernbert-151m/blob/8af2496eb63c7fa66d7d234e1f62629380030eb4/README.md",
+      "kind": "model_card",
+      "reviewed_on": "2026-10-13",
+      "review_depth": "content_reviewed",
+      "source_revision": "8af2496eb63c7fa66d7d234e1f62629380030eb4",
+      "review_note": "Card declares Apache-2.0, 25-slot capacity and CE+Brier training. Card prose T=1.0716 differs from the shipped per-K artifact and current evaluation T≈1.4265; do not assign its calibration claims to every serving path."
+    },
+    {
+      "id": "verdict-calibrator",
+      "title": "Verdict shipped per-K calibration artifact",
+      "url": "https://huggingface.co/heman10x/rlcd-modernbert-151m/blob/8af2496eb63c7fa66d7d234e1f62629380030eb4/calibrator.json",
+      "kind": "repository",
+      "reviewed_on": "2026-10-13",
+      "review_depth": "content_reviewed",
+      "source_revision": "8af2496eb63c7fa66d7d234e1f62629380030eb4",
+      "review_note": "Global T=2.8039; per-K values include K=5 T=3.0560, with K including abstention. Fitting provenance is author supplied; artifact bytes read but weight bytes not verified."
+    },
+    {
+      "id": "verdict-coreml",
+      "title": "Verdict Core ML conversion and rejected quantization",
+      "url": "https://huggingface.co/FluidInference/verdict-coreml/blob/835208c443699f1f95c4bed1b177dc916300cffe/README.md",
+      "kind": "model_card",
+      "reviewed_on": "2026-10-13",
+      "review_depth": "content_reviewed",
+      "source_revision": "835208c443699f1f95c4bed1b177dc916300cffe",
+      "review_note": "Converter report: FP16 L128/L512, 24 substantive candidates plus abstention. LUT8 failed its 99/100 agreement gate (96/100, four abstention flips) and is not included as a validated package. Published Index-era identity not authenticated against current release."
+    },
+    {
+      "id": "kev-current",
+      "title": "Kev current serving and source-watch review",
+      "url": "https://github.com/jaredpalmer/kev/blob/85ccf56a0afb952323c621055b02876e8498d60c/README.md",
+      "kind": "repository",
+      "reviewed_on": "2026-10-13",
+      "review_depth": "content_reviewed",
+      "source_revision": "85ccf56a0afb952323c621055b02876e8498d60c",
+      "review_note": "October 9 README changes add isolated accelerator probes, explicit device fail-closed behavior and MLX handling; latest October 12 commit changes Modal concurrency. These are runtime/serving changes, not new weight or calibration results. Historical Kev evidence retained."
+    },
+    {
+      "id": "clm-current",
+      "title": "CLM citation-only source-watch review",
+      "url": "https://github.com/Contrastive-LM/CLM/blob/d5f9ef0fd9bde185df0ceaad4f4ecc6cfe8c34f6/README.md",
+      "kind": "repository",
+      "reviewed_on": "2026-10-13",
+      "review_depth": "content_reviewed",
+      "source_revision": "d5f9ef0fd9bde185df0ceaad4f4ecc6cfe8c34f6",
+      "review_note": "Compared README at bb42c6c5bf914fd449bed2f6ca65be80602cb1f7 with d5f9ef0fd9bde185df0ceaad4f4ecc6cfe8c34f6: only BibTeX title shortened. No new result, weights or calibration inferred."
+    },
+    {
+      "id": "gliner-runtime-current",
+      "title": "GLiNER2 runtime compatibility review",
+      "url": "https://github.com/fastino-ai/GLiNER2/blob/b86d35c02f2c1a4d9840ea50197bd1b6d13b031e/README.md",
+      "kind": "repository",
+      "reviewed_on": "2026-10-13",
+      "review_depth": "content_reviewed",
+      "source_revision": "b86d35c02f2c1a4d9840ea50197bd1b6d13b031e",
+      "review_note": "README/history reviewed: Transformers 5 compatibility/dependency caps and DisentangledFlash packed runtime documentation. Schema-extraction loader support changes interface/compatibility; controlled quality or end-to-end speed gain not established here."
+    },
+    {
+      "id": "gliner-decide-current",
+      "title": "GLiNER2.5-Decide-1B current compatibility metadata",
+      "url": "https://huggingface.co/fastino/GLiNER2.5-Decide-1B/blob/67af949e17bebd20f05fe020a971079889e7a462/README.md",
+      "kind": "model_card",
+      "reviewed_on": "2026-10-13",
+      "review_depth": "content_reviewed",
+      "source_revision": "67af949e17bebd20f05fe020a971079889e7a462",
+      "review_note": "Compared Hub trees 688cd7ba8917a0855ad3ce929cba5a9998932e79 → 67af949e17bebd20f05fe020a971079889e7a462: README/config change; model.safetensors LFS oid remains 02c567d791aed26550d300064c7f0c0094fd65291503c65969b45b30786e33b3 (4755208228 bytes), tokenizer blobs unchanged. This is repository metadata comparison, not local weight-byte hash verification or a retrain/performance claim."
     }
   ],
   "entries": [
@@ -837,10 +1237,10 @@
         "en": "RLCD is vendor-described; the full training recipe is not public. Valid schemas and confidence fields do not establish semantic reliability.",
         "zh": "RLCD 的完整训练配方未公开；格式合法与置信度字段不等于语义可靠。"
       },
-      "reviewed_on": "2026-10-06",
+      "reviewed_on": "2026-10-13",
       "mechanism": {
-        "en": "Proprietary model. Choice/Score confidence summarizes the returned distribution; it is not a separate probability-of-correctness estimate. Noul returns P(yes) with no separate confidence field.",
-        "zh": "专有模型。Choice／Score 的 confidence 是返回分布的统计量，并非独立预测的正确概率；Noul 返回 P(yes)，没有单独 confidence 字段。"
+        "en": "Proprietary model. Choice/Score confidence summarizes the returned distribution; it is not a separate probability-of-correctness estimate. Noul returns P(yes) with no separate confidence field. Question IDs are not model input; each instruction must be complete. Same-request answers are documented as independent; dependent evidence requires a later request.",
+        "zh": "专有模型。Choice／Score 的 confidence 是返回分布的统计量，并非独立预测的正确概率；Noul 返回 P(yes)，没有单独 confidence 字段。 文档称问题 ID 不送入模型，instructions 须写完整；同请求答案互不作为上下文，依赖新证据的判断需后续请求。"
       },
       "training": {
         "en": "Vendor-described RLCD; controlled independent ablations not established here.",
@@ -919,7 +1319,8 @@
         "kev",
         "kev4b",
         "kev-1-0",
-        "kev27-v2"
+        "kev27-v2",
+        "kev-current"
       ],
       "summary": {
         "en": "Qwen-based typed decision family with a dynamic pointer head; Kev 1.0 freezes existing checkpoints as a release baseline.",
@@ -933,7 +1334,7 @@
         "en": "Keep trained-family tests separate from transfer. 27B v2 is worse and overconfident on long contracts (CUAD ECE 0.053 versus v1 0.007). Serving capacity and fitted temperature do not guarantee accuracy or calibration on new workloads.",
         "zh": "须区分训练任务族测试与迁移测试。27B v2 在长合同上退步且过度自信（CUAD ECE 0.053，v1 为 0.007）；可接收长度和拟合温度不保证新任务的准确率或校准。"
       },
-      "reviewed_on": "2026-10-06",
+      "reviewed_on": "2026-10-13",
       "mechanism": {
         "en": "Dynamic option readout on a language-model backbone; several model sizes.",
         "zh": "在语言模型骨干上动态读出选项分数；提供多个规模。"
@@ -943,8 +1344,8 @@
         "zh": "0.8B／4B／9B 使用 LoRA 与判断头；27B v2 全参数微调 Qwen3.8-27B，再按 0.85／0.15 与 v1 平均权重。温度拟合依赖分布；0.8B／4B 使用训练任务族的保留样本。"
       },
       "availability": {
-        "en": "Small releases require the base plus adapter/head; 27B v2 ships about 51 GB of full bf16 weights plus head. Served limit: 65,536 tokens. Author-validated CUAD context: 8,192 for 0.8B/4B/9B, 65,536 for 27B, under the stated 3-pp non-inferiority rule.",
-        "zh": "小型号需基座、适配器与判断头；27B v2 发布约 51 GB 的完整 bf16 权重与判断头。服务上限 65,536 token；按作者 CUAD 的 3 个百分点非劣效规则，0.8B／4B／9B 仅验证至 8,192，27B 至 65,536。"
+        "en": "Small releases require the base plus adapter/head; 27B v2 ships about 51 GB of full bf16 weights plus head. Served limit: 65,536 tokens. Author-validated CUAD context: 8,192 for 0.8B/4B/9B, 65,536 for 27B, under the stated 3-pp non-inferiority rule. Current server supports explicit CPU/accelerator selection and isolated fail-closed probes; those probes do not validate every kernel.",
+        "zh": "小型号需基座、适配器与判断头；27B v2 发布约 51 GB 的完整 bf16 权重与判断头。服务上限 65,536 token；按作者 CUAD 的 3 个百分点非劣效规则，0.8B／4B／9B 仅验证至 8,192，27B 至 65,536。 当前服务支持明确 CPU／加速器选择及隔离 fail-closed 探测；探测不验证所有内核。"
       },
       "license_note": "Kev 1.0 cards declare Apache-2.0 for the released weights/head and listed bases; verify the exact artifact. A family entry has no single weight revision.",
       "weight_revision": null,
@@ -967,7 +1368,8 @@
       "source_ids": [
         "clm",
         "clm-base",
-        "clm-deepswe"
+        "clm-deepswe",
+        "clm-current"
       ],
       "summary": {
         "en": "Separate state and action representations with learned projection heads on a frozen language-model encoder.",
@@ -981,7 +1383,7 @@
         "en": "Relative ranking cannot detect every all-wrong candidate set. Best-of-N scores include supplied candidates, not autonomous task-solving ability.",
         "zh": "相对排序不能保证识别“全部候选都错”；Best-of-N 成绩不代表模型独立解题能力。"
       },
-      "reviewed_on": "2026-09-25",
+      "reviewed_on": "2026-10-13",
       "mechanism": {
         "en": "Dual encoding permits candidate caching; released base uses frozen Qwen3-8B.",
         "zh": "双侧编码允许缓存候选；发布的基础版使用冻结 Qwen3-8B。"
@@ -1061,7 +1463,9 @@
       "url": "https://huggingface.co/fastino/GLiNER2.5-Decide-1B",
       "source_ids": [
         "gliner-decide",
-        "gliner-runtime"
+        "gliner-runtime",
+        "gliner-runtime-current",
+        "gliner-decide-current"
       ],
       "summary": {
         "en": "Schema-conditioned local classification with runtime labels and multiple decision heads.",
@@ -1075,7 +1479,7 @@
         "en": "This review inspected the 1B card, which cross-reports 340M results. Dataset audit is incomplete; JevK5 in that table is not TypeSafe Jev.",
         "zh": "本版核对的是 1B 模型卡，其中交叉报告 340M 成绩；数据集审计未完成，表中 JevK5 不是 TypeSafe Jev。"
       },
-      "reviewed_on": "2026-09-25",
+      "reviewed_on": "2026-10-13",
       "mechanism": {
         "en": "Encoder-style classification; single-label and multilabel outputs.",
         "zh": "编码器式分类；支持单标签与多标签输出。"
@@ -1085,8 +1489,8 @@
         "zh": "训练细节按具体检查点文档记录，不从同系列模型推断。"
       },
       "availability": {
-        "en": "Published local checkpoints and GLiNER2 runtime; use version-matched examples.",
-        "zh": "公开本地检查点及 GLiNER2 运行库；示例须匹配版本。"
+        "en": "Published checkpoints; current runtime supports Transformers 5 and schema-extraction loading. Match runtime, checkpoint config and classify_text examples; unchanged LFS weight identity across the watched revisions.",
+        "zh": "公开检查点；当前运行库支持 Transformers 5 与 schema-extraction 加载。须匹配运行库、检查点配置及 classify_text 示例；所监测两版本的 LFS 权重标识相同。"
       },
       "license_note": "Reviewed 1B card declares Apache-2.0; other checkpoints need separate checks.",
       "weight_revision": null,
@@ -1485,11 +1889,12 @@
     },
     {
       "id": "decision-index",
-      "name": "Decision Index 0.2",
+      "name": "Decision Index (archival releases and live board)",
       "category": "evaluation",
       "url": "https://huggingface.co/spaces/multimodalart/jev-decision-index",
       "source_ids": [
-        "decision-index"
+        "decision-index",
+        "decision-index-current"
       ],
       "summary": {
         "en": "A broader decision benchmark index with explicit aggregation rules.",
@@ -1500,10 +1905,10 @@
         "zh": "先检查任务覆盖和聚合方式，再解读排序。"
       },
       "caveat": {
-        "en": "Composite scores are not raw accuracy; API/GPU timings are not a controlled hardware experiment.",
-        "zh": "综合指数不是准确率；API 与 GPU 延迟并非受控硬件实验。"
+        "en": "Versioned composites are not raw accuracy. The live title is 0.3.2; complete current dynamic ranks were not audited. Keep historical 0.2, internal 0.3.1 and public-kit results separate; mixed API/GPU timings are not controlled hardware comparisons.",
+        "zh": "不同版本的综合指数不是准确率；实时页面标题为 0.3.2，完整动态排名未审计。历史 0.2、内部 0.3.1 与公共套件须分开；混合 API／GPU 延迟不是受控硬件比较。"
       },
-      "reviewed_on": "2026-09-25"
+      "reviewed_on": "2026-10-13"
     },
     {
       "id": "nimble-evaluation",
@@ -2042,6 +2447,203 @@
         "pointer-head",
         "local",
         "open-weight"
+      ]
+    },
+    {
+      "id": "decision3",
+      "name": "vLLM-SR Decision 3.0",
+      "category": "core_models",
+      "url": "https://huggingface.co/collections/vllm-sr/decision-30",
+      "source_ids": [
+        "decision3-d3",
+        "decision3-d3-manifest",
+        "decision3-d3-flash",
+        "decision3-d3-flash-manifest",
+        "decision3-d3-mini",
+        "decision3-d3-mini-manifest",
+        "decision3-d3-nano",
+        "decision3-d3-nano-manifest",
+        "decision3-d3-lite",
+        "decision3-d3-lite-manifest",
+        "decision3-d3-edge",
+        "decision3-d3-edge-manifest",
+        "decision3-config",
+        "decision3-loader",
+        "decision3-runtime",
+        "decision3-apple",
+        "decision3-coreml",
+        "fluiduse"
+      ],
+      "reviewed_on": "2026-10-13",
+      "weight_revision": null,
+      "summary": {
+        "en": "Six public-weight multimodal checkpoints with a 255-code decision readout; one independent prompt row per question.",
+        "zh": "六个公开权重多模态检查点，使用 255-code 判断读出；每题对应独立 prompt row。"
+      },
+      "use": {
+        "en": "Local text/image/video classification, scoring and routing; compare sizes at fixed input and candidate budgets.",
+        "zh": "本地文本／图像／视频分类、评分与路由；固定输入和候选预算比较各型号。"
+      },
+      "caveat": {
+        "en": "Internal Index 0.3.1, the 140178-request public kit and 231-task JevBench are separate protocols. Training overlap/decontamination and business calibration remain unknown; Engine support was dev-channel.",
+        "zh": "内部 Index 0.3.1、140178 请求公共套件与 231-task JevBench 是不同协议；训练重叠／去污染和业务校准仍未知，Engine 支持当时为 dev channel。"
+      },
+      "scale": {
+        "en": "Card counts / nominal base labels: d3 26.09B / 27B; flash 8.39B / 9B; mini 4.54B / 4B; nano 2.21B / 2B; lite 0.85B / 0.8B; edge 0.59B / 0.6B. Counts include vision; manifests also count the readout.",
+        "zh": "模型卡参数量／宣传基座尺寸：d3 26.09B／27B；flash 8.39B／9B；mini 4.54B／4B；nano 2.21B／2B；lite 0.85B／0.8B；edge 0.59B／0.6B。包含视觉编码器，manifest 另计读出头。"
+      },
+      "mechanism": {
+        "en": "Last prompt position → 255-code FP32 readout → mask unused codes → temperature 1.0 softmax. Questions have separate state/question/option rows; default batches of 8 do not encode all questions as one shared text sequence. Qwen full-attention layers are noncausal; DeltaNet layers stay causal.",
+        "zh": "最后 prompt 位置 → 255-code FP32 读出 → 掩蔽未使用 code → 温度 1.0 softmax。每题有独立状态／问题／选项行；默认 8 行批处理不等于所有问题共用一次序列编码。Qwen full-attention 层双向，DeltaNet 层保持因果。"
+      },
+      "training": {
+        "en": "d3 manifest declares Qwen3.8-27B, with qwen3_5 runtime architecture; others declare Qwen3.5, including edge derived from the 0.8B base. Public training data/recipe, overlap audits and held-out calibration reports were not established. Softmax and T=1 do not establish empirical calibration.",
+        "zh": "d3 manifest 声明 Qwen3.8-27B，运行架构为 qwen3_5；其他基于 Qwen3.5，edge 也源自 0.8B 基座。完整训练数据／配方、重叠审计及保留集校准报告尚未确证；softmax 和 T=1 不证明经验校准。"
+      },
+      "availability": {
+        "en": "v3.1.0 full weights, manifests and custom Transformers runtime; vLLM-SR Engine /v1/systemone in dev channel at the reviewed cards. Standard vLLM chat compatibility is not established. Core ML lite/nano/mini is a separate conversion. Video defaults: 2 fps, at most 32 frames; no audio validation. Null package token limit and backbone context configuration are not validated long-context quality.",
+        "zh": "v3.1.0 完整权重、manifest 及定制 Transformers 运行代码；所核卡片中 vLLM-SR Engine 的 /v1/systemone 为 dev channel，未确证标准 vLLM chat 兼容。Core ML lite／nano／mini 是独立转换；视频默认 2 fps、最多 32 帧，未验证音频。包中 token 上限为 null，骨干上下文配置不等于长上下文质量验收。"
+      },
+      "license_note": "All six pinned cards/manifests declare Apache-2.0 for weights, readout, runtime and listed Qwen bases. Public weights do not establish public training data. Per-package source revisions and author-supplied identity hashes are in the source register; no family-wide weight hash or local binary verification is claimed.",
+      "tags": [
+        "typed-decisions",
+        "code-readout",
+        "multimodal",
+        "local",
+        "open-weight"
+      ]
+    },
+    {
+      "id": "fluiduse",
+      "name": "FluidUse / decision-model Core ML deployment",
+      "category": "baselines",
+      "url": "https://github.com/FluidInference/FluidUse",
+      "source_ids": [
+        "fluiduse",
+        "fluiduse-support",
+        "fluiduse-bench",
+        "decision3-apple",
+        "decision3-coreml"
+      ],
+      "reviewed_on": "2026-10-13",
+      "summary": {
+        "en": "Apple deployment resource with native Swift managers and Python-assisted Core ML bridges, including Decision 3.0.",
+        "zh": "Apple 部署资源，含原生 Swift manager 与 Python 辅助 Core ML bridge，支持 Decision 3.0 等。"
+      },
+      "use": {
+        "en": "Test a local deployment against its upstream renderer, probabilities, failure handling and task labels.",
+        "zh": "把本地部署与上游 renderer、概率、失败处理和任务标签逐项核对。"
+      },
+      "caveat": {
+        "en": "Conversion parity and smoke tests are not quality guarantees. Match length buckets, precision, tokenizer, calibrator and media path; bridge calls queue serially and timeouts close the session. Automatic downloads/environment setup are documented, not run here.",
+        "zh": "转换等价和 smoke test 不保证质量；须匹配长度 bucket、精度、tokenizer、校准器与媒体路径。bridge 调用串行排队，超时会关闭 session；文档中的自动下载／环境安装本轮未运行。"
+      }
+    },
+    {
+      "id": "intern-decision",
+      "name": "Intern-Decision",
+      "category": "core_models",
+      "url": "https://github.com/internlm/Intern-Decision",
+      "source_ids": [
+        "intern-repo",
+        "intern-evaluation",
+        "intern-calibration",
+        "intern-0.8b",
+        "intern-2b",
+        "intern-4b",
+        "intern-inference",
+        "fluiduse"
+      ],
+      "reviewed_on": "2026-10-13",
+      "weight_revision": null,
+      "summary": {
+        "en": "Qwen3.5 multimodal 0.8B/2B/4B family; multiple typed fields scored from one causal masked assistant skeleton.",
+        "zh": "Qwen3.5 多模态 0.8B／2B／4B 系列，在一个因果 masked assistant skeleton 中评分多个类型化字段。"
+      },
+      "use": {
+        "en": "Compare multi-field cost and field/order sensitivity against per-question models; test image-grounded judgments.",
+        "zh": "与每题独立模型比较多字段成本和字段／顺序敏感性，测试基于图像证据的判断。"
+      },
+      "caveat": {
+        "en": "Private training/calibration records are absent. A 96-case distribution pilot is diagnostic; size/backend-specific temperature and max(P) confidence are not portable business risk guarantees.",
+        "zh": "原始训练／校准记录私有；96-case 分布试验只作诊断。型号／后端专属温度与 max(P) confidence 不能直接保证业务风险。"
+      },
+      "scale": {
+        "en": "0.8B, 2B and 4B nominal Qwen3.5 sizes; independently inspected cards, no local tensor count.",
+        "zh": "0.8B、2B、4B 为 Qwen3.5 名义规模；分别核对模型卡，未本地统计张量。"
+      },
+      "mechanism": {
+        "en": "Reads candidate-token logits immediately before each `<decision>` placeholder in one causal pass; up to 16 fields / 62 options, no free-text generation. Fields share the schema sequence, so order/context invariance needs testing. Confidence=max(P), unlike Jev distribution summaries.",
+        "zh": "一次因果前向，从每个 `<decision>` 前一位置读取候选 token logits；最多 16 字段／62 选项，不生成自由文本。字段共享 schema 序列，须验证顺序／上下文不变性；confidence=max(P)，不同于 Jev 的分布统计量。"
+      },
+      "training": {
+        "en": "Decision-tuned language backbone; frozen vision tower/projector. Cards report NLL temperature fitting on 1728 calibration and 1693 separate validation cases: 0.8B T=2.747760550703, 2B T=2.100509348278, 4B T=1.99241824. Private original records and full data construction remain unavailable.",
+        "zh": "微调语言骨干，冻结视觉 tower／projector。卡片称用 1728 校准及 1693 独立验证样本按 NLL 拟合温度：0.8B 为 2.747760550703、2B 为 2.100509348278、4B 为 1.99241824；原始私有记录及完整数据构建未公开。"
+      },
+      "availability": {
+        "en": "Public HF weights, own inference.py and repository HF/XTuner paths. HF card default 8192 tokens rejects overlength, up to 8 images. Core ML 0.8B port in FluidUse is text-only and uses smaller fixed buckets; it does not inherit HF image/context support.",
+        "zh": "公开 HF 权重、专属 inference.py 及仓库 HF／XTuner 路径。HF 卡默认 8192 token、超长拒绝，最多 8 图；FluidUse 的 Core ML 0.8B 仅文本、较小固定 bucket，不能继承 HF 的图像／上下文支持。"
+      },
+      "license_note": "Three inspected cards declare Apache-2.0 and retained Qwen notices. Check evaluation dataset licenses separately; original training/private calibration records are not released.",
+      "tags": [
+        "typed-decisions",
+        "masked-next-token",
+        "multimodal",
+        "local",
+        "calibration"
+      ]
+    },
+    {
+      "id": "verdict",
+      "name": "Verdict / OpenJev",
+      "category": "core_models",
+      "url": "https://github.com/Heman10x-NGU/Verdict-open-jev",
+      "source_ids": [
+        "verdict-repo",
+        "verdict-card",
+        "verdict-engine",
+        "verdict-calibrator",
+        "verdict-abstention",
+        "verdict-coreml",
+        "fluiduse-bench"
+      ],
+      "reviewed_on": "2026-10-13",
+      "weight_revision": "HF repository 8af2496eb63c7fa66d7d234e1f62629380030eb4 (source pin; tensor bytes not locally verified)",
+      "summary": {
+        "en": "151M ModernBERT/GLiClass candidate classifier with an explicit insufficient-evidence option and per-K calibration.",
+        "zh": "151M ModernBERT／GLiClass 候选分类器，含显式证据不足选项及 per-K 校准。"
+      },
+      "use": {
+        "en": "Compact intent classification and missing-option tests; compare native serving probabilities with the exact evaluation renderer/calibrator.",
+        "zh": "轻量意图分类与缺少正确选项测试；核对实际服务概率和评测 renderer／校准器。"
+      },
+      "caveat": {
+        "en": "Author tests show abstention collapsing under hard negatives and synonym wording. Converter reports shipped serving calibration differs substantially from the held-out evaluation; no domain-independent abstention guarantee.",
+        "zh": "作者测试显示 hard negative 和同义改写下拒答崩塌；转换者报告实际服务校准与保留集评测明显不同，不能保证跨域拒答可靠性。"
+      },
+      "scale": {
+        "en": "151378177 parameters reported; up to 25 logits = 24 substantive candidates plus abstention.",
+        "zh": "报告 151378177 参数；最多 25 logits，即 24 个实质候选加拒答项。"
+      },
+      "mechanism": {
+        "en": "Encoder scores candidates including __insufficient_evidence__, without text generation. Engine renders hypothesis-style descriptions and applies candidate-count temperatures; choosing abstention is a trained candidate decision, not a risk bound.",
+        "zh": "编码器评分包括 __insufficient_evidence__ 的候选，不生成文本。Engine 使用 hypothesis-style 描述及候选数对应温度；拒答是学习到的候选判断，并非风险上界。"
+      },
+      "training": {
+        "en": "Author describes CE+Brier post-training with temperature scaling. Shipped per-K/global calibration differs from the single T fitted by the held-out evaluator; original full training provenance and all open-domain fitting splits not independently audited.",
+        "zh": "作者称使用 CE+Brier 后训练与温度校准；发布的 per-K／全局校准不同于保留集评测拟合的单温度。完整原始训练来源及所有开放域拟合划分未独立审计。"
+      },
+      "availability": {
+        "en": "Public HF weights/ONNX and Python/WebGPU/WASM paths; 512-token serving budget. Separate Core ML FP16 L128/L512 conversion with full rendered-request limits; LUT8 package failed conversion acceptance and is not validated.",
+        "zh": "公开 HF 权重／ONNX 及 Python／WebGPU／WASM 路径，服务预算 512 token。独立 Core ML FP16 L128／L512 转换须遵守完整请求长度；LUT8 未通过转换验收，不属于已验证包。"
+      },
+      "license_note": "Pinned model card and repository declare Apache-2.0; base and dataset terms remain separate. An OpenJev name denotes this independent project, not an official TypeSafe release.",
+      "tags": [
+        "typed-decisions",
+        "encoder",
+        "abstention",
+        "local",
+        "calibration"
       ]
     }
   ]

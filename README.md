@@ -6,7 +6,7 @@
 
 A curated guide to systems that **classify, score, rank, verify, route or abstain** rather than primarily generate prose. The central question is not which model has the most impressive headline, but **which method delivers acceptable outcomes at acceptable risk and total cost for a particular task**.
 
-**Source review: 2026-10-11.** 39 selected resources, including 14 core model families and 11 contextualized evidence records. This edition reviews public sources; **it does not claim independent model reproduction**. Review depth and unresolved gaps are recorded in the [source register](docs/sources.md). Inclusion is not an endorsement or a production-readiness certification.
+**Source review: 2026-10-13.** 43 selected resources, including 17 core model families and 20 contextualized evidence records. This edition reviews public sources; **it does not claim independent model reproduction**. Review depth and unresolved gaps are recorded in the [source register](docs/sources.md). Inclusion is not an endorsement or a production-readiness certification.
 
 ## Contents
 
@@ -53,6 +53,9 @@ The table compares mechanisms and use cases, **not incompatible benchmark scores
 | [Microsoft-Decision-1](https://ai.azure.com/catalog/models/Microsoft-Decision-1) | Hosted Qwen3.5-9B post-training for bounded option scoring. | Compare classification, routing and rubric judgments. | Vendor comparisons lack audited item-level artifacts; familiar-task calibration need not transfer. Wording and safety errors remain. |
 | [OpenAI Decisions API / GPT-6 Luna](https://developers.openai.com/api/docs/guides/decisions) | Public-beta typed judgment API for text and images. | Managed classification, routing and ordinal scoring. | Refusal is a separate answer variant, not calibrated abstention. Confidence needs target-task validation; training and serving identity are undisclosed here. |
 | [Nace Drex v1.5](https://github.com/nace-ai/drex-decision-models) | MiMo-V2.6-Distill-Qwen-9B backbone with a Kev pointer head and public-weight release links. | Local candidate for text/JSON decisions, including long inputs. | Benchmark training splits are used; results are not unseen-domain zero-shot. Public Index 0.3.1 leaders fall inside its tie band. Small runner checks do not establish broad parity. |
+| [vLLM-SR Decision 3.0](https://huggingface.co/collections/vllm-sr/decision-30) | Six public-weight multimodal checkpoints with a 255-code decision readout; one independent prompt row per question. | Local text/image/video classification, scoring and routing; compare sizes at fixed input and candidate budgets. | Internal Index 0.3.1, the 140178-request public kit and 231-task JevBench are separate protocols. Training overlap/decontamination and business calibration remain unknown; Engine support was dev-channel. |
+| [Intern-Decision](https://github.com/internlm/Intern-Decision) | Qwen3.5 multimodal 0.8B/2B/4B family; multiple typed fields scored from one causal masked assistant skeleton. | Compare multi-field cost and field/order sensitivity against per-question models; test image-grounded judgments. | Private training/calibration records are absent. A 96-case distribution pilot is diagnostic; size/backend-specific temperature and max(P) confidence are not portable business risk guarantees. |
+| [Verdict / OpenJev](https://github.com/Heman10x-NGU/Verdict-open-jev) | 151M ModernBERT/GLiClass candidate classifier with an explicit insufficient-evidence option and per-K calibration. | Compact intent classification and missing-option tests; compare native serving probabilities with the exact evaluation renderer/calibrator. | Author tests show abstention collapsing under hard negatives and synonym wording. Converter reports shipped serving calibration differs substantially from the held-out evaluation; no domain-independent abstention guarantee. |
 
 ### Read these results in context
 
@@ -67,17 +70,27 @@ The table compares mechanisms and use cases, **not incompatible benchmark scores
 - [E09 — Drex v1.5: public-suite ties and benchmark-training overlap](docs/evidence.md#e09)
 - [E10 — Microsoft-Decision-1: perturbation stability is an author claim](docs/evidence.md#e10)
 - [E11 — Strands Qwen3.5 v1: new recipe, soup and missing-image limits](docs/evidence.md#e11)
+- [E12 — Decision 3.0: internal Index and device timing are bounded author reports](docs/evidence.md#e12)
+- [E13 — Decision 3.0: the full public kit is not the internal composite or JevBench](docs/evidence.md#e13)
+- [E14 — Decision 3.0 video: sampled-frame QA does not validate audio or streaming reliability](docs/evidence.md#e14)
+- [E15 — Decision 3.0 on Apple: conversion and public-harness evidence](docs/evidence.md#e15)
+- [E16 — Decision 3.0 PR triage: throughput and real-label agreement are different tests](docs/evidence.md#e16)
+- [E17 — WebMCP application test: small differences and preprocessing errors](docs/evidence.md#e17)
+- [E18 — Intern-Decision: exact-distribution calibration pilot, not hard-label accuracy](docs/evidence.md#e18)
+- [E19 — Verdict deployment: evaluator calibration is not shipped serving calibration](docs/evidence.md#e19)
+- [E20 — Verdict abstention: preserve hard-negative and synonym failures](docs/evidence.md#e20)
 
 **No combined accuracy leaderboard:** zero-shot classification, workflow fine-tuning and Best-of-N selection answer different questions. Local GPU forward time and remote API round-trip time are also different measurements.
 
 ## Baselines worth keeping
 
-A new training label is not evidence that a familiar baseline is obsolete. These alternatives help isolate gains from the data, output contract, architecture and training objective.
+A new training label is not evidence that a familiar baseline is obsolete. Deployment resources also help test whether a local implementation preserves the intended decision behavior. These alternatives help isolate gains from the data, output contract, architecture and training objective.
 
 - **[SetFit](https://github.com/huggingface/setfit)** — Few-shot sentence-transformer adaptation followed by a classification head. Not an arbitrary typed-question API.
 - **[Qwen3-Reranker](https://huggingface.co/Qwen/Qwen3-Reranker-0.6B)** — Task-trained query/document reranking. A relevance score is not a probability of business correctness.
 - **[Outlines](https://github.com/dottxt-ai/outlines)** — Constrained structured output for ordinary language models. Schema validity does not guarantee factual validity.
 - **[TabICLv2](https://arxiv.org/abs/2602.11139)** — A tabular foundation model for classification and regression. Paper-level inclusion; no local reproduction or natural-language claim.
+- **[FluidUse / decision-model Core ML deployment](https://github.com/FluidInference/FluidUse)** — Apple deployment resource with native Swift managers and Python-assisted Core ML bridges, including Decision 3.0. Conversion parity and smoke tests are not quality guarantees. Match length buckets, precision, tokenizer, calibrator and media path; bridge calls queue serially and timeouts close the session. Automatic downloads/environment setup are documented, not run here.
 
 Also retain a deterministic rule or ordinary supervised classifier where the task permits. A model should earn its complexity against the simplest credible alternative.
 
@@ -93,7 +106,7 @@ For executor selection, collect **task, available evidence, executor, outcome, l
 
 - **[MAPIE](https://github.com/scikit-learn-contrib/MAPIE)** — Prediction-set, uncertainty and conformal-risk tooling. Guarantees depend on the procedure, target risk and data assumptions.
 
-- **[Decision Index 0.2](https://huggingface.co/spaces/multimodalart/jev-decision-index)** — A broader decision benchmark index with explicit aggregation rules. Composite scores are not raw accuracy; API/GPU timings are not a controlled hardware experiment.
+- **[Decision Index (archival releases and live board)](https://huggingface.co/spaces/multimodalart/jev-decision-index)** — A broader decision benchmark index with explicit aggregation rules. Versioned composites are not raw accuracy. The live title is 0.3.2; complete current dynamic ranks were not audited. Keep historical 0.2, internal 0.3.1 and public-kit results separate; mixed API/GPU timings are not controlled hardware comparisons.
 - **[Nimble public evaluations](https://github.com/bespokelabsai/nimble/blob/62076b4f2d365b5879dafcf7f6dd072a1fe76df7/docs/PUBLIC_BENCHMARKS.md)** — Human-reference subsets, paired comparisons and calibration reporting. Project-author-run, not independently reproduced by this list.
 - **[Decision-model benchmark](https://github.com/nibzard/decision-model-benchmark)** — Third-party code and protocols for decision-model comparisons. Third-party status alone does not certify methodology or labels.
 
@@ -135,6 +148,6 @@ python3 -m unittest discover -s tests -v
 
 A [repository-scoped curator skill](.agents/skills/decision-models-curator/SKILL.md) defines the research/review procedure. A [weekly source watcher](.github/workflows/source-watch.yml) checks selected sources for changes and maintains an issue for review. **It does not run an AI researcher, update scientific claims, merge changes or require a paid model API.** See [maintenance](docs/maintenance.md) for setup, security, scheduling limits and manual use.
 
-Read [CONTRIBUTING](CONTRIBUTING.md) before adding a project or result. Negative findings, changed assumptions and corrections are welcome. [Initial review notes](updates/2026-09-25.md) preserve the original qualifications; the [October 6 release review](updates/2026-10-06-release-boundaries.md) and [October 11 review](updates/2026-10-11-typed-releases.md) record additions, corrections and remaining gaps. [Publishing instructions](PUBLISHING.md) explain how to initialize an empty repository safely.
+Read [CONTRIBUTING](CONTRIBUTING.md) before adding a project or result. Negative findings, changed assumptions and corrections are welcome. [Initial review notes](updates/2026-09-25.md) preserve the original qualifications; the [October 6 release review](updates/2026-10-06-release-boundaries.md) and [October 11 review](updates/2026-10-11-typed-releases.md) record additions, corrections and remaining gaps. [October 13 multimodal/deployment review](updates/2026-10-13-multimodal-deployment.md) separates new release, calibration and application evidence. [Publishing instructions](PUBLISHING.md) explain how to initialize an empty repository safely.
 
 Original code and curation text: [MIT](LICENSE). Linked projects, model weights, datasets and papers retain their own licenses. A source-text revision does **not** pin a model's weights.
