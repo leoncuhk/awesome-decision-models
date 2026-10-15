@@ -952,3 +952,131 @@
 - Source revision: `67af949e17bebd20f05fe020a971079889e7a462`
 - Note: Compared Hub trees 688cd7ba8917a0855ad3ce929cba5a9998932e79 → 67af949e17bebd20f05fe020a971079889e7a462: README/config change; model.safetensors LFS oid remains 02c567d791aed26550d300064c7f0c0094fd65291503c65969b45b30786e33b3 (4755208228 bytes), tokenizer blobs unchanged. This is repository metadata comparison, not local weight-byte hash verification or a retrain/performance claim.
 
+<a id="decision3-d3-oct15"></a>
+## d3 October 15 card and identity review
+
+- Source: https://huggingface.co/vllm-sr/d3/blob/225be8b1e2270becab69c5fe05b26f99cbbdd66b/README.md
+- Kind: `model_card`; review depth: `content_reviewed`; reviewed: 2026-10-15
+- Source revision: `225be8b1e2270becab69c5fe05b26f99cbbdd66b`
+- Note: Compared 093cffbaa7be6f5dfe14252ae7e80c396c06dbd9 to 225be8b1e2270becab69c5fe05b26f99cbbdd66b: all 12 safetensors weight/readout Git/LFS identities, decision_config.json blob and manifest identity unchanged; temperature remains 1.0. Changed root blobs: README, MODEL_MANIFEST, d3_runtime and .gitattributes; assets subtree also changes. History describes Index/serving documentation, loading checks and hosted-demo links; d3 additionally documents native vLLM. Manifest SHA-256 4959df7ee964c2fad24a8e853df8e3cda9bae61636fa5650cc1a0fed78539677; author package identity 0e439bebbbbf80d9e1b601c56c55a6fc3a6502b4e396cbbb5f3c3f3acc1d607b. Metadata/source inspection, not local weight-byte verification. The detailed runtime diff was inspected for d3.
+
+<a id="decision3-d3-flash-oct15"></a>
+## d3-flash October 15 card and identity review
+
+- Source: https://huggingface.co/vllm-sr/d3-flash/blob/8b35c853b90e777595ec36bacae820fe08ea077a/README.md
+- Kind: `model_card`; review depth: `content_reviewed`; reviewed: 2026-10-15
+- Source revision: `8b35c853b90e777595ec36bacae820fe08ea077a`
+- Note: Compared f6075bff3c0f7d5704e353d0fb2ebf94888d1691 to 8b35c853b90e777595ec36bacae820fe08ea077a: all 5 safetensors weight/readout Git/LFS identities, decision_config.json blob and manifest identity unchanged; temperature remains 1.0. Changed root blobs: README, MODEL_MANIFEST, d3_runtime and .gitattributes; assets subtree also changes. History describes Index/serving documentation, loading checks and hosted-demo links; d3 additionally documents native vLLM. Manifest SHA-256 abdafb9f4a3e39595a54b7ca977e6bd7a3279c57745231319e3a171a43976e65; author package identity 74b71d370f3d9e5731c603dafcb8af4e9134fd2c769c89c5169b031a0418799b. Metadata/source inspection, not local weight-byte verification. The detailed runtime diff was inspected for d3.
+
+<a id="decision3-d3-mini-oct15"></a>
+## d3-mini October 15 card and identity review
+
+- Source: https://huggingface.co/vllm-sr/d3-mini/blob/97dd054df4b3e0b3beb6af23ab8c82b7c0052e0e/README.md
+- Kind: `model_card`; review depth: `content_reviewed`; reviewed: 2026-10-15
+- Source revision: `97dd054df4b3e0b3beb6af23ab8c82b7c0052e0e`
+- Note: Compared 0e78bbdbe3cf480ed1461c185c9e0c4fa9258011 to 97dd054df4b3e0b3beb6af23ab8c82b7c0052e0e: all 3 safetensors weight/readout Git/LFS identities, decision_config.json blob and manifest identity unchanged; temperature remains 1.0. Changed root blobs: README, MODEL_MANIFEST, d3_runtime and .gitattributes; assets subtree also changes. History describes Index/serving documentation, loading checks and hosted-demo links; d3 additionally documents native vLLM. Manifest SHA-256 bc638e17982411f6ad0f524d33d0dc1f0db81ad7995c1bfdf93dba7674df5e48; author package identity 9ac186bb30b30c129d7aae03d73932600424963bd4644c2041a9d7120f029af5. Metadata/source inspection, not local weight-byte verification. The detailed runtime diff was inspected for d3.
+
+<a id="decision3-d3-nano-oct15"></a>
+## d3-nano October 15 card and identity review
+
+- Source: https://huggingface.co/vllm-sr/d3-nano/blob/aeb70d4dd53ed25b855c3b0a66394b8fe265db7f/README.md
+- Kind: `model_card`; review depth: `content_reviewed`; reviewed: 2026-10-15
+- Source revision: `aeb70d4dd53ed25b855c3b0a66394b8fe265db7f`
+- Note: Compared 9d9b937f5f117f78c030ea7ba677c0b3d328ec58 to aeb70d4dd53ed25b855c3b0a66394b8fe265db7f: all 2 safetensors weight/readout Git/LFS identities, decision_config.json blob and manifest identity unchanged; temperature remains 1.0. Changed root blobs: README, MODEL_MANIFEST, d3_runtime and .gitattributes; assets subtree also changes. History describes Index/serving documentation, loading checks and hosted-demo links; d3 additionally documents native vLLM. Manifest SHA-256 db2139c5b5b7060f8f95150ec70ca2fe7e69e6bf4249e5766df5388bf35977f2; author package identity a2a6dce5e40298a43f904dfbffe799e09e675d964df7477683ee2bc9db04cdd8. Metadata/source inspection, not local weight-byte verification. The detailed runtime diff was inspected for d3.
+
+<a id="decision3-d3-lite-oct15"></a>
+## d3-lite October 15 card and identity review
+
+- Source: https://huggingface.co/vllm-sr/d3-lite/blob/9c10703193afc7c7d28c88201c0364bfbbf58320/README.md
+- Kind: `model_card`; review depth: `content_reviewed`; reviewed: 2026-10-15
+- Source revision: `9c10703193afc7c7d28c88201c0364bfbbf58320`
+- Note: Compared 3c49f5c0bd48a4b28e29b8ec1f38f56e199f3d61 to 9c10703193afc7c7d28c88201c0364bfbbf58320: all 2 safetensors weight/readout Git/LFS identities, decision_config.json blob and manifest identity unchanged; temperature remains 1.0. Changed root blobs: README, MODEL_MANIFEST, d3_runtime and .gitattributes; assets subtree also changes. History describes Index/serving documentation, loading checks and hosted-demo links; d3 additionally documents native vLLM. Manifest SHA-256 31f0ff94ff26619c0a063ccac803edcfe34c56c92e5c9c50b703b62893f125dd; author package identity fda5cfc7bc9063fbb7cd40b50fa9a0963d83a4790a3d6a11a356833fd1171992. Metadata/source inspection, not local weight-byte verification. The detailed runtime diff was inspected for d3.
+
+<a id="decision3-d3-edge-oct15"></a>
+## d3-edge October 15 card and identity review
+
+- Source: https://huggingface.co/vllm-sr/d3-edge/blob/cab71e6ad3461b8086d51ddb572c656babd63b0b/README.md
+- Kind: `model_card`; review depth: `content_reviewed`; reviewed: 2026-10-15
+- Source revision: `cab71e6ad3461b8086d51ddb572c656babd63b0b`
+- Note: Compared 20c745653400d191ecacd99c4eafc0c5900dc15e to cab71e6ad3461b8086d51ddb572c656babd63b0b: all 2 safetensors weight/readout Git/LFS identities, decision_config.json blob and manifest identity unchanged; temperature remains 1.0. Changed root blobs: README, MODEL_MANIFEST, d3_runtime and .gitattributes; assets subtree also changes. History describes Index/serving documentation, loading checks and hosted-demo links; d3 additionally documents native vLLM. Manifest SHA-256 3bae8989a6feb36a66bf4d8c44112dc63199d0dc69f564dc895fe368b1e08e59; author package identity 6e00d04abbdbdf6d35c9e12065769d9edaacc3bfe9404583891797718d239dc8. Metadata/source inspection, not local weight-byte verification. The detailed runtime diff was inspected for d3.
+
+<a id="decision3-runtime-oct15"></a>
+## d3 package-verification scope update
+
+- Source: https://huggingface.co/vllm-sr/d3/blob/225be8b1e2270becab69c5fe05b26f99cbbdd66b/d3_runtime.py
+- Kind: `repository`; review depth: `content_reviewed`; reviewed: 2026-10-15
+- Source revision: `225be8b1e2270becab69c5fe05b26f99cbbdd66b`
+- Note: Diff against October 12 runtime read: fast/full check runtime-loaded files, excluding Markdown/assets/license/packaging; release additionally hashes all listed files and reports unlisted non-hidden files. Loading integrity policy change, not a retrain or temperature fit. Downloaded text SHA-256 2d90e93ac06b9ca4a84e0610ab9acfa2d6793ea4b40eec1b4a3da47577bdea37. No fetched code executed.
+
+<a id="vllm-d3-pr"></a>
+## Native vLLM Decision 3.0 integration and author tests
+
+- Source: https://github.com/vllm-project/vllm/pull/61565
+- Kind: `repository`; review depth: `content_reviewed`; reviewed: 2026-10-15
+- Source revision: `89cab550862e4b7f08d70c19682121362d7dd0c5`
+- Note: Merged 2026-10-14T17:10:56Z as 89cab550862e4b7f08d70c19682121362d7dd0c5. PR body SHA-256 0ae4020db2a05e5caa67309f962810bed64cb36b9f67c49b740080acf75f12a5. Author tests d3/mini/edge on MI325X; flash/nano/lite, CUDA, tensor parallelism and LoRA unmeasured. Latest official release rechecked after reconnect: v0.31.0 (Oct 5), predating the merge. Card separately reports an Oct 15 MI300X nightly check. No model execution here.
+
+<a id="vllm-d3-docs"></a>
+## vLLM structured decisions at the D3 merge
+
+- Source: https://github.com/vllm-project/vllm/blob/89cab550862e4b7f08d70c19682121362d7dd0c5/docs/models/structured_decisions_models.md
+- Kind: `official_docs`; review depth: `content_reviewed`; reviewed: 2026-10-15
+- Source revision: `89cab550862e4b7f08d70c19682121362d7dd0c5`
+- Note: Pinned D3 section and generic endpoint distinctions read alongside the latest official docs. D3 is a custom classify/pooling code-readout model, not ordinary chat generation. Noncausal full attention disables prefix caching/chunked prefill. Generic label-reading descriptions do not all apply to D3.
+
+<a id="vllm-d3-code"></a>
+## vLLM D3 classification model implementation
+
+- Source: https://github.com/vllm-project/vllm/blob/89cab550862e4b7f08d70c19682121362d7dd0c5/vllm/model_executor/models/d3.py
+- Kind: `repository`; review depth: `content_reviewed`; reviewed: 2026-10-15
+- Source revision: `89cab550862e4b7f08d70c19682121362d7dd0c5`
+- Note: Model source and relevant config/strategy patches read: detect decision_config.json, load readout.safetensors as FP32 score head, one classify read per question. Shared media features do not imply one shared noncausal text encoding. Read only.
+
+<a id="decision-index-text-oct15"></a>
+## Decision Index 0.3.2 text aggregate snapshot
+
+- Source: https://multimodalart-jev-decision-index.static.hf.space/data/v03.json
+- Kind: `evaluation_report`; review depth: `content_reviewed`; reviewed: 2026-10-15
+- Source revision: `not captured / live URL`
+- Note: Generated 2026-10-14T09:16:12Z, retrieved/rechecked Oct 15; SHA-256 e51e388fd9f7be8d82662bc349c1971147ffc64be2072568aca96820941b4133. 166 entries versus the card's older 149 count. Formula: public/same-skills/new-domains 0.2/0.5/0.3, private-scale equating and 0.9-point tie band. d3 66.26 and linne-oak 65.61 share rank_tie=1. Published aggregates inspected; hidden items/raw runs not audited.
+
+<a id="decision-index-vision-oct15"></a>
+## Decision Index 0.3.2 vision aggregate snapshot
+
+- Source: https://multimodalart-jev-decision-index.static.hf.space/data/vision.json
+- Kind: `evaluation_report`; review depth: `content_reviewed`; reviewed: 2026-10-15
+- Source revision: `not captured / live URL`
+- Note: Generated 2026-10-14T09:16:14Z, retrieved/rechecked Oct 15; SHA-256 66c74cfaa91f899cafc0fe2b639feca7febd611d9c7f5da42435fafc2e0a36f6. 34 entrants versus the card's older 33 count. Public/private equally weighted. d3 full/public/private 71.26/74.08/68.45. Published aggregates only; hidden items, uncertainty and raw runs not independently audited.
+
+<a id="decision-index-scoring-oct15"></a>
+## Decision Index 0.3.2 scoring-change description
+
+- Source: https://multimodalart-jev-decision-index.static.hf.space/index.html
+- Kind: `evaluation_report`; review depth: `content_reviewed`; reviewed: 2026-10-15
+- Source revision: `not captured / live URL`
+- Note: HTML/JavaScript read without execution; SHA-256 3da5b93fcf055c01566ef4553cb24c06a03217960e245f0a055ac33140a8f649. Changelog says GPQA/MMLU-Pro/BBH same-skill sets had been omitted for 37 models; scoring was corrected, GSM8K rebuilt and ForecastBench retired. JSON endpoints identified from page source. This extends the Oct 13 title-only inspection; score revisions do not establish retraining.
+
+<a id="financial-documents"></a>
+## Stefan Jansen: Testing Jev on Financial Documents
+
+- Source: https://insights.ml4trading.io/p/testing-jev-on-financial-documents
+- Kind: `evaluation_report`; review depth: `content_reviewed`; reviewed: 2026-10-15
+- Source revision: `not captured / live URL`
+- Note: Published Oct 13; body and methods appendix reviewed Oct 15; HTML SHA-256 c81fd362a36c238a5d99882f529f587ced4fc6af30678b7e8930d63d7046c0db. Original evaluator outside model team, with TypeSafe-provided API access for an unpaid evaluation and a vendor-suggested post-hoc prompt. Runs attributed to jev-1.13.0 (Sep 21–Oct 7) from experiment record and sampled recheck; original compact files lack version fields. Complete frozen code/prediction archive not audited. Label construction, population selection and split limitations retained.
+
+<a id="semantic-feature-cookbook"></a>
+## TypeSafe autoresearch semantic features with CatBoost
+
+- Source: https://docs.typesafe.ai/cookbooks/autoresearch_feature_discovery
+- Kind: `official_docs`; review depth: `content_reviewed`; reviewed: 2026-10-15
+- Source revision: `not captured / live URL`
+- Note: Full code/output and Markdown read; Markdown SHA-256 24e0854e5a5846c269142d2a57abfb8aa90d63c37231b03036ed08f1e9989b72. Cached run dated 2026-08-03: jev-1.12 plus claude-sonnet-5; alternate proposer branch not run. 2000 wine notes, 1200 development / 800 test, five rounds; 38 questions become 67 columns. Source describes cache replay, but notebook/cache/API not executed here. Critic-score reconstruction, not financial or visual-intent evidence.
+
+<a id="trl-sft-guide"></a>
+## TRL SFT: generic VLM/PEFT support boundaries
+
+- Source: https://huggingface.co/docs/trl/en/sft_trainer
+- Kind: `official_docs`; review depth: `content_reviewed`; reviewed: 2026-10-15
+- Source revision: `not captured / live URL`
+- Note: Relevant VLM/PEFT dataset-format sections reviewed; live HTML SHA-256 2f26af56edf5f6e5e8038221679f1bdd04251d49d0cecfadb0c38f15d495b68c. Generic trainer documentation for supported models, not a demonstrated D3 noncausal readout training/export or serving-LoRA recipe. No training, dependency installation or image upload performed.
+

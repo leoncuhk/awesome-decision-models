@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "reviewed_on": "2026-10-13",
+  "reviewed_on": "2026-10-15",
   "scope": "Evidence-backed models, methods and evaluation for bounded decisions in AI systems.",
   "sources": [
     {
@@ -1212,6 +1212,166 @@
       "review_depth": "content_reviewed",
       "source_revision": "67af949e17bebd20f05fe020a971079889e7a462",
       "review_note": "Compared Hub trees 688cd7ba8917a0855ad3ce929cba5a9998932e79 → 67af949e17bebd20f05fe020a971079889e7a462: README/config change; model.safetensors LFS oid remains 02c567d791aed26550d300064c7f0c0094fd65291503c65969b45b30786e33b3 (4755208228 bytes), tokenizer blobs unchanged. This is repository metadata comparison, not local weight-byte hash verification or a retrain/performance claim."
+    },
+    {
+      "id": "decision3-d3-oct15",
+      "title": "d3 October 15 card and identity review",
+      "url": "https://huggingface.co/vllm-sr/d3/blob/225be8b1e2270becab69c5fe05b26f99cbbdd66b/README.md",
+      "kind": "model_card",
+      "reviewed_on": "2026-10-15",
+      "review_depth": "content_reviewed",
+      "source_revision": "225be8b1e2270becab69c5fe05b26f99cbbdd66b",
+      "review_note": "Compared 093cffbaa7be6f5dfe14252ae7e80c396c06dbd9 to 225be8b1e2270becab69c5fe05b26f99cbbdd66b: all 12 safetensors weight/readout Git/LFS identities, decision_config.json blob and manifest identity unchanged; temperature remains 1.0. Changed root blobs: README, MODEL_MANIFEST, d3_runtime and .gitattributes; assets subtree also changes. History describes Index/serving documentation, loading checks and hosted-demo links; d3 additionally documents native vLLM. Manifest SHA-256 4959df7ee964c2fad24a8e853df8e3cda9bae61636fa5650cc1a0fed78539677; author package identity 0e439bebbbbf80d9e1b601c56c55a6fc3a6502b4e396cbbb5f3c3f3acc1d607b. Metadata/source inspection, not local weight-byte verification. The detailed runtime diff was inspected for d3."
+    },
+    {
+      "id": "decision3-d3-flash-oct15",
+      "title": "d3-flash October 15 card and identity review",
+      "url": "https://huggingface.co/vllm-sr/d3-flash/blob/8b35c853b90e777595ec36bacae820fe08ea077a/README.md",
+      "kind": "model_card",
+      "reviewed_on": "2026-10-15",
+      "review_depth": "content_reviewed",
+      "source_revision": "8b35c853b90e777595ec36bacae820fe08ea077a",
+      "review_note": "Compared f6075bff3c0f7d5704e353d0fb2ebf94888d1691 to 8b35c853b90e777595ec36bacae820fe08ea077a: all 5 safetensors weight/readout Git/LFS identities, decision_config.json blob and manifest identity unchanged; temperature remains 1.0. Changed root blobs: README, MODEL_MANIFEST, d3_runtime and .gitattributes; assets subtree also changes. History describes Index/serving documentation, loading checks and hosted-demo links; d3 additionally documents native vLLM. Manifest SHA-256 abdafb9f4a3e39595a54b7ca977e6bd7a3279c57745231319e3a171a43976e65; author package identity 74b71d370f3d9e5731c603dafcb8af4e9134fd2c769c89c5169b031a0418799b. Metadata/source inspection, not local weight-byte verification. The detailed runtime diff was inspected for d3."
+    },
+    {
+      "id": "decision3-d3-mini-oct15",
+      "title": "d3-mini October 15 card and identity review",
+      "url": "https://huggingface.co/vllm-sr/d3-mini/blob/97dd054df4b3e0b3beb6af23ab8c82b7c0052e0e/README.md",
+      "kind": "model_card",
+      "reviewed_on": "2026-10-15",
+      "review_depth": "content_reviewed",
+      "source_revision": "97dd054df4b3e0b3beb6af23ab8c82b7c0052e0e",
+      "review_note": "Compared 0e78bbdbe3cf480ed1461c185c9e0c4fa9258011 to 97dd054df4b3e0b3beb6af23ab8c82b7c0052e0e: all 3 safetensors weight/readout Git/LFS identities, decision_config.json blob and manifest identity unchanged; temperature remains 1.0. Changed root blobs: README, MODEL_MANIFEST, d3_runtime and .gitattributes; assets subtree also changes. History describes Index/serving documentation, loading checks and hosted-demo links; d3 additionally documents native vLLM. Manifest SHA-256 bc638e17982411f6ad0f524d33d0dc1f0db81ad7995c1bfdf93dba7674df5e48; author package identity 9ac186bb30b30c129d7aae03d73932600424963bd4644c2041a9d7120f029af5. Metadata/source inspection, not local weight-byte verification. The detailed runtime diff was inspected for d3."
+    },
+    {
+      "id": "decision3-d3-nano-oct15",
+      "title": "d3-nano October 15 card and identity review",
+      "url": "https://huggingface.co/vllm-sr/d3-nano/blob/aeb70d4dd53ed25b855c3b0a66394b8fe265db7f/README.md",
+      "kind": "model_card",
+      "reviewed_on": "2026-10-15",
+      "review_depth": "content_reviewed",
+      "source_revision": "aeb70d4dd53ed25b855c3b0a66394b8fe265db7f",
+      "review_note": "Compared 9d9b937f5f117f78c030ea7ba677c0b3d328ec58 to aeb70d4dd53ed25b855c3b0a66394b8fe265db7f: all 2 safetensors weight/readout Git/LFS identities, decision_config.json blob and manifest identity unchanged; temperature remains 1.0. Changed root blobs: README, MODEL_MANIFEST, d3_runtime and .gitattributes; assets subtree also changes. History describes Index/serving documentation, loading checks and hosted-demo links; d3 additionally documents native vLLM. Manifest SHA-256 db2139c5b5b7060f8f95150ec70ca2fe7e69e6bf4249e5766df5388bf35977f2; author package identity a2a6dce5e40298a43f904dfbffe799e09e675d964df7477683ee2bc9db04cdd8. Metadata/source inspection, not local weight-byte verification. The detailed runtime diff was inspected for d3."
+    },
+    {
+      "id": "decision3-d3-lite-oct15",
+      "title": "d3-lite October 15 card and identity review",
+      "url": "https://huggingface.co/vllm-sr/d3-lite/blob/9c10703193afc7c7d28c88201c0364bfbbf58320/README.md",
+      "kind": "model_card",
+      "reviewed_on": "2026-10-15",
+      "review_depth": "content_reviewed",
+      "source_revision": "9c10703193afc7c7d28c88201c0364bfbbf58320",
+      "review_note": "Compared 3c49f5c0bd48a4b28e29b8ec1f38f56e199f3d61 to 9c10703193afc7c7d28c88201c0364bfbbf58320: all 2 safetensors weight/readout Git/LFS identities, decision_config.json blob and manifest identity unchanged; temperature remains 1.0. Changed root blobs: README, MODEL_MANIFEST, d3_runtime and .gitattributes; assets subtree also changes. History describes Index/serving documentation, loading checks and hosted-demo links; d3 additionally documents native vLLM. Manifest SHA-256 31f0ff94ff26619c0a063ccac803edcfe34c56c92e5c9c50b703b62893f125dd; author package identity fda5cfc7bc9063fbb7cd40b50fa9a0963d83a4790a3d6a11a356833fd1171992. Metadata/source inspection, not local weight-byte verification. The detailed runtime diff was inspected for d3."
+    },
+    {
+      "id": "decision3-d3-edge-oct15",
+      "title": "d3-edge October 15 card and identity review",
+      "url": "https://huggingface.co/vllm-sr/d3-edge/blob/cab71e6ad3461b8086d51ddb572c656babd63b0b/README.md",
+      "kind": "model_card",
+      "reviewed_on": "2026-10-15",
+      "review_depth": "content_reviewed",
+      "source_revision": "cab71e6ad3461b8086d51ddb572c656babd63b0b",
+      "review_note": "Compared 20c745653400d191ecacd99c4eafc0c5900dc15e to cab71e6ad3461b8086d51ddb572c656babd63b0b: all 2 safetensors weight/readout Git/LFS identities, decision_config.json blob and manifest identity unchanged; temperature remains 1.0. Changed root blobs: README, MODEL_MANIFEST, d3_runtime and .gitattributes; assets subtree also changes. History describes Index/serving documentation, loading checks and hosted-demo links; d3 additionally documents native vLLM. Manifest SHA-256 3bae8989a6feb36a66bf4d8c44112dc63199d0dc69f564dc895fe368b1e08e59; author package identity 6e00d04abbdbdf6d35c9e12065769d9edaacc3bfe9404583891797718d239dc8. Metadata/source inspection, not local weight-byte verification. The detailed runtime diff was inspected for d3."
+    },
+    {
+      "id": "decision3-runtime-oct15",
+      "title": "d3 package-verification scope update",
+      "url": "https://huggingface.co/vllm-sr/d3/blob/225be8b1e2270becab69c5fe05b26f99cbbdd66b/d3_runtime.py",
+      "kind": "repository",
+      "reviewed_on": "2026-10-15",
+      "review_depth": "content_reviewed",
+      "source_revision": "225be8b1e2270becab69c5fe05b26f99cbbdd66b",
+      "review_note": "Diff against October 12 runtime read: fast/full check runtime-loaded files, excluding Markdown/assets/license/packaging; release additionally hashes all listed files and reports unlisted non-hidden files. Loading integrity policy change, not a retrain or temperature fit. Downloaded text SHA-256 2d90e93ac06b9ca4a84e0610ab9acfa2d6793ea4b40eec1b4a3da47577bdea37. No fetched code executed."
+    },
+    {
+      "id": "vllm-d3-pr",
+      "title": "Native vLLM Decision 3.0 integration and author tests",
+      "url": "https://github.com/vllm-project/vllm/pull/61565",
+      "kind": "repository",
+      "reviewed_on": "2026-10-15",
+      "review_depth": "content_reviewed",
+      "source_revision": "89cab550862e4b7f08d70c19682121362d7dd0c5",
+      "review_note": "Merged 2026-10-14T17:10:56Z as 89cab550862e4b7f08d70c19682121362d7dd0c5. PR body SHA-256 0ae4020db2a05e5caa67309f962810bed64cb36b9f67c49b740080acf75f12a5. Author tests d3/mini/edge on MI325X; flash/nano/lite, CUDA, tensor parallelism and LoRA unmeasured. Latest official release rechecked after reconnect: v0.31.0 (Oct 5), predating the merge. Card separately reports an Oct 15 MI300X nightly check. No model execution here."
+    },
+    {
+      "id": "vllm-d3-docs",
+      "title": "vLLM structured decisions at the D3 merge",
+      "url": "https://github.com/vllm-project/vllm/blob/89cab550862e4b7f08d70c19682121362d7dd0c5/docs/models/structured_decisions_models.md",
+      "kind": "official_docs",
+      "reviewed_on": "2026-10-15",
+      "review_depth": "content_reviewed",
+      "source_revision": "89cab550862e4b7f08d70c19682121362d7dd0c5",
+      "review_note": "Pinned D3 section and generic endpoint distinctions read alongside the latest official docs. D3 is a custom classify/pooling code-readout model, not ordinary chat generation. Noncausal full attention disables prefix caching/chunked prefill. Generic label-reading descriptions do not all apply to D3."
+    },
+    {
+      "id": "vllm-d3-code",
+      "title": "vLLM D3 classification model implementation",
+      "url": "https://github.com/vllm-project/vllm/blob/89cab550862e4b7f08d70c19682121362d7dd0c5/vllm/model_executor/models/d3.py",
+      "kind": "repository",
+      "reviewed_on": "2026-10-15",
+      "review_depth": "content_reviewed",
+      "source_revision": "89cab550862e4b7f08d70c19682121362d7dd0c5",
+      "review_note": "Model source and relevant config/strategy patches read: detect decision_config.json, load readout.safetensors as FP32 score head, one classify read per question. Shared media features do not imply one shared noncausal text encoding. Read only."
+    },
+    {
+      "id": "decision-index-text-oct15",
+      "title": "Decision Index 0.3.2 text aggregate snapshot",
+      "url": "https://multimodalart-jev-decision-index.static.hf.space/data/v03.json",
+      "kind": "evaluation_report",
+      "reviewed_on": "2026-10-15",
+      "review_depth": "content_reviewed",
+      "source_revision": null,
+      "review_note": "Generated 2026-10-14T09:16:12Z, retrieved/rechecked Oct 15; SHA-256 e51e388fd9f7be8d82662bc349c1971147ffc64be2072568aca96820941b4133. 166 entries versus the card's older 149 count. Formula: public/same-skills/new-domains 0.2/0.5/0.3, private-scale equating and 0.9-point tie band. d3 66.26 and linne-oak 65.61 share rank_tie=1. Published aggregates inspected; hidden items/raw runs not audited."
+    },
+    {
+      "id": "decision-index-vision-oct15",
+      "title": "Decision Index 0.3.2 vision aggregate snapshot",
+      "url": "https://multimodalart-jev-decision-index.static.hf.space/data/vision.json",
+      "kind": "evaluation_report",
+      "reviewed_on": "2026-10-15",
+      "review_depth": "content_reviewed",
+      "source_revision": null,
+      "review_note": "Generated 2026-10-14T09:16:14Z, retrieved/rechecked Oct 15; SHA-256 66c74cfaa91f899cafc0fe2b639feca7febd611d9c7f5da42435fafc2e0a36f6. 34 entrants versus the card's older 33 count. Public/private equally weighted. d3 full/public/private 71.26/74.08/68.45. Published aggregates only; hidden items, uncertainty and raw runs not independently audited."
+    },
+    {
+      "id": "decision-index-scoring-oct15",
+      "title": "Decision Index 0.3.2 scoring-change description",
+      "url": "https://multimodalart-jev-decision-index.static.hf.space/index.html",
+      "kind": "evaluation_report",
+      "reviewed_on": "2026-10-15",
+      "review_depth": "content_reviewed",
+      "source_revision": null,
+      "review_note": "HTML/JavaScript read without execution; SHA-256 3da5b93fcf055c01566ef4553cb24c06a03217960e245f0a055ac33140a8f649. Changelog says GPQA/MMLU-Pro/BBH same-skill sets had been omitted for 37 models; scoring was corrected, GSM8K rebuilt and ForecastBench retired. JSON endpoints identified from page source. This extends the Oct 13 title-only inspection; score revisions do not establish retraining."
+    },
+    {
+      "id": "financial-documents",
+      "title": "Stefan Jansen: Testing Jev on Financial Documents",
+      "url": "https://insights.ml4trading.io/p/testing-jev-on-financial-documents",
+      "kind": "evaluation_report",
+      "reviewed_on": "2026-10-15",
+      "review_depth": "content_reviewed",
+      "source_revision": null,
+      "review_note": "Published Oct 13; body and methods appendix reviewed Oct 15; HTML SHA-256 c81fd362a36c238a5d99882f529f587ced4fc6af30678b7e8930d63d7046c0db. Original evaluator outside model team, with TypeSafe-provided API access for an unpaid evaluation and a vendor-suggested post-hoc prompt. Runs attributed to jev-1.13.0 (Sep 21–Oct 7) from experiment record and sampled recheck; original compact files lack version fields. Complete frozen code/prediction archive not audited. Label construction, population selection and split limitations retained."
+    },
+    {
+      "id": "semantic-feature-cookbook",
+      "title": "TypeSafe autoresearch semantic features with CatBoost",
+      "url": "https://docs.typesafe.ai/cookbooks/autoresearch_feature_discovery",
+      "kind": "official_docs",
+      "reviewed_on": "2026-10-15",
+      "review_depth": "content_reviewed",
+      "source_revision": null,
+      "review_note": "Full code/output and Markdown read; Markdown SHA-256 24e0854e5a5846c269142d2a57abfb8aa90d63c37231b03036ed08f1e9989b72. Cached run dated 2026-08-03: jev-1.12 plus claude-sonnet-5; alternate proposer branch not run. 2000 wine notes, 1200 development / 800 test, five rounds; 38 questions become 67 columns. Source describes cache replay, but notebook/cache/API not executed here. Critic-score reconstruction, not financial or visual-intent evidence."
+    },
+    {
+      "id": "trl-sft-guide",
+      "title": "TRL SFT: generic VLM/PEFT support boundaries",
+      "url": "https://huggingface.co/docs/trl/en/sft_trainer",
+      "kind": "official_docs",
+      "reviewed_on": "2026-10-15",
+      "review_depth": "content_reviewed",
+      "source_revision": null,
+      "review_note": "Relevant VLM/PEFT dataset-format sections reviewed; live HTML SHA-256 2f26af56edf5f6e5e8038221679f1bdd04251d49d0cecfadb0c38f15d495b68c. Generic trainer documentation for supported models, not a demonstrated D3 noncausal readout training/export or serving-LoRA recipe. No training, dependency installation or image upload performed."
     }
   ],
   "entries": [
@@ -1223,21 +1383,23 @@
       "source_ids": [
         "jev-launch",
         "jev-primitives",
-        "jev-confidence"
+        "jev-confidence",
+        "financial-documents",
+        "semantic-feature-cookbook"
       ],
       "summary": {
         "en": "Hosted typed judgments: probabilities over supplied choices, propositions and ordinal rubrics.",
         "zh": "托管的结构化判断服务：对选项、命题与有序评分标准输出分布。"
       },
       "use": {
-        "en": "A managed comparator when testing whether a judgment node is useful.",
-        "zh": "验证判断节点价值时，可作为无需自建部署的对照。"
+        "en": "Managed typed-judgment comparator or frozen semantic-feature generator; compare supervised baselines under the same task and label policy.",
+        "zh": "可作为托管类型化判断对照或冻结的语义特征提取器；与监督基线比较时统一任务与标签规则。"
       },
       "caveat": {
         "en": "RLCD is vendor-described; the full training recipe is not public. Valid schemas and confidence fields do not establish semantic reliability.",
         "zh": "RLCD 的完整训练配方未公开；格式合法与置信度字段不等于语义可靠。"
       },
-      "reviewed_on": "2026-10-13",
+      "reviewed_on": "2026-10-15",
       "mechanism": {
         "en": "Proprietary model. Choice/Score confidence summarizes the returned distribution; it is not a separate probability-of-correctness estimate. Noul returns P(yes) with no separate confidence field. Question IDs are not model input; each instruction must be complete. Same-request answers are documented as independent; dependent evidence requires a later request.",
         "zh": "专有模型。Choice／Score 的 confidence 是返回分布的统计量，并非独立预测的正确概率；Noul 返回 P(yes)，没有单独 confidence 字段。 文档称问题 ID 不送入模型，instructions 须写完整；同请求答案互不作为上下文，依赖新证据的判断需后续请求。"
@@ -1894,7 +2056,10 @@
       "url": "https://huggingface.co/spaces/multimodalart/jev-decision-index",
       "source_ids": [
         "decision-index",
-        "decision-index-current"
+        "decision-index-current",
+        "decision-index-text-oct15",
+        "decision-index-vision-oct15",
+        "decision-index-scoring-oct15"
       ],
       "summary": {
         "en": "A broader decision benchmark index with explicit aggregation rules.",
@@ -1905,10 +2070,10 @@
         "zh": "先检查任务覆盖和聚合方式，再解读排序。"
       },
       "caveat": {
-        "en": "Versioned composites are not raw accuracy. The live title is 0.3.2; complete current dynamic ranks were not audited. Keep historical 0.2, internal 0.3.1 and public-kit results separate; mixed API/GPU timings are not controlled hardware comparisons.",
-        "zh": "不同版本的综合指数不是准确率；实时页面标题为 0.3.2，完整动态排名未审计。历史 0.2、内部 0.3.1 与公共套件须分开；混合 API／GPU 延迟不是受控硬件比较。"
+        "en": "Oct14-generated 0.3.2 aggregate JSON inspected on Oct15; private items/raw runs remain unaudited. Text uses a 0.9-point tie band. Archive scoring versions separately: 0.3.2 includes scoring/data corrections, not evidence of retraining.",
+        "zh": "10 月 15 日核对了 10 月 14 日生成的 0.3.2 汇总 JSON，私有题目／原始运行仍未审计。文本榜有 0.9 分平局带；0.3.2 含评分／数据修正，不能据此推断重训。"
       },
-      "reviewed_on": "2026-10-13"
+      "reviewed_on": "2026-10-15"
     },
     {
       "id": "nimble-evaluation",
@@ -2472,37 +2637,50 @@
         "decision3-runtime",
         "decision3-apple",
         "decision3-coreml",
-        "fluiduse"
+        "fluiduse",
+        "decision3-d3-oct15",
+        "decision3-d3-flash-oct15",
+        "decision3-d3-mini-oct15",
+        "decision3-d3-nano-oct15",
+        "decision3-d3-lite-oct15",
+        "decision3-d3-edge-oct15",
+        "decision3-runtime-oct15",
+        "vllm-d3-pr",
+        "vllm-d3-docs",
+        "vllm-d3-code",
+        "decision-index-text-oct15",
+        "decision-index-vision-oct15",
+        "decision-index-scoring-oct15"
       ],
-      "reviewed_on": "2026-10-13",
+      "reviewed_on": "2026-10-15",
       "weight_revision": null,
       "summary": {
-        "en": "Six public-weight multimodal checkpoints with a 255-code decision readout; one independent prompt row per question.",
-        "zh": "六个公开权重多模态检查点，使用 255-code 判断读出；每题对应独立 prompt row。"
+        "en": "Six multimodal code-readout checkpoints; native vLLM main support added October 14, with an independent prompt read per question.",
+        "zh": "六个多模态 code-readout 检查点；10 月 14 日新增原生 vLLM main 支持，每题仍独立读取 prompt。"
       },
       "use": {
         "en": "Local text/image/video classification, scoring and routing; compare sizes at fixed input and candidate budgets.",
         "zh": "本地文本／图像／视频分类、评分与路由；固定输入和候选预算比较各型号。"
       },
       "caveat": {
-        "en": "Internal Index 0.3.1, the 140178-request public kit and 231-task JevBench are separate protocols. Training overlap/decontamination and business calibration remain unknown; Engine support was dev-channel.",
-        "zh": "内部 Index 0.3.1、140178 请求公共套件与 231-task JevBench 是不同协议；训练重叠／去污染和业务校准仍未知，Engine 支持当时为 dev channel。"
+        "en": "Index versions and public-only scores differ. Weight/calibration identities are unchanged; the text numerical leader shares the top tie band. Native vLLM needs a post-merge/nightly build; LoRA and CUDA were unmeasured in the integration report.",
+        "zh": "Index 各版本与公共分数不可混用；权重／校准标识未变，文本数值领先者处于共享第一平局带。原生 vLLM 需合并后／nightly 版本，集成报告未测 LoRA 和 CUDA。"
       },
       "scale": {
         "en": "Card counts / nominal base labels: d3 26.09B / 27B; flash 8.39B / 9B; mini 4.54B / 4B; nano 2.21B / 2B; lite 0.85B / 0.8B; edge 0.59B / 0.6B. Counts include vision; manifests also count the readout.",
         "zh": "模型卡参数量／宣传基座尺寸：d3 26.09B／27B；flash 8.39B／9B；mini 4.54B／4B；nano 2.21B／2B；lite 0.85B／0.8B；edge 0.59B／0.6B。包含视觉编码器，manifest 另计读出头。"
       },
       "mechanism": {
-        "en": "Last prompt position → 255-code FP32 readout → mask unused codes → temperature 1.0 softmax. Questions have separate state/question/option rows; default batches of 8 do not encode all questions as one shared text sequence. Qwen full-attention layers are noncausal; DeltaNet layers stay causal.",
-        "zh": "最后 prompt 位置 → 255-code FP32 读出 → 掩蔽未使用 code → 温度 1.0 softmax。每题有独立状态／问题／选项行；默认 8 行批处理不等于所有问题共用一次序列编码。Qwen full-attention 层双向，DeltaNet 层保持因果。"
+        "en": "Last prompt position → 255-code FP32 readout → mask unused codes → temperature 1.0 softmax. Questions have separate state/question/option rows; the package runtime's default batches of 8 do not encode all questions as one shared text sequence. Qwen full-attention layers are noncausal; DeltaNet layers stay causal.",
+        "zh": "最后 prompt 位置 → 255-code FP32 读出 → 掩蔽未使用 code → 温度 1.0 softmax。每题有独立状态／问题／选项行；包运行库默认 8 行批处理不等于所有问题共用一次序列编码。Qwen full-attention 层双向，DeltaNet 层保持因果。"
       },
       "training": {
         "en": "d3 manifest declares Qwen3.8-27B, with qwen3_5 runtime architecture; others declare Qwen3.5, including edge derived from the 0.8B base. Public training data/recipe, overlap audits and held-out calibration reports were not established. Softmax and T=1 do not establish empirical calibration.",
         "zh": "d3 manifest 声明 Qwen3.8-27B，运行架构为 qwen3_5；其他基于 Qwen3.5，edge 也源自 0.8B 基座。完整训练数据／配方、重叠审计及保留集校准报告尚未确证；softmax 和 T=1 不证明经验校准。"
       },
       "availability": {
-        "en": "v3.1.0 full weights, manifests and custom Transformers runtime; vLLM-SR Engine /v1/systemone in dev channel at the reviewed cards. Standard vLLM chat compatibility is not established. Core ML lite/nano/mini is a separate conversion. Video defaults: 2 fps, at most 32 frames; no audio validation. Null package token limit and backbone context configuration are not validated long-context quality.",
-        "zh": "v3.1.0 完整权重、manifest 及定制 Transformers 运行代码；所核卡片中 vLLM-SR Engine 的 /v1/systemone 为 dev channel，未确证标准 vLLM chat 兼容。Core ML lite／nano／mini 是独立转换；视频默认 2 fps、最多 32 帧，未验证音频。包中 token 上限为 null，骨干上下文配置不等于长上下文质量验收。"
+        "en": "v3.1.0 weights retained; custom Transformers and vLLM-SR dev Engine paths remain. Native vLLM /v1/systemone merged as 89cab550 on Oct14; latest stable v0.31.0 predates support. D3 uses classify: no prefix caching/chunked prefill, up to 64 questions and 255 choice options; error/confidence/usage semantics differ from the package runtime. Core ML is separate. Video: 2 fps, at most 32 frames; no audio validation. No verified D3 multimodal fine-tuning recipe established here. Null package token limits and backbone context configuration are not validated long-context quality.",
+        "zh": "保留 v3.1.0 权重、定制 Transformers 与 vLLM-SR dev Engine。原生 vLLM /v1/systemone 于 10 月 14 日以 89cab550 合入；最新正式版 v0.31.0 早于该支持。D3 走 classify：关闭 prefix cache／chunked prefill，最多 64 题、255 个 choice 选项；错误／confidence／usage 与包运行库不同。Core ML 独立；视频 2 fps、最多 32 帧，未验证音频。本版未确证 D3 多模态微调配方。 包中的 null token 上限及骨干上下文配置不等于长上下文质量验收。"
       },
       "license_note": "All six pinned cards/manifests declare Apache-2.0 for weights, readout, runtime and listed Qwen bases. Public weights do not establish public training data. Per-package source revisions and author-supplied identity hashes are in the source register; no family-wide weight hash or local binary verification is claimed.",
       "tags": [
@@ -2645,6 +2823,50 @@
         "local",
         "calibration"
       ]
+    },
+    {
+      "id": "financial-document-eval",
+      "name": "Financial-document decision tests",
+      "category": "evaluation",
+      "url": "https://insights.ml4trading.io/p/testing-jev-on-financial-documents",
+      "source_ids": [
+        "financial-documents"
+      ],
+      "reviewed_on": "2026-10-15",
+      "summary": {
+        "en": "Original-evaluator comparison of Jev and supervised text/TF-IDF models on earnings, 8-K labels and SEC follow-up.",
+        "zh": "原评测者比较 Jev 与监督文本／TF-IDF 模型，分别测试财报变化、8-K 标签和 SEC 后续问询。"
+      },
+      "use": {
+        "en": "Test task/label alignment and supervised baselines before selecting typed judgments.",
+        "zh": "先核任务／标签对齐和监督基线，再选择类型化判断。"
+      },
+      "caveat": {
+        "en": "Vendor API support; historical selected populations, hindsight screening, post-hoc prompts and split limitations. No universal tree-versus-Jev winner or investment-return claim.",
+        "zh": "厂商提供 API；历史筛选样本含回顾检查、事后提示和划分限制，不能宣布树模型／Jev 通用胜负或投资收益。"
+      }
+    },
+    {
+      "id": "semantic-features",
+      "name": "Semantic features + supervised predictor",
+      "category": "baselines",
+      "url": "https://docs.typesafe.ai/cookbooks/autoresearch_feature_discovery",
+      "source_ids": [
+        "semantic-feature-cookbook"
+      ],
+      "reviewed_on": "2026-10-15",
+      "summary": {
+        "en": "LLM-proposed questions and Jev judgments turn text into features for a supervised CatBoost predictor.",
+        "zh": "LLM 提议问题，Jev 将文本转成语义特征，再由监督 CatBoost 预测任务标签。"
+      },
+      "use": {
+        "en": "Compare direct judgments, ordinary text features and frozen semantic features at matched label/inference budgets.",
+        "zh": "在相同标签／推理预算下比较直接判断、普通文本特征和冻结的语义特征。"
+      },
+      "caveat": {
+        "en": "Author-reported wine regression. Feature discovery belongs inside development folds; downstream training does not fine-tune Jev or establish financial/multimodal generalization.",
+        "zh": "葡萄酒回归属于作者报告；特征发现须限制在开发划分，训练下游模型不等于微调 Jev，也不证明金融／多模态泛化。"
+      }
     }
   ]
 }

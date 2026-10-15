@@ -210,6 +210,18 @@
       "kind": "hf_model",
       "url": "https://huggingface.co/api/models/heman10x/rlcd-modernbert-151m",
       "meaning": "Weights, renderer or per-K calibrator may change independently; preserve evaluation-versus-serving calibration distinctions and negative abstention findings."
+    },
+    {
+      "id": "vllm-structured-decisions",
+      "url": "https://api.github.com/repos/vllm-project/vllm/contents/docs/models/structured_decisions_models.md",
+      "kind": "github_file",
+      "meaning": "Documentation/API integration changed; distinguish main from released versions, custom heads from label reading, and measured from unmeasured training support."
+    },
+    {
+      "id": "typesafe-semantic-features",
+      "url": "https://docs.typesafe.ai/cookbooks/autoresearch_feature_discovery",
+      "kind": "web_page",
+      "meaning": "Raw cookbook HTML changed; inspect dataset, held-out feature search, run date, cache and downstream learner before attributing model improvement."
     }
   ]
 }

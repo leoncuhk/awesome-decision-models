@@ -6,7 +6,7 @@
 
 收录用于**分类、评分、排序、验证、路由与拒判**的模型和方法。我们关心的不是谁的宣传数字更高，而是：**在具体任务中，哪种方法能以可接受的风险和总成本，交付可验收的结果。**
 
-**本版来源核验日期：2026-10-13。** 精选 43 项资源，其中 17 个核心模型系列、20 条带协议背景的评测记录。本版完成的是公开资料核验，**没有宣称独立运行并复现这些模型**。阅读深度、版本固定情况与未解决的资料缺口均见[来源登记](docs/sources.md)。收录不等于背书，也不等于通过生产可靠性认证。
+**本版来源核验日期：2026-10-15。** 精选 45 项资源，其中 17 个核心模型系列、27 条带协议背景的评测记录。本版完成的是公开资料核验，**没有宣称独立运行并复现这些模型**。阅读深度、版本固定情况与未解决的资料缺口均见[来源登记](docs/sources.md)。收录不等于背书，也不等于通过生产可靠性认证。
 
 ## 目录
 
@@ -39,7 +39,7 @@
 
 | 模型 | 机制／定位 | 适合的实验 | 重要限制 |
 | --- | --- | --- | --- |
-| [Jev / TypeSafe](https://typesafe.ai) | 托管的结构化判断服务：对选项、命题与有序评分标准输出分布。 | 验证判断节点价值时，可作为无需自建部署的对照。 | RLCD 的完整训练配方未公开；格式合法与置信度字段不等于语义可靠。 |
+| [Jev / TypeSafe](https://typesafe.ai) | 托管的结构化判断服务：对选项、命题与有序评分标准输出分布。 | 可作为托管类型化判断对照或冻结的语义特征提取器；与监督基线比较时统一任务与标签规则。 | RLCD 的完整训练配方未公开；格式合法与置信度字段不等于语义可靠。 |
 | [Laya](https://github.com/NandhaKishorM/laya) | 小型编码器与动态选项判断头；包含通用、多语言及工作流专项检查点。 | 适合有领域训练数据、需要控制高频调用成本的窄域判断。 | 不可混用基础版／专项版成绩；专项卡披露训练／校准重叠和继承温度冲突。布尔标签可能主导 noul／choice；语义标签也不能保证否定句安全。官方称 action.act_probability 几乎恒为 1，不适合作为执行门槛；confidence 也需在实际任务上验证。 |
 | [Kev](https://github.com/jaredpalmer/kev) | Qwen 骨干与动态 pointer head 的类型化判断系列；Kev 1.0 将现有检查点固定为发布基线。 | 可检查、可微调的领域监督判断实验底座。 | 须区分训练任务族测试与迁移测试。27B v2 在长合同上退步且过度自信（CUAD ECE 0.053，v1 为 0.007）；可接收长度和拟合温度不保证新任务的准确率或校准。 |
 | [Contrastive Language Models (CLM)](https://github.com/Contrastive-LM/CLM) | 冻结语言模型编码器，分别表示状态与动作，再用可训练投影头匹配。 | 适合候选可复用的工具目录、排序及领域 Best-of-N 选择。 | 相对排序不能保证识别“全部候选都错”；Best-of-N 成绩不代表模型独立解题能力。 |
@@ -53,7 +53,7 @@
 | [Microsoft-Decision-1](https://ai.azure.com/catalog/models/Microsoft-Decision-1) | 托管的 Qwen3.5-9B 后训练模型，对有限选项评分。 | 比较分类、路由和按标准评分。 | 厂商比较缺少已审计的逐项产物；熟悉任务的校准不保证迁移，措辞与安全判断仍可能出错。 |
 | [OpenAI Decisions API / GPT-6 Luna](https://developers.openai.com/api/docs/guides/decisions) | 面向文本与图像的类型化判断 API，处于公开测试。 | 托管分类、路由与有序评分。 | 拒答为单独返回类型，不等于校准后的拒判；confidence 需在目标任务验证，训练与服务身份尚未披露。 |
 | [Nace Drex v1.5](https://github.com/nace-ai/drex-decision-models) | MiMo-V2.6-Distill-Qwen-9B 骨干加 Kev pointer head，提供公开权重发布链接。 | 本地文本／JSON 判断候选，可测试长输入。 | 使用基准训练划分，不能视为未知领域零样本；公开 Index 0.3.1 前列处于平局带内，小规模运行器核对不证明普遍等价。 |
-| [vLLM-SR Decision 3.0](https://huggingface.co/collections/vllm-sr/decision-30) | 六个公开权重多模态检查点，使用 255-code 判断读出；每题对应独立 prompt row。 | 本地文本／图像／视频分类、评分与路由；固定输入和候选预算比较各型号。 | 内部 Index 0.3.1、140178 请求公共套件与 231-task JevBench 是不同协议；训练重叠／去污染和业务校准仍未知，Engine 支持当时为 dev channel。 |
+| [vLLM-SR Decision 3.0](https://huggingface.co/collections/vllm-sr/decision-30) | 六个多模态 code-readout 检查点；10 月 14 日新增原生 vLLM main 支持，每题仍独立读取 prompt。 | 本地文本／图像／视频分类、评分与路由；固定输入和候选预算比较各型号。 | Index 各版本与公共分数不可混用；权重／校准标识未变，文本数值领先者处于共享第一平局带。原生 vLLM 需合并后／nightly 版本，集成报告未测 LoRA 和 CUDA。 |
 | [Intern-Decision](https://github.com/internlm/Intern-Decision) | Qwen3.5 多模态 0.8B／2B／4B 系列，在一个因果 masked assistant skeleton 中评分多个类型化字段。 | 与每题独立模型比较多字段成本和字段／顺序敏感性，测试基于图像证据的判断。 | 原始训练／校准记录私有；96-case 分布试验只作诊断。型号／后端专属温度与 max(P) confidence 不能直接保证业务风险。 |
 | [Verdict / OpenJev](https://github.com/Heman10x-NGU/Verdict-open-jev) | 151M ModernBERT／GLiClass 候选分类器，含显式证据不足选项及 per-K 校准。 | 轻量意图分类与缺少正确选项测试；核对实际服务概率和评测 renderer／校准器。 | 作者测试显示 hard negative 和同义改写下拒答崩塌；转换者报告实际服务校准与保留集评测明显不同，不能保证跨域拒答可靠性。 |
 
@@ -79,6 +79,15 @@
 - [E18 — Intern-Decision：精确分布校准试验。](docs/evidence.md#e18)
 - [E19 — Verdict 部署：评测校准不等于实际服务校准。](docs/evidence.md#e19)
 - [E20 — Verdict 拒答：保留 hard negative 与同义改写失败。](docs/evidence.md#e20)
+- [E21 — Decision 3.0：0.3.2 评分变化与不变的权重标识。](docs/evidence.md#e21)
+- [E22 — Decision 3.0：批处理吞吐、延迟与过载边界。](docs/evidence.md#e22)
+- [E23 — 原生 vLLM D3：已合入源码与有限工程测试。](docs/evidence.md#e23)
+- [E24 — 财报变化：条件标签和不等长文本窗口。](docs/evidence.md#e24)
+- [E25 — 8-K 分类：监督标签与事后选择。](docs/evidence.md#e25)
+- [E26 — SEC 后续问询：90 日预测不同于文本完整性。](docs/evidence.md#e26)
+- [E27 — 语义特征：开发集内发现与葡萄酒评分预测。](docs/evidence.md#e27)
+
+领域评测、训练支持核查与未知／澄清策略见[图片意图适配流程](docs/selection-guide.md#image-intent-adaptation)。
 
 零样本分类、专项微调与 Best-of-N 选择不是同一个问题。本地 GPU 前向耗时与远程 API 往返耗时，也不是同一种性能测量。
 
@@ -93,6 +102,7 @@
 - **[Outlines](https://github.com/dottxt-ai/outlines)** — 为普通语言模型提供受约束结构化输出。 模式合法不保证事实正确。
 - **[TabICLv2](https://arxiv.org/abs/2602.11139)** — 用于表格分类与回归的基础模型。 按论文收录；未本地复现，不外推自然语言能力。
 - **[FluidUse / decision-model Core ML deployment](https://github.com/FluidInference/FluidUse)** — Apple 部署资源，含原生 Swift manager 与 Python 辅助 Core ML bridge，支持 Decision 3.0 等。 转换等价和 smoke test 不保证质量；须匹配长度 bucket、精度、tokenizer、校准器与媒体路径。bridge 调用串行排队，超时会关闭 session；文档中的自动下载／环境安装本轮未运行。
+- **[Semantic features + supervised predictor](https://docs.typesafe.ai/cookbooks/autoresearch_feature_discovery)** — LLM 提议问题，Jev 将文本转成语义特征，再由监督 CatBoost 预测任务标签。 葡萄酒回归属于作者报告；特征发现须限制在开发划分，训练下游模型不等于微调 Jev，也不证明金融／多模态泛化。
 
 能够用规则或普通监督分类器解决的任务，也应保留相应对照。只有可靠地增加了价值，复杂性才值得付出。
 
@@ -108,9 +118,10 @@
 
 - **[MAPIE](https://github.com/scikit-learn-contrib/MAPIE)** — 预测集合、不确定性与保形风险工具。 保证依赖方法、风险目标及数据假设。
 
-- **[Decision Index (archival releases and live board)](https://huggingface.co/spaces/multimodalart/jev-decision-index)** — 具有明确聚合规则的较广覆盖决策评测指数。 不同版本的综合指数不是准确率；实时页面标题为 0.3.2，完整动态排名未审计。历史 0.2、内部 0.3.1 与公共套件须分开；混合 API／GPU 延迟不是受控硬件比较。
+- **[Decision Index (archival releases and live board)](https://huggingface.co/spaces/multimodalart/jev-decision-index)** — 具有明确聚合规则的较广覆盖决策评测指数。 10 月 15 日核对了 10 月 14 日生成的 0.3.2 汇总 JSON，私有题目／原始运行仍未审计。文本榜有 0.9 分平局带；0.3.2 含评分／数据修正，不能据此推断重训。
 - **[Nimble public evaluations](https://github.com/bespokelabsai/nimble/blob/62076b4f2d365b5879dafcf7f6dd072a1fe76df7/docs/PUBLIC_BENCHMARKS.md)** — 人工参考标签子集、配对比较及校准报告。 由项目方运行；本列表未独立复现。
 - **[Decision-model benchmark](https://github.com/nibzard/decision-model-benchmark)** — 用于判断模型比较的第三方代码与协议。 第三方身份本身不保证方法或标签可靠。
+- **[Financial-document decision tests](https://insights.ml4trading.io/p/testing-jev-on-financial-documents)** — 原评测者比较 Jev 与监督文本／TF-IDF 模型，分别测试财报变化、8-K 标签和 SEC 后续问询。 厂商提供 API；历史筛选样本含回顾检查、事后提示和划分限制，不能宣布树模型／Jev 通用胜负或投资收益。
 
 评测应同时看任务质量、关键错误、校准、风险—覆盖率、子群与分布变化，以及完整系统成本。阈值在校准集确定，不能在最终测试集上反复调参。自动放行的案例也必须保留抽检，才能发现“自信地判错”。
 
@@ -150,6 +161,6 @@ python3 -m unittest discover -s tests -v
 
 仓库包含[资料维护 Skill](.agents/skills/decision-models-curator/SKILL.md)和[每周来源检查工作流](.github/workflows/source-watch.yml)。前者规定怎样研究，后者发现来源变化并维护待审核 Issue。**工作流不会自动运行 AI 研究、改写结论或合并代码，也不需要付费模型 API。** 启用条件、调度限制和手动运行方式见[维护说明](docs/maintenance.md)。
 
-新增项目或成绩前请阅读 [CONTRIBUTING](CONTRIBUTING.md)。欢迎负面结果、假设变化与纠错。[首版核验记录](updates/2026-09-25.md)保留原始限制；[10 月 6 日发布核验记录](updates/2026-10-06-release-boundaries.md)与[10 月 11 日核验记录](updates/2026-10-11-typed-releases.md)说明新增、修正及证据缺口；[10 月 13 日多模态／部署核验](updates/2026-10-13-multimodal-deployment.md)区分新发布、校准和应用证据；[发布说明](PUBLISHING.md)提供面向空仓库的安全初始化步骤。
+新增项目或成绩前请阅读 [CONTRIBUTING](CONTRIBUTING.md)。欢迎负面结果、假设变化与纠错。[首版核验记录](updates/2026-09-25.md)保留原始限制；[10 月 6 日发布核验记录](updates/2026-10-06-release-boundaries.md)与[10 月 11 日核验记录](updates/2026-10-11-typed-releases.md)说明新增、修正及证据缺口；[10 月 13 日多模态／部署核验](updates/2026-10-13-multimodal-deployment.md)区分新发布、校准和应用证据；[10 月 15 日更新](updates/2026-10-15-serving-and-adaptation.md)核查原生 vLLM、评分变化、语义特征与领域适配；[发布说明](PUBLISHING.md)提供面向空仓库的安全初始化步骤。
 
 原创代码与整理文字使用 [MIT](LICENSE)；链接的项目、模型、数据与论文保留各自许可证。固定来源文档的提交版本，**不等于**固定模型权重。

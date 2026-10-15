@@ -43,7 +43,14 @@ def outputs(root: Path = ROOT) -> dict[Path, str]:
           'E17':'WebMCP 应用：小样本差异与前置规则错误。',
           'E18':'Intern-Decision：精确分布校准试验。',
           'E19':'Verdict 部署：评测校准不等于实际服务校准。',
-          'E20':'Verdict 拒答：保留 hard negative 与同义改写失败。'}
+          'E20':'Verdict 拒答：保留 hard negative 与同义改写失败。',
+          'E21':'Decision 3.0：0.3.2 评分变化与不变的权重标识。',
+          'E22':'Decision 3.0：批处理吞吐、延迟与过载边界。',
+          'E23':'原生 vLLM D3：已合入源码与有限工程测试。',
+          'E24':'财报变化：条件标签和不等长文本窗口。',
+          'E25':'8-K 分类：监督标签与事后选择。',
+          'E26':'SEC 后续问询：90 日预测不同于文本完整性。',
+          'E27':'语义特征：开发集内发现与葡萄酒评分预测。'}
         replacements['EVIDENCE_LINKS']='\n'.join(f"- [{e['id']} — {e['title'] if lang=='en' else short_zh[e['id']]}](docs/evidence.md#{e['id'].lower()})" for e in evs)
         for category in ['baselines','routing','reliability','evaluation','foundations','related_lists']:
             lines=[]

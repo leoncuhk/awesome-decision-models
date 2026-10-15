@@ -744,3 +744,289 @@ Reported fractions are displayed as percentages where appropriate. More printed 
 
 **Sources:** [Verdict / OpenJev mechanism and negative findings](https://github.com/Heman10x-NGU/Verdict-open-jev/blob/30f15564821626ca5c1ad5b2638c4eb7078787dd/README.md); [Verdict raw abstention-generalization report](https://github.com/Heman10x-NGU/Verdict-open-jev/blob/30f15564821626ca5c1ad5b2638c4eb7078787dd/reports/v2/exp_e5_abstention_generalization.json)
 
+<a id="e21"></a>
+## E21 · Decision 3.0 Index 0.3.2: scoring changes with unchanged weight identities
+
+**Evidence:** `author_reported` · **Reviewed:** 2026-10-15 · **Reproduced here:** no
+
+| Protocol | Recorded context |
+| --- | --- |
+| Task | Text and vision Full composites, separate board protocols; release claims corroborated against published aggregate JSON |
+| Test unit | Oct 14-generated text: 166 entries; vision: 34 entrants. Entry counts are not evaluation sample sizes |
+| Split | Public/same-skill/new-domain text panels; public/private vision panels. Hidden examples/raw runs not audited |
+| Reference | Text weights 0.2/0.5/0.3 with private-scale equating; vision public/private 0.5/0.5. Composites, not raw accuracy |
+| Training | Six v3.1.0 weight/readout Git/LFS and manifest identities unchanged since Oct 13 pins; temperature remains 1.0. No tensor bytes verified |
+| Measurement | Retrieved/rechecked Oct 15. Text tie band 0.9: d3 66.26 and linne-oak 65.61 share rank group 1; card entry counts reflect an older snapshot |
+| Hardware | Aggregate source review; serving timings are E22/E23 |
+
+| Reported measurement | Value |
+| --- | --- |
+| d3 displayed text Full index 0.3.2 | 66.26 |
+| d3 displayed vision Full index 0.3.2 | 71.26 |
+| d3-flash displayed text Full index 0.3.2 | 55.79 |
+| d3-flash displayed vision Full index 0.3.2 | 66.89 |
+| d3-mini displayed text Full index 0.3.2 | 52.61 |
+| d3-mini displayed vision Full index 0.3.2 | 63.16 |
+| d3-nano displayed text Full index 0.3.2 | 38.86 |
+| d3-nano displayed vision Full index 0.3.2 | 54.67 |
+| d3-lite displayed text Full index 0.3.2 | 32.33 |
+| d3-lite displayed vision Full index 0.3.2 | 42.11 |
+| d3-edge displayed text Full index 0.3.2 | 20.24 |
+| d3-edge displayed vision Full index 0.3.2 | 31.71 |
+
+**Interpretation:** A new evaluation snapshot does not establish newly trained weights or an uncontested text winner.
+
+- Changelog describes omitted same-skill sets and public-suite corrections. Subtracting 0.3.1 from 0.3.2 is not a controlled model-improvement experiment.
+- Published release/board aggregates are not an independent rerun by this repository; hidden-item and calibration audits remain incomplete.
+- Training overlap/decontamination remains unknown; approximate visual rebuilds and private/public boundaries remain relevant.
+- The tie band is a board convention, not a production confidence interval or risk guarantee.
+
+**Artifacts and limits:**
+- text generated utc: 2026-10-14T09:16:12Z
+- text sha256: e51e388fd9f7be8d82662bc349c1971147ffc64be2072568aca96820941b4133
+- vision generated utc: 2026-10-14T09:16:14Z
+- vision sha256: 66c74cfaa91f899cafc0fe2b639feca7febd611d9c7f5da42435fafc2e0a36f6
+- raw outputs: Aggregate JSON/metadata only; no benchmark run here
+
+**Sources:** [d3 October 15 card and identity review](https://huggingface.co/vllm-sr/d3/blob/225be8b1e2270becab69c5fe05b26f99cbbdd66b/README.md); [d3-flash October 15 card and identity review](https://huggingface.co/vllm-sr/d3-flash/blob/8b35c853b90e777595ec36bacae820fe08ea077a/README.md); [d3-mini October 15 card and identity review](https://huggingface.co/vllm-sr/d3-mini/blob/97dd054df4b3e0b3beb6af23ab8c82b7c0052e0e/README.md); [d3-nano October 15 card and identity review](https://huggingface.co/vllm-sr/d3-nano/blob/aeb70d4dd53ed25b855c3b0a66394b8fe265db7f/README.md); [d3-lite October 15 card and identity review](https://huggingface.co/vllm-sr/d3-lite/blob/9c10703193afc7c7d28c88201c0364bfbbf58320/README.md); [d3-edge October 15 card and identity review](https://huggingface.co/vllm-sr/d3-edge/blob/cab71e6ad3461b8086d51ddb572c656babd63b0b/README.md); [Decision Index 0.3.2 text aggregate snapshot](https://multimodalart-jev-decision-index.static.hf.space/data/v03.json); [Decision Index 0.3.2 vision aggregate snapshot](https://multimodalart-jev-decision-index.static.hf.space/data/vision.json); [Decision Index 0.3.2 scoring-change description](https://multimodalart-jev-decision-index.static.hf.space/index.html)
+
+<a id="e22"></a>
+## E22 · Decision 3.0 serving: batching gains have load and overload boundaries
+
+**Evidence:** `author_reported` · **Reviewed:** 2026-10-15 · **Reproduced here:** no
+
+| Protocol | Recorded context |
+| --- | --- |
+| Task | AutoModel in-process, package HTTP server and vLLM-SR Engine; Engine batching versus former one-request-per-forward mode |
+| Test unit | Oct 13: about 330-token ticket, text with 1/16 questions, new 1.6-MP images, new 10-second 1080p video and 32k text; 3 warmups then up to 20 calls; load levels 15–60 seconds |
+| Split | Runtime benchmark, not unseen-domain quality. Separate public-suite drift sample: 4000 requests / 29339 questions |
+| Reference | Same model/GPU; Engine source optimizations newer than published images. AutoModel back-to-back versus closed-loop Engine clients up to 64 |
+| Training | No weight/calibrator change established. Batching changes numerical execution: 14 of 29339 decisions differ, described as near-ties |
+| Measurement | 27 one-question-text requests/s at p99 <1 s; 29 at saturation is another operating point. Eight-question images fail that p99 target at every tested load. Engine admits 32 in-flight, rejects excess with HTTP 503 |
+| Hardware | One MI325X per replica, each side alone; ROCm 7.2/PyTorch 2.12, AutoModel Transformers 5.17.0. Startup: local weights, empty kernel caches; CLI image pull excluded |
+
+| Reported measurement | Value |
+| --- | --- |
+| AutoModel warm text-question median (ms) | 54.4 |
+| AutoModel warm image-question median (ms) | 290 |
+| AutoModel warm ten-second-video median (ms) | 500 |
+| Engine batching text-question median (ms) | 57.2 |
+| AutoModel one-question text rate (requests/s) | 18.4 |
+| Engine batching text rate with p99 under 1 s (requests/s) | 27 |
+| Engine text saturation rate (requests/s) | 29 |
+| Batched decisions changed | 14/29339 (0.05%) |
+| Engine batching startup, local weights (s) | 20.4 |
+| AutoModel startup, local weights (s) | 38.4 |
+
+**Interpretation:** Batching improves reported serving throughput while adding latency to a single short request; no hardware-independent speedup follows.
+
+- SR Engine differs from native vLLM in E23; do not merge their startup or throughput tables.
+- Byte parity concerned former unbatched mode with matched kernel settings; default batching has near-tie changes.
+- Measured Engine commit/image is not fully pinned. Startup excludes downloads/pulls; overload, retries and full costs are incomplete.
+- Tiny reported gold-accuracy drift under batching is not a demonstrated training improvement.
+
+**Artifacts and limits:**
+- protocol: Pinned Oct 15 card, Serving performance section
+- run date: 2026-10-13
+- raw outputs: Author report only; no load run/failure-log audit here
+
+**Sources:** [d3 October 15 card and identity review](https://huggingface.co/vllm-sr/d3/blob/225be8b1e2270becab69c5fe05b26f99cbbdd66b/README.md)
+
+<a id="e23"></a>
+## E23 · Native vLLM D3: merged source and bounded parity/concurrency evidence
+
+**Evidence:** `author_reported` · **Reviewed:** 2026-10-15 · **Reproduced here:** no
+
+| Protocol | Recorded context |
+| --- | --- |
+| Task | Native D3Strategy classify/pooling on /v1/systemone; one prompt/classify read per question with shared media features |
+| Test unit | PR: 416 questions per d3/mini/edge. Mixed throughput: 40% one-question text, 20% four-question text, 10% JSON, 10% 40-option choice, 15% new image, 5% new video |
+| Split | Parity fixtures and serving loads, not unseen-domain effectiveness. Flash/nano/lite, CUDA, tensor parallelism and LoRA explicitly unmeasured in PR |
+| Reference | PR d3@fc2d74bd, mini@6d8971f4, edge@fe71f8e1 versus checkpoint runtimes. Separate Oct 15 MI300X nightly check in card changes one d3 decision |
+| Training | Unchanged checkpoints, FP32 readout. Merged 89cab550862e4b7f08d70c19682121362d7dd0c5 at 2026-10-14T17:10:56Z; latest official v0.31.0 predates support |
+| Measurement | PR load: 8 s warmup, 30 s per closed-loop level. Rate below compares native vLLM with HTTP checkpoint server, not in-process AutoModel or SR Engine. Confidence/usage/error semantics differ; optional permutation_average absent |
+| Hardware | PR one MI325X per side, ROCm nightly 5555a2d8 + PR tree, PyTorch 2.13/ROCm 7.2; reference Transformers 5.17.0/FLA 0.5.2. Card separately tests MI300X Oct 15 nightly 0.32.0rc1.dev190+g3f1bcfd82 |
+
+| Reported measurement | Value |
+| --- | --- |
+| PR d3 decisions changed | 0/416 (0.00%) |
+| PR d3-mini decisions changed | 1/416 (0.24%) |
+| PR d3-edge decisions changed | 2/416 (0.48%) |
+| Card Oct 15 MI300X d3 decisions matched | 415/416 (99.76%) |
+| PR d3 checkpoint HTTP server, 8 clients (requests/s) | 6.1 |
+| PR d3 native vLLM, 8 clients (requests/s) | 8.6 |
+| PR d3 checkpoint HTTP server, 64 clients (requests/s) | 4.6 |
+| PR d3 native vLLM, 64 clients (requests/s) | 8.5 |
+| PR native d3 cold startup, local weights (s) | 214.5 |
+| PR AutoModel cold startup, local weights (s) | 39.9 |
+
+**Interpretation:** Native support is merged source with author-run measurements, not a stable-release or universal-parity guarantee.
+
+- Noncausal attention disables prefix caching/chunked prefill; one HTTP request is not one shared text encoding.
+- Up to 64 questions/255 choice options; top-level instructions and invalid/too-long questions return HTTP 400, unlike package per-question errors.
+- Device/build checks differ at near-ties. The CUDA install command is not NVIDIA validation.
+- Default 0.92 GPU utilization reserves HBM; reported reservation is not weight size. New-video decoding queues under load.
+
+**Artifacts and limits:**
+- merge commit: 89cab550862e4b7f08d70c19682121362d7dd0c5
+- pr body sha256: 0ae4020db2a05e5caa67309f962810bed64cb36b9f67c49b740080acf75f12a5
+- raw outputs: Author tables/tests read; no model execution
+- release check: Latest official release rechecked Oct 15: v0.31.0
+
+**Sources:** [Native vLLM Decision 3.0 integration and author tests](https://github.com/vllm-project/vllm/pull/61565); [vLLM structured decisions at the D3 merge](https://github.com/vllm-project/vllm/blob/89cab550862e4b7f08d70c19682121362d7dd0c5/docs/models/structured_decisions_models.md); [vLLM D3 classification model implementation](https://github.com/vllm-project/vllm/blob/89cab550862e4b7f08d70c19682121362d7dd0c5/vllm/model_executor/models/d3.py); [d3 October 15 card and identity review](https://huggingface.co/vllm-sr/d3/blob/225be8b1e2270becab69c5fe05b26f99cbbdd66b/README.md)
+
+<a id="e24"></a>
+## E24 · Financial earnings: conditional comparison labels and unequal text windows
+
+**Evidence:** `third_party_reported` · **Reviewed:** 2026-10-15 · **Reproduced here:** no
+
+| Protocol | Recorded context |
+| --- | --- |
+| Task | 2023 release revenue/EPS year-on-year direction and net loss, separate binary tasks |
+| Test unit | Selected revenue 802/EPS 833; unfiltered revenue 887/EPS 948; net loss 1044. Five submitted releases failed token limit |
+| Split | Supervised classifiers company-grouped five-fold; historical, not forward-time/after-training-cutoff. TF-IDF vocabulary/IDF fit on full corpus before label splits |
+| Reference | Later matched XBRL reports provide labels; retrospective magnitude-string screen selects comparisons. No complete corrected answer key |
+| Training | Reported Jev 1.13.0 without task examples; TF-IDF LightGBM and fine-tuned ModernBERT/SEC-BERT use labeled releases with fixed settings |
+| Measurement | Accuracy conditional on each population. Jev sees full text, encoders about first 4000 tokens. No extraction-and-arithmetic baseline |
+| Hardware | Encoders trained on one RTX 3090; hosted Jev source review, no speed comparison |
+
+| Reported measurement | Value |
+| --- | --- |
+| Jev selected revenue accuracy | 98.50% |
+| LightGBM selected revenue accuracy | 72.60% |
+| Jev selected EPS accuracy | 99.00% |
+| LightGBM selected EPS accuracy | 63.60% |
+| Jev unfiltered revenue accuracy | 95.40% |
+| Jev unfiltered EPS accuracy | 94.90% |
+| Jev net-loss accuracy | 97.30% |
+
+**Interpretation:** Jev leads the tested document classifiers on these specified comparisons; conditional screening and label defects prevent a universal accuracy claim.
+
+- TypeSafe supplied API access; external evaluator report, not reproduced here.
+- XBRL is later scoring evidence, not model input. Hindsight availability screening is not a deployable eligibility rule.
+- Disagreement-only label audit does not establish 100% correctness; binary options force answers for absent comparisons.
+- Unequal windows, untuned training, full-corpus preprocessing and historical exposure limit architecture-level conclusions.
+
+**Artifacts and limits:**
+- protocol: Original article and appendix
+- raw outputs: Complete frozen code/predictions not audited
+- model revision: Report attribution; original compact files lack version fields
+
+**Sources:** [Stefan Jansen: Testing Jev on Financial Documents](https://insights.ml4trading.io/p/testing-jev-on-financial-documents)
+
+<a id="e25"></a>
+## E25 · Financial 8-K categories: supervision and post-hoc selection
+
+**Evidence:** `third_party_reported` · **Reviewed:** 2026-10-15 · **Reproduced here:** no
+
+| Protocol | Recorded context |
+| --- | --- |
+| Task | Reproduce filer-selected 8-K category among 11 classes, with item headings removed |
+| Test unit | 3006 usable Jan–Sep 2023 filings; five failed documents /15 question rows excluded |
+| Split | Company-grouped classifier folds, TF-IDF full-corpus preprocessing; no forward-time test |
+| Reference | Company filing category, including overlapping 7.01/8.01 conventions; not objective event semantics alone |
+| Training | Jev without task examples; logistic/LightGBM and encoders supervised on public categories |
+| Measurement | Same Jev-answered feed; Jev averages three wordings. Nine-class analysis and 99%-precision cutoffs chosen after outcomes |
+| Hardware | No controlled hardware/speed comparison |
+
+| Reported measurement | Value |
+| --- | --- |
+| Jev full 11-class accuracy | 79.30% |
+| TF-IDF logistic accuracy | 89.40% |
+| TF-IDF LightGBM accuracy | 91.30% |
+| Jev post-hoc coverage at 99% observed precision | 47.90% |
+| ModernBERT post-hoc coverage at 99% observed precision | 55.50% |
+
+**Interpretation:** Supervision helps reproduce these public reporting labels; post-hoc subsets/thresholds do not establish prospective reliability.
+
+- Vendor API access disclosed; no independent replay here.
+- Nine-class analysis conditions on true category, unavailable as a live filter. Reporting conventions may differ from semantic intent.
+- Cutoffs used evaluated outcomes, not frozen calibration data; observed 99% precision is not a production guarantee.
+- Supervised versus zero-shot setup does not prove trees always outperform a decision architecture.
+
+**Artifacts and limits:**
+- protocol: Article task/split appendix
+- raw outputs: Some TF-IDF per-document predictions not retained according to source
+- model revision: Reported Jev 1.13.0; immutable serving version unavailable
+
+**Sources:** [Stefan Jansen: Testing Jev on Financial Documents](https://insights.ml4trading.io/p/testing-jev-on-financial-documents)
+
+<a id="e26"></a>
+## E26 · SEC follow-up: 90-day forecasting differs from textual completeness
+
+**Evidence:** `third_party_reported` · **Reviewed:** 2026-10-15 · **Reproduced here:** no
+
+| Protocol | Recorded context |
+| --- | --- |
+| Task | Predict substantive SEC follow-up within 90 days after a response |
+| Test unit | 2261 unique 2022–2023 letters, 925 positives; closing letters/silence negative, incomplete observation windows excluded |
+| Split | Text classifiers train on 8875 letters outside recorded test CIKs; 86 co-registrant IDs still overlap. Grouping is not chronological isolation |
+| Reference | Observed subsequent correspondence. Questions omit 90-day horizon; fully-resolves wording targets a different judgment |
+| Training | Reported Jev 1.13.0 zero-shot; supervised ModernBERT/SEC-BERT. Vendor-suggested fund-form hint added after seeing same-letter results |
+| Measurement | Direct accuracy/AUC/Brier below; augmented prompt is a separate post-hoc arm, not untouched validation |
+| Hardware | No latency or investment-performance comparison |
+
+| Reported measurement | Value |
+| --- | --- |
+| Jev direct-question accuracy | 67.00% |
+| Jev direct-question AUC | 71.30% |
+| Jev direct-question Brier | 0.2204 |
+| ModernBERT accuracy | 80.60% |
+| ModernBERT AUC | 89.00% |
+| ModernBERT Brier | 0.1346 |
+| Jev post-hoc hint AUC | 83.10% |
+| Jev post-hoc hint Brier | 0.1878 |
+
+**Interpretation:** Trained classifiers forecast this labeled process better; a same-sample domain hint needs new-letter validation, and semantic completeness is another target.
+
+- API support and prompt suggestion disclosed; source review is not our reproduction.
+- Company sequencing/regex labels may mislink reviews. Residual issuer overlap, TF-IDF preprocessing and historical exposure remain limitations.
+- Form-plus-length comparator uses another split, so is not imported as equally company-isolated.
+- Lower Brier alone does not prove calibration; no financial-return guarantee follows.
+
+**Artifacts and limits:**
+- protocol: Original methods appendix and question wording
+- raw outputs: Full raw prediction audit absent
+- version: Report attributes Sep 21–Oct 7 runs to Jev 1.13.0 using sampled recheck
+
+**Sources:** [Stefan Jansen: Testing Jev on Financial Documents](https://insights.ml4trading.io/p/testing-jev-on-financial-documents)
+
+<a id="e27"></a>
+## E27 · Semantic features: wine-score prediction with development-only discovery
+
+**Evidence:** `author_reported` · **Reviewed:** 2026-10-15 · **Reproduced here:** no
+
+| Protocol | Recorded context |
+| --- | --- |
+| Task | Predict critic score from wine tasting-note text, not finance or visual intent |
+| Test unit | 2000 sampled notes, exact duplicate text removed; 1200 development / 800 held-out, seed 0 |
+| Split | Proposal/selection uses development only, 5-fold CV repeated 3 times; five arms and round diagnostics evaluated on held-out afterward |
+| Reference | Critic score 80–100; cached sample 80–98. Public dataset revision 90eb39f35fc64e556fc17f06d4137a4a69ec3297 |
+| Training | Aug 3 cached run: fixed Jev 1.12 features, claude-sonnet-5 proposer, CatBoost 400 trees / depth 4 / rate 0.05. No Jev parameter training |
+| Measurement | Five rounds, 38 questions (29 score + 9 noul) become 67 columns; RMSE in critic points. Paired bootstrap conditional on this split; discovery-seed uncertainty unmeasured |
+| Hardware | Author cached/API workflow, not full-cost benchmark; no API calls here |
+
+| Reported measurement | Value |
+| --- | --- |
+| Mean baseline RMSE | 3.088 |
+| Same CatBoost word-count RMSE | 2.466 |
+| Direct Jev score with dev-fitted offset RMSE | 2.145 |
+| First-round 18-question RMSE | 1.869 |
+| Fifth-round 38-question RMSE | 1.772 |
+| Round 5 minus round 1 RMSE | -0.097 |
+
+**Interpretation:** Semantic judgments can be features for supervised prediction; this tests a pipeline, not Jev fine-tuning or general domain transfer.
+
+- Most gain comes from the first proposal; later-round paired 95% CI [-0.147,-0.050] concerns 800 rows, not repeated discovery runs.
+- Feature/schema search must stay inside development folds; future text and target leakage need separate checks.
+- Random row split and exact dedup do not establish temporal/group/near-duplicate generalization or no pretraining overlap.
+- Feature importance is predictive, not causal. Source cache/alternate proposer descriptions are not our replay.
+
+**Artifacts and limits:**
+- protocol: Official code/output read
+- raw outputs: Source describes cache; notebook/cache not replayed
+- run date: 2026-08-03
+- markdown sha256: 24e0854e5a5846c269142d2a57abfb8aa90d63c37231b03036ed08f1e9989b72
+
+**Sources:** [TypeSafe autoresearch semantic features with CatBoost](https://docs.typesafe.ai/cookbooks/autoresearch_feature_discovery)
+

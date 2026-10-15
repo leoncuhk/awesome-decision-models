@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "reviewed_on": "2026-10-13",
+  "reviewed_on": "2026-10-15",
   "records": [
     {
       "id": "E01",
@@ -1285,6 +1285,592 @@
         "protocol": "Pinned raw exp_e5 report read",
         "raw_outputs": "Aggregate counts public; per-example inference not replayed here",
         "upstream_revision": "30f15564821626ca5c1ad5b2638c4eb7078787dd"
+      },
+      "reproduced_here": false
+    },
+    {
+      "id": "E21",
+      "title": "Decision 3.0 Index 0.3.2: scoring changes with unchanged weight identities",
+      "model_ids": [
+        "decision3",
+        "decision-index"
+      ],
+      "source_ids": [
+        "decision3-d3-oct15",
+        "decision3-d3-flash-oct15",
+        "decision3-d3-mini-oct15",
+        "decision3-d3-nano-oct15",
+        "decision3-d3-lite-oct15",
+        "decision3-d3-edge-oct15",
+        "decision-index-text-oct15",
+        "decision-index-vision-oct15",
+        "decision-index-scoring-oct15"
+      ],
+      "evidence_type": "author_reported",
+      "reviewed_on": "2026-10-15",
+      "report_date": null,
+      "model_revision": null,
+      "protocol": {
+        "task": "Text and vision Full composites, separate board protocols; release claims corroborated against published aggregate JSON",
+        "test_unit": "Oct 14-generated text: 166 entries; vision: 34 entrants. Entry counts are not evaluation sample sizes",
+        "split": "Public/same-skill/new-domain text panels; public/private vision panels. Hidden examples/raw runs not audited",
+        "reference": "Text weights 0.2/0.5/0.3 with private-scale equating; vision public/private 0.5/0.5. Composites, not raw accuracy",
+        "training": "Six v3.1.0 weight/readout Git/LFS and manifest identities unchanged since Oct 13 pins; temperature remains 1.0. No tensor bytes verified",
+        "measurement": "Retrieved/rechecked Oct 15. Text tie band 0.9: d3 66.26 and linne-oak 65.61 share rank group 1; card entry counts reflect an older snapshot",
+        "hardware": "Aggregate source review; serving timings are E22/E23"
+      },
+      "metrics": [
+        {
+          "label": "d3 displayed text Full index 0.3.2",
+          "value": 66.26,
+          "unit": "index_points"
+        },
+        {
+          "label": "d3 displayed vision Full index 0.3.2",
+          "value": 71.26,
+          "unit": "index_points"
+        },
+        {
+          "label": "d3-flash displayed text Full index 0.3.2",
+          "value": 55.79,
+          "unit": "index_points"
+        },
+        {
+          "label": "d3-flash displayed vision Full index 0.3.2",
+          "value": 66.89,
+          "unit": "index_points"
+        },
+        {
+          "label": "d3-mini displayed text Full index 0.3.2",
+          "value": 52.61,
+          "unit": "index_points"
+        },
+        {
+          "label": "d3-mini displayed vision Full index 0.3.2",
+          "value": 63.16,
+          "unit": "index_points"
+        },
+        {
+          "label": "d3-nano displayed text Full index 0.3.2",
+          "value": 38.86,
+          "unit": "index_points"
+        },
+        {
+          "label": "d3-nano displayed vision Full index 0.3.2",
+          "value": 54.67,
+          "unit": "index_points"
+        },
+        {
+          "label": "d3-lite displayed text Full index 0.3.2",
+          "value": 32.33,
+          "unit": "index_points"
+        },
+        {
+          "label": "d3-lite displayed vision Full index 0.3.2",
+          "value": 42.11,
+          "unit": "index_points"
+        },
+        {
+          "label": "d3-edge displayed text Full index 0.3.2",
+          "value": 20.24,
+          "unit": "index_points"
+        },
+        {
+          "label": "d3-edge displayed vision Full index 0.3.2",
+          "value": 31.71,
+          "unit": "index_points"
+        }
+      ],
+      "conclusion": "A new evaluation snapshot does not establish newly trained weights or an uncontested text winner.",
+      "caveats": [
+        "Changelog describes omitted same-skill sets and public-suite corrections. Subtracting 0.3.1 from 0.3.2 is not a controlled model-improvement experiment.",
+        "Published release/board aggregates are not an independent rerun by this repository; hidden-item and calibration audits remain incomplete.",
+        "Training overlap/decontamination remains unknown; approximate visual rebuilds and private/public boundaries remain relevant.",
+        "The tie band is a board convention, not a production confidence interval or risk guarantee."
+      ],
+      "artifacts": {
+        "text_generated_utc": "2026-10-14T09:16:12Z",
+        "text_sha256": "e51e388fd9f7be8d82662bc349c1971147ffc64be2072568aca96820941b4133",
+        "vision_generated_utc": "2026-10-14T09:16:14Z",
+        "vision_sha256": "66c74cfaa91f899cafc0fe2b639feca7febd611d9c7f5da42435fafc2e0a36f6",
+        "raw_outputs": "Aggregate JSON/metadata only; no benchmark run here"
+      },
+      "reproduced_here": false
+    },
+    {
+      "id": "E22",
+      "title": "Decision 3.0 serving: batching gains have load and overload boundaries",
+      "model_ids": [
+        "decision3"
+      ],
+      "source_ids": [
+        "decision3-d3-oct15"
+      ],
+      "evidence_type": "author_reported",
+      "reviewed_on": "2026-10-15",
+      "report_date": "2026-10-13",
+      "model_revision": "225be8b1e2270becab69c5fe05b26f99cbbdd66b",
+      "protocol": {
+        "task": "AutoModel in-process, package HTTP server and vLLM-SR Engine; Engine batching versus former one-request-per-forward mode",
+        "test_unit": "Oct 13: about 330-token ticket, text with 1/16 questions, new 1.6-MP images, new 10-second 1080p video and 32k text; 3 warmups then up to 20 calls; load levels 15–60 seconds",
+        "split": "Runtime benchmark, not unseen-domain quality. Separate public-suite drift sample: 4000 requests / 29339 questions",
+        "reference": "Same model/GPU; Engine source optimizations newer than published images. AutoModel back-to-back versus closed-loop Engine clients up to 64",
+        "training": "No weight/calibrator change established. Batching changes numerical execution: 14 of 29339 decisions differ, described as near-ties",
+        "measurement": "27 one-question-text requests/s at p99 <1 s; 29 at saturation is another operating point. Eight-question images fail that p99 target at every tested load. Engine admits 32 in-flight, rejects excess with HTTP 503",
+        "hardware": "One MI325X per replica, each side alone; ROCm 7.2/PyTorch 2.12, AutoModel Transformers 5.17.0. Startup: local weights, empty kernel caches; CLI image pull excluded"
+      },
+      "metrics": [
+        {
+          "label": "AutoModel warm text-question median (ms)",
+          "value": 54.4,
+          "unit": "milliseconds"
+        },
+        {
+          "label": "AutoModel warm image-question median (ms)",
+          "value": 290,
+          "unit": "milliseconds"
+        },
+        {
+          "label": "AutoModel warm ten-second-video median (ms)",
+          "value": 500,
+          "unit": "milliseconds"
+        },
+        {
+          "label": "Engine batching text-question median (ms)",
+          "value": 57.2,
+          "unit": "milliseconds"
+        },
+        {
+          "label": "AutoModel one-question text rate (requests/s)",
+          "value": 18.4,
+          "unit": "requests_per_second"
+        },
+        {
+          "label": "Engine batching text rate with p99 under 1 s (requests/s)",
+          "value": 27,
+          "unit": "requests_per_second"
+        },
+        {
+          "label": "Engine text saturation rate (requests/s)",
+          "value": 29,
+          "unit": "requests_per_second"
+        },
+        {
+          "label": "Batched decisions changed",
+          "value": 0.0004771805446675074,
+          "unit": "fraction",
+          "numerator": 14,
+          "denominator": 29339
+        },
+        {
+          "label": "Engine batching startup, local weights (s)",
+          "value": 20.4,
+          "unit": "seconds"
+        },
+        {
+          "label": "AutoModel startup, local weights (s)",
+          "value": 38.4,
+          "unit": "seconds"
+        }
+      ],
+      "conclusion": "Batching improves reported serving throughput while adding latency to a single short request; no hardware-independent speedup follows.",
+      "caveats": [
+        "SR Engine differs from native vLLM in E23; do not merge their startup or throughput tables.",
+        "Byte parity concerned former unbatched mode with matched kernel settings; default batching has near-tie changes.",
+        "Measured Engine commit/image is not fully pinned. Startup excludes downloads/pulls; overload, retries and full costs are incomplete.",
+        "Tiny reported gold-accuracy drift under batching is not a demonstrated training improvement."
+      ],
+      "artifacts": {
+        "protocol": "Pinned Oct 15 card, Serving performance section",
+        "run_date": "2026-10-13",
+        "raw_outputs": "Author report only; no load run/failure-log audit here"
+      },
+      "reproduced_here": false
+    },
+    {
+      "id": "E23",
+      "title": "Native vLLM D3: merged source and bounded parity/concurrency evidence",
+      "model_ids": [
+        "decision3"
+      ],
+      "source_ids": [
+        "vllm-d3-pr",
+        "vllm-d3-docs",
+        "vllm-d3-code",
+        "decision3-d3-oct15"
+      ],
+      "evidence_type": "author_reported",
+      "reviewed_on": "2026-10-15",
+      "report_date": "2026-10-14",
+      "model_revision": "89cab550862e4b7f08d70c19682121362d7dd0c5",
+      "protocol": {
+        "task": "Native D3Strategy classify/pooling on /v1/systemone; one prompt/classify read per question with shared media features",
+        "test_unit": "PR: 416 questions per d3/mini/edge. Mixed throughput: 40% one-question text, 20% four-question text, 10% JSON, 10% 40-option choice, 15% new image, 5% new video",
+        "split": "Parity fixtures and serving loads, not unseen-domain effectiveness. Flash/nano/lite, CUDA, tensor parallelism and LoRA explicitly unmeasured in PR",
+        "reference": "PR d3@fc2d74bd, mini@6d8971f4, edge@fe71f8e1 versus checkpoint runtimes. Separate Oct 15 MI300X nightly check in card changes one d3 decision",
+        "training": "Unchanged checkpoints, FP32 readout. Merged 89cab550862e4b7f08d70c19682121362d7dd0c5 at 2026-10-14T17:10:56Z; latest official v0.31.0 predates support",
+        "measurement": "PR load: 8 s warmup, 30 s per closed-loop level. Rate below compares native vLLM with HTTP checkpoint server, not in-process AutoModel or SR Engine. Confidence/usage/error semantics differ; optional permutation_average absent",
+        "hardware": "PR one MI325X per side, ROCm nightly 5555a2d8 + PR tree, PyTorch 2.13/ROCm 7.2; reference Transformers 5.17.0/FLA 0.5.2. Card separately tests MI300X Oct 15 nightly 0.32.0rc1.dev190+g3f1bcfd82"
+      },
+      "metrics": [
+        {
+          "label": "PR d3 decisions changed",
+          "value": 0,
+          "unit": "fraction",
+          "numerator": 0,
+          "denominator": 416
+        },
+        {
+          "label": "PR d3-mini decisions changed",
+          "value": 0.002403846153846154,
+          "unit": "fraction",
+          "numerator": 1,
+          "denominator": 416
+        },
+        {
+          "label": "PR d3-edge decisions changed",
+          "value": 0.004807692307692308,
+          "unit": "fraction",
+          "numerator": 2,
+          "denominator": 416
+        },
+        {
+          "label": "Card Oct 15 MI300X d3 decisions matched",
+          "value": 0.9975961538461539,
+          "unit": "fraction",
+          "numerator": 415,
+          "denominator": 416
+        },
+        {
+          "label": "PR d3 checkpoint HTTP server, 8 clients (requests/s)",
+          "value": 6.1,
+          "unit": "requests_per_second"
+        },
+        {
+          "label": "PR d3 native vLLM, 8 clients (requests/s)",
+          "value": 8.6,
+          "unit": "requests_per_second"
+        },
+        {
+          "label": "PR d3 checkpoint HTTP server, 64 clients (requests/s)",
+          "value": 4.6,
+          "unit": "requests_per_second"
+        },
+        {
+          "label": "PR d3 native vLLM, 64 clients (requests/s)",
+          "value": 8.5,
+          "unit": "requests_per_second"
+        },
+        {
+          "label": "PR native d3 cold startup, local weights (s)",
+          "value": 214.5,
+          "unit": "seconds"
+        },
+        {
+          "label": "PR AutoModel cold startup, local weights (s)",
+          "value": 39.9,
+          "unit": "seconds"
+        }
+      ],
+      "conclusion": "Native support is merged source with author-run measurements, not a stable-release or universal-parity guarantee.",
+      "caveats": [
+        "Noncausal attention disables prefix caching/chunked prefill; one HTTP request is not one shared text encoding.",
+        "Up to 64 questions/255 choice options; top-level instructions and invalid/too-long questions return HTTP 400, unlike package per-question errors.",
+        "Device/build checks differ at near-ties. The CUDA install command is not NVIDIA validation.",
+        "Default 0.92 GPU utilization reserves HBM; reported reservation is not weight size. New-video decoding queues under load."
+      ],
+      "artifacts": {
+        "merge_commit": "89cab550862e4b7f08d70c19682121362d7dd0c5",
+        "pr_body_sha256": "0ae4020db2a05e5caa67309f962810bed64cb36b9f67c49b740080acf75f12a5",
+        "raw_outputs": "Author tables/tests read; no model execution",
+        "release_check": "Latest official release rechecked Oct 15: v0.31.0"
+      },
+      "reproduced_here": false
+    },
+    {
+      "id": "E24",
+      "title": "Financial earnings: conditional comparison labels and unequal text windows",
+      "model_ids": [
+        "jev",
+        "financial-document-eval"
+      ],
+      "source_ids": [
+        "financial-documents"
+      ],
+      "evidence_type": "third_party_reported",
+      "reviewed_on": "2026-10-15",
+      "report_date": "2026-10-13",
+      "model_revision": null,
+      "protocol": {
+        "task": "2023 release revenue/EPS year-on-year direction and net loss, separate binary tasks",
+        "test_unit": "Selected revenue 802/EPS 833; unfiltered revenue 887/EPS 948; net loss 1044. Five submitted releases failed token limit",
+        "split": "Supervised classifiers company-grouped five-fold; historical, not forward-time/after-training-cutoff. TF-IDF vocabulary/IDF fit on full corpus before label splits",
+        "reference": "Later matched XBRL reports provide labels; retrospective magnitude-string screen selects comparisons. No complete corrected answer key",
+        "training": "Reported Jev 1.13.0 without task examples; TF-IDF LightGBM and fine-tuned ModernBERT/SEC-BERT use labeled releases with fixed settings",
+        "measurement": "Accuracy conditional on each population. Jev sees full text, encoders about first 4000 tokens. No extraction-and-arithmetic baseline",
+        "hardware": "Encoders trained on one RTX 3090; hosted Jev source review, no speed comparison"
+      },
+      "metrics": [
+        {
+          "label": "Jev selected revenue accuracy",
+          "value": 0.985,
+          "unit": "fraction"
+        },
+        {
+          "label": "LightGBM selected revenue accuracy",
+          "value": 0.726,
+          "unit": "fraction"
+        },
+        {
+          "label": "Jev selected EPS accuracy",
+          "value": 0.99,
+          "unit": "fraction"
+        },
+        {
+          "label": "LightGBM selected EPS accuracy",
+          "value": 0.636,
+          "unit": "fraction"
+        },
+        {
+          "label": "Jev unfiltered revenue accuracy",
+          "value": 0.954,
+          "unit": "fraction"
+        },
+        {
+          "label": "Jev unfiltered EPS accuracy",
+          "value": 0.949,
+          "unit": "fraction"
+        },
+        {
+          "label": "Jev net-loss accuracy",
+          "value": 0.973,
+          "unit": "fraction"
+        }
+      ],
+      "conclusion": "Jev leads the tested document classifiers on these specified comparisons; conditional screening and label defects prevent a universal accuracy claim.",
+      "caveats": [
+        "TypeSafe supplied API access; external evaluator report, not reproduced here.",
+        "XBRL is later scoring evidence, not model input. Hindsight availability screening is not a deployable eligibility rule.",
+        "Disagreement-only label audit does not establish 100% correctness; binary options force answers for absent comparisons.",
+        "Unequal windows, untuned training, full-corpus preprocessing and historical exposure limit architecture-level conclusions."
+      ],
+      "artifacts": {
+        "protocol": "Original article and appendix",
+        "raw_outputs": "Complete frozen code/predictions not audited",
+        "model_revision": "Report attribution; original compact files lack version fields"
+      },
+      "reproduced_here": false
+    },
+    {
+      "id": "E25",
+      "title": "Financial 8-K categories: supervision and post-hoc selection",
+      "model_ids": [
+        "jev",
+        "financial-document-eval"
+      ],
+      "source_ids": [
+        "financial-documents"
+      ],
+      "evidence_type": "third_party_reported",
+      "reviewed_on": "2026-10-15",
+      "report_date": "2026-10-13",
+      "model_revision": null,
+      "protocol": {
+        "task": "Reproduce filer-selected 8-K category among 11 classes, with item headings removed",
+        "test_unit": "3006 usable Jan–Sep 2023 filings; five failed documents /15 question rows excluded",
+        "split": "Company-grouped classifier folds, TF-IDF full-corpus preprocessing; no forward-time test",
+        "reference": "Company filing category, including overlapping 7.01/8.01 conventions; not objective event semantics alone",
+        "training": "Jev without task examples; logistic/LightGBM and encoders supervised on public categories",
+        "measurement": "Same Jev-answered feed; Jev averages three wordings. Nine-class analysis and 99%-precision cutoffs chosen after outcomes",
+        "hardware": "No controlled hardware/speed comparison"
+      },
+      "metrics": [
+        {
+          "label": "Jev full 11-class accuracy",
+          "value": 0.793,
+          "unit": "fraction"
+        },
+        {
+          "label": "TF-IDF logistic accuracy",
+          "value": 0.894,
+          "unit": "fraction"
+        },
+        {
+          "label": "TF-IDF LightGBM accuracy",
+          "value": 0.913,
+          "unit": "fraction"
+        },
+        {
+          "label": "Jev post-hoc coverage at 99% observed precision",
+          "value": 0.479,
+          "unit": "fraction"
+        },
+        {
+          "label": "ModernBERT post-hoc coverage at 99% observed precision",
+          "value": 0.555,
+          "unit": "fraction"
+        }
+      ],
+      "conclusion": "Supervision helps reproduce these public reporting labels; post-hoc subsets/thresholds do not establish prospective reliability.",
+      "caveats": [
+        "Vendor API access disclosed; no independent replay here.",
+        "Nine-class analysis conditions on true category, unavailable as a live filter. Reporting conventions may differ from semantic intent.",
+        "Cutoffs used evaluated outcomes, not frozen calibration data; observed 99% precision is not a production guarantee.",
+        "Supervised versus zero-shot setup does not prove trees always outperform a decision architecture."
+      ],
+      "artifacts": {
+        "protocol": "Article task/split appendix",
+        "raw_outputs": "Some TF-IDF per-document predictions not retained according to source",
+        "model_revision": "Reported Jev 1.13.0; immutable serving version unavailable"
+      },
+      "reproduced_here": false
+    },
+    {
+      "id": "E26",
+      "title": "SEC follow-up: 90-day forecasting differs from textual completeness",
+      "model_ids": [
+        "jev",
+        "financial-document-eval"
+      ],
+      "source_ids": [
+        "financial-documents"
+      ],
+      "evidence_type": "third_party_reported",
+      "reviewed_on": "2026-10-15",
+      "report_date": "2026-10-13",
+      "model_revision": null,
+      "protocol": {
+        "task": "Predict substantive SEC follow-up within 90 days after a response",
+        "test_unit": "2261 unique 2022–2023 letters, 925 positives; closing letters/silence negative, incomplete observation windows excluded",
+        "split": "Text classifiers train on 8875 letters outside recorded test CIKs; 86 co-registrant IDs still overlap. Grouping is not chronological isolation",
+        "reference": "Observed subsequent correspondence. Questions omit 90-day horizon; fully-resolves wording targets a different judgment",
+        "training": "Reported Jev 1.13.0 zero-shot; supervised ModernBERT/SEC-BERT. Vendor-suggested fund-form hint added after seeing same-letter results",
+        "measurement": "Direct accuracy/AUC/Brier below; augmented prompt is a separate post-hoc arm, not untouched validation",
+        "hardware": "No latency or investment-performance comparison"
+      },
+      "metrics": [
+        {
+          "label": "Jev direct-question accuracy",
+          "value": 0.67,
+          "unit": "fraction"
+        },
+        {
+          "label": "Jev direct-question AUC",
+          "value": 0.713,
+          "unit": "fraction"
+        },
+        {
+          "label": "Jev direct-question Brier",
+          "value": 0.2204,
+          "unit": "brier"
+        },
+        {
+          "label": "ModernBERT accuracy",
+          "value": 0.806,
+          "unit": "fraction"
+        },
+        {
+          "label": "ModernBERT AUC",
+          "value": 0.89,
+          "unit": "fraction"
+        },
+        {
+          "label": "ModernBERT Brier",
+          "value": 0.1346,
+          "unit": "brier"
+        },
+        {
+          "label": "Jev post-hoc hint AUC",
+          "value": 0.831,
+          "unit": "fraction"
+        },
+        {
+          "label": "Jev post-hoc hint Brier",
+          "value": 0.1878,
+          "unit": "brier"
+        }
+      ],
+      "conclusion": "Trained classifiers forecast this labeled process better; a same-sample domain hint needs new-letter validation, and semantic completeness is another target.",
+      "caveats": [
+        "API support and prompt suggestion disclosed; source review is not our reproduction.",
+        "Company sequencing/regex labels may mislink reviews. Residual issuer overlap, TF-IDF preprocessing and historical exposure remain limitations.",
+        "Form-plus-length comparator uses another split, so is not imported as equally company-isolated.",
+        "Lower Brier alone does not prove calibration; no financial-return guarantee follows."
+      ],
+      "artifacts": {
+        "protocol": "Original methods appendix and question wording",
+        "raw_outputs": "Full raw prediction audit absent",
+        "version": "Report attributes Sep 21–Oct 7 runs to Jev 1.13.0 using sampled recheck"
+      },
+      "reproduced_here": false
+    },
+    {
+      "id": "E27",
+      "title": "Semantic features: wine-score prediction with development-only discovery",
+      "model_ids": [
+        "jev",
+        "semantic-features"
+      ],
+      "source_ids": [
+        "semantic-feature-cookbook"
+      ],
+      "evidence_type": "author_reported",
+      "reviewed_on": "2026-10-15",
+      "report_date": "2026-08-03",
+      "model_revision": null,
+      "protocol": {
+        "task": "Predict critic score from wine tasting-note text, not finance or visual intent",
+        "test_unit": "2000 sampled notes, exact duplicate text removed; 1200 development / 800 held-out, seed 0",
+        "split": "Proposal/selection uses development only, 5-fold CV repeated 3 times; five arms and round diagnostics evaluated on held-out afterward",
+        "reference": "Critic score 80–100; cached sample 80–98. Public dataset revision 90eb39f35fc64e556fc17f06d4137a4a69ec3297",
+        "training": "Aug 3 cached run: fixed Jev 1.12 features, claude-sonnet-5 proposer, CatBoost 400 trees / depth 4 / rate 0.05. No Jev parameter training",
+        "measurement": "Five rounds, 38 questions (29 score + 9 noul) become 67 columns; RMSE in critic points. Paired bootstrap conditional on this split; discovery-seed uncertainty unmeasured",
+        "hardware": "Author cached/API workflow, not full-cost benchmark; no API calls here"
+      },
+      "metrics": [
+        {
+          "label": "Mean baseline RMSE",
+          "value": 3.088,
+          "unit": "rmse_points"
+        },
+        {
+          "label": "Same CatBoost word-count RMSE",
+          "value": 2.466,
+          "unit": "rmse_points"
+        },
+        {
+          "label": "Direct Jev score with dev-fitted offset RMSE",
+          "value": 2.145,
+          "unit": "rmse_points"
+        },
+        {
+          "label": "First-round 18-question RMSE",
+          "value": 1.869,
+          "unit": "rmse_points"
+        },
+        {
+          "label": "Fifth-round 38-question RMSE",
+          "value": 1.772,
+          "unit": "rmse_points"
+        },
+        {
+          "label": "Round 5 minus round 1 RMSE",
+          "value": -0.097,
+          "unit": "rmse_delta_points"
+        }
+      ],
+      "conclusion": "Semantic judgments can be features for supervised prediction; this tests a pipeline, not Jev fine-tuning or general domain transfer.",
+      "caveats": [
+        "Most gain comes from the first proposal; later-round paired 95% CI [-0.147,-0.050] concerns 800 rows, not repeated discovery runs.",
+        "Feature/schema search must stay inside development folds; future text and target leakage need separate checks.",
+        "Random row split and exact dedup do not establish temporal/group/near-duplicate generalization or no pretraining overlap.",
+        "Feature importance is predictive, not causal. Source cache/alternate proposer descriptions are not our replay."
+      ],
+      "artifacts": {
+        "protocol": "Official code/output read",
+        "raw_outputs": "Source describes cache; notebook/cache not replayed",
+        "run_date": "2026-08-03",
+        "markdown_sha256": "24e0854e5a5846c269142d2a57abfb8aa90d63c37231b03036ed08f1e9989b72"
       },
       "reproduced_here": false
     }

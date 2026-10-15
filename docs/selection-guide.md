@@ -88,6 +88,33 @@ The newer releases add distinct experiments; they do not replace task-specific a
 
 中文：新增型号扩大可测试的方案空间。验收必须固定模型／转换包、schema、规则、校准器和完整测量边界；“多题一次调用”不意味着每种模型都只编码一次。公共 Index、231-task JevBench、业务标签一致率、转换等价和吞吐演示分别回答不同问题，不能相互代替。先以影子评测验证关键错误、校准、拒答和总成本，再决定是否上线。
 
+<a id="image-intent-adaptation"></a>
+## 7. Image intent and domain adaptation / 图片意图与领域适配
+
+This is a proposed evaluation workflow, not a validated deployment or a customer case. Image content and conversational intent are different labels. The same payment screenshot may accompany a receipt submission, a status question or a complaint. Define intent from the image **and only the text/context available at decision time**. Keep visible facts, inferred intent and allowable action as separate outputs. Support multiple intents, unknown and targeted clarification when evidence cannot identify the request.
+
+以下是通用评测建议，并非已验证部署或任何客户案例。图像内容不等于会话意图；同一张付款截图可能用于提交凭证、询问进度或投诉。输入应包含图像和判断时已经存在的文本上下文。把可见事实、推断意图和可执行动作分开，允许多意图、未知和有针对性的澄清。
+
+| Stage / 阶段 | Concrete experiment / 实验 | Acceptance boundary / 验收边界 |
+| --- | --- | --- |
+| Define labels / 定义标签 | Specify user goal, evidence span, ambiguity policy and error cost; independently adjudicate disagreements. / 定义诉求、证据范围、歧义规则及错判代价，独立裁定标注分歧。 | Later resolution can help construct labels, but future messages/agent replies cannot enter an earlier model input. / 后续结果可辅助制标签，但未来消息／客服回复不能泄漏到早先判断的输入。 |
+| Freeze the domain test / 固定领域测试 | Compare text-only, OCR+text classifier/rules, an instruction VLM and a multimodal decision model on identical labels/evidence. / 统一标签与证据，比较纯文本、OCR+文本分类／规则、指令 VLM 和多模态判断模型。 | Include same image with different contexts, image-only ambiguity, missing/wrong images, small text, crops and new layouts. OCR may lose visual relationships. / 包含同图异上下文、仅图歧义、缺图／错图、小字、裁剪和新布局；OCR 可能丢失视觉关系。 |
+| Diagnose before training / 先归因再训练 | Improve context, OCR, label definitions or deterministic extraction first; measure macro-F1, costly confusions, unknown/clarification coverage and total latency. / 先改善上下文、OCR、标签或确定性提取；测宏F1、关键混淆、未知／澄清覆盖和总延迟。 | Closed-set accuracy may conceal confident forced choices; measure risk–coverage and clarification burden separately. / 闭集准确率可能掩盖强制猜测，风险—覆盖和澄清负担须单测。 |
+| Adapt with verified support / 核验支持后适配 | With adjudicated target examples, compare a supervised text classifier, VLM SFT/parameter-efficient adaptation and a distilled smaller student. / 有裁定样本后，比较监督文本分类、VLM SFT／参数高效适配和小模型蒸馏。 | Check exact backbone/readout, image processor, loss/masking, trainable modules, dependency versions, memory, export and serving adapter. A generic text ModernBERT/LoRA recipe does not certify D3 multimodal training. / 核对骨干／读出、图像处理、损失掩码、训练模块、依赖版本、内存、导出和服务适配；文本 ModernBERT／LoRA 配方不等于 D3 多模态支持。 |
+| Freeze calibration / 冻结校准 | Split by conversation, source and time; group near-duplicate images and template variants. Fit calibration separately, then freeze before final test. / 按会话、来源和时间划分，图像近重复与模板变体分组；独立校准后冻结最终测试。 | Preserve minority-intent/shift tests. Audit teacher labels and soft probabilities; distillation does not make teacher errors correct. / 保留少数意图和漂移检查；抽检教师标签及软概率，蒸馏不会使教师错误变正确。 |
+| Gate actions / 权限隔离 | Predict intent or clarify; authenticated policy controls consequential actions such as refunds and account changes. / 模型识别意图或澄清；退款、账户变更等动作交由身份与策略规则。 | Confidence is not authorization; a screenshot does not establish permission. / 置信度不是授权，截图不能证明动作权限。 |
+
+The [native D3 integration report](https://github.com/vllm-project/vllm/pull/61565) explicitly leaves LoRA unmeasured. [TRL's generic VLM/PEFT documentation](https://huggingface.co/docs/trl/en/sft_trainer) is a starting reference for supported generative models, not evidence that D3's custom noncausal readout has a working multimodal training/export recipe. Keep that support unknown until the exact path is verified. No private images were collected or uploaded for this guide.
+
+[原生 D3 集成报告](https://github.com/vllm-project/vllm/pull/61565)明确未测 LoRA；[TRL 通用 VLM／PEFT 文档](https://huggingface.co/docs/trl/en/sft_trainer)仅可作为受支持生成模型的参考，不能证明 D3 的定制双向注意力读出已有可用的多模态训练／导出配方。具体路径核验前保留未知。本指南未收集或上传私人图片。
+
+<a id="semantic-feature-prediction"></a>
+## 8. Semantic judgment, features and prediction / 语义判断、特征与预测
+
+The [financial-document comparison](evidence.md#e24) separates reading a reported fact, reproducing a public taxonomy and forecasting later institutional action. They require different labels and validation. Another useful arm is the [semantic-feature pipeline](evidence.md#e27): freeze evidence-grounded judgments, then train a supervised predictor alongside TF-IDF/embeddings/structural features. Run question/schema discovery inside development folds; freeze it before final testing and include extraction cost. A wine-score result does not demonstrate financial returns or transfer to image intent.
+
+[财务文档对照](evidence.md#e24)将读取已报告事实、复现公共分类标签、预测后续机构行为分开，不能以一种任务代替另一种。也可把[语义判断作为特征](evidence.md#e27)，与 TF-IDF／嵌入／结构特征并排训练监督预测器；问题和 schema 搜索只能发生在开发划分，最终测试前冻结并计入提取成本。葡萄酒评分结果不能证明金融收益或图片意图泛化。
+
 ## 中文：一页决策建议
 
 **先定义判断契约。** 输入证据是什么、输出有哪些、怎样才算正确、错判代价是多少、证据不够怎么办。判断“是什么”、预测“谁能做”、学习“怎样能改善结果”，需要的标签和方法不同。
