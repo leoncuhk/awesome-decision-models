@@ -6,7 +6,7 @@
 
 A curated guide to systems that **classify, score, rank, verify, route or abstain** rather than primarily generate prose. The central question is not which model has the most impressive headline, but **which method delivers acceptable outcomes at acceptable risk and total cost for a particular task**.
 
-**Source review: 2026-10-15.** 45 selected resources, including 17 core model families and 27 contextualized evidence records. This edition reviews public sources; **it does not claim independent model reproduction**. Review depth and unresolved gaps are recorded in the [source register](docs/sources.md). Inclusion is not an endorsement or a production-readiness certification.
+**Source review: 2026-10-16.** 48 selected resources, including 17 core model families and 28 contextualized evidence records. This edition reviews public sources; **it does not claim independent model reproduction**. Review depth and unresolved gaps are recorded in the [source register](docs/sources.md). Inclusion is not an endorsement or a production-readiness certification.
 
 ## Contents
 
@@ -86,8 +86,9 @@ The table compares mechanisms and use cases, **not incompatible benchmark scores
 - [E25 — Financial 8-K categories: supervision and post-hoc selection](docs/evidence.md#e25)
 - [E26 — SEC follow-up: 90-day forecasting differs from textual completeness](docs/evidence.md#e26)
 - [E27 — Semantic features: wine-score prediction with development-only discovery](docs/evidence.md#e27)
+- [E28 — EcomMIR: scene and intent scores belong to a combined competition pipeline](docs/evidence.md#e28)
 
-For domain evaluation and verified training support, see the [image-intent adaptation workflow](docs/selection-guide.md#image-intent-adaptation).
+For domain evaluation and verified training support, see the [image-intent adaptation workflow](docs/selection-guide.md#image-intent-adaptation). The detailed [multimodal fine-tuning research plan](docs/multimodal-decision-finetuning.md) compares matched short-label SFT and candidate readouts, audits actual image training paths and defines risk/cost acceptance.
 
 **No combined accuracy leaderboard:** zero-shot classification, workflow fine-tuning and Best-of-N selection answer different questions. Local GPU forward time and remote API round-trip time are also different measurements.
 
@@ -101,6 +102,8 @@ A new training label is not evidence that a familiar baseline is obsolete. Deplo
 - **[TabICLv2](https://arxiv.org/abs/2602.11139)** — A tabular foundation model for classification and regression. Paper-level inclusion; no local reproduction or natural-language claim.
 - **[FluidUse / decision-model Core ML deployment](https://github.com/FluidInference/FluidUse)** — Apple deployment resource with native Swift managers and Python-assisted Core ML bridges, including Decision 3.0. Conversion parity and smoke tests are not quality guarantees. Match length buckets, precision, tokenizer, calibrator and media path; bridge calls queue serially and timeouts close the session. Automatic downloads/environment setup are documented, not run here.
 - **[Semantic features + supervised predictor](https://docs.typesafe.ai/cookbooks/autoresearch_feature_discovery)** — LLM-proposed questions and Jev judgments turn text into features for a supervised CatBoost predictor. Author-reported wine regression. Feature discovery belongs inside development folds; downstream training does not fine-tune Jev or establish financial/multimodal generalization.
+- **[ezjev text candidate-logit LoRA](https://github.com/everettjf/ezjev/tree/8b3d88957c0795bea160c8fbc9c6d2a54b051136)** — Inspectable per-question candidate CE+Brier, replay and temperature fitting on a Qwen3.5 text-training path. Not an image fine-tuning implementation. MIT covers code only; some training data are non-commercial or lack stated terms. No training or calibration result reproduced here.
+- **[decision-pacman decision distillation](https://github.com/grapeot/decision-pacman/tree/593ed1f59f4f97ad0bda7287ff304e9667360089)** — Text-state teacher/simulator labels train a small option-distribution LoRA student. Game-specific author reports include lost generality. Not image-training or customer-support transfer evidence; complete data/evaluated artifacts not audited.
 
 Also retain a deterministic rule or ordinary supervised classifier where the task permits. A model should earn its complexity against the simplest credible alternative.
 
@@ -120,6 +123,7 @@ For executor selection, collect **task, available evidence, executor, outcome, l
 - **[Nimble public evaluations](https://github.com/bespokelabsai/nimble/blob/62076b4f2d365b5879dafcf7f6dd072a1fe76df7/docs/PUBLIC_BENCHMARKS.md)** — Human-reference subsets, paired comparisons and calibration reporting. Project-author-run, not independently reproduced by this list.
 - **[Decision-model benchmark](https://github.com/nibzard/decision-model-benchmark)** — Third-party code and protocols for decision-model comparisons. Third-party status alone does not certify methodology or labels.
 - **[Financial-document decision tests](https://insights.ml4trading.io/p/testing-jev-on-financial-documents)** — Original-evaluator comparison of Jev and supervised text/TF-IDF models on earnings, 8-K labels and SEC follow-up. Vendor API support; historical selected populations, hindsight screening, post-hoc prompts and split limitations. No universal tree-versus-Jev winner or investment-return claim.
+- **[MIRE / EcomMIR multimodal intent evaluation](https://github.com/liujunwen23/MIRE/tree/d101287af90d114c5bf0cbfbd56fe9c52358e3bb)** — Image-scene and multi-turn intent challenge, with full-SFT baseline and a published LoRA-based competition solution. EcomMIR scores are author-reported combined interventions with Round 1 pseudo-labels; not LoRA-only or a 1,000-example-only untouched-test result. Dataset rights and full replay remain unverified.
 
 A useful scorecard includes task quality, consequential errors, calibration, risk–coverage, subgroup/shift behavior and full-system cost. Fix the acceptance threshold on calibration data, not on the final test set. Keep sampling automatically accepted cases so confidently wrong decisions remain visible.
 
@@ -159,6 +163,6 @@ python3 -m unittest discover -s tests -v
 
 A [repository-scoped curator skill](.agents/skills/decision-models-curator/SKILL.md) defines the research/review procedure. A [weekly source watcher](.github/workflows/source-watch.yml) checks selected sources for changes and maintains an issue for review. **It does not run an AI researcher, update scientific claims, merge changes or require a paid model API.** See [maintenance](docs/maintenance.md) for setup, security, scheduling limits and manual use.
 
-Read [CONTRIBUTING](CONTRIBUTING.md) before adding a project or result. Negative findings, changed assumptions and corrections are welcome. [Initial review notes](updates/2026-09-25.md) preserve the original qualifications; the [October 6 release review](updates/2026-10-06-release-boundaries.md) and [October 11 review](updates/2026-10-11-typed-releases.md) record additions, corrections and remaining gaps. [October 13 multimodal/deployment review](updates/2026-10-13-multimodal-deployment.md) separates new release, calibration and application evidence. [October 15 update](updates/2026-10-15-serving-and-adaptation.md) reviews native vLLM, score changes, semantic features and domain adaptation. [Publishing instructions](PUBLISHING.md) explain how to initialize an empty repository safely.
+Read [CONTRIBUTING](CONTRIBUTING.md) before adding a project or result. Negative findings, changed assumptions and corrections are welcome. [Initial review notes](updates/2026-09-25.md) preserve the original qualifications; the [October 6 release review](updates/2026-10-06-release-boundaries.md) and [October 11 review](updates/2026-10-11-typed-releases.md) record additions, corrections and remaining gaps. [October 13 multimodal/deployment review](updates/2026-10-13-multimodal-deployment.md) separates new release, calibration and application evidence. [October 15 update](updates/2026-10-15-serving-and-adaptation.md) reviews native vLLM, score changes, semantic features and domain adaptation. [October 16 research update](updates/2026-10-16-multimodal-finetuning.md) adds training-path and competition-evidence checks. [Publishing instructions](PUBLISHING.md) explain how to initialize an empty repository safely.
 
 Original code and curation text: [MIT](LICENSE). Linked projects, model weights, datasets and papers retain their own licenses. A source-text revision does **not** pin a model's weights.

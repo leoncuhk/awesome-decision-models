@@ -1080,3 +1080,75 @@
 - Source revision: `not captured / live URL`
 - Note: Relevant VLM/PEFT dataset-format sections reviewed; live HTML SHA-256 2f26af56edf5f6e5e8038221679f1bdd04251d49d0cecfadb0c38f15d495b68c. Generic trainer documentation for supported models, not a demonstrated D3 noncausal readout training/export or serving-LoRA recipe. No training, dependency installation or image upload performed.
 
+<a id="mire-challenge"></a>
+## MIRE: official multimodal scene and dialogue-intent challenge
+
+- Source: https://github.com/liujunwen23/MIRE/blob/d101287af90d114c5bf0cbfbd56fe9c52358e3bb/README.md
+- Kind: `repository`; review depth: `content_reviewed`; reviewed: 2026-10-16
+- Source revision: `d101287af90d114c5bf0cbfbd56fe9c52358e3bb`
+- Note: README, task/data description and evaluation script inspected. Screenshot scene classification and multi-turn intent recognition are separate tasks; public baseline is not a typed decision readout. Dataset distribution/usage terms need their own review; no dataset downloaded or model run.
+
+<a id="mire-full-sft"></a>
+## MIRE: Qwen2-VL-7B full-SFT baseline configuration
+
+- Source: https://github.com/liujunwen23/MIRE/blob/d101287af90d114c5bf0cbfbd56fe9c52358e3bb/mire_baseline/configs/qwen2_vl_full_sft.yaml
+- Kind: `repository`; review depth: `content_reviewed`; reviewed: 2026-10-16
+- Source revision: `d101287af90d114c5bf0cbfbd56fe9c52358e3bb`
+- Note: Configuration explicitly sets finetuning_type: full, qwen2_vl template and 0.1 validation fraction. This establishes the baseline configuration, not reproducibility of competition scores or a LoRA recipe.
+
+<a id="ecommir-paper"></a>
+## EcomMIR: multimodal intent recognition competition solution
+
+- Source: https://zhoushengisnoob.github.io/papers/WWWComp.pdf
+- Kind: `paper`; review depth: `content_reviewed`; reviewed: 2026-10-16
+- Source revision: `not captured / live URL`
+- Note: Four-page author-hosted WWW Companion 2025 paper read, including sections 2–3 and Tables 1–3; DOI 10.1145/3701716.3718371. PDF SHA-256 3918aa06dd0b8592eaba7a9b5046fba111b0e2b86fa4bfbe1629102dba478b57. CN-CLIP scene model and MiniCPM-V 2.6 LoRA intent model use multiple data/model interventions, including Round 1 pseudo-labels. Tables are author reports; exact scored example IDs, full outputs and independent replay not established here. No image/data/model execution.
+
+<a id="ezjev-training"></a>
+## ezjev: text candidate-logit LoRA training and replay
+
+- Source: https://github.com/everettjf/ezjev/tree/8b3d88957c0795bea160c8fbc9c6d2a54b051136
+- Kind: `repository`; review depth: `content_reviewed`; reviewed: 2026-10-16
+- Source revision: `8b3d88957c0795bea160c8fbc9c6d2a54b051136`
+- Note: README and parts/train.py/parts/loop.py inspected. Per-question text tokenization, candidate lm_head row projection, candidate CE+Brier, replay and development NLL temperature search. Training inputs are input_ids/attention_mask; no image processor/pixel tensors. Multimodal class detection is not image fine-tuning. Historical job spending is not a current cost estimate; MIT code does not cover data/weights. No code executed.
+
+<a id="ezjev-s3-card"></a>
+## ezjev-4b-s3: lineage, calibration and training-data license warning
+
+- Source: https://huggingface.co/everettjf/ezjev-4b-s3/blob/a2faa581dc5e48c0c41ce388d056fed8e8fa6b4d/README.md
+- Kind: `model_card`; review depth: `content_reviewed`; reviewed: 2026-10-16
+- Source revision: `a2faa581dc5e48c0c41ce388d056fed8e8fa6b4d`
+- Note: Card reviewed for LoRA/merged lineage, replay, development-set temperature and explicit non-commercial/unstated training-data license warning. Source revision pins the card, not locally hashed weights; JevBench self-test not reproduced and no new score imported.
+
+<a id="intern-training"></a>
+## Intern-Decision: multimodal full-language training configuration
+
+- Source: https://github.com/InternLM/Intern-Decision/blob/3572c8a68b5df5dafe02d0e093989ba8ec0183bc/configs/training/qwen35.py
+- Kind: `repository`; review depth: `content_reviewed`; reviewed: 2026-10-16
+- Source revision: `3572c8a68b5df5dafe02d0e093989ba8ec0183bc`
+- Note: Configuration and src/model/qwen.py reviewed: freeze_vision=True, freeze_projector=True, freeze_language=False, standard XTuner CELossConfig; real pixel_values/image_grid_thw flow through frozen visual features. Existing configuration trains the language backbone, not a LoRA adapter. Dependency-level CE execution not rerun; private original training/calibration data prevent complete replay.
+
+<a id="intern-training-inputs"></a>
+## Intern-Decision: masked labels and causal placeholder input compilation
+
+- Source: https://github.com/InternLM/Intern-Decision/blob/3572c8a68b5df5dafe02d0e093989ba8ec0183bc/src/inputs/schema.py
+- Kind: `repository`; review depth: `content_reviewed`; reviewed: 2026-10-16
+- Source revision: `3572c8a68b5df5dafe02d0e093989ba8ec0183bc`
+- Note: src/inputs/schema.py, masked.py, dataset.py and inference/hf_backend.py reviewed. Assistant skeleton contains placeholders; target answer symbols are separately placed in labels, then aligned for next-token CE. Multimodal tokenizer carries pixels/grid. Later causal fields see prior placeholders, not completed gold/predicted answers; no automatic consistency or field independence claim. Length/marker checks inspected, not executed.
+
+<a id="d3-training-boundary"></a>
+## Decision 3.0: inference-only wrapper training boundary
+
+- Source: https://huggingface.co/vllm-sr/d3/blob/225be8b1e2270becab69c5fe05b26f99cbbdd66b/modeling_d3.py
+- Kind: `repository`; review depth: `content_reviewed`; reviewed: 2026-10-16
+- Source revision: `225be8b1e2270becab69c5fe05b26f99cbbdd66b`
+- Note: Inspected wrapper train(True) explicitly raises inference-only RuntimeError; save_pretrained is unsupported. Custom readout/noncausal inference should not be treated as a generic Trainer/PEFT training recipe. This source finding does not establish absence of unpublished or separately engineered training paths; no remote model code executed.
+
+<a id="pacman-training"></a>
+## decision-pacman: textual-state decision distillation and generality trade-off
+
+- Source: https://github.com/grapeot/decision-pacman/tree/593ed1f59f4f97ad0bda7287ff304e9667360089
+- Kind: `repository`; review depth: `content_reviewed`; reviewed: 2026-10-16
+- Source revision: `593ed1f59f4f97ad0bda7287ff304e9667360089`
+- Note: README and training/train.py reviewed. Chat-template text states, language-side LoRA and option-letter soft-target CE; no image tensors in inspected trainer. Teacher-only lookahead used for labeling is excluded from student evaluation inputs. Author reports task gains with worse generic JevBench performance; complete generated training data and all evaluated artifacts not audited here. No game/model run and no score imported as independent evidence.
+

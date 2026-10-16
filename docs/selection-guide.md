@@ -108,6 +108,10 @@ The [native D3 integration report](https://github.com/vllm-project/vllm/pull/615
 
 [原生 D3 集成报告](https://github.com/vllm-project/vllm/pull/61565)明确未测 LoRA；[TRL 通用 VLM／PEFT 文档](https://huggingface.co/docs/trl/en/sft_trainer)仅可作为受支持生成模型的参考，不能证明 D3 的定制双向注意力读出已有可用的多模态训练／导出配方。具体路径核验前保留未知。本指南未收集或上传私人图片。
 
+For a complete proposed experiment, see the [multimodal fine-tuning research plan](multimodal-decision-finetuning.md): matched B0–B3 arms, actual image-path checks, candidate versus full-vocabulary loss, grouped splits, distillation, export and risk/cost stopping rules. [E28](evidence.md#e28) keeps the MIRE/EcomMIR competition results separate from decision-model leaderboards.
+
+完整实验设计见[多模态微调研究方案](multimodal-decision-finetuning.zh-CN.md)：同条件 B0–B3 对照、真实图像路径检查、候选／完整词表损失、分组划分、蒸馏、导出及风险／成本停止条件；[E28](evidence.md#e28)单独保存 MIRE／EcomMIR 竞赛结果，不混入判断模型总榜。
+
 <a id="semantic-feature-prediction"></a>
 ## 8. Semantic judgment, features and prediction / 语义判断、特征与预测
 

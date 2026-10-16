@@ -1030,3 +1030,39 @@ Reported fractions are displayed as percentages where appropriate. More printed 
 
 **Sources:** [TypeSafe autoresearch semantic features with CatBoost](https://docs.typesafe.ai/cookbooks/autoresearch_feature_discovery)
 
+<a id="e28"></a>
+## E28 · EcomMIR: scene and intent scores belong to a combined competition pipeline
+
+**Evidence:** `author_reported` · **Reviewed:** 2026-10-16 · **Reproduced here:** no
+
+| Protocol | Recorded context |
+| --- | --- |
+| Task | WWW 2025 MIRE image-scene classification and multi-turn dialogue intent recognition; distinct outputs |
+| Test unit | Round 2 competition examples; exact scored counts, item IDs and independent conversation groups not established from the reviewed paper |
+| Split | Paper separates Local, Round 1 and Round 2. Round 1 unlabeled samples supply high-confidence pseudo-labels for training; a 9:1 local scene train/validation split is described. Do not call this 1,000-label-only training or untouched evaluation-round data. |
+| Reference | Competition scene/intent labels; individual labels and adjudication not audited here |
+| Training | CN-CLIP scene training/model soup; MiniCPM-V 2.6 intent LoRA plus data cleaning, hierarchical labels, high-confidence selection and image augmentation. Official MIRE Qwen2-VL full-SFT baseline is a separate implementation. |
+| Measurement | Paper Table 3 intent Round 2 Ours F1; Table 2 scene Round 2 Model Soup F1. Aggregation convention and uncertainty not established here; do not combine task scores or compare to Decision Index/JevBench. |
+| Hardware | Paper intent LoRA training uses two 80GB A800 GPUs with ms-swift/DeepSpeed; no serving P95, total cost or independently measured throughput imported |
+
+| Reported measurement | Value |
+| --- | --- |
+| MiniCPM-V 2.6 combined intent system: Round 2 F1 | 94.20% |
+| CN-CLIP scene Model Soup: Round 2 F1 | 82.78% |
+
+**Interpretation:** A primary worked example supports studying multimodal adaptation and data interventions. These results do not isolate LoRA, prove a legal-option readout advantage or establish customer-support production outcomes.
+
+- Both results are author-reported and were not rerun by this repository. Exact trained weight revisions and full raw outputs are not pinned.
+- Round 1 pseudo-label selection and multiple interventions limit attribution; this is not training on only the original 1,000 labeled examples. Round 2 item identity/overlap is not independently audited; neither contamination nor a clean blind final test is established here.
+- Paper tables report F1 without enough reviewed detail to equate it with a newly designed macro-F1 protocol or compute a significance claim.
+- Some cleaning removes short utterances/handoff requests and image augmentation changes content; label preservation must be checked for any new task.
+- Dataset access, base-model terms, code licenses and commercial usage rights are separate; no automatic commercial-use conclusion.
+
+**Artifacts and limits:**
+- protocol: Four-page primary paper read, Tables 1–3 visually checked; official challenge README/config inspected
+- raw outputs: Not independently audited; no complete replay performed
+- model hash: Exact evaluated checkpoints not captured
+- source identity: DOI 10.1145/3701716.3718371; PDF content hash in source register
+
+**Sources:** [EcomMIR: multimodal intent recognition competition solution](https://zhoushengisnoob.github.io/papers/WWWComp.pdf); [MIRE: official multimodal scene and dialogue-intent challenge](https://github.com/liujunwen23/MIRE/blob/d101287af90d114c5bf0cbfbd56fe9c52358e3bb/README.md); [MIRE: Qwen2-VL-7B full-SFT baseline configuration](https://github.com/liujunwen23/MIRE/blob/d101287af90d114c5bf0cbfbd56fe9c52358e3bb/mire_baseline/configs/qwen2_vl_full_sft.yaml)
+

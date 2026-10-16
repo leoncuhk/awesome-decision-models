@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "reviewed_on": "2026-10-15",
+  "reviewed_on": "2026-10-16",
   "scope": "Evidence-backed models, methods and evaluation for bounded decisions in AI systems.",
   "sources": [
     {
@@ -1372,6 +1372,96 @@
       "review_depth": "content_reviewed",
       "source_revision": null,
       "review_note": "Relevant VLM/PEFT dataset-format sections reviewed; live HTML SHA-256 2f26af56edf5f6e5e8038221679f1bdd04251d49d0cecfadb0c38f15d495b68c. Generic trainer documentation for supported models, not a demonstrated D3 noncausal readout training/export or serving-LoRA recipe. No training, dependency installation or image upload performed."
+    },
+    {
+      "id": "mire-challenge",
+      "title": "MIRE: official multimodal scene and dialogue-intent challenge",
+      "url": "https://github.com/liujunwen23/MIRE/blob/d101287af90d114c5bf0cbfbd56fe9c52358e3bb/README.md",
+      "kind": "repository",
+      "reviewed_on": "2026-10-16",
+      "review_depth": "content_reviewed",
+      "source_revision": "d101287af90d114c5bf0cbfbd56fe9c52358e3bb",
+      "review_note": "README, task/data description and evaluation script inspected. Screenshot scene classification and multi-turn intent recognition are separate tasks; public baseline is not a typed decision readout. Dataset distribution/usage terms need their own review; no dataset downloaded or model run."
+    },
+    {
+      "id": "mire-full-sft",
+      "title": "MIRE: Qwen2-VL-7B full-SFT baseline configuration",
+      "url": "https://github.com/liujunwen23/MIRE/blob/d101287af90d114c5bf0cbfbd56fe9c52358e3bb/mire_baseline/configs/qwen2_vl_full_sft.yaml",
+      "kind": "repository",
+      "reviewed_on": "2026-10-16",
+      "review_depth": "content_reviewed",
+      "source_revision": "d101287af90d114c5bf0cbfbd56fe9c52358e3bb",
+      "review_note": "Configuration explicitly sets finetuning_type: full, qwen2_vl template and 0.1 validation fraction. This establishes the baseline configuration, not reproducibility of competition scores or a LoRA recipe."
+    },
+    {
+      "id": "ecommir-paper",
+      "title": "EcomMIR: multimodal intent recognition competition solution",
+      "url": "https://zhoushengisnoob.github.io/papers/WWWComp.pdf",
+      "kind": "paper",
+      "reviewed_on": "2026-10-16",
+      "review_depth": "content_reviewed",
+      "source_revision": null,
+      "review_note": "Four-page author-hosted WWW Companion 2025 paper read, including sections 2–3 and Tables 1–3; DOI 10.1145/3701716.3718371. PDF SHA-256 3918aa06dd0b8592eaba7a9b5046fba111b0e2b86fa4bfbe1629102dba478b57. CN-CLIP scene model and MiniCPM-V 2.6 LoRA intent model use multiple data/model interventions, including Round 1 pseudo-labels. Tables are author reports; exact scored example IDs, full outputs and independent replay not established here. No image/data/model execution."
+    },
+    {
+      "id": "ezjev-training",
+      "title": "ezjev: text candidate-logit LoRA training and replay",
+      "url": "https://github.com/everettjf/ezjev/tree/8b3d88957c0795bea160c8fbc9c6d2a54b051136",
+      "kind": "repository",
+      "reviewed_on": "2026-10-16",
+      "review_depth": "content_reviewed",
+      "source_revision": "8b3d88957c0795bea160c8fbc9c6d2a54b051136",
+      "review_note": "README and parts/train.py/parts/loop.py inspected. Per-question text tokenization, candidate lm_head row projection, candidate CE+Brier, replay and development NLL temperature search. Training inputs are input_ids/attention_mask; no image processor/pixel tensors. Multimodal class detection is not image fine-tuning. Historical job spending is not a current cost estimate; MIT code does not cover data/weights. No code executed."
+    },
+    {
+      "id": "ezjev-s3-card",
+      "title": "ezjev-4b-s3: lineage, calibration and training-data license warning",
+      "url": "https://huggingface.co/everettjf/ezjev-4b-s3/blob/a2faa581dc5e48c0c41ce388d056fed8e8fa6b4d/README.md",
+      "kind": "model_card",
+      "reviewed_on": "2026-10-16",
+      "review_depth": "content_reviewed",
+      "source_revision": "a2faa581dc5e48c0c41ce388d056fed8e8fa6b4d",
+      "review_note": "Card reviewed for LoRA/merged lineage, replay, development-set temperature and explicit non-commercial/unstated training-data license warning. Source revision pins the card, not locally hashed weights; JevBench self-test not reproduced and no new score imported."
+    },
+    {
+      "id": "intern-training",
+      "title": "Intern-Decision: multimodal full-language training configuration",
+      "url": "https://github.com/InternLM/Intern-Decision/blob/3572c8a68b5df5dafe02d0e093989ba8ec0183bc/configs/training/qwen35.py",
+      "kind": "repository",
+      "reviewed_on": "2026-10-16",
+      "review_depth": "content_reviewed",
+      "source_revision": "3572c8a68b5df5dafe02d0e093989ba8ec0183bc",
+      "review_note": "Configuration and src/model/qwen.py reviewed: freeze_vision=True, freeze_projector=True, freeze_language=False, standard XTuner CELossConfig; real pixel_values/image_grid_thw flow through frozen visual features. Existing configuration trains the language backbone, not a LoRA adapter. Dependency-level CE execution not rerun; private original training/calibration data prevent complete replay."
+    },
+    {
+      "id": "intern-training-inputs",
+      "title": "Intern-Decision: masked labels and causal placeholder input compilation",
+      "url": "https://github.com/InternLM/Intern-Decision/blob/3572c8a68b5df5dafe02d0e093989ba8ec0183bc/src/inputs/schema.py",
+      "kind": "repository",
+      "reviewed_on": "2026-10-16",
+      "review_depth": "content_reviewed",
+      "source_revision": "3572c8a68b5df5dafe02d0e093989ba8ec0183bc",
+      "review_note": "src/inputs/schema.py, masked.py, dataset.py and inference/hf_backend.py reviewed. Assistant skeleton contains placeholders; target answer symbols are separately placed in labels, then aligned for next-token CE. Multimodal tokenizer carries pixels/grid. Later causal fields see prior placeholders, not completed gold/predicted answers; no automatic consistency or field independence claim. Length/marker checks inspected, not executed."
+    },
+    {
+      "id": "d3-training-boundary",
+      "title": "Decision 3.0: inference-only wrapper training boundary",
+      "url": "https://huggingface.co/vllm-sr/d3/blob/225be8b1e2270becab69c5fe05b26f99cbbdd66b/modeling_d3.py",
+      "kind": "repository",
+      "reviewed_on": "2026-10-16",
+      "review_depth": "content_reviewed",
+      "source_revision": "225be8b1e2270becab69c5fe05b26f99cbbdd66b",
+      "review_note": "Inspected wrapper train(True) explicitly raises inference-only RuntimeError; save_pretrained is unsupported. Custom readout/noncausal inference should not be treated as a generic Trainer/PEFT training recipe. This source finding does not establish absence of unpublished or separately engineered training paths; no remote model code executed."
+    },
+    {
+      "id": "pacman-training",
+      "title": "decision-pacman: textual-state decision distillation and generality trade-off",
+      "url": "https://github.com/grapeot/decision-pacman/tree/593ed1f59f4f97ad0bda7287ff304e9667360089",
+      "kind": "repository",
+      "reviewed_on": "2026-10-16",
+      "review_depth": "content_reviewed",
+      "source_revision": "593ed1f59f4f97ad0bda7287ff304e9667360089",
+      "review_note": "README and training/train.py reviewed. Chat-template text states, language-side LoRA and option-letter soft-target CE; no image tensors in inspected trainer. Teacher-only lookahead used for labeling is excluded from student evaluation inputs. Author reports task gains with worse generic JevBench performance; complete generated training data and all evaluated artifacts not audited here. No game/model run and no score imported as independent evidence."
     }
   ],
   "entries": [
@@ -2650,9 +2740,10 @@
         "vllm-d3-code",
         "decision-index-text-oct15",
         "decision-index-vision-oct15",
-        "decision-index-scoring-oct15"
+        "decision-index-scoring-oct15",
+        "d3-training-boundary"
       ],
-      "reviewed_on": "2026-10-15",
+      "reviewed_on": "2026-10-16",
       "weight_revision": null,
       "summary": {
         "en": "Six multimodal code-readout checkpoints; native vLLM main support added October 14, with an independent prompt read per question.",
@@ -2679,8 +2770,8 @@
         "zh": "d3 manifest 声明 Qwen3.8-27B，运行架构为 qwen3_5；其他基于 Qwen3.5，edge 也源自 0.8B 基座。完整训练数据／配方、重叠审计及保留集校准报告尚未确证；softmax 和 T=1 不证明经验校准。"
       },
       "availability": {
-        "en": "v3.1.0 weights retained; custom Transformers and vLLM-SR dev Engine paths remain. Native vLLM /v1/systemone merged as 89cab550 on Oct14; latest stable v0.31.0 predates support. D3 uses classify: no prefix caching/chunked prefill, up to 64 questions and 255 choice options; error/confidence/usage semantics differ from the package runtime. Core ML is separate. Video: 2 fps, at most 32 frames; no audio validation. No verified D3 multimodal fine-tuning recipe established here. Null package token limits and backbone context configuration are not validated long-context quality.",
-        "zh": "保留 v3.1.0 权重、定制 Transformers 与 vLLM-SR dev Engine。原生 vLLM /v1/systemone 于 10 月 14 日以 89cab550 合入；最新正式版 v0.31.0 早于该支持。D3 走 classify：关闭 prefix cache／chunked prefill，最多 64 题、255 个 choice 选项；错误／confidence／usage 与包运行库不同。Core ML 独立；视频 2 fps、最多 32 帧，未验证音频。本版未确证 D3 多模态微调配方。 包中的 null token 上限及骨干上下文配置不等于长上下文质量验收。"
+        "en": "v3.1.0 weights retained; custom Transformers and vLLM-SR dev Engine paths remain. Native vLLM /v1/systemone merged as 89cab550 on Oct14; latest stable v0.31.0 predates support. D3 uses classify: no prefix caching/chunked prefill, up to 64 questions and 255 choice options; error/confidence/usage semantics differ from the package runtime. Core ML is separate. Video: 2 fps, at most 32 frames; no audio validation. No verified D3 multimodal fine-tuning recipe established here. Null package token limits and backbone context configuration are not validated long-context quality. Inspected modeling_d3.py rejects train(True) as inference-only; generic PEFT support must not be assumed.",
+        "zh": "保留 v3.1.0 权重、定制 Transformers 与 vLLM-SR dev Engine。原生 vLLM /v1/systemone 于 10 月 14 日以 89cab550 合入；最新正式版 v0.31.0 早于该支持。D3 走 classify：关闭 prefix cache／chunked prefill，最多 64 题、255 个 choice 选项；错误／confidence／usage 与包运行库不同。Core ML 独立；视频 2 fps、最多 32 帧，未验证音频。本版未确证 D3 多模态微调配方。包中的 null token 上限及骨干上下文配置不等于长上下文质量验收。已审阅 modeling_d3.py 的 train(True) 明确拒绝训练，不能默认通用 PEFT 可用。"
       },
       "license_note": "All six pinned cards/manifests declare Apache-2.0 for weights, readout, runtime and listed Qwen bases. Public weights do not establish public training data. Per-package source revisions and author-supplied identity hashes are in the source register; no family-wide weight hash or local binary verification is claimed.",
       "tags": [
@@ -2730,9 +2821,11 @@
         "intern-2b",
         "intern-4b",
         "intern-inference",
-        "fluiduse"
+        "fluiduse",
+        "intern-training",
+        "intern-training-inputs"
       ],
-      "reviewed_on": "2026-10-13",
+      "reviewed_on": "2026-10-16",
       "weight_revision": null,
       "summary": {
         "en": "Qwen3.5 multimodal 0.8B/2B/4B family; multiple typed fields scored from one causal masked assistant skeleton.",
@@ -2755,8 +2848,8 @@
         "zh": "一次因果前向，从每个 `<decision>` 前一位置读取候选 token logits；最多 16 字段／62 选项，不生成自由文本。字段共享 schema 序列，须验证顺序／上下文不变性；confidence=max(P)，不同于 Jev 的分布统计量。"
       },
       "training": {
-        "en": "Decision-tuned language backbone; frozen vision tower/projector. Cards report NLL temperature fitting on 1728 calibration and 1693 separate validation cases: 0.8B T=2.747760550703, 2B T=2.100509348278, 4B T=1.99241824. Private original records and full data construction remain unavailable.",
-        "zh": "微调语言骨干，冻结视觉 tower／projector。卡片称用 1728 校准及 1693 独立验证样本按 NLL 拟合温度：0.8B 为 2.747760550703、2B 为 2.100509348278、4B 为 1.99241824；原始私有记录及完整数据构建未公开。"
+        "en": "Decision-tuned language backbone; frozen vision tower/projector. Cards report NLL temperature fitting on 1728 calibration and 1693 separate validation cases: 0.8B T=2.747760550703, 2B T=2.100509348278, 4B T=1.99241824. Private original records and full data construction remain unavailable. Inspected XTuner configuration trains full language parameters with masked full-vocabulary answer-token CE, not LoRA; gold symbols remain labels, while the input retains placeholders.",
+        "zh": "微调语言骨干，冻结视觉 tower／projector。卡片称用 1728 校准及 1693 独立验证样本按 NLL 拟合温度：0.8B 为 2.747760550703、2B 为 2.100509348278、4B 为 1.99241824；原始私有记录及完整数据构建未公开。已审阅 XTuner 配置以 masked 完整词表 answer-token CE 训练语言全参数，并非 LoRA；金标答码只在 labels，输入保持占位符。"
       },
       "availability": {
         "en": "Public HF weights, own inference.py and repository HF/XTuner paths. HF card default 8192 tokens rejects overlength, up to 8 images. Core ML 0.8B port in FluidUse is text-only and uses smaller fixed buckets; it does not inherit HF image/context support.",
@@ -2866,6 +2959,75 @@
       "caveat": {
         "en": "Author-reported wine regression. Feature discovery belongs inside development folds; downstream training does not fine-tune Jev or establish financial/multimodal generalization.",
         "zh": "葡萄酒回归属于作者报告；特征发现须限制在开发划分，训练下游模型不等于微调 Jev，也不证明金融／多模态泛化。"
+      }
+    },
+    {
+      "id": "mire-ecommir",
+      "name": "MIRE / EcomMIR multimodal intent evaluation",
+      "category": "evaluation",
+      "url": "https://github.com/liujunwen23/MIRE/tree/d101287af90d114c5bf0cbfbd56fe9c52358e3bb",
+      "source_ids": [
+        "mire-challenge",
+        "mire-full-sft",
+        "ecommir-paper"
+      ],
+      "reviewed_on": "2026-10-16",
+      "summary": {
+        "en": "Image-scene and multi-turn intent challenge, with full-SFT baseline and a published LoRA-based competition solution.",
+        "zh": "图像场景与多轮意图挑战，提供全参数 SFT 基线及已发表的 LoRA 竞赛方案。"
+      },
+      "use": {
+        "en": "Inspect label/evidence structure and separate scene recognition from intent before adapting a VLM.",
+        "zh": "适配 VLM 前检查标签／证据结构，将场景识别与意图判断分开。"
+      },
+      "caveat": {
+        "en": "EcomMIR scores are author-reported combined interventions with Round 1 pseudo-labels; not LoRA-only or a 1,000-example-only untouched-test result. Dataset rights and full replay remain unverified.",
+        "zh": "EcomMIR 为含 Round 1 伪标签等组合干预的作者报告，不是 LoRA 单项或仅 1,000 样本的未触及测试结果；数据使用权与完整复现仍未核实。"
+      }
+    },
+    {
+      "id": "ezjev-training-baseline",
+      "name": "ezjev text candidate-logit LoRA",
+      "category": "baselines",
+      "url": "https://github.com/everettjf/ezjev/tree/8b3d88957c0795bea160c8fbc9c6d2a54b051136",
+      "source_ids": [
+        "ezjev-training",
+        "ezjev-s3-card"
+      ],
+      "reviewed_on": "2026-10-16",
+      "summary": {
+        "en": "Inspectable per-question candidate CE+Brier, replay and temperature fitting on a Qwen3.5 text-training path.",
+        "zh": "可检查的逐题候选 CE＋Brier、回放及温度拟合，训练路径使用 Qwen3.5 文本输入。"
+      },
+      "use": {
+        "en": "Study a bounded training/readout baseline before implementing a matched multimodal candidate scorer.",
+        "zh": "实现同骨干多模态候选评分前，研究有明确边界的训练／读出基线。"
+      },
+      "caveat": {
+        "en": "Not an image fine-tuning implementation. MIT covers code only; some training data are non-commercial or lack stated terms. No training or calibration result reproduced here.",
+        "zh": "不是图像微调实现；MIT 仅覆盖代码，部分训练数据为非商业许可或未说明条款；未在此复现训练或校准。"
+      }
+    },
+    {
+      "id": "decision-pacman-distillation",
+      "name": "decision-pacman decision distillation",
+      "category": "baselines",
+      "url": "https://github.com/grapeot/decision-pacman/tree/593ed1f59f4f97ad0bda7287ff304e9667360089",
+      "source_ids": [
+        "pacman-training"
+      ],
+      "reviewed_on": "2026-10-16",
+      "summary": {
+        "en": "Text-state teacher/simulator labels train a small option-distribution LoRA student.",
+        "zh": "用文本状态的教师／模拟器标签训练小型候选分布 LoRA 学生。"
+      },
+      "use": {
+        "en": "Inspect distillation inputs and retain both domain and generic regression sets.",
+        "zh": "检查蒸馏输入，保留领域任务及通用能力回归集。"
+      },
+      "caveat": {
+        "en": "Game-specific author reports include lost generality. Not image-training or customer-support transfer evidence; complete data/evaluated artifacts not audited.",
+        "zh": "游戏专项作者报告同时存在通用能力下降；不证明图像训练或客服泛化，完整数据／评测产物未审计。"
       }
     }
   ]

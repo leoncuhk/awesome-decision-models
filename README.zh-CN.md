@@ -6,7 +6,7 @@
 
 收录用于**分类、评分、排序、验证、路由与拒判**的模型和方法。我们关心的不是谁的宣传数字更高，而是：**在具体任务中，哪种方法能以可接受的风险和总成本，交付可验收的结果。**
 
-**本版来源核验日期：2026-10-15。** 精选 45 项资源，其中 17 个核心模型系列、27 条带协议背景的评测记录。本版完成的是公开资料核验，**没有宣称独立运行并复现这些模型**。阅读深度、版本固定情况与未解决的资料缺口均见[来源登记](docs/sources.md)。收录不等于背书，也不等于通过生产可靠性认证。
+**本版来源核验日期：2026-10-16。** 精选 48 项资源，其中 17 个核心模型系列、28 条带协议背景的评测记录。本版完成的是公开资料核验，**没有宣称独立运行并复现这些模型**。阅读深度、版本固定情况与未解决的资料缺口均见[来源登记](docs/sources.md)。收录不等于背书，也不等于通过生产可靠性认证。
 
 ## 目录
 
@@ -86,8 +86,9 @@
 - [E25 — 8-K 分类：监督标签与事后选择。](docs/evidence.md#e25)
 - [E26 — SEC 后续问询：90 日预测不同于文本完整性。](docs/evidence.md#e26)
 - [E27 — 语义特征：开发集内发现与葡萄酒评分预测。](docs/evidence.md#e27)
+- [E28 — EcomMIR：多模态场景与意图的组合竞赛方案。](docs/evidence.md#e28)
 
-领域评测、训练支持核查与未知／澄清策略见[图片意图适配流程](docs/selection-guide.md#image-intent-adaptation)。
+领域评测、训练支持核查与未知／澄清策略见[图片意图适配流程](docs/selection-guide.md#image-intent-adaptation)。详细[多模态微调研究方案](docs/multimodal-decision-finetuning.zh-CN.md)比较同骨干短标签 SFT 与候选读出，核查真实图像训练路径，并定义风险／成本验收。
 
 零样本分类、专项微调与 Best-of-N 选择不是同一个问题。本地 GPU 前向耗时与远程 API 往返耗时，也不是同一种性能测量。
 
@@ -103,6 +104,8 @@
 - **[TabICLv2](https://arxiv.org/abs/2602.11139)** — 用于表格分类与回归的基础模型。 按论文收录；未本地复现，不外推自然语言能力。
 - **[FluidUse / decision-model Core ML deployment](https://github.com/FluidInference/FluidUse)** — Apple 部署资源，含原生 Swift manager 与 Python 辅助 Core ML bridge，支持 Decision 3.0 等。 转换等价和 smoke test 不保证质量；须匹配长度 bucket、精度、tokenizer、校准器与媒体路径。bridge 调用串行排队，超时会关闭 session；文档中的自动下载／环境安装本轮未运行。
 - **[Semantic features + supervised predictor](https://docs.typesafe.ai/cookbooks/autoresearch_feature_discovery)** — LLM 提议问题，Jev 将文本转成语义特征，再由监督 CatBoost 预测任务标签。 葡萄酒回归属于作者报告；特征发现须限制在开发划分，训练下游模型不等于微调 Jev，也不证明金融／多模态泛化。
+- **[ezjev text candidate-logit LoRA](https://github.com/everettjf/ezjev/tree/8b3d88957c0795bea160c8fbc9c6d2a54b051136)** — 可检查的逐题候选 CE＋Brier、回放及温度拟合，训练路径使用 Qwen3.5 文本输入。 不是图像微调实现；MIT 仅覆盖代码，部分训练数据为非商业许可或未说明条款；未在此复现训练或校准。
+- **[decision-pacman decision distillation](https://github.com/grapeot/decision-pacman/tree/593ed1f59f4f97ad0bda7287ff304e9667360089)** — 用文本状态的教师／模拟器标签训练小型候选分布 LoRA 学生。 游戏专项作者报告同时存在通用能力下降；不证明图像训练或客服泛化，完整数据／评测产物未审计。
 
 能够用规则或普通监督分类器解决的任务，也应保留相应对照。只有可靠地增加了价值，复杂性才值得付出。
 
@@ -122,6 +125,7 @@
 - **[Nimble public evaluations](https://github.com/bespokelabsai/nimble/blob/62076b4f2d365b5879dafcf7f6dd072a1fe76df7/docs/PUBLIC_BENCHMARKS.md)** — 人工参考标签子集、配对比较及校准报告。 由项目方运行；本列表未独立复现。
 - **[Decision-model benchmark](https://github.com/nibzard/decision-model-benchmark)** — 用于判断模型比较的第三方代码与协议。 第三方身份本身不保证方法或标签可靠。
 - **[Financial-document decision tests](https://insights.ml4trading.io/p/testing-jev-on-financial-documents)** — 原评测者比较 Jev 与监督文本／TF-IDF 模型，分别测试财报变化、8-K 标签和 SEC 后续问询。 厂商提供 API；历史筛选样本含回顾检查、事后提示和划分限制，不能宣布树模型／Jev 通用胜负或投资收益。
+- **[MIRE / EcomMIR multimodal intent evaluation](https://github.com/liujunwen23/MIRE/tree/d101287af90d114c5bf0cbfbd56fe9c52358e3bb)** — 图像场景与多轮意图挑战，提供全参数 SFT 基线及已发表的 LoRA 竞赛方案。 EcomMIR 为含 Round 1 伪标签等组合干预的作者报告，不是 LoRA 单项或仅 1,000 样本的未触及测试结果；数据使用权与完整复现仍未核实。
 
 评测应同时看任务质量、关键错误、校准、风险—覆盖率、子群与分布变化，以及完整系统成本。阈值在校准集确定，不能在最终测试集上反复调参。自动放行的案例也必须保留抽检，才能发现“自信地判错”。
 
@@ -161,6 +165,6 @@ python3 -m unittest discover -s tests -v
 
 仓库包含[资料维护 Skill](.agents/skills/decision-models-curator/SKILL.md)和[每周来源检查工作流](.github/workflows/source-watch.yml)。前者规定怎样研究，后者发现来源变化并维护待审核 Issue。**工作流不会自动运行 AI 研究、改写结论或合并代码，也不需要付费模型 API。** 启用条件、调度限制和手动运行方式见[维护说明](docs/maintenance.md)。
 
-新增项目或成绩前请阅读 [CONTRIBUTING](CONTRIBUTING.md)。欢迎负面结果、假设变化与纠错。[首版核验记录](updates/2026-09-25.md)保留原始限制；[10 月 6 日发布核验记录](updates/2026-10-06-release-boundaries.md)与[10 月 11 日核验记录](updates/2026-10-11-typed-releases.md)说明新增、修正及证据缺口；[10 月 13 日多模态／部署核验](updates/2026-10-13-multimodal-deployment.md)区分新发布、校准和应用证据；[10 月 15 日更新](updates/2026-10-15-serving-and-adaptation.md)核查原生 vLLM、评分变化、语义特征与领域适配；[发布说明](PUBLISHING.md)提供面向空仓库的安全初始化步骤。
+新增项目或成绩前请阅读 [CONTRIBUTING](CONTRIBUTING.md)。欢迎负面结果、假设变化与纠错。[首版核验记录](updates/2026-09-25.md)保留原始限制；[10 月 6 日发布核验记录](updates/2026-10-06-release-boundaries.md)与[10 月 11 日核验记录](updates/2026-10-11-typed-releases.md)说明新增、修正及证据缺口；[10 月 13 日多模态／部署核验](updates/2026-10-13-multimodal-deployment.md)区分新发布、校准和应用证据；[10 月 15 日更新](updates/2026-10-15-serving-and-adaptation.md)核查原生 vLLM、评分变化、语义特征与领域适配；[10 月 16 日研究更新](updates/2026-10-16-multimodal-finetuning.md)补充训练路径与竞赛证据核查；[发布说明](PUBLISHING.md)提供面向空仓库的安全初始化步骤。
 
 原创代码与整理文字使用 [MIT](LICENSE)；链接的项目、模型、数据与论文保留各自许可证。固定来源文档的提交版本，**不等于**固定模型权重。
