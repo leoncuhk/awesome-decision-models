@@ -108,6 +108,12 @@ The [native D3 integration report](https://github.com/vllm-project/vllm/pull/615
 
 [原生 D3 集成报告](https://github.com/vllm-project/vllm/pull/61565)明确未测 LoRA；[TRL 通用 VLM／PEFT 文档](https://huggingface.co/docs/trl/en/sft_trainer)仅可作为受支持生成模型的参考，不能证明 D3 的定制双向注意力读出已有可用的多模态训练／导出配方。具体路径核验前保留未知。本指南未收集或上传私人图片。
 
+The official D3 wrapper restriction does not exclude a separate trainer. [Vis Decisions](https://github.com/Blockether/vis-decisions/blob/d73768e3c18d89d11f6b9a774b87d64ccd55f27d/src/blockether/vis_decisions/_d3_trainer.py) implements text-only full/LoRA adaptation with a trainable readout and merged export; it removes the vision tower and therefore does not verify image fine-tuning. Qwen3.5/VLM SFT or LoRA is an experimental baseline, not a demonstrated quality winner over D3; the reviewed sources do not establish a matched task/data/scale/budget multimodal comparison. B2/B3 must hold the exact base checkpoint fixed to isolate readout effects.
+
+官方 D3 封装的限制不排除独立训练器。[Vis Decisions](https://github.com/Blockether/vis-decisions/blob/d73768e3c18d89d11f6b9a774b87d64ccd55f27d/src/blockether/vis_decisions/_d3_trainer.py)实现文本 full／LoRA 适配、可训练读出及合并导出，但去掉视觉塔，不能据此确证图片微调。Qwen3.5／VLM 的 SFT 或 LoRA 是实验基线，并非已证明效果胜过 D3；已阅来源未确立同任务／数据／规模／预算的多模态对照。B2／B3 需固定精确底座，才能归因读出收益。
+
+The [one-page route](multimodal-decision-finetuning.md#quick-route) and [layered reading list](multimodal-decision-finetuning.md#reading-list) turn this into experiment gates, separating peer-reviewed methods, preprints and engineering. / [一页路线](multimodal-decision-finetuning.zh-CN.md#quick-route)及[分层阅读](multimodal-decision-finetuning.zh-CN.md#reading-list)给出实验关卡，分开同行评议、预印本与工程证据。
+
 For a complete proposed experiment, see the [multimodal fine-tuning research plan](multimodal-decision-finetuning.md): matched B0–B3 arms, actual image-path checks, candidate versus full-vocabulary loss, grouped splits, distillation, export and risk/cost stopping rules. [E28](evidence.md#e28) keeps the MIRE/EcomMIR competition results separate from decision-model leaderboards.
 
 完整实验设计见[多模态微调研究方案](multimodal-decision-finetuning.zh-CN.md)：同条件 B0–B3 对照、真实图像路径检查、候选／完整词表损失、分组划分、蒸馏、导出及风险／成本停止条件；[E28](evidence.md#e28)单独保存 MIRE／EcomMIR 竞赛结果，不混入判断模型总榜。

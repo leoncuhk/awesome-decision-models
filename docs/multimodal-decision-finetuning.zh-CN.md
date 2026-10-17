@@ -2,13 +2,48 @@
 
 [English](multimodal-decision-finetuning.md) · [首页](../README.zh-CN.md) · [选型指南](selection-guide.md#image-intent-adaptation) · [证据台账](evidence.md)
 
-来源核验：2026-10-16。本方案面向通用多模态客服意图识别，属于可检验的研究设计；没有执行模型训练或证明生产收益。下面分别标明公开实现、作者报告和建议实验。图像理解、意图判断、概率校准及行动权限是不同问题。
+来源核验：2026-10-17。本方案面向通用多模态客服意图识别，属于可检验的研究设计；没有执行模型训练或证明生产收益。下面分别标明公开实现、作者报告和建议实验。图像理解、意图判断、概率校准及拒判策略是不同问题。
+
+**研究问题：** 给定领域图片和决策时可见的对话，怎样在预先约定的关键错误风险与完整成本限制下，提高可接受的意图识别覆盖率，并对证据不足案例澄清或转人工？微调 decision model 只是可能的手段，不是研究目的。数值风险、成本与最小实质收益标准须由场景负责人在模型／阈值选择之前确定，不设通用达标线。
+
+<a id="quick-route"></a>
+## 一页实验入口
+
+用以下路线检验领域后训练是否改善明确的决策任务。**候选没有已证实的通用赢家，微调也可能降低质量。** [阅读清单](#reading-list)分开同行评议方法、预印本与工程资产。
+
+| 关卡 | 继续之前应有的具体产物 | 继续／停止条件 |
+| --- | --- | --- |
+| 1. 契约与留出 | 决策当时的证据、独立标注一致性、标签／未知、错误代价与使用权；按分组、时间、近重复家族划分训练／开发／校准／最终测试。见[数据](#3-数据与标签先消除不确定性)。 | 先解决标签歧义与泄漏；未来上下文不得进入更早输入。 |
+| 2. 基线与候选门槛 | 冻结零／少样本 VLM、带可用页面说明／检索的 VLM、运行时支持的 D3／Intern 推理、纯文本及 OCR＋文本；记录标签使用与总预算。见[对照](#1-先固定问题和对照)及[候选门槛](#candidate-gates)。 | 缺证据先取证／澄清；按核实的工程支持选择训练路径，不预设效果排名。 |
+| 3. 小批学习检查 | 真实可训练参数／梯度、极小子集拟合、去图／换图、token 与读出位置对齐。见[视觉路径](#4-训练前验证视觉路径与损失)。 | 先修复链路；小批拟合成功不是泛化证据。 |
+| 4. 受控适配 | 同一个精确底座、数据、视觉处理和预算下做 B2 短标签 SFT／B3 候选评分；有限开发搜索与学习曲线。见[实验顺序](#5-实验顺序与停止条件)。 | 跨底座比较只回答系统选型；保留普通回放与通用回归集。 |
+| 5. 校准与拒判 | 独立校准、实际选择／路由策略、未知／OOS 与澄清；冻结门槛、温度和阈值。见[验收](#6-验收任务质量风险与成本一起看)。 | 概率／confidence 字段不是风险保证，只使用假设适合目标风险的方法。 |
+| 6. 冻结验收 | 配对分组测试与不确定性、关键错误、覆盖率、完整成本及训练／导出／服务等价。 | 仅在满足关键风险／成本限制且覆盖率相对最强冻结基线有预先约定的实质收益时继续；否则改证据、数据、工程或停止。 |
+
+每关产物记录到有版本的实验清单；这是一套在核验使用权和运行时之后实施的设计，不是未经验证的命令集合。
 
 ## 1. 先固定问题和对照
 
-目标不是造一个“领域大脑”，而是判断：在相同输入证据、标注、基础模型及资源预算下，短标签生成与直接候选评分，哪种方式能在预设错路由风险下覆盖更多请求，并降低完整处理成本。
+任务是根据领域图片与当时可见对话识别意图，无法辨识时澄清或转人工；在预定风险／成本条件下与最强冻结基线比较。后训练、短标签和直接候选评分都是待检验效果的手段。
 
-先区分三个输出：**可见事实**（图片显示什么）、**用户意图**（结合当时文本想解决什么）、**允许的下一步**（按身份、策略和证据可以做什么）。同一截图可以对应不同诉求；图像分类标签不能自动成为意图标签。截图也不能证明真实性、账户归属或操作授权。允许多意图、未知、超出范围和澄清；缺少证据时不要强行选择业务类别。易变政策应通过版本化检索提供，不能只记在权重里。
+将**可见事实**（图片显示什么）、**用户意图**（结合当时文本想解决什么）及**证据充分性**分开标注。同一截图可以对应不同诉求，图像类别不能自动成为意图标签；允许多意图、未知、超出范围和澄清。版本化页面说明／检索可提供决策当时可用的背景，不能补造缺失的用户诉求。
+
+### 预注册可证伪假设
+
+先确认可辨识性与独立人工标注一致性，再建立最强 OCR／通用 VLM／页面说明／检索基线；确认剩余瓶颈属于可学习的领域适配后才训练。预先声明终点、分组单位、划分、模型搜索预算、候选策略和停止规则；开发集用于模型／模板／学习选择，独立校准集用于概率／策略拟合，最终测试只做验收。
+
+| 假设／论文到实验的对应 | 什么结果可推翻它 | 决定 |
+| --- | --- | --- |
+| H1：图片＋可见对话可辨识标签；MIRE／EcomMIR 与 MIntRec2.0 提示分开场景、意图和 OOS。 | 完善契约后独立标注仍持续分歧，或同图不同上下文确实歧义；页面说明／检索不能补造缺失的用户诉求。 | 改标签／证据或澄清，不扩大训练掩盖不可辨识。 |
+| H2：领域适配在关键风险／成本限制下相对最强冻结基线增加有效覆盖；EcomMIR 提供适配实例，不证明本场景收益。 | 配对留出覆盖差值及区间不满足预定实质收益，或关键错误／成本变差。 | 保留较强基线或停止；已有 decision checkpoint 仅在训练链路核实后纳入继续训练臂。 |
+| H3：候选评分相对短标签 SFT 改善声明的质量／校准／成本目标；读出／目标比较对应 B2／B3。 | 同精确底座、数据、规模、预算对照没有实质收益；跨底座结果不能检验此假设。 | 选较简单／较强且已验收的系统，不把底座／训练经历变化算作读出收益。 |
+| H4：实际策略使用图像证据，并泛化到新 UI／时间／语言／OOS；视觉反馈／评审及校准拒判论文对应这些检查。 | 图像必要案例消融、冻结漂移集或真实策略风险／覆盖／成本失败，评审一致率掩盖视觉错误。 | 修证据、链路、数据、阈值或停止；证据不足响应本身也要评估，不等于自动安全。 |
+
+主要终点是在预定关键风险约束下，相对最强基线的可接受意图标签覆盖率变化，并报告区间、每类错误与完整成本。离线 F1 提升、实现更容易或校准误差单独下降，都不能独立判定成功；论文提供机制和检验思路，同行评议不等于当前场景成功。
+
+**工程支持与已验证效果分开。** Qwen3.5 或其他受支持 VLM 的 SFT／LoRA 是候选实验基线，不是已证明优于 D3 的推荐。在本页已核的一手来源中，尚未确立同任务、数据、规模及训练／推理预算的直接多模态对照；实现更容易不等于效果更好。D3 应保留为相同保留集图像／上下文输入上的实质推理对照，并披露目标标签使用及适配预算是否相同。
+
+若要归因机制，B2 与 B3 必须从同一个精确骨干检查点出发，固定数据、规模、视觉处理和预算；新适配 Qwen VLM 与已发布 D3 的比较，只能检验已披露条件下的完整系统，不能把换底座／训练经历的差异归因于读出、目标函数或配方。B0／B1／B2／B3 是评测设计，不是效果排名，也不要求只选 Qwen3.5。
 
 建议按下列顺序比较；这些是实验臂，不是已有成绩：
 
@@ -18,6 +53,7 @@
 | B1：指令 VLM | 固定 schema 的零样本／少样本短标签输出 | 图片与上下文是否足够；另设检索增强臂，避免同时改变证据和模型 |
 | B2：VLM LoRA-SFT | 在相同 VLM 骨干上训练短结构化标签 | 领域监督的收益；限制生成长度并统计格式错误 |
 | B3：候选分布 LoRA | 与 B2 相同骨干、数据、图像处理和预算，直接读合法选项 logits | 读出／目标函数的收益；必须先证明训练与服务一致 |
+| C：已有决策检查点继续训练 | 仅在核实图片训练链路后，对 D3／Intern 等已有 decision checkpoint 做领域适配；与同一检查点未适配版本比较 | 目标划分和预算明示；跨系列结果用于系统选型，不是 B2／B3 读出消融。Vis 仅文本训练不能计作多模态 C 臂 |
 
 先跑通 B0/B1/B2，再决定是否值得实现 B3。短标签生成本来就可能只有几个 token，去掉解码并不必然显著降低端到端延迟。只有场景分类被证实是瓶颈时，才增加独立视觉编码器或多阶段场景模型。
 
@@ -29,12 +65,26 @@
 | [EcomMIR 作者论文](https://zhoushengisnoob.github.io/papers/WWWComp.pdf)（[DOI](https://doi.org/10.1145/3701716.3718371)） | CN-CLIP 场景分类与 MiniCPM-V 2.6 LoRA 意图分类；另有清洗、层级标签、高置信伪标签、图像增强及场景 model soup | [E28](evidence.md#e28) 的 Round 2 意图 F1 0.9420、场景 F1 0.8278 是组合系统作者报告；不能归因于 LoRA 单项，也不是“仅 1,000 条训练样本、完全未接触评测轮数据”的证明 |
 | [ezjev 训练代码](https://github.com/everettjf/ezjev/tree/8b3d88957c0795bea160c8fbc9c6d2a54b051136) | 每题独立文本 prompt，候选字母 CE＋Brier、难例／普通样本回放和开发集温度拟合 | 代码使用 tokenizer、input IDs 和 attention mask，没有图像处理与视觉张量训练路径；即使加载多模态类，也不能称为图像微调实现 |
 | [Intern-Decision 训练配置](https://github.com/InternLM/Intern-Decision/blob/3572c8a68b5df5dafe02d0e093989ba8ec0183bc/configs/training/qwen35.py)与[输入编译器](https://github.com/InternLM/Intern-Decision/blob/3572c8a68b5df5dafe02d0e093989ba8ec0183bc/src/inputs/schema.py) | 有真实多模态处理路径；冻结视觉 tower／projector，训练语言骨干；masked answer-token CE | 配置不是现成 LoRA；完整原始训练数据未公开，不能声称从零完全复现；多个字段并不自动逻辑一致 |
-| [Decision 3.0 wrapper](https://huggingface.co/vllm-sr/d3/blob/225be8b1e2270becab69c5fe05b26f99cbbdd66b/modeling_d3.py) | 已审阅版本 `train(True)` 明确抛出 inference-only 错误，含定制读出和非因果注意力 | 不能直接套通用 Trainer／PEFT。255 个答码不等于固定 255 个业务类别，也不证明有公开可用的多模态 LoRA 配方 |
+| [Decision 3.0 wrapper](https://huggingface.co/vllm-sr/d3/blob/225be8b1e2270becab69c5fe05b26f99cbbdd66b/modeling_d3.py) | 官方封装的已审阅版本 `train(True)` 明确抛出 inference-only 错误，含定制读出和非因果注意力 | 不能直接套通用 Trainer／PEFT。255 个答码不等于固定 255 个业务类别，也不证明有公开可用的多模态 LoRA 配方 |
+| [Vis Decisions 0.6.1 文本训练](https://github.com/Blockether/vis-decisions/blob/d73768e3c18d89d11f6b9a774b87d64ccd55f27d/src/blockether/vis_decisions/_d3_trainer.py) | 独立 D3 文本实现；全语言骨干训练或 LoRA adapter **加可训练的完整 255 答码头**，候选 CE 及合并 FP32／ONNX 导出代码 | 指南列 Edge／Lite，代码还接受 Nano；`from_local` 仅留文本权重、去掉视觉塔，模型只接收 token IDs。可查的文本适配链路不等于开箱即用的多模态训练，也不是独立复现结果 |
 | [decision-pacman 训练代码](https://github.com/grapeot/decision-pacman/blob/593ed1f59f4f97ad0bda7287ff304e9667360089/training/train.py)与[报告](https://github.com/grapeot/decision-pacman/blob/593ed1f59f4f97ad0bda7287ff304e9667360089/README.md) | 文本化游戏状态、教师／模拟器标签、候选分布 LoRA 蒸馏；作者同时报告专长提升与通用题下降 | 不是截图训练或客服泛化证明；教师可见的未来模拟只用于制标签，不得混入学生推理输入；完整数据不在已审阅代码中 |
+
+官方推理 wrapper 的限制是封装边界，不能推出 D3 无法微调。[Vis 代码](https://github.com/Blockether/vis-decisions/blob/d73768e3c18d89d11f6b9a774b87d64ccd55f27d/src/blockether/vis_decisions/_d3.py)另建 `Qwen3_5TextModel`，训练路径没有图像／视频塔或视觉张量。若研究图片适配，需保留或恢复匹配的视觉链路／processor，验证 pixels 与 grid 元数据，再核查梯度、读出和多模态导出／服务等价。本次仅阅读源码，未运行训练／导出，也不引入社区速度或质量成绩。
+
+新增 [Intern-Decision 论文 v1](https://arxiv.org/html/2610.22131v1)称训练有 17,880 条样本，其中 5,500 条带图，训练语言骨干、冻结视觉塔／projector。这支持“有带图训练”，不是 LoRA 效果报告。七套定量比较针对文本任务，视觉演示为定性；公开 Jevbench 参与开发，且缺同数据消融。已阅论文没有给出同条件多模态 D3 对照，也不足以确立完整原始训练数据已公开。
 
 [10 月 17 日机制核查](decision-readout-and-reasoning.md)补充 StartLux v1.1：公开推理／服务包及归档 v1 文本 LoRA 示例，不等于已验证的完整多模态 v1.1／RLCD² 训练配方；权重为非商业许可，应核查使用权和精确运行时后再作有条件对照。
 
 ezjev 的 MIT 代码许可证不能覆盖模型与训练数据；[模型卡](https://huggingface.co/everettjf/ezjev-4b-s3/blob/a2faa581dc5e48c0c41ce388d056fed8e8fa6b4d/README.md)明确提醒部分训练来源为非商业许可或未注明许可。其历史训练费用是作者某次实验记录，不能作为新的训练报价。MIRE／EcomMIR 的论文可读性同样不代替数据、底座、代码及权重的逐项使用权核查。所有来源均为阅读核验，未在此复现。
+
+<a id="candidate-gates"></a>
+### 候选适配门槛
+
+| 候选 | 当前已核起点 | 图片适配前的门槛 |
+| --- | --- | --- |
+| D3 | 官方多模态推理对照；独立 Vis Edge／Lite 文本 full／LoRA 路径，代码另接受 Nano。 | Vis 去掉视觉；须恢复／保留真实图片链路，核梯度与多模态导出后再测效果。这是独立工程，不是架构禁止微调。 |
+| Intern-Decision | 带图的全语言参数训练及 masked answer-token 路径，视觉／projector 冻结。 | 固定检查点／模板／后端；区分全参预算与另行验证的 LoRA 目标模块；论文文本成绩不能认证图片领域效果。 |
+| Qwen3.5／其他受支持 VLM | 候选短标签生成式 SFT／LoRA 基线，先核模型／processor／trainer 支持。 | B2／B3 共用精确起始检查点和证据；工具链更容易不证明优于已做决策训练的 D3／Intern。 |
 
 ## 3. 数据与标签：先消除不确定性
 
@@ -70,7 +120,9 @@ L=-\log p_\theta(y\mid x,C)+\lambda\sum_{k\in C}(p_\theta(k)-\mathbf{1}[k=y])^2.
 3. **以语言侧 LoRA 为待测起点。** 冻结视觉 tower／projector可减少训练参数，但须验证精确模型类、目标模块及梯度。它是新实验建议，不能把 Intern 的全语言参数配置改名为 LoRA。rank、学习率和 epoch 用有限开发搜索选择，不照搬其他模型；明确早停规则。
 4. **错误归因后再加数据。** 分开统计 OCR／视觉、上下文不足、标签歧义、规则绕过、模板／读出、领域知识、校准与权限错误。难例与普通样本回放同时保留；绘制按数据量／预算的学习曲线，防止仅对难例过拟合。
 5. **有收益才做蒸馏。** 教师输入、标签来源与筛选逻辑明确；训练池内生成，人工抽检错误及软分布，按意图／语言查看偏差。小模型可能提升专长却丢失通用能力，应保留通用和边界回归集。
-6. **验证导出与服务。** 同一输入比较训练端、合并／导出产物和服务端的答码映射、logits、温度、近似平局、图像处理与错误处理。适配器体积小不代表推理可以省掉大骨干。对 D3 先作推理对照，除非另行验证完整训练／导出路径。
+6. **验证导出与服务。** 同一输入比较训练端、合并／导出产物和服务端的答码映射、logits、温度、近似平局、图像处理与错误处理。适配器体积小不代表推理可以省掉大骨干。对图片任务，先将 D3 作推理对照，直到图像训练／导出链路另行验证；Vis 的独立文本适配路径不能代替图像训练验证。
+
+只有剩余错误确属视觉事实或候选偏好、且能形成可审计成对标签时，才另设反馈／偏好学习臂。有条件借鉴 RLAIF-V／LLaVA-Critic，在同底座／证据／预算下与监督适配比较，抽检教师／评审错误；反馈生成限制在训练池，核查与评测集的来源／图片重叠。偏好模型不能替代意图契约或人工裁定的最终标签。
 
 ## 6. 验收：任务质量、风险与成本一起看
 
@@ -87,8 +139,45 @@ L=-\log p_\theta(y\mid x,C)+\lambda\sum_{k\in C}(p_\theta(k)-\mathbf{1}[k=y])^2.
 
 标签体系不稳定、证据无法确定意图、视觉管线失效、服务模板不一致、关键错误不降或收益不能覆盖维护成本时，应暂停扩大训练。离线 F1、教师一致率、格式合法率、转换等价与真实处理成效分别报告。通过离线验收之后仍需另行设计获授权的影子评估、人工抽检和回滚；本方案没有执行部署或处理真实请求。
 
+校准、错误排序与分类质量分别测量。[Guo 等](https://proceedings.mlr.press/v70/guo17a.html)在独立校准数据拟合温度；共同正温度不改变固定候选的 argmax。[UAI 2024 置信度研究](https://proceedings.mlr.press/v244/cattelan24a.html)支持另测风险—覆盖率／AURC，但 ImageNet 上的分数选择不是动态候选 VLM 的已验证默认。D3／API 的 `confidence >= 0.9` 不意味着领域接收案例的错误率不超过 10%；须检查真实统计量与返回策略。
+
+[固定 D3 包](https://huggingface.co/vllm-sr/d3/blob/225be8b1e2270becab69c5fe05b26f99cbbdd66b/d3_runtime.py)在多候选 choice／score 中将 confidence 定义为一减归一化熵，衡量分布集中度，不是所选标签正确的估计概率；其他后端可有不同定义。概率映射拟合与阈值认证应分开留出，或采用计入自适应选择的有效程序；在同一校准集反复挑模型、温度和门槛后，不能继承未考虑选择的保证。
+
+[Conformal Risk Control](https://proceedings.iclr.cc/paper_files/paper/2024/hash/f3549ef9b5ff520a7e41ff3cc306ab2b-Abstract-Conference.html)在交换性及有界单调损失等条件下控制期望风险，不是逐样本、也不是对任意固定校准集的高概率保证。接受集错误率可能随阈值非单调，不能自动套标准 CRC；需选择匹配风险定义和数据依赖的方法，并在路由、候选归约或分布变化后重新验证。
+
+最终比较应配对同一会话／请求分组，报告质量、覆盖与成本差值及分组不确定性。查看最终结果之前冻结模型、策略和阈值，记录所有开发实验臂；预先声明最小实质收益与关键错误／成本限制。均值的小幅波动、校准误差单独降低或 ONNX 等价，均不足以判定继续。
+
 ## 7. 最小研究产物
 
-保留任务／标签规范、来源及使用权清单、分组划分与去重方法、版本和预算、实验臂、图像消融、逐类错误、校准／阈值、完整成本与停止决定。共享产物只使用明确可公开的材料；真实数据与执行权限遵循各自管理边界。训练和评测脚本应在选定实现经验证后再编写，不把不可运行的示例命令包装成复现配方。
+保留预注册假设、负责人确定的风险／成本／实质收益限制、任务／标签规范、来源及使用权清单、分组划分与去重方法、版本和预算、实验臂、图像消融、逐类错误、校准／阈值、完整成本与停止决定。共享产物只使用明确可公开的材料；真实数据与执行权限遵循各自管理边界。训练和评测脚本应在选定实现经验证后再编写，不把不可运行的示例命令包装成复现配方。
 
 本页证据来源及版本见[来源登记](sources.md)；EcomMIR 数值与协议限制见 [E28](evidence.md#e28)。本页不发布数据集、模型权重或训练结果。
+
+<a id="reading-list"></a>
+## 8. 分层阅读清单与可借鉴方法
+
+发表层级与证据强度是两个维度。同行评议不使结果自动独立于模型作者，也不证明可迁移到当前领域。本仓库仅核查资料，未运行这些模型；以下用于形成可检验设计，不拼总榜。
+
+### 同行评议论文
+
+| 正式标题／venue | 可借鉴的实施问题 | 证据边界 |
+| --- | --- | --- |
+| [EcomMIR: Towards Intelligent Multimodal Intent Recognition in E-Commerce Dialogue Systems](https://doi.org/10.1145/3701716.3718371) — WWW Companion 2025（Companion Proceedings of the ACM Web Conference 2025），四页竞赛方案 | CN-CLIP＋Greedy Soup 场景分类；MiniCPM-V 2.6 LoRA 意图分类；层级标签、清洗及伪标签筛选。 | 作者组合系统竞赛报告，不是 WWW 主会研究轨或 LoRA 单项消融。Round 1 无标签测试输入进入训练，含 transductive 成分，不能称仅 1,000 样本纯监督；这也不能证明 Round 2 泄漏。见 [E28](evidence.md#e28)。 |
+| [MIntRec2.0: A Large-scale Benchmark Dataset for Multimodal Intent Recognition and Out-of-scope Detection in Conversations](https://openreview.net/forum?id=nY9nITZQjc) — ICLR 2024；[官方仓库](https://github.com/thuiar/MIntRec2.0) | 意图／OOS 标签、多方多轮文本／音频／视频上下文；域内与 outlier-exposure 目标。 | 电视剧会话不是客服截图，也不是 LoRA 实证；本轮读到仓库正文，OpenReview 验证阻止全文访问。 |
+| [RLAIF-V: Open-Source AI Feedback Leads to Super GPT-4V Trustworthiness](https://openaccess.thecvf.com/content/CVPR2025/html/Yu_RLAIF-V_Open-Source_AI_Feedback_Leads_to_Super_GPT-4V_Trustworthiness_CVPR_2025_paper.html) — CVPR 2025 | 视觉事实检查、AI 偏好构造及 DPO 式偏好学习；蒸馏前核查教师反馈。 | 作者对齐结果针对视觉回答可信度，不是领域意图效用；仓库后来支持 LoRA 不代表论文所有结果为 LoRA。数据 NC／研究用途及底座／API 条款须核查。 |
+| [LLaVA-Critic: Learning to Evaluate Multimodal Models](https://openaccess.thecvf.com/content/CVPR2025/html/Xiong_LLaVA-Critic_Learning_to_Evaluate_Multimodal_Models_CVPR_2025_paper.html) — CVPR 2025 | 用 pointwise／pairwise critic 指令微调 LLaVA-OneVision，对判断及解释做 CE；核 GPT-4o 辅助标签偏差。 | 生成式视觉评审器不等于直接候选 logits 分类器或领域结果验证器；不猜未核实的 adapter／全参设置，不把教师一致率当金标。 |
+| [VL-RewardBench: A Challenging Benchmark for Vision-Language Generative Reward Models](https://openaccess.thecvf.com/content/CVPR2025/html/Li_VL-RewardBench_A_Challenging_Benchmark_for_Vision-Language_Generative_Reward_Models_CVPR_2025_paper.html) — CVPR 2025 | 用筛选、人工复核的视觉偏好案例检查评审器是否识别视觉证据失误。 | 是基准，不是训练配方；来源含 RLAIF-V／RLHF-V，须检查样本／图像／来源重叠。基准作者原评测与本仓库复现分开。 |
+| [On Calibration of Modern Neural Networks](https://proceedings.mlr.press/v70/guo17a.html) — ICML 2017 | 在独立校准集拟合温度并评估概率质量。 | 共同正温度不提高固定候选 argmax／top-1；部署及分布变化下仍须实测校准。 |
+| [How to Fix a Broken Confidence Estimator: Evaluating Post-hoc Methods for Selective Classification with Deep Neural Networks](https://proceedings.mlr.press/v244/cattelan24a.html) — UAI 2024 | 将准确率与错误排序分开，评估风险—覆盖率／AURC。 | 84 个 ImageNet 分类器的研究不能证明动态标签或 VLM 上最好的 confidence 分数。 |
+| [Conformal Risk Control](https://proceedings.iclr.cc/paper_files/paper/2024/hash/f3549ef9b5ff520a7e41ff3cc306ab2b-Abstract-Conference.html) — ICLR 2024 | 先精确定义风险，再匹配有界损失、单调性及交换性假设。 | 期望风险控制不是逐决策正确保证；任意接受集条件错误率不自动适用。 |
+
+### 预印本与工程资产
+
+| 来源／状态 | 已支持什么 | 尚未支持什么 |
+| --- | --- | --- |
+| [Intern-Decision: Efficient Multimodal Decision Making with Autoregressive Masked Language Modeling](https://arxiv.org/html/2610.22131v1) — arXiv v1，2026-10-15 | 带图的全语言参数训练、多字段因果 masked 读出，视觉／projector 冻结。 | 文本套件成绩与定性视觉示例没有提供同条件 D3 多模态对照或 LoRA 效果；完整原始训练数据公开未确立。 |
+| [StartLux-Decision: AutoThink Decision Models with Reinforcement Learning for Calibrated Deliberative Decisions](https://arxiv.org/html/2610.17309v1) — arXiv v1，2026-10-12 | 候选概率、按需推理及策略条件校准，见[机制核查](decision-readout-and-reasoning.md)。 | 公共 DI 开发选择、作者 DecisionPivot 与 NC 权重限制结论／使用范围，不是已验证领域图片训练配方。 |
+| [MIRE: Multimodal Intent Recognition for Dialogue Systems challenge baseline](https://github.com/liujunwen23/MIRE/tree/d101287af90d114c5bf0cbfbd56fe9c52358e3bb) — WWW2025 挑战工程仓库 | 场景／意图任务的 Qwen2-VL-7B **全参数 SFT** 基线。 | 不是 EcomMIR 实现或 LoRA 结果；本轮未核得独立的同行评议方法论文。 |
+| [Vis Decisions 0.6.1 D3 路径](https://github.com/Blockether/vis-decisions/blob/d73768e3c18d89d11f6b9a774b87d64ccd55f27d/src/blockether/vis_decisions/_d3_trainer.py) — 第三方工程 | 文本 full／LoRA＋可训练答码头及合并导出实现。 | 去掉视觉塔，不能证明多模态适配或独立评测复现。 |
+
+阅读顺序：领域意图适配 → OOS／澄清 → 视觉反馈 → 候选／评审评分 → 评分器检查 → 校准与拒判。同行评议方法能帮助设计实验，不能保证微调改善目标决策；阅读深度、版本与访问缺口见[来源登记](sources.md)。

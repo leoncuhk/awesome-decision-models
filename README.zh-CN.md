@@ -53,8 +53,8 @@
 | [Microsoft-Decision-1](https://ai.azure.com/catalog/models/Microsoft-Decision-1) | 托管的 Qwen3.5-9B 后训练模型，对有限选项评分。 | 比较分类、路由和按标准评分。 | 厂商比较缺少已审计的逐项产物；熟悉任务的校准不保证迁移，措辞与安全判断仍可能出错。 |
 | [OpenAI Decisions API / GPT-6 Luna](https://developers.openai.com/api/docs/guides/decisions) | 面向文本与图像的类型化判断 API，处于公开测试。 | 托管分类、路由与有序评分。 | 拒答为单独返回类型，不等于校准后的拒判；confidence 需在目标任务验证，训练与服务身份尚未披露。 |
 | [Nace Drex v1.5](https://github.com/nace-ai/drex-decision-models) | MiMo-V2.6-Distill-Qwen-9B 骨干加 Kev pointer head，提供公开权重发布链接。 | 本地文本／JSON 判断候选，可测试长输入。 | 使用基准训练划分，不能视为未知领域零样本；公开 Index 0.3.1 前列处于平局带内，小规模运行器核对不证明普遍等价。 |
-| [vLLM-SR Decision 3.0](https://huggingface.co/collections/vllm-sr/decision-30) | 六个多模态 code-readout 检查点；10 月 14 日新增原生 vLLM main 支持，每题仍独立读取 prompt。 | 本地文本／图像／视频分类、评分与路由；固定输入和候选预算比较各型号。 | Index 各版本与公共分数不可混用；权重／校准标识未变，文本数值领先者处于共享第一平局带。原生 vLLM 需合并后／nightly 版本，集成报告未测 LoRA 和 CUDA。 |
-| [Intern-Decision](https://github.com/internlm/Intern-Decision) | Qwen3.5 多模态 0.8B／2B／4B 系列，在一个因果 masked assistant skeleton 中评分多个类型化字段。 | 与每题独立模型比较多字段成本和字段／顺序敏感性，测试基于图像证据的判断。 | 原始训练／校准记录私有；96-case 分布试验只作诊断。型号／后端专属温度与 max(P) confidence 不能直接保证业务风险。 |
+| [vLLM-SR Decision 3.0](https://huggingface.co/collections/vllm-sr/decision-30) | 六个多模态 code-readout 检查点；10 月 14 日新增原生 vLLM main 支持，每题仍独立读取 prompt。 | 本地文本／图像／视频分类、评分与路由；固定输入和候选预算比较各型号。 | Index 各版本与公共分数不可混用；10 月 15 日快照的权重／校准标识未变，文本数值领先者处于共享第一平局带；该次服务核验要求原生 vLLM 合并后／nightly 版本，集成报告未测 LoRA 和 CUDA。 |
+| [Intern-Decision](https://github.com/internlm/Intern-Decision) | Qwen3.5 多模态 0.8B／2B／4B 系列，在一个因果 masked assistant skeleton 中评分多个类型化字段。 | 与每题独立模型比较多字段成本和字段／顺序敏感性，测试基于图像证据的判断。 | 原始训练／校准记录私有；96-case 分布试验只作诊断。型号／后端专属温度与 max(P) confidence 不能直接保证业务风险。 论文七套准确率针对文本任务，视觉轨迹为定性演示；公开 Jevbench 参与开发，已阅证据缺同数据消融及同条件 D3 多模态对照。 |
 | [Verdict / OpenJev](https://github.com/Heman10x-NGU/Verdict-open-jev) | 151M ModernBERT／GLiClass 候选分类器，含显式证据不足选项及 per-K 校准。 | 轻量意图分类与缺少正确选项测试；核对实际服务概率和评测 renderer／校准器。 | 作者测试显示 hard negative 和同义改写下拒答崩塌；转换者报告实际服务校准与保留集评测明显不同，不能保证跨域拒答可靠性。 |
 | [StartLux-Decision v1.1 (Instant / AutoThink)](https://github.com/StartLuxLabs/StartLux-Decision) | 使用 LM 选项字母读出：Instant 的 full-attention 提示双向，因果 AutoThink 按需推理并混合两次分布。 | 在证据充分的判断上以相同风险与总成本比较一次读出和选择性计算；商业使用权重需另获授权。 | 公共 DI 参与开发选择，并非完整／私有榜；DecisionPivot 为作者自建自测。论文 0.9 门槛成绩不代表当前 0.6 默认；confidence／none 须按实际策略验证。 |
 
@@ -92,7 +92,7 @@
 - [E30 — DecisionPivot：作者对比及版本／成对正确率边界。](docs/evidence.md#e30)
 - [E31 — RLCD²：强制推理子集的终止与长度变化。](docs/evidence.md#e31)
 
-领域评测、训练支持核查与未知／澄清策略见[图片意图适配流程](docs/selection-guide.md#image-intent-adaptation)。详细[多模态微调研究方案](docs/multimodal-decision-finetuning.zh-CN.md)比较同骨干短标签 SFT 与候选读出，核查真实图像训练路径，并定义风险／成本验收。
+领域评测、训练支持核查与未知／澄清策略见[图片意图适配流程](docs/selection-guide.md#image-intent-adaptation)。先看[多模态后训练一页入口](docs/multimodal-decision-finetuning.zh-CN.md#quick-route)，再深入同条件对照、候选门槛及[分层学术阅读清单](docs/multimodal-decision-finetuning.zh-CN.md#reading-list)。
 
 [读出与自适应推理比较](docs/decision-readout-and-reasoning.md)区分 StartLux Instant／AutoThink、D3、Decider v1.1 与托管 Jev，并分开训练／服务和公共／独立证据。
 
@@ -172,6 +172,6 @@ python3 -m unittest discover -s tests -v
 
 仓库包含[资料维护 Skill](.agents/skills/decision-models-curator/SKILL.md)和[每周来源检查工作流](.github/workflows/source-watch.yml)。前者规定怎样研究，后者发现来源变化并维护待审核 Issue。**工作流不会自动运行 AI 研究、改写结论或合并代码，也不需要付费模型 API。** 启用条件、调度限制和手动运行方式见[维护说明](docs/maintenance.md)。
 
-新增项目或成绩前请阅读 [CONTRIBUTING](CONTRIBUTING.md)。欢迎负面结果、假设变化与纠错。[首版核验记录](updates/2026-09-25.md)保留原始限制；[10 月 6 日发布核验记录](updates/2026-10-06-release-boundaries.md)与[10 月 11 日核验记录](updates/2026-10-11-typed-releases.md)说明新增、修正及证据缺口；[10 月 13 日多模态／部署核验](updates/2026-10-13-multimodal-deployment.md)区分新发布、校准和应用证据；[10 月 15 日更新](updates/2026-10-15-serving-and-adaptation.md)核查原生 vLLM、评分变化、语义特征与领域适配；[10 月 16 日研究更新](updates/2026-10-16-multimodal-finetuning.md)补充训练路径与竞赛证据核查；[10 月 17 日 StartLux 核验](updates/2026-10-17-startlux-and-decisionpivot.md)记录新增模型、评测与机制证据；[发布说明](PUBLISHING.md)提供面向空仓库的安全初始化步骤。
+新增项目或成绩前请阅读 [CONTRIBUTING](CONTRIBUTING.md)。欢迎负面结果、假设变化与纠错。[首版核验记录](updates/2026-09-25.md)保留原始限制；[10 月 6 日发布核验记录](updates/2026-10-06-release-boundaries.md)与[10 月 11 日核验记录](updates/2026-10-11-typed-releases.md)说明新增、修正及证据缺口；[10 月 13 日多模态／部署核验](updates/2026-10-13-multimodal-deployment.md)区分新发布、校准和应用证据；[10 月 15 日更新](updates/2026-10-15-serving-and-adaptation.md)核查原生 vLLM、评分变化、语义特征与领域适配；[10 月 16 日研究更新](updates/2026-10-16-multimodal-finetuning.md)补充训练路径与竞赛证据核查；[10 月 17 日 StartLux 核验](updates/2026-10-17-startlux-and-decisionpivot.md)记录新增模型、评测与机制证据；[多模态后训练指南更新](updates/2026-10-17-d3-text-training.md)补充论文支撑的实验路线及 D3 文本训练边界；[发布说明](PUBLISHING.md)提供面向空仓库的安全初始化步骤。
 
 原创代码与整理文字使用 [MIT](LICENSE)；链接的项目、模型、数据与论文保留各自许可证。固定来源文档的提交版本，**不等于**固定模型权重。

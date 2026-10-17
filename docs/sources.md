@@ -1304,3 +1304,99 @@
 - Source revision: `14c9d90137962d300f3de95633f7b6535e80c5ce`
 - Note: model.py, config.json and decision_config.json reviewed. Native Qwen3_5Model plus 255-row readout, noncausal full-attention, saved temperature 1.0087417621345625, valid-option normalization and 8192-token prepare limit. Card states training/evaluation image cap 512x512 versus larger configurable inference default. Training source/config/data-manifest paths exist; full raw dataset and end-to-end reproduction not audited. Earlier v1 source snapshots retained.
 
+<a id="vis-d3-guide"></a>
+## Vis: third-party D3 Edge/Lite text training scope
+
+- Source: https://github.com/Blockether/vis/blob/7589e04daa7af13ccd0c5b3c03a5e402c7f4abfb/resources/vis-docs/decision-models.md#choose-and-train-d3
+- Kind: `repository`; review depth: `content_reviewed`; reviewed: 2026-10-17
+- Source revision: `7589e04daa7af13ccd0c5b3c03a5e402c7f4abfb`
+- Note: Choose-and-train-D3 section and vis-decisions README/pyproject inspected. Guide requires >=0.6.0; reviewed code declares 0.6.1 at d73768e3c18d89d11f6b9a774b87d64ccd55f27d. Published bundles list Edge/Lite; code also whitelists Nano, not all six D3 sizes. Bundles remove image/video encoder. Direct site request returned 403; body was read through web retrieval and fixed to this public Markdown source. Author RAM/speed claims not imported or independently reproduced.
+
+<a id="vis-d3-training"></a>
+## Vis Decisions: text D3 full/LoRA gradients and candidate loss
+
+- Source: https://github.com/Blockether/vis-decisions/blob/d73768e3c18d89d11f6b9a774b87d64ccd55f27d/src/blockether/vis_decisions/_d3_trainer.py
+- Kind: `repository`; review depth: `content_reviewed`; reviewed: 2026-10-17
+- Source revision: `d73768e3c18d89d11f6b9a774b87d64ccd55f27d`
+- Note: Pinned _d3_trainer.py, d3_training.py, _trainer.py and tests/test_d3_training.py inspected. Rows become token IDs from text/JSON state, question and integer target; no pixel/grid input. Full mode trains text backbone plus 255-row readout; LoRA freezes base backbone weights, trains adapters AND the complete readout. CE uses valid candidate-code logits, with unpadded per-row backward/gradient accumulation. Optional max_input_tokens cuts state tails during training, unlike the default overlength rejection. Checkpoint saves merged weights and separate readout. Test source checks changed/merged weights but tests/models were not executed here. No matched multimodal D3-versus-Qwen3.5 SFT/LoRA comparison on the same task/data/scale/budget was established by the reviewed sources; implementation availability is not effect evidence.
+
+<a id="vis-d3-export"></a>
+## Vis Decisions: text-only D3 reconstruction and merged FP32/ONNX export
+
+- Source: https://github.com/Blockether/vis-decisions/blob/d73768e3c18d89d11f6b9a774b87d64ccd55f27d/src/blockether/vis_decisions/_d3.py
+- Kind: `repository`; review depth: `content_reviewed`; reviewed: 2026-10-17
+- Source revision: `d73768e3c18d89d11f6b9a774b87d64ccd55f27d`
+- Note: Pinned _d3.py, d3_training.py, _trainer.py and scripts/export_d3.py inspected. from_local filters language_model.* tensors; load_checkpoint instantiates Qwen3_5TextModel with no vision tower. Forward accepts only input_ids, with noncausal full-attention and causal linear-attention. _cpu_state folds LoRA deltas into saved text weights; readout saved separately; ONNX input is input_ids and code includes PyTorch/ONNX logits/argmax parity checks. These are implementation findings, not a locally verified export or independent quality result. FP32 text conversion does not establish multimodal parity.
+
+<a id="intern-paper-v1"></a>
+## Intern-Decision paper v1: image-bearing training versus text-suite evidence
+
+- Source: https://arxiv.org/html/2610.22131v1
+- Kind: `paper`; review depth: `content_reviewed`; reviewed: 2026-10-17
+- Source revision: `not captured / live URL`
+- Note: arXiv v1 submitted 2026-10-15. Training composition, objective/setup, evaluation Tables 2–3, qualitative section 6, and recovered settings/data composition in Appendices A/B reviewed. Authors report 17880 samples / 23500 decisions, including 5500 image-bearing samples; language backbone trained, vision/projector frozen, not a LoRA effect report. Seven-suite accuracy is text-task evidence, while visual demonstrations are selected qualitative trajectories. Authors acknowledge missing matched-data ablations and public Jevbench use during development. No matched multimodal comparison with D3 on the same task/data/scale/budget established; composition and selected examples do not establish public availability of full training data. Paper hashes/log checks are author reports, not local verification. HTML SHA-256 ede54b2b807b943b4182ca0c1dd27cfa37211062d43433f1c3fc403ab9a3a103. No model run or new accuracy number imported.
+
+<a id="mintrec2-repo"></a>
+## MIntRec2.0: conversational multimodal intent and out-of-scope benchmark
+
+- Source: https://github.com/thuiar/MIntRec2.0/blob/38cb8bf1841cfb9b410aa6a8731394ca5ba74a39/README.md
+- Kind: `repository`; review depth: `content_reviewed`; reviewed: 2026-10-17
+- Source revision: `38cb8bf1841cfb9b410aa6a8731394ca5ba74a39`
+- Note: Official author README/task-framework sections reviewed. Authors identify the paper as ICLR 2024, OpenReview nY9nITZQjc. Text/audio/video, multi-party multi-turn context, in-scope CE and outlier exposure/OOS handling are relevant methodological leads. This is television-dialogue data, not screenshot-domain LoRA evidence. Publisher page/PDF/API were blocked by HTTP 403/browser verification in this review; full paper body was not obtained. Data/rights not downloaded or audited, no score imported. Reviewed artifact SHA-256 249fdd77eed4ef38dfb6e72dbc780e0b597766ce8d23b34150de7a2b8a94b645.
+
+<a id="rlaifv-paper"></a>
+## RLAIF-V: Open-Source AI Feedback Leads to Super GPT-4V Trustworthiness
+
+- Source: https://openaccess.thecvf.com/content/CVPR2025/html/Yu_RLAIF-V_Open-Source_AI_Feedback_Leads_to_Super_GPT-4V_Trustworthiness_CVPR_2025_paper.html
+- Kind: `paper`; review depth: `content_reviewed`; reviewed: 2026-10-17
+- Source revision: `not captured / live URL`
+- Note: CVPR 2025 publisher PDF reviewed for feedback construction, deconfounding/divide-and-conquer visual checking, preference learning and inference feedback. Relevant sections read; author outcomes are not new independent results here. Visual factuality/preferences do not establish intent classification or domain utility. No numerical performance imported and no model run. Reviewed artifact SHA-256 1f7cb72d41d680d0773620c4681eff406f74c4c72aad32d5a65b1a9e07e8ef72.
+
+<a id="rlaifv-terms"></a>
+## RLAIF-V: LoRA support and dataset/research-use restrictions
+
+- Source: https://github.com/RLHF-V/RLAIF-V/blob/83d917b2e8118ca8e7877a796d72af9bb3e6b356/README.md
+- Kind: `repository`; review depth: `content_reviewed`; reviewed: 2026-10-17
+- Source revision: `83d917b2e8118ca8e7877a796d72af9bb3e6b356`
+- Note: Training/LoRA/DPO and license sections inspected. Repository LoRA support does not establish that all paper results use LoRA. README labels code Apache-2.0, dataset CC BY-NC 4.0, and adds research-use/base-model/API notices; no blanket commercial-use conclusion. No dataset/model/dependency download or training. Reviewed artifact SHA-256 3a2a2f80df2f7224137d584823fcd6476c53b1794f6e618fd99ccb7ecfea0783.
+
+<a id="llava-critic-paper"></a>
+## LLaVA-Critic: Learning to Evaluate Multimodal Models
+
+- Source: https://openaccess.thecvf.com/content/CVPR2025/html/Xiong_LLaVA-Critic_Learning_to_Evaluate_Multimodal_Models_CVPR_2025_paper.html
+- Kind: `paper`; review depth: `content_reviewed`; reviewed: 2026-10-17
+- Source revision: `not captured / live URL`
+- Note: CVPR 2025 publisher metadata and PDF sections on data/model/training reviewed. LLaVA-OneVision 7B/72B fine-tuned on critic instructions, with standard CE over generated judgments and justifications; pointwise/pairwise supervision includes GPT-4o-assisted labels. Do not identify this with a direct candidate-logit classifier or assert an uninspected LoRA/full-parameter setting. Evaluation quality and domain decision utility require separate validation. No accuracy number or independent run imported. Reviewed artifact SHA-256 382689036ff4e1eb41ef62ae1a98632199aec567016cc5ab2e9ee578d7916dd8.
+
+<a id="vl-rewardbench-paper"></a>
+## VL-RewardBench: A Challenging Benchmark for Vision-Language Generative Reward Models
+
+- Source: https://openaccess.thecvf.com/content/CVPR2025/html/Li_VL-RewardBench_A_Challenging_Benchmark_for_Vision-Language_Generative_Reward_Models_CVPR_2025_paper.html
+- Kind: `paper`; review depth: `content_reviewed`; reviewed: 2026-10-17
+- Source revision: `not captured / live URL`
+- Note: CVPR 2025 publisher PDF/data-construction and evaluation sections reviewed. 1250 curated/human-verified visual preference examples probe generative reward/judge models; benchmark is not a training recipe. Source pools include RLAIF-V/RLHF-V and others, so training/evaluation source/example/image overlap needs auditing. Read benchmark-author evaluation as its own evidence; no independent rerun or domain-quality conclusion here. Reviewed artifact SHA-256 7d55ad6cf701d7c5cd2f0859a872eeb6c37367d4d7c810c87dfc4b62c97880d5.
+
+<a id="guo-calibration-methods"></a>
+## On Calibration of Modern Neural Networks: temperature fitting method review
+
+- Source: https://proceedings.mlr.press/v70/guo17a.html
+- Kind: `paper`; review depth: `content_reviewed`; reviewed: 2026-10-17
+- Source revision: `not captured / live URL`
+- Note: ICML 2017 proceedings PDF temperature-scaling section reviewed, supplementing the preserved earlier abstract-level source. Fit a scalar temperature on separate calibration data; a positive common temperature preserves fixed-candidate argmax and therefore does not itself raise top-1 accuracy. Empirical calibration on studied classifiers is not a domain/shift/selection guarantee. No new performance record. Reviewed artifact SHA-256 df7c93f97204f8a3c2b10f6d5bf5265baac25f00c1ae3b473a3e1dbc102dacb2.
+
+<a id="selective-confidence-uai2024"></a>
+## How to Fix a Broken Confidence Estimator: Evaluating Post-hoc Methods for Selective Classification with Deep Neural Networks
+
+- Source: https://proceedings.mlr.press/v244/cattelan24a.html
+- Kind: `paper`; review depth: `content_reviewed`; reviewed: 2026-10-17
+- Source revision: `not captured / live URL`
+- Note: UAI 2024 / PMLR 244 proceedings PDF abstract/method/experiment scope reviewed. Study of post-hoc confidence scores on 84 ImageNet classifiers motivates evaluating error ranking and risk-coverage/AURC separately from classification accuracy. Does not establish the best score for dynamic-candidate VLM decisions, or certify a new domain threshold. No score/claimed multiplier imported. Reviewed artifact SHA-256 e9728ea686ce094db10fba05ec9204f9e88e308fbe3dfa3d6265a7ee04720574.
+
+<a id="crc-iclr2024"></a>
+## Conformal Risk Control: published theorem assumptions
+
+- Source: https://proceedings.iclr.cc/paper_files/paper/2024/hash/f3549ef9b5ff520a7e41ff3cc306ab2b-Abstract-Conference.html
+- Kind: `paper`; review depth: `content_reviewed`; reviewed: 2026-10-17
+- Source revision: `not captured / live URL`
+- Note: ICLR 2024 publisher PDF formulation, exchangeability/monotone-bounded-loss conditions and non-monotonic counterexample reviewed. Main guarantee controls expected risk under its assumptions, not per-item correctness or arbitrary fixed-calibration-set high-probability risk. Accepted-set conditional error need not be monotone in a score threshold, so the generic algorithm cannot be attached without a matching formulation. Preserves earlier arXiv source snapshots; no implementation/run performed. Reviewed artifact SHA-256 0fff32a0254a47f06a399522b83ba463d0ca62f71e3a0e094985d80cba166c0c.
+
