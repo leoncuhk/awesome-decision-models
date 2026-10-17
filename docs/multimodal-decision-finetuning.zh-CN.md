@@ -32,6 +32,8 @@
 | [Decision 3.0 wrapper](https://huggingface.co/vllm-sr/d3/blob/225be8b1e2270becab69c5fe05b26f99cbbdd66b/modeling_d3.py) | 已审阅版本 `train(True)` 明确抛出 inference-only 错误，含定制读出和非因果注意力 | 不能直接套通用 Trainer／PEFT。255 个答码不等于固定 255 个业务类别，也不证明有公开可用的多模态 LoRA 配方 |
 | [decision-pacman 训练代码](https://github.com/grapeot/decision-pacman/blob/593ed1f59f4f97ad0bda7287ff304e9667360089/training/train.py)与[报告](https://github.com/grapeot/decision-pacman/blob/593ed1f59f4f97ad0bda7287ff304e9667360089/README.md) | 文本化游戏状态、教师／模拟器标签、候选分布 LoRA 蒸馏；作者同时报告专长提升与通用题下降 | 不是截图训练或客服泛化证明；教师可见的未来模拟只用于制标签，不得混入学生推理输入；完整数据不在已审阅代码中 |
 
+[10 月 17 日机制核查](decision-readout-and-reasoning.md)补充 StartLux v1.1：公开推理／服务包及归档 v1 文本 LoRA 示例，不等于已验证的完整多模态 v1.1／RLCD² 训练配方；权重为非商业许可，应核查使用权和精确运行时后再作有条件对照。
+
 ezjev 的 MIT 代码许可证不能覆盖模型与训练数据；[模型卡](https://huggingface.co/everettjf/ezjev-4b-s3/blob/a2faa581dc5e48c0c41ce388d056fed8e8fa6b4d/README.md)明确提醒部分训练来源为非商业许可或未注明许可。其历史训练费用是作者某次实验记录，不能作为新的训练报价。MIRE／EcomMIR 的论文可读性同样不代替数据、底座、代码及权重的逐项使用权核查。所有来源均为阅读核验，未在此复现。
 
 ## 3. 数据与标签：先消除不确定性

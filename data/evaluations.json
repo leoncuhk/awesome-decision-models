@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "reviewed_on": "2026-10-16",
+  "reviewed_on": "2026-10-17",
   "records": [
     {
       "id": "E01",
@@ -1923,6 +1923,205 @@
         "raw_outputs": "Not independently audited; no complete replay performed",
         "model_hash": "Exact evaluated checkpoints not captured",
         "source_identity": "DOI 10.1145/3701716.3718371; PDF content hash in source register"
+      },
+      "reproduced_here": false
+    },
+    {
+      "id": "E29",
+      "title": "StartLux: public DI 0.3 is a development-selected subset, not a full-board result",
+      "model_ids": [
+        "startlux-decision",
+        "decision3",
+        "jev",
+        "pplx-decider"
+      ],
+      "source_ids": [
+        "startlux-paper",
+        "startlux-27b-autothink",
+        "startlux-repo"
+      ],
+      "evidence_type": "author_reported",
+      "reviewed_on": "2026-10-17",
+      "report_date": "2026-10-12",
+      "model_revision": null,
+      "protocol": {
+        "task": "Public Decision Index 0.3 chance-corrected weighted decision score; distinct from DI 0.2.1 and full/private DI 0.3.2",
+        "test_unit": "37 public benchmark tasks in paper Table D.1; task/example independence and aggregate sample count not reconstructed here",
+        "split": "Paper says public evaluation contributes 20% of full DI score; private 80% not evaluated. Public DI used to choose Stage 2 recipes, attention variants and Instant seed averages. Most task families represented in training.",
+        "reference": "Public benchmark labels and kit; paper reference baseline snapshot 2026-10-07, with D3 separately run by StartLux authors",
+        "training": "StartLux decision-trained models; author describes exact-match/parent-group exclusions. Task-family coverage and development selection remain; exact item leakage is not inferred from family exposure.",
+        "measurement": "Paper Table 4 / D.1 score points, not raw percentage accuracy. AutoThink gate 0.9, mix 0.75, generation limit 4096; gate/temperature settings selected on held-out training-distribution data rather than DI.",
+        "hardware": "Accuracy release uses vLLM 0.19.1 safeguards, text-only release path; not the later 0.31 speed benchmark or default gate 0.6"
+      },
+      "metrics": [
+        {
+          "label": "StartLux 27B AutoThink: public DI 0.3",
+          "value": 73.37,
+          "unit": "points"
+        },
+        {
+          "label": "StartLux 27B Instant: public DI 0.3",
+          "value": 72.83,
+          "unit": "points"
+        },
+        {
+          "label": "Jev public reference snapshot, as imported by authors",
+          "value": 57.96,
+          "unit": "points"
+        }
+      ],
+      "conclusion": "Supports a strong author-run development-subset result under the stated protocol. It does not establish an official full-board submission, independent blind test or global winner.",
+      "caveats": [
+        "Public DI participated in model selection; do not label these scores independent test results.",
+        "Family overlap does not itself establish exact test-item leakage; claimed exclusions were not independently replayed.",
+        "Reference systems combine archived board values and author-run D3; exact evaluated weight/API versions and full raw outputs are not fully audited.",
+        "AutoThink generates reasoning, unlike a strictly single-pass comparator. Compare complete cost as well as accuracy.",
+        "Do not combine with D3 full Index 0.3.2 E21 or substitute later engine rerun/default gate results."
+      ],
+      "artifacts": {
+        "protocol": "Fixed arXiv v1 sections 4.1–4.2, Tables 4/D.1; fixed model card",
+        "raw_outputs": "Not independently replayed; paper/card points kept separate from serving reruns",
+        "model_hash": "Evaluated binaries not downloaded/hashed here"
+      },
+      "reproduced_here": false
+    },
+    {
+      "id": "E30",
+      "title": "DecisionPivot: author-built contrast benchmark and release-run pair accuracy",
+      "model_ids": [
+        "startlux-decision",
+        "decision3",
+        "jev",
+        "pplx-decider",
+        "decisionpivot"
+      ],
+      "source_ids": [
+        "startlux-paper",
+        "decisionpivot-data",
+        "decisionpivot-generators"
+      ],
+      "evidence_type": "author_reported",
+      "reviewed_on": "2026-10-17",
+      "report_date": "2026-10-12",
+      "model_revision": null,
+      "protocol": {
+        "task": "DecisionPivot core: programmatically verifiable computational decisions with answer-changing contrast groups",
+        "test_unit": "7800 examples = 13 families x 600; pair accuracy requires every group member correct and is macro-averaged over families; do not assume 7800 independent pairs",
+        "split": "Authors state DecisionPivot excluded from data/checkpoint/configuration choice. Procedural training teaches related decision kinds; exact evaluation-template independence is author-described, not independently reconstructed. Separate reused reference track has 34104 examples across 35 public tasks.",
+        "reference": "Generated labels from programs; public generators/solver code/audit assets inspected but not executed",
+        "training": "Final StartLux v1.1 Instant versus causal AutoThink with reasoning supervision/RLCD²; author-built benchmark and evaluation are not a third-party replication",
+        "measurement": "Paper section 4.3/Figure 9 pair accuracy; AutoThink gate 0.9, initial/post mixture 25/75, 4096-token generation limit. Distinct from item accuracy and seven-layer chance-corrected quantization scores.",
+        "hardware": "Author release inference; no speed ranking imported. Thought generation makes compute unequal; stochastic run variability remains."
+      },
+      "metrics": [
+        {
+          "label": "StartLux 27B AutoThink: paper release pair accuracy",
+          "value": 0.869,
+          "unit": "fraction"
+        },
+        {
+          "label": "StartLux 27B Instant: paper release pair accuracy",
+          "value": 0.754,
+          "unit": "fraction"
+        },
+        {
+          "label": "D3 d3: pair accuracy reported by StartLux authors",
+          "value": 0.713,
+          "unit": "fraction"
+        },
+        {
+          "label": "Perplexity Decider v1.1: author comparison pair accuracy",
+          "value": 0.701,
+          "unit": "fraction"
+        },
+        {
+          "label": "Hosted Jev: pair accuracy reported in paper",
+          "value": 0.31,
+          "unit": "fraction"
+        }
+      ],
+      "conclusion": "The paper supports an author-run advantage on these generated computational contrast families. It does not prove a domain-independent or independently reproduced global ranking.",
+      "caveats": [
+        "The benchmark and compared StartLux models have shared authors; claimed holdout status is not independent evaluator status.",
+        "Dataset v1.1 corrected 10 of 13 core generators. Its pinned committed tables include intermediate research checkpoints and do not match the paper release summary. Do not silently identify them with final models.",
+        "Pinned CHANGES says old hosted Jev core runs were not carried into corrected v1.1; complete run/item/version mapping for paper comparisons remains unaudited here. The paper number is retained only as its author report.",
+        "Do not substitute 88.1 engine replay or default-gate 0.6 results for the paper 86.9 run; settings and sampled thoughts differ.",
+        "auto_at_5/auto_at_1 maximize accepted coverage retrospectively on benchmark labels; they are not pre-certified deployable risk thresholds.",
+        "Generated names/programmatic labels reduce some ambiguities, but do not establish absence of related procedural exposure or real-traffic generalization."
+      ],
+      "artifacts": {
+        "protocol": "Paper v1 section 4.3; HF dataset revision b6a65d303f3f8689d293869aff3db41f944984c6; generator repository 2b7000f312ccbbdce4e8625b56d8a8186ea0047a",
+        "raw_outputs": "Public scoring/table assets inspected; final paper-to-run mapping and independent replay not established",
+        "model_hash": "Exact evaluated binaries/API revisions not locally verified"
+      },
+      "reproduced_here": false
+    },
+    {
+      "id": "E31",
+      "title": "RLCD²: conditional reasoning-efficiency gains are not universal calibration or service-latency gains",
+      "model_ids": [
+        "startlux-decision"
+      ],
+      "source_ids": [
+        "startlux-paper"
+      ],
+      "evidence_type": "author_reported",
+      "reviewed_on": "2026-10-17",
+      "report_date": "2026-10-12",
+      "model_revision": null,
+      "protocol": {
+        "task": "9B reasoning-supervised checkpoint versus released post-RLCD² checkpoint",
+        "test_unit": "2986 held-out examples from training distribution, after authors exclude 35 training/RL-overlapping examples",
+        "split": "Held-out training-distribution diagnostic, separate from DecisionPivot and real requests. RL reward/soft budgets were explored; not an untouched cross-domain claim.",
+        "reference": "Held-out labels and paper Table 2; no new local inference or significance computation",
+        "training": "Frozen starting scorer rewards proper-score improvement minus soft length penalty; group-relative gradients optimize language reasoning policy. Release soft penalty starts beyond 3072 tokens, distinct from generation cap.",
+        "measurement": "Reasoning forced on every example, one sampled trace per question, hard generation limit 4096. Default accuracy fuses 25% initial and 75% post-reasoning probabilities. Mean tokens are for this forced-reasoning cohort, not all deployed requests.",
+        "hardware": "No end-to-end latency or cost reduction measured by this record; token reduction alone does not establish P95 under load"
+      },
+      "metrics": [
+        {
+          "label": "9B before RLCD²: mean trace tokens",
+          "value": 2494,
+          "unit": "tokens"
+        },
+        {
+          "label": "9B release after RLCD²: mean trace tokens",
+          "value": 868,
+          "unit": "tokens"
+        },
+        {
+          "label": "9B before RLCD²: termination rate",
+          "value": 0.459,
+          "unit": "fraction"
+        },
+        {
+          "label": "9B after RLCD²: termination rate",
+          "value": 0.939,
+          "unit": "fraction"
+        },
+        {
+          "label": "9B before RLCD²: default accuracy",
+          "value": 0.8038,
+          "unit": "fraction"
+        },
+        {
+          "label": "9B after RLCD²: default accuracy",
+          "value": 0.8048,
+          "unit": "fraction"
+        }
+      ],
+      "conclusion": "The author comparison supports substantially shorter, more often terminating traces at 9B while preserving similar diagnostic accuracy under this forced-reasoning protocol.",
+      "caveats": [
+        "These are author reports, not independent causal attribution or a new reproduction.",
+        "Do not apply the token mean to easy requests answered without reasoning, or advertise the same reduction at every model size.",
+        "The paper reports no statistically clear RLCD² changes at 27B; calibration changes at 9B/27B remain within reported uncertainty.",
+        "Proper scoring rules and a frozen scorer do not guarantee empirical calibration, especially after routing, candidate selection or distribution shift.",
+        "This is not Jev training disclosure; similarity of RLCD/RLCD² names does not establish identical implementations."
+      ],
+      "artifacts": {
+        "protocol": "Paper v1 Table 2 and sections 3.2–3.3; release soft budget identified separately",
+        "raw_outputs": "No run artifacts regenerated here; complete v1.1 training pipeline/data package not verified",
+        "model_hash": "Pre/post evaluated binaries not locally hashed"
       },
       "reproduced_here": false
     }

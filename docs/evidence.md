@@ -1066,3 +1066,117 @@ Reported fractions are displayed as percentages where appropriate. More printed 
 
 **Sources:** [EcomMIR: multimodal intent recognition competition solution](https://zhoushengisnoob.github.io/papers/WWWComp.pdf); [MIRE: official multimodal scene and dialogue-intent challenge](https://github.com/liujunwen23/MIRE/blob/d101287af90d114c5bf0cbfbd56fe9c52358e3bb/README.md); [MIRE: Qwen2-VL-7B full-SFT baseline configuration](https://github.com/liujunwen23/MIRE/blob/d101287af90d114c5bf0cbfbd56fe9c52358e3bb/mire_baseline/configs/qwen2_vl_full_sft.yaml)
 
+<a id="e29"></a>
+## E29 · StartLux: public DI 0.3 is a development-selected subset, not a full-board result
+
+**Evidence:** `author_reported` · **Reviewed:** 2026-10-17 · **Reproduced here:** no
+
+| Protocol | Recorded context |
+| --- | --- |
+| Task | Public Decision Index 0.3 chance-corrected weighted decision score; distinct from DI 0.2.1 and full/private DI 0.3.2 |
+| Test unit | 37 public benchmark tasks in paper Table D.1; task/example independence and aggregate sample count not reconstructed here |
+| Split | Paper says public evaluation contributes 20% of full DI score; private 80% not evaluated. Public DI used to choose Stage 2 recipes, attention variants and Instant seed averages. Most task families represented in training. |
+| Reference | Public benchmark labels and kit; paper reference baseline snapshot 2026-10-07, with D3 separately run by StartLux authors |
+| Training | StartLux decision-trained models; author describes exact-match/parent-group exclusions. Task-family coverage and development selection remain; exact item leakage is not inferred from family exposure. |
+| Measurement | Paper Table 4 / D.1 score points, not raw percentage accuracy. AutoThink gate 0.9, mix 0.75, generation limit 4096; gate/temperature settings selected on held-out training-distribution data rather than DI. |
+| Hardware | Accuracy release uses vLLM 0.19.1 safeguards, text-only release path; not the later 0.31 speed benchmark or default gate 0.6 |
+
+| Reported measurement | Value |
+| --- | --- |
+| StartLux 27B AutoThink: public DI 0.3 | 73.37 |
+| StartLux 27B Instant: public DI 0.3 | 72.83 |
+| Jev public reference snapshot, as imported by authors | 57.96 |
+
+**Interpretation:** Supports a strong author-run development-subset result under the stated protocol. It does not establish an official full-board submission, independent blind test or global winner.
+
+- Public DI participated in model selection; do not label these scores independent test results.
+- Family overlap does not itself establish exact test-item leakage; claimed exclusions were not independently replayed.
+- Reference systems combine archived board values and author-run D3; exact evaluated weight/API versions and full raw outputs are not fully audited.
+- AutoThink generates reasoning, unlike a strictly single-pass comparator. Compare complete cost as well as accuracy.
+- Do not combine with D3 full Index 0.3.2 E21 or substitute later engine rerun/default gate results.
+
+**Artifacts and limits:**
+- protocol: Fixed arXiv v1 sections 4.1–4.2, Tables 4/D.1; fixed model card
+- raw outputs: Not independently replayed; paper/card points kept separate from serving reruns
+- model hash: Evaluated binaries not downloaded/hashed here
+
+**Sources:** [StartLux-Decision: AutoThink and RLCD² technical report v1](https://arxiv.org/html/2610.17309v1); [startlux-models/StartLux-Decision-v1.1-27B-AutoThink model card](https://huggingface.co/startlux-models/StartLux-Decision-v1.1-27B-AutoThink/blob/dd62d5cd84a483d75bdd548880bbf08bdd3f67a4/README.md); [StartLux v1.1: family and inference-package release](https://github.com/StartLuxLabs/StartLux-Decision/blob/cb1d11f1ac9e9b43b95ef3a6468fa29b607c40fd/README.md)
+
+<a id="e30"></a>
+## E30 · DecisionPivot: author-built contrast benchmark and release-run pair accuracy
+
+**Evidence:** `author_reported` · **Reviewed:** 2026-10-17 · **Reproduced here:** no
+
+| Protocol | Recorded context |
+| --- | --- |
+| Task | DecisionPivot core: programmatically verifiable computational decisions with answer-changing contrast groups |
+| Test unit | 7800 examples = 13 families x 600; pair accuracy requires every group member correct and is macro-averaged over families; do not assume 7800 independent pairs |
+| Split | Authors state DecisionPivot excluded from data/checkpoint/configuration choice. Procedural training teaches related decision kinds; exact evaluation-template independence is author-described, not independently reconstructed. Separate reused reference track has 34104 examples across 35 public tasks. |
+| Reference | Generated labels from programs; public generators/solver code/audit assets inspected but not executed |
+| Training | Final StartLux v1.1 Instant versus causal AutoThink with reasoning supervision/RLCD²; author-built benchmark and evaluation are not a third-party replication |
+| Measurement | Paper section 4.3/Figure 9 pair accuracy; AutoThink gate 0.9, initial/post mixture 25/75, 4096-token generation limit. Distinct from item accuracy and seven-layer chance-corrected quantization scores. |
+| Hardware | Author release inference; no speed ranking imported. Thought generation makes compute unequal; stochastic run variability remains. |
+
+| Reported measurement | Value |
+| --- | --- |
+| StartLux 27B AutoThink: paper release pair accuracy | 86.90% |
+| StartLux 27B Instant: paper release pair accuracy | 75.40% |
+| D3 d3: pair accuracy reported by StartLux authors | 71.30% |
+| Perplexity Decider v1.1: author comparison pair accuracy | 70.10% |
+| Hosted Jev: pair accuracy reported in paper | 31.00% |
+
+**Interpretation:** The paper supports an author-run advantage on these generated computational contrast families. It does not prove a domain-independent or independently reproduced global ranking.
+
+- The benchmark and compared StartLux models have shared authors; claimed holdout status is not independent evaluator status.
+- Dataset v1.1 corrected 10 of 13 core generators. Its pinned committed tables include intermediate research checkpoints and do not match the paper release summary. Do not silently identify them with final models.
+- Pinned CHANGES says old hosted Jev core runs were not carried into corrected v1.1; complete run/item/version mapping for paper comparisons remains unaudited here. The paper number is retained only as its author report.
+- Do not substitute 88.1 engine replay or default-gate 0.6 results for the paper 86.9 run; settings and sampled thoughts differ.
+- auto_at_5/auto_at_1 maximize accepted coverage retrospectively on benchmark labels; they are not pre-certified deployable risk thresholds.
+- Generated names/programmatic labels reduce some ambiguities, but do not establish absence of related procedural exposure or real-traffic generalization.
+
+**Artifacts and limits:**
+- protocol: Paper v1 section 4.3; HF dataset revision b6a65d303f3f8689d293869aff3db41f944984c6; generator repository 2b7000f312ccbbdce4e8625b56d8a8186ea0047a
+- raw outputs: Public scoring/table assets inspected; final paper-to-run mapping and independent replay not established
+- model hash: Exact evaluated binaries/API revisions not locally verified
+
+**Sources:** [StartLux-Decision: AutoThink and RLCD² technical report v1](https://arxiv.org/html/2610.17309v1); [DecisionPivot v1.1: fixed dataset card, scorer and table identities](https://huggingface.co/datasets/startlux-models/DecisionPivot/blob/b6a65d303f3f8689d293869aff3db41f944984c6/README.md); [DecisionPivot: public generators, independent solvers and audit code](https://github.com/StartLuxLabs/DecisionPivot/tree/2b7000f312ccbbdce4e8625b56d8a8186ea0047a)
+
+<a id="e31"></a>
+## E31 · RLCD²: conditional reasoning-efficiency gains are not universal calibration or service-latency gains
+
+**Evidence:** `author_reported` · **Reviewed:** 2026-10-17 · **Reproduced here:** no
+
+| Protocol | Recorded context |
+| --- | --- |
+| Task | 9B reasoning-supervised checkpoint versus released post-RLCD² checkpoint |
+| Test unit | 2986 held-out examples from training distribution, after authors exclude 35 training/RL-overlapping examples |
+| Split | Held-out training-distribution diagnostic, separate from DecisionPivot and real requests. RL reward/soft budgets were explored; not an untouched cross-domain claim. |
+| Reference | Held-out labels and paper Table 2; no new local inference or significance computation |
+| Training | Frozen starting scorer rewards proper-score improvement minus soft length penalty; group-relative gradients optimize language reasoning policy. Release soft penalty starts beyond 3072 tokens, distinct from generation cap. |
+| Measurement | Reasoning forced on every example, one sampled trace per question, hard generation limit 4096. Default accuracy fuses 25% initial and 75% post-reasoning probabilities. Mean tokens are for this forced-reasoning cohort, not all deployed requests. |
+| Hardware | No end-to-end latency or cost reduction measured by this record; token reduction alone does not establish P95 under load |
+
+| Reported measurement | Value |
+| --- | --- |
+| 9B before RLCD²: mean trace tokens | 2494 |
+| 9B release after RLCD²: mean trace tokens | 868 |
+| 9B before RLCD²: termination rate | 45.90% |
+| 9B after RLCD²: termination rate | 93.90% |
+| 9B before RLCD²: default accuracy | 80.38% |
+| 9B after RLCD²: default accuracy | 80.48% |
+
+**Interpretation:** The author comparison supports substantially shorter, more often terminating traces at 9B while preserving similar diagnostic accuracy under this forced-reasoning protocol.
+
+- These are author reports, not independent causal attribution or a new reproduction.
+- Do not apply the token mean to easy requests answered without reasoning, or advertise the same reduction at every model size.
+- The paper reports no statistically clear RLCD² changes at 27B; calibration changes at 9B/27B remain within reported uncertainty.
+- Proper scoring rules and a frozen scorer do not guarantee empirical calibration, especially after routing, candidate selection or distribution shift.
+- This is not Jev training disclosure; similarity of RLCD/RLCD² names does not establish identical implementations.
+
+**Artifacts and limits:**
+- protocol: Paper v1 Table 2 and sections 3.2–3.3; release soft budget identified separately
+- raw outputs: No run artifacts regenerated here; complete v1.1 training pipeline/data package not verified
+- model hash: Pre/post evaluated binaries not locally hashed
+
+**Sources:** [StartLux-Decision: AutoThink and RLCD² technical report v1](https://arxiv.org/html/2610.17309v1)
+

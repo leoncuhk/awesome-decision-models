@@ -1152,3 +1152,155 @@
 - Source revision: `593ed1f59f4f97ad0bda7287ff304e9667360089`
 - Note: README and training/train.py reviewed. Chat-template text states, language-side LoRA and option-letter soft-target CE; no image tensors in inspected trainer. Teacher-only lookahead used for labeling is excluded from student evaluation inputs. Author reports task gains with worse generic JevBench performance; complete generated training data and all evaluated artifacts not audited here. No game/model run and no score imported as independent evidence.
 
+<a id="startlux-paper"></a>
+## StartLux-Decision: AutoThink and RLCD² technical report v1
+
+- Source: https://arxiv.org/html/2610.17309v1
+- Kind: `paper`; review depth: `content_reviewed`; reviewed: 2026-10-17
+- Source revision: `not captured / live URL`
+- Note: arXiv v1 submitted 2026-10-12. Relevant full-text sections 2–6, Tables 2/4 and Appendices A/B/D reviewed. Paper describes three-stage training, frozen probability scorer, proper-score/length reward and policy-aware calibration. DI public is development-selected and contributes 20% of the full board; private 80% unevaluated. DecisionPivot is author-built/evaluated despite claimed exclusion from model selection. HTML SHA-256 2c8109f3f0d4bca33bc9bc742b7e674941261f36f01ce16c226e86d659bebcae. No training, inference or independent reproduction.
+
+<a id="startlux-repo"></a>
+## StartLux v1.1: family and inference-package release
+
+- Source: https://github.com/StartLuxLabs/StartLux-Decision/blob/cb1d11f1ac9e9b43b95ef3a6468fa29b607c40fd/README.md
+- Kind: `repository`; review depth: `content_reviewed`; reviewed: 2026-10-17
+- Source revision: `cb1d11f1ac9e9b43b95ef3a6468fa29b607c40fd`
+- Note: README/repository tree and Apache-2.0 LICENSE reviewed. Five Instant sizes and three AutoThink sizes, with separate v1 archive and quantized formats. Public package is inference/server code; archived v1 LoRA does not establish the complete v1.1/RLCD² training pipeline. Published gate 0.9, runtime default 0.6; engine reruns are not the paper release run. No external code executed.
+
+<a id="startlux-api"></a>
+## StartLux API: gates, confidence and none_probability
+
+- Source: https://github.com/StartLuxLabs/StartLux-Decision/blob/cb1d11f1ac9e9b43b95ef3a6468fa29b607c40fd/docs/api.md
+- Kind: `official_docs`; review depth: `content_reviewed`; reviewed: 2026-10-17
+- Source revision: `cb1d11f1ac9e9b43b95ef3a6468fa29b607c40fd`
+- Note: Request/response, per-question processing, maximum-probability gate, transformed confidence and none/renormalization semantics reviewed. none_probability is documented as an alarm score, not calibrated absence probability. Current defaults must not inherit paper metrics; threshold 0.2 is an author diagnostic, not a deployment risk guarantee.
+
+<a id="startlux-pipeline"></a>
+## StartLux inference: separate question rows and adaptive readout
+
+- Source: https://github.com/StartLuxLabs/StartLux-Decision/blob/cb1d11f1ac9e9b43b95ef3a6468fa29b607c40fd/startlux_decide/pipeline.py
+- Kind: `repository`; review depth: `content_reviewed`; reviewed: 2026-10-17
+- Source revision: `cb1d11f1ac9e9b43b95ef3a6468fa29b607c40fd`
+- Note: pipeline.py, readout.py, prompt.py, controls.py and modelcfg.py inspected. Existing LM option-letter projection, max(P) gate, 25/75 mixture, 26-code limit and group/final tournament, loop detection and default last-4000-character post-thought tail. Causal prefix reuse is a runtime optimization; it is not one joint backbone row for every question. No package imported or executed.
+
+<a id="startlux-engines"></a>
+## StartLux serving: backend, context and media boundaries
+
+- Source: https://github.com/StartLuxLabs/StartLux-Decision/blob/cb1d11f1ac9e9b43b95ef3a6468fa29b607c40fd/docs/engines.md
+- Kind: `official_docs`; review depth: `content_reviewed`; reviewed: 2026-10-17
+- Source revision: `cb1d11f1ac9e9b43b95ef3a6468fa29b607c40fd`
+- Note: Engine settings and docs/benchmarks.md reviewed. vLLM 0.19.1 release runs differ from 0.31 single-readout speed checks; complete AutoThink includes thought and second readout. Launcher 0.31 enables up to 8 images, video=0; 0.19.1 is text-only. Instant default whole-prefill cap 131072 after author-reported long-prefill crashes; causal context config 262144. These are engineering limits, not full-context quality validation.
+
+<a id="startlux-v1-training"></a>
+## StartLux archived v1: text LoRA example is not v1.1 RLCD² training
+
+- Source: https://github.com/StartLuxLabs/StartLux-Decision/blob/cb1d11f1ac9e9b43b95ef3a6468fa29b607c40fd/v1/finetune/finetune_lora.py
+- Kind: `repository`; review depth: `content_reviewed`; reviewed: 2026-10-17
+- Source revision: `cb1d11f1ac9e9b43b95ef3a6468fa29b607c40fd`
+- Note: Archived trainer and v1/docs/finetuning.md read. AutoTokenizer/text rows, selected LM-head letter projection and language linear-layer LoRA are inspectable. This is an earlier text adaptation example, not the released v1.1 three-stage training/data/RLCD² package or verified image fine-tuning. Author generic sample-size/speed advice not adopted as a measured recommendation.
+
+<a id="startlux-site"></a>
+## StartLux author release article
+
+- Source: https://decision.startlux.com/
+- Kind: `official_publication`; review depth: `content_reviewed`; reviewed: 2026-10-17
+- Source revision: `not captured / live URL`
+- Note: Release body reviewed as author interpretation; live HTML SHA-256 bf65d3c8d5f141d429e88db8d74b6164a6b5eac63d7747ffcdcb1008c053bcbb. Accuracy, development benchmark selection and latency claims checked against fixed paper/code/cards. Readout-only latency excludes reasoning-generation cost. Promotional superiority statements not adopted as independent or full-board rankings.
+
+<a id="startlux-27b-autothink"></a>
+## startlux-models/StartLux-Decision-v1.1-27B-AutoThink model card
+
+- Source: https://huggingface.co/startlux-models/StartLux-Decision-v1.1-27B-AutoThink/blob/dd62d5cd84a483d75bdd548880bbf08bdd3f67a4/README.md
+- Kind: `model_card`; review depth: `content_reviewed`; reviewed: 2026-10-17
+- Source revision: `dd62d5cd84a483d75bdd548880bbf08bdd3f67a4`
+- Note: Card and model metadata inspected; source revision pins text/repository identity, not locally hashed weight bytes. Nominal size and CC BY-NC 4.0 declared. Quantized ports are deployment variants, not new families; no weights downloaded or model run. config.json and decision_config.json also inspected: Qwen3_5ForConditionalGeneration runtime, A–Z IDs, per-type temperatures and 26-code/group-reduction settings. Exact base provenance not inferred from class name.
+
+<a id="startlux-0p8b-instant"></a>
+## startlux-models/StartLux-Decision-v1.1-0.8B-Instant model card
+
+- Source: https://huggingface.co/startlux-models/StartLux-Decision-v1.1-0.8B-Instant/blob/6496ae641cc71b149ce9dad69bd97f2a44e7bf11/README.md
+- Kind: `model_card`; review depth: `content_reviewed`; reviewed: 2026-10-17
+- Source revision: `6496ae641cc71b149ce9dad69bd97f2a44e7bf11`
+- Note: Card and model metadata inspected; source revision pins text/repository identity, not locally hashed weight bytes. Nominal size and CC BY-NC 4.0 declared. Quantized ports are deployment variants, not new families; no weights downloaded or model run.
+
+<a id="startlux-2b-instant"></a>
+## startlux-models/StartLux-Decision-v1.1-2B-Instant model card
+
+- Source: https://huggingface.co/startlux-models/StartLux-Decision-v1.1-2B-Instant/blob/f1e6cd147dda82c9ffa3e8e725d5c1f175566fb1/README.md
+- Kind: `model_card`; review depth: `content_reviewed`; reviewed: 2026-10-17
+- Source revision: `f1e6cd147dda82c9ffa3e8e725d5c1f175566fb1`
+- Note: Card and model metadata inspected; source revision pins text/repository identity, not locally hashed weight bytes. Nominal size and CC BY-NC 4.0 declared. Quantized ports are deployment variants, not new families; no weights downloaded or model run.
+
+<a id="startlux-4b-instant"></a>
+## startlux-models/StartLux-Decision-v1.1-4B-Instant model card
+
+- Source: https://huggingface.co/startlux-models/StartLux-Decision-v1.1-4B-Instant/blob/416088f77cfce09633906a3675c7cd2e5dabcf10/README.md
+- Kind: `model_card`; review depth: `content_reviewed`; reviewed: 2026-10-17
+- Source revision: `416088f77cfce09633906a3675c7cd2e5dabcf10`
+- Note: Card and model metadata inspected; source revision pins text/repository identity, not locally hashed weight bytes. Nominal size and CC BY-NC 4.0 declared. Quantized ports are deployment variants, not new families; no weights downloaded or model run.
+
+<a id="startlux-9b-instant"></a>
+## startlux-models/StartLux-Decision-v1.1-9B-Instant model card
+
+- Source: https://huggingface.co/startlux-models/StartLux-Decision-v1.1-9B-Instant/blob/18a17f734966b213b2f00fa9c915e8b9af2a9b20/README.md
+- Kind: `model_card`; review depth: `content_reviewed`; reviewed: 2026-10-17
+- Source revision: `18a17f734966b213b2f00fa9c915e8b9af2a9b20`
+- Note: Card and model metadata inspected; source revision pins text/repository identity, not locally hashed weight bytes. Nominal size and CC BY-NC 4.0 declared. Quantized ports are deployment variants, not new families; no weights downloaded or model run.
+
+<a id="startlux-27b-instant"></a>
+## startlux-models/StartLux-Decision-v1.1-27B-Instant model card
+
+- Source: https://huggingface.co/startlux-models/StartLux-Decision-v1.1-27B-Instant/blob/32e7d35d74db615c4a059181efbf21c5421f3561/README.md
+- Kind: `model_card`; review depth: `content_reviewed`; reviewed: 2026-10-17
+- Source revision: `32e7d35d74db615c4a059181efbf21c5421f3561`
+- Note: Card and model metadata inspected; source revision pins text/repository identity, not locally hashed weight bytes. Nominal size and CC BY-NC 4.0 declared. Quantized ports are deployment variants, not new families; no weights downloaded or model run.
+
+<a id="startlux-4b-autothink"></a>
+## startlux-models/StartLux-Decision-v1.1-4B-AutoThink model card
+
+- Source: https://huggingface.co/startlux-models/StartLux-Decision-v1.1-4B-AutoThink/blob/23dd4c513ef387705bb13fd8caadc2d5c863082f/README.md
+- Kind: `model_card`; review depth: `content_reviewed`; reviewed: 2026-10-17
+- Source revision: `23dd4c513ef387705bb13fd8caadc2d5c863082f`
+- Note: Card and model metadata inspected; source revision pins text/repository identity, not locally hashed weight bytes. Nominal size and CC BY-NC 4.0 declared. Quantized ports are deployment variants, not new families; no weights downloaded or model run.
+
+<a id="startlux-9b-autothink"></a>
+## startlux-models/StartLux-Decision-v1.1-9B-AutoThink model card
+
+- Source: https://huggingface.co/startlux-models/StartLux-Decision-v1.1-9B-AutoThink/blob/efc649d8493b5b7353cf2ed6da0cdcbc215958ef/README.md
+- Kind: `model_card`; review depth: `content_reviewed`; reviewed: 2026-10-17
+- Source revision: `efc649d8493b5b7353cf2ed6da0cdcbc215958ef`
+- Note: Card and model metadata inspected; source revision pins text/repository identity, not locally hashed weight bytes. Nominal size and CC BY-NC 4.0 declared. Quantized ports are deployment variants, not new families; no weights downloaded or model run.
+
+<a id="decisionpivot-data"></a>
+## DecisionPivot v1.1: fixed dataset card, scorer and table identities
+
+- Source: https://huggingface.co/datasets/startlux-models/DecisionPivot/blob/b6a65d303f3f8689d293869aff3db41f944984c6/README.md
+- Kind: `evaluation_report`; review depth: `content_reviewed`; reviewed: 2026-10-17
+- Source revision: `b6a65d303f3f8689d293869aff3db41f944984c6`
+- Note: README, CHANGES, EXPOSURE, score.py and committed headline CSVs inspected. v1.1 corrected 10/13 core generators on Oct8; Oct14 rename from DecideBench changes no items. 7800 core examples, grouped pair accuracy distinct from 34104 reused-reference items and seven-layer scores. auto_at_5/auto_at_1 are benchmark hindsight risk-coverage diagnostics, not pre-certified deployment thresholds. Pinned headline tables include intermediate research systems and do not numerically match the paper release table; old hosted Jev core runs were not carried into corrected v1.1. No silent mapping of those runs to final checkpoints; no independent scoring replay. Core CC BY 4.0, reference source terms separate, code Apache-2.0.
+
+<a id="decisionpivot-generators"></a>
+## DecisionPivot: public generators, independent solvers and audit code
+
+- Source: https://github.com/StartLuxLabs/DecisionPivot/tree/2b7000f312ccbbdce4e8625b56d8a8186ea0047a
+- Kind: `repository`; review depth: `content_reviewed`; reviewed: 2026-10-17
+- Source revision: `2b7000f312ccbbdce4e8625b56d8a8186ea0047a`
+- Note: README/tree, docs/AUDIT.md and generators/regenerate.py inspected; 13 generator and corresponding solver paths present. Dataset docs retain old relative gen_v4 paths; current public repository has generators/, solvers/ and docs/. Assets improve inspectability, but regeneration/audits/models were not run here. Solver implementation independence is not an independent external model evaluation. Related procedural training families do not by themselves prove exact item overlap.
+
+<a id="pplx-v11-card"></a>
+## Perplexity Decider v1.1: native head, attention and deployment card
+
+- Source: https://huggingface.co/perplexity-ai/pplx-decider-v1.1-27b/blob/14c9d90137962d300f3de95633f7b6535e80c5ce/README.md
+- Kind: `model_card`; review depth: `content_reviewed`; reviewed: 2026-10-17
+- Source revision: `14c9d90137962d300f3de95633f7b6535e80c5ce`
+- Note: Card and anonymous model metadata inspected: Apache-2.0, Qwen3.8-27B identity with Qwen3_5 runtime, separate 255x5120 readout and noncausal full-attention. v1.1 is not the old v1/API artifact. Card still contains private-repository wording although inspected metadata is public/ungated; no weights downloaded or access configured. Its own numerical DI table is not imported as a new comparable result without a fully matched protocol.
+
+<a id="pplx-v11-runtime"></a>
+## Perplexity Decider v1.1: fixed native code and calibration configuration
+
+- Source: https://huggingface.co/perplexity-ai/pplx-decider-v1.1-27b/blob/14c9d90137962d300f3de95633f7b6535e80c5ce/source/src/autojev/model.py
+- Kind: `repository`; review depth: `content_reviewed`; reviewed: 2026-10-17
+- Source revision: `14c9d90137962d300f3de95633f7b6535e80c5ce`
+- Note: model.py, config.json and decision_config.json reviewed. Native Qwen3_5Model plus 255-row readout, noncausal full-attention, saved temperature 1.0087417621345625, valid-option normalization and 8192-token prepare limit. Card states training/evaluation image cap 512x512 versus larger configurable inference default. Training source/config/data-manifest paths exist; full raw dataset and end-to-end reproduction not audited. Earlier v1 source snapshots retained.
+

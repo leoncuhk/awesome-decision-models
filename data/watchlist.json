@@ -222,6 +222,18 @@
       "url": "https://docs.typesafe.ai/cookbooks/autoresearch_feature_discovery",
       "kind": "web_page",
       "meaning": "Raw cookbook HTML changed; inspect dataset, held-out feature search, run date, cache and downstream learner before attributing model improvement."
+    },
+    {
+      "id": "startlux-readme",
+      "kind": "github_file",
+      "url": "https://api.github.com/repos/StartLuxLabs/StartLux-Decision/contents/README.md",
+      "meaning": "Release/serving documentation changed; separate Instant from AutoThink, gate/runtime from paper results, NC weights from Apache code, and revision changes from demonstrated performance."
+    },
+    {
+      "id": "startlux-27b-autothink-model",
+      "kind": "hf_model",
+      "url": "https://huggingface.co/api/models/startlux-models/StartLux-Decision-v1.1-27B-AutoThink",
+      "meaning": "Inspect exact weight/card/config revisions, license and gate/calibration changes; a source revision or model card update is not an independent benchmark improvement."
     }
   ]
 }

@@ -119,6 +119,13 @@ The [financial-document comparison](evidence.md#e24) separates reading a reporte
 
 [财务文档对照](evidence.md#e24)将读取已报告事实、复现公共分类标签、预测后续机构行为分开，不能以一种任务代替另一种。也可把[语义判断作为特征](evidence.md#e27)，与 TF-IDF／嵌入／结构特征并排训练监督预测器；问题和 schema 搜索只能发生在开发划分，最终测试前冻结并计入提取成本。葡萄酒评分结果不能证明金融收益或图片意图泛化。
 
+<a id="adaptive-reasoning"></a>
+## 9. Read or think / 一次判断还是按需推理
+
+The [mechanism comparison](decision-readout-and-reasoning.md) separates option-letter readouts, dedicated code heads and hosted unknowns. Compare StartLux Instant with AutoThink only after freezing evidence, gate, mixture, candidate reduction and backend; a gate is a compute policy, not a risk certificate. For a generic support image with missing conversational context, clarify or retrieve rather than expecting a longer thought to invent the evidence. Exact dates/arithmetic retain deterministic-tool baselines. Fit calibration on the actual returned selection/routing policy and include thought generation, rereads, queueing and failures in cost. StartLux weights require separate commercial authorization.
+
+[机制比较](decision-readout-and-reasoning.md)分开选项字母读出、独立答码头和托管未知实现。比较 StartLux Instant／AutoThink 前冻结证据、门槛、混合、候选归约与后端；门槛是计算策略，不是风险认证。通用客服图像缺会话上下文时应澄清或取证，不能期待长推理补造证据；日期／算术保留确定性工具基线。按实际选择／路由输出校准，并把推理生成、再读、排队与失败计入总成本；StartLux 权重商用需另获授权。
+
 ## 中文：一页决策建议
 
 **先定义判断契约。** 输入证据是什么、输出有哪些、怎样才算正确、错判代价是多少、证据不够怎么办。判断“是什么”、预测“谁能做”、学习“怎样能改善结果”，需要的标签和方法不同。

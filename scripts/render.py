@@ -51,7 +51,10 @@ def outputs(root: Path = ROOT) -> dict[Path, str]:
           'E25':'8-K 分类：监督标签与事后选择。',
           'E26':'SEC 后续问询：90 日预测不同于文本完整性。',
           'E27':'语义特征：开发集内发现与葡萄酒评分预测。',
-          'E28':'EcomMIR：多模态场景与意图的组合竞赛方案。'}
+          'E28':'EcomMIR：多模态场景与意图的组合竞赛方案。',
+          'E29':'StartLux：公共 DI 开发选择不等于完整盲测。',
+          'E30':'DecisionPivot：作者对比及版本／成对正确率边界。',
+          'E31':'RLCD²：强制推理子集的终止与长度变化。'}
         replacements['EVIDENCE_LINKS']='\n'.join(f"- [{e['id']} — {e['title'] if lang=='en' else short_zh[e['id']]}](docs/evidence.md#{e['id'].lower()})" for e in evs)
         for category in ['baselines','routing','reliability','evaluation','foundations','related_lists']:
             lines=[]
