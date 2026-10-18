@@ -1214,3 +1214,45 @@ Reported fractions are displayed as percentages where appropriate. More printed 
 
 **Sources:** [Drex v2.0 fixed release card and public evaluation scope](https://github.com/nace-ai/drex-decision-models/blob/be8ba7c8157241b9393862e9fcec104d0dc5caff/models/drex-v2.0/README.md); [Drex v2.0 pinned HF model card/config and published LFS identities](https://huggingface.co/nace-ai/drex-v2.0/tree/3e6d164cb5c8cf264eec167905cc2448d89ea97d)
 
+<a id="e33"></a>
+## E33 · MIRE: official semifinal weighted-F1 scores are separate from composite final prizes
+
+**Evidence:** `third_party_reported` · **Reviewed:** 2026-10-18 · **Reproduced here:** no
+
+| Protocol | Recorded context |
+| --- | --- |
+| Task | WWW2025 MIRE later algorithm round (复赛 / semifinal): scene and dialogue-intent classification |
+| Test unit | Organizer describes 10000 new semifinal test examples; exact scored IDs, class supports and independent conversation groups not obtained |
+| Split | Public official later-round leaderboard, best submission dates Jan18–19 2025. Distinct from preliminary, local validation and composite expert-final awards. |
+| Reference | Hidden organizer labels; official all-class weighted F1 definition and score/intent_score/image_scene_score columns. Complete labels and adjudication not audited here. |
+| Training | Contestant submission recipes differ; EcomMIR uses Round1 pseudo-label expansion. Official organizer overview and method papers do not pin complete training artifacts or evaluated checkpoint hashes. |
+| Measurement | Transcribed exact three official columns per team, not a task-score mean. Overall online ranks scale1/拥抱LLM2/Dynamic Challengers3; composite awards reverse first/third. No significance or causal-ablation claim. |
+| Hardware | Leaderboard accuracy/F1 only; matched hardware, queueing, inference latency/throughput, total cost and concurrency not disclosed by these rows |
+
+| Reported measurement | Value |
+| --- | --- |
+| Dynamic Challengers semifinal official overall score | 90.51% |
+| Dynamic Challengers semifinal intent_score | 93.65% |
+| Dynamic Challengers semifinal image_scene_score | 83.39% |
+| 拥抱LLM semifinal official overall score | 90.70% |
+| 拥抱LLM semifinal intent_score | 94.20% |
+| 拥抱LLM semifinal image_scene_score | 82.78% |
+| scale semifinal official overall score | 90.85% |
+| scale semifinal intent_score | 92.65% |
+| scale semifinal image_scene_score | 86.76% |
+
+**Interpretation:** The official semifinal score table supports a stage-specific comparison; gold/silver/bronze are composite final placements and cannot be reconstructed by sorting those scores.
+
+- Third-party-reported relative to contestant model authors: organizer evaluation, not this repository reproducing submissions.
+- Official score is weighted across all labels, not an equal mean of two task F1 values; class counts and weighting inputs are not inferred from rounded values.
+- Final expert/composite numeric scores were not published in the inspected final table.
+- Submission selection, pseudo-label exposure and unavailable raw outputs/weights limit unseen-domain, statistical and isolated-method conclusions.
+- IntentionGPT/CuSMer full texts and verified method-code repositories remain unconfirmed; abstract/overview attribution is not a complete implementation audit.
+
+**Artifacts and limits:**
+- protocol: Rendered official information/leaderboard/final pages reviewed Oct18 2026; later-round best-submission dates retained
+- raw outputs: Public aggregate rows inspected; predictions, exact label supports and evaluator run manifest not obtained
+- model hash: Exact scored submission binaries/checkpoints not captured
+
+**Sources:** [MIRE official semifinal leaderboard: exact three-team score columns](https://tianchi.aliyun.com/competition/entrance/532277/rankingList); [MIRE official task labels and all-class weighted-F1 definition](https://tianchi.aliyun.com/competition/entrance/532277/information); [MIRE official final composite awards: gold, silver and bronze](https://tianchi.aliyun.com/competition/entrance/532277/customize583); [MIRE official phases, resource rules and composite final review](https://tianchi.aliyun.com/competition/entrance/532277); [Multimodal Intent Recognition in E-Commerce: Challenges, Innovations, and Lightweight Solutions](https://doi.org/10.1145/3701716.3719642)
+

@@ -81,6 +81,8 @@ B0／B1／D0 确认存在可学习领域差距后，先 B2，再决定 B3／C。
 
 ## 2. 公开证据能支持什么
 
+[MIRE竞赛案例](mire-case-study.zh-CN.md#tasks)单独整理完整标签、真实输入输出／代码、[官方最终奖项与线上成绩](mire-case-study.zh-CN.md#finalists)及前三方法边界；这是有来源的案例，不是新领域实验成果。
+
 | 来源与固定版本 | 已核实内容 | 不能由此推出 |
 | --- | --- | --- |
 | [MIRE 官方仓库](https://github.com/liujunwen23/MIRE/tree/d101287af90d114c5bf0cbfbd56fe9c52358e3bb) | WWW 2025 多模态意图挑战包含图像场景与多轮对话意图；[官方配置](https://github.com/liujunwen23/MIRE/blob/d101287af90d114c5bf0cbfbd56fe9c52358e3bb/mire_baseline/configs/qwen2_vl_full_sft.yaml)是 Qwen2-VL-7B 的全参数 SFT | 不是 decision readout 或 LoRA 的效果证明；公开可访问不等于数据获准商业使用 |
@@ -310,6 +312,7 @@ flowchart TD
 
 | 正式标题／venue | 可借鉴的实施问题 | 证据边界 |
 | --- | --- | --- |
+| [组织方竞赛综述](https://doi.org/10.1145/3701716.3719642) — WWW Companion 2025 | 任务／资源定义、三队技术概述及综合获奖表；现已阅读全文。 | 组织方报告，不是独立消融；精确线上值来自对应阶段官方榜，不推断最终综合总分。 |
 | [EcomMIR: Towards Intelligent Multimodal Intent Recognition in E-Commerce Dialogue Systems](https://doi.org/10.1145/3701716.3718371) — WWW Companion 2025（Companion Proceedings of the ACM Web Conference 2025），四页竞赛方案 | CN-CLIP＋Greedy Soup 场景分类；MiniCPM-V 2.6 LoRA 意图分类；层级标签、清洗及伪标签筛选。 | 作者组合系统竞赛报告，不是 WWW 主会研究轨或 LoRA 单项消融。Round 1 无标签测试输入进入训练，含 transductive 成分，不能称仅 1,000 样本纯监督；这也不能证明 Round 2 泄漏。见 [E28](evidence.md#e28)。 |
 | [MIntRec2.0: A Large-scale Benchmark Dataset for Multimodal Intent Recognition and Out-of-scope Detection in Conversations](https://openreview.net/forum?id=nY9nITZQjc) — ICLR 2024；[官方仓库](https://github.com/thuiar/MIntRec2.0) | 意图／OOS 标签、多方多轮文本／音频／视频上下文；域内与 outlier-exposure 目标。 | 电视剧会话不是客服截图，也不是 LoRA 实证；本轮读到仓库正文，OpenReview 验证阻止全文访问。 |
 | [RLAIF-V: Open-Source AI Feedback Leads to Super GPT-4V Trustworthiness](https://openaccess.thecvf.com/content/CVPR2025/html/Yu_RLAIF-V_Open-Source_AI_Feedback_Leads_to_Super_GPT-4V_Trustworthiness_CVPR_2025_paper.html) — CVPR 2025 | 视觉事实检查、AI 偏好构造及 DPO 式偏好学习；蒸馏前核查教师反馈。 | 作者对齐结果针对视觉回答可信度，不是领域意图效用；仓库后来支持 LoRA 不代表论文所有结果为 LoRA。数据 NC／研究用途及底座／API 条款须核查。 |

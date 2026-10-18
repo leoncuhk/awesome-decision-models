@@ -1902,6 +1902,96 @@
       "review_depth": "content_reviewed",
       "source_revision": null,
       "review_note": "Official handbook section reviewed: Wilson and binomial-tail interval methods, including small-sample cautions. Guide examples (8/10 Wilson interval, zero-error one-sided bounds) are fictional arithmetic calculations under iid/fixed-policy assumptions, not model results or guarantees for correlated screenshots/adaptive selection. No real sample size, labels or predictions published."
+    },
+    {
+      "id": "mire-organizer-2025",
+      "title": "Multimodal Intent Recognition in E-Commerce: Challenges, Innovations, and Lightweight Solutions",
+      "url": "https://doi.org/10.1145/3701716.3719642",
+      "kind": "paper",
+      "reviewed_on": "2026-10-18",
+      "review_depth": "content_reviewed",
+      "source_revision": null,
+      "review_note": "Organizer paper by Junwen Liu et al., WWW Companion 2025 pp.3008–3011, full four-page public-paper copy read using local PDF text extraction; SHA-256 9393318023f3072fdcf0b4d8646231565df577b0f5a0c859b48c8578eab86f81. Sections 2–4, award Table 1 and abstract/conclusion reviewed. Confirms 23+23 tasks, competition data/resource constraints, method summaries and separate expert evaluation. Earlier remote ACM access was blocked; this review obtained the text. Table 1 awards are not an exact per-team F1 leaderboard; broad baseline-to-top-team claims are not imported as reproducible effects."
+    },
+    {
+      "id": "mire-contract-oct18",
+      "title": "MIRE fixed data, generation, submission and scoring contract audit",
+      "url": "https://github.com/liujunwen23/MIRE/blob/d101287af90d114c5bf0cbfbd56fe9c52358e3bb/mire_baseline/cal_acc.py",
+      "kind": "repository",
+      "reviewed_on": "2026-10-18",
+      "review_depth": "content_reviewed",
+      "source_revision": "d101287af90d114c5bf0cbfbd56fe9c52358e3bb",
+      "review_note": "Read both READMEs, all three configs, convert2submit.py, cal_acc.py and ten demo records at the fixed revision. Instruction contains dialogue/candidates even when input is empty; images are separate and output is a target. Local scoring uses weighted F1/P/R and accuracy over label strings, despite a misleading multilabel docstring. Conversion aligns predictions by row index, not an ID join. Full SFT, sample read cap, context/generation caps and competition limits are distinct. Public demo images were not available/read; no downloaded code executed."
+    },
+    {
+      "id": "mire-tianchi-rules",
+      "title": "MIRE official phases, resource rules and composite final review",
+      "url": "https://tianchi.aliyun.com/competition/entrance/532277",
+      "kind": "official_docs",
+      "reviewed_on": "2026-10-18",
+      "review_depth": "content_reviewed",
+      "source_revision": null,
+      "review_note": "Public rendered official introduction inspected in an anonymous browser Oct18. Preliminary and semifinal test phases precede expert review Jan22–27 2025; final placement combines online and expert evaluation. Rules state <10B, at most three model calls per sample and total output within 100 tokens, private deployability and full inference code; prohibit private-domain training data/commercial LLM API calls in the contest. No credentials, registration, dataset download or submission performed. Publication/usage rights remain separate."
+    },
+    {
+      "id": "mire-tianchi-scoring",
+      "title": "MIRE official task labels and all-class weighted-F1 definition",
+      "url": "https://tianchi.aliyun.com/competition/entrance/532277/information",
+      "kind": "official_docs",
+      "reviewed_on": "2026-10-18",
+      "review_depth": "content_reviewed",
+      "source_revision": null,
+      "review_note": "Public rendered official task/data page inspected Oct18. Contains the complete active 23 scene and 23 intent labels; data description 1000 annotated training, 10000 preliminary and 10000 new semifinal examples. Score is weighted F1 across all classification labels, not an equal mean of two task F1 values. Submission CSV needs id and predict. Exact class supports/task proportions/raw labels were not obtained."
+    },
+    {
+      "id": "mire-tianchi-semifinal",
+      "title": "MIRE official semifinal leaderboard: exact three-team score columns",
+      "url": "https://tianchi.aliyun.com/competition/entrance/532277/rankingList",
+      "kind": "evaluation_report",
+      "reviewed_on": "2026-10-18",
+      "review_depth": "content_reviewed",
+      "source_revision": null,
+      "review_note": "Rendered algorithm leaderboard reviewed Oct18: selected later algorithm round (复赛; English UI Final Round), distinct from composite expert-final placement. scale 0.9085 / intent 0.9265 / scene 0.8676, 拥抱LLM 0.9070 / 0.9420 / 0.8278, Dynamic Challengers 0.9051 / 0.9365 / 0.8339. Best-submission dates Jan19/Jan19/Jan18 2025. Preserve official score column; do not derive it by task averaging or infer exact task counts. Public board inspected, underlying submissions/predictions not independently replayed."
+    },
+    {
+      "id": "mire-tianchi-final",
+      "title": "MIRE official final composite awards: gold, silver and bronze",
+      "url": "https://tianchi.aliyun.com/competition/entrance/532277/customize583",
+      "kind": "official_publication",
+      "reviewed_on": "2026-10-18",
+      "review_depth": "content_reviewed",
+      "source_revision": null,
+      "review_note": "Rendered official final-results table inspected Oct18: Dynamic Challengers gold/final rank1, 拥抱LLM silver/rank2, scale bronze/rank3. These are composite final awards, not semifinal online score ranks. Exact expert/composite numeric scores not published in this inspected table; no invented final-score column."
+    },
+    {
+      "id": "intentiongpt-abstract",
+      "title": "IntentionGPT: Boosting E-commerce User Intent Recognition with Self-data Augmentation and Structure-aware Retrieval",
+      "url": "https://doi.org/10.1145/3701716.3718370",
+      "kind": "paper",
+      "reviewed_on": "2026-10-18",
+      "review_depth": "abstract_reviewed",
+      "source_revision": null,
+      "review_note": "Publisher SIGWEB WWW25 Companion TOC abstract and DOI identity inspected; full paper not obtained. Describes self-data augmentation, collaborative noise filtering, structure-aware retrieval and model soups; author claims first place. Organizer overview independently attributes matching method families to gold team Dynamic Challengers. Exact submission/checkpoint/code mapping and backbone/training details not verified. Do not confuse with IntentGPT or unrelated same-name chat applications."
+    },
+    {
+      "id": "cusmer-abstract",
+      "title": "CuSMer: Multimodal Intent Recognition in Customer Service via Data Augment and LLM Merge",
+      "url": "https://doi.org/10.1145/3701716.3718373",
+      "kind": "paper",
+      "reviewed_on": "2026-10-18",
+      "review_depth": "abstract_reviewed",
+      "source_revision": null,
+      "review_note": "Publisher SIGWEB WWW25 Companion TOC abstract and DOI identity inspected; full paper not obtained. Two author-described pipelines: pseudo-labeling→fine-tuning→LLM merging and image augmentation→fine-tuning→LLM merging. Abstract first-round third/final-round first is an online-stage claim, not composite gold. Organizer overview gives scale diversity/confidence sampling and Breadcrumbs/TIES merge descriptions; these are attributed overview claims, not a code audit or isolated causal effect."
+    },
+    {
+      "id": "cusmer-team-identity",
+      "title": "CuSMer author page: scale@DLUT bronze-medal identity",
+      "url": "https://binglin-wu.github.io/",
+      "kind": "official_publication",
+      "reviewed_on": "2026-10-18",
+      "review_depth": "content_reviewed",
+      "source_revision": null,
+      "review_note": "Author news/publication page read: CuSMer authors and scale@DLUT bronze at this exact competition align with official scale final rank3. Dalian university news separately describes online/final-round first and composite bronze. An author page establishes attribution, not release of source code, evaluated weights or independent replication."
     }
   ],
   "entries": [
@@ -3416,26 +3506,35 @@
     },
     {
       "id": "mire-ecommir",
-      "name": "MIRE / EcomMIR multimodal intent evaluation",
+      "name": "MIRE / WWW2025 multimodal intent competition",
       "category": "evaluation",
       "url": "https://github.com/liujunwen23/MIRE/tree/d101287af90d114c5bf0cbfbd56fe9c52358e3bb",
       "source_ids": [
         "mire-challenge",
         "mire-full-sft",
-        "ecommir-paper"
+        "ecommir-paper",
+        "mire-organizer-2025",
+        "mire-contract-oct18",
+        "mire-tianchi-rules",
+        "mire-tianchi-scoring",
+        "mire-tianchi-semifinal",
+        "mire-tianchi-final",
+        "intentiongpt-abstract",
+        "cusmer-abstract",
+        "cusmer-team-identity"
       ],
-      "reviewed_on": "2026-10-16",
+      "reviewed_on": "2026-10-18",
       "summary": {
-        "en": "Image-scene and multi-turn intent challenge, with full-SFT baseline and a published LoRA-based competition solution.",
-        "zh": "图像场景与多轮意图挑战，提供全参数 SFT 基线及已发表的 LoRA 竞赛方案。"
+        "en": "Parallel 23-class scene and 23-class dialogue-intent tasks, official full-SFT baseline, and sourced gold/silver/bronze methods and semifinal scores.",
+        "zh": "并列的 23 类场景／23 类对话意图任务、官方 full-SFT 基线，以及有来源的金银铜方法和复赛成绩。"
       },
       "use": {
-        "en": "Inspect label/evidence structure and separate scene recognition from intent before adapting a VLM.",
-        "zh": "适配 VLM 前检查标签／证据结构，将场景识别与意图判断分开。"
+        "en": "Study task/label/IO contracts and compare data augmentation, retrieval, adaptation and merging as separate hypotheses; follow the linked case before domain experiments.",
+        "zh": "研究任务／标签／输入输出契约，将数据增强、检索、适配及合并作为分别检验的假设；领域实验前先看专门案例。"
       },
       "caveat": {
-        "en": "EcomMIR scores are author-reported combined interventions with Round 1 pseudo-labels; not LoRA-only or a 1,000-example-only untouched-test result. Dataset rights and full replay remain unverified.",
-        "zh": "EcomMIR 为含 Round 1 伪标签等组合干预的作者报告，不是 LoRA 单项或仅 1,000 样本的未触及测试结果；数据使用权与完整复现仍未核实。"
+        "en": "Composite final prizes differ from online F1 ranks. E33 records official semifinal scores; E28 preserves author EcomMIR task results. Pseudo-label exposure and missing exact artifacts limit causal claims, replay and domain transfer.",
+        "zh": "综合最终奖项与线上 F1 排名不同；E33 保存官方复赛成绩，E28 保留 EcomMIR 作者分任务结果。伪标签接触与精确产物缺失限制归因、重放和跨域结论。"
       }
     },
     {

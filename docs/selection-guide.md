@@ -114,6 +114,8 @@ The official D3 wrapper restriction does not exclude a separate trainer. [Vis De
 
 The [one-page route](multimodal-decision-finetuning.md#quick-route) and [layered reading list](multimodal-decision-finetuning.md#reading-list) turn this into experiment gates, separating peer-reviewed methods, preprints and engineering. / [一页路线](multimodal-decision-finetuning.zh-CN.md#quick-route)及[分层阅读](multimodal-decision-finetuning.zh-CN.md#reading-list)给出实验关卡，分开同行评议、预印本与工程证据。
 
+The [MIRE case](mire-case-study.md#finalists) separates final prizes from online F1 and traces three method families. / [MIRE案例](mire-case-study.zh-CN.md#finalists)分开最终奖项与线上F1，并追溯三类参赛方法。
+
 Execution details: [grouped splits](multimodal-decision-finetuning.md#split-protocol), [minimal matrix](multimodal-decision-finetuning.md#experiment-matrix), [result template](multimodal-decision-finetuning.md#result-template). / 执行细节：[防泄漏划分](multimodal-decision-finetuning.zh-CN.md#split-protocol)、[最小矩阵](multimodal-decision-finetuning.zh-CN.md#experiment-matrix)、[结果模板](multimodal-decision-finetuning.zh-CN.md#result-template)。
 
 For a complete proposed experiment, see the [multimodal fine-tuning research plan](multimodal-decision-finetuning.md): matched B0–B3 arms, actual image-path checks, candidate versus full-vocabulary loss, grouped splits, distillation, export and risk/cost stopping rules. [E28](evidence.md#e28) keeps the MIRE/EcomMIR competition results separate from decision-model leaderboards.

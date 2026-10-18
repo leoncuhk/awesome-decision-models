@@ -2178,6 +2178,94 @@
         "model_hash": "Available HF snapshot 3e6d164cb5c8cf264eec167905cc2448d89ea97d and published LFS metadata inspected; evaluated weight/API mapping unknown"
       },
       "reproduced_here": false
+    },
+    {
+      "id": "E33",
+      "title": "MIRE: official semifinal weighted-F1 scores are separate from composite final prizes",
+      "model_ids": [
+        "mire-ecommir"
+      ],
+      "source_ids": [
+        "mire-tianchi-semifinal",
+        "mire-tianchi-scoring",
+        "mire-tianchi-final",
+        "mire-tianchi-rules",
+        "mire-organizer-2025"
+      ],
+      "evidence_type": "third_party_reported",
+      "reviewed_on": "2026-10-18",
+      "report_date": null,
+      "model_revision": null,
+      "protocol": {
+        "task": "WWW2025 MIRE later algorithm round (复赛 / semifinal): scene and dialogue-intent classification",
+        "test_unit": "Organizer describes 10000 new semifinal test examples; exact scored IDs, class supports and independent conversation groups not obtained",
+        "split": "Public official later-round leaderboard, best submission dates Jan18–19 2025. Distinct from preliminary, local validation and composite expert-final awards.",
+        "reference": "Hidden organizer labels; official all-class weighted F1 definition and score/intent_score/image_scene_score columns. Complete labels and adjudication not audited here.",
+        "training": "Contestant submission recipes differ; EcomMIR uses Round1 pseudo-label expansion. Official organizer overview and method papers do not pin complete training artifacts or evaluated checkpoint hashes.",
+        "measurement": "Transcribed exact three official columns per team, not a task-score mean. Overall online ranks scale1/拥抱LLM2/Dynamic Challengers3; composite awards reverse first/third. No significance or causal-ablation claim.",
+        "hardware": "Leaderboard accuracy/F1 only; matched hardware, queueing, inference latency/throughput, total cost and concurrency not disclosed by these rows"
+      },
+      "metrics": [
+        {
+          "label": "Dynamic Challengers semifinal official overall score",
+          "value": 0.9051,
+          "unit": "fraction"
+        },
+        {
+          "label": "Dynamic Challengers semifinal intent_score",
+          "value": 0.9365,
+          "unit": "fraction"
+        },
+        {
+          "label": "Dynamic Challengers semifinal image_scene_score",
+          "value": 0.8339,
+          "unit": "fraction"
+        },
+        {
+          "label": "拥抱LLM semifinal official overall score",
+          "value": 0.907,
+          "unit": "fraction"
+        },
+        {
+          "label": "拥抱LLM semifinal intent_score",
+          "value": 0.942,
+          "unit": "fraction"
+        },
+        {
+          "label": "拥抱LLM semifinal image_scene_score",
+          "value": 0.8278,
+          "unit": "fraction"
+        },
+        {
+          "label": "scale semifinal official overall score",
+          "value": 0.9085,
+          "unit": "fraction"
+        },
+        {
+          "label": "scale semifinal intent_score",
+          "value": 0.9265,
+          "unit": "fraction"
+        },
+        {
+          "label": "scale semifinal image_scene_score",
+          "value": 0.8676,
+          "unit": "fraction"
+        }
+      ],
+      "conclusion": "The official semifinal score table supports a stage-specific comparison; gold/silver/bronze are composite final placements and cannot be reconstructed by sorting those scores.",
+      "caveats": [
+        "Third-party-reported relative to contestant model authors: organizer evaluation, not this repository reproducing submissions.",
+        "Official score is weighted across all labels, not an equal mean of two task F1 values; class counts and weighting inputs are not inferred from rounded values.",
+        "Final expert/composite numeric scores were not published in the inspected final table.",
+        "Submission selection, pseudo-label exposure and unavailable raw outputs/weights limit unseen-domain, statistical and isolated-method conclusions.",
+        "IntentionGPT/CuSMer full texts and verified method-code repositories remain unconfirmed; abstract/overview attribution is not a complete implementation audit."
+      ],
+      "artifacts": {
+        "protocol": "Rendered official information/leaderboard/final pages reviewed Oct18 2026; later-round best-submission dates retained",
+        "raw_outputs": "Public aggregate rows inspected; predictions, exact label supports and evaluator run manifest not obtained",
+        "model_hash": "Exact scored submission binaries/checkpoints not captured"
+      },
+      "reproduced_here": false
     }
   ]
 }

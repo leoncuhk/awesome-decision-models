@@ -47,6 +47,8 @@ For domain evaluation and verified training support, see the [image-intent adapt
 
 Execution details: [split protocol](docs/multimodal-decision-finetuning.md#split-protocol), [minimal experiment matrix](docs/multimodal-decision-finetuning.md#experiment-matrix), [result record and stopping decision](docs/multimodal-decision-finetuning.md#result-template).
 
+Worked case: [MIRE tasks, labels and code](docs/mire-case-study.md#tasks), [official composite awards and semifinal scores](docs/mire-case-study.md#finalists), and [transfer limits](docs/mire-case-study.md#transfer-boundaries).
+
 The [readout and adaptive-reasoning comparison](docs/decision-readout-and-reasoning.md) separates StartLux Instant/AutoThink, D3, Decider v1.1 and hosted Jev, including training versus serving and public versus independent evidence.
 
 **No combined accuracy leaderboard:** zero-shot classification, workflow fine-tuning and Best-of-N selection answer different questions. Local GPU forward time and remote API round-trip time are also different measurements.

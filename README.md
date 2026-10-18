@@ -6,7 +6,7 @@
 
 A curated guide to systems that **classify, score, rank, verify, route or abstain** rather than primarily generate prose. The central question is not which model has the most impressive headline, but **which method delivers acceptable outcomes at acceptable risk and total cost for a particular task**.
 
-**Source review: 2026-10-18.** 52 selected resources, including 18 core model families and 32 contextualized evidence records. This edition reviews public sources; **it does not claim independent model reproduction**. Review depth and unresolved gaps are recorded in the [source register](docs/sources.md). Inclusion is not an endorsement or a production-readiness certification.
+**Source review: 2026-10-18.** 52 selected resources, including 18 core model families and 33 contextualized evidence records. This edition reviews public sources; **it does not claim independent model reproduction**. Review depth and unresolved gaps are recorded in the [source register](docs/sources.md). Inclusion is not an endorsement or a production-readiness certification.
 
 ## Contents
 
@@ -92,10 +92,13 @@ The table compares mechanisms and use cases, **not incompatible benchmark scores
 - [E30 — DecisionPivot: author-built contrast benchmark and release-run pair accuracy](docs/evidence.md#e30)
 - [E31 — RLCD²: conditional reasoning-efficiency gains are not universal calibration or service-latency gains](docs/evidence.md#e31)
 - [E32 — Drex v2.0: public JevBench author counts do not establish a universal advantage](docs/evidence.md#e32)
+- [E33 — MIRE: official semifinal weighted-F1 scores are separate from composite final prizes](docs/evidence.md#e33)
 
 For domain evaluation and verified training support, see the [image-intent adaptation workflow](docs/selection-guide.md#image-intent-adaptation). Start with the [one-page multimodal post-training route](docs/multimodal-decision-finetuning.md#quick-route), then follow the controlled experiments, candidate gates and [layered academic reading list](docs/multimodal-decision-finetuning.md#reading-list).
 
 Execution details: [split protocol](docs/multimodal-decision-finetuning.md#split-protocol), [minimal experiment matrix](docs/multimodal-decision-finetuning.md#experiment-matrix), [result record and stopping decision](docs/multimodal-decision-finetuning.md#result-template).
+
+Worked case: [MIRE tasks, labels and code](docs/mire-case-study.md#tasks), [official composite awards and semifinal scores](docs/mire-case-study.md#finalists), and [transfer limits](docs/mire-case-study.md#transfer-boundaries).
 
 The [readout and adaptive-reasoning comparison](docs/decision-readout-and-reasoning.md) separates StartLux Instant/AutoThink, D3, Decider v1.1 and hosted Jev, including training versus serving and public versus independent evidence.
 
@@ -133,7 +136,7 @@ For executor selection, collect **task, available evidence, executor, outcome, l
 - **[Nimble public evaluations](https://github.com/bespokelabsai/nimble/blob/62076b4f2d365b5879dafcf7f6dd072a1fe76df7/docs/PUBLIC_BENCHMARKS.md)** — Human-reference subsets, paired comparisons and calibration reporting. Project-author-run, not independently reproduced by this list.
 - **[Decision-model benchmark](https://github.com/nibzard/decision-model-benchmark)** — Third-party code and protocols for decision-model comparisons. Third-party status alone does not certify methodology or labels.
 - **[Financial-document decision tests](https://insights.ml4trading.io/p/testing-jev-on-financial-documents)** — Original-evaluator comparison of Jev and supervised text/TF-IDF models on earnings, 8-K labels and SEC follow-up. Vendor API support; historical selected populations, hindsight screening, post-hoc prompts and split limitations. No universal tree-versus-Jev winner or investment-return claim.
-- **[MIRE / EcomMIR multimodal intent evaluation](https://github.com/liujunwen23/MIRE/tree/d101287af90d114c5bf0cbfbd56fe9c52358e3bb)** — Image-scene and multi-turn intent challenge, with full-SFT baseline and a published LoRA-based competition solution. EcomMIR scores are author-reported combined interventions with Round 1 pseudo-labels; not LoRA-only or a 1,000-example-only untouched-test result. Dataset rights and full replay remain unverified.
+- **[MIRE / WWW2025 multimodal intent competition](https://github.com/liujunwen23/MIRE/tree/d101287af90d114c5bf0cbfbd56fe9c52358e3bb)** — Parallel 23-class scene and 23-class dialogue-intent tasks, official full-SFT baseline, and sourced gold/silver/bronze methods and semifinal scores. Composite final prizes differ from online F1 ranks. E33 records official semifinal scores; E28 preserves author EcomMIR task results. Pseudo-label exposure and missing exact artifacts limit causal claims, replay and domain transfer.
 - **[DecisionPivot v1.1](https://huggingface.co/datasets/startlux-models/DecisionPivot/tree/b6a65d303f3f8689d293869aff3db41f944984c6)** — 13 generated contrast families, programmatic labels and public generator/solver/scoring assets; separate reused-public-task reference track. StartLux-author benchmark and runs, not third-party reproduction. Corrected v1.1 and intermediate tables must not be silently equated to the paper release scores. Hindsight coverage metrics are not deployment risk guarantees.
 - **[Artificial Analysis Decision Index](https://artificialanalysis.ai/methodology/decision-index)** — Version 1.0 combines knowledge/hallucination, text HLE, tool calling and safety classification with four equal weights. 500 knowledge items are private; WildGuardTest is a filtered 835-row subset. Non-hallucination is conditional on not being correct. No current ranks/scores audited; not a calibration, multimodal or full-service latency test.
 

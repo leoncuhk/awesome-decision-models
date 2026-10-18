@@ -6,7 +6,7 @@
 
 收录用于**分类、评分、排序、验证、路由与拒判**的模型和方法。我们关心的不是谁的宣传数字更高，而是：**在具体任务中，哪种方法能以可接受的风险和总成本，交付可验收的结果。**
 
-**本版来源核验日期：2026-10-18。** 精选 52 项资源，其中 18 个核心模型系列、32 条带协议背景的评测记录。本版完成的是公开资料核验，**没有宣称独立运行并复现这些模型**。阅读深度、版本固定情况与未解决的资料缺口均见[来源登记](docs/sources.md)。收录不等于背书，也不等于通过生产可靠性认证。
+**本版来源核验日期：2026-10-18。** 精选 52 项资源，其中 18 个核心模型系列、33 条带协议背景的评测记录。本版完成的是公开资料核验，**没有宣称独立运行并复现这些模型**。阅读深度、版本固定情况与未解决的资料缺口均见[来源登记](docs/sources.md)。收录不等于背书，也不等于通过生产可靠性认证。
 
 ## 目录
 
@@ -92,10 +92,13 @@
 - [E30 — DecisionPivot：作者对比及版本／成对正确率边界。](docs/evidence.md#e30)
 - [E31 — RLCD²：强制推理子集的终止与长度变化。](docs/evidence.md#e31)
 - [E32 — Drex v2.0：公共 JevBench 作者计数与比较边界。](docs/evidence.md#e32)
+- [E33 — MIRE：官方复赛成绩与综合最终奖项分别记录。](docs/evidence.md#e33)
 
 领域评测、训练支持核查与未知／澄清策略见[图片意图适配流程](docs/selection-guide.md#image-intent-adaptation)。先看[多模态后训练一页入口](docs/multimodal-decision-finetuning.zh-CN.md#quick-route)，再深入同条件对照、候选门槛及[分层学术阅读清单](docs/multimodal-decision-finetuning.zh-CN.md#reading-list)。
 
 执行细节：[分组划分协议](docs/multimodal-decision-finetuning.zh-CN.md#split-protocol)、[最小实验矩阵](docs/multimodal-decision-finetuning.zh-CN.md#experiment-matrix)、[结果记录与停止决定](docs/multimodal-decision-finetuning.zh-CN.md#result-template)。
+
+具体案例：[MIRE任务、标签与代码](docs/mire-case-study.zh-CN.md#tasks)、[官方综合奖项与复赛成绩](docs/mire-case-study.zh-CN.md#finalists)及[迁移边界](docs/mire-case-study.zh-CN.md#transfer-boundaries)。
 
 [读出与自适应推理比较](docs/decision-readout-and-reasoning.md)区分 StartLux Instant／AutoThink、D3、Decider v1.1 与托管 Jev，并分开训练／服务和公共／独立证据。
 
@@ -135,7 +138,7 @@
 - **[Nimble public evaluations](https://github.com/bespokelabsai/nimble/blob/62076b4f2d365b5879dafcf7f6dd072a1fe76df7/docs/PUBLIC_BENCHMARKS.md)** — 人工参考标签子集、配对比较及校准报告。 由项目方运行；本列表未独立复现。
 - **[Decision-model benchmark](https://github.com/nibzard/decision-model-benchmark)** — 用于判断模型比较的第三方代码与协议。 第三方身份本身不保证方法或标签可靠。
 - **[Financial-document decision tests](https://insights.ml4trading.io/p/testing-jev-on-financial-documents)** — 原评测者比较 Jev 与监督文本／TF-IDF 模型，分别测试财报变化、8-K 标签和 SEC 后续问询。 厂商提供 API；历史筛选样本含回顾检查、事后提示和划分限制，不能宣布树模型／Jev 通用胜负或投资收益。
-- **[MIRE / EcomMIR multimodal intent evaluation](https://github.com/liujunwen23/MIRE/tree/d101287af90d114c5bf0cbfbd56fe9c52358e3bb)** — 图像场景与多轮意图挑战，提供全参数 SFT 基线及已发表的 LoRA 竞赛方案。 EcomMIR 为含 Round 1 伪标签等组合干预的作者报告，不是 LoRA 单项或仅 1,000 样本的未触及测试结果；数据使用权与完整复现仍未核实。
+- **[MIRE / WWW2025 multimodal intent competition](https://github.com/liujunwen23/MIRE/tree/d101287af90d114c5bf0cbfbd56fe9c52358e3bb)** — 并列的 23 类场景／23 类对话意图任务、官方 full-SFT 基线，以及有来源的金银铜方法和复赛成绩。 综合最终奖项与线上 F1 排名不同；E33 保存官方复赛成绩，E28 保留 EcomMIR 作者分任务结果。伪标签接触与精确产物缺失限制归因、重放和跨域结论。
 - **[DecisionPivot v1.1](https://huggingface.co/datasets/startlux-models/DecisionPivot/tree/b6a65d303f3f8689d293869aff3db41f944984c6)** — 13 个生成对比家族、程序标签及公开生成／求解／评分资产，另有复用公共任务参考轨。 StartLux 作者自建与运行，不是第三方复现。修正版 v1.1 及中间检查点表不能静默等同论文最终成绩；事后覆盖指标不是部署风险保证。
 - **[Artificial Analysis Decision Index](https://artificialanalysis.ai/methodology/decision-index)** — 1.0 版以四等权部分组合知识／幻觉、文本 HLE、工具调用与安全分类。 500 道知识题私有；WildGuardTest 为筛选后 835 行。非幻觉率以未答对集合为分母。未审计当前排名／成绩，不能代替校准、多模态或完整服务延迟测试。
 

@@ -55,7 +55,8 @@ def outputs(root: Path = ROOT) -> dict[Path, str]:
           'E29':'StartLux：公共 DI 开发选择不等于完整盲测。',
           'E30':'DecisionPivot：作者对比及版本／成对正确率边界。',
           'E31':'RLCD²：强制推理子集的终止与长度变化。',
-          'E32':'Drex v2.0：公共 JevBench 作者计数与比较边界。'}
+          'E32':'Drex v2.0：公共 JevBench 作者计数与比较边界。',
+          'E33':'MIRE：官方复赛成绩与综合最终奖项分别记录。'}
         replacements['EVIDENCE_LINKS']='\n'.join(f"- [{e['id']} — {e['title'] if lang=='en' else short_zh[e['id']]}](docs/evidence.md#{e['id'].lower()})" for e in evs)
         for category in ['baselines','routing','reliability','evaluation','foundations','related_lists']:
             lines=[]

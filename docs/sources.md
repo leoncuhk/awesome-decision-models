@@ -1504,3 +1504,75 @@
 - Source revision: `not captured / live URL`
 - Note: Official handbook section reviewed: Wilson and binomial-tail interval methods, including small-sample cautions. Guide examples (8/10 Wilson interval, zero-error one-sided bounds) are fictional arithmetic calculations under iid/fixed-policy assumptions, not model results or guarantees for correlated screenshots/adaptive selection. No real sample size, labels or predictions published.
 
+<a id="mire-organizer-2025"></a>
+## Multimodal Intent Recognition in E-Commerce: Challenges, Innovations, and Lightweight Solutions
+
+- Source: https://doi.org/10.1145/3701716.3719642
+- Kind: `paper`; review depth: `content_reviewed`; reviewed: 2026-10-18
+- Source revision: `not captured / live URL`
+- Note: Organizer paper by Junwen Liu et al., WWW Companion 2025 pp.3008–3011, full four-page public-paper copy read using local PDF text extraction; SHA-256 9393318023f3072fdcf0b4d8646231565df577b0f5a0c859b48c8578eab86f81. Sections 2–4, award Table 1 and abstract/conclusion reviewed. Confirms 23+23 tasks, competition data/resource constraints, method summaries and separate expert evaluation. Earlier remote ACM access was blocked; this review obtained the text. Table 1 awards are not an exact per-team F1 leaderboard; broad baseline-to-top-team claims are not imported as reproducible effects.
+
+<a id="mire-contract-oct18"></a>
+## MIRE fixed data, generation, submission and scoring contract audit
+
+- Source: https://github.com/liujunwen23/MIRE/blob/d101287af90d114c5bf0cbfbd56fe9c52358e3bb/mire_baseline/cal_acc.py
+- Kind: `repository`; review depth: `content_reviewed`; reviewed: 2026-10-18
+- Source revision: `d101287af90d114c5bf0cbfbd56fe9c52358e3bb`
+- Note: Read both READMEs, all three configs, convert2submit.py, cal_acc.py and ten demo records at the fixed revision. Instruction contains dialogue/candidates even when input is empty; images are separate and output is a target. Local scoring uses weighted F1/P/R and accuracy over label strings, despite a misleading multilabel docstring. Conversion aligns predictions by row index, not an ID join. Full SFT, sample read cap, context/generation caps and competition limits are distinct. Public demo images were not available/read; no downloaded code executed.
+
+<a id="mire-tianchi-rules"></a>
+## MIRE official phases, resource rules and composite final review
+
+- Source: https://tianchi.aliyun.com/competition/entrance/532277
+- Kind: `official_docs`; review depth: `content_reviewed`; reviewed: 2026-10-18
+- Source revision: `not captured / live URL`
+- Note: Public rendered official introduction inspected in an anonymous browser Oct18. Preliminary and semifinal test phases precede expert review Jan22–27 2025; final placement combines online and expert evaluation. Rules state <10B, at most three model calls per sample and total output within 100 tokens, private deployability and full inference code; prohibit private-domain training data/commercial LLM API calls in the contest. No credentials, registration, dataset download or submission performed. Publication/usage rights remain separate.
+
+<a id="mire-tianchi-scoring"></a>
+## MIRE official task labels and all-class weighted-F1 definition
+
+- Source: https://tianchi.aliyun.com/competition/entrance/532277/information
+- Kind: `official_docs`; review depth: `content_reviewed`; reviewed: 2026-10-18
+- Source revision: `not captured / live URL`
+- Note: Public rendered official task/data page inspected Oct18. Contains the complete active 23 scene and 23 intent labels; data description 1000 annotated training, 10000 preliminary and 10000 new semifinal examples. Score is weighted F1 across all classification labels, not an equal mean of two task F1 values. Submission CSV needs id and predict. Exact class supports/task proportions/raw labels were not obtained.
+
+<a id="mire-tianchi-semifinal"></a>
+## MIRE official semifinal leaderboard: exact three-team score columns
+
+- Source: https://tianchi.aliyun.com/competition/entrance/532277/rankingList
+- Kind: `evaluation_report`; review depth: `content_reviewed`; reviewed: 2026-10-18
+- Source revision: `not captured / live URL`
+- Note: Rendered algorithm leaderboard reviewed Oct18: selected later algorithm round (复赛; English UI Final Round), distinct from composite expert-final placement. scale 0.9085 / intent 0.9265 / scene 0.8676, 拥抱LLM 0.9070 / 0.9420 / 0.8278, Dynamic Challengers 0.9051 / 0.9365 / 0.8339. Best-submission dates Jan19/Jan19/Jan18 2025. Preserve official score column; do not derive it by task averaging or infer exact task counts. Public board inspected, underlying submissions/predictions not independently replayed.
+
+<a id="mire-tianchi-final"></a>
+## MIRE official final composite awards: gold, silver and bronze
+
+- Source: https://tianchi.aliyun.com/competition/entrance/532277/customize583
+- Kind: `official_publication`; review depth: `content_reviewed`; reviewed: 2026-10-18
+- Source revision: `not captured / live URL`
+- Note: Rendered official final-results table inspected Oct18: Dynamic Challengers gold/final rank1, 拥抱LLM silver/rank2, scale bronze/rank3. These are composite final awards, not semifinal online score ranks. Exact expert/composite numeric scores not published in this inspected table; no invented final-score column.
+
+<a id="intentiongpt-abstract"></a>
+## IntentionGPT: Boosting E-commerce User Intent Recognition with Self-data Augmentation and Structure-aware Retrieval
+
+- Source: https://doi.org/10.1145/3701716.3718370
+- Kind: `paper`; review depth: `abstract_reviewed`; reviewed: 2026-10-18
+- Source revision: `not captured / live URL`
+- Note: Publisher SIGWEB WWW25 Companion TOC abstract and DOI identity inspected; full paper not obtained. Describes self-data augmentation, collaborative noise filtering, structure-aware retrieval and model soups; author claims first place. Organizer overview independently attributes matching method families to gold team Dynamic Challengers. Exact submission/checkpoint/code mapping and backbone/training details not verified. Do not confuse with IntentGPT or unrelated same-name chat applications.
+
+<a id="cusmer-abstract"></a>
+## CuSMer: Multimodal Intent Recognition in Customer Service via Data Augment and LLM Merge
+
+- Source: https://doi.org/10.1145/3701716.3718373
+- Kind: `paper`; review depth: `abstract_reviewed`; reviewed: 2026-10-18
+- Source revision: `not captured / live URL`
+- Note: Publisher SIGWEB WWW25 Companion TOC abstract and DOI identity inspected; full paper not obtained. Two author-described pipelines: pseudo-labeling→fine-tuning→LLM merging and image augmentation→fine-tuning→LLM merging. Abstract first-round third/final-round first is an online-stage claim, not composite gold. Organizer overview gives scale diversity/confidence sampling and Breadcrumbs/TIES merge descriptions; these are attributed overview claims, not a code audit or isolated causal effect.
+
+<a id="cusmer-team-identity"></a>
+## CuSMer author page: scale@DLUT bronze-medal identity
+
+- Source: https://binglin-wu.github.io/
+- Kind: `official_publication`; review depth: `content_reviewed`; reviewed: 2026-10-18
+- Source revision: `not captured / live URL`
+- Note: Author news/publication page read: CuSMer authors and scale@DLUT bronze at this exact competition align with official scale final rank3. Dalian university news separately describes online/final-round first and composite bronze. An author page establishes attribution, not release of source code, evaluated weights or independent replication.
+
