@@ -1488,3 +1488,19 @@
 - Source revision: `3e6d164cb5c8cf264eec167905cc2448d89ea97d`
 - Note: Full model license read: commercial-use thresholds, competitor exclusions and downstream use restrictions remain material; separate licensing can be required. Code, model, data and complementary material have distinct terms. Public access is not unrestricted open source; this is a source description, not legal advice.
 
+<a id="group-time-cv-docs"></a>
+## scikit-learn: grouped/time-aware cross-validation and held-out selection
+
+- Source: https://scikit-learn.org/stable/modules/cross_validation.html
+- Kind: `official_docs`; review depth: `content_reviewed`; reviewed: 2026-10-18
+- Source revision: `not captured / live URL`
+- Note: Official documentation reviewed Oct18: separate model selection from final holdout, fit preprocessing within training folds, keep groups disjoint and use time-aware evaluation for temporal targets. Stratification does not override group/time constraints. Proposed screenshot connected-component grouping and separate calibration roles are curatorial design choices, not an implemented sklearn experiment. No library installed or CV run on real data.
+
+<a id="binomial-interval-reference"></a>
+## NIST/SEMATECH: binomial confidence intervals
+
+- Source: https://www.itl.nist.gov/div898/handbook/prc/section2/prc241.htm
+- Kind: `official_docs`; review depth: `content_reviewed`; reviewed: 2026-10-18
+- Source revision: `not captured / live URL`
+- Note: Official handbook section reviewed: Wilson and binomial-tail interval methods, including small-sample cautions. Guide examples (8/10 Wilson interval, zero-error one-sided bounds) are fictional arithmetic calculations under iid/fixed-policy assumptions, not model results or guarantees for correlated screenshots/adaptive selection. No real sample size, labels or predictions published.
+

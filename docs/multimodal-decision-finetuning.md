@@ -2,7 +2,7 @@
 
 [简体中文](multimodal-decision-finetuning.zh-CN.md) · [Home](../README.md) · [Selection guide](selection-guide.md#image-intent-adaptation) · [Evidence ledger](evidence.md)
 
-Sources reviewed: 2026-10-17. This is a testable research design for general multimodal customer-support intent recognition. No model was trained and no production benefit was demonstrated here. Public implementations, author reports and proposed experiments are distinguished below. Image understanding, intent, calibration and abstention policy are separate questions.
+Sources reviewed: 2026-10-18. This is a testable research design for general multimodal customer-support intent recognition. No model was trained and no production benefit was demonstrated here. Public implementations, author reports and proposed experiments are distinguished below. Image understanding, intent, calibration and abstention policy are separate questions.
 
 **Research question.** Given domain images and the dialogue visible at decision time, how much intent recognition can be accepted under predefined consequential-error risk and complete-cost limits, while clarifying or handing off evidence-insufficient cases? Fine-tuning a decision model is one possible means, not the research goal. The scenario owner must set numerical risk, cost and minimum-useful-gain criteria before model/threshold selection; no universal pass line is assumed.
 
@@ -21,6 +21,20 @@ Use this route to test whether domain post-training improves a defined decision.
 | 6. Frozen acceptance | Paired grouped test results/uncertainty, consequential errors, coverage, full cost and train/export/serving parity. | Continue only for a predefined coverage gain over the strongest frozen baseline within critical-risk/cost limits; otherwise correct evidence/data/engineering or stop. |
 
 Record each gate's artifacts in a versioned experiment manifest. This is a design to implement after rights and runtime verification, not an untested command sequence.
+
+<a id="six-principles"></a>
+### Six principles translated into experiments
+
+| Principle | Concrete experiment / artifact |
+| --- | --- |
+| Intent depends on evidence, not the screenshot category alone. | Independent annotation of visible facts, contemporaneous intent and sufficiency; same-image/different-context cases. |
+| Typed outputs and direct logits are mechanisms, not accuracy guarantees. | D0 inference comparator; B2/B3 with the exact same base and explicit normalization/readout. |
+| Domain supervision must add useful information. | Strong B0/B1 baselines first; grouped learning curves and one-factor adaptation, including ordinary replay. |
+| More reasoning cannot supply missing evidence. | Deterministic arithmetic/rules; optional frozen hard-case AutoThink comparison only on evidence-complete inputs. |
+| Probability, calibration and an acceptable policy differ. | Separate development/calibration/test roles, error costs and risk–coverage; no universal confidence cutoff. |
+| Deployment is part of the model being evaluated. | Image/token/template, concurrent request, precision/device/calibrator regression and complete cost on the same frozen policy. |
+
+Start at the [data schema](#data-schema), [split protocol](#split-protocol) and [minimal matrix](#experiment-matrix); finish with the [result template](#result-template) and [decision tree](#decision-tree). These are proposed procedures for a small domain-screenshot dataset, not a released dataset or an experimental result.
 
 ## 1. Freeze the question and comparisons
 
@@ -45,17 +59,25 @@ The primary endpoint is the change in accepted intent-label coverage relative to
 
 For mechanism attribution, B2 and B3 must start from the same exact backbone checkpoint and hold data, scale, visual processing and budget fixed. Comparing a newly adapted Qwen VLM with a released D3 model tests the complete systems under their disclosed conditions; it cannot isolate the benefit of a different readout, objective or training recipe. The B0/B1/B2/B3 sequence is an evaluation plan, not a quality ranking or a requirement to choose only Qwen3.5.
 
-These are proposed experimental arms, not measured results:
+<a id="experiment-matrix"></a>
+### Minimal matrix: required first pass, then gated extensions
 
-| Arm | Inputs and training | Factor to isolate |
+Run the first five rows on one frozen task/split. Complete their comparisons and finite selection within Train/Dev first; only predeclared frozen baselines and final candidates enter one final-test protocol. Do not choose a model while viewing Test. A zero-shot arm may see label names/definitions, not labeled demonstrations; few-shot examples come only from Train and get a separate run ID. Match evidence, nominal scale/memory and allowed budget where feasible; disclose unmatched base pretraining, precision, label access and inference effort. This is a system comparison, not a claim of equal prior training or a ranking.
+
+| Arm | First-pass configuration | Comparison / decision |
 | --- | --- | --- |
-| B0: OCR + text | Rules or ordinary supervised text classifier; retain a text-only arm | OCR, loss of layout, label separability and cost |
-| B1: instruction VLM | Fixed-schema zero/few-shot short-label output | Whether images and context suffice; retrieval augmentation gets a separate arm |
-| B2: VLM LoRA-SFT | Short structured labels on the same VLM backbone | Benefit of domain supervision; cap output length and count format failures |
-| B3: candidate-distribution LoRA | Same backbone, data, image processing and budget as B2; read legal-option logits | Benefit of readout/objective, after verifying training/serving alignment |
-| C: continue a decision checkpoint | Domain adaptation of an existing D3/Intern or other decision checkpoint only after verifying the image training path; compare to that same checkpoint without adaptation | Keep target splits and budget explicit. Cross-family results select systems; this is not the B2/B3 readout ablation. Vis text-only training is not a multimodal C arm |
+| B0-T | Contemporaneous text only; TF-IDF or another ordinary supervised classifier, features fitted on Train only | Establish label separability and a low-cost floor. |
+| B0-O | Same classifier plus OCR from the same screenshot; freeze OCR/version | B0-T versus B0-O isolates the OCR evidence addition; include OCR errors/time. |
+| B1 | One fixed general VLM, image + contemporaneous text, zero-shot structured short labels | Freeze schema/template, image budget and failures; page guidance/retrieval is a separate one-factor arm. |
+| D0 | One disclosed D3 size, zero-shot typed decisions on the same image/text and candidates | Serious specialized-model inference comparator; compare complete systems, not readout alone. |
+| B2 | Comparable-scale Qwen or other supported VLM, language-side LoRA with short-label SFT | Compare with its exact unadapted B1 checkpoint. Finite Dev search; verify the visual path and retain ordinary cases. |
+| B3-CE, conditional | Same exact B2 base/data/processor/LoRA budget; candidate-subset CE with fixed readout | Isolate a specified scoring formulation. B2/B3 differ in readout/normalization; do not attribute their entire difference to loss alone. |
+| B3-Brier, conditional | Same B3-CE implementation/initialization/budget; only add the declared Brier term | Compare against B3-CE to test the extra objective. Tune its weight on Dev, not Test or threshold-certification data. |
+| C, conditional | Continue the exact D0 or an Intern checkpoint only after image training/export gates pass | Compare with that checkpoint's unadapted version at a declared budget; Vis text-only code is not a multimodal C run. |
 
-Establish B0/B1/B2 before investing in B3. A short generated label may require only a few tokens, so removing decoding need not materially reduce end-to-end latency. Add a separate scene encoder or multistage classifier only when scene recognition is a demonstrated bottleneck.
+Optional Intern inference gets its own I0 row; it is not required before the first B2 run. Optional AutoThink gets R0 with its licensed checkpoint/backend, a hard-case gate selected on Dev, fixed reasoning budget and complete latency. Evaluate the **whole routed population** as well as the predeclared hard subset, including gate errors and extra calls. Do not select that subset from final-test mistakes or assume reasoning helps. Arithmetic, date comparisons and explicit constraints keep deterministic-tool baselines.
+
+After B0/B1/D0 diagnose a learnable domain gap, try B2 before B3/C. Add one factor at a time; reuse development split/seed/budget across paired arms and record failed attempts. Train on nested, group-preserving subsets to check whether additional domain examples help; do not call different random duplicates independent data gains. A short generated label may use only a few tokens, so direct scoring need not reduce complete latency.
 
 ## 2. What the public evidence supports
 
@@ -88,13 +110,69 @@ ezjev's MIT code license does not license its weights or training data. Its [mod
 
 ## 3. Resolve data and label uncertainty first
 
-A proposed data contract includes anonymous grouping ID, decision timestamp, language, UI/template version, image reference, contemporaneous text, candidates and definitions, adjudicated labels, evidence sufficiency, disagreement and usage rights. These are schema suggestions, not a request to upload real records to a public repository.
+<a id="data-schema"></a>
+### A minimal local data schema
 
-Specify primary versus secondary intent, ambiguity rules, facts requiring the image, useful clarification and steps controlled by external policy. Independently relabel and adjudicate disagreements. Persistent disagreement calls for fixing the taxonomy before scaling models. Historical operator actions can be wrong and are not automatic gold labels.
+The following is invented notation, not a real record, usable prompt or public-data upload request. Store actual assets, text, identities and labels in an authorized local/private system; opaque IDs alone do not anonymize screenshots. Keep the label taxonomy/candidate definitions in a versioned sidecar. Separate annotation-only later outcomes from model-visible evidence, and verify evidence timestamps before feature extraction.
 
-Separate training, development, calibration and final testing using conversation/user groups and source, time, near-duplicate image, screenshot-template and UI-family boundaries. Group duplicates before splitting and document the rule; learned preprocessing, pseudo-label selection and model selection stay inside allowed training/development partitions. Later messages or resolutions can help human label construction but must not enter earlier decision inputs. Generate teacher labels for the training pool, not as repeatedly consulted answers to the final test.
+```json
+{
+  "record_id": "synthetic-001",
+  "image_ref": "LOCAL_ONLY",
+  "visible_text": "SYNTHETIC_PLACEHOLDER",
+  "evidence_cutoff": "SYNTHETIC_TIMESTAMP",
+  "guidance_version": null,
+  "conversation_group": "GROUP_A",
+  "user_group": "GROUP_B",
+  "near_duplicate_group": "DUP_A",
+  "leakage_component": "COMPONENT_A",
+  "ui_family": "UI_A",
+  "ui_version": "v0",
+  "language": "und",
+  "label_schema_version": "labels-v1",
+  "task_mode": "single_intent",
+  "intents": ["INTENT_A"],
+  "evidence_status": "sufficient",
+  "unknown_reason": null,
+  "annotation_status": "independently_reviewed_and_adjudicated",
+  "rights_status": "LOCAL_REVIEW_REQUIRED",
+  "split": "unassigned"
+}
+```
 
-Retain both natural traffic proportions and a separate enriched stress set: rare/confusable intents, same image with different context, image-only ambiguity, missing/wrong images, small text, crops, blur, new layouts, languages, negation, exceptions, contradictions, all-wrong candidate sets and malicious instructions embedded in images. Stress-set enrichment is not a traffic prevalence estimate. Test whether image flips/crops or removal of short utterances preserve the label; a useful clarification or handoff request must not be deleted mechanically because a paper filtered similar text.
+Audit readability at the actual inference resize/crop/compression, not just the original resolution: can annotators read the decisive text and distinguish the UI state, and does OCR retain it? Separate blur/small text/missing regions/redaction loss from semantic confusion. Freeze permissible preprocessing; a crop or flip that removes evidence or reverses a UI relation is not label-preserving augmentation.
+
+Define `task_mode` before modeling. Single-intent uses an agreed primary-label tie rule; multi-intent uses a set target and per-label precision/recall (plus exact-set score when useful), not an exclusive softmax. `unknown` means the taxonomy cannot assign a known class; `out_of_scope` means a known scope mismatch; `insufficient`/`needs_clarification` concerns missing evidence. They may coexist with a partial intent. State their precedence and annotation/output rules explicitly. A model's low-confidence abstention is a **policy output**, not automatically one of these gold labels.
+
+Have at least two annotators independently assess an agreed audit subset, enriched with ambiguous/rare cases and a separate representative sample. Record label-wise agreement, disagreements and adjudication, rather than only a pooled agreement score. Expand the audit where disagreement concentrates. Historical operator actions and teacher labels are provisional evidence, not automatic gold. If the same visible image/text admits multiple plausible intents, request context or revise the contract before training.
+
+<a id="split-protocol"></a>
+### Leakage-resistant split protocol
+
+1. **Inventory before allocation.** Count usable images and independent conversations/users, exact/near duplicates, UI/template families, dates, labels and missing evidence. Audit exact hashes plus visual/OCR similarity and manually inspect suspicious pairs; a perceptual hash alone neither proves identity nor catches every near duplicate. Record excluded/corrupt assets and reasons.
+2. **Form leakage components.** Link records sharing the chosen independence unit (same conversation/user) or an actual duplicate/near-identical rendered instance; take connected components so transitive links cannot cross partitions. Derived crops, augmentations and paraphrases inherit the parent's component and split. A giant component is a limitation to resolve, not a reason to break the grouping rule. Keep abstract UI family separate from instance-duplicate grouping.
+3. **Declare populations.** For expected traffic, keep representative prevalence with no component overlap. Also freeze a later-time and/or previously unseen UI/page-family holdout when those generalization claims matter; report it separately, not as a representative mixture. A familiar-UI split cannot demonstrate new-page generalization. Enriched rare/error stress sets have their own denominators. Temporal splits do not automatically enforce user/duplicate isolation: check both constraints.
+4. **Lock roles and membership.** A data steward may use labels to allocate per-class support before model selection, then hide final-test labels/content from prompt/model/hard-case development. Train fits weights/features/augmentation; Dev selects checkpoint, schema, prompt, rank, learning rate, epochs, Brier weight and routing design. Cal fits the frozen model's probability mapping/policy; Test measures frozen acceptance once. No test content or errors feed retrieval examples, pseudo-labels, synthetic hard cases, calibration or model selection.
+5. **Use CV only inside development.** When a fixed Dev split is unstable, use group-aware folds (optionally stratified when feasible), or forward-time folds if the target is future traffic; never sacrifice group/time isolation for label balance. Keep outer Test and final Cal untouched. Preprocessing and generated examples are fitted within each training fold. Report fold/group counts, missing classes and selection variability. OOF predictions from several models are not automatically a valid calibrator for a refitted model; recalibrate the final artifact or use a justified cross-fitting procedure. See [official grouped/time CV guidance](https://scikit-learn.org/stable/modules/cross_validation.html).
+6. **Version changes.** Fix split IDs/hashes and a leakage audit before the first comparison. If a Dev hard case moves into Train, retire that development measurement and replace/version Dev. Inspect final-test errors only after freezing/reporting acceptance; once those errors guide changes, that test is development history and a new untouched acceptance set is needed.
+
+Retain a predeclared separate stress set: rare/confusable intents, same image with different text, missing/wrong images, tiny text/blur, unseen UI/languages, negation/exceptions/contradictions, all-wrong candidates and malicious instructions embedded in images. Adjudicate expected behavior per case. Enrichment is not traffic prevalence, and final-test errors never generate training hard cases.
+
+<a id="sample-size"></a>
+### Small-sample support and uncertainty
+
+Do not select a fixed percentage from image count alone. Plan from independent groups, number of labels, rare-label prevalence, desired uncertainty and annotation budget. Publish an internal count table **before training**, one row per class/unknown/OOS and relevant UI/time group:
+
+| Label / group | Train records / independent groups | Dev records / groups | Cal records / groups | Test positives / groups | Uncertainty / limitation |
+| --- | --- | --- | --- | --- | --- |
+| Each declared class | fill counts | fill counts | fill counts | fill counts | Recall numerator/denominator and interval method |
+| Unknown / OOS / insufficient | count separately | count separately | count separately | count separately | Separate recognition and policy-rejection errors |
+
+Rare classes may have no independent positive examples in a partition. Mark their recall as not estimable, report a fixed label list and the rule for undefined metrics, and do not imply coverage of every class from macro-F1. Collect targeted **independent** labels or restrict the conclusion; merging classes requires semantic justification and a new taxonomy version. Group-aware bootstrap intervals are useful for paired system differences when enough groups exist; too few groups make uncertainty itself unstable.
+
+For an explicitly **fictional iid example**, recall 8/10 is 80%, but its two-sided 95% Wilson interval is about 49.0–94.3%. At a pre-fixed policy with zero errors among 20 independent accepted cases, the exact one-sided 95% binomial upper error bound is `1 - 0.05^(1/20)`, about 13.9%; even zero among 60 gives about 4.9%. These arithmetic illustrations follow [binomial interval methods](https://www.itl.nist.gov/div898/handbook/prc/section2/prc241.htm), not model results. Correlated screenshots, adaptive threshold selection or multiple subgroup claims cannot inherit those simple iid bounds. There may be too little data for any useful risk certificate; report that outcome instead of relaxing the budget after seeing results.
+
+For calibration, first freeze checkpoint/template/candidate reduction. Fit temperature/probability mapping on Cal-fit and certify thresholds on independent Cal-policy, or use a valid method accounting for their joint selection. When support cannot sustain this separation, label the policy exploratory and collect more data; do not advertise an untouched certificate. Cal is not a second Dev set. Final calibration quality is measured on the frozen Test, not asserted from the same data used to fit it.
 
 ## 4. Verify the visual path and objective before training
 
@@ -113,6 +191,21 @@ Distinguish candidate-subset CE, full-vocabulary answer-token CE and a separate 
 
 Check answer-code tokenization in the actual complete prompt, answer positions, legal candidates and padding. Remap labels when shuffling options and test order sensitivity. B2 supervises the agreed answer portion; B3 computes loss at its agreed readout. Do not leak targets or silently discard overlength inputs, broken images or unmappable labels.
 
+<a id="preflight"></a>
+### Training preflight: retain a pass/fail record
+
+- Freeze task/labels/rights and split hashes; verify zero group/duplicate overlap and no later-context/target leakage. Record per-class support and the primary risk/cost/useful-gain limits before scores.
+- Pin model/weight identity, processor/template, code, trainable module names/counts, dtype/device and optimizer settings. Inspect which LoRA/readout parameters actually receive gradients; frozen vision must still supply image features.
+- Decode several training batches with image dimensions, visual grids/token counts, answer positions/masks and label-to-code mapping; targets must be in supervision only. Report length distribution and every truncation/exclusion instead of silently dropping difficult examples.
+- Fit a tiny Train subset as a debugging check; compare image removal/swaps on adjudicated image-essential examples, option permutations with label remapping, padding and unknowns. Tiny-fit success does not establish generalization or a correct visual path by itself.
+- Predeclare finite search/seed/step/token/compute budgets, early-stopping rule, development metric and regression cases. Keep augmentation label-preserving and inside Train; record ordinary-versus-hard sampling rather than optimizing only selected hard cases.
+- Confirm a supported multimodal training/merge/serving path. Failure at the D3/Intern gate means retain inference baseline or stop C; do not bypass an inference-only wrapper by assumption. No commands in this document have been tested as a training recipe.
+
+<a id="evidence-ablations"></a>
+### Evidence ablations before architecture expansion
+
+On the same predeclared groups, compare image only, contemporaneous text only, OCR + text, and image + text. Keep class definitions/allowed guidance fixed and count preprocessing cost. Image-only retains label definitions but removes dialogue; OCR is derived visual evidence, not a no-image-information control. Mark whether each reduced input still identifies intent: a justified clarification on an underdetermined input is evaluated under the sufficiency contract, not forced to guess the original label. Add wrong/missing-image controls only where their expected consequence is adjudicated. A graph/second encoder/reasoning branch is justified by a diagnosed residual error, not by a desire to combine every technique.
+
 ## 5. Experiment order and stopping rules
 
 1. **Freeze versions and budgets.** Record base/weights, processor, template, code commits, dependencies, resolution, precision, candidates, context, seeds, training tokens/examples and budget. A model-repository revision need not change weights or training.
@@ -124,6 +217,20 @@ Check answer-code tokenization in the actual complete prompt, answer positions, 
 
 Preference/feedback learning is an optional later arm only if residual errors concern visual factuality or candidate preference and auditable pair labels are available. Borrow RLAIF-V/LLaVA-Critic ideas conditionally, compare against supervised adaptation with the same base/evidence/budget, and audit teacher/judge errors. Keep feedback generation inside the training pool and check source/image overlap with evaluation data. A preference model is not a replacement for the intent contract or human-adjudicated final labels.
 
+<a id="serving-regression"></a>
+### Serving regression after every trained/exported/backend change
+
+| Case | Frozen comparison and failure rule |
+| --- | --- |
+| Isolated versus concurrent requests | Interleave deliberately different state/questions/options; compare each request with its isolated output at a prespecified numeric tolerance. Check answer-token offsets, row order and cache isolation; another request must never alter option identity. |
+| Short/long and image/text mixtures | Verify processor, pixels/grid, truncation side and actual retained evidence; batch padding, missing/corrupt images and near-limit inputs must have explicit counted outcomes. |
+| Train/eager, merged/exported and serving artifacts | Same cases/candidate mapping; record logits/probability and label differences, especially near ties. Never assume an adapter merge/export preserves the visual/readout path. |
+| Device/precision/quantization/backend | Record each combination independently; dtype/kernel changes can change logits. Revalidate its matched calibrator/policy rather than reusing a temperature silently. |
+| Calibration/gates | Pin calibrator ID, fit population, candidate set, entropy/max-probability definition, rejection and reasoning policy; reject mismatched artifacts. |
+| Load and failures | Record concurrency/batch/context/image budgets, cold/warm cache, sample count, p50/p95, throughput, memory, timeout/invalid-output rate and retries. Include failures/clarifications in the population and complete cost. |
+
+The [Oct18 runtime review](../updates/2026-10-18-weekly-review.md) documents why request-local offsets and serving/eval preparation matter. This checklist is proposed regression coverage, not a claim that any listed backend passes it. Small timing samples give unstable p95; report counts and workload, not a universal speedup.
+
 ## 6. Accept quality, risk and cost together
 
 | Dimension | Predefined reporting |
@@ -131,7 +238,7 @@ Preference/feedback learning is an optional later arm only if residual errors co
 | Task quality | Macro-F1, per-class precision/recall, critical confusions and high-risk false negatives; separate multi-intent/unknown |
 | Automation policy | Coverage and accepted-set error at a frozen threshold, clarification/handoff burden; unknown labels versus system abstention |
 | Uncertainty | Paired comparisons and intervals at conversation/user independence units; no winner from insufficient samples; natural and stress populations separate |
-| Probability quality | NLL/Brier on independent calibration data; ECE bins, temperature scope and freeze time explicit; final test used for acceptance |
+| Probability quality | Fit on independent Cal; report frozen-policy Test NLL/Brier and ECE with bins/temperature scope/freeze time; no self-reported confidence substituted for probabilities |
 | Shift and groups | Time, language, source, UI, rare intents, missing evidence and failure rates |
 | System economics | OCR/retrieval/preprocessing, model, queue, retries, review and correction; hardware, concurrency, cache, cold/warm behavior, P50/P95, throughput and timeouts |
 
@@ -154,6 +261,45 @@ The Oct14 [risk-budgeted System One preprint](https://arxiv.org/html/2610.19811v
 Retain preregistered hypotheses, owner-defined risk/cost/useful-gain limits, task/label specification, source and usage-right inventory, grouped splits and deduplication, versions/budgets, experimental arms, image ablations, per-class errors, calibration/thresholds, full cost and stopping decision. Shared artifacts must use explicitly publishable material; real data and execution authority remain under their own governance. Write training/evaluation scripts after validating the chosen implementation rather than presenting untested commands as a reproduction recipe.
 
 Source identities and review scope are in the [register](sources.md); EcomMIR measurements and protocol limitations are in [E28](evidence.md#e28). This page releases no dataset, model weights or training results.
+
+<a id="result-template"></a>
+### Copyable experiment/result record
+
+One row per run and population; fill planned fields before running, leave unmeasured values blank, and retain rejected/failed arms. All placeholders below are generic; store real artifacts privately unless explicitly publishable.
+
+| Field | Required content |
+| --- | --- |
+| Identity / plan | Run ID, hypothesis, parent comparator, sole changed factor, intended population, owner-set maximum critical risk/complete cost, minimum useful coverage gain, stop rule and search budget |
+| Data / labels | Local manifest/split hashes, label version/mode/definitions, evidence cutoff, rights, group/duplicate audit, per-partition class/group counts and annotation disagreements |
+| Artifacts / training | Exact base/weights/code/processor/template/readout; trainable modules, LoRA rank, loss/Brier normalization/weight, seed, optimizer/LR/steps/examples/tokens, sampling/replay and used label access |
+| Policy / calibration | Frozen candidate order/reduction, probability/confidence definition, Cal-fit/Cal-policy membership, calibrator/gate/threshold IDs and fit time; assumptions and certificate status (or no certificate) |
+| Quality | Macro-F1 with label list/undefined rule; each class TP/FP/FN/support/recall interval, confusion matrix; multilabel/unknown/OOS/insufficient and critical errors separately; format/timeouts included |
+| Selective behavior | Accepted errors / accepted count, accepted / all eligible requests, clarification/handoff and failure fractions; grouped paired difference and interval versus the frozen baseline; representative/stress/shift results separate |
+| Probability | Test NLL/Brier conventions/ECE bins; if an arm lacks usable class probabilities, mark not available rather than fabricate them from its verbal confidence |
+| Cost / regression | Hardware/dtype/device/backend, batch/concurrency/image/context budgets; complete p50/p95/throughput/cost/memory/counts, queue/retries/OCR/review; serving-regression pass/fail and parity tolerance |
+| Outcome / limits | Predefined pass/fail/inconclusive decision, limiting classes/groups, failed checks, next single-factor change, review date and new holdout requirement after test-guided changes |
+
+Cost per request includes inference and evidence processing plus retries/review/correction; show the observed counts and unit prices used rather than importing a universal price. Report both offline intent recognition and the frozen accept/clarify policy: higher macro-F1 alone does not prove a coverage gain within the critical-risk budget. Keep seed/fold variation distinct from sampling uncertainty; a confidence interval is not a deployment guarantee.
+
+<a id="decision-tree"></a>
+### Continue, collect, repair or stop
+
+```mermaid
+flowchart TD
+    A[Freeze task, labels and evidence] --> B{Identifiable and reliable labels?}
+    B -- No --> C[Clarify evidence or revise taxonomy]
+    B -- Yes --> D{Independent support and clean splits?}
+    D -- No --> E[Collect groups or narrow claims]
+    D -- Yes --> F[Run B0, B1 and D0]
+    F --> G{Learnable domain gap after error audit?}
+    G -- No --> H[Retain baseline or repair evidence/tools]
+    G -- Yes --> I[B2; B3 or C only after gates]
+    I --> J{Frozen test risk, gain, cost and parity pass?}
+    J -- No --> K[Stop expansion; report inconclusive/failure]
+    J -- Yes --> L[Plan separately authorized shadow evaluation]
+```
+
+Training stops early for leakage, ambiguous targets, broken visual/readout paths, non-finite loss or serving mismatch. Expansion stops when the preregistered useful-gain/risk/cost criteria fail or are not estimable. After the finite Dev search, do not keep trying models on Test until one passes. If B2 adds no useful gain, retain the stronger baseline; B3, C, distillation and reasoning are optional hypotheses, not an obligation to keep increasing complexity.
 
 <a id="reading-list"></a>
 ## 8. Layered reading list and what to borrow
@@ -182,5 +328,7 @@ Publication status and evidence strength are separate axes. Peer review does not
 | [StartLux-Decision: AutoThink Decision Models with Reinforcement Learning for Calibrated Deliberative Decisions](https://arxiv.org/html/2610.17309v1) — arXiv v1, 2026-10-12 | Candidate probabilities, adaptive reasoning and policy-aware calibration; [mechanism audit](decision-readout-and-reasoning.md). | Public DI development selection, author-built DecisionPivot and NC weights constrain interpretation and use; not a demonstrated domain image-training recipe. |
 | [MIRE: Multimodal Intent Recognition for Dialogue Systems challenge baseline](https://github.com/liujunwen23/MIRE/tree/d101287af90d114c5bf0cbfbd56fe9c52358e3bb) — WWW2025 challenge engineering repository | Qwen2-VL-7B **full SFT** baseline for scene/intent tasks. | This is not EcomMIR's implementation, a LoRA result, or a separate peer-reviewed method paper verified here. |
 | [Vis Decisions 0.6.1 D3 path](https://github.com/Blockether/vis-decisions/blob/d73768e3c18d89d11f6b9a774b87d64ccd55f27d/src/blockether/vis_decisions/_d3_trainer.py) — third-party engineering | Text full/LoRA plus trainable code head and merged export implementation. | Removed vision tower; not verified multimodal adaptation or an independent benchmark reproduction. |
+
+For experimental allocation and uncertainty, use the [official grouped/time CV documentation](https://scikit-learn.org/stable/modules/cross_validation.html) and [NIST binomial-interval reference](https://www.itl.nist.gov/div898/handbook/prc/section2/prc241.htm) with their stated assumptions; neither establishes this dataset's independence or sufficient size.
 
 Read in order: domain intent adaptation → OOS/clarification → visual feedback → candidate/critic scoring → judge checks → calibration and rejection. Peer-reviewed methods can inform an experiment without proving that fine-tuning will improve its target decision. Review depth, versions and access gaps are in the [source register](sources.md).

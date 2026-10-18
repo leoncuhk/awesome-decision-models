@@ -114,6 +114,8 @@ The official D3 wrapper restriction does not exclude a separate trainer. [Vis De
 
 The [one-page route](multimodal-decision-finetuning.md#quick-route) and [layered reading list](multimodal-decision-finetuning.md#reading-list) turn this into experiment gates, separating peer-reviewed methods, preprints and engineering. / [一页路线](multimodal-decision-finetuning.zh-CN.md#quick-route)及[分层阅读](multimodal-decision-finetuning.zh-CN.md#reading-list)给出实验关卡，分开同行评议、预印本与工程证据。
 
+Execution details: [grouped splits](multimodal-decision-finetuning.md#split-protocol), [minimal matrix](multimodal-decision-finetuning.md#experiment-matrix), [result template](multimodal-decision-finetuning.md#result-template). / 执行细节：[防泄漏划分](multimodal-decision-finetuning.zh-CN.md#split-protocol)、[最小矩阵](multimodal-decision-finetuning.zh-CN.md#experiment-matrix)、[结果模板](multimodal-decision-finetuning.zh-CN.md#result-template)。
+
 For a complete proposed experiment, see the [multimodal fine-tuning research plan](multimodal-decision-finetuning.md): matched B0–B3 arms, actual image-path checks, candidate versus full-vocabulary loss, grouped splits, distillation, export and risk/cost stopping rules. [E28](evidence.md#e28) keeps the MIRE/EcomMIR competition results separate from decision-model leaderboards.
 
 完整实验设计见[多模态微调研究方案](multimodal-decision-finetuning.zh-CN.md)：同条件 B0–B3 对照、真实图像路径检查、候选／完整词表损失、分组划分、蒸馏、导出及风险／成本停止条件；[E28](evidence.md#e28)单独保存 MIRE／EcomMIR 竞赛结果，不混入判断模型总榜。

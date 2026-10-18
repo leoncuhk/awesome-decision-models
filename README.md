@@ -95,6 +95,8 @@ The table compares mechanisms and use cases, **not incompatible benchmark scores
 
 For domain evaluation and verified training support, see the [image-intent adaptation workflow](docs/selection-guide.md#image-intent-adaptation). Start with the [one-page multimodal post-training route](docs/multimodal-decision-finetuning.md#quick-route), then follow the controlled experiments, candidate gates and [layered academic reading list](docs/multimodal-decision-finetuning.md#reading-list).
 
+Execution details: [split protocol](docs/multimodal-decision-finetuning.md#split-protocol), [minimal experiment matrix](docs/multimodal-decision-finetuning.md#experiment-matrix), [result record and stopping decision](docs/multimodal-decision-finetuning.md#result-template).
+
 The [readout and adaptive-reasoning comparison](docs/decision-readout-and-reasoning.md) separates StartLux Instant/AutoThink, D3, Decider v1.1 and hosted Jev, including training versus serving and public versus independent evidence.
 
 **No combined accuracy leaderboard:** zero-shot classification, workflow fine-tuning and Best-of-N selection answer different questions. Local GPU forward time and remote API round-trip time are also different measurements.
