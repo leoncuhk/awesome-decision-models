@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "reviewed_on": "2026-10-17",
+  "reviewed_on": "2026-10-18",
   "scope": "Evidence-backed models, methods and evaluation for bounded decisions in AI systems.",
   "sources": [
     {
@@ -1772,6 +1772,116 @@
       "review_depth": "content_reviewed",
       "source_revision": null,
       "review_note": "ICLR 2024 publisher PDF formulation, exchangeability/monotone-bounded-loss conditions and non-monotonic counterexample reviewed. Main guarantee controls expected risk under its assumptions, not per-item correctness or arbitrary fixed-calibration-set high-probability risk. Accepted-set conditional error need not be monotone in a score threshold, so the generic algorithm cannot be attached without a matching formulation. Preserves earlier arXiv source snapshots; no implementation/run performed. Reviewed artifact SHA-256 0fff32a0254a47f06a399522b83ba463d0ca62f71e3a0e094985d80cba166c0c."
+    },
+    {
+      "id": "startlux-wide-options",
+      "title": "StartLux: normalize list-form criteria/options before tournament routing",
+      "url": "https://github.com/StartLuxLabs/StartLux-Decision/commit/83fe6c7d61a687a6e17f118b4f7d8f429f5d3a01",
+      "kind": "repository",
+      "reviewed_on": "2026-10-18",
+      "review_depth": "content_reviewed",
+      "source_revision": "83fe6c7d61a687a6e17f118b4f7d8f429f5d3a01",
+      "review_note": "Commit patch, fixed pipeline and fake-backend test cases read, not executed. List/tuple criteria or options now normalize before wide-choice routing, including 26 choices plus a none slot; previously those forms could return 422 while mapping-form routing already worked. Tournament stages add computation and can change candidate coverage; this is a request-handling fix, not a new weight or accuracy result. All eight v1.1 HF repository revisions still match the separately registered Oct17 card pins."
+    },
+    {
+      "id": "startlux-vllm-pin",
+      "title": "StartLux: optional vLLM extra pinned to 0.31.0",
+      "url": "https://github.com/StartLuxLabs/StartLux-Decision/commit/4b2026c96c0c5d4f5257745b3a03caf428fc730f",
+      "kind": "repository",
+      "reviewed_on": "2026-10-18",
+      "review_depth": "content_reviewed",
+      "source_revision": "4b2026c96c0c5d4f5257745b3a03caf428fc730f",
+      "review_note": "pyproject/README dependency change inspected: optional vllm extra 0.19.1 to 0.31.0. Published accuracy runs used the earlier stack; installing the current extra does not recreate that execution snapshot. No dependencies installed, advisory assessment or runtime parity test performed."
+    },
+    {
+      "id": "strands-request-offsets",
+      "title": "Strands: request-local pointer offsets and tokenizer/cache concurrency fixes",
+      "url": "https://github.com/strands-labs/strands-decider/commit/6039cf8b64c6074e75804000c07ac3d4cce795f7",
+      "kind": "repository",
+      "reviewed_on": "2026-10-18",
+      "review_depth": "content_reviewed",
+      "source_revision": "6039cf8b64c6074e75804000c07ac3d4cce795f7",
+      "review_note": "Patch and current infer implementation reviewed. Per-question offsets are returned with each request instead of shared mutable last offsets, preventing concurrent pointer lookups from using another request; tokenizer reconfiguration is locked and an unforkable-prefix-cache fallback flag is sticky. These can affect returned probabilities and service reliability; no trained-weight or benchmark gain inferred. External tests not executed."
+    },
+    {
+      "id": "strands-serving-eval",
+      "title": "Strands: eval/calibrate use serving model preparation",
+      "url": "https://github.com/strands-labs/strands-decider/commit/930e6d5de16309be32579f5631a7369a3322140c",
+      "kind": "repository",
+      "reviewed_on": "2026-10-18",
+      "review_depth": "content_reviewed",
+      "source_revision": "930e6d5de16309be32579f5631a7369a3322140c",
+      "review_note": "collect_logits now takes the prepared SystemOneEngine model, aligning CPU fp32 torso and MPS/CPU kernel setup with serving instead of a bare eval().to(device). Torch eval/calibrate supports cuda/mps/cpu and rejects mlx; MLX remains serving/ask only. Backend-specific temperature/logits need revalidation; no newly measured calibration or accuracy values imported."
+    },
+    {
+      "id": "strands-v1-configs",
+      "title": "Strands: five published v1 seed-0 training configurations and missing-input disclosure",
+      "url": "https://github.com/strands-labs/strands-decider/commit/94f1cc1d491ebc456140103ea60c5f7daa21eca8",
+      "kind": "repository",
+      "reviewed_on": "2026-10-18",
+      "review_depth": "content_reviewed",
+      "source_revision": "94f1cc1d491ebc456140103ea60c5f7daa21eca8",
+      "review_note": "Five v1 configs and current training README reviewed. Release averages seeds 0/1/2 then calibrates; committed configs describe seed 0. Qwen config identifies four unavailable mix inputs plus teacher_g28 distributions; Gemma configs depend on externally built code_v27. File hashes and settings improve provenance but do not provide those bytes/builders or full replay. Preserves historical overlap, CUDA and missing-image findings."
+    },
+    {
+      "id": "aa-decision-index-v1",
+      "title": "Artificial Analysis Decision Index methodology 1.0",
+      "url": "https://artificialanalysis.ai/methodology/decision-index",
+      "kind": "evaluation_report",
+      "reviewed_on": "2026-10-18",
+      "review_depth": "content_reviewed",
+      "source_revision": null,
+      "review_note": "Full methodology reviewed on Oct18, version 1.0 (October 2026). Four 25% components: private 500-item AA-Omniscience-Decision (accuracy and non-hallucination 12.5% each), 513 text-only HLE MCQs, When2Call, and average of three WildGuardTest F1 scores on 835 selected rows. Non-hallucination uses wrong/(wrong+IDK), not overall error. API choice argmax/yes>=0.5 versus structured-output LM protocol. Private items/raw runs unaudited; no leaderboard score/rank imported. Separate publisher/protocol from the HF-hosted community Decision Index. Reviewed HTML SHA-256 24f3ec44ed73d844e7ff5c64fc9e0fa09f82eb4be8cfab327451ba303bacadee."
+    },
+    {
+      "id": "system-one-risk-budget-v1",
+      "title": "Calibration and Risk-Budgeted Decisions with System One Models",
+      "url": "https://arxiv.org/html/2610.19811v1",
+      "kind": "paper",
+      "reviewed_on": "2026-10-18",
+      "review_depth": "content_reviewed",
+      "source_revision": null,
+      "review_note": "Messoudi and Mansar, arXiv v1 submitted Oct14; formulation, fixed-sequence LTT theorem, six English-text datasets, single-seed split protocol, limitations and appendix read. Frozen scorer/ordered threshold family come from Fit independently of iid Cal; guarantee bounds probability over calibration samples of certifying a population-risk-violating policy, not per-input correctness. Risk is FOR=P(Y=1|s(X)<tau) in the negative-action subset. No certificate means fallback policy, not per-item abstention. Query separation and constructed retrieval mixtures limit transfer; no empirical score/multiplier imported or local reproduction. Reviewed HTML SHA-256 c391dbf1dac6388435d99a154bc04fba4820e8c1384bfc715a3602f1861eeebf."
+    },
+    {
+      "id": "drex-v2-release",
+      "title": "Drex v2.0 fixed release card and public evaluation scope",
+      "url": "https://github.com/nace-ai/drex-decision-models/blob/be8ba7c8157241b9393862e9fcec104d0dc5caff/models/drex-v2.0/README.md",
+      "kind": "model_card",
+      "reviewed_on": "2026-10-18",
+      "review_depth": "content_reviewed",
+      "source_revision": "be8ba7c8157241b9393862e9fcec104d0dc5caff",
+      "review_note": "Full card reviewed. Qwen3.6-35B-A3B identity with Qwen3_5Moe runtime; language tower only. Public 37-task DI, public 231-item JevBench, 400-item DecideBench v1.1 and game/email claims are different protocols; only JevBench counts imported in E32. Author reports, not independent reproduction; exact evaluated weights are not linked by a run manifest to the current HF snapshot."
+    },
+    {
+      "id": "drex-v2-hf",
+      "title": "Drex v2.0 pinned HF model card/config and published LFS identities",
+      "url": "https://huggingface.co/nace-ai/drex-v2.0/tree/3e6d164cb5c8cf264eec167905cc2448d89ea97d",
+      "kind": "model_card",
+      "reviewed_on": "2026-10-18",
+      "review_depth": "content_reviewed",
+      "source_revision": "3e6d164cb5c8cf264eec167905cc2448d89ea97d",
+      "review_note": "Public ungated snapshot last modified Oct15. Card, config and safetensors index read; HF API blobs metadata enumerates 16 safetensors shards and head.pt. Published head.pt LFS SHA-256 6837d5c40f66de5bf08ab3eb0315985281ce85d711c3a86b3fbbb025d194c5af. Canonical sorted filename-to-{sha256,size} JSON for those 17 files has SHA-256 63d602e7cce6a8386b002e7d09904b63d89267eb99eaa791ce67407eeaf71f26. Metadata identities were inspected, not independently verified by downloading tensors; they do not identify evaluated binaries. Vision config is present in base packaging but the reviewed runtime uses language only."
+    },
+    {
+      "id": "drex-v2-runtime",
+      "title": "Drex fixed runtime: language-only MoE loading and independent question rows",
+      "url": "https://github.com/nace-ai/drex-decision-models/blob/be8ba7c8157241b9393862e9fcec104d0dc5caff/kev/model.py",
+      "kind": "repository",
+      "reviewed_on": "2026-10-18",
+      "review_depth": "content_reviewed",
+      "source_revision": "be8ba7c8157241b9393862e9fcec104d0dc5caff",
+      "review_note": "load_backbone extracts language_model from Qwen3_5MoeForConditionalGeneration and discards the remaining wrapper/vision tower. Hybrid backbones use independent causal question rows, recomputing state without prefix caching; supported fork paths can reuse prefixes. A batched request is not proof of one shared all-question encoding. Code and serving/checkpoint interfaces read only, never imported/executed."
+    },
+    {
+      "id": "drex-v2-license",
+      "title": "Drex v2.0 Nace.AI Open RAIL-M weight license",
+      "url": "https://huggingface.co/nace-ai/drex-v2.0/blob/3e6d164cb5c8cf264eec167905cc2448d89ea97d/LICENSE",
+      "kind": "official_docs",
+      "reviewed_on": "2026-10-18",
+      "review_depth": "content_reviewed",
+      "source_revision": "3e6d164cb5c8cf264eec167905cc2448d89ea97d",
+      "review_note": "Full model license read: commercial-use thresholds, competitor exclusions and downstream use restrictions remain material; separate licensing can be required. Code, model, data and complementary material have distinct terms. Public access is not unrestricted open source; this is a source description, not legal advice."
     }
   ],
   "entries": [
@@ -2231,7 +2341,10 @@
         "strands-v1-results",
         "strands-v1-runtime",
         "strands-v1-vision",
-        "strands-v1-data"
+        "strands-v1-data",
+        "strands-request-offsets",
+        "strands-serving-eval",
+        "strands-v1-configs"
       ],
       "summary": {
         "en": "Qwen3.5 and Gemma 4 pointer-head family; October v1 releases average three trained adapters/heads and then calibrate.",
@@ -2242,21 +2355,21 @@
         "zh": "可作为短文本分类和领域监督判断的本地基线；用实际流量测试问题变化、选项顺序和风险—覆盖率。"
       },
       "caveat": {
-        "en": "Qwen v1 data builders are not yet on main. Several dev evaluations have their train splits in the mix. E2B index predates a CUDA attention fix; Qwen v1 missing-image overconfidence worsens on POPE. E07/E08 remain historical, not current guarantees.",
-        "zh": "Qwen v1 数据构建器尚未进入 main；若干 dev 评测对应训练划分已用于训练。E2B index 先于 CUDA 注意力修复；Qwen v1 缺图时 POPE 过度自信恶化。E07／E08 保留为历史，不能当作当前保证。"
+        "en": "Five v1 seed-0 configs are now public, but Qwen mix builders/four inputs plus teacher distributions and Gemma code_v27 remain missing. Several dev evaluations have train splits in the mix. E2B index predates a CUDA attention fix; Qwen v1 missing-image overconfidence worsens on POPE. E07/E08 remain historical, not current guarantees.",
+        "zh": "已公开五份 v1 seed-0 配置，但 Qwen 混合构建器／四项输入及教师分布、Gemma code_v27 仍缺失。若干 dev 评测对应训练划分已用于训练。E2B index 先于 CUDA 注意力修复；Qwen v1 缺图时 POPE 过度自信恶化。E07／E08 保留为历史，不能当作当前保证。"
       },
-      "reviewed_on": "2026-10-11",
+      "reviewed_on": "2026-10-18",
       "mechanism": {
         "en": "Replaces the language-model head with a dynamic pointer readout comparing the answer-position state to option-token states; one forward pass for noul, choice or score. Confidence is derived from the distribution, not a separate correctness predictor.",
         "zh": "以动态 pointer 读出替代语言模型输出头，比较答案位置与选项 token 的隐状态，一次前向计算支持 noul、choice、score。置信度由分布推导，并非独立正确率预测器。"
       },
       "training": {
-        "en": "Qwen v1: 246678 balanced rows, Gemma-4-31B teacher and v19 KL anchor. Gemma v1: 135602 rows, Qwen3.5-4B teacher and v19 anchor. Three-seed soups store rank-48 LoRA plus three readouts; recipes differ by family.",
-        "zh": "Qwen v1：246678 条平衡样本、Gemma-4-31B 教师与 v19 KL 锚点。Gemma v1：135602 条样本、Qwen3.5-4B 教师与 v19 锚点。三种子平均保存 rank-48 LoRA 与三个读出头；不同系列配方不同。"
+        "en": "Qwen v1: 246678 balanced rows, Gemma-4-31B teacher and v19 KL anchor. Gemma v1: 135602 rows, Qwen3.5-4B teacher and v19 anchor. Three-seed soups store rank-48 LoRA plus three readouts; recipes differ by family. Published seed-0 settings and input hashes improve traceability, not complete data replay.",
+        "zh": "Qwen v1：246678 条平衡样本、Gemma-4-31B 教师与 v19 KL 锚点。Gemma v1：135602 条样本、Qwen3.5-4B 教师与 v19 锚点。三种子平均保存 rank-48 LoRA 与三个读出头；不同系列配方不同。 公开 seed-0 设置与输入哈希改善可追溯性，不等于完整数据可重放。"
       },
       "availability": {
-        "en": "Current Qwen: strands-decider-2B-qwen3.5-v1-2610; four Gemma v1 sizes are text-only and need runtime main at the reviewed revision. Separate base weights; 4096-token trained/served window. v19/v21 remain published.",
-        "zh": "当前 Qwen 为 strands-decider-2B-qwen3.5-v1-2610；四种 Gemma v1 仅文本，所核版本需运行库 main。另需基座权重，训练／服务窗口 4096 token；v19／v21 继续发布。"
+        "en": "Current Qwen: strands-decider-2B-qwen3.5-v1-2610; four Gemma v1 sizes are text-only and need runtime main at the reviewed revision. Separate base weights; 4096-token trained/served window. v19/v21 remain published. Oct16 main fixes request-local pointer offsets/tokenizer concurrency and aligns torch eval/calibrate with serving preparation; MLX is not supported by eval/calibrate. Revalidate probabilities/calibration per backend; no new weight/score claim.",
+        "zh": "当前 Qwen 为 strands-decider-2B-qwen3.5-v1-2610；四种 Gemma v1 仅文本，所核版本需运行库 main。另需基座权重，训练／服务窗口 4096 token；v19／v21 继续发布。 10 月 16 日 main 修复每请求 pointer 偏移／分词并发，并让 torch 评测／校准使用服务准备流程；eval／calibrate 不支持 MLX。按后端重验概率／校准，不推断新权重或成绩。"
       },
       "license_note": "Repository and published adapter/head declare Apache-2.0. The release contains adapter/head files only; base weights load separately. Check base-model and dataset terms separately.",
       "weight_revision": null,
@@ -2451,7 +2564,7 @@
     },
     {
       "id": "decision-index",
-      "name": "Decision Index (archival releases and live board)",
+      "name": "HF-hosted Decision Index (archival releases and live board)",
       "category": "evaluation",
       "url": "https://huggingface.co/spaces/multimodalart/jev-decision-index",
       "source_ids": [
@@ -2470,10 +2583,10 @@
         "zh": "先检查任务覆盖和聚合方式，再解读排序。"
       },
       "caveat": {
-        "en": "Oct14-generated 0.3.2 aggregate JSON inspected on Oct15; private items/raw runs remain unaudited. Text uses a 0.9-point tie band. Archive scoring versions separately: 0.3.2 includes scoring/data corrections, not evidence of retraining.",
-        "zh": "10 月 15 日核对了 10 月 14 日生成的 0.3.2 汇总 JSON，私有题目／原始运行仍未审计。文本榜有 0.9 分平局带；0.3.2 含评分／数据修正，不能据此推断重训。"
+        "en": "Oct14-generated 0.3.2 aggregate JSON inspected on Oct15; private items/raw runs remain unaudited. Text uses a 0.9-point tie band. Archive scoring versions separately: 0.3.2 includes scoring/data corrections, not evidence of retraining. This community index is separate from Artificial Analysis Decision Index 1.0; do not merge rankings or score labels.",
+        "zh": "10 月 15 日核对了 10 月 14 日生成的 0.3.2 汇总 JSON，私有题目／原始运行仍未审计。文本榜有 0.9 分平局带；0.3.2 含评分／数据修正，不能据此推断重训。 此社区指数与 Artificial Analysis Decision Index 1.0 分属不同协议，不合并排名或成绩标签。"
       },
-      "reviewed_on": "2026-10-15"
+      "reviewed_on": "2026-10-18"
     },
     {
       "id": "nimble-evaluation",
@@ -2969,44 +3082,48 @@
     },
     {
       "category": "core_models",
-      "reviewed_on": "2026-10-11",
-      "weight_revision": null,
+      "reviewed_on": "2026-10-18",
+      "weight_revision": "v2.0 HF nace-ai/drex-v2.0@3e6d164cb5c8cf264eec167905cc2448d89ea97d (published LFS identities; tensor bytes not locally verified; v1.5 remains unpinned)",
       "id": "drex",
-      "name": "Nace Drex v1.5",
+      "name": "Nace Drex v1.5 / v2.0",
       "url": "https://github.com/nace-ai/drex-decision-models",
       "source_ids": [
         "drex-release",
         "drex-context",
         "drex-license",
-        "drex-training"
+        "drex-training",
+        "drex-v2-release",
+        "drex-v2-hf",
+        "drex-v2-runtime",
+        "drex-v2-license"
       ],
       "summary": {
-        "en": "MiMo-V2.6-Distill-Qwen-9B backbone with a Kev pointer head and public-weight release links.",
-        "zh": "MiMo-V2.6-Distill-Qwen-9B 骨干加 Kev pointer head，提供公开权重发布链接。"
+        "en": "Text-only Kev-pointer family: v1.5 uses MiMo-V2.6-Distill-Qwen-9B; v2.0 uses the Qwen3.6-35B-A3B language tower.",
+        "zh": "仅文本 Kev pointer 系列：v1.5 使用 MiMo-V2.6-Distill-Qwen-9B，v2.0 使用 Qwen3.6-35B-A3B 的语言骨干。"
       },
       "use": {
         "en": "Local candidate for text/JSON decisions, including long inputs.",
         "zh": "本地文本／JSON 判断候选，可测试长输入。"
       },
       "caveat": {
-        "en": "Benchmark training splits are used; results are not unseen-domain zero-shot. Public Index 0.3.1 leaders fall inside its tie band. Small runner checks do not establish broad parity.",
-        "zh": "使用基准训练划分，不能视为未知领域零样本；公开 Index 0.3.1 前列处于平局带内，小规模运行器核对不证明普遍等价。"
+        "en": "v1.5 uses benchmark training splits; its results are not unseen-domain zero-shot. Public Index 0.3.1 leaders fall inside its tie band. Small runner checks do not establish broad parity. v2.0 JevBench author counts trail Jev 1.13.0 by two items (E32); this is not a significance result or a universal win. Current snapshot is not proven identical to evaluated weights.",
+        "zh": "v1.5 使用基准训练划分，其结果不能视为未知领域零样本；公开 Index 0.3.1 前列处于平局带内，小规模运行器核对不证明普遍等价。 v2.0 作者 JevBench 计数比 Jev 1.13.0 少两题（E32），不作显著性或普遍胜出结论；当前 snapshot 与实测权重未建立同一性。"
       },
       "scale": {
-        "en": "Approximately 9B, author described; memory depends on context and precision.",
-        "zh": "作者描述约 9B；内存随上下文和精度变化。"
+        "en": "v1.5 approximately 9B; v2.0 author describes 35B total/~3B active, 256 experts/8 active. Active size is not resident weight memory; tensors not independently counted.",
+        "zh": "v1.5 约 9B；v2.0 作者称总量 35B／激活约 3B，256 专家中激活 8 个。激活规模不等于驻留权重内存，未独立统计张量。"
       },
       "mechanism": {
-        "en": "One pass per question; pointer head scores supplied noul/choice/score options. Forked llama.cpp shares the encoded state.",
-        "zh": "每题一次前向；pointer head 对 noul／choice／score 选项评分，定制 llama.cpp 共享状态编码。"
+        "en": "Pointer head scores supplied noul/choice/score options without generation, per question. v2.0 runtime extracts Qwen3_5Moe language_model and drops vision; hybrid questions are independent causal rows. Fork runtimes can share state prefixes.",
+        "zh": "pointer head 每题对给定 noul／choice／score 候选评分而不生成。v2.0 运行时提取 Qwen3_5Moe language_model 并舍弃视觉，混合骨干的各题为独立因果 row；分支运行库可共享状态前缀。"
       },
       "training": {
-        "en": "Official benchmark training splits plus procedural data; full training/calibration artifacts unverified.",
-        "zh": "官方基准训练划分加程序生成数据；完整训练／校准产物未核实。"
+        "en": "v1.5 discloses official benchmark training splits plus procedural data. Full v2.0 training/decontamination/calibration artifacts remain unverified; do not transfer v1.5 recipe details or temperatures to v2.0.",
+        "zh": "v1.5 披露使用官方基准训练划分加程序生成数据。完整 v2.0 训练／去污染／校准产物仍未核实，不能将 v1.5 配方细节或温度移植给 v2.0。"
       },
       "availability": {
-        "en": "Python CUDA and Nace llama.cpp/Ollama forks; default 16384, configurable maximum 131072 tokens for state plus one question. HF card/weight hash not obtained.",
-        "zh": "Python CUDA 及 Nace 的 llama.cpp／Ollama 分支；状态加一题默认 16384、可配置最大 131072 token，未取得 HF 模型卡／权重哈希。"
+        "en": "Python CUDA and Nace llama.cpp/Ollama forks; default state-plus-one-question limit 16384, configurable maximum 131072. v2.0 HF snapshot/card/config plus 16 shard and head LFS identities reviewed; no tensors downloaded or parity tested. Base vision packaging does not establish image input support.",
+        "zh": "Python CUDA 及 Nace llama.cpp／Ollama 分支；状态加一题默认上限 16384、可配置最大 131072。已核 v2.0 HF snapshot／卡／配置、16 分片及 head 的 LFS 标识，未下载张量或测试等价；基座视觉包装不证明支持图像输入。"
       },
       "license_note": "Code Apache-2.0; weights use modified Nace.AI Open RAIL-M with commercial thresholds, competitor exclusions and use restrictions. Public access does not imply unrestricted open source.",
       "tags": [
@@ -3365,9 +3482,11 @@
         "startlux-9b-instant",
         "startlux-27b-instant",
         "startlux-4b-autothink",
-        "startlux-9b-autothink"
+        "startlux-9b-autothink",
+        "startlux-wide-options",
+        "startlux-vllm-pin"
       ],
-      "reviewed_on": "2026-10-17",
+      "reviewed_on": "2026-10-18",
       "weight_revision": null,
       "summary": {
         "en": "Option-letter LM readout: Instant uses prompt-bidirectional full-attention; causal AutoThink conditionally reasons and fuses two distributions.",
@@ -3394,8 +3513,8 @@
         "zh": "论文：语言全参数 SFT；adapter／数据／注意力适配后合并，Instant 多种子权重平均；因果推理监督后接 RLCD²，视觉冻结。RLCD² 由冻结起始评分器计算 proper-score 差值及软长度惩罚，以 group-relative policy gradients 优化推理；公开推理加归档 v1 文本 LoRA 不等于完整 v1.1 训练／数据包。"
       },
       "availability": {
-        "en": "Inspected vLLM/llama.cpp/MLX/Transformers paths, not executed. Accuracy release vLLM 0.19.1 is text-only; launcher 0.31 enables up to 8 images, video=0. Default Instant context cap 131072; causal configuration 262144, not verified full-context quality. AutoThink default gate 0.6/budget 4096, loop handling and 4000-character tail; full latency includes reasoning and reread.",
-        "zh": "已阅 vLLM／llama.cpp／MLX／Transformers 路径，未运行。成绩发布用 vLLM 0.19.1 仅文本；launcher 0.31 最多八图、video=0。默认 Instant 上限 131072，因果配置 262144，不等于全长度质量验证。AutoThink 默认门槛 0.6／预算 4096，含循环处理及末 4000 字符后读；总延迟须含推理与再读出。"
+        "en": "Inspected vLLM/llama.cpp/MLX/Transformers paths, not executed. Accuracy release vLLM 0.19.1 is text-only; launcher 0.31 enables up to 8 images, video=0. Default Instant context cap 131072; causal configuration 262144, not verified full-context quality. AutoThink default gate 0.6/budget 4096, loop handling and 4000-character tail; full latency includes reasoning and reread. Oct17 fixes normalize list-form criteria/options before tournament routing (including a 26-choice none slot); optional vLLM extra now pins 0.31.0. Eight card revisions are unchanged; no new measured gain.",
+        "zh": "已阅 vLLM／llama.cpp／MLX／Transformers 路径，未运行。成绩发布用 vLLM 0.19.1 仅文本；launcher 0.31 最多八图、video=0。默认 Instant 上限 131072，因果配置 262144，不等于全长度质量验证。AutoThink 默认门槛 0.6／预算 4096，含循环处理及末 4000 字符后读；总延迟须含推理与再读出。 10 月 17 日修复将列表式 criteria／options 先规范化再做分组归约，含 26 选项另加 none 的情况；可选 vLLM 依赖现固定 0.31.0。八卡 revision 未变，无新增实测增益。"
       },
       "license_note": "Inference code Apache-2.0; all eight inspected v1.1 cards declare CC BY-NC 4.0 weights. Commercial use requires a separate license. Training/reference dataset and backbone terms remain separate; no unrestricted open-source model claim.",
       "tags": [
@@ -3429,6 +3548,50 @@
       "caveat": {
         "en": "StartLux-author benchmark and runs, not third-party reproduction. Corrected v1.1 and intermediate tables must not be silently equated to the paper release scores. Hindsight coverage metrics are not deployment risk guarantees.",
         "zh": "StartLux 作者自建与运行，不是第三方复现。修正版 v1.1 及中间检查点表不能静默等同论文最终成绩；事后覆盖指标不是部署风险保证。"
+      }
+    },
+    {
+      "id": "artificial-analysis-decision-index",
+      "name": "Artificial Analysis Decision Index",
+      "category": "evaluation",
+      "url": "https://artificialanalysis.ai/methodology/decision-index",
+      "source_ids": [
+        "aa-decision-index-v1"
+      ],
+      "reviewed_on": "2026-10-18",
+      "summary": {
+        "en": "Version 1.0 combines knowledge/hallucination, text HLE, tool calling and safety classification with four equal weights.",
+        "zh": "1.0 版以四等权部分组合知识／幻觉、文本 HLE、工具调用与安全分类。"
+      },
+      "use": {
+        "en": "Compare task coverage, label mapping and aggregation alongside the separate HF-hosted index; review per-task outcomes before selecting a model.",
+        "zh": "与独立的 HF 托管指数并列核对任务覆盖、标签映射及聚合；选型前查看分任务结果。"
+      },
+      "caveat": {
+        "en": "500 knowledge items are private; WildGuardTest is a filtered 835-row subset. Non-hallucination is conditional on not being correct. No current ranks/scores audited; not a calibration, multimodal or full-service latency test.",
+        "zh": "500 道知识题私有；WildGuardTest 为筛选后 835 行。非幻觉率以未答对集合为分母。未审计当前排名／成绩，不能代替校准、多模态或完整服务延迟测试。"
+      }
+    },
+    {
+      "id": "system-one-risk-budget",
+      "name": "Calibration and Risk-Budgeted Decisions with System One Models",
+      "category": "reliability",
+      "url": "https://arxiv.org/html/2610.19811v1",
+      "source_ids": [
+        "system-one-risk-budget-v1"
+      ],
+      "reviewed_on": "2026-10-18",
+      "summary": {
+        "en": "Preprint separates probability calibration from fixed-sequence LTT certification of a binary decision policy under a risk budget.",
+        "zh": "预印本将概率校准与固定序列 LTT 对二元风险预算策略的认证分开。"
+      },
+      "use": {
+        "en": "Define score polarity, conditional risk, fallback and Fit/Cal/Test independence before selecting a threshold family; use as a method candidate with explicit assumptions.",
+        "zh": "选择阈值族前定义分数方向、条件风险、回退及 Fit／Cal／Test 独立性，作为假设明确的方法候选。"
+      },
+      "caveat": {
+        "en": "Author-reported six English-text datasets, single seed. The iid same-population guarantee is over calibration samples certifying population FOR, not per-item correctness, arbitrary multiclass/VLM risk or distribution shift. No certificate means policy fallback.",
+        "zh": "作者报告六个英文文本数据集、单种子。同分布 iid 保证针对校准抽样认证总体 FOR，不是逐题正确、多类／VLM 任意风险或分布漂移保证；无证书意味着策略回退。"
       }
     }
   ]

@@ -1180,3 +1180,37 @@ Reported fractions are displayed as percentages where appropriate. More printed 
 
 **Sources:** [StartLux-Decision: AutoThink and RLCD² technical report v1](https://arxiv.org/html/2610.17309v1)
 
+<a id="e32"></a>
+## E32 · Drex v2.0: public JevBench author counts do not establish a universal advantage
+
+**Evidence:** `author_reported` · **Reviewed:** 2026-10-18 · **Reproduced here:** no
+
+| Protocol | Recorded context |
+| --- | --- |
+| Task | Typed noul/choice/ordinal decisions on the 231 public JevBench items |
+| Test unit | 231 questions; no paired raw predictions or independence/grouping analysis obtained |
+| Split | Public suite; separate from public-only 37-task DI, private leaderboard tasks and the 400-item DecideBench v1.1 |
+| Reference | Author release-card table: Jev 1.13.0 200/231 and Drex v2.0 198/231 |
+| Training | Drex family discloses benchmark-training-split/procedural data; full v2 training and decontamination/calibration artifacts not verified |
+| Measurement | Choice takes top option; yes/no uses noul >= 0.5; ordinal takes top level. Source reports overall accuracy; no uncertainty or paired error table supplied. |
+| Hardware | Accuracy only; no matched hardware, batching, end-to-end latency or cost protocol for this comparison |
+
+| Reported measurement | Value |
+| --- | --- |
+| Drex v2.0 public JevBench accuracy | 198/231 (85.71%) |
+| Jev 1.13.0 public JevBench accuracy | 200/231 (86.58%) |
+
+**Interpretation:** The author table puts Drex v2.0 two items below Jev 1.13.0 on this public suite; neither the difference nor a universal ranking is established.
+
+- Author report, not an independent reproduction; do not treat the public suite as unseen-domain evidence.
+- No paired outputs/significance calculation; two-item difference does not establish a statistically clear winner.
+- The reviewed HF snapshot and published LFS identities pin available artifacts, not the binaries used for these runs.
+- The table hard subset is tied, while other author tasks differ; no merged ranking or imported email/game speed claim.
+
+**Artifacts and limits:**
+- protocol: Fixed GitHub release card at be8ba7c8157241b9393862e9fcec104d0dc5caff
+- raw outputs: Full paired raw predictions and evaluated-artifact manifest not obtained
+- model hash: Available HF snapshot 3e6d164cb5c8cf264eec167905cc2448d89ea97d and published LFS metadata inspected; evaluated weight/API mapping unknown
+
+**Sources:** [Drex v2.0 fixed release card and public evaluation scope](https://github.com/nace-ai/drex-decision-models/blob/be8ba7c8157241b9393862e9fcec104d0dc5caff/models/drex-v2.0/README.md); [Drex v2.0 pinned HF model card/config and published LFS identities](https://huggingface.co/nace-ai/drex-v2.0/tree/3e6d164cb5c8cf264eec167905cc2448d89ea97d)
+

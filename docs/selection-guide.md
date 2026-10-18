@@ -143,3 +143,22 @@ The [mechanism comparison](decision-readout-and-reasoning.md) separates option-l
 **验收完整系统。** 主要目标是在可接受风险下自动完成的比例及总交付成本。训练、校准和最终测试分开；按来源、客户或时间留出；同时记录延迟、人工复核、失败重试与错误修正。抽检自动放行案例，避免只学到“已转人工”的那部分世界。
 
 **不急于构建一个无所不能的领域大脑。** 一个稳定、可验证的判断节点，比一套无法确认效用的宏大架构更有积累价值。先跑通证据、判断、升级和验收，再根据测量结果扩展。
+
+
+<a id="decision-index-protocols"></a>
+## Decision Index protocols / 同名指数的协议边界
+
+| Publisher / 发布者 | Reviewed scope / 所核范围 | Interpretation / 解读 |
+| --- | --- | --- |
+| [HF-hosted community Decision Index](https://huggingface.co/spaces/multimodalart/jev-decision-index), archived 0.2 and reviewed 0.3.2 aggregates | Text and visual tracks; public/private coverage and versioned chance-correction/aggregation; public-only 37-task reports are subsets. / 文本、视觉分轨，公开／私有覆盖及版本化机会校正／聚合；仅公共 37 任务是子集。 | Keep track, scoring version, date and tie band with every score. / 每个成绩保留分轨、评分版本、日期与平局带。 |
+| [Artificial Analysis Decision Index](https://artificialanalysis.ai/methodology/decision-index), methodology 1.0 | Four equal 25% parts: private 500-item knowledge set, 513 text HLE MCQs, When2Call, filtered 835-row WildGuardTest. / 四等权部分：私有 500 题知识集、513 道文本 HLE 选择题、When2Call、筛选后 835 行 WildGuardTest。 | Different publisher/tasks/aggregation; no score/rank imported here. / 发布者、任务及聚合均不同，本轮不引入排名／成绩。 |
+
+AA knowledge scoring splits its weight between accuracy and non-hallucination; the latter is `100 * (1 - wrong/(wrong + IDK))`, so its denominator excludes correct answers. WildGuard averages three F1 scores. Neither composite substitutes for policy-conditioned calibration, image-specific acceptance or full-service p95. A single API call containing multiple questions does not establish a single shared model forward pass. Private items and raw runs remain unaudited.
+
+AA 知识部分将权重平分给准确率与非幻觉率；后者为 `100 * (1 - wrong/(wrong + IDK))`，分母不含答对项。WildGuard 平均三个 F1。两个总分都不能代替实际策略校准、图像专项验收或完整服务 p95；一次多题 API 调用不证明模型一次共享前向。私有题与原始运行仍未审计。
+
+## Risk-budgeted policy / 风险预算策略
+
+The Oct14 [risk-budgeted System One preprint](https://arxiv.org/html/2610.19811v1) studies binary policies: score `s(X)` predicts a positive event, Action 0 on `s(X) < tau` has `FOR = P(Y=1 | s(X)<tau)`, and Action 1 is the conservative fallback. Its fixed-sequence LTT result requires a frozen scorer/ordered threshold family derived from Fit independently of iid Cal from the same deployment population. With error level delta, the probability over calibration samples of certifying a population-risk-violating policy is bounded by delta. This is not each answer's probability of correctness, a promise that every finite test estimate stays below budget, or an automatic multiclass/image/shift guarantee. No certificate means fallback for the policy, distinct from per-input abstention. Six English-text datasets/single seed are author evidence; no local replication or numeric gain is claimed.
+
+10 月 14 日的[风险预算 System One 预印本](https://arxiv.org/html/2610.19811v1)研究二元策略：`s(X)` 预测正事件，`s(X) < tau` 区域执行 Action 0，风险为 `FOR = P(Y=1 | s(X)<tau)`，其余执行保守回退 Action 1。固定序列 LTT 要求评分器与有序阈值族由 Fit 冻结，并与来自部署同一总体的 iid Cal 独立；以 delta 为错误水平时，对校准集抽样而言，认证出总体风险超预算策略的概率不超过 delta。这不是逐题正确率、每次有限测试估计必不超预算，也不自动覆盖多类／图像／漂移。无证书意味着策略回退，区别于单输入拒答。六个英文文本集／单种子属于作者证据，本轮未复现或引入数值增益。

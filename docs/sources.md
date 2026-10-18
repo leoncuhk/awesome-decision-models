@@ -1400,3 +1400,91 @@
 - Source revision: `not captured / live URL`
 - Note: ICLR 2024 publisher PDF formulation, exchangeability/monotone-bounded-loss conditions and non-monotonic counterexample reviewed. Main guarantee controls expected risk under its assumptions, not per-item correctness or arbitrary fixed-calibration-set high-probability risk. Accepted-set conditional error need not be monotone in a score threshold, so the generic algorithm cannot be attached without a matching formulation. Preserves earlier arXiv source snapshots; no implementation/run performed. Reviewed artifact SHA-256 0fff32a0254a47f06a399522b83ba463d0ca62f71e3a0e094985d80cba166c0c.
 
+<a id="startlux-wide-options"></a>
+## StartLux: normalize list-form criteria/options before tournament routing
+
+- Source: https://github.com/StartLuxLabs/StartLux-Decision/commit/83fe6c7d61a687a6e17f118b4f7d8f429f5d3a01
+- Kind: `repository`; review depth: `content_reviewed`; reviewed: 2026-10-18
+- Source revision: `83fe6c7d61a687a6e17f118b4f7d8f429f5d3a01`
+- Note: Commit patch, fixed pipeline and fake-backend test cases read, not executed. List/tuple criteria or options now normalize before wide-choice routing, including 26 choices plus a none slot; previously those forms could return 422 while mapping-form routing already worked. Tournament stages add computation and can change candidate coverage; this is a request-handling fix, not a new weight or accuracy result. All eight v1.1 HF repository revisions still match the separately registered Oct17 card pins.
+
+<a id="startlux-vllm-pin"></a>
+## StartLux: optional vLLM extra pinned to 0.31.0
+
+- Source: https://github.com/StartLuxLabs/StartLux-Decision/commit/4b2026c96c0c5d4f5257745b3a03caf428fc730f
+- Kind: `repository`; review depth: `content_reviewed`; reviewed: 2026-10-18
+- Source revision: `4b2026c96c0c5d4f5257745b3a03caf428fc730f`
+- Note: pyproject/README dependency change inspected: optional vllm extra 0.19.1 to 0.31.0. Published accuracy runs used the earlier stack; installing the current extra does not recreate that execution snapshot. No dependencies installed, advisory assessment or runtime parity test performed.
+
+<a id="strands-request-offsets"></a>
+## Strands: request-local pointer offsets and tokenizer/cache concurrency fixes
+
+- Source: https://github.com/strands-labs/strands-decider/commit/6039cf8b64c6074e75804000c07ac3d4cce795f7
+- Kind: `repository`; review depth: `content_reviewed`; reviewed: 2026-10-18
+- Source revision: `6039cf8b64c6074e75804000c07ac3d4cce795f7`
+- Note: Patch and current infer implementation reviewed. Per-question offsets are returned with each request instead of shared mutable last offsets, preventing concurrent pointer lookups from using another request; tokenizer reconfiguration is locked and an unforkable-prefix-cache fallback flag is sticky. These can affect returned probabilities and service reliability; no trained-weight or benchmark gain inferred. External tests not executed.
+
+<a id="strands-serving-eval"></a>
+## Strands: eval/calibrate use serving model preparation
+
+- Source: https://github.com/strands-labs/strands-decider/commit/930e6d5de16309be32579f5631a7369a3322140c
+- Kind: `repository`; review depth: `content_reviewed`; reviewed: 2026-10-18
+- Source revision: `930e6d5de16309be32579f5631a7369a3322140c`
+- Note: collect_logits now takes the prepared SystemOneEngine model, aligning CPU fp32 torso and MPS/CPU kernel setup with serving instead of a bare eval().to(device). Torch eval/calibrate supports cuda/mps/cpu and rejects mlx; MLX remains serving/ask only. Backend-specific temperature/logits need revalidation; no newly measured calibration or accuracy values imported.
+
+<a id="strands-v1-configs"></a>
+## Strands: five published v1 seed-0 training configurations and missing-input disclosure
+
+- Source: https://github.com/strands-labs/strands-decider/commit/94f1cc1d491ebc456140103ea60c5f7daa21eca8
+- Kind: `repository`; review depth: `content_reviewed`; reviewed: 2026-10-18
+- Source revision: `94f1cc1d491ebc456140103ea60c5f7daa21eca8`
+- Note: Five v1 configs and current training README reviewed. Release averages seeds 0/1/2 then calibrates; committed configs describe seed 0. Qwen config identifies four unavailable mix inputs plus teacher_g28 distributions; Gemma configs depend on externally built code_v27. File hashes and settings improve provenance but do not provide those bytes/builders or full replay. Preserves historical overlap, CUDA and missing-image findings.
+
+<a id="aa-decision-index-v1"></a>
+## Artificial Analysis Decision Index methodology 1.0
+
+- Source: https://artificialanalysis.ai/methodology/decision-index
+- Kind: `evaluation_report`; review depth: `content_reviewed`; reviewed: 2026-10-18
+- Source revision: `not captured / live URL`
+- Note: Full methodology reviewed on Oct18, version 1.0 (October 2026). Four 25% components: private 500-item AA-Omniscience-Decision (accuracy and non-hallucination 12.5% each), 513 text-only HLE MCQs, When2Call, and average of three WildGuardTest F1 scores on 835 selected rows. Non-hallucination uses wrong/(wrong+IDK), not overall error. API choice argmax/yes>=0.5 versus structured-output LM protocol. Private items/raw runs unaudited; no leaderboard score/rank imported. Separate publisher/protocol from the HF-hosted community Decision Index. Reviewed HTML SHA-256 24f3ec44ed73d844e7ff5c64fc9e0fa09f82eb4be8cfab327451ba303bacadee.
+
+<a id="system-one-risk-budget-v1"></a>
+## Calibration and Risk-Budgeted Decisions with System One Models
+
+- Source: https://arxiv.org/html/2610.19811v1
+- Kind: `paper`; review depth: `content_reviewed`; reviewed: 2026-10-18
+- Source revision: `not captured / live URL`
+- Note: Messoudi and Mansar, arXiv v1 submitted Oct14; formulation, fixed-sequence LTT theorem, six English-text datasets, single-seed split protocol, limitations and appendix read. Frozen scorer/ordered threshold family come from Fit independently of iid Cal; guarantee bounds probability over calibration samples of certifying a population-risk-violating policy, not per-input correctness. Risk is FOR=P(Y=1|s(X)<tau) in the negative-action subset. No certificate means fallback policy, not per-item abstention. Query separation and constructed retrieval mixtures limit transfer; no empirical score/multiplier imported or local reproduction. Reviewed HTML SHA-256 c391dbf1dac6388435d99a154bc04fba4820e8c1384bfc715a3602f1861eeebf.
+
+<a id="drex-v2-release"></a>
+## Drex v2.0 fixed release card and public evaluation scope
+
+- Source: https://github.com/nace-ai/drex-decision-models/blob/be8ba7c8157241b9393862e9fcec104d0dc5caff/models/drex-v2.0/README.md
+- Kind: `model_card`; review depth: `content_reviewed`; reviewed: 2026-10-18
+- Source revision: `be8ba7c8157241b9393862e9fcec104d0dc5caff`
+- Note: Full card reviewed. Qwen3.6-35B-A3B identity with Qwen3_5Moe runtime; language tower only. Public 37-task DI, public 231-item JevBench, 400-item DecideBench v1.1 and game/email claims are different protocols; only JevBench counts imported in E32. Author reports, not independent reproduction; exact evaluated weights are not linked by a run manifest to the current HF snapshot.
+
+<a id="drex-v2-hf"></a>
+## Drex v2.0 pinned HF model card/config and published LFS identities
+
+- Source: https://huggingface.co/nace-ai/drex-v2.0/tree/3e6d164cb5c8cf264eec167905cc2448d89ea97d
+- Kind: `model_card`; review depth: `content_reviewed`; reviewed: 2026-10-18
+- Source revision: `3e6d164cb5c8cf264eec167905cc2448d89ea97d`
+- Note: Public ungated snapshot last modified Oct15. Card, config and safetensors index read; HF API blobs metadata enumerates 16 safetensors shards and head.pt. Published head.pt LFS SHA-256 6837d5c40f66de5bf08ab3eb0315985281ce85d711c3a86b3fbbb025d194c5af. Canonical sorted filename-to-{sha256,size} JSON for those 17 files has SHA-256 63d602e7cce6a8386b002e7d09904b63d89267eb99eaa791ce67407eeaf71f26. Metadata identities were inspected, not independently verified by downloading tensors; they do not identify evaluated binaries. Vision config is present in base packaging but the reviewed runtime uses language only.
+
+<a id="drex-v2-runtime"></a>
+## Drex fixed runtime: language-only MoE loading and independent question rows
+
+- Source: https://github.com/nace-ai/drex-decision-models/blob/be8ba7c8157241b9393862e9fcec104d0dc5caff/kev/model.py
+- Kind: `repository`; review depth: `content_reviewed`; reviewed: 2026-10-18
+- Source revision: `be8ba7c8157241b9393862e9fcec104d0dc5caff`
+- Note: load_backbone extracts language_model from Qwen3_5MoeForConditionalGeneration and discards the remaining wrapper/vision tower. Hybrid backbones use independent causal question rows, recomputing state without prefix caching; supported fork paths can reuse prefixes. A batched request is not proof of one shared all-question encoding. Code and serving/checkpoint interfaces read only, never imported/executed.
+
+<a id="drex-v2-license"></a>
+## Drex v2.0 Nace.AI Open RAIL-M weight license
+
+- Source: https://huggingface.co/nace-ai/drex-v2.0/blob/3e6d164cb5c8cf264eec167905cc2448d89ea97d/LICENSE
+- Kind: `official_docs`; review depth: `content_reviewed`; reviewed: 2026-10-18
+- Source revision: `3e6d164cb5c8cf264eec167905cc2448d89ea97d`
+- Note: Full model license read: commercial-use thresholds, competitor exclusions and downstream use restrictions remain material; separate licensing can be required. Code, model, data and complementary material have distinct terms. Public access is not unrestricted open source; this is a source description, not legal advice.
+

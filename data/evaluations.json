@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "reviewed_on": "2026-10-17",
+  "reviewed_on": "2026-10-18",
   "records": [
     {
       "id": "E01",
@@ -2122,6 +2122,60 @@
         "protocol": "Paper v1 Table 2 and sections 3.2–3.3; release soft budget identified separately",
         "raw_outputs": "No run artifacts regenerated here; complete v1.1 training pipeline/data package not verified",
         "model_hash": "Pre/post evaluated binaries not locally hashed"
+      },
+      "reproduced_here": false
+    },
+    {
+      "id": "E32",
+      "title": "Drex v2.0: public JevBench author counts do not establish a universal advantage",
+      "model_ids": [
+        "drex",
+        "jev"
+      ],
+      "source_ids": [
+        "drex-v2-release",
+        "drex-v2-hf"
+      ],
+      "evidence_type": "author_reported",
+      "reviewed_on": "2026-10-18",
+      "report_date": null,
+      "model_revision": null,
+      "protocol": {
+        "task": "Typed noul/choice/ordinal decisions on the 231 public JevBench items",
+        "test_unit": "231 questions; no paired raw predictions or independence/grouping analysis obtained",
+        "split": "Public suite; separate from public-only 37-task DI, private leaderboard tasks and the 400-item DecideBench v1.1",
+        "reference": "Author release-card table: Jev 1.13.0 200/231 and Drex v2.0 198/231",
+        "training": "Drex family discloses benchmark-training-split/procedural data; full v2 training and decontamination/calibration artifacts not verified",
+        "measurement": "Choice takes top option; yes/no uses noul >= 0.5; ordinal takes top level. Source reports overall accuracy; no uncertainty or paired error table supplied.",
+        "hardware": "Accuracy only; no matched hardware, batching, end-to-end latency or cost protocol for this comparison"
+      },
+      "metrics": [
+        {
+          "label": "Drex v2.0 public JevBench accuracy",
+          "value": 0.8571428571428571,
+          "unit": "fraction",
+          "numerator": 198,
+          "denominator": 231
+        },
+        {
+          "label": "Jev 1.13.0 public JevBench accuracy",
+          "value": 0.8658008658008658,
+          "unit": "fraction",
+          "numerator": 200,
+          "denominator": 231
+        }
+      ],
+      "conclusion": "The author table puts Drex v2.0 two items below Jev 1.13.0 on this public suite; neither the difference nor a universal ranking is established.",
+      "caveats": [
+        "Author report, not an independent reproduction; do not treat the public suite as unseen-domain evidence.",
+        "No paired outputs/significance calculation; two-item difference does not establish a statistically clear winner.",
+        "The reviewed HF snapshot and published LFS identities pin available artifacts, not the binaries used for these runs.",
+        "The table hard subset is tied, while other author tasks differ; no merged ranking or imported email/game speed claim."
+      ],
+      "artifacts": {
+        "protocol": "Fixed GitHub release card at be8ba7c8157241b9393862e9fcec104d0dc5caff",
+        "raw_outputs": "Full paired raw predictions and evaluated-artifact manifest not obtained",
+        "model_hash": "Available HF snapshot 3e6d164cb5c8cf264eec167905cc2448d89ea97d and published LFS metadata inspected; evaluated weight/API mapping unknown"
       },
       "reproduced_here": false
     }

@@ -147,6 +147,8 @@ L=-\log p_\theta(y\mid x,C)+\lambda\sum_{k\in C}(p_\theta(k)-\mathbf{1}[k=y])^2.
 
 最终比较应配对同一会话／请求分组，报告质量、覆盖与成本差值及分组不确定性。查看最终结果之前冻结模型、策略和阈值，记录所有开发实验臂；预先声明最小实质收益与关键错误／成本限制。均值的小幅波动、校准误差单独降低或 ONNX 等价，均不足以判定继续。
 
+10 月 14 日的[风险预算 System One 预印本](https://arxiv.org/html/2610.19811v1)研究二元策略：`s(X)` 预测正事件，`s(X) < tau` 区域执行 Action 0，风险为 `FOR = P(Y=1 | s(X)<tau)`，其余执行保守回退 Action 1。固定序列 LTT 要求评分器与有序阈值族由 Fit 冻结，并与来自部署同一总体的 iid Cal 独立；以 delta 为错误水平时，对校准集抽样而言，认证出总体风险超预算策略的概率不超过 delta。这不是逐题正确率、每次有限测试估计必不超预算，也不自动覆盖多类／图像／漂移。无证书意味着策略回退，区别于单输入拒答。六个英文文本集／单种子属于作者证据，本轮未复现或引入数值增益。
+
 ## 7. 最小研究产物
 
 保留预注册假设、负责人确定的风险／成本／实质收益限制、任务／标签规范、来源及使用权清单、分组划分与去重方法、版本和预算、实验臂、图像消融、逐类错误、校准／阈值、完整成本与停止决定。共享产物只使用明确可公开的材料；真实数据与执行权限遵循各自管理边界。训练和评测脚本应在选定实现经验证后再编写，不把不可运行的示例命令包装成复现配方。
@@ -175,6 +177,7 @@ L=-\log p_\theta(y\mid x,C)+\lambda\sum_{k\in C}(p_\theta(k)-\mathbf{1}[k=y])^2.
 
 | 来源／状态 | 已支持什么 | 尚未支持什么 |
 | --- | --- | --- |
+| [Calibration and Risk-Budgeted Decisions with System One Models](https://arxiv.org/html/2610.19811v1) — arXiv v1，2026-10-14 | LTT 认证前定义二元 FOR、冻结评分器／阈值族、独立 Fit／Cal／Test 与保守回退。 | 作者六个英文文本集／单种子；校准抽样下的总体风险保证不是逐题正确率或图像／多类／漂移保证。 |
 | [Intern-Decision: Efficient Multimodal Decision Making with Autoregressive Masked Language Modeling](https://arxiv.org/html/2610.22131v1) — arXiv v1，2026-10-15 | 带图的全语言参数训练、多字段因果 masked 读出，视觉／projector 冻结。 | 文本套件成绩与定性视觉示例没有提供同条件 D3 多模态对照或 LoRA 效果；完整原始训练数据公开未确立。 |
 | [StartLux-Decision: AutoThink Decision Models with Reinforcement Learning for Calibrated Deliberative Decisions](https://arxiv.org/html/2610.17309v1) — arXiv v1，2026-10-12 | 候选概率、按需推理及策略条件校准，见[机制核查](decision-readout-and-reasoning.md)。 | 公共 DI 开发选择、作者 DecisionPivot 与 NC 权重限制结论／使用范围，不是已验证领域图片训练配方。 |
 | [MIRE: Multimodal Intent Recognition for Dialogue Systems challenge baseline](https://github.com/liujunwen23/MIRE/tree/d101287af90d114c5bf0cbfbd56fe9c52358e3bb) — WWW2025 挑战工程仓库 | 场景／意图任务的 Qwen2-VL-7B **全参数 SFT** 基线。 | 不是 EcomMIR 实现或 LoRA 结果；本轮未核得独立的同行评议方法论文。 |
