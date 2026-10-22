@@ -102,6 +102,8 @@ Worked case: [MIRE tasks, labels and code](docs/mire-case-study.md#tasks), [offi
 
 The [readout and adaptive-reasoning comparison](docs/decision-readout-and-reasoning.md) separates StartLux Instant/AutoThink, D3, Decider v1.1 and hosted Jev, including training versus serving and public versus independent evidence.
 
+Research planning (Chinese): [full October 22 survey](docs/multimodal-decision-research-survey-2026-10-22.md) and [falsifiable experiment protocol](docs/multimodal-decision-research-protocol.md), covering MIRE data-access limits, novelty comparisons, heterogeneous repair actions and stopping criteria. These are research plans, not reproduced results.
+
 **No combined accuracy leaderboard:** zero-shot classification, workflow fine-tuning and Best-of-N selection answer different questions. Local GPU forward time and remote API round-trip time are also different measurements.
 
 ## Baselines worth keeping
