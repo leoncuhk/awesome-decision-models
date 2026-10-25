@@ -234,6 +234,48 @@
       "kind": "hf_model",
       "url": "https://huggingface.co/api/models/startlux-models/StartLux-Decision-v1.1-27B-AutoThink",
       "meaning": "Inspect exact weight/card/config revisions, license and gate/calibration changes; a source revision or model card update is not an independent benchmark improvement."
+    },
+    {
+      "id": "pplx-v12-model",
+      "kind": "hf_model",
+      "url": "https://huggingface.co/api/models/perplexity-ai/pplx-decider-v1.2",
+      "meaning": "Separate retraining, joint-request policy, calibration and tag-only changes; public0.3 is not private text Full0.4."
+    },
+    {
+      "id": "pplx-flash-v12-model",
+      "kind": "hf_model",
+      "url": "https://huggingface.co/api/models/perplexity-ai/pplx-decider-flash-v1.2",
+      "meaning": "Check grouping regressions and per-artifact temperature; source tags are not weight improvements."
+    },
+    {
+      "id": "mammoth-model",
+      "kind": "hf_model",
+      "url": "https://huggingface.co/api/models/baselabs/mammoth-1",
+      "meaning": "Inspect weight versus image-card changes and reconcile text-only report with image-training wording."
+    },
+    {
+      "id": "elephant-model",
+      "kind": "hf_model",
+      "url": "https://huggingface.co/api/models/baselabs/elephant-1",
+      "meaning": "Separate configuration and card changes from weights/evaluated runs; do not merge live rankings."
+    },
+    {
+      "id": "jeffan-model",
+      "kind": "hf_model",
+      "url": "https://huggingface.co/api/models/tattrongvu/Jeffan-31b-1710",
+      "meaning": "Distinguish license-only changes from weights and conditional-reread inference policy."
+    },
+    {
+      "id": "startlux-prism",
+      "kind": "github_file",
+      "url": "https://api.github.com/repos/StartLuxLabs/StartLux-Prism/contents/README.md",
+      "meaning": "Inspect supported models, quantization/parity scope, policy defaults and unresolved own-code license."
+    },
+    {
+      "id": "kapitsa-systemone",
+      "kind": "github_file",
+      "url": "https://api.github.com/repos/nace-ai/kapitsa/contents/docs/systemone.md",
+      "meaning": "Inspect released runtime revision, state/branch/packed limits and cache/quantized-quality evidence separately."
     }
   ]
 }

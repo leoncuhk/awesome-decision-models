@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "reviewed_on": "2026-10-18",
+  "reviewed_on": "2026-10-25",
   "records": [
     {
       "id": "E01",
@@ -2264,6 +2264,186 @@
         "protocol": "Rendered official information/leaderboard/final pages reviewed Oct18 2026; later-round best-submission dates retained",
         "raw_outputs": "Public aggregate rows inspected; predictions, exact label supports and evaluator run manifest not obtained",
         "model_hash": "Exact scored submission binaries/checkpoints not captured"
+      },
+      "reproduced_here": false
+    },
+    {
+      "id": "E34",
+      "title": "Missing legal authority: wrong picks and false abstentions are opposite errors",
+      "model_ids": [
+        "commit-or-abstain",
+        "jev",
+        "pplx-decider"
+      ],
+      "source_ids": [
+        "commit-or-abstain-paper-v1",
+        "commit-or-abstain-code"
+      ],
+      "evidence_type": "third_party_reported",
+      "reviewed_on": "2026-10-25",
+      "report_date": "2026-10-21",
+      "model_revision": null,
+      "protocol": {
+        "task": "CaseHOLD holding selection with an explicit sixth none option",
+        "test_unit": "5314 public test items;1670 constructed no-correct-holding items,3644 correct-holding-present items",
+        "split": "Original and perturbed conditions; Table2 full-test operating points, distinct from30/70 policy-selection split in section4.3",
+        "reference": "CaseHOLD labels and constructed replacements from other cases; not observed real-world citation absence",
+        "training": "Evaluated hosted providers not trained here; public pre2021 legal text may overlap training; perturbation tests do not rule this out",
+        "measurement": "Wrong pick conditional on1670 absent items; false abstention conditional on3644 present items. Preserve both denominators. Jev1.14 and pplx1.2 provider labels; exact hosted weight snapshots unresolved.",
+        "hardware": "API result accuracy only in this record. Paper synchronous decision billing versus batch generative prices excludes human review; no end-to-end cost multiplier imported"
+      },
+      "metrics": [
+        {
+          "label": "Jev1.14 wrong-pick rate, absent holding",
+          "value": 0.301,
+          "unit": "fraction"
+        },
+        {
+          "label": "Jev1.14 false-abstention rate, present holding",
+          "value": 0.262,
+          "unit": "fraction"
+        },
+        {
+          "label": "pplx-decider1.2 wrong-pick rate, absent holding",
+          "value": 0.565,
+          "unit": "fraction"
+        },
+        {
+          "label": "pplx-decider1.2 false-abstention rate, present holding",
+          "value": 0.018,
+          "unit": "fraction"
+        }
+      ],
+      "conclusion": "The more cautious operating point reduces false commitment while rejecting more answerable items; neither accuracy nor a none option alone establishes reliable acceptance.",
+      "caveats": [
+        "External researcher report relative to providers; not reproduced here.",
+        "Constructed absence, one English task and one prompt per type limit transfer.",
+        "No exact evaluated-weight hashes; do not attach these values to current HF checkpoints.",
+        "Agreement-gate results use3720 held-out policy items and different denominators, so are not merged with this table."
+      ],
+      "artifacts": {
+        "protocol": "Paper v1 Table2, methods, limitations and appendices",
+        "raw_outputs": "Fixed code README lists full paired inputs/raw API logs/prompts/statistics; scripts not executed here",
+        "model_hash": "Hosted snapshot/evaluated binaries not captured"
+      },
+      "reproduced_here": false
+    },
+    {
+      "id": "E35",
+      "title": "RouteGuard: lower ECE cannot create error-ranking signal",
+      "model_ids": [
+        "routeguard"
+      ],
+      "source_ids": [
+        "routeguard-paper-v1",
+        "routeguard-code"
+      ],
+      "evidence_type": "author_reported",
+      "reviewed_on": "2026-10-25",
+      "report_date": "2026-10-22",
+      "model_revision": null,
+      "protocol": {
+        "task": "Eight-class IT ticket routing with self-reported LLM confidence and isotonic calibration",
+        "test_unit": "Common1000-ticket LLM test subset from47837 corpus;500 disjoint calibration items per condition",
+        "split": "Stratified33486/4784/9567 train/cal/test; LLM subsets drawn within partitions, examples from train",
+        "reference": "Public corpus category labels, no temporal split or independently audited taxonomy adjudication",
+        "training": "GPT-4o-mini few-shot receives label names and up to24 train examples; supervised baselines see33486 labels; unequal information",
+        "measurement": "Paper TableIII few-shot raw versus isotonic confidence; correctness AUROC on same1000 items. Constant raw confidence1 maps to constant0.480; ECE improvement is not discrimination.",
+        "hardware": "Historical May2026 provider calls; calibration diagnostic only, not live performance or full deployment cost"
+      },
+      "metrics": [
+        {
+          "label": "GPT-4o-mini few-shot raw ECE",
+          "value": 0.541,
+          "unit": "fraction"
+        },
+        {
+          "label": "GPT-4o-mini few-shot isotonic ECE",
+          "value": 0.021,
+          "unit": "fraction"
+        },
+        {
+          "label": "GPT-4o-mini few-shot raw correctness AUROC",
+          "value": 0.5,
+          "unit": "fraction"
+        },
+        {
+          "label": "GPT-4o-mini few-shot isotonic correctness AUROC",
+          "value": 0.5,
+          "unit": "fraction"
+        }
+      ],
+      "conclusion": "Probability-level correction can leave abstention ranking uninformative; evaluate risk/coverage and cost rather than ECE alone.",
+      "caveats": [
+        "Author report; no reproduction or new algorithm claim.",
+        "One random-split corpus, older endpoint labels and prompt/output-budget confounding.",
+        "Mixed agreement pool contains supervised LR and all-voter inference costs.",
+        "Human triage is assumed correct/fixed-cost; cost parameters are illustrative.",
+        "Zenodo concept DOI inaccessible; exact archived vectors/manifest not inspected."
+      ],
+      "artifacts": {
+        "protocol": "Paper v1 TableIII and sectionsIII–VI",
+        "raw_outputs": "Fixed RouteGuard code/README inspected; external frozen archive inaccessible",
+        "model_hash": "Exact provider snapshots unknown; no model files fetched"
+      },
+      "reproduced_here": false
+    },
+    {
+      "id": "E36",
+      "title": "Perplexity v1.2: grouping changes task scores and does not isolate training gains",
+      "model_ids": [
+        "pplx-decider"
+      ],
+      "source_ids": [
+        "pplx-v12-card",
+        "pplx-flash-v12-card"
+      ],
+      "evidence_type": "author_reported",
+      "reviewed_on": "2026-10-25",
+      "report_date": null,
+      "model_revision": null,
+      "protocol": {
+        "task": "37-task public Decision Index0.3 with joint versus one-question requests",
+        "test_unit": "Public suite aggregates;9 benchmarks have multi-question requests,28 unchanged between modes; raw paired run artifacts not audited",
+        "split": "Public task training splits included in v1.2 with author-described decontamination; no private/full index in this record",
+        "reference": "Published card suite-weighted public index, not simple mean of category scores",
+        "training": "27B retraining and Flash distillation/soup differ from v1.1; grouping effects and training effects must be separated",
+        "measurement": "Valid options normalized per question; joint mode shares noncausal full-attention across questions, single mode scores each alone. Default temperatures fitted joint, not proven optimal in single mode.",
+        "hardware": "Quality only; no matched cost/latency protocol or current-weight run manifest independently obtained"
+      },
+      "metrics": [
+        {
+          "label": "27B v1.2 joint public index",
+          "value": 68.09,
+          "unit": "index_points"
+        },
+        {
+          "label": "27B v1.2 single-question public index",
+          "value": 67.75,
+          "unit": "index_points"
+        },
+        {
+          "label": "Flash v1.2 joint public index",
+          "value": 58.88,
+          "unit": "index_points"
+        },
+        {
+          "label": "Flash v1.2 single-question public index",
+          "value": 60.05,
+          "unit": "index_points"
+        }
+      ],
+      "conclusion": "Joint grouping is a task-dependent policy choice; Flash aggregate favors single-question mode. These are author public-suite reports, not a new cross-model ranking.",
+      "caveats": [
+        "No independent reproduction or causal attribution of v1.1-to-v1.2 gains.",
+        "Benchmark-family training exposure does not itself prove exact test leakage.",
+        "Public0.3 scores cannot substitute for private-only text Full0.4 or the vision board.",
+        "Source-tag revisions do not identify the evaluated weight bytes."
+      ],
+      "artifacts": {
+        "protocol": "Official27B/Flash model-card evaluation and grouping sections",
+        "raw_outputs": "Card aggregates inspected; full paired outputs/calibration split IDs not audited",
+        "model_hash": "Source revisions pinned; evaluated tensor hashes unknown"
       },
       "reproduced_here": false
     }

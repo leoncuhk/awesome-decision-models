@@ -154,7 +154,7 @@ The [mechanism comparison](decision-readout-and-reasoning.md) separates option-l
 
 | Publisher / 发布者 | Reviewed scope / 所核范围 | Interpretation / 解读 |
 | --- | --- | --- |
-| [HF-hosted community Decision Index](https://huggingface.co/spaces/multimodalart/jev-decision-index), archived 0.2 and reviewed 0.3.2 aggregates | Text and visual tracks; public/private coverage and versioned chance-correction/aggregation; public-only 37-task reports are subsets. / 文本、视觉分轨，公开／私有覆盖及版本化机会校正／聚合；仅公共 37 任务是子集。 | Keep track, scoring version, date and tie band with every score. / 每个成绩保留分轨、评分版本、日期与平局带。 |
+| [HF-hosted community Decision Index](https://huggingface.co/spaces/multimodalart/jev-decision-index), archived 0.2/0.3.2 and reviewed 0.4 methodology | Text and visual tracks; public/private coverage and versioned chance-correction/aggregation; public-only 37-task reports are subsets. / 文本、视觉分轨，公开／私有覆盖及版本化机会校正／聚合；仅公共 37 任务是子集。 | Keep track, scoring version, date and tie band with every score. / 每个成绩保留分轨、评分版本、日期与平局带。 |
 | [Artificial Analysis Decision Index](https://artificialanalysis.ai/methodology/decision-index), methodology 1.0 | Four equal 25% parts: private 500-item knowledge set, 513 text HLE MCQs, When2Call, filtered 835-row WildGuardTest. / 四等权部分：私有 500 题知识集、513 道文本 HLE 选择题、When2Call、筛选后 835 行 WildGuardTest。 | Different publisher/tasks/aggregation; no score/rank imported here. / 发布者、任务及聚合均不同，本轮不引入排名／成绩。 |
 
 AA knowledge scoring splits its weight between accuracy and non-hallucination; the latter is `100 * (1 - wrong/(wrong + IDK))`, so its denominator excludes correct answers. WildGuard averages three F1 scores. Neither composite substitutes for policy-conditioned calibration, image-specific acceptance or full-service p95. A single API call containing multiple questions does not establish a single shared model forward pass. Private items and raw runs remain unaudited.
@@ -166,3 +166,12 @@ AA 知识部分将权重平分给准确率与非幻觉率；后者为 `100 * (1 
 The Oct14 [risk-budgeted System One preprint](https://arxiv.org/html/2610.19811v1) studies binary policies: score `s(X)` predicts a positive event, Action 0 on `s(X) < tau` has `FOR = P(Y=1 | s(X)<tau)`, and Action 1 is the conservative fallback. Its fixed-sequence LTT result requires a frozen scorer/ordered threshold family derived from Fit independently of iid Cal from the same deployment population. With error level delta, the probability over calibration samples of certifying a population-risk-violating policy is bounded by delta. This is not each answer's probability of correctness, a promise that every finite test estimate stays below budget, or an automatic multiclass/image/shift guarantee. No certificate means fallback for the policy, distinct from per-input abstention. Six English-text datasets/single seed are author evidence; no local replication or numeric gain is claimed.
 
 10 月 14 日的[风险预算 System One 预印本](https://arxiv.org/html/2610.19811v1)研究二元策略：`s(X)` 预测正事件，`s(X) < tau` 区域执行 Action 0，风险为 `FOR = P(Y=1 | s(X)<tau)`，其余执行保守回退 Action 1。固定序列 LTT 要求评分器与有序阈值族由 Fit 冻结，并与来自部署同一总体的 iid Cal 独立；以 delta 为错误水平时，对校准集抽样而言，认证出总体风险超预算策略的概率不超过 delta。这不是逐题正确率、每次有限测试估计必不超预算，也不自动覆盖多类／图像／漂移。无证书意味着策略回退，区别于单输入拒答。六个英文文本集／单种子属于作者证据，本轮未复现或引入数值增益。
+
+
+The [October25 methodology review](../updates/2026-10-25-weekly-review.md) separates **text0.4 Full** (private same-skill/new-domain60/40, public-scale mapping; revised hidden domain set) from **vision Full** (public/private same-skill50/50). Public0.3 remains a visible diagnostic, with zero text-Full weight. Score changes across editions are not model improvements; old fixed-source records remain even when live archival files disappear.
+
+10 月25日核查：文本0.4 Full 为纯私有同技能／新领域60／40（映射到公共尺度，隐藏新领域集合也已修订）；视觉 Full 仍为公共／私有同技能50／50。公共0.3 仍展示，但不计文本 Full。跨版分数变化不等于模型提升，上游移除在线旧文件后仍保留本库固定来源。
+
+For acceptance policies, [E34](evidence.md#e34) shows opposite false-commitment/false-abstention errors on constructed legal inputs; [E35](evidence.md#e35) shows that lower ECE can leave error ranking unchanged. Specify missing-evidence cases, the cost of unnecessary review and calibration selection before testing. Neither result transfers automatically to screenshot intent or new traffic.
+
+验收策略应同时看 [E34](evidence.md#e34) 的错误承诺／误拒答及 [E35](evidence.md#e35) 的“ECE降低而错误排序不变”。测试前写清缺证据样本、不必要复核成本与校准选择，不能直接迁移为截图意图或新流量的保证。

@@ -106,3 +106,5 @@ python3 -m unittest discover -s tests -v
 新增项目或成绩前请阅读 [CONTRIBUTING](CONTRIBUTING.md)。欢迎负面结果、假设变化与纠错。[首版核验记录](updates/2026-09-25.md)保留原始限制；[10 月 6 日发布核验记录](updates/2026-10-06-release-boundaries.md)与[10 月 11 日核验记录](updates/2026-10-11-typed-releases.md)说明新增、修正及证据缺口；[10 月 13 日多模态／部署核验](updates/2026-10-13-multimodal-deployment.md)区分新发布、校准和应用证据；[10 月 15 日更新](updates/2026-10-15-serving-and-adaptation.md)核查原生 vLLM、评分变化、语义特征与领域适配；[10 月 16 日研究更新](updates/2026-10-16-multimodal-finetuning.md)补充训练路径与竞赛证据核查；[10 月 17 日 StartLux 核验](updates/2026-10-17-startlux-and-decisionpivot.md)记录新增模型、评测与机制证据；[多模态后训练指南更新](updates/2026-10-17-d3-text-training.md)补充论文支撑的实验路线及 D3 文本训练边界；[发布说明](PUBLISHING.md)提供面向空仓库的安全初始化步骤。
 
 原创代码与整理文字使用 [MIT](LICENSE)；链接的项目、模型、数据与论文保留各自许可证。固定来源文档的提交版本，**不等于**固定模型权重。
+
+[10月25日每周核查](updates/2026-10-25-weekly-review.md)补入联合请求发布、有边界的重复读取／拒答证据及训练／部署修正。

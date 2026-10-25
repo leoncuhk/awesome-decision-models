@@ -86,3 +86,18 @@ Compare a simple OCR/text baseline, one-pass decision model, short-label generat
 Calibrate and certify thresholds on outputs returned by the actual selection/routing policy, then freeze before final testing. The paper's policy-aware calibration is useful evidence for this design principle, with distribution-shift limitations; it does not certify a new deployment. `none_probability` is documented as an alarm score, not a calibrated probability of missing evidence. Candidate-normalized probabilities, rejection and authority to act remain separate.
 
 在实际选择／路由策略返回的输出上校准和验证阈值，最终测试前冻结。论文的 policy-aware calibration 支持这种实验设计，但保留跨分布限制，不能认证新部署。`none_probability` 是告警分数，不是已校准的缺证据概率；候选内归一化、拒判和动作权限仍需分开。
+
+
+## October25 follow-up / 10月25日补核
+
+[Decider v1.2](https://huggingface.co/perplexity-ai/pplx-decider-v1.2) changes the unit of attention: every question inside a joint request can see the others. This differs from v1.1's independent question rows and from packing independent requests for throughput. [E36](evidence.md#e36) retains the author grouping comparison: related facets can benefit, independent candidates can suffer, and Flash's public aggregate favors one question per request. Freeze grouping with the calibrator; the published temperatures were fitted in joint format. Training around32k and a262144 runtime ceiling do not validate all long-context decisions. Splitting overlong groups also changes joint semantics.
+
+[Decider v1.2](https://huggingface.co/perplexity-ai/pplx-decider-v1.2)让同请求的问题相互可见，区别于 v1.1 独立问题行及保持请求独立的 packing。[E36](evidence.md#e36)保留作者分组对照：相关属性可能受益，独立候选可能受损，Flash 公共总分偏向逐题请求。分组策略须与校准器一起冻结；发布温度在联合格式拟合。约32k训练与262144运行上限不验证任意长上下文，超长拆组也会改变语义。
+
+[Prism](https://github.com/StartLuxLabs/StartLux-Prism/tree/f32ed8eee9d89ea56dde03a978cf4128d2bbf497) adds CUDA GGUF execution for causal AutoThink, not Instant. Its integer-path batch/cache invariance is distinct from equivalence to BF16 or production calibration. Its own code has no chosen license at this revision; vendored Apache files do not resolve that. [Jeffan](models.md#jeffan) instead uses conditional whole-input rereading below0.9, replacing its first distribution; this is a separate adaptive-computation policy, not StartLux's thought-generation/mixing algorithm.
+
+[Prism](https://github.com/StartLuxLabs/StartLux-Prism/tree/f32ed8eee9d89ea56dde03a978cf4128d2bbf497)为因果 AutoThink 增加 CUDA GGUF 路径，不支持 Instant；整数路径批次／缓存不变性不等于 BF16 等价或生产校准。该版本自有代码尚未选许可证，vendored Apache 文件不解决这一点。[Jeffan](models.md#jeffan)则在低于0.9时重复读取整段输入并替换初判，不是 StartLux 的生成推理／分布混合算法。
+
+The public20% statement above describes historical DI0.3. Current text0.4 Full removes public weight and changes the hidden domain set; vision keeps a different formula. Preserve edition/track with all older evidence rather than updating old scores in place.
+
+上文公共占20%描述历史 DI0.3；当前文本0.4 Full 已取消公共权重并修改隐藏领域集合，视觉公式仍不同。保留旧证据的分轨和版本，不原地改写旧成绩。

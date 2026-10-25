@@ -1256,3 +1256,112 @@ Reported fractions are displayed as percentages where appropriate. More printed 
 
 **Sources:** [MIRE official semifinal leaderboard: exact three-team score columns](https://tianchi.aliyun.com/competition/entrance/532277/rankingList); [MIRE official task labels and all-class weighted-F1 definition](https://tianchi.aliyun.com/competition/entrance/532277/information); [MIRE official final composite awards: gold, silver and bronze](https://tianchi.aliyun.com/competition/entrance/532277/customize583); [MIRE official phases, resource rules and composite final review](https://tianchi.aliyun.com/competition/entrance/532277); [Multimodal Intent Recognition in E-Commerce: Challenges, Innovations, and Lightweight Solutions](https://doi.org/10.1145/3701716.3719642)
 
+<a id="e34"></a>
+## E34 · Missing legal authority: wrong picks and false abstentions are opposite errors
+
+**Evidence:** `third_party_reported` · **Reviewed:** 2026-10-25 · **Reproduced here:** no
+
+| Protocol | Recorded context |
+| --- | --- |
+| Task | CaseHOLD holding selection with an explicit sixth none option |
+| Test unit | 5314 public test items;1670 constructed no-correct-holding items,3644 correct-holding-present items |
+| Split | Original and perturbed conditions; Table2 full-test operating points, distinct from30/70 policy-selection split in section4.3 |
+| Reference | CaseHOLD labels and constructed replacements from other cases; not observed real-world citation absence |
+| Training | Evaluated hosted providers not trained here; public pre2021 legal text may overlap training; perturbation tests do not rule this out |
+| Measurement | Wrong pick conditional on1670 absent items; false abstention conditional on3644 present items. Preserve both denominators. Jev1.14 and pplx1.2 provider labels; exact hosted weight snapshots unresolved. |
+| Hardware | API result accuracy only in this record. Paper synchronous decision billing versus batch generative prices excludes human review; no end-to-end cost multiplier imported |
+
+| Reported measurement | Value |
+| --- | --- |
+| Jev1.14 wrong-pick rate, absent holding | 30.10% |
+| Jev1.14 false-abstention rate, present holding | 26.20% |
+| pplx-decider1.2 wrong-pick rate, absent holding | 56.50% |
+| pplx-decider1.2 false-abstention rate, present holding | 1.80% |
+
+**Interpretation:** The more cautious operating point reduces false commitment while rejecting more answerable items; neither accuracy nor a none option alone establishes reliable acceptance.
+
+- External researcher report relative to providers; not reproduced here.
+- Constructed absence, one English task and one prompt per type limit transfer.
+- No exact evaluated-weight hashes; do not attach these values to current HF checkpoints.
+- Agreement-gate results use3720 held-out policy items and different denominators, so are not merged with this table.
+
+**Artifacts and limits:**
+- protocol: Paper v1 Table2, methods, limitations and appendices
+- raw outputs: Fixed code README lists full paired inputs/raw API logs/prompts/statistics; scripts not executed here
+- model hash: Hosted snapshot/evaluated binaries not captured
+
+**Sources:** [Commit or Abstain? Missing Legal Authority evaluation](https://arxiv.org/html/2610.29961v1); [Commit or Abstain fixed prompts, logs and result summaries](https://github.com/mmikaildemir/commit-or-abstain/tree/f3d49c6de7d5943bb1981c0a55d504f1bae5fa33)
+
+<a id="e35"></a>
+## E35 · RouteGuard: lower ECE cannot create error-ranking signal
+
+**Evidence:** `author_reported` · **Reviewed:** 2026-10-25 · **Reproduced here:** no
+
+| Protocol | Recorded context |
+| --- | --- |
+| Task | Eight-class IT ticket routing with self-reported LLM confidence and isotonic calibration |
+| Test unit | Common1000-ticket LLM test subset from47837 corpus;500 disjoint calibration items per condition |
+| Split | Stratified33486/4784/9567 train/cal/test; LLM subsets drawn within partitions, examples from train |
+| Reference | Public corpus category labels, no temporal split or independently audited taxonomy adjudication |
+| Training | GPT-4o-mini few-shot receives label names and up to24 train examples; supervised baselines see33486 labels; unequal information |
+| Measurement | Paper TableIII few-shot raw versus isotonic confidence; correctness AUROC on same1000 items. Constant raw confidence1 maps to constant0.480; ECE improvement is not discrimination. |
+| Hardware | Historical May2026 provider calls; calibration diagnostic only, not live performance or full deployment cost |
+
+| Reported measurement | Value |
+| --- | --- |
+| GPT-4o-mini few-shot raw ECE | 54.10% |
+| GPT-4o-mini few-shot isotonic ECE | 2.10% |
+| GPT-4o-mini few-shot raw correctness AUROC | 50.00% |
+| GPT-4o-mini few-shot isotonic correctness AUROC | 50.00% |
+
+**Interpretation:** Probability-level correction can leave abstention ranking uninformative; evaluate risk/coverage and cost rather than ECE alone.
+
+- Author report; no reproduction or new algorithm claim.
+- One random-split corpus, older endpoint labels and prompt/output-budget confounding.
+- Mixed agreement pool contains supervised LR and all-voter inference costs.
+- Human triage is assumed correct/fixed-cost; cost parameters are illustrative.
+- Zenodo concept DOI inaccessible; exact archived vectors/manifest not inspected.
+
+**Artifacts and limits:**
+- protocol: Paper v1 TableIII and sectionsIII–VI
+- raw outputs: Fixed RouteGuard code/README inspected; external frozen archive inaccessible
+- model hash: Exact provider snapshots unknown; no model files fetched
+
+**Sources:** [Cost-Aware Abstention for LLM-Based IT Ticket Classification](https://arxiv.org/html/2610.31657v1); [RouteGuard fixed code/README and inaccessible external archive](https://github.com/sachinkg12/RouteGuard/tree/22a2c3988281bc7b2249fa8ce985678442ff1af3)
+
+<a id="e36"></a>
+## E36 · Perplexity v1.2: grouping changes task scores and does not isolate training gains
+
+**Evidence:** `author_reported` · **Reviewed:** 2026-10-25 · **Reproduced here:** no
+
+| Protocol | Recorded context |
+| --- | --- |
+| Task | 37-task public Decision Index0.3 with joint versus one-question requests |
+| Test unit | Public suite aggregates;9 benchmarks have multi-question requests,28 unchanged between modes; raw paired run artifacts not audited |
+| Split | Public task training splits included in v1.2 with author-described decontamination; no private/full index in this record |
+| Reference | Published card suite-weighted public index, not simple mean of category scores |
+| Training | 27B retraining and Flash distillation/soup differ from v1.1; grouping effects and training effects must be separated |
+| Measurement | Valid options normalized per question; joint mode shares noncausal full-attention across questions, single mode scores each alone. Default temperatures fitted joint, not proven optimal in single mode. |
+| Hardware | Quality only; no matched cost/latency protocol or current-weight run manifest independently obtained |
+
+| Reported measurement | Value |
+| --- | --- |
+| 27B v1.2 joint public index | 68.09 |
+| 27B v1.2 single-question public index | 67.75 |
+| Flash v1.2 joint public index | 58.88 |
+| Flash v1.2 single-question public index | 60.05 |
+
+**Interpretation:** Joint grouping is a task-dependent policy choice; Flash aggregate favors single-question mode. These are author public-suite reports, not a new cross-model ranking.
+
+- No independent reproduction or causal attribution of v1.1-to-v1.2 gains.
+- Benchmark-family training exposure does not itself prove exact test leakage.
+- Public0.3 scores cannot substitute for private-only text Full0.4 or the vision board.
+- Source-tag revisions do not identify the evaluated weight bytes.
+
+**Artifacts and limits:**
+- protocol: Official27B/Flash model-card evaluation and grouping sections
+- raw outputs: Card aggregates inspected; full paired outputs/calibration split IDs not audited
+- model hash: Source revisions pinned; evaluated tensor hashes unknown
+
+**Sources:** [Perplexity Decider v1.2: joint requests and retrained data mixture](https://huggingface.co/perplexity-ai/pplx-decider-v1.2/blob/cce0f3f80033e9d89d80831d5281fd72124aacce/README.md); [Perplexity Decider Flash v1.2: distilled 4B and grouping regressions](https://huggingface.co/perplexity-ai/pplx-decider-flash-v1.2/blob/9ff7cf9838e59df461c276b7699d56b244d2af58/README.md)
+

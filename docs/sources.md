@@ -1576,3 +1576,147 @@
 - Source revision: `not captured / live URL`
 - Note: Author news/publication page read: CuSMer authors and scale@DLUT bronze at this exact competition align with official scale final rank3. Dalian university news separately describes online/final-round first and composite bronze. An author page establishes attribution, not release of source code, evaluated weights or independent replication.
 
+<a id="strands-init-from-oct19"></a>
+## Strands: continuing released adapter and head training
+
+- Source: https://github.com/strands-labs/strands-decider/commit/e69edb2650d87ecdd28e6ff0563c5a40d716f1f1
+- Kind: `repository`; review depth: `content_reviewed`; reviewed: 2026-10-25
+- Source revision: `e69edb2650d87ecdd28e6ff0563c5a40d716f1f1`
+- Note: Commit patches for loader, training and README inspected. init_from now preserves and trains the trained adapter and pointer/slot head rather than replacing a head and freezing the torso. Architecture conflicts are rejected, fitted temperatures reset, checkpoint KL anchoring supported. Vision loader explicitly refuses trainable mode. This is a text adaptation implementation change, not a new released checkpoint or measured quality gain; upstream tests inspected, not executed.
+
+<a id="gliner-ddp-oct20"></a>
+## GLiNER2: distributed training gradient synchronization fix
+
+- Source: https://github.com/fastino-ai/GLiNER2/commit/fe3145e065958f9d6f738cdc891acff0cd673efc
+- Kind: `repository`; review depth: `content_reviewed`; reviewed: 2026-10-25
+- Source revision: `fe3145e065958f9d6f738cdc891acff0cd673efc`
+- Note: Patch inspected: register ExtractorOutput as a pytree dataclass, disable static_graph by default, and touch every trainable parameter with a zero term per distributed step. Author identifies previously silent rank-local gradient drift. Applies to multi-GPU training; it does not prove that any published Decide checkpoint used the defective path or was retrained. No new weight/performance conclusion.
+
+<a id="kev-data-contract-oct22"></a>
+## Kev: complete-question identity for data splits and conflict detection
+
+- Source: https://github.com/jaredpalmer/kev/commit/ac8e24524695cfb2d5147bf8063c3db3ef9276e6
+- Kind: `repository`; review depth: `content_reviewed`; reviewed: 2026-10-25
+- Source revision: `ac8e24524695cfb2d5147bf8063c3db3ef9276e6`
+- Note: Data-preparation code and test patches inspected. Conflict identity now includes type/instructions/criteria; different rubrics for one state are retained, summaries distinguish forms, and variants of the same state stay in one partition. This fixes adaptation data handling, not held-out accuracy or published weights.
+
+<a id="kev-score-decimal-oct22"></a>
+## Kev: preserve exact JSON score fractions before label validation
+
+- Source: https://github.com/jaredpalmer/kev/commit/e7ae8fd5fda9d40865d3a9de90f074feb0735985
+- Kind: `repository`; review depth: `content_reviewed`; reviewed: 2026-10-25
+- Source revision: `e7ae8fd5fda9d40865d3a9de90f074feb0735985`
+- Note: Converter and synthetic-data parser patches inspected. Decimal parsing prevents fractional JSON scores near an integer from being rounded into a valid ordinal label. Non-score fields retain conventional JSON conversion. No trainer/model code executed or accuracy inferred.
+
+<a id="startlux-prism-oct22"></a>
+## StartLux-Prism: GGUF CUDA runtime, parity scope and licensing
+
+- Source: https://github.com/StartLuxLabs/StartLux-Prism/tree/f32ed8eee9d89ea56dde03a978cf4128d2bbf497
+- Kind: `repository`; review depth: `content_reviewed`; reviewed: 2026-10-25
+- Source revision: `f32ed8eee9d89ea56dde03a978cf4128d2bbf497`
+- Note: README and docs/testing.md at this source revision inspected; upstream Decision README integration commit 18256c5cfb4ce6dd184583886a3ca1e437522a94 reviewed. Supports causal v1/v1.1 AutoThink 4B/9B/27B, not bidirectional Instant. Q8_0/W4A8, shared-state branching, images with mmproj and optional thoughts. Internal bit invariance/parity tests are author reports, not equivalence to BF16 on all inputs. Activation-range calibration is quantization calibration, distinct from probability calibration. v1.1 allow_none defaults on versus off in the other package; gate remains 0.6 versus paper 0.9. Own code has no chosen license; vendored files Apache-2.0, model weights CC BY-NC 4.0. No speed multiplier imported.
+
+<a id="drex-apple-oct23"></a>
+## Drex v2.0: Q4_K_M Apple deployment and corrected engine limits
+
+- Source: https://github.com/nace-ai/drex-decision-models/blob/f2afd75f714997fe8a950888252b833f2c5198f9/models/drex-v2.0/apple-silicon.md
+- Kind: `official_docs`; review depth: `content_reviewed`; reviewed: 2026-10-25
+- Source revision: `f2afd75f714997fe8a950888252b833f2c5198f9`
+- Note: Full page and release-card patch read. Q4_K_M deployment added for Kapitsa v0.2.15 and Nace llama.cpp/Ollama forks. Author timing is a short-ticket localhost sequential median on M5 Pro 48GB; repeat-state cache and cold calls are distinct. llama.cpp tested at 36GB, all three at 48GB: not validation of every Mac/workload. Quantized output accuracy/calibration equivalence is not established by speed/fit. Retain modified model license separately from runtime licenses.
+
+<a id="kapitsa-systemone-v0215"></a>
+## Kapitsa v0.2.15: shared recurrent state, branch readout and limits
+
+- Source: https://github.com/nace-ai/kapitsa/blob/5c489cc69b397d2088aa165f9017129b4a724b7a/docs/systemone.md
+- Kind: `official_docs`; review depth: `content_reviewed`; reviewed: 2026-10-25
+- Source revision: `5c489cc69b397d2088aa165f9017129b4a724b7a`
+- Note: System One docs read at resolved v0.2.15 commit. Reuses a checkpointed state with separate question branches and unquantized F32 pointer head; transformer layers remain quantized. Default sequence/state/branch/packed caps are each 16384, separately configurable; 131072 capacity is not verified quality. Cache equality to four decimals and upstream tests are author assertions, not this repository running them. No execution or install.
+
+<a id="pplx-v12-card"></a>
+## Perplexity Decider v1.2: joint requests and retrained data mixture
+
+- Source: https://huggingface.co/perplexity-ai/pplx-decider-v1.2/blob/cce0f3f80033e9d89d80831d5281fd72124aacce/README.md
+- Kind: `model_card`; review depth: `content_reviewed`; reviewed: 2026-10-25
+- Source revision: `cce0f3f80033e9d89d80831d5281fd72124aacce`
+- Note: Full card, file tree and tag-only commit inspected. Native 27B release changes joint attention/request format and training mix; benchmark train-split inclusion and decontamination are author disclosures. 262144 configured length versus about 32k training, longer log spot-check only. Temperature 1.382 fitted in joint format; transfer calibration is not guaranteed. Packed BF16 fast path has near-tie differences; FP8 is optional and shifts probabilities. Current cce0f3f commit adds only a discovery tag over release parent 225c913: not another weight release. Public tree readable; card still says private, download access/weights not tested.
+
+<a id="pplx-flash-v12-card"></a>
+## Perplexity Decider Flash v1.2: distilled 4B and grouping regressions
+
+- Source: https://huggingface.co/perplexity-ai/pplx-decider-flash-v1.2/blob/9ff7cf9838e59df461c276b7699d56b244d2af58/README.md
+- Kind: `model_card`; review depth: `content_reviewed`; reviewed: 2026-10-25
+- Source revision: `9ff7cf9838e59df461c276b7699d56b244d2af58`
+- Note: Full card, public file tree and tag-only commit inspected. Qwen3.5-4B probability distillation/model soup; separate 255x2560 head, joint format and T=1.554. Author recommends one question per request; grouping can hurt independent-candidate tasks. Joint-format calibration cannot be assumed optimal after changing grouping. Current revision adds a metadata tag only; weights/evaluated binary mapping not locally verified.
+
+<a id="decision-index-v04-method"></a>
+## HF community Decision Index: private-only text Full and separate vision formula
+
+- Source: https://huggingface.co/spaces/multimodalart/jev-decision-index/blob/5b9973d31e1b3cff2702ed61e518306ddb279b91/methodology.html
+- Kind: `official_docs`; review depth: `content_reviewed`; reviewed: 2026-10-25
+- Source revision: `5b9973d31e1b3cff2702ed61e518306ddb279b91`
+- Note: Methodology HTML source sections on v0.4, v0.3 and vision inspected, plus current README. Text v0.4 Full weights private same-skill/new-domain 60/40 after public-scale mapping; public scores no longer contribute. Private new-domain task set is revised, selected by consistency of stock-model ordering, and unavailable for audit. Vision remains 50% public/50% private same-skill; text 0.9-point tie grouping retained. Upstream removes live archival files at this commit; historical source pins/evidence here retained. Current board labels 0.4.1; no scores/ranks imported.
+
+<a id="baseten-decision-report"></a>
+## Base Labs: mammoth-1 / elephant-1 technical report
+
+- Source: https://labs.baseten.co/articles/mammoth-1-and-elephant-1-frontier-decision-models
+- Kind: `official_publication`; review depth: `content_reviewed`; reviewed: 2026-10-25
+- Source revision: `not captured / live URL`
+- Note: Full method, data-evolution, training, results and future-directions sections reviewed. Language fine-tuning, frozen vision, block full-attention and CE+Brier; public DI feedback informs Mix1–8. Report says text-only training, conflicting with current card image-training wording. Public ablation and private DI/author AA replica are different evaluations. No ranks or gains imported; no independent contamination or tensor audit.
+
+<a id="mammoth-card-oct25"></a>
+## Mammoth-1 current card: image-input claim and conflicting training description
+
+- Source: https://huggingface.co/baselabs/mammoth-1
+- Kind: `model_card`; review depth: `content_reviewed`; reviewed: 2026-10-25
+- Source revision: `not captured / live URL`
+- Note: Current card read, but fixed historical blob/API reads inaccessible; no source hash inferred. MIT declaration, trained length16384, candidate-limit and request rejection contract reviewed. Card says text/image decision training; technical report says text alone. Image support and image supervision/quality remain separate. Public data recipe does not equal fully inspectable training data. Current live scores are not assigned to an inferred weight revision.
+
+<a id="jeffan-card-oct25"></a>
+## Jeffan-31b-1710: model card and published conditional-reread engine
+
+- Source: https://huggingface.co/tattrongvu/Jeffan-31b-1710/blob/cebfa86c2bed2b5c83b12e44de4374b20c87fd79/inference/README.md
+- Kind: `model_card`; review depth: `content_reviewed`; reviewed: 2026-10-25
+- Source revision: `cebfa86c2bed2b5c83b12e44de4374b20c87fd79`
+- Note: Card and full inference README reviewed. Text-only Gemma-4-31B-it letter-logit scorer; no disclosed training recipe/data or independent overlap audit. Engine conditionally repeats whole input below0.9 and replaces first distribution; submitted policy is not uniformly single-pass. Card8192 versus engine98304 capacity; public-suite observed lengths do not validate arbitrary context. Simulated96GB cap on B200 is not measured RTX hardware. No rank/score imported.
+
+<a id="jeffan-license-oct25"></a>
+## Jeffan: license-only change to Apache-2.0
+
+- Source: https://huggingface.co/tattrongvu/Jeffan-31b-1710/commit/cebfa86c2bed2b5c83b12e44de4374b20c87fd79
+- Kind: `repository`; review depth: `content_reviewed`; reviewed: 2026-10-25
+- Source revision: `cebfa86c2bed2b5c83b12e44de4374b20c87fd79`
+- Note: Inspected five-file license/README/pyproject diff: Apache-2.0 replaces CC BY-NC4.0 for weights and MIT for inference code. No weight file listed as changed. This revision is a source/license identity, not an evaluated tensor hash or new quality result. Upstream base terms still need checking.
+
+<a id="routeguard-paper-v1"></a>
+## Cost-Aware Abstention for LLM-Based IT Ticket Classification
+
+- Source: https://arxiv.org/html/2610.31657v1
+- Kind: `paper`; review depth: `content_reviewed`; reviewed: 2026-10-25
+- Source revision: `not captured / live URL`
+- Note: Sachin Gupta, Oct22 v1. Full paper reviewed:47,837 tickets/eight labels, train/cal/test33486/4784/9567; LLM common test1000/cal500 per condition. Cost and calibration conclusions are author reports. Constant self-confidence remains nondiscriminative after isotonic calibration. Labels/training access differ across trained versus prompted models; prompt/budget and provider/precision ablations are confounded. Random split, idealized correct human triage/fixed costs, historical endpoints: no temporal/production or universal LLM claim.
+
+<a id="routeguard-code"></a>
+## RouteGuard fixed code/README and inaccessible external archive
+
+- Source: https://github.com/sachinkg12/RouteGuard/tree/22a2c3988281bc7b2249fa8ce985678442ff1af3
+- Kind: `repository`; review depth: `content_reviewed`; reviewed: 2026-10-25
+- Source revision: `22a2c3988281bc7b2249fa8ce985678442ff1af3`
+- Note: Code/README inspected at Sep10 commit; paper submission Oct22 is separate. MIT code. Text-free vectors/manifest claimed in Zenodo concept DOI10.5281/zenodo.22609128, but archive inaccessible in review; exact artifact version/hash not verified. README pending-arXiv wording stale. No recomputation executed, publisher receipt is not independent reproduction.
+
+<a id="commit-or-abstain-paper-v1"></a>
+## Commit or Abstain? Missing Legal Authority evaluation
+
+- Source: https://arxiv.org/html/2610.29961v1
+- Kind: `paper`; review depth: `content_reviewed`; reviewed: 2026-10-25
+- Source revision: `not captured / live URL`
+- Note: M.Mikail Demir, Oct21 v1 under review; full methods/results/limitations and appendices inspected. Third-party relative to evaluated providers, not reproduced here. Constructed CaseHOLD absent-correct-option subset1670/5314, explicit none option. Opposite wrong-pick/false-abstention errors retained in E34. Public pre2021 text may overlap pretraining despite perturbation checks. One English legal task and constructed absence do not establish real legal retrieval/citation reliability. Hosted snapshot identities and full human-review costs unresolved.
+
+<a id="commit-or-abstain-code"></a>
+## Commit or Abstain fixed prompts, logs and result summaries
+
+- Source: https://github.com/mmikaildemir/commit-or-abstain/tree/f3d49c6de7d5943bb1981c0a55d504f1bae5fa33
+- Kind: `repository`; review depth: `content_reviewed`; reviewed: 2026-10-25
+- Source revision: `f3d49c6de7d5943bb1981c0a55d504f1bae5fa33`
+- Note: README at Oct21 commit inspected: paired data, exact prompts, raw API logs, cost/result summaries and recalculation scripts listed. No code executed or artifacts regenerated here. MIT code; CaseHOLD material retains upstream terms. Stored evaluations are reported evidence, not this repository rerunning them.
+
