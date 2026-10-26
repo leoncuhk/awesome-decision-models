@@ -6,6 +6,8 @@ Reviewed 2026-10-17. This compares mechanisms and evidence boundaries, not an ov
 
 本页比较机制与证据边界，不生成总榜。StartLux 来源为论文 v1、固定推理代码与型号卡片；D3／Jev 的历史证据保留原协议。本次未运行模型。
 
+> October 26 scope note: earlier unqualified D3 rows describe the classic release. [D3-Turbo audit](../updates/2026-10-26-multimodal-training-and-evidence.md#d3-turbo) adds cached state with independent question branches, distinct from Decider v1.2 joint-question attention. It does not establish image fine-tuning. / 10 月 26 日补注：下方历史 D3 表述指经典版；Turbo 复用状态、各题分支独立，不同于 Decider v1.2 联合题目注意，也不证明图像微调。
+
 ## 1. Separate the layers / 分开比较不同层
 
 | Layer / 层次 | Question / 应问的问题 |

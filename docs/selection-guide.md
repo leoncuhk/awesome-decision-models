@@ -89,7 +89,10 @@ The newer releases add distinct experiments; they do not replace task-specific a
 中文：新增型号扩大可测试的方案空间。验收必须固定模型／转换包、schema、规则、校准器和完整测量边界；“多题一次调用”不意味着每种模型都只编码一次。公共 Index、231-task JevBench、业务标签一致率、转换等价和吞吐演示分别回答不同问题，不能相互代替。先以影子评测验证关键错误、校准、拒答和总成本，再决定是否上线。
 
 <a id="image-intent-adaptation"></a>
+
 ## 7. Image intent and domain adaptation / 图片意图与领域适配
+
+[2026-10-26 training-support audit](../updates/2026-10-26-multimodal-training-and-evidence.md#trainability) distinguishes image-supervised Qwen/Intern paths, experimental Clef, verified inference paths for D3-Turbo/Decider and mlx-decision media rejection. The same update specifies learned judgment versus changing facts and frozen acceptance. / [10 月 26 日训练支持核验](../updates/2026-10-26-multimodal-training-and-evidence.md#trainability)分开图像监督 Qwen／Intern、实验 Clef、仅确证推理的 D3-Turbo／Decider 与拒收媒体训练的 mlx-decision，并给出学习判断、变化事实与冻结验收的合同。
 
 This is a proposed evaluation workflow, not a validated deployment or a customer case. Image content and conversational intent are different labels. The same payment screenshot may accompany a receipt submission, a status question or a complaint. Define intent from the image **and only the text/context available at decision time**. Keep visible facts, inferred intent and allowable action as separate outputs. Support multiple intents, unknown and targeted clarification when evidence cannot identify the request.
 

@@ -2,7 +2,9 @@
 
 [English](multimodal-decision-finetuning.md) · [首页](../README.zh-CN.md) · [选型指南](selection-guide.md#image-intent-adaptation) · [证据台账](evidence.md)
 
-来源核验：2026-10-18。本方案面向通用多模态客服意图识别，属于可检验的研究设计；没有执行模型训练或证明生产收益。下面分别标明公开实现、作者报告和建议实验。图像理解、意图判断、概率校准及拒判策略是不同问题。
+来源核验：2026-10-26（专项补核训练支持；既有证据保留原日期）。本方案面向通用多模态客服意图识别，属于可检验的研究设计；没有执行模型训练或证明生产收益。下面分别标明公开实现、作者报告和建议实验。图像理解、意图判断、概率校准及拒判策略是不同问题。
+
+最新：[10 月 26 日源码核验与可执行验收计划](../updates/2026-10-26-multimodal-training-and-evidence.md)补齐 Qwen 图像监督配方，深化已有 Intern 路径，区分 D3-Turbo 与经典 D3，并记录 Clef／MLX 实验边界。10 月 22 日调研继续作为历史档案。
 
 **研究问题：** 给定领域图片和决策时可见的对话，怎样在预先约定的关键错误风险与完整成本限制下，提高可接受的意图识别覆盖率，并对证据不足案例澄清或转人工？微调 decision model 只是可能的手段，不是研究目的。数值风险、成本与最小实质收益标准须由场景负责人在模型／阈值选择之前确定，不设通用达标线。
 
@@ -106,9 +108,12 @@ ezjev 的 MIT 代码许可证不能覆盖模型与训练数据；[模型卡](htt
 
 | 候选 | 当前已核起点 | 图片适配前的门槛 |
 | --- | --- | --- |
-| D3 | 官方多模态推理对照；独立 Vis Edge／Lite 文本 full／LoRA 路径，代码另接受 Nano。 | Vis 去掉视觉；须恢复／保留真实图片链路，核梯度与多模态导出后再测效果。这是独立工程，不是架构禁止微调。 |
-| Intern-Decision | 带图的全语言参数训练及 masked answer-token 路径，视觉／projector 冻结。 | 固定检查点／模板／后端；区分全参预算与另行验证的 LoRA 目标模块；论文文本成绩不能认证图片领域效果。 |
-| Qwen3.5／其他受支持 VLM | 候选短标签生成式 SFT／LoRA 基线，先核模型／processor／trainer 支持。 | B2／B3 共用精确起始检查点和证据；工具链更容易不证明优于已做决策训练的 D3／Intern。 |
+| D3 经典版／Turbo | 经典 Vis 路径仅文本；Turbo 复用状态、各题独立分支，官方 wrapper 仍拒绝训练。 | 固定本地发布／运行时身份；API 的 `vllm-sr/d3` 已是 Turbo 别名，图像推理或状态复用均不认证图像 LoRA／导出。 |
+| Intern-Decision | 已有 9 月 26 日全语言参数带图训练代码，本次沿实际 dataset、pixels／grid、标签移位及冻结特征注入补核。 | `MEDIA_ROOT` 启用视觉，模型／tokenizer／processor 使用同一 `MODEL_PATH`。最终 HF 保存／审计工具属于源码支持，不是本次运行或现成 LoRA。 |
+| Qwen2／2.5／3-VL | [官方 trainer](https://github.com/QwenLM/Qwen3-VL/blob/96588727e44c78b25ba03ea03b8e12f7e64fd0da/qwen-vl-finetune/qwenvl/train/train_qwen.py)将图片接入 SFT 与 attention LoRA。 | 不能凭名字相似称其支持 Qwen3.5；核实际模块、截断、保存的 processor 与 adapter 合并／重载。 |
+| Qwen3.5 | [ms-swift 指南](https://github.com/modelscope/ms-swift/blob/942be5a6120d46443f1b1940f2902c3757e312a5/docs/source_en/BestPractices/Qwen3_8-Best-Practice.md)及 loader／template 有带图生成式 LoRA 路径。 | B2／B3 固定同一精确底座、证据与预算；候选子集 CE／Brier 或新增分类 head 是独立实现／消融，不由推理接口自动提供。 |
+| Decider／Clef | Decider v1.2 图片推理已收录；Clef 社区代码静态连接图像与 LoRA／head 损失。 | 未核实 Decider 图像训练配方；Clef 社区明确没有真实权重 GPU 或图片训练测试。相关训练门槛通过前保留推理对照。 |
+| mlx-decision | 可看图推理与实验性 head／readout 拟合是不同路径。 | [解析器](https://github.com/armbues/mlx-decision/blob/d3e239a8c8c2afb362725f94c5076b90221168a5/src/mlx_decision/data/format.py)拒绝图像／视频训练，文档排除 D3／pplx／Clef 骨干 LoRA／全参训练。 |
 
 ## 3. 数据与标签：先消除不确定性
 
@@ -147,6 +152,15 @@ ezjev 的 MIT 代码许可证不能覆盖模型与训练数据；[模型卡](htt
 建模前定义 `task_mode`。单意图约定主标签冲突规则；多意图使用集合目标与逐标签 precision／recall，必要时加 exact-set，不能用互斥 softmax。`unknown` 表示标签体系无法归入已知类，`out_of_scope` 表示已知范围外，`insufficient`／`needs_clarification` 表示缺证据；可与部分已知意图并存。明示优先级、标注与输出规则。模型低置信拒判属于**策略输出**，不自动等于这些金标。
 
 至少两位标注者独立评审约定的审计子集，既含代表性样本，也另含歧义／稀有类；记录逐类一致性、分歧及裁决，不只报汇总一致率。分歧集中处扩大审计。历史操作与教师标签是待核证据，不自动是真值；同一可见图文仍有多个合理意图时，先补上下文或改契约再训练。
+
+<a id="learned-judgment"></a>
+### 学判断方法，把变化事实作为输入证据
+
+分别监督意图、证据充分性／缺口原因与允许的下一步，并测三者联合一致性；用户目标、图片类别与缺失事实的猜测不可混为一个标签。独立裁定同图不同诉求、证据可读／不可读、冲突及真实未知意图的配对案例；建议路由标签不授予执行权限。
+
+价格、资格、订单状态、政策生效日与类别说明等变化事实放在带版本和时间的检索／工具证据中。训练如何使用当时证据、识别缺失／过时／冲突并提出有区分力的问题，不以记住变化事实为目标。持出事实值和后续政策版本，比较冻结检索基线与适配。缺事实要取证，缺目标要澄清，未知意图要开放集处理；低置信度本身不能确定是哪种问题。
+
+[Rep2Act／VAD-R](https://arxiv.org/html/2609.32653v1)启发分开测可答判断与最终回答是否服从它；这是新收录的 9 月工作，不是企业效果证据。[VLTest](https://arxiv.org/html/2610.30794v1)启发图／文／联合配对控制并重审预期答案。[日期计划](../updates/2026-10-26-multimodal-training-and-evidence.md#acceptance-plan)补充标注、中文迁移、独立 Cal-fit／Cal-policy、风险成本及复用已完成检查的规则，本次均未运行。
 
 <a id="split-protocol"></a>
 ### 防泄漏划分协议

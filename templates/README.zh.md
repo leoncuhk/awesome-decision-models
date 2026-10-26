@@ -45,6 +45,8 @@
 
 领域评测、训练支持核查与未知／澄清策略见[图片意图适配流程](docs/selection-guide.md#image-intent-adaptation)。先看[多模态后训练一页入口](docs/multimodal-decision-finetuning.zh-CN.md#quick-route)，再深入同条件对照、候选门槛及[分层学术阅读清单](docs/multimodal-decision-finetuning.zh-CN.md#reading-list)。
 
+最新专项核验：[10 月 26 日图文训练、监督与验收更新](updates/2026-10-26-multimodal-training-and-evidence.md)，补齐 Qwen／Intern 训练链路、D3-Turbo 身份、Clef／MLX 实验边界和两篇新收录论文；分开来源支持、本地复现与业务效果。
+
 执行细节：[分组划分协议](docs/multimodal-decision-finetuning.zh-CN.md#split-protocol)、[最小实验矩阵](docs/multimodal-decision-finetuning.zh-CN.md#experiment-matrix)、[结果记录与停止决定](docs/multimodal-decision-finetuning.zh-CN.md#result-template)。
 
 具体案例：[MIRE任务、标签与代码](docs/mire-case-study.zh-CN.md#tasks)、[官方综合奖项与复赛成绩](docs/mire-case-study.zh-CN.md#finalists)及[迁移边界](docs/mire-case-study.zh-CN.md#transfer-boundaries)。

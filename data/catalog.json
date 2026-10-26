@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "reviewed_on": "2026-10-25",
+  "reviewed_on": "2026-10-26",
   "scope": "Evidence-backed models, methods and evaluation for bounded decisions in AI systems.",
   "sources": [
     {
@@ -2172,6 +2172,256 @@
       "review_depth": "content_reviewed",
       "source_revision": "f3d49c6de7d5943bb1981c0a55d504f1bae5fa33",
       "review_note": "README at Oct21 commit inspected: paired data, exact prompts, raw API logs, cost/result summaries and recalculation scripts listed. No code executed or artifacts regenerated here. MIT code; CaseHOLD material retains upstream terms. Stored evaluations are reported evidence, not this repository rerunning them."
+    },
+    {
+      "id": "qwen-vl-train-oct26",
+      "title": "QwenVL official image SFT and LoRA trainer",
+      "url": "https://github.com/QwenLM/Qwen3-VL/blob/96588727e44c78b25ba03ea03b8e12f7e64fd0da/qwen-vl-finetune/qwenvl/train/train_qwen.py",
+      "kind": "repository",
+      "reviewed_on": "2026-10-26",
+      "review_depth": "content_reviewed",
+      "source_revision": "96588727e44c78b25ba03ea03b8e12f7e64fd0da",
+      "review_note": "Trainer body inspected: Qwen2-VL/2.5-VL/3-VL dense/MoE class dispatch, matching AutoProcessor, PEFT attention projections, supervised data module, model and processor saving. This dispatch is not Qwen3.5 support. Latest inspected tree commit is Jan30 2026, not an Oct26 feature release. No model code executed. Repository LICENSE is Apache-2.0; selected checkpoint/data terms are separate."
+    },
+    {
+      "id": "qwen-vl-data-oct26",
+      "title": "QwenVL official visual tensors and answer masking",
+      "url": "https://github.com/QwenLM/Qwen3-VL/blob/96588727e44c78b25ba03ea03b8e12f7e64fd0da/qwen-vl-finetune/qwenvl/data/data_processor.py",
+      "kind": "repository",
+      "reviewed_on": "2026-10-26",
+      "review_depth": "content_reviewed",
+      "source_revision": "96588727e44c78b25ba03ea03b8e12f7e64fd0da",
+      "review_note": "Image processing, pixel_values/image_grid_thw, multimodal positions and assistant-label masking inspected. The ordinary collator slices tokens to model_max_length; audit retained evidence and labels rather than assume overlength examples fail closed. Source-path inspection is not a successful training or export run."
+    },
+    {
+      "id": "qwen-vl-training-readme-oct26",
+      "title": "QwenVL training formats, dependencies and scope",
+      "url": "https://github.com/QwenLM/Qwen3-VL/blob/96588727e44c78b25ba03ea03b8e12f7e64fd0da/qwen-vl-finetune/README.md",
+      "kind": "official_docs",
+      "reviewed_on": "2026-10-26",
+      "review_depth": "content_reviewed",
+      "source_revision": "96588727e44c78b25ba03ea03b8e12f7e64fd0da",
+      "review_note": "Read image/conversation format, full/LoRA flags and dependencies. Image markers must match media. Documentation examples are starting points, not a locally verified environment; MoE/ZeRO restrictions and the exact model class matter. Do not use its random validation fraction as a group/time split protocol."
+    },
+    {
+      "id": "swift-qwen35-guide-oct26",
+      "title": "ms-swift Qwen3.5/3.6/3.8 image-bearing LoRA guide",
+      "url": "https://github.com/modelscope/ms-swift/blob/942be5a6120d46443f1b1940f2902c3757e312a5/docs/source_en/BestPractices/Qwen3_8-Best-Practice.md",
+      "kind": "official_docs",
+      "reviewed_on": "2026-10-26",
+      "review_depth": "content_reviewed",
+      "source_revision": "942be5a6120d46443f1b1940f2902c3757e312a5",
+      "review_note": "Read image/messages custom format, dense Qwen3.5-4B LoRA with OCR data, MoE training, inference and version caveats. Source also describes Qwen3.6/3.8 but this review does not validate every replacement checkpoint/backend. Repository LICENSE Apache-2.0 inspected. Oct26 tree head concerns RLHF log-softmax performance, not a new image-training release; demonstration memory/time is not a local measurement."
+    },
+    {
+      "id": "swift-qwen35-example-oct26",
+      "title": "ms-swift Qwen3.5 image OCR LoRA example",
+      "url": "https://github.com/modelscope/ms-swift/blob/942be5a6120d46443f1b1940f2902c3757e312a5/examples/models/qwen3_5/transformers.sh",
+      "kind": "repository",
+      "reviewed_on": "2026-10-26",
+      "review_depth": "content_reviewed",
+      "source_revision": "942be5a6120d46443f1b1940f2902c3757e312a5",
+      "review_note": "Qwen3.5-35B-A3B, OCR image dataset, LoRA and adapter inference example inspected without running it. Explicit model/template/data wiring is stronger than API compatibility; rank, learning rate, random split and hardware comments are not recommended business defaults."
+    },
+    {
+      "id": "swift-qwen35-loader-oct26",
+      "title": "ms-swift Qwen3.5 multimodal model loader",
+      "url": "https://github.com/modelscope/ms-swift/blob/942be5a6120d46443f1b1940f2902c3757e312a5/swift/model/models/qwen.py",
+      "kind": "repository",
+      "reviewed_on": "2026-10-26",
+      "review_depth": "content_reviewed",
+      "source_revision": "942be5a6120d46443f1b1940f2902c3757e312a5",
+      "review_note": "Qwen3_5Loader uses Qwen3_5ForConditionalGeneration; dense 0.8B/2B/4B/9B model registration and model architecture/visual hooks inspected. This is distinct from Qwen3-VL trainer dispatch. No weights loaded or optimizer run."
+    },
+    {
+      "id": "swift-qwen35-template-oct26",
+      "title": "ms-swift Qwen3.5 visual template and position handling",
+      "url": "https://github.com/modelscope/ms-swift/blob/942be5a6120d46443f1b1940f2902c3757e312a5/swift/template/templates/qwen.py",
+      "kind": "repository",
+      "reviewed_on": "2026-10-26",
+      "review_depth": "content_reviewed",
+      "source_revision": "942be5a6120d46443f1b1940f2902c3757e312a5",
+      "review_note": "Qwen3_5Template derives from the visual template; image grids, multimodal position handling and packing/version guard inspected. Template handles role whitespace/thinking formatting; freeze the exact render and serving parity in any later experiment. No local runtime verification."
+    },
+    {
+      "id": "intern-visual-release",
+      "title": "Intern-Decision original public training-code release",
+      "url": "https://github.com/InternLM/Intern-Decision/commit/63292c8b5e0f5d410a7159e0f1c14475b828839a",
+      "kind": "repository",
+      "reviewed_on": "2026-10-26",
+      "review_depth": "content_reviewed",
+      "source_revision": "63292c8b5e0f5d410a7159e0f1c14475b828839a",
+      "review_note": "GitHub commit metadata: Sep26 2026 08:03:14 UTC, training/inference/demo/evaluation release. Config, dataset, masked tokenizer, model and verification blobs match the Oct22 tree inspected here. Oct22 adds report/community/citation documentation. This is deeper review of an existing path, not a new Oct26 release or reproduction."
+    },
+    {
+      "id": "intern-visual-data-oct26",
+      "title": "Intern-Decision hard-label and local-image training contract",
+      "url": "https://github.com/InternLM/Intern-Decision/blob/565350244af860e1c276768cd80bdd9b8be93913/docs/DATA.md",
+      "kind": "official_docs",
+      "reviewed_on": "2026-10-26",
+      "review_depth": "content_reviewed",
+      "source_revision": "565350244af860e1c276768cd80bdd9b8be93913",
+      "review_note": "Read canonical JSONL, ordered local images resolved against MEDIA_ROOT, hard targets outside model evidence, 62 single-token symbols and strict row errors. Explicitly excludes original training data, private calibration/validation records, media and preparation pipelines. This document does not disclose the mixture; the separate paper does report its composition."
+    },
+    {
+      "id": "intern-visual-loader-oct26",
+      "title": "Intern-Decision actual UniversalDataset construction",
+      "url": "https://github.com/InternLM/Intern-Decision/blob/565350244af860e1c276768cd80bdd9b8be93913/src/inputs/dataset.py",
+      "kind": "repository",
+      "reviewed_on": "2026-10-26",
+      "review_depth": "content_reviewed",
+      "source_revision": "565350244af860e1c276768cd80bdd9b8be93913",
+      "review_note": "UniversalDatasetConfig.build constructs UniversalDataset(JsonlDataset), whose __getitem__ calls tokenize_fn(row, media_root). The qwen35.py class_name string alone does not identify the constructed dataset. Strict cache counts and no replacement rows; source only."
+    },
+    {
+      "id": "intern-visual-masking-oct26",
+      "title": "Intern-Decision visual tokenization, labels and collator",
+      "url": "https://github.com/InternLM/Intern-Decision/blob/565350244af860e1c276768cd80bdd9b8be93913/src/inputs/masked.py",
+      "kind": "repository",
+      "reviewed_on": "2026-10-26",
+      "review_depth": "content_reviewed",
+      "source_revision": "565350244af860e1c276768cd80bdd9b8be93913",
+      "review_note": "MaskedQwen3VLTokenizeFunction adds marker, validates one-token codes, passes images to the processor and calculates multimodal positions. Collator supplies pixels/grid and shifts marker targets to preceding logits. Config uses full-vocabulary masked CE, not candidate-subset CE or a supplied LoRA recipe. No training run."
+    },
+    {
+      "id": "intern-visual-model-oct26",
+      "title": "Intern-Decision frozen visual-feature injection",
+      "url": "https://github.com/InternLM/Intern-Decision/blob/565350244af860e1c276768cd80bdd9b8be93913/src/model/qwen.py",
+      "kind": "repository",
+      "reviewed_on": "2026-10-26",
+      "review_depth": "content_reviewed",
+      "source_revision": "565350244af860e1c276768cd80bdd9b8be93913",
+      "review_note": "DecisionQwen._prepare_llm_inputs computes frozen visual features and injects them into language embeddings; image input with missing grid or text-only forward rejects. Frozen vision/projector are enforced. Text-only batches participate in frozen visual collectives without becoming image training evidence. No local gradient audit."
+    },
+    {
+      "id": "intern-visual-save-oct26",
+      "title": "Intern-Decision checkpoint verification boundaries",
+      "url": "https://github.com/InternLM/Intern-Decision/blob/565350244af860e1c276768cd80bdd9b8be93913/scripts/verify_checkpoint.py",
+      "kind": "repository",
+      "reviewed_on": "2026-10-26",
+      "review_depth": "content_reviewed",
+      "source_revision": "565350244af860e1c276768cd80bdd9b8be93913",
+      "review_note": "Verifier checks unchanged saved visual tensors, at least one changed language-layer weight and per-rank load audit files. Related scripts/train.sh uses fresh work directory, local MODEL_PATH/tokenizer/processor and canonical user-supplied JSONL; qwen35.py requests final HF output without auto-resume. This checks specified tensor conditions, not inference quality, full export equivalence or release-data replay. None executed here."
+    },
+    {
+      "id": "d3-turbo-card",
+      "title": "D3-Turbo card: state reuse, localization and API alias",
+      "url": "https://huggingface.co/vllm-sr/d3-turbo/blob/a0f3e9e59ebd1202fe1d4de1c4c0f9a986758cbb/README.md",
+      "kind": "model_card",
+      "reviewed_on": "2026-10-26",
+      "review_depth": "content_reviewed",
+      "source_revision": "a0f3e9e59ebd1202fe1d4de1c4c0f9a986758cbb",
+      "review_note": "HF metadata: created Oct19 2026; latest tree Oct20 15:49:39 UTC. Card scope, Box/Track, API alias and evaluation caveats reviewed. Text/vision Index values are author estimates against a 0.3.2 snapshot, not official/current board results; no new numeric result imported. Box always emits a box, including absent targets; presence needs a separate judgment. Card/LICENSE declare Apache-2.0. No tensor download or inference."
+    },
+    {
+      "id": "d3-turbo-runtime",
+      "title": "D3-Turbo prefix_bidir StateOnce implementation",
+      "url": "https://huggingface.co/vllm-sr/d3-turbo/blob/a0f3e9e59ebd1202fe1d4de1c4c0f9a986758cbb/d3_runtime.py",
+      "kind": "repository",
+      "reviewed_on": "2026-10-26",
+      "review_depth": "content_reviewed",
+      "source_revision": "a0f3e9e59ebd1202fe1d4de1c4c0f9a986758cbb",
+      "review_note": "Read attention/StateOnce implementation: state attends within state; each question branch reads cached state and its own block. Full-attention state K/V plus causal DeltaNet recurrent/convolution state are reused. This is not cross-question joint attention as in Decider v1.2. Package switch can revert to per-question rows. No runtime executed."
+    },
+    {
+      "id": "d3-turbo-wrapper",
+      "title": "D3-Turbo wrapper still refuses training and generic saving",
+      "url": "https://huggingface.co/vllm-sr/d3-turbo/blob/a0f3e9e59ebd1202fe1d4de1c4c0f9a986758cbb/modeling_d3.py",
+      "kind": "repository",
+      "reviewed_on": "2026-10-26",
+      "review_depth": "content_reviewed",
+      "source_revision": "a0f3e9e59ebd1202fe1d4de1c4c0f9a986758cbb",
+      "review_note": "train(True) raises inference-only RuntimeError; save_pretrained and push_to_hub are not generic training export paths. Separate implementations remain possible, but image training/LoRA cannot be inferred from multimodal inference or the Qwen architecture. No local test of the wrapper."
+    },
+    {
+      "id": "d3-turbo-config",
+      "title": "D3-Turbo fixed decision configuration",
+      "url": "https://huggingface.co/vllm-sr/d3-turbo/blob/a0f3e9e59ebd1202fe1d4de1c4c0f9a986758cbb/decision_config.json",
+      "kind": "repository",
+      "reviewed_on": "2026-10-26",
+      "review_depth": "content_reviewed",
+      "source_revision": "a0f3e9e59ebd1202fe1d4de1c4c0f9a986758cbb",
+      "review_note": "prefix_bidir, 255 code IDs, FP32 readout, T=1, validated_length=32768 and Box calibration assets inspected alongside config/manifest. Manifest supplies hashes, not this review independently hashing weights. Backbone context capacity is distinct from validated_length/long-context card mode; localization calibration does not calibrate intent risk."
+    },
+    {
+      "id": "d3-turbo-eval-runtime",
+      "title": "D3-Turbo external evaluator runtime note",
+      "url": "https://huggingface.co/vllm-sr/d3-turbo/blob/a0f3e9e59ebd1202fe1d4de1c4c0f9a986758cbb/.eval_results/vllm-sr__d3-turbo.yaml",
+      "kind": "evaluation_report",
+      "reviewed_on": "2026-10-26",
+      "review_depth": "content_reviewed",
+      "source_revision": "a0f3e9e59ebd1202fe1d4de1c4c0f9a986758cbb",
+      "review_note": "Oct19 evaluator metadata says native AutoModel.system_one used because vLLM nightly did not then support prefix_bidir. This historical limitation does not prove current nightly failure. SR Engine and native upstream vLLM are separate paths; bucket logs/metrics not audited or reproduced, and no scores imported."
+    },
+    {
+      "id": "clef-community-training",
+      "title": "Community Clef adapter and FP32 head training loop",
+      "url": "https://github.com/MersivMedia/clef-finetune/blob/c83f7bc1acc23c81ad0de838510c59c48bf60c79/src/clef_finetune/train.py",
+      "kind": "repository",
+      "reviewed_on": "2026-10-26",
+      "review_depth": "content_reviewed",
+      "source_revision": "c83f7bc1acc23c81ad0de838510c59c48bf60c79",
+      "review_note": "Oct2 v0.1.0 source: resolve_images -> encode_record(processor) -> collate_records -> model -> CE/Brier loss/backward; adapter and head saved separately. Code LICENSE Apache-2.0 inspected. Static image-to-loss wiring is not a real-weight image-training run; community implementation does not reproduce proprietary RLCD."
+    },
+    {
+      "id": "clef-community-status",
+      "title": "Community Clef fine-tuning explicit unverified cases",
+      "url": "https://github.com/MersivMedia/clef-finetune/blob/c83f7bc1acc23c81ad0de838510c59c48bf60c79/docs/KNOWN_ISSUES.md",
+      "kind": "official_docs",
+      "reviewed_on": "2026-10-26",
+      "review_depth": "content_reviewed",
+      "source_revision": "c83f7bc1acc23c81ad0de838510c59c48bf60c79",
+      "review_note": "Maintainer explicitly reports no real Clef/Clef-Flash GPU training, no image/video training test, no multi-GPU/QLoRA validation; tiny random CPU plumbing only. Documents option sorting, exact LoRA module regex after reload and FP32 head handling. These tests were not rerun here. Ordinal EMD is supervised loss, not RLCD."
+    },
+    {
+      "id": "mlx-image-training-boundary",
+      "title": "mlx-decision rejects media in training records",
+      "url": "https://github.com/armbues/mlx-decision/blob/d3e239a8c8c2afb362725f94c5076b90221168a5/src/mlx_decision/data/format.py",
+      "kind": "repository",
+      "reviewed_on": "2026-10-26",
+      "review_depth": "content_reviewed",
+      "source_revision": "d3e239a8c8c2afb362725f94c5076b90221168a5",
+      "review_note": "Training parser rejects nonempty images/videos and images embedded in state. Mac image inference cannot establish multimodal adaptation. Read only; no port or local model run."
+    },
+    {
+      "id": "mlx-training-scope",
+      "title": "mlx-decision provisional training scope",
+      "url": "https://github.com/armbues/mlx-decision/blob/d3e239a8c8c2afb362725f94c5076b90221168a5/docs/TRAINING.md",
+      "kind": "official_docs",
+      "reviewed_on": "2026-10-26",
+      "review_depth": "content_reviewed",
+      "source_revision": "d3e239a8c8c2afb362725f94c5076b90221168a5",
+      "review_note": "Docs explicitly exclude image training and LoRA/full adaptation of Clef/pplx/d3/H2O-Lightning/d1; supported fitting changes only the head/readout with networks frozen. No conclusion about all MLX frameworks or future versions. Does not change the separate historical FluidUse records."
+    },
+    {
+      "id": "rep2act-paper-v1",
+      "title": "From Knowing to Abstaining / VAD-R / Rep2Act v1",
+      "url": "https://arxiv.org/html/2609.32653v1",
+      "kind": "paper",
+      "reviewed_on": "2026-10-26",
+      "review_depth": "content_reviewed",
+      "source_revision": null,
+      "review_note": "Sep26 2026 v1; read benchmark design, method, metrics and appendix. Evidence-gap labels and separate routing supervision motivate annotation experiments. A-Acc measures answer/abstain action agreement, not final-answer correctness. Author-defined balanced split/model judges limit transfer. Paper CC BY 4.0; no release code/data endpoint or reusable dataset license established here. No performance number imported or experiment reproduced."
+    },
+    {
+      "id": "vltest-paper-v1",
+      "title": "VLTest joint image-text failure diagnosis v1",
+      "url": "https://arxiv.org/html/2610.30794v1",
+      "kind": "paper",
+      "reviewed_on": "2026-10-26",
+      "review_depth": "content_reviewed",
+      "source_revision": null,
+      "review_note": "Oct22 2026 v1; read method, controls, oracle and limitations. Four matched cells and expected-answer preservation support robustness-test design; seed-correct filtering differs from representative traffic risk. Treat as reviewed preprint, without independently verifying its TOSEM header/publication status. Paper CC BY 4.0; no scores imported."
+    },
+    {
+      "id": "vltest-code",
+      "title": "VLTest replication-code scope and missing run settings",
+      "url": "https://github.com/beanduan22/VLTest/blob/b5861f2f990a63a1b8d0af37881471cf9034e66f/README.md",
+      "kind": "repository",
+      "reviewed_on": "2026-10-26",
+      "review_depth": "content_reviewed",
+      "source_revision": "b5861f2f990a63a1b8d0af37881471cf9034e66f",
+      "review_note": "Oct22 fixed README and MIT LICENSE read. Local seed manifest, external models/assets, separate pilot proxy thresholds and human annotation audit required. Additional open/API model adapters and concrete budget/threshold placeholders remain for the researcher. Paper automated-oracle description must not be equated to a complete out-of-box reproduction from this README. No dependencies installed or code executed; underlying dataset/image terms separate."
     }
   ],
   "entries": [
@@ -2573,7 +2823,9 @@
         "clef-launch",
         "clef-card",
         "clef-flash-card",
-        "clef-hosted"
+        "clef-hosted",
+        "clef-community-training",
+        "clef-community-status"
       ],
       "summary": {
         "en": "Multimodal Qwen backbones with a joint schema head for typed decisions and a Jev/SystemOne-compatible wrapper.",
@@ -2584,17 +2836,17 @@
         "zh": "比较文本／图像分类、分流与有序评分，并按具体任务衡量错误成本。"
       },
       "caveat": {
-        "en": "Vendor benchmarks have task-specific trade-offs. API compatibility and probability outputs do not establish calibrated business risk; local inference needs the custom schema runtime.",
-        "zh": "厂商评测存在任务间取舍；接口兼容和概率输出不等于业务风险已校准，本地推理需要定制 schema 运行代码。"
+        "en": "Vendor benchmarks have task-specific trade-offs. API compatibility and probability outputs do not establish calibrated business risk; local inference needs the custom schema runtime. Community adaptation is experimental; real-weight multimodal training/export remains unverified.",
+        "zh": "厂商评测存在任务间取舍；接口兼容和概率输出不等于业务风险已校准，本地推理需要定制 schema 运行代码。 社区适配属于实验实现，真实权重多模态训练／导出尚未验证。"
       },
-      "reviewed_on": "2026-10-06",
+      "reviewed_on": "2026-10-26",
       "mechanism": {
         "en": "Joint transformer head routes state evidence to questions and jointly scores their allowed options in one forward pass; no free-form answer generation.",
         "zh": "联合 Transformer 判断头把状态证据路由到问题，在一次前向计算中对各题允许的选项评分，不生成自由文本答案。"
       },
       "training": {
-        "en": "Cloudflare reports rank-256 LoRA plus the routing head, label-smoothed cross-entropy, Brier loss and a secondary RLCD objective on internal synthetic data; the full data/recipe was not audited.",
-        "zh": "Cloudflare 称使用 rank-256 LoRA 与路由头、标签平滑交叉熵、Brier 损失及辅助 RLCD 目标，训练数据为内部合成数据；完整数据和配方未审计。"
+        "en": "Cloudflare reports rank-256 LoRA plus the routing head, label-smoothed cross-entropy, Brier loss and a secondary RLCD objective on internal synthetic data; the full data/recipe was not audited. Separate Oct2 MersivMedia community adapter wires image encoding into supervised LoRA+FP32-head loss, but explicitly has no real Clef GPU run or image-training test. Tiny random CPU checks and supervised ordinal EMD do not establish image effectiveness or reproduce RLCD.",
+        "zh": "Cloudflare 称使用 rank-256 LoRA 与路由头、标签平滑交叉熵、Brier 损失及辅助 RLCD 目标，训练数据为内部合成数据；完整数据和配方未审计。 独立的 10 月 2 日 MersivMedia 社区实现将图像编码接入 LoRA＋FP32 head 监督损失，但明确没有真实 Clef GPU run 或图像训练测试；随机小模型 CPU 检查及监督 ordinal EMD 不证明图片效果，也不等于 RLCD 复现。"
       },
       "availability": {
         "en": "Public weights and custom load_release_model/systemone helpers; also Workers AI. The hosted Clef page lists 65,536 tokens, while local encode_record defaults to 16,384. Check the specific endpoint schema for supported media and truncation.",
@@ -3434,7 +3686,7 @@
     },
     {
       "id": "decision3",
-      "name": "vLLM-SR Decision 3.0",
+      "name": "vLLM-SR Decision 3.0 / D3-Turbo",
       "category": "core_models",
       "url": "https://huggingface.co/collections/vllm-sr/decision-30",
       "source_ids": [
@@ -3472,39 +3724,44 @@
         "d3-training-boundary",
         "vis-d3-guide",
         "vis-d3-training",
-        "vis-d3-export"
+        "vis-d3-export",
+        "d3-turbo-card",
+        "d3-turbo-runtime",
+        "d3-turbo-wrapper",
+        "d3-turbo-config",
+        "d3-turbo-eval-runtime"
       ],
-      "reviewed_on": "2026-10-17",
+      "reviewed_on": "2026-10-26",
       "weight_revision": null,
       "summary": {
-        "en": "Six multimodal code-readout checkpoints; native vLLM main support added October 14, with an independent prompt read per question.",
-        "zh": "六个多模态 code-readout 检查点；10 月 14 日新增原生 vLLM main 支持，每题仍独立读取 prompt。"
+        "en": "Multimodal 255-code family: classic per-question encoding and Turbo shared-state question branches are distinct releases.",
+        "zh": "多模态 255 答码系列：经典版逐题编码，Turbo 复用状态后分题读出，须分开记录发布身份。"
       },
       "use": {
         "en": "Local text/image/video classification, scoring and routing; compare sizes at fixed input and candidate budgets.",
         "zh": "本地文本／图像／视频分类、评分与路由；固定输入和候选预算比较各型号。"
       },
       "caveat": {
-        "en": "Index versions and public-only scores differ. In the Oct15 snapshot, weight/calibration identities were unchanged and the text numerical leader shared the top tie band. That serving review required post-merge/nightly native vLLM; LoRA and CUDA were unmeasured in the integration report.",
-        "zh": "Index 各版本与公共分数不可混用；10 月 15 日快照的权重／校准标识未变，文本数值领先者处于共享第一平局带；该次服务核验要求原生 vLLM 合并后／nightly 版本，集成报告未测 LoRA 和 CUDA。"
+        "en": "Index versions and public-only scores differ. In the Oct15 snapshot, weight/calibration identities were unchanged and the text numerical leader shared the top tie band. That serving review required post-merge/nightly native vLLM; LoRA and CUDA were unmeasured in the integration report. Turbo Index figures are author estimates, not official board updates; no numeric gain imported. API aliases are not frozen checkpoint identities.",
+        "zh": "Index 各版本与公共分数不可混用；10 月 15 日快照的权重／校准标识未变，文本数值领先者处于共享第一平局带；该次服务核验要求原生 vLLM 合并后／nightly 版本，集成报告未测 LoRA 和 CUDA。 Turbo 指数为作者估计，未当作官方榜单或导入新数值；API 别名不是冻结检查点身份。"
       },
       "scale": {
         "en": "Card counts / nominal base labels: d3 26.09B / 27B; flash 8.39B / 9B; mini 4.54B / 4B; nano 2.21B / 2B; lite 0.85B / 0.8B; edge 0.59B / 0.6B. Counts include vision; manifests also count the readout.",
         "zh": "模型卡参数量／宣传基座尺寸：d3 26.09B／27B；flash 8.39B／9B；mini 4.54B／4B；nano 2.21B／2B；lite 0.85B／0.8B；edge 0.59B／0.6B。包含视觉编码器，manifest 另计读出头。"
       },
       "mechanism": {
-        "en": "Last prompt position → 255-code FP32 readout → mask unused codes → temperature 1.0 softmax. Questions have separate state/question/option rows; the package runtime's default batches of 8 do not encode all questions as one shared text sequence. Qwen full-attention layers are noncausal; DeltaNet layers stay causal. The pinned package choice/score confidence is 1-H(P)/log(K) for K>1 (one option: 1), a concentration statistic rather than a calibrated probability of correctness; native/backend semantics must be checked separately.",
-        "zh": "最后 prompt 位置 → 255-code FP32 读出 → 掩蔽未使用 code → 温度 1.0 softmax。每题有独立状态／问题／选项行；包运行库默认 8 行批处理不等于所有问题共用一次序列编码。Qwen full-attention 层双向，DeltaNet 层保持因果。 固定包的 choice／score confidence 为 K>1 时的 1-H(P)/log(K)（单候选为 1），是分布集中度统计量，不是已校准的正确概率；原生／其他后端语义须另查。"
+        "en": "Classic D3: Last prompt position → 255-code FP32 readout → mask unused codes → temperature 1.0 softmax. Questions have separate state/question/option rows; the package runtime's default batches of 8 do not encode all questions as one shared text sequence. Qwen full-attention layers are noncausal; DeltaNet layers stay causal. The pinned package choice/score confidence is 1-H(P)/log(K) for K>1 (one option: 1), a concentration statistic rather than a calibrated probability of correctness; native/backend semantics must be checked separately. Turbo prefix_bidir computes state once and runs separate question blocks on cached state; it does not let questions attend to one another.",
+        "zh": "经典 D3：最后 prompt 位置 → 255-code FP32 读出 → 掩蔽未使用 code → 温度 1.0 softmax。每题有独立状态／问题／选项行；包运行库默认 8 行批处理不等于所有问题共用一次序列编码。Qwen full-attention 层双向，DeltaNet 层保持因果。 固定包的 choice／score confidence 为 K>1 时的 1-H(P)/log(K)（单候选为 1），是分布集中度统计量，不是已校准的正确概率；原生／其他后端语义须另查。 Turbo prefix_bidir 先算一次状态，再让各题独立分支读取缓存；不是题目之间相互注意。"
       },
       "training": {
-        "en": "d3 manifest declares Qwen3.8-27B, with qwen3_5 runtime architecture; others declare Qwen3.5, including edge derived from the 0.8B base. Public training data/recipe, overlap audits and held-out calibration reports were not established. Softmax and T=1 do not establish empirical calibration. Separate third-party Vis Decisions 0.6.1 implements text-only full or LoRA adaptation: language backbone/adapters plus a trainable 255-code readout, valid-option CE and merged FP32 export. It strips the vision tower; this does not establish image/video fine-tuning or reproduce the original D3 training recipe.",
-        "zh": "d3 manifest 声明 Qwen3.8-27B，运行架构为 qwen3_5；其他基于 Qwen3.5，edge 也源自 0.8B 基座。完整训练数据／配方、重叠审计及保留集校准报告尚未确证；softmax 和 T=1 不证明经验校准。 独立第三方 Vis Decisions 0.6.1 实现文本 full／LoRA 适配：训练语言骨干／adapter 及完整 255 答码头，使用有效候选 CE 与合并 FP32 导出。它去掉视觉塔，不能证明图像／视频微调，也不等于复现 D3 原始训练配方。"
+        "en": "d3 manifest declares Qwen3.8-27B, with qwen3_5 runtime architecture; others declare Qwen3.5, including edge derived from the 0.8B base. Public training data/recipe, overlap audits and held-out calibration reports were not established. Softmax and T=1 do not establish empirical calibration. Separate third-party Vis Decisions 0.6.1 implements text-only full or LoRA adaptation: language backbone/adapters plus a trainable 255-code readout, valid-option CE and merged FP32 export. It strips the vision tower; this does not establish image/video fine-tuning or reproduce the original D3 training recipe. Turbo retains an inference-only train(True) guard and non-generic saving; no released image-training recipe verified. Its new inference mechanism does not change this boundary.",
+        "zh": "d3 manifest 声明 Qwen3.8-27B，运行架构为 qwen3_5；其他基于 Qwen3.5，edge 也源自 0.8B 基座。完整训练数据／配方、重叠审计及保留集校准报告尚未确证；softmax 和 T=1 不证明经验校准。 独立第三方 Vis Decisions 0.6.1 实现文本 full／LoRA 适配：训练语言骨干／adapter 及完整 255 答码头，使用有效候选 CE 与合并 FP32 导出。它去掉视觉塔，不能证明图像／视频微调，也不等于复现 D3 原始训练配方。 Turbo 仍由 train(True) 拒绝训练，保存也不是通用训练导出；未核实公开图像训练配方，新增推理机制不改变此边界。"
       },
       "availability": {
-        "en": "v3.1.0 weights retained; custom Transformers and vLLM-SR dev Engine paths remain. Native vLLM /v1/systemone merged as 89cab550 on Oct14; the Oct15 review found stable v0.31.0 predating support. D3 uses classify: no prefix caching/chunked prefill, up to 64 questions and 255 choice options; error/confidence/usage semantics differ from the package runtime. Core ML is separate. Video: 2 fps, at most 32 frames; no audio validation. No verified D3 multimodal fine-tuning recipe established here. Null package token limits and backbone context configuration are not validated long-context quality. The inspected official modeling_d3.py rejects train(True); this wrapper restriction does not rule out separate training implementations such as the text-only Vis path. Generic multimodal PEFT support remains unverified.",
-        "zh": "保留 v3.1.0 权重、定制 Transformers 与 vLLM-SR dev Engine。原生 vLLM /v1/systemone 于 10 月 14 日以 89cab550 合入；10 月 15 日核验时的正式版 v0.31.0 早于该支持。D3 走 classify：关闭 prefix cache／chunked prefill，最多 64 题、255 个 choice 选项；错误／confidence／usage 与包运行库不同。Core ML 独立；视频 2 fps、最多 32 帧，未验证音频。本版未确证 D3 多模态微调配方。包中的 null token 上限及骨干上下文配置不等于长上下文质量验收。已阅官方 modeling_d3.py 的 train(True) 拒绝训练；这限制该封装，不排除 Vis 文本路径等独立训练实现。通用多模态 PEFT 支持仍未确证。"
+        "en": "v3.1.0 weights retained; custom Transformers and vLLM-SR dev Engine paths remain. Native vLLM /v1/systemone merged as 89cab550 on Oct14; the Oct15 review found stable v0.31.0 predating support. D3 uses classify: no prefix caching/chunked prefill, up to 64 questions and 255 choice options; error/confidence/usage semantics differ from the package runtime. Core ML is separate. Video: 2 fps, at most 32 frames; no audio validation. No verified D3 multimodal fine-tuning recipe established here. Null package token limits and backbone context configuration are not validated long-context quality. The inspected official modeling_d3.py rejects train(True); this wrapper restriction does not rule out separate training implementations such as the text-only Vis path. Generic multimodal PEFT support remains unverified. Oct19 Turbo/Oct20 card: own AutoModel and SR Engine paths, Box/Track; API alias vllm-sr/d3 serves Turbo. Oct19 external metadata did not support prefix_bidir in native vLLM nightly; do not silently transfer classic support. Box output alone is not presence evidence.",
+        "zh": "保留 v3.1.0 权重、定制 Transformers 与 vLLM-SR dev Engine。原生 vLLM /v1/systemone 于 10 月 14 日以 89cab550 合入；10 月 15 日核验时的正式版 v0.31.0 早于该支持。D3 走 classify：关闭 prefix cache／chunked prefill，最多 64 题、255 个 choice 选项；错误／confidence／usage 与包运行库不同。Core ML 独立；视频 2 fps、最多 32 帧，未验证音频。本版未确证 D3 多模态微调配方。包中的 null token 上限及骨干上下文配置不等于长上下文质量验收。已阅官方 modeling_d3.py 的 train(True) 拒绝训练；这限制该封装，不排除 Vis 文本路径等独立训练实现。通用多模态 PEFT 支持仍未确证。 10 月 19 日 Turbo／20 日卡：专属 AutoModel 与 SR Engine 路径、Box／Track；API 的 vllm-sr/d3 别名实际服务 Turbo。19 日外评元数据称原生 vLLM nightly 不支持 prefix_bidir，不能照搬经典版支持；框输出本身不是目标存在证据。"
       },
-      "license_note": "All six pinned cards/manifests declare Apache-2.0 for weights, readout, runtime and listed Qwen bases. Public weights do not establish public training data. Per-package source revisions and author-supplied identity hashes are in the source register; no family-wide weight hash or local binary verification is claimed.",
+      "license_note": "All six pinned cards/manifests declare Apache-2.0 for weights, readout, runtime and listed Qwen bases. Public weights do not establish public training data. Per-package source revisions and author-supplied identity hashes are in the source register; no family-wide weight hash or local binary verification is claimed. Turbo fixed card, LICENSE and manifest also declare Apache-2.0; manifest hashes are author supplied and were not checked against weight bytes here.",
       "tags": [
         "typed-decisions",
         "code-readout",
@@ -3555,9 +3812,15 @@
         "fluiduse",
         "intern-training",
         "intern-training-inputs",
-        "intern-paper-v1"
+        "intern-paper-v1",
+        "intern-visual-release",
+        "intern-visual-data-oct26",
+        "intern-visual-loader-oct26",
+        "intern-visual-masking-oct26",
+        "intern-visual-model-oct26",
+        "intern-visual-save-oct26"
       ],
-      "reviewed_on": "2026-10-17",
+      "reviewed_on": "2026-10-26",
       "weight_revision": null,
       "summary": {
         "en": "Qwen3.5 multimodal 0.8B/2B/4B family; multiple typed fields scored from one causal masked assistant skeleton.",
@@ -3580,8 +3843,8 @@
         "zh": "一次因果前向，从每个 `<decision>` 前一位置读取候选 token logits；最多 16 字段／62 选项，不生成自由文本。字段共享 schema 序列，须验证顺序／上下文不变性；confidence=max(P)，不同于 Jev 的分布统计量。"
       },
       "training": {
-        "en": "Decision-tuned language backbone; frozen vision tower/projector. Cards report NLL temperature fitting on 1728 calibration and 1693 separate validation cases: 0.8B T=2.747760550703, 2B T=2.100509348278, 4B T=1.99241824. Private original records and full data construction remain unavailable. Inspected XTuner configuration trains full language parameters with masked full-vocabulary answer-token CE, not LoRA; gold symbols remain labels, while the input retains placeholders. Paper v1 reports 17880 training samples / 23500 decisions, including 5500 image-bearing samples, for full language-backbone tuning with vision/projector frozen. This is not LoRA effectiveness evidence or verification that the full raw training data are public.",
-        "zh": "微调语言骨干，冻结视觉 tower／projector。卡片称用 1728 校准及 1693 独立验证样本按 NLL 拟合温度：0.8B 为 2.747760550703、2B 为 2.100509348278、4B 为 1.99241824；原始私有记录及完整数据构建未公开。已审阅 XTuner 配置以 masked 完整词表 answer-token CE 训练语言全参数，并非 LoRA；金标答码只在 labels，输入保持占位符。 论文 v1 称有 17880 条训练样本／23500 个决策，其中 5500 条带图；训练语言骨干、冻结视觉塔／projector。它不是 LoRA 效果证据，也不代表已核实完整原始训练数据公开。"
+        "en": "Decision-tuned language backbone; frozen vision tower/projector. Cards report NLL temperature fitting on 1728 calibration and 1693 separate validation cases: 0.8B T=2.747760550703, 2B T=2.100509348278, 4B T=1.99241824. Private original records and full data construction remain unavailable. Inspected XTuner configuration trains full language parameters with masked full-vocabulary answer-token CE, not LoRA; gold symbols remain labels, while the input retains placeholders. Paper v1 reports 17880 training samples / 23500 decisions, including 5500 image-bearing samples, for full language-backbone tuning with vision/projector frozen. This is not LoRA effectiveness evidence or verification that the full raw training data are public. Oct26 deeper audit confirms Sep26 code, not a new release: MEDIA_ROOT selects visual tokenization; actual UniversalDataset passes pixels/grid through the collator to frozen visual-feature injection. Missing image grids reject. Final HF saving/tensor-audit tools exist, but were not run.",
+        "zh": "微调语言骨干，冻结视觉 tower／projector。卡片称用 1728 校准及 1693 独立验证样本按 NLL 拟合温度：0.8B 为 2.747760550703、2B 为 2.100509348278、4B 为 1.99241824；原始私有记录及完整数据构建未公开。已审阅 XTuner 配置以 masked 完整词表 answer-token CE 训练语言全参数，并非 LoRA；金标答码只在 labels，输入保持占位符。 论文 v1 称有 17880 条训练样本／23500 个决策，其中 5500 条带图；训练语言骨干、冻结视觉塔／projector。它不是 LoRA 效果证据，也不代表已核实完整原始训练数据公开。 10 月 26 日深化核验的是 9 月 26 日源码而非新发布：MEDIA_ROOT 选择视觉分词，实际 UniversalDataset 经 collator 把 pixels／grid 送入冻结视觉特征注入；缺 grid 拒绝。存在最终 HF 保存／张量审计工具，本次未执行。"
       },
       "availability": {
         "en": "Public HF weights, own inference.py and repository HF/XTuner paths. HF card default 8192 tokens rejects overlength, up to 8 images. Core ML 0.8B port in FluidUse is text-only and uses smaller fixed buckets; it does not inherit HF image/context support.",
@@ -4041,6 +4304,81 @@
       "caveat": {
         "en": "One English legal task, synthetic absence, public-text training exposure unresolved. Logged API evaluation is not local reproduction; billed call comparisons omit human-review cost.",
         "zh": "单一英文法律任务、构造性缺失，公共文本训练暴露未排除；API 日志评估不等于本仓库复现，调用费用对比不含人工复核成本。"
+      }
+    },
+    {
+      "id": "qwen-image-sft",
+      "name": "Qwen VLM image-supervised SFT / LoRA",
+      "category": "baselines",
+      "url": "https://github.com/QwenLM/Qwen3-VL/blob/96588727e44c78b25ba03ea03b8e12f7e64fd0da/qwen-vl-finetune/README.md",
+      "source_ids": [
+        "qwen-vl-train-oct26",
+        "qwen-vl-data-oct26",
+        "qwen-vl-training-readme-oct26",
+        "swift-qwen35-guide-oct26",
+        "swift-qwen35-example-oct26",
+        "swift-qwen35-loader-oct26",
+        "swift-qwen35-template-oct26",
+        "mlx-image-training-boundary",
+        "mlx-training-scope"
+      ],
+      "reviewed_on": "2026-10-26",
+      "summary": {
+        "en": "Inspectable image-to-supervised-loss routes: official Qwen2/2.5/3-VL trainer and separate ms-swift Qwen3.5 LoRA path.",
+        "zh": "可查图像到监督损失的路径：Qwen2／2.5／3-VL 官方 trainer，另有 ms-swift Qwen3.5 LoRA。"
+      },
+      "use": {
+        "en": "Use short-label SFT as a matched baseline before adding candidate-logit losses or a separate head; freeze base, data and image processing.",
+        "zh": "加候选 logits 损失或独立 head 前，先做同条件短标签 SFT；固定底座、数据与视觉处理。"
+      },
+      "caveat": {
+        "en": "Code support is not a business-quality result. Qwen3-VL dispatch does not certify Qwen3.5; mlx-decision rejects image training. Code Apache-2.0; checkpoint/data rights and export parity require separate checks.",
+        "zh": "代码支持不是业务效果；Qwen3-VL 分派不认证 Qwen3.5，mlx-decision 拒收图片训练。代码 Apache-2.0，检查点／数据权利及导出等价需另核。"
+      }
+    },
+    {
+      "id": "rep2act-vadr",
+      "name": "Rep2Act / VAD-R",
+      "category": "reliability",
+      "url": "https://arxiv.org/html/2609.32653v1",
+      "source_ids": [
+        "rep2act-paper-v1"
+      ],
+      "reviewed_on": "2026-10-26",
+      "summary": {
+        "en": "Evidence-gap annotation and answerability-to-action alignment; newly cataloged Sep26 preprint.",
+        "zh": "证据缺口标注及可答性到动作的对齐；本次新收录 9 月 26 日预印本。"
+      },
+      "use": {
+        "en": "Separate intent, sufficiency and next-action supervision; compare an explicit sufficiency gate with generated abstention.",
+        "zh": "分开意图、充分性及下一步监督；比较显式充分性门控与生成式拒答。"
+      },
+      "caveat": {
+        "en": "A-Acc is action agreement, not answer correctness. Model judges/balanced splits limit transfer; code/data availability and reuse rights remain unverified. No local reproduction.",
+        "zh": "A-Acc 是动作一致率而非答案正确率；模型裁判／平衡划分限制外推，代码数据可得性和复用许可未核实，未本地复现。"
+      }
+    },
+    {
+      "id": "vltest",
+      "name": "VLTest joint image-text testing",
+      "category": "evaluation",
+      "url": "https://arxiv.org/html/2610.30794v1",
+      "source_ids": [
+        "vltest-paper-v1",
+        "vltest-code"
+      ],
+      "reviewed_on": "2026-10-26",
+      "summary": {
+        "en": "Oct22 method uses matched original/image/text/joint controls and checks that mutations preserve the expected answer.",
+        "zh": "10 月 22 日方法以原始／仅改图／仅改文／联合四格对照，核查扰动是否保持预期答案。"
+      },
+      "use": {
+        "en": "Audit joint failures separately from single-modality errors; retain natural conflicts and relabel evidence-changing edits.",
+        "zh": "将联合失效与单模态错误分开审计；保留自然冲突，对改变证据的编辑重标。"
+      },
+      "caveat": {
+        "en": "Seed-correct diagnostic selection is not traffic risk. MIT code needs assets, settings, adapters and annotation; paper/code oracle paths differ. No failure counts reproduced here.",
+        "zh": "仅种子答对的诊断选择不是流量风险；MIT 代码仍需资产、设置、适配与标注，论文／代码裁判路径有差异，本仓库未复现失效计数。"
       }
     }
   ]

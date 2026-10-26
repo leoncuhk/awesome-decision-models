@@ -1720,3 +1720,203 @@
 - Source revision: `f3d49c6de7d5943bb1981c0a55d504f1bae5fa33`
 - Note: README at Oct21 commit inspected: paired data, exact prompts, raw API logs, cost/result summaries and recalculation scripts listed. No code executed or artifacts regenerated here. MIT code; CaseHOLD material retains upstream terms. Stored evaluations are reported evidence, not this repository rerunning them.
 
+<a id="qwen-vl-train-oct26"></a>
+## QwenVL official image SFT and LoRA trainer
+
+- Source: https://github.com/QwenLM/Qwen3-VL/blob/96588727e44c78b25ba03ea03b8e12f7e64fd0da/qwen-vl-finetune/qwenvl/train/train_qwen.py
+- Kind: `repository`; review depth: `content_reviewed`; reviewed: 2026-10-26
+- Source revision: `96588727e44c78b25ba03ea03b8e12f7e64fd0da`
+- Note: Trainer body inspected: Qwen2-VL/2.5-VL/3-VL dense/MoE class dispatch, matching AutoProcessor, PEFT attention projections, supervised data module, model and processor saving. This dispatch is not Qwen3.5 support. Latest inspected tree commit is Jan30 2026, not an Oct26 feature release. No model code executed. Repository LICENSE is Apache-2.0; selected checkpoint/data terms are separate.
+
+<a id="qwen-vl-data-oct26"></a>
+## QwenVL official visual tensors and answer masking
+
+- Source: https://github.com/QwenLM/Qwen3-VL/blob/96588727e44c78b25ba03ea03b8e12f7e64fd0da/qwen-vl-finetune/qwenvl/data/data_processor.py
+- Kind: `repository`; review depth: `content_reviewed`; reviewed: 2026-10-26
+- Source revision: `96588727e44c78b25ba03ea03b8e12f7e64fd0da`
+- Note: Image processing, pixel_values/image_grid_thw, multimodal positions and assistant-label masking inspected. The ordinary collator slices tokens to model_max_length; audit retained evidence and labels rather than assume overlength examples fail closed. Source-path inspection is not a successful training or export run.
+
+<a id="qwen-vl-training-readme-oct26"></a>
+## QwenVL training formats, dependencies and scope
+
+- Source: https://github.com/QwenLM/Qwen3-VL/blob/96588727e44c78b25ba03ea03b8e12f7e64fd0da/qwen-vl-finetune/README.md
+- Kind: `official_docs`; review depth: `content_reviewed`; reviewed: 2026-10-26
+- Source revision: `96588727e44c78b25ba03ea03b8e12f7e64fd0da`
+- Note: Read image/conversation format, full/LoRA flags and dependencies. Image markers must match media. Documentation examples are starting points, not a locally verified environment; MoE/ZeRO restrictions and the exact model class matter. Do not use its random validation fraction as a group/time split protocol.
+
+<a id="swift-qwen35-guide-oct26"></a>
+## ms-swift Qwen3.5/3.6/3.8 image-bearing LoRA guide
+
+- Source: https://github.com/modelscope/ms-swift/blob/942be5a6120d46443f1b1940f2902c3757e312a5/docs/source_en/BestPractices/Qwen3_8-Best-Practice.md
+- Kind: `official_docs`; review depth: `content_reviewed`; reviewed: 2026-10-26
+- Source revision: `942be5a6120d46443f1b1940f2902c3757e312a5`
+- Note: Read image/messages custom format, dense Qwen3.5-4B LoRA with OCR data, MoE training, inference and version caveats. Source also describes Qwen3.6/3.8 but this review does not validate every replacement checkpoint/backend. Repository LICENSE Apache-2.0 inspected. Oct26 tree head concerns RLHF log-softmax performance, not a new image-training release; demonstration memory/time is not a local measurement.
+
+<a id="swift-qwen35-example-oct26"></a>
+## ms-swift Qwen3.5 image OCR LoRA example
+
+- Source: https://github.com/modelscope/ms-swift/blob/942be5a6120d46443f1b1940f2902c3757e312a5/examples/models/qwen3_5/transformers.sh
+- Kind: `repository`; review depth: `content_reviewed`; reviewed: 2026-10-26
+- Source revision: `942be5a6120d46443f1b1940f2902c3757e312a5`
+- Note: Qwen3.5-35B-A3B, OCR image dataset, LoRA and adapter inference example inspected without running it. Explicit model/template/data wiring is stronger than API compatibility; rank, learning rate, random split and hardware comments are not recommended business defaults.
+
+<a id="swift-qwen35-loader-oct26"></a>
+## ms-swift Qwen3.5 multimodal model loader
+
+- Source: https://github.com/modelscope/ms-swift/blob/942be5a6120d46443f1b1940f2902c3757e312a5/swift/model/models/qwen.py
+- Kind: `repository`; review depth: `content_reviewed`; reviewed: 2026-10-26
+- Source revision: `942be5a6120d46443f1b1940f2902c3757e312a5`
+- Note: Qwen3_5Loader uses Qwen3_5ForConditionalGeneration; dense 0.8B/2B/4B/9B model registration and model architecture/visual hooks inspected. This is distinct from Qwen3-VL trainer dispatch. No weights loaded or optimizer run.
+
+<a id="swift-qwen35-template-oct26"></a>
+## ms-swift Qwen3.5 visual template and position handling
+
+- Source: https://github.com/modelscope/ms-swift/blob/942be5a6120d46443f1b1940f2902c3757e312a5/swift/template/templates/qwen.py
+- Kind: `repository`; review depth: `content_reviewed`; reviewed: 2026-10-26
+- Source revision: `942be5a6120d46443f1b1940f2902c3757e312a5`
+- Note: Qwen3_5Template derives from the visual template; image grids, multimodal position handling and packing/version guard inspected. Template handles role whitespace/thinking formatting; freeze the exact render and serving parity in any later experiment. No local runtime verification.
+
+<a id="intern-visual-release"></a>
+## Intern-Decision original public training-code release
+
+- Source: https://github.com/InternLM/Intern-Decision/commit/63292c8b5e0f5d410a7159e0f1c14475b828839a
+- Kind: `repository`; review depth: `content_reviewed`; reviewed: 2026-10-26
+- Source revision: `63292c8b5e0f5d410a7159e0f1c14475b828839a`
+- Note: GitHub commit metadata: Sep26 2026 08:03:14 UTC, training/inference/demo/evaluation release. Config, dataset, masked tokenizer, model and verification blobs match the Oct22 tree inspected here. Oct22 adds report/community/citation documentation. This is deeper review of an existing path, not a new Oct26 release or reproduction.
+
+<a id="intern-visual-data-oct26"></a>
+## Intern-Decision hard-label and local-image training contract
+
+- Source: https://github.com/InternLM/Intern-Decision/blob/565350244af860e1c276768cd80bdd9b8be93913/docs/DATA.md
+- Kind: `official_docs`; review depth: `content_reviewed`; reviewed: 2026-10-26
+- Source revision: `565350244af860e1c276768cd80bdd9b8be93913`
+- Note: Read canonical JSONL, ordered local images resolved against MEDIA_ROOT, hard targets outside model evidence, 62 single-token symbols and strict row errors. Explicitly excludes original training data, private calibration/validation records, media and preparation pipelines. This document does not disclose the mixture; the separate paper does report its composition.
+
+<a id="intern-visual-loader-oct26"></a>
+## Intern-Decision actual UniversalDataset construction
+
+- Source: https://github.com/InternLM/Intern-Decision/blob/565350244af860e1c276768cd80bdd9b8be93913/src/inputs/dataset.py
+- Kind: `repository`; review depth: `content_reviewed`; reviewed: 2026-10-26
+- Source revision: `565350244af860e1c276768cd80bdd9b8be93913`
+- Note: UniversalDatasetConfig.build constructs UniversalDataset(JsonlDataset), whose __getitem__ calls tokenize_fn(row, media_root). The qwen35.py class_name string alone does not identify the constructed dataset. Strict cache counts and no replacement rows; source only.
+
+<a id="intern-visual-masking-oct26"></a>
+## Intern-Decision visual tokenization, labels and collator
+
+- Source: https://github.com/InternLM/Intern-Decision/blob/565350244af860e1c276768cd80bdd9b8be93913/src/inputs/masked.py
+- Kind: `repository`; review depth: `content_reviewed`; reviewed: 2026-10-26
+- Source revision: `565350244af860e1c276768cd80bdd9b8be93913`
+- Note: MaskedQwen3VLTokenizeFunction adds marker, validates one-token codes, passes images to the processor and calculates multimodal positions. Collator supplies pixels/grid and shifts marker targets to preceding logits. Config uses full-vocabulary masked CE, not candidate-subset CE or a supplied LoRA recipe. No training run.
+
+<a id="intern-visual-model-oct26"></a>
+## Intern-Decision frozen visual-feature injection
+
+- Source: https://github.com/InternLM/Intern-Decision/blob/565350244af860e1c276768cd80bdd9b8be93913/src/model/qwen.py
+- Kind: `repository`; review depth: `content_reviewed`; reviewed: 2026-10-26
+- Source revision: `565350244af860e1c276768cd80bdd9b8be93913`
+- Note: DecisionQwen._prepare_llm_inputs computes frozen visual features and injects them into language embeddings; image input with missing grid or text-only forward rejects. Frozen vision/projector are enforced. Text-only batches participate in frozen visual collectives without becoming image training evidence. No local gradient audit.
+
+<a id="intern-visual-save-oct26"></a>
+## Intern-Decision checkpoint verification boundaries
+
+- Source: https://github.com/InternLM/Intern-Decision/blob/565350244af860e1c276768cd80bdd9b8be93913/scripts/verify_checkpoint.py
+- Kind: `repository`; review depth: `content_reviewed`; reviewed: 2026-10-26
+- Source revision: `565350244af860e1c276768cd80bdd9b8be93913`
+- Note: Verifier checks unchanged saved visual tensors, at least one changed language-layer weight and per-rank load audit files. Related scripts/train.sh uses fresh work directory, local MODEL_PATH/tokenizer/processor and canonical user-supplied JSONL; qwen35.py requests final HF output without auto-resume. This checks specified tensor conditions, not inference quality, full export equivalence or release-data replay. None executed here.
+
+<a id="d3-turbo-card"></a>
+## D3-Turbo card: state reuse, localization and API alias
+
+- Source: https://huggingface.co/vllm-sr/d3-turbo/blob/a0f3e9e59ebd1202fe1d4de1c4c0f9a986758cbb/README.md
+- Kind: `model_card`; review depth: `content_reviewed`; reviewed: 2026-10-26
+- Source revision: `a0f3e9e59ebd1202fe1d4de1c4c0f9a986758cbb`
+- Note: HF metadata: created Oct19 2026; latest tree Oct20 15:49:39 UTC. Card scope, Box/Track, API alias and evaluation caveats reviewed. Text/vision Index values are author estimates against a 0.3.2 snapshot, not official/current board results; no new numeric result imported. Box always emits a box, including absent targets; presence needs a separate judgment. Card/LICENSE declare Apache-2.0. No tensor download or inference.
+
+<a id="d3-turbo-runtime"></a>
+## D3-Turbo prefix_bidir StateOnce implementation
+
+- Source: https://huggingface.co/vllm-sr/d3-turbo/blob/a0f3e9e59ebd1202fe1d4de1c4c0f9a986758cbb/d3_runtime.py
+- Kind: `repository`; review depth: `content_reviewed`; reviewed: 2026-10-26
+- Source revision: `a0f3e9e59ebd1202fe1d4de1c4c0f9a986758cbb`
+- Note: Read attention/StateOnce implementation: state attends within state; each question branch reads cached state and its own block. Full-attention state K/V plus causal DeltaNet recurrent/convolution state are reused. This is not cross-question joint attention as in Decider v1.2. Package switch can revert to per-question rows. No runtime executed.
+
+<a id="d3-turbo-wrapper"></a>
+## D3-Turbo wrapper still refuses training and generic saving
+
+- Source: https://huggingface.co/vllm-sr/d3-turbo/blob/a0f3e9e59ebd1202fe1d4de1c4c0f9a986758cbb/modeling_d3.py
+- Kind: `repository`; review depth: `content_reviewed`; reviewed: 2026-10-26
+- Source revision: `a0f3e9e59ebd1202fe1d4de1c4c0f9a986758cbb`
+- Note: train(True) raises inference-only RuntimeError; save_pretrained and push_to_hub are not generic training export paths. Separate implementations remain possible, but image training/LoRA cannot be inferred from multimodal inference or the Qwen architecture. No local test of the wrapper.
+
+<a id="d3-turbo-config"></a>
+## D3-Turbo fixed decision configuration
+
+- Source: https://huggingface.co/vllm-sr/d3-turbo/blob/a0f3e9e59ebd1202fe1d4de1c4c0f9a986758cbb/decision_config.json
+- Kind: `repository`; review depth: `content_reviewed`; reviewed: 2026-10-26
+- Source revision: `a0f3e9e59ebd1202fe1d4de1c4c0f9a986758cbb`
+- Note: prefix_bidir, 255 code IDs, FP32 readout, T=1, validated_length=32768 and Box calibration assets inspected alongside config/manifest. Manifest supplies hashes, not this review independently hashing weights. Backbone context capacity is distinct from validated_length/long-context card mode; localization calibration does not calibrate intent risk.
+
+<a id="d3-turbo-eval-runtime"></a>
+## D3-Turbo external evaluator runtime note
+
+- Source: https://huggingface.co/vllm-sr/d3-turbo/blob/a0f3e9e59ebd1202fe1d4de1c4c0f9a986758cbb/.eval_results/vllm-sr__d3-turbo.yaml
+- Kind: `evaluation_report`; review depth: `content_reviewed`; reviewed: 2026-10-26
+- Source revision: `a0f3e9e59ebd1202fe1d4de1c4c0f9a986758cbb`
+- Note: Oct19 evaluator metadata says native AutoModel.system_one used because vLLM nightly did not then support prefix_bidir. This historical limitation does not prove current nightly failure. SR Engine and native upstream vLLM are separate paths; bucket logs/metrics not audited or reproduced, and no scores imported.
+
+<a id="clef-community-training"></a>
+## Community Clef adapter and FP32 head training loop
+
+- Source: https://github.com/MersivMedia/clef-finetune/blob/c83f7bc1acc23c81ad0de838510c59c48bf60c79/src/clef_finetune/train.py
+- Kind: `repository`; review depth: `content_reviewed`; reviewed: 2026-10-26
+- Source revision: `c83f7bc1acc23c81ad0de838510c59c48bf60c79`
+- Note: Oct2 v0.1.0 source: resolve_images -> encode_record(processor) -> collate_records -> model -> CE/Brier loss/backward; adapter and head saved separately. Code LICENSE Apache-2.0 inspected. Static image-to-loss wiring is not a real-weight image-training run; community implementation does not reproduce proprietary RLCD.
+
+<a id="clef-community-status"></a>
+## Community Clef fine-tuning explicit unverified cases
+
+- Source: https://github.com/MersivMedia/clef-finetune/blob/c83f7bc1acc23c81ad0de838510c59c48bf60c79/docs/KNOWN_ISSUES.md
+- Kind: `official_docs`; review depth: `content_reviewed`; reviewed: 2026-10-26
+- Source revision: `c83f7bc1acc23c81ad0de838510c59c48bf60c79`
+- Note: Maintainer explicitly reports no real Clef/Clef-Flash GPU training, no image/video training test, no multi-GPU/QLoRA validation; tiny random CPU plumbing only. Documents option sorting, exact LoRA module regex after reload and FP32 head handling. These tests were not rerun here. Ordinal EMD is supervised loss, not RLCD.
+
+<a id="mlx-image-training-boundary"></a>
+## mlx-decision rejects media in training records
+
+- Source: https://github.com/armbues/mlx-decision/blob/d3e239a8c8c2afb362725f94c5076b90221168a5/src/mlx_decision/data/format.py
+- Kind: `repository`; review depth: `content_reviewed`; reviewed: 2026-10-26
+- Source revision: `d3e239a8c8c2afb362725f94c5076b90221168a5`
+- Note: Training parser rejects nonempty images/videos and images embedded in state. Mac image inference cannot establish multimodal adaptation. Read only; no port or local model run.
+
+<a id="mlx-training-scope"></a>
+## mlx-decision provisional training scope
+
+- Source: https://github.com/armbues/mlx-decision/blob/d3e239a8c8c2afb362725f94c5076b90221168a5/docs/TRAINING.md
+- Kind: `official_docs`; review depth: `content_reviewed`; reviewed: 2026-10-26
+- Source revision: `d3e239a8c8c2afb362725f94c5076b90221168a5`
+- Note: Docs explicitly exclude image training and LoRA/full adaptation of Clef/pplx/d3/H2O-Lightning/d1; supported fitting changes only the head/readout with networks frozen. No conclusion about all MLX frameworks or future versions. Does not change the separate historical FluidUse records.
+
+<a id="rep2act-paper-v1"></a>
+## From Knowing to Abstaining / VAD-R / Rep2Act v1
+
+- Source: https://arxiv.org/html/2609.32653v1
+- Kind: `paper`; review depth: `content_reviewed`; reviewed: 2026-10-26
+- Source revision: `not captured / live URL`
+- Note: Sep26 2026 v1; read benchmark design, method, metrics and appendix. Evidence-gap labels and separate routing supervision motivate annotation experiments. A-Acc measures answer/abstain action agreement, not final-answer correctness. Author-defined balanced split/model judges limit transfer. Paper CC BY 4.0; no release code/data endpoint or reusable dataset license established here. No performance number imported or experiment reproduced.
+
+<a id="vltest-paper-v1"></a>
+## VLTest joint image-text failure diagnosis v1
+
+- Source: https://arxiv.org/html/2610.30794v1
+- Kind: `paper`; review depth: `content_reviewed`; reviewed: 2026-10-26
+- Source revision: `not captured / live URL`
+- Note: Oct22 2026 v1; read method, controls, oracle and limitations. Four matched cells and expected-answer preservation support robustness-test design; seed-correct filtering differs from representative traffic risk. Treat as reviewed preprint, without independently verifying its TOSEM header/publication status. Paper CC BY 4.0; no scores imported.
+
+<a id="vltest-code"></a>
+## VLTest replication-code scope and missing run settings
+
+- Source: https://github.com/beanduan22/VLTest/blob/b5861f2f990a63a1b8d0af37881471cf9034e66f/README.md
+- Kind: `repository`; review depth: `content_reviewed`; reviewed: 2026-10-26
+- Source revision: `b5861f2f990a63a1b8d0af37881471cf9034e66f`
+- Note: Oct22 fixed README and MIT LICENSE read. Local seed manifest, external models/assets, separate pilot proxy thresholds and human annotation audit required. Additional open/API model adapters and concrete budget/threshold placeholders remain for the researcher. Paper automated-oracle description must not be equated to a complete out-of-box reproduction from this README. No dependencies installed or code executed; underlying dataset/image terms separate.
+

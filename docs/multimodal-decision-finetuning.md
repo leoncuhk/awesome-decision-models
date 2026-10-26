@@ -2,7 +2,9 @@
 
 [简体中文](multimodal-decision-finetuning.zh-CN.md) · [Home](../README.md) · [Selection guide](selection-guide.md#image-intent-adaptation) · [Evidence ledger](evidence.md)
 
-Sources reviewed: 2026-10-18. This is a testable research design for general multimodal customer-support intent recognition. No model was trained and no production benefit was demonstrated here. Public implementations, author reports and proposed experiments are distinguished below. Image understanding, intent, calibration and abstention policy are separate questions.
+Sources reviewed: 2026-10-26 (targeted training-support update; earlier evidence retains its original dates). This is a testable research design for general multimodal customer-support intent recognition. No model was trained and no production benefit was demonstrated here. Public implementations, author reports and proposed experiments are distinguished below. Image understanding, intent, calibration and abstention policy are separate questions.
+
+Latest: [October 26 source audit and executable acceptance plan](../updates/2026-10-26-multimodal-training-and-evidence.md). It adds Qwen image-supervised recipes, deepens the existing Intern path, separates D3-Turbo from classic D3, and records experimental Clef/MLX limitations. The October 22 survey stays archival.
 
 **Research question.** Given domain images and the dialogue visible at decision time, how much intent recognition can be accepted under predefined consequential-error risk and complete-cost limits, while clarifying or handing off evidence-insufficient cases? Fine-tuning a decision model is one possible means, not the research goal. The scenario owner must set numerical risk, cost and minimum-useful-gain criteria before model/threshold selection; no universal pass line is assumed.
 
@@ -106,9 +108,12 @@ ezjev's MIT code license does not license its weights or training data. Its [mod
 
 | Candidate | Currently inspected starting point | Gate before image adaptation |
 | --- | --- | --- |
-| D3 | Official multimodal inference comparator; separate Vis Edge/Lite text full/LoRA path, with Nano additionally accepted in code. | Vis drops vision. Restore/retain the actual image path, verify gradients and multimodal export, then test quality; this is separate engineering, not an architectural ban on fine-tuning. |
-| Intern-Decision | Image-bearing full-language training and masked answer-token code path; frozen vision/projector. | Exact checkpoint/template/backend identity; full-parameter budget versus separately validated LoRA targets; paper text results do not validate image-domain effectiveness. |
-| Qwen3.5 / another supported VLM | Candidate short-label generative SFT/LoRA baseline; model/processor/trainer support must be verified. | B2/B3 share the exact starting checkpoint and evidence. Easier tooling does not demonstrate superiority to a decision-tuned D3 or Intern model. |
+| D3 classic / Turbo | Classic Vis path is text only. Turbo reuses state with independent question branches; its official wrapper still rejects training. | Keep exact local release/runtime IDs. API `vllm-sr/d3` now aliases Turbo; neither image inference nor shared-state execution certifies image LoRA/export. |
+| Intern-Decision | Existing Sep26 full-language image-supervised code, now audited through actual dataset, pixels/grid, label shift and frozen-feature injection. | `MEDIA_ROOT` enables vision; model, tokenizer and processor come from the same `MODEL_PATH`. Final HF save/audit tooling is source support, not a run here or a supplied LoRA recipe. |
+| Qwen2/2.5/3-VL | [Official trainer](https://github.com/QwenLM/Qwen3-VL/blob/96588727e44c78b25ba03ea03b8e12f7e64fd0da/qwen-vl-finetune/qwenvl/train/train_qwen.py) wires images to SFT and attention LoRA. | This model dispatch does not support Qwen3.5 by name similarity. Audit actual target modules, truncation, saved processor and adapter merge/reload. |
+| Qwen3.5 | [ms-swift guide](https://github.com/modelscope/ms-swift/blob/942be5a6120d46443f1b1940f2902c3757e312a5/docs/source_en/BestPractices/Qwen3_8-Best-Practice.md) and loader/template provide an image-bearing generative LoRA path. | B2/B3 use one exact base/evidence/budget. Candidate-subset CE/Brier or a new classifier head is a separate implementation/ablation, not supplied by an inference interface. |
+| Decider / Clef | Decider v1.2 image inference is already cataloged. Clef community code statically connects images to LoRA/head loss. | No Decider image-training recipe verified; Clef community explicitly has no real-weight GPU or image-training test. Keep both as inference comparators until the relevant training gate passes. |
+| mlx-decision | Media-capable inference and provisional head/readout fitting are different paths. | [Parser](https://github.com/armbues/mlx-decision/blob/d3e239a8c8c2afb362725f94c5076b90221168a5/src/mlx_decision/data/format.py) rejects image/video training records; its docs exclude backbone LoRA/full tuning for D3/pplx/Clef. |
 
 ## 3. Resolve data and label uncertainty first
 
@@ -147,6 +152,15 @@ Audit readability at the actual inference resize/crop/compression, not just the 
 Define `task_mode` before modeling. Single-intent uses an agreed primary-label tie rule; multi-intent uses a set target and per-label precision/recall (plus exact-set score when useful), not an exclusive softmax. `unknown` means the taxonomy cannot assign a known class; `out_of_scope` means a known scope mismatch; `insufficient`/`needs_clarification` concerns missing evidence. They may coexist with a partial intent. State their precedence and annotation/output rules explicitly. A model's low-confidence abstention is a **policy output**, not automatically one of these gold labels.
 
 Have at least two annotators independently assess an agreed audit subset, enriched with ambiguous/rare cases and a separate representative sample. Record label-wise agreement, disagreements and adjudication, rather than only a pooled agreement score. Expand the audit where disagreement concentrates. Historical operator actions and teacher labels are provisional evidence, not automatic gold. If the same visible image/text admits multiple plausible intents, request context or revise the contract before training.
+
+<a id="learned-judgment"></a>
+### Learn judgment while supplying changing facts as evidence
+
+Train separate targets for intent, evidence sufficiency/reason and permitted next step; evaluate their joint consistency. Keep user goal distinct from image category and from a guess about a missing fact. Use matched same-image/different-goal cases, readable/unreadable evidence, contradictions and genuine unknown intents with independent adjudication. Suggested routing labels do not authorize execution.
+
+Changing prices, entitlements, order status, policy dates and taxonomy descriptions belong in versioned, time-valid retrieval/tool evidence. Train how to use the supplied evidence, recognize absent/stale/conflicting facts and ask a discriminating question; do not make recall of mutable facts the learning objective. Hold out fact values and later policy versions, and compare a frozen retrieval baseline to adaptation. A missing fact calls for retrieval, a missing user goal for clarification, and an unknown intent for open-set handling; low confidence alone does not identify which one.
+
+[Rep2Act/VAD-R](https://arxiv.org/html/2609.32653v1) motivates separately testing answerability judgments and whether the actual response obeys them. It is newly cataloged September work, not new enterprise evidence. [VLTest](https://arxiv.org/html/2610.30794v1) motivates matched image/text/joint controls with re-adjudicated expected answers. The [dated plan](../updates/2026-10-26-multimodal-training-and-evidence.md#acceptance-plan) adds annotation, Chinese transfer, separate Cal-fit/Cal-policy, risk/cost and reuse-of-completed-check rules. None was run here.
 
 <a id="split-protocol"></a>
 ### Leakage-resistant split protocol

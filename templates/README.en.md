@@ -45,6 +45,8 @@ The table compares mechanisms and use cases, **not incompatible benchmark scores
 
 For domain evaluation and verified training support, see the [image-intent adaptation workflow](docs/selection-guide.md#image-intent-adaptation). Start with the [one-page multimodal post-training route](docs/multimodal-decision-finetuning.md#quick-route), then follow the controlled experiments, candidate gates and [layered academic reading list](docs/multimodal-decision-finetuning.md#reading-list).
 
+Latest targeted review: [October 26 image-training support, supervision and acceptance update](updates/2026-10-26-multimodal-training-and-evidence.md) — Qwen/Intern training paths, D3-Turbo identity, experimental Clef/MLX limits, and two newly cataloged papers. Source support remains separate from local reproduction and business effectiveness.
+
 Execution details: [split protocol](docs/multimodal-decision-finetuning.md#split-protocol), [minimal experiment matrix](docs/multimodal-decision-finetuning.md#experiment-matrix), [result record and stopping decision](docs/multimodal-decision-finetuning.md#result-template).
 
 Worked case: [MIRE tasks, labels and code](docs/mire-case-study.md#tasks), [official composite awards and semifinal scores](docs/mire-case-study.md#finalists), and [transfer limits](docs/mire-case-study.md#transfer-boundaries).
