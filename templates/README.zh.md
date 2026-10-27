@@ -45,7 +45,7 @@
 
 领域评测、训练支持核查与未知／澄清策略见[图片意图适配流程](docs/selection-guide.md#image-intent-adaptation)。先看[多模态后训练一页入口](docs/multimodal-decision-finetuning.zh-CN.md#quick-route)，再深入同条件对照、候选门槛及[分层学术阅读清单](docs/multimodal-decision-finetuning.zh-CN.md#reading-list)。
 
-M5 Pro 48 GB、图片＋意图及待补历史的实施与科学验证统一整合到[原多模态主指南](docs/multimodal-decision-finetuning.zh-CN.md#mac-implementation)：条件小模型路线、划分预算、短标签分数、业务成本验收与分阶段科研。[10 月 26 日来源核验](updates/2026-10-26-multimodal-training-and-evidence.md)保留历史身份，不再新增实施报告。
+M5 Pro 48 GB、图片＋意图及待补历史的实施与科学验证统一整合到[原多模态主指南](docs/multimodal-decision-finetuning.zh-CN.md#mac-implementation)：Qwen3.5-4B 优先验证与 2B 回退依据、划分预算、短标签分数、业务成本验收与分阶段科研。[10 月 26 日来源核验](updates/2026-10-26-multimodal-training-and-evidence.md)保留历史身份，不再新增实施报告。
 
 执行细节：[分组划分协议](docs/multimodal-decision-finetuning.zh-CN.md#split-protocol)、[最小实验矩阵](docs/multimodal-decision-finetuning.zh-CN.md#experiment-matrix)、[结果记录与停止决定](docs/multimodal-decision-finetuning.zh-CN.md#result-template)。
 

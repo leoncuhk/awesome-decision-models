@@ -2552,6 +2552,96 @@
       "review_depth": "abstract_reviewed",
       "source_revision": null,
       "review_note": "ACL Anthology metadata/abstract reviewed: EMNLP main proceedings, November 2025; structured interaction summarization then a fine-tuned small intent model on UI trajectories. Prior-work boundary only; full methods/artifacts and performance claims not imported. No claim that its task equals a single-image business classifier."
+    },
+    {
+      "id": "qwen35-4b-selection-oct27",
+      "title": "Qwen3.5-4B official VLM and template selection audit",
+      "url": "https://huggingface.co/Qwen/Qwen3.5-4B/blob/851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a/README.md",
+      "kind": "model_card",
+      "reviewed_on": "2026-10-27",
+      "review_depth": "content_reviewed",
+      "source_revision": "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a",
+      "review_note": "Read official card, API revision/license, config and chat_template.jinja. Native vision-language 4B, Apache-2.0, thinking default and explicit template branch. Author benchmark tables motivate a candidate, not a same-protocol business win or M5 memory/gradient result. No numerical claims imported, weights downloaded or model executed."
+    },
+    {
+      "id": "qwen35-4b-mlx-selection-oct27",
+      "title": "Community Qwen3.5-4B MLX quantization config and provenance gap",
+      "url": "https://huggingface.co/mlx-community/Qwen3.5-4B-4bit/blob/0e7ffd5c629ef7719d4cbc04069232580bfa9d9c/config.json",
+      "kind": "repository",
+      "reviewed_on": "2026-10-27",
+      "review_depth": "content_reviewed",
+      "source_revision": "0e7ffd5c629ef7719d4cbc04069232580bfa9d9c",
+      "review_note": "Read public API file list, config, tokenizer_config and chat_template.jinja. Preserves qwen3_5/vision_config and affine 4-bit group64. No README/LICENSE file or API license declaration found in this snapshot. Trace upstream provenance and retain official notices before future use; do not treat original Apache terms as a complete conversion audit. No weight-byte/quantization-fidelity/capacity test."
+    },
+    {
+      "id": "mlx-vlm-qwen35-visual-oct27",
+      "title": "MLX-VLM Qwen3.5 image embeddings and visual fusion",
+      "url": "https://github.com/Blaizzy/mlx-vlm/blob/2ceff4c14b991370a459d14eb49d1bedf4fb9e84/mlx_vlm/models/qwen3_5/qwen3_5.py",
+      "kind": "repository",
+      "reviewed_on": "2026-10-27",
+      "review_depth": "content_reviewed",
+      "source_revision": "2ceff4c14b991370a459d14eb49d1bedf4fb9e84",
+      "review_note": "Read distinct Qwen3.5 vision tower, pixels/grid processing, embedding insertion, image-feature/token count rejection and language-model construction. Do not transfer a Qwen3-VL model path merely from naming. Source inspection only; no checkpoint loaded or image forward/backward run."
+    },
+    {
+      "id": "mlx-vlm-qwen35-language-oct27",
+      "title": "MLX-VLM Qwen3.5 training-mode DeltaNet dispatch and adapter module names",
+      "url": "https://github.com/Blaizzy/mlx-vlm/blob/2ceff4c14b991370a459d14eb49d1bedf4fb9e84/mlx_vlm/models/qwen3_5/language.py",
+      "kind": "repository",
+      "reviewed_on": "2026-10-27",
+      "review_depth": "content_reviewed",
+      "source_revision": "2ceff4c14b991370a459d14eb49d1bedf4fb9e84",
+      "review_note": "Read training use_kernel=not self.training dispatch and hybrid layer implementation, including DeltaNet in_proj_qkv/z/b/a and out_proj. Adapter targets must reflect actual modules, not copied q/k/v/o-only lists. MTP is not a decision classifier. No local gradient, model quality or hardware claim."
+    },
+    {
+      "id": "mlx-vlm-qwen35-delta-oct27",
+      "title": "MLX-VLM Qwen3.5 chunked/reference training path",
+      "url": "https://github.com/Blaizzy/mlx-vlm/blob/2ceff4c14b991370a459d14eb49d1bedf4fb9e84/mlx_vlm/models/qwen3_5/gated_delta.py",
+      "kind": "repository",
+      "reviewed_on": "2026-10-27",
+      "review_depth": "content_reviewed",
+      "source_revision": "2ceff4c14b991370a459d14eb49d1bedf4fb9e84",
+      "review_note": "Read gated_delta_update use_kernel=False fallback to chunked/reference MLX ops. Architecture is not sufficient grounds to assert inference-only. No tests from this third-party package were executed; actual full-checkpoint image-conditioned gradients remain a gate."
+    },
+    {
+      "id": "jev-decision-2b-selection-oct27",
+      "title": "Jev-Decision Qwen3-VL-2B pointer-head precedent and release limits",
+      "url": "https://github.com/yeyan00/Jev-Decision/blob/811bf5083a12622b0e63a98084312a91ac119b80/README.md",
+      "kind": "repository",
+      "reviewed_on": "2026-10-27",
+      "review_depth": "content_reviewed",
+      "source_revision": "811bf5083a12622b0e63a98084312a91ac119b80",
+      "review_note": "Read README, pinned tree, config and MIT LICENSE. Declares Qwen3-VL-2B, frozen-vision LoRA, dynamic pointer readout and image/text inputs. No public checkpoint/evaluation-result artifacts found in inspected tree; README gives no numeric outcome/checkpoint link. PyTorch/CUDA-oriented, not native MLX. ScienceQA mixture imposes NC/SA concerns on derived weights. This newly audited precedent does not retrospectively justify an earlier choice or prove business gains."
+    },
+    {
+      "id": "jev-decision-2b-data-oct27",
+      "title": "Jev-Decision image processor and visual tensor collator",
+      "url": "https://github.com/yeyan00/Jev-Decision/blob/811bf5083a12622b0e63a98084312a91ac119b80/src/jev_decision/data.py",
+      "kind": "repository",
+      "reviewed_on": "2026-10-27",
+      "review_depth": "content_reviewed",
+      "source_revision": "811bf5083a12622b0e63a98084312a91ac119b80",
+      "review_note": "Read local-image message construction, processor.apply_chat_template and concatenation of pixel_values/image_grid_thw into model batches. Actual image path in code, not compatibility inference; no data downloaded or samples run."
+    },
+    {
+      "id": "jev-decision-2b-loss-oct27",
+      "title": "Jev-Decision visual backbone, pointer loss and frozen-vision LoRA code",
+      "url": "https://github.com/yeyan00/Jev-Decision/blob/811bf5083a12622b0e63a98084312a91ac119b80/src/jev_decision/model.py",
+      "kind": "repository",
+      "reviewed_on": "2026-10-27",
+      "review_depth": "content_reviewed",
+      "source_revision": "811bf5083a12622b0e63a98084312a91ac119b80",
+      "review_note": "Read AutoModelForImageTextToText, multimodal_inputs forwarding, final hidden-state decision/option pointer readout, hard/soft CE, freeze/head/LoRA and save code. This supports an inspectable implementation, not a completed model release or measured effect. No code executed."
+    },
+    {
+      "id": "jev-decision-2b-train-oct27",
+      "title": "Jev-Decision optimization entry for head/LoRA training",
+      "url": "https://github.com/yeyan00/Jev-Decision/blob/811bf5083a12622b0e63a98084312a91ac119b80/src/jev_decision/train.py",
+      "kind": "repository",
+      "reviewed_on": "2026-10-27",
+      "review_depth": "content_reviewed",
+      "source_revision": "811bf5083a12622b0e63a98084312a91ac119b80",
+      "review_note": "Read configured processor, trainable parameters, AdamW and accelerator.backward(loss), head/LoRA stages and validation selection. Code-level trainability differs from published weights/results, Mac support and local reproduction. No training run."
     }
   ],
   "entries": [
@@ -4458,7 +4548,16 @@
         "qwen3vl-2b-original-oct27",
         "qwen3vl-2b-mlx-oct27",
         "qwen35-2b-original-oct27",
-        "qwen35-2b-mlx-oct27"
+        "qwen35-2b-mlx-oct27",
+        "qwen35-4b-selection-oct27",
+        "qwen35-4b-mlx-selection-oct27",
+        "mlx-vlm-qwen35-visual-oct27",
+        "mlx-vlm-qwen35-language-oct27",
+        "mlx-vlm-qwen35-delta-oct27",
+        "jev-decision-2b-selection-oct27",
+        "jev-decision-2b-data-oct27",
+        "jev-decision-2b-loss-oct27",
+        "jev-decision-2b-train-oct27"
       ],
       "reviewed_on": "2026-10-27",
       "summary": {
@@ -4466,12 +4565,12 @@
         "zh": "可查图像监督路径：QwenVL 官方、ms-swift Qwen3.5，以及供 Mac 实验的固定 MLX-VLM 图像条件语言 adapter。"
       },
       "use": {
-        "en": "Use short-label SFT as a matched baseline before adding candidate-logit losses or a separate head; freeze base, data and image processing.",
-        "zh": "加候选 logits 损失或独立 head 前，先做同条件短标签 SFT；固定底座、数据与视觉处理。"
+        "en": "Compare a gated native Qwen3.5-4B main candidate with matched frozen/head/short-label QLoRA baselines; 2B is a conditional cost control/fallback, not a proven business winner.",
+        "zh": "以过门槛的原生 Qwen3.5-4B 主候选比较同条件冻结／head／短标签 QLoRA；2B 是条件成本对照／回退，不是已证业务赢家。"
       },
       "caveat": {
-        "en": "Frameworks/checkpoints differ; no local model run or business gain. mlx-decision rejects image training, while mlx-vlm has a separate visual path. Code licenses and per-artifact rights differ; capacity, gradients, masks and reload/export parity remain gates.",
-        "zh": "框架／检查点不同，未本地运行模型或证明业务收益。mlx-decision 训练拒收图片，mlx-vlm 另有视觉路径；代码与产物权利分别核，容量、梯度、mask 及重载／导出等价仍须过关。"
+        "en": "Frameworks/checkpoints differ; no local model run or business gain. mlx-decision rejects image training, while mlx-vlm has a separate visual path. Code licenses and per-artifact rights differ; capacity, gradients, masks and reload/export parity remain gates. Community 4B conversion lacks an explicit license/card in the inspected snapshot; trace upstream notices/provenance. Jev-Decision is a Qwen3-VL-2B image-training code precedent, without a public checkpoint/result found in the inspected tree.",
+        "zh": "框架／检查点不同，未本地运行模型或证明业务收益。mlx-decision 训练拒收图片，mlx-vlm 另有视觉路径；代码与产物权利分别核，容量、梯度、mask 及重载／导出等价仍须过关。 所阅社区 4B 转换快照缺显式许可／模型卡，须追溯上游通知和来源。Jev-Decision 是 Qwen3-VL-2B 图像训练代码先例，已阅树未见公开 checkpoint／结果。"
       }
     },
     {

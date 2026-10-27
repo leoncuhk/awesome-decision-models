@@ -61,14 +61,14 @@
 <a id="experiment-matrix"></a>
 ### 最小矩阵：先做必要对照，再过门槛扩展
 
-使用同一冻结任务／划分，特征、示例与 head 仅用 Train 拟合。Dev 完成有限模型／提示词／scorer 选择，再把预声明冻结基线和最终候选带到同一锁定 Test。先低成本臂，首轮一个小 VLM 足够。补齐历史的同一 cohort 必做 image-only、context-only、OCR＋context、image＋context，并固定历史窗口；视图尚未获准构建前，只能报告 image-only，不能称已测试多模态增益，更不虚构历史。
+使用同一冻结任务／划分，特征、示例与 head 仅用 Train 拟合。Dev 完成有限模型／提示词／scorer 选择，再把预声明冻结基线和最终候选带到同一锁定 Test。先低成本臂，首轮一个主候选足够；优先验证 4B，2B 是有条件对照／回退，见[选择依据](#mac-implementation)。补齐历史的同一 cohort 必做 image-only、context-only、OCR＋context、image＋context，并固定历史窗口；视图尚未获准构建前，只能报告 image-only，不能称已测试多模态增益，更不虚构历史。
 
 | 实验臂 | 配置 | 检验什么 |
 | --- | --- | --- |
 | B0-R／B0-T | 现有确定性规则；有真实文本时的普通监督文本分类器 | 业务低成本底线与目标可分性，计入规则失败。 |
 | B0-O | 冻结 OCR 加同一个上下文／文本分类器 | OCR 信息增量；计 OCR 错误与预处理代价。 |
 | F0 | 冻结图文编码器特征加正则化线性 head | 不改 VLM 的低成本监督融合；归一化／head 选择仅用 Dev。 |
-| B1 | 一个精确 2B 级 VLM，零样本及另列的 Train-only 少样本短标签 | 未适配对照；固定模板、图像像素／token 和非法输出规则。检索／页面说明另设同条件臂。 |
+| B1 | 通过 G1 的精确主候选（优先 Qwen3.5-4B），零样本及另列的 Train-only 少样本短标签 | 未适配对照；固定模板、图像像素／token 和非法输出规则。检索／页面说明另设同条件臂。 |
 | F1 | 冻结同一 B1 骨干，在核实的特征位置训练小 head | head 是否已经足够；需要独立验证特征／head 实现，不是通用 SFT CLI 已支持。 |
 | B2 | 同一量化 B1 底座，图像条件语言侧 QLoRA，completion-only 短标签 SFT | adapter 学习相对 B1／F1 的增量；视觉冻结但仍被使用。至少三个预注册种子，Dev 搜索有上限。 |
 | B3-CE／B3-Brier，过门槛后 | B2 的精确底座／数据／processor／adapter 预算；候选子集 CE，再在同一实现加入明示 Brier 项 | 读出／目标归因；前一比较还改变归一化，后一比较才隔离额外损失。 |
@@ -105,7 +105,7 @@ ezjev 的 MIT 代码许可证不能覆盖模型与训练数据；[模型卡](htt
 
 | 候选 | 当前已核起点 | 图片适配前的门槛 |
 | --- | --- | --- |
-| 原生 Mac VLM | [固定 MLX-VLM](https://github.com/Blaizzy/mlx-vlm/blob/2ceff4c14b991370a459d14eb49d1bedf4fb9e84/docs/training.md)有本地图像 completion-only SFT 与量化底座语言 adapter。 | G1 先一个 2B 候选，默认冻结视觉；核真实 pixels／mask／梯度、最长输入内存及重载。源码支持不是本机跑通。 |
+| 原生 Mac VLM | [固定 MLX-VLM](https://github.com/Blaizzy/mlx-vlm/blob/2ceff4c14b991370a459d14eb49d1bedf4fb9e84/docs/training.md)有本地图像 completion-only SFT 与量化底座语言 adapter。 | G1 直接验证 Qwen3.5-4B，2B 仅对照／回退，默认冻结视觉；核真实 pixels／mask／梯度、最长输入内存及重载。源码支持不是本机跑通。 |
 | D3 经典版／Turbo | 经典 Vis 适配仅文本；Turbo 共享状态、题目独立，官方 wrapper 拒绝训练；D3 还有 nano／mini／flash 等小型号。 | 固定模型／运行时身份；API 别名或推理容量不证明原生 Mac 图像训练配方。 |
 | Intern-Decision | CUDA／XTuner 路径有冻结视觉／projector 的全语言参数带图训练。 | 不是现成 Mac LoRA；保留其占位／答码监督合同，移植／导出另验证。 |
 | Qwen2／2.5／3-VL 与 Qwen3.5 | QwenVL 官方及独立 ms-swift 配方仍是可查图像训练参考；Mac 使用自身已核 MLX 模型／processor 路径。 | 不能把 CUDA／Transformers 支持迁给 MLX，也不能凭名称把 Qwen3-VL 分派迁给 Qwen3.5；B2／B3 固定同一精确底座与证据。 |
@@ -223,7 +223,7 @@ L=-\log p_\theta(y\mid x,C)+\lambda\sum_{k\in C}(p_\theta(k)-\mathbf{1}[k=y])^2.
 
 - 冻结任务／标签／使用权和 split 哈希；验证分组／重复零交叉、无未来上下文／目标泄漏。在看到成绩前记录逐类支持及主要风险／成本／实质收益限制。
 - 固定模型／权重标识、processor／模板、代码、可训练模块名称／数量、dtype／设备与优化设置；检查真正收到梯度的 LoRA／读出参数，冻结视觉仍须传递图像特征。
-- 解码若干训练 batch，核图像尺寸、视觉 grid／token 数、答案位置／mask、标签到答码映射；目标只进入监督。报告长度分布和每次截断／排除，不静默丢难例。
+- 解码若干训练 batch，核图像尺寸、视觉 grid／token 数、thinking／模板前缀、答案位置／mask、标签到答码映射；目标只进入监督。报告长度分布和每次截断／排除，不静默丢难例。
 - 极小 Train 子集拟合仅作调试；在人工确认图像必要的案例上做去图／换图，另测选项重排后的标签映射、padding 和未知。拟合成功不独自证明泛化或视觉链路正确。
 - 预定有限搜索／种子／步数／token／算力预算、early stopping、开发指标及回归集；增强须保持标签且仅限 Train。记录普通／难例采样比，不只优化被选出的难例。
 - 确认受支持的多模态训练／合并／服务链路；D3／Intern 门槛失败就保留推理基线或停止 C，不能假定可绕过 inference-only 封装。本文没有已测试可直接运行的训练命令。
@@ -240,22 +240,36 @@ L=-\log p_\theta(y\mid x,C)+\lambda\sum_{k\in C}(p_\theta(k)-\mathbf{1}[k=y])^2.
 ## 5. 实验顺序与停止条件
 
 <a id="mac-implementation"></a>
-### MacBook M5 Pro 48 GB：先做一个小模型的图像条件适配
+### MacBook M5 Pro 48 GB：优先验证 4B，2B 作对照或回退
 
-计划目标明确为 **MacBook M5 Pro、48 GB 统一内存**；这是已确认的规划配置，本次没有在该机运行训练。首轮一个 2B 级 4-bit 模型、每例单图、microbatch 1 加梯度累积，先保留必要图像／上下文证据，再考虑加 batch。只有仍有业务／科研理由，且代表性最长输入反向／保存重载实测有余量，才升级 4B；不保证 8B 可训或固定完工时间。记录峰值内存、pressure／swap 与 step／墙钟时间，不由文件大小推算。
+**选择结论：以原生 `Qwen3.5-4B` VLM 的图像条件语言侧 QLoRA 作为业务／研究主候选，先在它上面过 G1。** 目标是 M5 Pro、48 GB 统一内存，已有数千张图片＋意图，可补判定前历史；本次没有在该机训练。此前把 `Qwen3-VL-2B` 固定为 B1 起点，理由偏重低成本排错，未充分论证主业务选型，现予修正。2B 冒烟成功不是考虑 4B 的前置条件；4B 同样没有被证明更优或必能训。
 
-[Apple 规格](https://www.apple.com/macbook-pro/specs/)还列有按芯片变体选择的 24／64 GB 配置，其他配置读者须重新过资源关；它们不是本 48 GB 方案的并行首轮路线。
-
-首个实现候选是 `Qwen3-VL-2B-Instruct` 的 MLX 4-bit 转换；`Qwen3.5-2B` 仅在明确失效／资源问题值得另做一臂时作为第二候选。**同时**固定原始与转换仓库、processor／模板／config 和代码；仓库 revision 标识来源／产物快照，不代表独立逐字节核验权重：
-
-| 候选 | 原始 HF revision | MLX 4-bit HF revision |
+| 选择依据／候选角色 | 当前证据 | 反证／下一步 |
 | --- | --- | --- |
-| Qwen3-VL-2B-Instruct | [89644892…](https://huggingface.co/Qwen/Qwen3-VL-2B-Instruct/tree/89644892e4d85e24eaac8bacfd4f463576704203) | [9c4f5209…](https://huggingface.co/mlx-community/Qwen3-VL-2B-Instruct-4bit/tree/9c4f5209e57b31f4b9dfba735de3fb983739c9cc) |
-| Qwen3.5-2B | [15852e8c…](https://huggingface.co/Qwen/Qwen3.5-2B/tree/15852e8c16360a2fea060d615a32b45270f8a8fc) | [674aaa72…](https://huggingface.co/mlx-community/Qwen3.5-2B-4bit/tree/674aaa7240b91e8012fcad5d791b7dfe5ba90207) |
+| 主候选：Qwen3.5-4B | [官方卡](https://huggingface.co/Qwen/Qwen3.5-4B/blob/851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a/README.md)是视觉语言模型，含 OCR／文档／视觉任务作者评测；下述 MLX 路径有真实视觉融合和训练分支。 | 公开分数不证明领域意图、校准或 Mac 容量。G1 失败先归因；过关后才进行同骨干受限实验。 |
+| Qwen3.5 决策研究接续 | [Intern-Decision-4B](https://huggingface.co/internlm/Intern-Decision-4B/blob/0e5e6aa7d6d750e2b1504ba11a8136cb58aeb3cd/README.md)、[d3-mini](https://huggingface.co/vllm-sr/d3-mini/blob/97dd054df4b3e0b3beb6af23ab8c82b7c0052e0e/README.md)是同家族 4B 图文判断先例。 | 它们是另经训练的 decision checkpoints，不是原生 4B＋本方案 QLoRA 的效果证明。Intern 一次前向多字段；经典 d3-mini 多题调用仍逐题前向，不混作 Turbo。 |
+| Qwen3-VL-2B 并非没有先例 | [Jev-Decision](https://github.com/yeyan00/Jev-Decision/blob/811bf5083a12622b0e63a98084312a91ac119b80/README.md)公开图文 processor／collator → 最后 hidden state 的 pointer head → loss／LoRA backward；[数据](https://github.com/yeyan00/Jev-Decision/blob/811bf5083a12622b0e63a98084312a91ac119b80/src/jev_decision/data.py)、[模型](https://github.com/yeyan00/Jev-Decision/blob/811bf5083a12622b0e63a98084312a91ac119b80/src/jev_decision/model.py)及[训练](https://github.com/yeyan00/Jev-Decision/blob/811bf5083a12622b0e63a98084312a91ac119b80/src/jev_decision/train.py)可查。 | 已阅树未提供公开 checkpoint／评测结果，README 未给数值；属于 PyTorch／CUDA 实现，不是 MLX 移植。代码 MIT 不覆盖混合 ScienceQA 等数据的 NC／SA 条款。它是本次补核先例，不能倒叙作为原选型已具备的依据。 |
+| 2B 的有限角色 | 资源失败时优先考虑同家族 Qwen3.5-2B；若是 Qwen3.5 实现兼容性阻碍，可考虑 Qwen3-VL-2B 的独立路径。 | 降参只是成本假设，仍过 G1；仅在预算和问题需要时加一臂，不自动展开三个模型全矩阵。 |
 
-所阅四份元数据均声明 Apache-2.0；[MLX-VLM 代码](https://github.com/Blaizzy/mlx-vlm/blob/2ceff4c14b991370a459d14eb49d1bedf4fb9e84/LICENSE)为 MIT，实际产物／依赖／数据权利仍分别核对。固定 MLX-VLM `2ceff4c14b991370a459d14eb49d1bedf4fb9e84`（2026-10-26 23:23:46 UTC）的[入口](https://github.com/Blaizzy/mlx-vlm/blob/2ceff4c14b991370a459d14eb49d1bedf4fb9e84/mlx_vlm/train.py)是 `python -m mlx_vlm.train`，不照搬旧 `lora.py` 示例；[当前训练指南](https://github.com/Blaizzy/mlx-vlm/blob/2ceff4c14b991370a459d14eb49d1bedf4fb9e84/docs/training.md)描述本地图像 JSONL、completion-only SFT 与 LoRA／量化底座 adapter。
+**最小比较：** 在一个精确 Qwen3.5-4B 量化产物上做 B1 零／少样本 → F1 frozen head → B2 语言侧 QLoRA；B3／专用 head 仅在新实现通过门槛后开启，scorer／校准控制保持。4B 对 Qwen3-VL-2B 是骨干、规模、预训练／后训练、模板及视觉链路共同变化的完整系统比较，不能称纯规模或读出增益。同家族 3.5-2B 尺度对照也有检查点训练差异。候选选择在有限 Dev 预算内完成，并冻结预注册的对照／回退规则；锁定 Test 只做一次成本／风险验收，不在 Test 换模型直到过线。若按既定规则强基线或 2B 已达目标而 4B 无实质增益，就保留较便宜系统。
 
-已阅链路是图像感知 [`VisionDataset`](https://github.com/Blaizzy/mlx-vlm/blob/2ceff4c14b991370a459d14eb49d1bedf4fb9e84/mlx_vlm/trainer/vlm/sft/dataset.py) → processor pixels／grid → [`vlm_sft_loss`](https://github.com/Blaizzy/mlx-vlm/blob/2ceff4c14b991370a459d14eb49d1bedf4fb9e84/mlx_vlm/trainer/vlm/sft/runtime.py) 的 shifted 输入／assistant mask → [Qwen 视觉 embeddings](https://github.com/Blaizzy/mlx-vlm/blob/2ceff4c14b991370a459d14eb49d1bedf4fb9e84/mlx_vlm/models/qwen3_vl/qwen3_vl.py) 注入语言模型 → [`nn.value_and_grad`](https://github.com/Blaizzy/mlx-vlm/blob/2ceff4c14b991370a459d14eb49d1bedf4fb9e84/mlx_vlm/trainer/common/engine.py)。[默认 adapter 准备](https://github.com/Blaizzy/mlx-vlm/blob/2ceff4c14b991370a459d14eb49d1bedf4fb9e84/mlx_vlm/trainer/peft/utils.py)冻结全底座、选择语言 transformer 层，故称**冻结视觉塔的图像条件语言侧适配**，不是纯文本训练，也不是视觉塔微调。本次没有测梯度或容量；普通 shifted SFT 不实现 Intern 占位监督或 Clef schema head。
+**资源与执行：** G1 直接使用 4B 4-bit、每例单图、microbatch 1 加梯度累积，保留必要图像／上下文证据；代表性最长输入反向、保存重载实测后再扩大。48 GB 或量化文件尺寸都不是容量保证；不承诺 8B、时长或吞吐。记录峰值内存、pressure／swap、step／墙钟时间。[其他内存规格](https://www.apple.com/macbook-pro/specs/)须另过资源关。
+
+同时固定原始和社区转换仓库、processor／模板／config、adapter 目标及代码；revision 是来源／产物快照，不是独立权重字节审计：
+
+| 角色／候选 | 原始 HF revision | MLX 4-bit HF revision |
+| --- | --- | --- |
+| 主候选 Qwen3.5-4B | [851bf6e8…](https://huggingface.co/Qwen/Qwen3.5-4B/tree/851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a) | [0e7ffd5c…](https://huggingface.co/mlx-community/Qwen3.5-4B-4bit/tree/0e7ffd5c629ef7719d4cbc04069232580bfa9d9c) |
+| 同家族资源对照／回退 Qwen3.5-2B | [15852e8c…](https://huggingface.co/Qwen/Qwen3.5-2B/tree/15852e8c16360a2fea060d615a32b45270f8a8fc) | [674aaa72…](https://huggingface.co/mlx-community/Qwen3.5-2B-4bit/tree/674aaa7240b91e8012fcad5d791b7dfe5ba90207) |
+| 独立小模型路径 Qwen3-VL-2B-Instruct | [89644892…](https://huggingface.co/Qwen/Qwen3-VL-2B-Instruct/tree/89644892e4d85e24eaac8bacfd4f463576704203) | [9c4f5209…](https://huggingface.co/mlx-community/Qwen3-VL-2B-Instruct-4bit/tree/9c4f5209e57b31f4b9dfba735de3fb983739c9cc) |
+
+官方 Qwen3.5-4B 声明 Apache-2.0；社区 4B 转换的固定目录未见 README／LICENSE，API 也未返回许可声明，不能把官方条款或先前两组 2B 的许可核验冒充对它的完整审计。其 config 保留 vision_config，量化为 affine 4-bit、group 64。G0 追溯并保留官方 LICENSE／NOTICE，核实际转换来源与分发权；无法确认时停用该产物，未来另获授权后可考虑从官方权重受控转换，本次不下载或转换。[MLX-VLM 代码](https://github.com/Blaizzy/mlx-vlm/blob/2ceff4c14b991370a459d14eb49d1bedf4fb9e84/LICENSE)为 MIT，数据／依赖／产物权利独立。
+
+固定 MLX-VLM `2ceff4c14b991370a459d14eb49d1bedf4fb9e84`（2026-10-26 23:23:46 UTC）的[入口](https://github.com/Blaizzy/mlx-vlm/blob/2ceff4c14b991370a459d14eb49d1bedf4fb9e84/mlx_vlm/train.py)是 `python -m mlx_vlm.train`，不照搬旧 `lora.py`。已阅 [VisionDataset](https://github.com/Blaizzy/mlx-vlm/blob/2ceff4c14b991370a459d14eb49d1bedf4fb9e84/mlx_vlm/trainer/vlm/sft/dataset.py) → pixels／grid → [shifted completion loss](https://github.com/Blaizzy/mlx-vlm/blob/2ceff4c14b991370a459d14eb49d1bedf4fb9e84/mlx_vlm/trainer/vlm/sft/runtime.py) → [Qwen3.5 视觉融合](https://github.com/Blaizzy/mlx-vlm/blob/2ceff4c14b991370a459d14eb49d1bedf4fb9e84/mlx_vlm/models/qwen3_5/qwen3_5.py) → [梯度引擎](https://github.com/Blaizzy/mlx-vlm/blob/2ceff4c14b991370a459d14eb49d1bedf4fb9e84/mlx_vlm/trainer/common/engine.py)；[adapter 准备](https://github.com/Blaizzy/mlx-vlm/blob/2ceff4c14b991370a459d14eb49d1bedf4fb9e84/mlx_vlm/trainer/peft/utils.py)冻结底座、选择语言层。这支持**冻结视觉塔的图像条件语言侧适配源码路径**，不是 M5 Pro 端到端复现，也不实现 Intern 占位监督或 Clef head。
+
+Qwen3.5 [language.py](https://github.com/Blaizzy/mlx-vlm/blob/2ceff4c14b991370a459d14eb49d1bedf4fb9e84/mlx_vlm/models/qwen3_5/language.py)在训练时令 `use_kernel=False`，[gated_delta.py](https://github.com/Blaizzy/mlx-vlm/blob/2ceff4c14b991370a459d14eb49d1bedf4fb9e84/mlx_vlm/models/qwen3_5/gated_delta.py)转入 chunked／reference ops；不能因 DeltaNet 架构判定它只能推理。实际梯度仍待 G1。语言 linear 模块包含 DeltaNet 的 `in_proj_qkv/z/b/a` 与 `out_proj`，不能机械套 Qwen3-VL 的 q/k/v/o 清单；保存并审计真实 trainable 模块、参数数目及梯度覆盖。MTP 是多 token 预测，不是分类 decision head。
+
+**短标签模板门槛：** 固定 thinking 开关、完整 processor／chat template 和评分前缀。Qwen3.5 默认生成前缀含 thinking 标记；金标短标签、空 thinking 段和推理前缀须一致，逐 token 核对完整序列、prefix、completion mask 与标签位置。所阅通用训练 CLI 没有专门 thinking 开关，不能发明参数；需要时核实 processor／模板或 Python 配置接线并版本化，未通过就停在 G1。长思考生成与短 decision 接口分开计成本和比较。
 
 | 阶段 | 待执行工作与必留产物 | 通过／失败／停止 |
 | --- | --- | --- |

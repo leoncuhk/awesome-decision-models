@@ -2024,3 +2024,75 @@
 - Source revision: `not captured / live URL`
 - Note: ACL Anthology metadata/abstract reviewed: EMNLP main proceedings, November 2025; structured interaction summarization then a fine-tuned small intent model on UI trajectories. Prior-work boundary only; full methods/artifacts and performance claims not imported. No claim that its task equals a single-image business classifier.
 
+<a id="qwen35-4b-selection-oct27"></a>
+## Qwen3.5-4B official VLM and template selection audit
+
+- Source: https://huggingface.co/Qwen/Qwen3.5-4B/blob/851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a/README.md
+- Kind: `model_card`; review depth: `content_reviewed`; reviewed: 2026-10-27
+- Source revision: `851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a`
+- Note: Read official card, API revision/license, config and chat_template.jinja. Native vision-language 4B, Apache-2.0, thinking default and explicit template branch. Author benchmark tables motivate a candidate, not a same-protocol business win or M5 memory/gradient result. No numerical claims imported, weights downloaded or model executed.
+
+<a id="qwen35-4b-mlx-selection-oct27"></a>
+## Community Qwen3.5-4B MLX quantization config and provenance gap
+
+- Source: https://huggingface.co/mlx-community/Qwen3.5-4B-4bit/blob/0e7ffd5c629ef7719d4cbc04069232580bfa9d9c/config.json
+- Kind: `repository`; review depth: `content_reviewed`; reviewed: 2026-10-27
+- Source revision: `0e7ffd5c629ef7719d4cbc04069232580bfa9d9c`
+- Note: Read public API file list, config, tokenizer_config and chat_template.jinja. Preserves qwen3_5/vision_config and affine 4-bit group64. No README/LICENSE file or API license declaration found in this snapshot. Trace upstream provenance and retain official notices before future use; do not treat original Apache terms as a complete conversion audit. No weight-byte/quantization-fidelity/capacity test.
+
+<a id="mlx-vlm-qwen35-visual-oct27"></a>
+## MLX-VLM Qwen3.5 image embeddings and visual fusion
+
+- Source: https://github.com/Blaizzy/mlx-vlm/blob/2ceff4c14b991370a459d14eb49d1bedf4fb9e84/mlx_vlm/models/qwen3_5/qwen3_5.py
+- Kind: `repository`; review depth: `content_reviewed`; reviewed: 2026-10-27
+- Source revision: `2ceff4c14b991370a459d14eb49d1bedf4fb9e84`
+- Note: Read distinct Qwen3.5 vision tower, pixels/grid processing, embedding insertion, image-feature/token count rejection and language-model construction. Do not transfer a Qwen3-VL model path merely from naming. Source inspection only; no checkpoint loaded or image forward/backward run.
+
+<a id="mlx-vlm-qwen35-language-oct27"></a>
+## MLX-VLM Qwen3.5 training-mode DeltaNet dispatch and adapter module names
+
+- Source: https://github.com/Blaizzy/mlx-vlm/blob/2ceff4c14b991370a459d14eb49d1bedf4fb9e84/mlx_vlm/models/qwen3_5/language.py
+- Kind: `repository`; review depth: `content_reviewed`; reviewed: 2026-10-27
+- Source revision: `2ceff4c14b991370a459d14eb49d1bedf4fb9e84`
+- Note: Read training use_kernel=not self.training dispatch and hybrid layer implementation, including DeltaNet in_proj_qkv/z/b/a and out_proj. Adapter targets must reflect actual modules, not copied q/k/v/o-only lists. MTP is not a decision classifier. No local gradient, model quality or hardware claim.
+
+<a id="mlx-vlm-qwen35-delta-oct27"></a>
+## MLX-VLM Qwen3.5 chunked/reference training path
+
+- Source: https://github.com/Blaizzy/mlx-vlm/blob/2ceff4c14b991370a459d14eb49d1bedf4fb9e84/mlx_vlm/models/qwen3_5/gated_delta.py
+- Kind: `repository`; review depth: `content_reviewed`; reviewed: 2026-10-27
+- Source revision: `2ceff4c14b991370a459d14eb49d1bedf4fb9e84`
+- Note: Read gated_delta_update use_kernel=False fallback to chunked/reference MLX ops. Architecture is not sufficient grounds to assert inference-only. No tests from this third-party package were executed; actual full-checkpoint image-conditioned gradients remain a gate.
+
+<a id="jev-decision-2b-selection-oct27"></a>
+## Jev-Decision Qwen3-VL-2B pointer-head precedent and release limits
+
+- Source: https://github.com/yeyan00/Jev-Decision/blob/811bf5083a12622b0e63a98084312a91ac119b80/README.md
+- Kind: `repository`; review depth: `content_reviewed`; reviewed: 2026-10-27
+- Source revision: `811bf5083a12622b0e63a98084312a91ac119b80`
+- Note: Read README, pinned tree, config and MIT LICENSE. Declares Qwen3-VL-2B, frozen-vision LoRA, dynamic pointer readout and image/text inputs. No public checkpoint/evaluation-result artifacts found in inspected tree; README gives no numeric outcome/checkpoint link. PyTorch/CUDA-oriented, not native MLX. ScienceQA mixture imposes NC/SA concerns on derived weights. This newly audited precedent does not retrospectively justify an earlier choice or prove business gains.
+
+<a id="jev-decision-2b-data-oct27"></a>
+## Jev-Decision image processor and visual tensor collator
+
+- Source: https://github.com/yeyan00/Jev-Decision/blob/811bf5083a12622b0e63a98084312a91ac119b80/src/jev_decision/data.py
+- Kind: `repository`; review depth: `content_reviewed`; reviewed: 2026-10-27
+- Source revision: `811bf5083a12622b0e63a98084312a91ac119b80`
+- Note: Read local-image message construction, processor.apply_chat_template and concatenation of pixel_values/image_grid_thw into model batches. Actual image path in code, not compatibility inference; no data downloaded or samples run.
+
+<a id="jev-decision-2b-loss-oct27"></a>
+## Jev-Decision visual backbone, pointer loss and frozen-vision LoRA code
+
+- Source: https://github.com/yeyan00/Jev-Decision/blob/811bf5083a12622b0e63a98084312a91ac119b80/src/jev_decision/model.py
+- Kind: `repository`; review depth: `content_reviewed`; reviewed: 2026-10-27
+- Source revision: `811bf5083a12622b0e63a98084312a91ac119b80`
+- Note: Read AutoModelForImageTextToText, multimodal_inputs forwarding, final hidden-state decision/option pointer readout, hard/soft CE, freeze/head/LoRA and save code. This supports an inspectable implementation, not a completed model release or measured effect. No code executed.
+
+<a id="jev-decision-2b-train-oct27"></a>
+## Jev-Decision optimization entry for head/LoRA training
+
+- Source: https://github.com/yeyan00/Jev-Decision/blob/811bf5083a12622b0e63a98084312a91ac119b80/src/jev_decision/train.py
+- Kind: `repository`; review depth: `content_reviewed`; reviewed: 2026-10-27
+- Source revision: `811bf5083a12622b0e63a98084312a91ac119b80`
+- Note: Read configured processor, trainable parameters, AdamW and accelerator.backward(loss), head/LoRA stages and validation selection. Code-level trainability differs from published weights/results, Mac support and local reproduction. No training run.
+
