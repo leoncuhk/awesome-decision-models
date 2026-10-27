@@ -92,7 +92,7 @@ The newer releases add distinct experiments; they do not replace task-specific a
 
 ## 7. Image intent and domain adaptation / 图片意图与领域适配
 
-Current implementation plan: [Mac small-data route](multimodal-decision-finetuning.md#mac-implementation), with conditional capacity, matched baselines, cost/risk acceptance and research gates. / 当前实施方案：[Mac 小样本路线](multimodal-decision-finetuning.zh-CN.md#mac-implementation)，统一条件容量、同条件基线、成本／风险验收及科研门槛。
+Current implementation plan: [M5 Pro 48 GB small-data route](multimodal-decision-finetuning.md#mac-implementation), with conditional capacity, matched baselines, cost/risk acceptance and research gates. / 当前实施方案：[M5 Pro 48 GB 小样本路线](multimodal-decision-finetuning.zh-CN.md#mac-implementation)，统一条件容量、同条件基线、成本／风险验收及科研门槛。
 
 [2026-10-26 training-support audit](../updates/2026-10-26-multimodal-training-and-evidence.md#trainability) distinguishes image-supervised Qwen/Intern paths, experimental Clef, verified inference paths for D3-Turbo/Decider and mlx-decision media rejection. The same update specifies learned judgment versus changing facts and frozen acceptance. / [10 月 26 日训练支持核验](../updates/2026-10-26-multimodal-training-and-evidence.md#trainability)分开图像监督 Qwen／Intern、实验 Clef、仅确证推理的 D3-Turbo／Decider 与拒收媒体训练的 mlx-decision，并给出学习判断、变化事实与冻结验收的合同。
 

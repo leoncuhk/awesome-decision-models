@@ -45,7 +45,7 @@ The table compares mechanisms and use cases, **not incompatible benchmark scores
 
 For domain evaluation and verified training support, see the [image-intent adaptation workflow](docs/selection-guide.md#image-intent-adaptation). Start with the [one-page multimodal post-training route](docs/multimodal-decision-finetuning.md#quick-route), then follow the controlled experiments, candidate gates and [layered academic reading list](docs/multimodal-decision-finetuning.md#reading-list).
 
-Mac implementation and scientific evaluation are integrated into the [existing multimodal guide](docs/multimodal-decision-finetuning.md#mac-implementation): conditional small-model route, split budget, short-label scores, business-cost acceptance and gated research. The [October 26 source audit](updates/2026-10-26-multimodal-training-and-evidence.md) remains historical; no new implementation report is added.
+M5 Pro 48 GB implementation for image-plus-intent data with planned prior context, and scientific evaluation, are integrated into the [existing multimodal guide](docs/multimodal-decision-finetuning.md#mac-implementation): conditional small-model route, split budget, short-label scores, business-cost acceptance and gated research. The [October 26 source audit](updates/2026-10-26-multimodal-training-and-evidence.md) remains historical; no new implementation report is added.
 
 Execution details: [split protocol](docs/multimodal-decision-finetuning.md#split-protocol), [minimal experiment matrix](docs/multimodal-decision-finetuning.md#experiment-matrix), [result record and stopping decision](docs/multimodal-decision-finetuning.md#result-template).
 

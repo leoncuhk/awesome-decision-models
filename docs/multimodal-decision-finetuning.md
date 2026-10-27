@@ -39,7 +39,9 @@ Start at the [data schema](#data-schema), [split protocol](#split-protocol) and 
 
 ## 1. Freeze the question and comparisons
 
-Define exactly what is observed: an image, contemporaneous context if actually present, the user's intent, observable evidence, evidence sufficiency, and the policy-permitted next step. These are different annotation targets. If the existing labels describe only image categories, do not invent conversation context, intent or correct actions. Scope that first experiment to what its inputs identify, or separately authorize the missing annotation. Keep normal known cases, missing images, missing context, image–text conflicts, unknown intents and OOS distinct. Two annotators independently audit a representative sample plus enriched ambiguous/rare cases and adjudicate disagreements; do not force a label when the input itself is insufficient.
+The starting data are **images plus manually labeled intents**; historical context can be added. The primary task is business image–text intent recognition, with image-only as a required comparator. Construct a versioned derived view from history visible in the business system **before the decision cutoff**: exclude later support conclusions, final handling outcomes, backfilled labels and facts learned only after investigation. Freeze history length and truncation rules, and group all turns/images from the same conversation/case into one partition. Access, redaction and historical joins remain pending execution authorization; preserve the original records.
+
+Intent labels do not establish that every image identifies its label. Audit a representative sample plus enriched ambiguous/rare cases with two independent annotators and adjudication; if the visible evidence cannot determine the intent, mark the limitation or add valid prior context rather than force a label. Correct next actions and evidence-insufficiency labels have **not** been supplied: evidence spans, sufficiency/conflict reasons and policy-permitted actions are optional staged annotations with their own cost/rights, not existing gold. Separate normal known cases, missing image/context, conflicts, unknown intents and OOS wherever verified labels support that distinction.
 
 The main output is a short label plus a defined score, with evidence location and optional concise explanation separate. Long chain-of-thought is not a substitute for evidence grounding. Changing prices/status/policies remain time-valid input evidence, as specified in [learned judgment](#learned-judgment).
 
@@ -59,7 +61,7 @@ Training support determines which experiment is feasible, not which model wins. 
 <a id="experiment-matrix"></a>
 ### Minimal matrix: required first pass, then gated extensions
 
-Use one frozen task/split; all features, exemplars and heads fit only on Train. Complete finite model/prompt/scorer selection on Dev, then take only preregistered frozen baselines and final candidates into the same locked Test. Start with the inexpensive arms; one small VLM is enough initially. If the task has no real context, omit context-only comparisons explicitly rather than synthesize evidence.
+Use one frozen task/split; all features, exemplars and heads fit only on Train. Complete finite model/prompt/scorer selection on Dev, then take only preregistered frozen baselines and final candidates into the same locked Test. Start with the inexpensive arms; one small VLM is enough initially. On the context-augmented cohort, require image-only, context-only, OCR+context and image+context comparisons with the same frozen history window. Before that view is authorized and constructed, image-only results cannot be presented as a tested multimodal gain; do not fabricate history.
 
 | Arm | Configuration | What it tests |
 | --- | --- | --- |
@@ -115,7 +117,7 @@ ezjev's MIT code license does not license its weights or training data. Its [mod
 <a id="data-schema"></a>
 ### A minimal local data schema
 
-The following is invented notation, not a real record, usable prompt or public-data upload request. Store actual assets, text, identities and labels in an authorized local/private system; opaque IDs alone do not anonymize screenshots. Keep the label taxonomy/candidate definitions in a versioned sidecar. Separate annotation-only later outcomes from model-visible evidence, and verify evidence timestamps before feature extraction.
+Starting schema: image + intent; historical context is a planned addition. Evidence-insufficiency and correct-action targets require additional annotation and are not assumed present. The following is invented notation, not a real record, usable prompt or public-data upload request. Store actual assets, text, identities and labels in an authorized local/private system; opaque IDs alone do not anonymize screenshots. Keep the label taxonomy/candidate definitions in a versioned sidecar. Separate annotation-only later outcomes from model-visible evidence, and verify evidence timestamps before feature extraction.
 
 ```json
 {
@@ -153,7 +155,7 @@ Have at least two annotators independently assess an agreed audit subset, enrich
 <a id="learned-judgment"></a>
 ### Learn judgment while supplying changing facts as evidence
 
-Train separate targets for intent, evidence sufficiency/reason and permitted next step; evaluate their joint consistency. Keep user goal distinct from image category and from a guess about a missing fact. Use matched same-image/different-goal cases, readable/unreadable evidence, contradictions and genuine unknown intents with independent adjudication. Suggested routing labels do not authorize execution.
+Intent-only supervision is the starting arm. If additional sufficiency/reason and permitted-next-step annotations are authorized and obtained, supervise them separately and evaluate joint consistency; until then, mark those targets/metrics unavailable. Keep user goal distinct from image category and from a guess about a missing fact. Use matched same-image/different-goal cases, readable/unreadable evidence, contradictions and genuine unknown intents with independent adjudication. Suggested routing labels do not authorize execution.
 
 Changing prices, entitlements, order status, policy dates and taxonomy descriptions belong in versioned, time-valid retrieval/tool evidence. Train how to use the supplied evidence, recognize absent/stale/conflicting facts and ask a discriminating question; do not make recall of mutable facts the learning objective. Hold out fact values and later policy versions, and compare a frozen retrieval baseline to adaptation. A missing fact calls for retrieval, a missing user goal for clarification, and an unknown intent for open-set handling; low confidence alone does not identify which one.
 
@@ -229,7 +231,7 @@ Check answer-code tokenization in the actual complete prompt, answer positions, 
 <a id="evidence-ablations"></a>
 ### Evidence ablations before architecture expansion
 
-On the same predeclared independent groups, compare image-only, context-only, OCR+context and full image+context; omit unavailable context explicitly. Keep candidate definitions/guidance and preprocessing budgets fixed. OCR is derived visual evidence, not a no-image-information control. Test logo/template shortcuts with semantics-audited removal or changes; if the changed region is necessary evidence, relabel sufficiency/intent rather than demanding invariance.
+On the same predeclared independent groups with the authorized historical view, require image-only, context-only, OCR+context and full image+context. Freeze the decision cutoff, history length and truncation for all arms; missing-history cases form a separate reported slice. Keep candidate definitions/guidance and preprocessing budgets fixed. OCR is derived visual evidence, not a no-image-information control. Test logo/template shortcuts with semantics-audited removal or changes; if the changed region is necessary evidence, relabel sufficiency/intent rather than demanding invariance.
 
 For matched visual-change/text-change four-cell tests, adjudicate original, image-only edit, text-only edit and joint edit. A random swapped image can change the correct answer; it must not blindly inherit the label. Distinguish valid meaning-preserving changes from meaning/evidence-changing ones. Add missing/conflicting modalities, natural unknowns/OOS, unseen-template/time challenges and grouped training-size curves. Representative natural-frequency Test and deliberately enriched stress sets keep separate denominators and costs. A synthetic black-box mask is not a complete model of missing evidence.
 
@@ -238,16 +240,11 @@ Run these checks before adding graphs, another encoder, reasoning or an H4 resea
 ## 5. Experiment order and stopping rules
 
 <a id="mac-implementation"></a>
-### MacBook M5 Pro: one small image-conditioned adaptation first
+### MacBook M5 Pro 48 GB: one small image-conditioned adaptation first
 
-This is a conditional implementation plan, not a measured fit/speed claim. [Apple's configuration specifications](https://www.apple.com/macbook-pro/specs/) list 24/48/64 GB M5 Pro paths depending on the chip variant. The target machine's configuration is unconfirmed. Start with one 2B-class 4-bit candidate and microbatch 1; consider 4B only after measured resource headroom and a business/research reason. No 8B training-capacity or completion-time promise follows from the chip name.
+The planned target is **MacBook M5 Pro with 48 GB unified memory**. This configuration is confirmed for planning; no training was run on it here. Start with one 2B-class 4-bit model, one image per example, microbatch 1 and gradient accumulation. Preserve required visual/context evidence before increasing batch size. A 4B arm requires both a residual business/research reason and measured headroom on representative longest-input backward/save/reload; neither 8B fit nor a completion time is promised. Record peak memory, pressure/swap and step/wall time rather than infer them from model-file size.
 
-| Target unified memory | Planned resource gate |
-| --- | --- |
-| 24 GB | Keep the first 2B candidate, bounded media cache, checkpointing and microbatch 1; stop or revise if representative longest-input backward/save/reload has unacceptable pressure/swap. |
-| 48 GB | Same initial gate; additional capacity may preserve necessary image/context tokens, but must be measured before changing the model/batch. |
-| 64 GB | Same initial gate; a 4B arm is conditional on useful headroom and expected value, not required simply because memory is larger. |
-| Unknown/other | Confirm the target configuration and run G1 later; do not substitute another connected computer or a model-file size. |
+[Apple's specifications](https://www.apple.com/macbook-pro/specs/) also list 24/64 GB configurations subject to chip variant; readers using those configurations must repeat the resource gate. They are not separate first-pass routes for this 48 GB plan.
 
 First implementation candidate: `Qwen3-VL-2B-Instruct` in an MLX 4-bit conversion. `Qwen3.5-2B` is a second candidate only if a defined failure/resource issue warrants another arm. Pin **both** the original and conversion repositories, processor/template/config and code; repository revisions identify source/artifact snapshots, not an independent weight-byte audit:
 
@@ -271,7 +268,7 @@ The inspected chain is image-aware [`VisionDataset`](https://github.com/Blaizzy/
 **Unexecuted G1 example only.** `/local/...` paths are invented placeholders for already pinned local artifacts. No installer, downloader or sample upload is included. `validation.jsonl` contains a Train/Dev-authorized smoke subset or Dev, never Cal/Test. The stable label ID below is synthetic; verify its tokenization in the exact full prompt before choosing it.
 
 ```json
-{"images":["images/synthetic-status.png"],"messages":[{"role":"user","content":"Classify the synthetic page. Labels: L0=status inquiry; L1=other."},{"role":"assistant","content":"L0"}]}
+{"images":["images/synthetic-status.png"],"messages":[{"role":"user","content":"Infer intent from this synthetic image and the pre-decision message: Please check this status. Labels: L0=status inquiry; L1=other."},{"role":"assistant","content":"L0"}]}
 ```
 
 ```sh
@@ -310,7 +307,7 @@ The primary business measure is total expected cost per independent case: error 
 | Dimension | Predefined reporting |
 | --- | --- |
 | Business, primary | Per-case error/review/latency/compute cost components; paired net reduction and interval versus strongest frozen baseline; minimum worthwhile effect and stop decision. |
-| Task, supporting | Macro-F1, each class recall/precision, critical confusions, joint intent/sufficiency/action correctness; multilabel/unknown/OOS/insufficient separate. |
+| Task, supporting | Macro-F1, each class recall/precision, critical confusions, joint intent/sufficiency/action correctness only where additional gold is available; multilabel/unknown/OOS/insufficient separate. |
 | Selective policy | Cost/risk–coverage curves, useful coverage at the same critical-risk ceiling, accepted errors/accepted independent cases, false refusals and review/clarification burden. |
 | Uncertainty | Paired cluster bootstrap at the preregistered case/conversation/user unit when support permits; seed variability reported separately, not pooled as independent cases. |
 | Probability / OOS | Frozen-Test Brier/NLL/ECE and defined bins, OOS AUROC/operating point and scorer costs; independent probability fitting and policy selection. |
