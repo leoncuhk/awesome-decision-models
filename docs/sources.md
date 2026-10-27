@@ -1920,3 +1920,107 @@
 - Source revision: `b5861f2f990a63a1b8d0af37881471cf9034e66f`
 - Note: Oct22 fixed README and MIT LICENSE read. Local seed manifest, external models/assets, separate pilot proxy thresholds and human annotation audit required. Additional open/API model adapters and concrete budget/threshold placeholders remain for the researcher. Paper automated-oracle description must not be equated to a complete out-of-box reproduction from this README. No dependencies installed or code executed; underlying dataset/image terms separate.
 
+<a id="mlx-vlm-training-oct27"></a>
+## MLX-VLM pinned image-conditioned SFT and CLI
+
+- Source: https://github.com/Blaizzy/mlx-vlm/blob/2ceff4c14b991370a459d14eb49d1bedf4fb9e84/docs/training.md
+- Kind: `official_docs`; review depth: `content_reviewed`; reviewed: 2026-10-27
+- Source revision: `2ceff4c14b991370a459d14eb49d1bedf4fb9e84`
+- Note: Oct26 2026 23:23:46 UTC tree reviewed; head change concerns model README listings, not a newly introduced training feature. Read current training guide and train.py: local image JSONL, completion-only masks, quantized-base language adapters, CLI flags, microstep counting, memory metrics and saving. Restoring weights uses a fresh optimizer; optimizer/RNG state is not saved. LICENSE is MIT. Source inspection only; no environment installed, weights fetched or training run.
+
+<a id="mlx-vlm-visual-loss-oct27"></a>
+## MLX-VLM image features and shifted completion loss
+
+- Source: https://github.com/Blaizzy/mlx-vlm/blob/2ceff4c14b991370a459d14eb49d1bedf4fb9e84/mlx_vlm/trainer/vlm/sft/runtime.py
+- Kind: `repository`; review depth: `content_reviewed`; reviewed: 2026-10-27
+- Source revision: `2ceff4c14b991370a459d14eb49d1bedf4fb9e84`
+- Note: Read runtime plus VisionDataset, common engine and Qwen3-VL model: nonempty media without features rejects; pixels/grid reach model; targets and completion mask shift by one; visual embeddings merge with text; nn.value_and_grad supplies training. Default frozen vision still conditions language adapters. No actual gradient/quality/memory test, nor blanket support for custom decision heads.
+
+<a id="mlx-vlm-language-adapters-oct27"></a>
+## MLX-VLM frozen-base language adapter targets
+
+- Source: https://github.com/Blaizzy/mlx-vlm/blob/2ceff4c14b991370a459d14eb49d1bedf4fb9e84/mlx_vlm/trainer/peft/utils.py
+- Kind: `repository`; review depth: `content_reviewed`; reviewed: 2026-10-27
+- Source revision: `2ceff4c14b991370a459d14eb49d1bedf4fb9e84`
+- Note: Read base freezing, language-transformer target discovery, QuantizedLinear adapter handling and load preparation. Actual module names/gradients must be audited after loading the exact checkpoint; general LoRA support is not a per-checkpoint successful image run or permission to train vision. No code executed.
+
+<a id="mlx-vlm-clef-inference-oct27"></a>
+## MLX-VLM Clef image inference and custom call contract
+
+- Source: https://github.com/Blaizzy/mlx-vlm/blob/2ceff4c14b991370a459d14eb49d1bedf4fb9e84/mlx_vlm/models/clef/clef.py
+- Kind: `repository`; review depth: `content_reviewed`; reviewed: 2026-10-27
+- Source revision: `2ceff4c14b991370a459d14eb49d1bedf4fb9e84`
+- Note: Read fixed Clef model and its README: predict accepts image/video evidence, while __call__ requires question_spans, option_spans and qtype. Its joint-schema head cannot be assumed trainable through ordinary shifted-SFT CLI. Distinct from mlx-decision media-training rejection and community CUDA fine-tuning.
+
+<a id="qwen3vl-2b-original-oct27"></a>
+## Qwen/Qwen3-VL-2B-Instruct pinned candidate metadata
+
+- Source: https://huggingface.co/Qwen/Qwen3-VL-2B-Instruct/tree/89644892e4d85e24eaac8bacfd4f463576704203
+- Kind: `model_card`; review depth: `metadata_only`; reviewed: 2026-10-27
+- Source revision: `89644892e4d85e24eaac8bacfd4f463576704203`
+- Note: Read HF API revision metadata: exact repository SHA and Apache-2.0 declaration verified. Original and conversion are separate artifacts; quantization fidelity, processor/template compatibility, weight bytes and trainability not locally tested. No weight download. Model choice is a proposed experiment, not a quality or capacity result.
+
+<a id="qwen3vl-2b-mlx-oct27"></a>
+## mlx-community/Qwen3-VL-2B-Instruct-4bit pinned candidate metadata
+
+- Source: https://huggingface.co/mlx-community/Qwen3-VL-2B-Instruct-4bit/tree/9c4f5209e57b31f4b9dfba735de3fb983739c9cc
+- Kind: `model_card`; review depth: `metadata_only`; reviewed: 2026-10-27
+- Source revision: `9c4f5209e57b31f4b9dfba735de3fb983739c9cc`
+- Note: Read HF API revision metadata: exact repository SHA and Apache-2.0 declaration verified. Original and conversion are separate artifacts; quantization fidelity, processor/template compatibility, weight bytes and trainability not locally tested. No weight download. Model choice is a proposed experiment, not a quality or capacity result.
+
+<a id="qwen35-2b-original-oct27"></a>
+## Qwen/Qwen3.5-2B pinned candidate metadata
+
+- Source: https://huggingface.co/Qwen/Qwen3.5-2B/tree/15852e8c16360a2fea060d615a32b45270f8a8fc
+- Kind: `model_card`; review depth: `metadata_only`; reviewed: 2026-10-27
+- Source revision: `15852e8c16360a2fea060d615a32b45270f8a8fc`
+- Note: Read HF API revision metadata: exact repository SHA and Apache-2.0 declaration verified. Original and conversion are separate artifacts; quantization fidelity, processor/template compatibility, weight bytes and trainability not locally tested. No weight download. Model choice is a proposed experiment, not a quality or capacity result.
+
+<a id="qwen35-2b-mlx-oct27"></a>
+## mlx-community/Qwen3.5-2B-4bit pinned candidate metadata
+
+- Source: https://huggingface.co/mlx-community/Qwen3.5-2B-4bit/tree/674aaa7240b91e8012fcad5d791b7dfe5ba90207
+- Kind: `model_card`; review depth: `metadata_only`; reviewed: 2026-10-27
+- Source revision: `674aaa7240b91e8012fcad5d791b7dfe5ba90207`
+- Note: Read HF API revision metadata: exact repository SHA and Apache-2.0 declaration verified. Original and conversion are separate artifacts; quantization fidelity, processor/template compatibility, weight bytes and trainability not locally tested. No weight download. Model choice is a proposed experiment, not a quality or capacity result.
+
+<a id="apple-m5-pro-memory-oct27"></a>
+## Apple MacBook Pro M5 Pro memory configurations
+
+- Source: https://www.apple.com/macbook-pro/specs/
+- Kind: `official_docs`; review depth: `content_reviewed`; reviewed: 2026-10-27
+- Source revision: `not captured / live URL`
+- Note: Official specification lists M5 Pro 24GB, configurable 48GB and 64GB subject to chip variant. This supports conditional resource planning only: no inspected user machine is identified here, and no training-capacity, runtime or speed is certified. Specification is a live page reviewed Oct27.
+
+<a id="learn-then-test-v5"></a>
+## Learn then Test risk-control framework v5
+
+- Source: https://arxiv.org/html/2110.01052v5
+- Kind: `paper`; review depth: `content_reviewed`; reviewed: 2026-10-27
+- Source revision: `not captured / live URL`
+- Note: Version history: first Oct3 2021; v5 Sep29 2022. Relevant risk-control/selective-classification and multiple-testing sections reviewed; displayed typesetting date is not treated as a new release. Valid p-values, frozen candidate family, appropriate data/loss assumptions and FWER control matter. No theorem or certification implemented here; do not infer a guarantee under clustered observations or template/time shift.
+
+<a id="leakage-reproducibility-v1"></a>
+## Leakage and the Reproducibility Crisis in ML-based Science v1
+
+- Source: https://arxiv.org/html/2207.07048v1
+- Kind: `paper`; review depth: `content_reviewed`; reviewed: 2026-10-27
+- Source revision: `not captured / live URL`
+- Note: Jul14 2022 v1; leakage taxonomy, independence/future-information/selection issues and model information-sheet motivation reviewed. Methodological reference, not an audit of a private dataset. No numerical study result imported or code rerun.
+
+<a id="personalization-oos-v1"></a>
+## Does Personalization Break Trust? Few-Shot Intent Adaptation v1
+
+- Source: https://arxiv.org/html/2610.20652v1
+- Kind: `paper`; review depth: `content_reviewed`; reviewed: 2026-10-27
+- Source revision: `not captured / live URL`
+- Note: Oct12 2026 text-encoder intent preprint. Read adaptation/scorer contrasts and limitations: OOS quality can degrade, scorer changes partly recover it, pseudo-OOS and forgetting remain. Motivates same-backbone temperature/energy/Mahalanobis controls; no VLM effect or score imported. An anonymized code link is reported but its contents/license were not audited or run.
+
+<a id="intent-decomposition-emnlp2025"></a>
+## Small Models, Big Results: Intent Extraction through Decomposition
+
+- Source: https://aclanthology.org/2025.emnlp-main.949/
+- Kind: `paper`; review depth: `abstract_reviewed`; reviewed: 2026-10-27
+- Source revision: `not captured / live URL`
+- Note: ACL Anthology metadata/abstract reviewed: EMNLP main proceedings, November 2025; structured interaction summarization then a fine-tuned small intent model on UI trajectories. Prior-work boundary only; full methods/artifacts and performance claims not imported. No claim that its task equals a single-image business classifier.
+

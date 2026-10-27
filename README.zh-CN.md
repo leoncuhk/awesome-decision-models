@@ -6,7 +6,7 @@
 
 收录用于**分类、评分、排序、验证、路由与拒判**的模型和方法。我们关心的不是谁的宣传数字更高，而是：**在具体任务中，哪种方法能以可接受的风险和总成本，交付可验收的结果。**
 
-**本版来源核验日期：2026-10-26。** 精选 59 项资源，其中 20 个核心模型系列、36 条带协议背景的评测记录。本版完成的是公开资料核验，**没有宣称独立运行并复现这些模型**。阅读深度、版本固定情况与未解决的资料缺口均见[来源登记](docs/sources.md)。收录不等于背书，也不等于通过生产可靠性认证。
+**本版来源核验日期：2026-10-27。** 精选 59 项资源，其中 20 个核心模型系列、36 条带协议背景的评测记录。本版完成的是公开资料核验，**没有宣称独立运行并复现这些模型**。阅读深度、版本固定情况与未解决的资料缺口均见[来源登记](docs/sources.md)。收录不等于背书，也不等于通过生产可靠性认证。
 
 ## 目录
 
@@ -101,7 +101,7 @@
 
 领域评测、训练支持核查与未知／澄清策略见[图片意图适配流程](docs/selection-guide.md#image-intent-adaptation)。先看[多模态后训练一页入口](docs/multimodal-decision-finetuning.zh-CN.md#quick-route)，再深入同条件对照、候选门槛及[分层学术阅读清单](docs/multimodal-decision-finetuning.zh-CN.md#reading-list)。
 
-最新专项核验：[10 月 26 日图文训练、监督与验收更新](updates/2026-10-26-multimodal-training-and-evidence.md)，补齐 Qwen／Intern 训练链路、D3-Turbo 身份、Clef／MLX 实验边界和两篇新收录论文；分开来源支持、本地复现与业务效果。
+Mac 实施与科学验证统一整合到[原多模态主指南](docs/multimodal-decision-finetuning.zh-CN.md#mac-implementation)：条件小模型路线、划分预算、短标签分数、业务成本验收与分阶段科研。[10 月 26 日来源核验](updates/2026-10-26-multimodal-training-and-evidence.md)保留历史身份，不再新增实施报告。
 
 执行细节：[分组划分协议](docs/multimodal-decision-finetuning.zh-CN.md#split-protocol)、[最小实验矩阵](docs/multimodal-decision-finetuning.zh-CN.md#experiment-matrix)、[结果记录与停止决定](docs/multimodal-decision-finetuning.zh-CN.md#result-template)。
 
@@ -127,7 +127,7 @@
 - **[Semantic features + supervised predictor](https://docs.typesafe.ai/cookbooks/autoresearch_feature_discovery)** — LLM 提议问题，Jev 将文本转成语义特征，再由监督 CatBoost 预测任务标签。 葡萄酒回归属于作者报告；特征发现须限制在开发划分，训练下游模型不等于微调 Jev，也不证明金融／多模态泛化。
 - **[ezjev text candidate-logit LoRA](https://github.com/everettjf/ezjev/tree/8b3d88957c0795bea160c8fbc9c6d2a54b051136)** — 可检查的逐题候选 CE＋Brier、回放及温度拟合，训练路径使用 Qwen3.5 文本输入。 不是图像微调实现；MIT 仅覆盖代码，部分训练数据为非商业许可或未说明条款；未在此复现训练或校准。
 - **[decision-pacman decision distillation](https://github.com/grapeot/decision-pacman/tree/593ed1f59f4f97ad0bda7287ff304e9667360089)** — 用文本状态的教师／模拟器标签训练小型候选分布 LoRA 学生。 游戏专项作者报告同时存在通用能力下降；不证明图像训练或客服泛化，完整数据／评测产物未审计。
-- **[Qwen VLM image-supervised SFT / LoRA](https://github.com/QwenLM/Qwen3-VL/blob/96588727e44c78b25ba03ea03b8e12f7e64fd0da/qwen-vl-finetune/README.md)** — 可查图像到监督损失的路径：Qwen2／2.5／3-VL 官方 trainer，另有 ms-swift Qwen3.5 LoRA。 代码支持不是业务效果；Qwen3-VL 分派不认证 Qwen3.5，mlx-decision 拒收图片训练。代码 Apache-2.0，检查点／数据权利及导出等价需另核。
+- **[Qwen VLM image-supervised SFT / LoRA](https://github.com/QwenLM/Qwen3-VL/blob/96588727e44c78b25ba03ea03b8e12f7e64fd0da/qwen-vl-finetune/README.md)** — 可查图像监督路径：QwenVL 官方、ms-swift Qwen3.5，以及供 Mac 实验的固定 MLX-VLM 图像条件语言 adapter。 框架／检查点不同，未本地运行模型或证明业务收益。mlx-decision 训练拒收图片，mlx-vlm 另有视觉路径；代码与产物权利分别核，容量、梯度、mask 及重载／导出等价仍须过关。
 
 能够用规则或普通监督分类器解决的任务，也应保留相应对照。只有可靠地增加了价值，复杂性才值得付出。
 

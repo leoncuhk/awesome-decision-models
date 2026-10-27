@@ -6,7 +6,7 @@
 
 A curated guide to systems that **classify, score, rank, verify, route or abstain** rather than primarily generate prose. The central question is not which model has the most impressive headline, but **which method delivers acceptable outcomes at acceptable risk and total cost for a particular task**.
 
-**Source review: 2026-10-26.** 59 selected resources, including 20 core model families and 36 contextualized evidence records. This edition reviews public sources; **it does not claim independent model reproduction**. Review depth and unresolved gaps are recorded in the [source register](docs/sources.md). Inclusion is not an endorsement or a production-readiness certification.
+**Source review: 2026-10-27.** 59 selected resources, including 20 core model families and 36 contextualized evidence records. This edition reviews public sources; **it does not claim independent model reproduction**. Review depth and unresolved gaps are recorded in the [source register](docs/sources.md). Inclusion is not an endorsement or a production-readiness certification.
 
 ## Contents
 
@@ -101,7 +101,7 @@ The table compares mechanisms and use cases, **not incompatible benchmark scores
 
 For domain evaluation and verified training support, see the [image-intent adaptation workflow](docs/selection-guide.md#image-intent-adaptation). Start with the [one-page multimodal post-training route](docs/multimodal-decision-finetuning.md#quick-route), then follow the controlled experiments, candidate gates and [layered academic reading list](docs/multimodal-decision-finetuning.md#reading-list).
 
-Latest targeted review: [October 26 image-training support, supervision and acceptance update](updates/2026-10-26-multimodal-training-and-evidence.md) — Qwen/Intern training paths, D3-Turbo identity, experimental Clef/MLX limits, and two newly cataloged papers. Source support remains separate from local reproduction and business effectiveness.
+Mac implementation and scientific evaluation are integrated into the [existing multimodal guide](docs/multimodal-decision-finetuning.md#mac-implementation): conditional small-model route, split budget, short-label scores, business-cost acceptance and gated research. The [October 26 source audit](updates/2026-10-26-multimodal-training-and-evidence.md) remains historical; no new implementation report is added.
 
 Execution details: [split protocol](docs/multimodal-decision-finetuning.md#split-protocol), [minimal experiment matrix](docs/multimodal-decision-finetuning.md#experiment-matrix), [result record and stopping decision](docs/multimodal-decision-finetuning.md#result-template).
 
@@ -125,7 +125,7 @@ A new training label is not evidence that a familiar baseline is obsolete. Deplo
 - **[Semantic features + supervised predictor](https://docs.typesafe.ai/cookbooks/autoresearch_feature_discovery)** — LLM-proposed questions and Jev judgments turn text into features for a supervised CatBoost predictor. Author-reported wine regression. Feature discovery belongs inside development folds; downstream training does not fine-tune Jev or establish financial/multimodal generalization.
 - **[ezjev text candidate-logit LoRA](https://github.com/everettjf/ezjev/tree/8b3d88957c0795bea160c8fbc9c6d2a54b051136)** — Inspectable per-question candidate CE+Brier, replay and temperature fitting on a Qwen3.5 text-training path. Not an image fine-tuning implementation. MIT covers code only; some training data are non-commercial or lack stated terms. No training or calibration result reproduced here.
 - **[decision-pacman decision distillation](https://github.com/grapeot/decision-pacman/tree/593ed1f59f4f97ad0bda7287ff304e9667360089)** — Text-state teacher/simulator labels train a small option-distribution LoRA student. Game-specific author reports include lost generality. Not image-training or customer-support transfer evidence; complete data/evaluated artifacts not audited.
-- **[Qwen VLM image-supervised SFT / LoRA](https://github.com/QwenLM/Qwen3-VL/blob/96588727e44c78b25ba03ea03b8e12f7e64fd0da/qwen-vl-finetune/README.md)** — Inspectable image-to-supervised-loss routes: official Qwen2/2.5/3-VL trainer and separate ms-swift Qwen3.5 LoRA path. Code support is not a business-quality result. Qwen3-VL dispatch does not certify Qwen3.5; mlx-decision rejects image training. Code Apache-2.0; checkpoint/data rights and export parity require separate checks.
+- **[Qwen VLM image-supervised SFT / LoRA](https://github.com/QwenLM/Qwen3-VL/blob/96588727e44c78b25ba03ea03b8e12f7e64fd0da/qwen-vl-finetune/README.md)** — Inspectable image-supervised routes: official QwenVL, ms-swift Qwen3.5, and pinned MLX-VLM image-conditioned language adapters for Mac experiments. Frameworks/checkpoints differ; no local model run or business gain. mlx-decision rejects image training, while mlx-vlm has a separate visual path. Code licenses and per-artifact rights differ; capacity, gradients, masks and reload/export parity remain gates.
 
 Also retain a deterministic rule or ordinary supervised classifier where the task permits. A model should earn its complexity against the simplest credible alternative.
 
