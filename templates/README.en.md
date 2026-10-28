@@ -45,13 +45,15 @@ The table compares mechanisms and use cases, **not incompatible benchmark scores
 
 For domain evaluation and verified training support, see the [image-intent adaptation workflow](docs/selection-guide.md#image-intent-adaptation). Start with the [one-page multimodal post-training route](docs/multimodal-decision-finetuning.md#quick-route), then follow the controlled experiments, candidate gates and [layered academic reading list](docs/multimodal-decision-finetuning.md#reading-list).
 
+M5 Pro 48 GB implementation for image-plus-intent data with planned prior context, and scientific evaluation, are integrated into the [existing multimodal guide](docs/multimodal-decision-finetuning.md#mac-implementation): Qwen3.5-4B validation priority and 2B fallback rationale, split budget, short-label scores, business-cost acceptance and gated research. The [October 26 source audit](updates/2026-10-26-multimodal-training-and-evidence.md) remains historical; no new implementation report is added.
+
 Execution details: [split protocol](docs/multimodal-decision-finetuning.md#split-protocol), [minimal experiment matrix](docs/multimodal-decision-finetuning.md#experiment-matrix), [result record and stopping decision](docs/multimodal-decision-finetuning.md#result-template).
 
 Worked case: [MIRE tasks, labels and code](docs/mire-case-study.md#tasks), [official composite awards and semifinal scores](docs/mire-case-study.md#finalists), and [transfer limits](docs/mire-case-study.md#transfer-boundaries).
 
 The [readout and adaptive-reasoning comparison](docs/decision-readout-and-reasoning.md) separates StartLux Instant/AutoThink, D3, Decider v1.1 and hosted Jev, including training versus serving and public versus independent evidence.
 
-Research planning (Chinese): [full October 22 survey](docs/multimodal-decision-research-survey-2026-10-22.md) and [falsifiable experiment protocol](docs/multimodal-decision-research-protocol.md), covering MIRE data-access limits, novelty comparisons, heterogeneous repair actions and stopping criteria. These are research plans, not reproduced results.
+Research priorities are consolidated in the [existing guide](docs/multimodal-decision-finetuning.md#research-agenda): diagnose compressed-state failure under rule changes and costly recovery first; reserve joint action risk as a harder alternative. Prior art, controls and stop criteria are specified, with no established novelty/results. The [Oct22 survey](docs/multimodal-decision-research-survey-2026-10-22.md) and [earlier protocol](docs/multimodal-decision-research-protocol.md) remain historical.
 
 **No combined accuracy leaderboard:** zero-shot classification, workflow fine-tuning and Best-of-N selection answer different questions. Local GPU forward time and remote API round-trip time are also different measurements.
 

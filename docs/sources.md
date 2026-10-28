@@ -1720,3 +1720,523 @@
 - Source revision: `f3d49c6de7d5943bb1981c0a55d504f1bae5fa33`
 - Note: README at Oct21 commit inspected: paired data, exact prompts, raw API logs, cost/result summaries and recalculation scripts listed. No code executed or artifacts regenerated here. MIT code; CaseHOLD material retains upstream terms. Stored evaluations are reported evidence, not this repository rerunning them.
 
+<a id="qwen-vl-train-oct26"></a>
+## QwenVL official image SFT and LoRA trainer
+
+- Source: https://github.com/QwenLM/Qwen3-VL/blob/96588727e44c78b25ba03ea03b8e12f7e64fd0da/qwen-vl-finetune/qwenvl/train/train_qwen.py
+- Kind: `repository`; review depth: `content_reviewed`; reviewed: 2026-10-26
+- Source revision: `96588727e44c78b25ba03ea03b8e12f7e64fd0da`
+- Note: Trainer body inspected: Qwen2-VL/2.5-VL/3-VL dense/MoE class dispatch, matching AutoProcessor, PEFT attention projections, supervised data module, model and processor saving. This dispatch is not Qwen3.5 support. Latest inspected tree commit is Jan30 2026, not an Oct26 feature release. No model code executed. Repository LICENSE is Apache-2.0; selected checkpoint/data terms are separate.
+
+<a id="qwen-vl-data-oct26"></a>
+## QwenVL official visual tensors and answer masking
+
+- Source: https://github.com/QwenLM/Qwen3-VL/blob/96588727e44c78b25ba03ea03b8e12f7e64fd0da/qwen-vl-finetune/qwenvl/data/data_processor.py
+- Kind: `repository`; review depth: `content_reviewed`; reviewed: 2026-10-26
+- Source revision: `96588727e44c78b25ba03ea03b8e12f7e64fd0da`
+- Note: Image processing, pixel_values/image_grid_thw, multimodal positions and assistant-label masking inspected. The ordinary collator slices tokens to model_max_length; audit retained evidence and labels rather than assume overlength examples fail closed. Source-path inspection is not a successful training or export run.
+
+<a id="qwen-vl-training-readme-oct26"></a>
+## QwenVL training formats, dependencies and scope
+
+- Source: https://github.com/QwenLM/Qwen3-VL/blob/96588727e44c78b25ba03ea03b8e12f7e64fd0da/qwen-vl-finetune/README.md
+- Kind: `official_docs`; review depth: `content_reviewed`; reviewed: 2026-10-26
+- Source revision: `96588727e44c78b25ba03ea03b8e12f7e64fd0da`
+- Note: Read image/conversation format, full/LoRA flags and dependencies. Image markers must match media. Documentation examples are starting points, not a locally verified environment; MoE/ZeRO restrictions and the exact model class matter. Do not use its random validation fraction as a group/time split protocol.
+
+<a id="swift-qwen35-guide-oct26"></a>
+## ms-swift Qwen3.5/3.6/3.8 image-bearing LoRA guide
+
+- Source: https://github.com/modelscope/ms-swift/blob/942be5a6120d46443f1b1940f2902c3757e312a5/docs/source_en/BestPractices/Qwen3_8-Best-Practice.md
+- Kind: `official_docs`; review depth: `content_reviewed`; reviewed: 2026-10-26
+- Source revision: `942be5a6120d46443f1b1940f2902c3757e312a5`
+- Note: Read image/messages custom format, dense Qwen3.5-4B LoRA with OCR data, MoE training, inference and version caveats. Source also describes Qwen3.6/3.8 but this review does not validate every replacement checkpoint/backend. Repository LICENSE Apache-2.0 inspected. Oct26 tree head concerns RLHF log-softmax performance, not a new image-training release; demonstration memory/time is not a local measurement.
+
+<a id="swift-qwen35-example-oct26"></a>
+## ms-swift Qwen3.5 image OCR LoRA example
+
+- Source: https://github.com/modelscope/ms-swift/blob/942be5a6120d46443f1b1940f2902c3757e312a5/examples/models/qwen3_5/transformers.sh
+- Kind: `repository`; review depth: `content_reviewed`; reviewed: 2026-10-26
+- Source revision: `942be5a6120d46443f1b1940f2902c3757e312a5`
+- Note: Qwen3.5-35B-A3B, OCR image dataset, LoRA and adapter inference example inspected without running it. Explicit model/template/data wiring is stronger than API compatibility; rank, learning rate, random split and hardware comments are not recommended business defaults.
+
+<a id="swift-qwen35-loader-oct26"></a>
+## ms-swift Qwen3.5 multimodal model loader
+
+- Source: https://github.com/modelscope/ms-swift/blob/942be5a6120d46443f1b1940f2902c3757e312a5/swift/model/models/qwen.py
+- Kind: `repository`; review depth: `content_reviewed`; reviewed: 2026-10-26
+- Source revision: `942be5a6120d46443f1b1940f2902c3757e312a5`
+- Note: Qwen3_5Loader uses Qwen3_5ForConditionalGeneration; dense 0.8B/2B/4B/9B model registration and model architecture/visual hooks inspected. This is distinct from Qwen3-VL trainer dispatch. No weights loaded or optimizer run.
+
+<a id="swift-qwen35-template-oct26"></a>
+## ms-swift Qwen3.5 visual template and position handling
+
+- Source: https://github.com/modelscope/ms-swift/blob/942be5a6120d46443f1b1940f2902c3757e312a5/swift/template/templates/qwen.py
+- Kind: `repository`; review depth: `content_reviewed`; reviewed: 2026-10-26
+- Source revision: `942be5a6120d46443f1b1940f2902c3757e312a5`
+- Note: Qwen3_5Template derives from the visual template; image grids, multimodal position handling and packing/version guard inspected. Template handles role whitespace/thinking formatting; freeze the exact render and serving parity in any later experiment. No local runtime verification.
+
+<a id="intern-visual-release"></a>
+## Intern-Decision original public training-code release
+
+- Source: https://github.com/InternLM/Intern-Decision/commit/63292c8b5e0f5d410a7159e0f1c14475b828839a
+- Kind: `repository`; review depth: `content_reviewed`; reviewed: 2026-10-26
+- Source revision: `63292c8b5e0f5d410a7159e0f1c14475b828839a`
+- Note: GitHub commit metadata: Sep26 2026 08:03:14 UTC, training/inference/demo/evaluation release. Config, dataset, masked tokenizer, model and verification blobs match the Oct22 tree inspected here. Oct22 adds report/community/citation documentation. This is deeper review of an existing path, not a new Oct26 release or reproduction.
+
+<a id="intern-visual-data-oct26"></a>
+## Intern-Decision hard-label and local-image training contract
+
+- Source: https://github.com/InternLM/Intern-Decision/blob/565350244af860e1c276768cd80bdd9b8be93913/docs/DATA.md
+- Kind: `official_docs`; review depth: `content_reviewed`; reviewed: 2026-10-26
+- Source revision: `565350244af860e1c276768cd80bdd9b8be93913`
+- Note: Read canonical JSONL, ordered local images resolved against MEDIA_ROOT, hard targets outside model evidence, 62 single-token symbols and strict row errors. Explicitly excludes original training data, private calibration/validation records, media and preparation pipelines. This document does not disclose the mixture; the separate paper does report its composition.
+
+<a id="intern-visual-loader-oct26"></a>
+## Intern-Decision actual UniversalDataset construction
+
+- Source: https://github.com/InternLM/Intern-Decision/blob/565350244af860e1c276768cd80bdd9b8be93913/src/inputs/dataset.py
+- Kind: `repository`; review depth: `content_reviewed`; reviewed: 2026-10-26
+- Source revision: `565350244af860e1c276768cd80bdd9b8be93913`
+- Note: UniversalDatasetConfig.build constructs UniversalDataset(JsonlDataset), whose __getitem__ calls tokenize_fn(row, media_root). The qwen35.py class_name string alone does not identify the constructed dataset. Strict cache counts and no replacement rows; source only.
+
+<a id="intern-visual-masking-oct26"></a>
+## Intern-Decision visual tokenization, labels and collator
+
+- Source: https://github.com/InternLM/Intern-Decision/blob/565350244af860e1c276768cd80bdd9b8be93913/src/inputs/masked.py
+- Kind: `repository`; review depth: `content_reviewed`; reviewed: 2026-10-26
+- Source revision: `565350244af860e1c276768cd80bdd9b8be93913`
+- Note: MaskedQwen3VLTokenizeFunction adds marker, validates one-token codes, passes images to the processor and calculates multimodal positions. Collator supplies pixels/grid and shifts marker targets to preceding logits. Config uses full-vocabulary masked CE, not candidate-subset CE or a supplied LoRA recipe. No training run.
+
+<a id="intern-visual-model-oct26"></a>
+## Intern-Decision frozen visual-feature injection
+
+- Source: https://github.com/InternLM/Intern-Decision/blob/565350244af860e1c276768cd80bdd9b8be93913/src/model/qwen.py
+- Kind: `repository`; review depth: `content_reviewed`; reviewed: 2026-10-26
+- Source revision: `565350244af860e1c276768cd80bdd9b8be93913`
+- Note: DecisionQwen._prepare_llm_inputs computes frozen visual features and injects them into language embeddings; image input with missing grid or text-only forward rejects. Frozen vision/projector are enforced. Text-only batches participate in frozen visual collectives without becoming image training evidence. No local gradient audit.
+
+<a id="intern-visual-save-oct26"></a>
+## Intern-Decision checkpoint verification boundaries
+
+- Source: https://github.com/InternLM/Intern-Decision/blob/565350244af860e1c276768cd80bdd9b8be93913/scripts/verify_checkpoint.py
+- Kind: `repository`; review depth: `content_reviewed`; reviewed: 2026-10-26
+- Source revision: `565350244af860e1c276768cd80bdd9b8be93913`
+- Note: Verifier checks unchanged saved visual tensors, at least one changed language-layer weight and per-rank load audit files. Related scripts/train.sh uses fresh work directory, local MODEL_PATH/tokenizer/processor and canonical user-supplied JSONL; qwen35.py requests final HF output without auto-resume. This checks specified tensor conditions, not inference quality, full export equivalence or release-data replay. None executed here.
+
+<a id="d3-turbo-card"></a>
+## D3-Turbo card: state reuse, localization and API alias
+
+- Source: https://huggingface.co/vllm-sr/d3-turbo/blob/a0f3e9e59ebd1202fe1d4de1c4c0f9a986758cbb/README.md
+- Kind: `model_card`; review depth: `content_reviewed`; reviewed: 2026-10-26
+- Source revision: `a0f3e9e59ebd1202fe1d4de1c4c0f9a986758cbb`
+- Note: HF metadata: created Oct19 2026; latest tree Oct20 15:49:39 UTC. Card scope, Box/Track, API alias and evaluation caveats reviewed. Text/vision Index values are author estimates against a 0.3.2 snapshot, not official/current board results; no new numeric result imported. Box always emits a box, including absent targets; presence needs a separate judgment. Card/LICENSE declare Apache-2.0. No tensor download or inference.
+
+<a id="d3-turbo-runtime"></a>
+## D3-Turbo prefix_bidir StateOnce implementation
+
+- Source: https://huggingface.co/vllm-sr/d3-turbo/blob/a0f3e9e59ebd1202fe1d4de1c4c0f9a986758cbb/d3_runtime.py
+- Kind: `repository`; review depth: `content_reviewed`; reviewed: 2026-10-26
+- Source revision: `a0f3e9e59ebd1202fe1d4de1c4c0f9a986758cbb`
+- Note: Read attention/StateOnce implementation: state attends within state; each question branch reads cached state and its own block. Full-attention state K/V plus causal DeltaNet recurrent/convolution state are reused. This is not cross-question joint attention as in Decider v1.2. Package switch can revert to per-question rows. No runtime executed.
+
+<a id="d3-turbo-wrapper"></a>
+## D3-Turbo wrapper still refuses training and generic saving
+
+- Source: https://huggingface.co/vllm-sr/d3-turbo/blob/a0f3e9e59ebd1202fe1d4de1c4c0f9a986758cbb/modeling_d3.py
+- Kind: `repository`; review depth: `content_reviewed`; reviewed: 2026-10-26
+- Source revision: `a0f3e9e59ebd1202fe1d4de1c4c0f9a986758cbb`
+- Note: train(True) raises inference-only RuntimeError; save_pretrained and push_to_hub are not generic training export paths. Separate implementations remain possible, but image training/LoRA cannot be inferred from multimodal inference or the Qwen architecture. No local test of the wrapper.
+
+<a id="d3-turbo-config"></a>
+## D3-Turbo fixed decision configuration
+
+- Source: https://huggingface.co/vllm-sr/d3-turbo/blob/a0f3e9e59ebd1202fe1d4de1c4c0f9a986758cbb/decision_config.json
+- Kind: `repository`; review depth: `content_reviewed`; reviewed: 2026-10-26
+- Source revision: `a0f3e9e59ebd1202fe1d4de1c4c0f9a986758cbb`
+- Note: prefix_bidir, 255 code IDs, FP32 readout, T=1, validated_length=32768 and Box calibration assets inspected alongside config/manifest. Manifest supplies hashes, not this review independently hashing weights. Backbone context capacity is distinct from validated_length/long-context card mode; localization calibration does not calibrate intent risk.
+
+<a id="d3-turbo-eval-runtime"></a>
+## D3-Turbo external evaluator runtime note
+
+- Source: https://huggingface.co/vllm-sr/d3-turbo/blob/a0f3e9e59ebd1202fe1d4de1c4c0f9a986758cbb/.eval_results/vllm-sr__d3-turbo.yaml
+- Kind: `evaluation_report`; review depth: `content_reviewed`; reviewed: 2026-10-26
+- Source revision: `a0f3e9e59ebd1202fe1d4de1c4c0f9a986758cbb`
+- Note: Oct19 evaluator metadata says native AutoModel.system_one used because vLLM nightly did not then support prefix_bidir. This historical limitation does not prove current nightly failure. SR Engine and native upstream vLLM are separate paths; bucket logs/metrics not audited or reproduced, and no scores imported.
+
+<a id="clef-community-training"></a>
+## Community Clef adapter and FP32 head training loop
+
+- Source: https://github.com/MersivMedia/clef-finetune/blob/c83f7bc1acc23c81ad0de838510c59c48bf60c79/src/clef_finetune/train.py
+- Kind: `repository`; review depth: `content_reviewed`; reviewed: 2026-10-26
+- Source revision: `c83f7bc1acc23c81ad0de838510c59c48bf60c79`
+- Note: Oct2 v0.1.0 source: resolve_images -> encode_record(processor) -> collate_records -> model -> CE/Brier loss/backward; adapter and head saved separately. Code LICENSE Apache-2.0 inspected. Static image-to-loss wiring is not a real-weight image-training run; community implementation does not reproduce proprietary RLCD.
+
+<a id="clef-community-status"></a>
+## Community Clef fine-tuning explicit unverified cases
+
+- Source: https://github.com/MersivMedia/clef-finetune/blob/c83f7bc1acc23c81ad0de838510c59c48bf60c79/docs/KNOWN_ISSUES.md
+- Kind: `official_docs`; review depth: `content_reviewed`; reviewed: 2026-10-26
+- Source revision: `c83f7bc1acc23c81ad0de838510c59c48bf60c79`
+- Note: Maintainer explicitly reports no real Clef/Clef-Flash GPU training, no image/video training test, no multi-GPU/QLoRA validation; tiny random CPU plumbing only. Documents option sorting, exact LoRA module regex after reload and FP32 head handling. These tests were not rerun here. Ordinal EMD is supervised loss, not RLCD.
+
+<a id="mlx-image-training-boundary"></a>
+## mlx-decision rejects media in training records
+
+- Source: https://github.com/armbues/mlx-decision/blob/d3e239a8c8c2afb362725f94c5076b90221168a5/src/mlx_decision/data/format.py
+- Kind: `repository`; review depth: `content_reviewed`; reviewed: 2026-10-26
+- Source revision: `d3e239a8c8c2afb362725f94c5076b90221168a5`
+- Note: Training parser rejects nonempty images/videos and images embedded in state. Mac image inference cannot establish multimodal adaptation. Read only; no port or local model run.
+
+<a id="mlx-training-scope"></a>
+## mlx-decision provisional training scope
+
+- Source: https://github.com/armbues/mlx-decision/blob/d3e239a8c8c2afb362725f94c5076b90221168a5/docs/TRAINING.md
+- Kind: `official_docs`; review depth: `content_reviewed`; reviewed: 2026-10-26
+- Source revision: `d3e239a8c8c2afb362725f94c5076b90221168a5`
+- Note: Docs explicitly exclude image training and LoRA/full adaptation of Clef/pplx/d3/H2O-Lightning/d1; supported fitting changes only the head/readout with networks frozen. No conclusion about all MLX frameworks or future versions. Does not change the separate historical FluidUse records.
+
+<a id="rep2act-paper-v1"></a>
+## From Knowing to Abstaining / VAD-R / Rep2Act v1
+
+- Source: https://arxiv.org/html/2609.32653v1
+- Kind: `paper`; review depth: `content_reviewed`; reviewed: 2026-10-26
+- Source revision: `not captured / live URL`
+- Note: Sep26 2026 v1; read benchmark design, method, metrics and appendix. Evidence-gap labels and separate routing supervision motivate annotation experiments. A-Acc measures answer/abstain action agreement, not final-answer correctness. Author-defined balanced split/model judges limit transfer. Paper CC BY 4.0; no release code/data endpoint or reusable dataset license established here. No performance number imported or experiment reproduced.
+
+<a id="vltest-paper-v1"></a>
+## VLTest joint image-text failure diagnosis v1
+
+- Source: https://arxiv.org/html/2610.30794v1
+- Kind: `paper`; review depth: `content_reviewed`; reviewed: 2026-10-26
+- Source revision: `not captured / live URL`
+- Note: Oct22 2026 v1; read method, controls, oracle and limitations. Four matched cells and expected-answer preservation support robustness-test design; seed-correct filtering differs from representative traffic risk. Treat as reviewed preprint, without independently verifying its TOSEM header/publication status. Paper CC BY 4.0; no scores imported.
+
+<a id="vltest-code"></a>
+## VLTest replication-code scope and missing run settings
+
+- Source: https://github.com/beanduan22/VLTest/blob/b5861f2f990a63a1b8d0af37881471cf9034e66f/README.md
+- Kind: `repository`; review depth: `content_reviewed`; reviewed: 2026-10-26
+- Source revision: `b5861f2f990a63a1b8d0af37881471cf9034e66f`
+- Note: Oct22 fixed README and MIT LICENSE read. Local seed manifest, external models/assets, separate pilot proxy thresholds and human annotation audit required. Additional open/API model adapters and concrete budget/threshold placeholders remain for the researcher. Paper automated-oracle description must not be equated to a complete out-of-box reproduction from this README. No dependencies installed or code executed; underlying dataset/image terms separate.
+
+<a id="mlx-vlm-training-oct27"></a>
+## MLX-VLM pinned image-conditioned SFT and CLI
+
+- Source: https://github.com/Blaizzy/mlx-vlm/blob/2ceff4c14b991370a459d14eb49d1bedf4fb9e84/docs/training.md
+- Kind: `official_docs`; review depth: `content_reviewed`; reviewed: 2026-10-27
+- Source revision: `2ceff4c14b991370a459d14eb49d1bedf4fb9e84`
+- Note: Oct26 2026 23:23:46 UTC tree reviewed; head change concerns model README listings, not a newly introduced training feature. Read current training guide and train.py: local image JSONL, completion-only masks, quantized-base language adapters, CLI flags, microstep counting, memory metrics and saving. Restoring weights uses a fresh optimizer; optimizer/RNG state is not saved. LICENSE is MIT. Source inspection only; no environment installed, weights fetched or training run.
+
+<a id="mlx-vlm-visual-loss-oct27"></a>
+## MLX-VLM image features and shifted completion loss
+
+- Source: https://github.com/Blaizzy/mlx-vlm/blob/2ceff4c14b991370a459d14eb49d1bedf4fb9e84/mlx_vlm/trainer/vlm/sft/runtime.py
+- Kind: `repository`; review depth: `content_reviewed`; reviewed: 2026-10-27
+- Source revision: `2ceff4c14b991370a459d14eb49d1bedf4fb9e84`
+- Note: Read runtime plus VisionDataset, common engine and Qwen3-VL model: nonempty media without features rejects; pixels/grid reach model; targets and completion mask shift by one; visual embeddings merge with text; nn.value_and_grad supplies training. Default frozen vision still conditions language adapters. No actual gradient/quality/memory test, nor blanket support for custom decision heads.
+
+<a id="mlx-vlm-language-adapters-oct27"></a>
+## MLX-VLM frozen-base language adapter targets
+
+- Source: https://github.com/Blaizzy/mlx-vlm/blob/2ceff4c14b991370a459d14eb49d1bedf4fb9e84/mlx_vlm/trainer/peft/utils.py
+- Kind: `repository`; review depth: `content_reviewed`; reviewed: 2026-10-27
+- Source revision: `2ceff4c14b991370a459d14eb49d1bedf4fb9e84`
+- Note: Read base freezing, language-transformer target discovery, QuantizedLinear adapter handling and load preparation. Actual module names/gradients must be audited after loading the exact checkpoint; general LoRA support is not a per-checkpoint successful image run or permission to train vision. No code executed.
+
+<a id="mlx-vlm-clef-inference-oct27"></a>
+## MLX-VLM Clef image inference and custom call contract
+
+- Source: https://github.com/Blaizzy/mlx-vlm/blob/2ceff4c14b991370a459d14eb49d1bedf4fb9e84/mlx_vlm/models/clef/clef.py
+- Kind: `repository`; review depth: `content_reviewed`; reviewed: 2026-10-27
+- Source revision: `2ceff4c14b991370a459d14eb49d1bedf4fb9e84`
+- Note: Read fixed Clef model and its README: predict accepts image/video evidence, while __call__ requires question_spans, option_spans and qtype. Its joint-schema head cannot be assumed trainable through ordinary shifted-SFT CLI. Distinct from mlx-decision media-training rejection and community CUDA fine-tuning.
+
+<a id="qwen3vl-2b-original-oct27"></a>
+## Qwen/Qwen3-VL-2B-Instruct pinned candidate metadata
+
+- Source: https://huggingface.co/Qwen/Qwen3-VL-2B-Instruct/tree/89644892e4d85e24eaac8bacfd4f463576704203
+- Kind: `model_card`; review depth: `metadata_only`; reviewed: 2026-10-27
+- Source revision: `89644892e4d85e24eaac8bacfd4f463576704203`
+- Note: Read HF API revision metadata: exact repository SHA and Apache-2.0 declaration verified. Original and conversion are separate artifacts; quantization fidelity, processor/template compatibility, weight bytes and trainability not locally tested. No weight download. Model choice is a proposed experiment, not a quality or capacity result.
+
+<a id="qwen3vl-2b-mlx-oct27"></a>
+## mlx-community/Qwen3-VL-2B-Instruct-4bit pinned candidate metadata
+
+- Source: https://huggingface.co/mlx-community/Qwen3-VL-2B-Instruct-4bit/tree/9c4f5209e57b31f4b9dfba735de3fb983739c9cc
+- Kind: `model_card`; review depth: `metadata_only`; reviewed: 2026-10-27
+- Source revision: `9c4f5209e57b31f4b9dfba735de3fb983739c9cc`
+- Note: Read HF API revision metadata: exact repository SHA and Apache-2.0 declaration verified. Original and conversion are separate artifacts; quantization fidelity, processor/template compatibility, weight bytes and trainability not locally tested. No weight download. Model choice is a proposed experiment, not a quality or capacity result.
+
+<a id="qwen35-2b-original-oct27"></a>
+## Qwen/Qwen3.5-2B pinned candidate metadata
+
+- Source: https://huggingface.co/Qwen/Qwen3.5-2B/tree/15852e8c16360a2fea060d615a32b45270f8a8fc
+- Kind: `model_card`; review depth: `metadata_only`; reviewed: 2026-10-27
+- Source revision: `15852e8c16360a2fea060d615a32b45270f8a8fc`
+- Note: Read HF API revision metadata: exact repository SHA and Apache-2.0 declaration verified. Original and conversion are separate artifacts; quantization fidelity, processor/template compatibility, weight bytes and trainability not locally tested. No weight download. Model choice is a proposed experiment, not a quality or capacity result.
+
+<a id="qwen35-2b-mlx-oct27"></a>
+## mlx-community/Qwen3.5-2B-4bit pinned candidate metadata
+
+- Source: https://huggingface.co/mlx-community/Qwen3.5-2B-4bit/tree/674aaa7240b91e8012fcad5d791b7dfe5ba90207
+- Kind: `model_card`; review depth: `metadata_only`; reviewed: 2026-10-27
+- Source revision: `674aaa7240b91e8012fcad5d791b7dfe5ba90207`
+- Note: Read HF API revision metadata: exact repository SHA and Apache-2.0 declaration verified. Original and conversion are separate artifacts; quantization fidelity, processor/template compatibility, weight bytes and trainability not locally tested. No weight download. Model choice is a proposed experiment, not a quality or capacity result.
+
+<a id="apple-m5-pro-memory-oct27"></a>
+## Apple MacBook Pro M5 Pro memory configurations
+
+- Source: https://www.apple.com/macbook-pro/specs/
+- Kind: `official_docs`; review depth: `content_reviewed`; reviewed: 2026-10-27
+- Source revision: `not captured / live URL`
+- Note: Official specification lists M5 Pro 24GB, configurable 48GB and 64GB subject to chip variant. This supports conditional resource planning only: no inspected user machine is identified here, and no training-capacity, runtime or speed is certified. Specification is a live page reviewed Oct27.
+
+<a id="learn-then-test-v5"></a>
+## Learn then Test risk-control framework v5
+
+- Source: https://arxiv.org/html/2110.01052v5
+- Kind: `paper`; review depth: `content_reviewed`; reviewed: 2026-10-27
+- Source revision: `not captured / live URL`
+- Note: Version history: first Oct3 2021; v5 Sep29 2022. Relevant risk-control/selective-classification and multiple-testing sections reviewed; displayed typesetting date is not treated as a new release. Valid p-values, frozen candidate family, appropriate data/loss assumptions and FWER control matter. No theorem or certification implemented here; do not infer a guarantee under clustered observations or template/time shift.
+
+<a id="leakage-reproducibility-v1"></a>
+## Leakage and the Reproducibility Crisis in ML-based Science v1
+
+- Source: https://arxiv.org/html/2207.07048v1
+- Kind: `paper`; review depth: `content_reviewed`; reviewed: 2026-10-27
+- Source revision: `not captured / live URL`
+- Note: Jul14 2022 v1; leakage taxonomy, independence/future-information/selection issues and model information-sheet motivation reviewed. Methodological reference, not an audit of a private dataset. No numerical study result imported or code rerun.
+
+<a id="personalization-oos-v1"></a>
+## Does Personalization Break Trust? Few-Shot Intent Adaptation v1
+
+- Source: https://arxiv.org/html/2610.20652v1
+- Kind: `paper`; review depth: `content_reviewed`; reviewed: 2026-10-27
+- Source revision: `not captured / live URL`
+- Note: Oct12 2026 text-encoder intent preprint. Read adaptation/scorer contrasts and limitations: OOS quality can degrade, scorer changes partly recover it, pseudo-OOS and forgetting remain. Motivates same-backbone temperature/energy/Mahalanobis controls; no VLM effect or score imported. An anonymized code link is reported but its contents/license were not audited or run.
+
+<a id="intent-decomposition-emnlp2025"></a>
+## Small Models, Big Results: Intent Extraction through Decomposition
+
+- Source: https://aclanthology.org/2025.emnlp-main.949/
+- Kind: `paper`; review depth: `abstract_reviewed`; reviewed: 2026-10-27
+- Source revision: `not captured / live URL`
+- Note: ACL Anthology metadata/abstract reviewed: EMNLP main proceedings, November 2025; structured interaction summarization then a fine-tuned small intent model on UI trajectories. Prior-work boundary only; full methods/artifacts and performance claims not imported. No claim that its task equals a single-image business classifier.
+
+<a id="qwen35-4b-selection-oct27"></a>
+## Qwen3.5-4B official VLM and template selection audit
+
+- Source: https://huggingface.co/Qwen/Qwen3.5-4B/blob/851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a/README.md
+- Kind: `model_card`; review depth: `content_reviewed`; reviewed: 2026-10-27
+- Source revision: `851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a`
+- Note: Read official card, API revision/license, config and chat_template.jinja. Native vision-language 4B, Apache-2.0, thinking default and explicit template branch. Author benchmark tables motivate a candidate, not a same-protocol business win or M5 memory/gradient result. No numerical claims imported, weights downloaded or model executed.
+
+<a id="qwen35-4b-mlx-selection-oct27"></a>
+## Community Qwen3.5-4B MLX quantization config and provenance gap
+
+- Source: https://huggingface.co/mlx-community/Qwen3.5-4B-4bit/blob/0e7ffd5c629ef7719d4cbc04069232580bfa9d9c/config.json
+- Kind: `repository`; review depth: `content_reviewed`; reviewed: 2026-10-27
+- Source revision: `0e7ffd5c629ef7719d4cbc04069232580bfa9d9c`
+- Note: Read public API file list, config, tokenizer_config and chat_template.jinja. Preserves qwen3_5/vision_config and affine 4-bit group64. No README/LICENSE file or API license declaration found in this snapshot. Trace upstream provenance and retain official notices before future use; do not treat original Apache terms as a complete conversion audit. No weight-byte/quantization-fidelity/capacity test.
+
+<a id="mlx-vlm-qwen35-visual-oct27"></a>
+## MLX-VLM Qwen3.5 image embeddings and visual fusion
+
+- Source: https://github.com/Blaizzy/mlx-vlm/blob/2ceff4c14b991370a459d14eb49d1bedf4fb9e84/mlx_vlm/models/qwen3_5/qwen3_5.py
+- Kind: `repository`; review depth: `content_reviewed`; reviewed: 2026-10-27
+- Source revision: `2ceff4c14b991370a459d14eb49d1bedf4fb9e84`
+- Note: Read distinct Qwen3.5 vision tower, pixels/grid processing, embedding insertion, image-feature/token count rejection and language-model construction. Do not transfer a Qwen3-VL model path merely from naming. Source inspection only; no checkpoint loaded or image forward/backward run.
+
+<a id="mlx-vlm-qwen35-language-oct27"></a>
+## MLX-VLM Qwen3.5 training-mode DeltaNet dispatch and adapter module names
+
+- Source: https://github.com/Blaizzy/mlx-vlm/blob/2ceff4c14b991370a459d14eb49d1bedf4fb9e84/mlx_vlm/models/qwen3_5/language.py
+- Kind: `repository`; review depth: `content_reviewed`; reviewed: 2026-10-27
+- Source revision: `2ceff4c14b991370a459d14eb49d1bedf4fb9e84`
+- Note: Read training use_kernel=not self.training dispatch and hybrid layer implementation, including DeltaNet in_proj_qkv/z/b/a and out_proj. Adapter targets must reflect actual modules, not copied q/k/v/o-only lists. MTP is not a decision classifier. No local gradient, model quality or hardware claim.
+
+<a id="mlx-vlm-qwen35-delta-oct27"></a>
+## MLX-VLM Qwen3.5 chunked/reference training path
+
+- Source: https://github.com/Blaizzy/mlx-vlm/blob/2ceff4c14b991370a459d14eb49d1bedf4fb9e84/mlx_vlm/models/qwen3_5/gated_delta.py
+- Kind: `repository`; review depth: `content_reviewed`; reviewed: 2026-10-27
+- Source revision: `2ceff4c14b991370a459d14eb49d1bedf4fb9e84`
+- Note: Read gated_delta_update use_kernel=False fallback to chunked/reference MLX ops. Architecture is not sufficient grounds to assert inference-only. No tests from this third-party package were executed; actual full-checkpoint image-conditioned gradients remain a gate.
+
+<a id="jev-decision-2b-selection-oct27"></a>
+## Jev-Decision Qwen3-VL-2B pointer-head precedent and release limits
+
+- Source: https://github.com/yeyan00/Jev-Decision/blob/811bf5083a12622b0e63a98084312a91ac119b80/README.md
+- Kind: `repository`; review depth: `content_reviewed`; reviewed: 2026-10-27
+- Source revision: `811bf5083a12622b0e63a98084312a91ac119b80`
+- Note: Read README, pinned tree, config and MIT LICENSE. Declares Qwen3-VL-2B, frozen-vision LoRA, dynamic pointer readout and image/text inputs. No public checkpoint/evaluation-result artifacts found in inspected tree; README gives no numeric outcome/checkpoint link. PyTorch/CUDA-oriented, not native MLX. ScienceQA mixture imposes NC/SA concerns on derived weights. This newly audited precedent does not retrospectively justify an earlier choice or prove business gains.
+
+<a id="jev-decision-2b-data-oct27"></a>
+## Jev-Decision image processor and visual tensor collator
+
+- Source: https://github.com/yeyan00/Jev-Decision/blob/811bf5083a12622b0e63a98084312a91ac119b80/src/jev_decision/data.py
+- Kind: `repository`; review depth: `content_reviewed`; reviewed: 2026-10-27
+- Source revision: `811bf5083a12622b0e63a98084312a91ac119b80`
+- Note: Read local-image message construction, processor.apply_chat_template and concatenation of pixel_values/image_grid_thw into model batches. Actual image path in code, not compatibility inference; no data downloaded or samples run.
+
+<a id="jev-decision-2b-loss-oct27"></a>
+## Jev-Decision visual backbone, pointer loss and frozen-vision LoRA code
+
+- Source: https://github.com/yeyan00/Jev-Decision/blob/811bf5083a12622b0e63a98084312a91ac119b80/src/jev_decision/model.py
+- Kind: `repository`; review depth: `content_reviewed`; reviewed: 2026-10-27
+- Source revision: `811bf5083a12622b0e63a98084312a91ac119b80`
+- Note: Read AutoModelForImageTextToText, multimodal_inputs forwarding, final hidden-state decision/option pointer readout, hard/soft CE, freeze/head/LoRA and save code. This supports an inspectable implementation, not a completed model release or measured effect. No code executed.
+
+<a id="jev-decision-2b-train-oct27"></a>
+## Jev-Decision optimization entry for head/LoRA training
+
+- Source: https://github.com/yeyan00/Jev-Decision/blob/811bf5083a12622b0e63a98084312a91ac119b80/src/jev_decision/train.py
+- Kind: `repository`; review depth: `content_reviewed`; reviewed: 2026-10-27
+- Source revision: `811bf5083a12622b0e63a98084312a91ac119b80`
+- Note: Read configured processor, trainable parameters, AdamW and accelerator.backward(loss), head/LoRA stages and validation selection. Code-level trainability differs from published weights/results, Mac support and local reproduction. No training run.
+
+<a id="lecam-feature-risk-oct28"></a>
+## Le Cam meets LeCun: Deficiency and Generic Feature Learning
+
+- Source: https://arxiv.org/html/1402.4884v1
+- Kind: `paper`; review depth: `content_reviewed`; reviewed: 2026-10-28
+- Source revision: `not captured / live URL`
+- Note: 2014-02-20 v1. Read decision-risk definitions, factoring/Blackwell/deficiency and generic-feature/reconstruction relations. Provides strong prior art, not novelty or a bound for this proposed restricted rule family. No theorem reproduced or local experiment.
+
+<a id="eddi-acquisition-oct28"></a>
+## EDDI: Efficient Dynamic Discovery of High-Value Information with Partial VAE
+
+- Source: https://proceedings.mlr.press/v97/ma19c.html
+- Kind: `paper`; review depth: `abstract_reviewed`; reviewed: 2026-10-28
+- Source revision: `not captured / live URL`
+- Note: ICML 2019 publisher title/abstract verified. Partial VAE and expected-information-gain feature acquisition already trade information cost against decision quality. PDF is accessible but yielded no extractable text; do not claim full-method/experimental audit. No numerical results imported.
+
+<a id="aa-pomdp-oct28"></a>
+## Towards Cost Sensitive Decision Making
+
+- Source: https://proceedings.mlr.press/v258/li25h.html
+- Kind: `paper`; review depth: `content_reviewed`; reviewed: 2026-10-28
+- Source revision: `not captured / live URL`
+- Note: AISTATS 2025 title, abstract and publisher PDF introduction/formulation reviewed via text extraction. Active-Acquisition POMDP integrates feature acquisition costs and decisions using generative beliefs/hierarchical RL. No results reproduced; not a ready multimodal conversational-state method.
+
+<a id="spo-decision-loss-oct28"></a>
+## Smart Predict, then Optimize: decision-loss prior art
+
+- Source: https://arxiv.org/abs/1710.08005v5
+- Kind: `paper`; review depth: `abstract_reviewed`; reviewed: 2026-10-28
+- Source revision: `not captured / live URL`
+- Note: Original 2017 submission, v5 2020-11-19. Abstract reviewed for downstream decision loss/SPO surrogate motivation only; no transfer of consistency guarantees to arbitrary chatbot actions or local method audit.
+
+<a id="decision-calibration-2021-oct28"></a>
+## Calibrating Predictions to Decisions: A Novel Approach to Multi-Class Calibration
+
+- Source: https://papers.neurips.cc/paper_files/paper/2021/hash/bbc92a647199b832ec90d7cf57074e9e-Abstract.html
+- Kind: `paper`; review depth: `content_reviewed`; reviewed: 2026-10-28
+- Source revision: `not captured / live URL`
+- Note: NeurIPS 2021 publisher PDF definitions and decision-rule/loss restrictions reviewed. Decision calibration concerns specified downstream decisions and population expected loss, not individual guarantees. Existing theory constrains candidate B's novelty.
+
+<a id="partial-calibration-2026-oct28"></a>
+## Robust Decision-Making with Partially Calibrated Forecasters
+
+- Source: https://proceedings.iclr.cc/paper_files/paper/2026/hash/b8b6df58745740e54f00d84534bd182d-Abstract-Conference.html
+- Kind: `paper`; review depth: `content_reviewed`; reviewed: 2026-10-28
+- Source revision: `not captured / live URL`
+- Note: ICLR 2026 publisher PDF problem/assumptions reviewed: minimax policies under H-calibration constraints, finite-dimensional tests and utility linear in forecasts. Not a universal shared-error/action-safety guarantee; no experiments reproduced.
+
+<a id="mmshopbench-v1-oct28"></a>
+## MMShopBench: A Real-Log Benchmark for Multimodal, Multi-Turn Shopping Agents
+
+- Source: https://arxiv.org/html/2607.29002v1
+- Kind: `paper`; review depth: `content_reviewed`; reviewed: 2026-10-28
+- Source revision: `not captured / live URL`
+- Note: 2026-07-31 v1 author report. Read target-turn filtering, Chinese histories, frozen catalog, EGVS and existential top-k metrics. Excludes unsatisfiable requests. No live transaction/auth/recovery proof. Code-default mismatch is audited separately and does not prove actual paper leakage. No new leaderboard score imported.
+
+<a id="mmshop-egvs-contract-oct28"></a>
+## MMShopBench EGVS constraint-source and selection defaults
+
+- Source: https://github.com/H-cool/MMshopbench/blob/069571a969a34c953e621a029861cdaa0458490d/opencode_searchagent/mmshopbench_ask_ai_eval_pipline/src/mmshopbench_eval/steps/egvs_self_verify.py
+- Kind: `repository`; review depth: `content_reviewed`; reviewed: 2026-10-28
+- Source revision: `069571a969a34c953e621a029861cdaa0458490d`
+- Note: Read CLI defaults and conditional mandatory-from loading of annotated Mandatory_attributes/user_inent_text; infer-constraints replaces them with dialogue inference. Default replace versus paper augmentation is another contract difference. No code executed, private samples read or assertion about actual paper run configuration.
+
+<a id="realworldshop-v1-oct28"></a>
+## RealWorldShop: Benchmarking and Improving Conversational Shopping Agents in Real-World E-commerce
+
+- Source: https://arxiv.org/html/2609.38974v1
+- Kind: `paper`; review depth: `content_reviewed`; reviewed: 2026-10-28
+- Source revision: `not captured / live URL`
+- Note: 2026-09-30 v1 author report. Read inventory/synthetic-profile/simulator/judge protocol, six actions, state/flow/retrieval/guards and ablation interpretation. Simulated success is not real payment conversion; guards are not account authorization, and full production cost/latency/recovery was not established. No result reproduced or score imported.
+
+<a id="selmroute-v1-oct28"></a>
+## SeLMRoute: Probabilistic Semantic Evidence for Large Language Model Routing
+
+- Source: https://arxiv.org/html/2609.34736v1
+- Kind: `paper`; review depth: `content_reviewed`; reviewed: 2026-10-28
+- Source revision: `not captured / live URL`
+- Note: 2026-09-28 v1 author report. Distinguish original-fold direct routing, grouped PM/Hard uncertainty and validation-qualified cost protocol. PM/Hard interval includes zero; strict savings have no positive result and some undefined cases. Main cost excludes semantic extraction. No local run or business action-safety inference; numerical leaderboard scores not imported.
+
+<a id="selmroute-release-oct28"></a>
+## SeLMRoute frozen reproduction and cost-accounting contract
+
+- Source: https://github.com/Indigma-Innovations/SeLMRoute/blob/ec42fdbad3d30320679f0a25a7f7df335d379f1d/README.md
+- Kind: `repository`; review depth: `content_reviewed`; reviewed: 2026-10-28
+- Source revision: `ec42fdbad3d30320679f0a25a7f7df335d379f1d`
+- Note: Read frozen feature/reproduction boundary, checkpoint-versus-evaluation distinction, grouped checks and omitted-extractor cost. Released router availability is not a reproduced result; optional live paths were not run.
+
+<a id="selmroute-risk-oct28"></a>
+## SeLMRoute risk and strongest-fixed fallback semantics
+
+- Source: https://github.com/Indigma-Innovations/SeLMRoute/blob/ec42fdbad3d30320679f0a25a7f7df335d379f1d/src/selmroute/evaluation/calibrated_selective.py
+- Kind: `repository`; review depth: `content_reviewed`; reviewed: 2026-10-28
+- Source revision: `ec42fdbad3d30320679f0a25a7f7df335d379f1d`
+- Note: Read safe_model=best_single_model(fit_Y) and outcome-score fallback; companion selective.py averages supplied regret as risk. These are routing-score notions, not verified permission/action safety. No code executed.
+
+<a id="jev-models-oct28"></a>
+## Jev current model identities and customization boundary
+
+- Source: https://docs.typesafe.ai/models
+- Kind: `official_docs`; review depth: `content_reviewed`; reviewed: 2026-10-28
+- Source revision: `not captured / live URL`
+- Note: Live page reviewed 2026-10-28: newest 1.14/aliases, default text input, no customer fine-tuning/LoRA, CJK caveat and version-specific thresholds. Mutable documentation, not an API call or model-byte audit. Experimental images are documented on a separate page.
+
+<a id="jev-images-oct28"></a>
+## Jev experimental image and Box contract
+
+- Source: https://docs.typesafe.ai/images
+- Kind: `official_docs`; review depth: `content_reviewed`; reviewed: 2026-10-28
+- Source revision: `not captured / live URL`
+- Note: Live page reviewed 2026-10-28: images/Box explicitly not production-ready, off by default, per-request Danger-Zone header; images on 1.13/1.14 and Box on 1.14. Preserves historical text/default interface evidence. No image request or upload performed.
+
+<a id="jev-confidence-oct28"></a>
+## Jev probability versus confidence statistics
+
+- Source: https://docs.typesafe.ai/confidence
+- Kind: `official_docs`; review depth: `content_reviewed`; reviewed: 2026-10-28
+- Source revision: `not captured / live URL`
+- Note: Read Choice/Score statistics and Noul probability with no separate confidence. Distribution summaries are not action-correctness or permission certificates; do not transfer illustrative thresholds to a domain. No API run.
+
+<a id="pocos-production-account-oct28"></a>
+## Pocos author account: evidence, stale-state and phone-agent gates
+
+- Source: https://medium.com/@geo.lomidze/jev-in-production-how-we-turned-our-ai-phone-assistant-into-a-fast-predictable-jev-gated-system-4a1b1a85de6c
+- Kind: `official_publication`; review depth: `content_reviewed`; reviewed: 2026-10-28
+- Source revision: `not captured / live URL`
+- Note: Author post dated 2026-09-24. Reviewed ASR upstream error, deterministic policy/permissions, invalidation and tracing. Four-case smoke is wiring evidence, not KPI A/B. No independently auditable large randomized production evaluation established by this account.
+
+<a id="taritas-turn-detection-oct28"></a>
+## Taritas semantic turn detection implementation account
+
+- Source: https://taritas.com/blog/semantic-turn-detection-jev
+- Kind: `official_publication`; review depth: `content_reviewed`; reviewed: 2026-10-28
+- Source revision: `not captured / live URL`
+- Note: Published/updated 2026-09-28. Author reports lexical/acoustic/semantic integration and a small phrase/synthetic-speech check; not a randomized production KPI evaluation or verified multimodal image use. No tests run here.
+
+<a id="agora-jev-vad-oct28"></a>
+## Agora community Jev VAD integration example
+
+- Source: https://github.com/AgoraIO-Community/convoai-jev-vad/blob/c950900359fecd892e0a51cc7e828f83d425e290/README.md
+- Kind: `repository`; review depth: `content_reviewed`; reviewed: 2026-10-28
+- Source revision: `c950900359fecd892e0a51cc7e828f83d425e290`
+- Note: Pinned README describes transcript-based semantic turn detection layered on acoustic signals, state machine, limitations and author spike checks. Integration example, not independently validated large production A/B. No code executed.
+
