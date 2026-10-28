@@ -53,7 +53,7 @@ M5 Pro 48 GB、图片＋意图及待补历史的实施与科学验证统一整�
 
 [读出与自适应推理比较](docs/decision-readout-and-reasoning.md)区分 StartLux Instant／AutoThink、D3、Decider v1.1 与托管 Jev，并分开训练／服务和公共／独立证据。
 
-科研立项：[10 月 22 日调研完整转换](docs/multimodal-decision-research-survey-2026-10-22.md)与[可证伪实验协议](docs/multimodal-decision-research-protocol.md)，覆盖 MIRE 数据获取边界、新颖性逐项比较、异质修复动作与停止条件。这些是研究规划，不是复现结果。
+科研主线见[原指南研究章节](docs/multimodal-decision-finetuning.zh-CN.md#research-agenda)：先诊断规则变化下的状态压缩／有成本补证，联合风险仅留高难度备选；包含 prior art、强基线、反证与停止门槛，尚无已确立原创或实验结果。[10 月 22 日调研](docs/multimodal-decision-research-survey-2026-10-22.md)及[旧协议](docs/multimodal-decision-research-protocol.md)保留历史身份。
 
 零样本分类、专项微调与 Best-of-N 选择不是同一个问题。本地 GPU 前向耗时与远程 API 往返耗时，也不是同一种性能测量。
 

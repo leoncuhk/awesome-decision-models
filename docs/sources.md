@@ -2096,3 +2096,147 @@
 - Source revision: `811bf5083a12622b0e63a98084312a91ac119b80`
 - Note: Read configured processor, trainable parameters, AdamW and accelerator.backward(loss), head/LoRA stages and validation selection. Code-level trainability differs from published weights/results, Mac support and local reproduction. No training run.
 
+<a id="lecam-feature-risk-oct28"></a>
+## Le Cam meets LeCun: Deficiency and Generic Feature Learning
+
+- Source: https://arxiv.org/html/1402.4884v1
+- Kind: `paper`; review depth: `content_reviewed`; reviewed: 2026-10-28
+- Source revision: `not captured / live URL`
+- Note: 2014-02-20 v1. Read decision-risk definitions, factoring/Blackwell/deficiency and generic-feature/reconstruction relations. Provides strong prior art, not novelty or a bound for this proposed restricted rule family. No theorem reproduced or local experiment.
+
+<a id="eddi-acquisition-oct28"></a>
+## EDDI: Efficient Dynamic Discovery of High-Value Information with Partial VAE
+
+- Source: https://proceedings.mlr.press/v97/ma19c.html
+- Kind: `paper`; review depth: `abstract_reviewed`; reviewed: 2026-10-28
+- Source revision: `not captured / live URL`
+- Note: ICML 2019 publisher title/abstract verified. Partial VAE and expected-information-gain feature acquisition already trade information cost against decision quality. PDF is accessible but yielded no extractable text; do not claim full-method/experimental audit. No numerical results imported.
+
+<a id="aa-pomdp-oct28"></a>
+## Towards Cost Sensitive Decision Making
+
+- Source: https://proceedings.mlr.press/v258/li25h.html
+- Kind: `paper`; review depth: `content_reviewed`; reviewed: 2026-10-28
+- Source revision: `not captured / live URL`
+- Note: AISTATS 2025 title, abstract and publisher PDF introduction/formulation reviewed via text extraction. Active-Acquisition POMDP integrates feature acquisition costs and decisions using generative beliefs/hierarchical RL. No results reproduced; not a ready multimodal conversational-state method.
+
+<a id="spo-decision-loss-oct28"></a>
+## Smart Predict, then Optimize: decision-loss prior art
+
+- Source: https://arxiv.org/abs/1710.08005v5
+- Kind: `paper`; review depth: `abstract_reviewed`; reviewed: 2026-10-28
+- Source revision: `not captured / live URL`
+- Note: Original 2017 submission, v5 2020-11-19. Abstract reviewed for downstream decision loss/SPO surrogate motivation only; no transfer of consistency guarantees to arbitrary chatbot actions or local method audit.
+
+<a id="decision-calibration-2021-oct28"></a>
+## Calibrating Predictions to Decisions: A Novel Approach to Multi-Class Calibration
+
+- Source: https://papers.neurips.cc/paper_files/paper/2021/hash/bbc92a647199b832ec90d7cf57074e9e-Abstract.html
+- Kind: `paper`; review depth: `content_reviewed`; reviewed: 2026-10-28
+- Source revision: `not captured / live URL`
+- Note: NeurIPS 2021 publisher PDF definitions and decision-rule/loss restrictions reviewed. Decision calibration concerns specified downstream decisions and population expected loss, not individual guarantees. Existing theory constrains candidate B's novelty.
+
+<a id="partial-calibration-2026-oct28"></a>
+## Robust Decision-Making with Partially Calibrated Forecasters
+
+- Source: https://proceedings.iclr.cc/paper_files/paper/2026/hash/b8b6df58745740e54f00d84534bd182d-Abstract-Conference.html
+- Kind: `paper`; review depth: `content_reviewed`; reviewed: 2026-10-28
+- Source revision: `not captured / live URL`
+- Note: ICLR 2026 publisher PDF problem/assumptions reviewed: minimax policies under H-calibration constraints, finite-dimensional tests and utility linear in forecasts. Not a universal shared-error/action-safety guarantee; no experiments reproduced.
+
+<a id="mmshopbench-v1-oct28"></a>
+## MMShopBench: A Real-Log Benchmark for Multimodal, Multi-Turn Shopping Agents
+
+- Source: https://arxiv.org/html/2607.29002v1
+- Kind: `paper`; review depth: `content_reviewed`; reviewed: 2026-10-28
+- Source revision: `not captured / live URL`
+- Note: 2026-07-31 v1 author report. Read target-turn filtering, Chinese histories, frozen catalog, EGVS and existential top-k metrics. Excludes unsatisfiable requests. No live transaction/auth/recovery proof. Code-default mismatch is audited separately and does not prove actual paper leakage. No new leaderboard score imported.
+
+<a id="mmshop-egvs-contract-oct28"></a>
+## MMShopBench EGVS constraint-source and selection defaults
+
+- Source: https://github.com/H-cool/MMshopbench/blob/069571a969a34c953e621a029861cdaa0458490d/opencode_searchagent/mmshopbench_ask_ai_eval_pipline/src/mmshopbench_eval/steps/egvs_self_verify.py
+- Kind: `repository`; review depth: `content_reviewed`; reviewed: 2026-10-28
+- Source revision: `069571a969a34c953e621a029861cdaa0458490d`
+- Note: Read CLI defaults and conditional mandatory-from loading of annotated Mandatory_attributes/user_inent_text; infer-constraints replaces them with dialogue inference. Default replace versus paper augmentation is another contract difference. No code executed, private samples read or assertion about actual paper run configuration.
+
+<a id="realworldshop-v1-oct28"></a>
+## RealWorldShop: Benchmarking and Improving Conversational Shopping Agents in Real-World E-commerce
+
+- Source: https://arxiv.org/html/2609.38974v1
+- Kind: `paper`; review depth: `content_reviewed`; reviewed: 2026-10-28
+- Source revision: `not captured / live URL`
+- Note: 2026-09-30 v1 author report. Read inventory/synthetic-profile/simulator/judge protocol, six actions, state/flow/retrieval/guards and ablation interpretation. Simulated success is not real payment conversion; guards are not account authorization, and full production cost/latency/recovery was not established. No result reproduced or score imported.
+
+<a id="selmroute-v1-oct28"></a>
+## SeLMRoute: Probabilistic Semantic Evidence for Large Language Model Routing
+
+- Source: https://arxiv.org/html/2609.34736v1
+- Kind: `paper`; review depth: `content_reviewed`; reviewed: 2026-10-28
+- Source revision: `not captured / live URL`
+- Note: 2026-09-28 v1 author report. Distinguish original-fold direct routing, grouped PM/Hard uncertainty and validation-qualified cost protocol. PM/Hard interval includes zero; strict savings have no positive result and some undefined cases. Main cost excludes semantic extraction. No local run or business action-safety inference; numerical leaderboard scores not imported.
+
+<a id="selmroute-release-oct28"></a>
+## SeLMRoute frozen reproduction and cost-accounting contract
+
+- Source: https://github.com/Indigma-Innovations/SeLMRoute/blob/ec42fdbad3d30320679f0a25a7f7df335d379f1d/README.md
+- Kind: `repository`; review depth: `content_reviewed`; reviewed: 2026-10-28
+- Source revision: `ec42fdbad3d30320679f0a25a7f7df335d379f1d`
+- Note: Read frozen feature/reproduction boundary, checkpoint-versus-evaluation distinction, grouped checks and omitted-extractor cost. Released router availability is not a reproduced result; optional live paths were not run.
+
+<a id="selmroute-risk-oct28"></a>
+## SeLMRoute risk and strongest-fixed fallback semantics
+
+- Source: https://github.com/Indigma-Innovations/SeLMRoute/blob/ec42fdbad3d30320679f0a25a7f7df335d379f1d/src/selmroute/evaluation/calibrated_selective.py
+- Kind: `repository`; review depth: `content_reviewed`; reviewed: 2026-10-28
+- Source revision: `ec42fdbad3d30320679f0a25a7f7df335d379f1d`
+- Note: Read safe_model=best_single_model(fit_Y) and outcome-score fallback; companion selective.py averages supplied regret as risk. These are routing-score notions, not verified permission/action safety. No code executed.
+
+<a id="jev-models-oct28"></a>
+## Jev current model identities and customization boundary
+
+- Source: https://docs.typesafe.ai/models
+- Kind: `official_docs`; review depth: `content_reviewed`; reviewed: 2026-10-28
+- Source revision: `not captured / live URL`
+- Note: Live page reviewed 2026-10-28: newest 1.14/aliases, default text input, no customer fine-tuning/LoRA, CJK caveat and version-specific thresholds. Mutable documentation, not an API call or model-byte audit. Experimental images are documented on a separate page.
+
+<a id="jev-images-oct28"></a>
+## Jev experimental image and Box contract
+
+- Source: https://docs.typesafe.ai/images
+- Kind: `official_docs`; review depth: `content_reviewed`; reviewed: 2026-10-28
+- Source revision: `not captured / live URL`
+- Note: Live page reviewed 2026-10-28: images/Box explicitly not production-ready, off by default, per-request Danger-Zone header; images on 1.13/1.14 and Box on 1.14. Preserves historical text/default interface evidence. No image request or upload performed.
+
+<a id="jev-confidence-oct28"></a>
+## Jev probability versus confidence statistics
+
+- Source: https://docs.typesafe.ai/confidence
+- Kind: `official_docs`; review depth: `content_reviewed`; reviewed: 2026-10-28
+- Source revision: `not captured / live URL`
+- Note: Read Choice/Score statistics and Noul probability with no separate confidence. Distribution summaries are not action-correctness or permission certificates; do not transfer illustrative thresholds to a domain. No API run.
+
+<a id="pocos-production-account-oct28"></a>
+## Pocos author account: evidence, stale-state and phone-agent gates
+
+- Source: https://medium.com/@geo.lomidze/jev-in-production-how-we-turned-our-ai-phone-assistant-into-a-fast-predictable-jev-gated-system-4a1b1a85de6c
+- Kind: `official_publication`; review depth: `content_reviewed`; reviewed: 2026-10-28
+- Source revision: `not captured / live URL`
+- Note: Author post dated 2026-09-24. Reviewed ASR upstream error, deterministic policy/permissions, invalidation and tracing. Four-case smoke is wiring evidence, not KPI A/B. No independently auditable large randomized production evaluation established by this account.
+
+<a id="taritas-turn-detection-oct28"></a>
+## Taritas semantic turn detection implementation account
+
+- Source: https://taritas.com/blog/semantic-turn-detection-jev
+- Kind: `official_publication`; review depth: `content_reviewed`; reviewed: 2026-10-28
+- Source revision: `not captured / live URL`
+- Note: Published/updated 2026-09-28. Author reports lexical/acoustic/semantic integration and a small phrase/synthetic-speech check; not a randomized production KPI evaluation or verified multimodal image use. No tests run here.
+
+<a id="agora-jev-vad-oct28"></a>
+## Agora community Jev VAD integration example
+
+- Source: https://github.com/AgoraIO-Community/convoai-jev-vad/blob/c950900359fecd892e0a51cc7e828f83d425e290/README.md
+- Kind: `repository`; review depth: `content_reviewed`; reviewed: 2026-10-28
+- Source revision: `c950900359fecd892e0a51cc7e828f83d425e290`
+- Note: Pinned README describes transcript-based semantic turn detection layered on acoustic signals, state machine, limitations and author spike checks. Integration example, not independently validated large production A/B. No code executed.
+

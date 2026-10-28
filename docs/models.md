@@ -2,7 +2,7 @@
 
 [Home](../README.md) · [中文首页](../README.zh-CN.md) · [Evidence](evidence.md)
 
-Source review: 2026-10-27. These are source-backed descriptions and curatorial use cases, not production certifications.
+Source review: 2026-10-28. These are source-backed descriptions and curatorial use cases, not production certifications.
 
 `Unknown` is intentional. An inspected source revision does not identify the deployed weight revision. Language support, licenses and resource requirements must be checked for the exact artifact. Recorded weight identifiers are source-reported unless a local binary verification is explicitly documented; recording an identifier is not a claim that the weights were downloaded or hashed here.
 
@@ -17,16 +17,16 @@ Hosted typed judgments: probabilities over supplied choices, propositions and or
 | Dimension | English | 中文 |
 | --- | --- | --- |
 | Scale | Not publicly established by the reviewed material. | 核对的公开资料未明确参数规模。 |
-| Mechanism | Proprietary model. Choice/Score confidence summarizes the returned distribution; it is not a separate probability-of-correctness estimate. Noul returns P(yes) with no separate confidence field. Question IDs are not model input; each instruction must be complete. Same-request answers are documented as independent; dependent evidence requires a later request. | 专有模型。Choice／Score 的 confidence 是返回分布的统计量，并非独立预测的正确概率；Noul 返回 P(yes)，没有单独 confidence 字段。 文档称问题 ID 不送入模型，instructions 须写完整；同请求答案互不作为上下文，依赖新证据的判断需后续请求。 |
-| Training | Vendor-described RLCD; controlled independent ablations not established here. | 官方称采用 RLCD；本版未取得受控独立消融证据。 |
-| Deployment | Hosted API; no public weights verified. | 托管 API；本版未核实公开权重。 |
+| Mechanism | Proprietary model. Choice/Score confidence summarizes the returned distribution; it is not a separate probability-of-correctness estimate. Noul returns P(yes) with no separate confidence field. Question IDs are not model input; each instruction must be complete. Same-request answers are documented as independent; dependent evidence requires a later request. Question-context independence is not statistical independence of errors. | 专有模型。Choice／Score 的 confidence 是返回分布的统计量，并非独立预测的正确概率；Noul 返回 P(yes)，没有单独 confidence 字段。 文档称问题 ID 不送入模型，instructions 须写完整；同请求答案互不作为上下文，依赖新证据的判断需后续请求。 问题上下文互不读取不等于误差在统计上独立。 |
+| Training | Vendor-described RLCD; no customer self-service fine-tuning/LoRA. Request state/instruction customization is not weight adaptation; independent controlled training ablations remain unestablished. | 官方称采用 RLCD；不支持客户自助权重微调／LoRA，state／instructions 定制不是权重适配；独立受控训练消融仍未确立。 |
+| Deployment | Hosted API, no verified public weights. Oct28 docs list current 1.14; default interface is text, while images are experimental/off by default with TypeSafe-Danger-Zone-Images:true on 1.13/1.14; Box requires 1.14. No image request tested here. | 托管 API，未核实公开权重。10 月 28 日文档列当前 1.14；默认接口为文本，1.13／1.14 图片实验入口默认关闭，需 TypeSafe-Danger-Zone-Images:true，Box 需 1.14。本次未发图像请求。 |
 | Suggested use | Managed typed-judgment comparator or frozen semantic-feature generator; compare supervised baselines under the same task and label policy. | 可作为托管类型化判断对照或冻结的语义特征提取器；与监督基线比较时统一任务与标签规则。 |
-| Boundary | RLCD is vendor-described; the full training recipe is not public. Valid schemas and confidence fields do not establish semantic reliability. | RLCD 的完整训练配方未公开；格式合法与置信度字段不等于语义可靠。 |
+| Boundary | RLCD is vendor-described; the full training recipe is not public. Valid schemas and confidence fields do not establish semantic reliability. Experimental image support is not production readiness; CJK needs its own evaluation. Author deployment stories/smoke checks do not establish a large independently auditable randomized KPI A/B. | RLCD 的完整训练配方未公开；格式合法与置信度字段不等于语义可靠。 实验图片支持不等于生产成熟，CJK 须另测；作者生产案例／smoke 不构成可独立核验的大规模随机 KPI A/B。 |
 
 **License note:** Commercial service terms; no open-weight license implied.
 **Recorded weight identifier:** Unknown / not pinned
 
-**Sources:** [Introducing System One Models & Jev](https://typesafe.ai/blog/introducing-system-one-models-and-jev); [TypeSafe primitives](https://docs.typesafe.ai/primitives); [TypeSafe confidence semantics](https://docs.typesafe.ai/confidence); [Stefan Jansen: Testing Jev on Financial Documents](https://insights.ml4trading.io/p/testing-jev-on-financial-documents); [TypeSafe autoresearch semantic features with CatBoost](https://docs.typesafe.ai/cookbooks/autoresearch_feature_discovery)
+**Sources:** [Introducing System One Models & Jev](https://typesafe.ai/blog/introducing-system-one-models-and-jev); [TypeSafe primitives](https://docs.typesafe.ai/primitives); [TypeSafe confidence semantics](https://docs.typesafe.ai/confidence); [Stefan Jansen: Testing Jev on Financial Documents](https://insights.ml4trading.io/p/testing-jev-on-financial-documents); [TypeSafe autoresearch semantic features with CatBoost](https://docs.typesafe.ai/cookbooks/autoresearch_feature_discovery); [Jev current model identities and customization boundary](https://docs.typesafe.ai/models); [Jev experimental image and Box contract](https://docs.typesafe.ai/images); [Jev probability versus confidence statistics](https://docs.typesafe.ai/confidence); [Pocos author account: evidence, stale-state and phone-agent gates](https://medium.com/@geo.lomidze/jev-in-production-how-we-turned-our-ai-phone-assistant-into-a-fast-predictable-jev-gated-system-4a1b1a85de6c); [Taritas semantic turn detection implementation account](https://taritas.com/blog/semantic-turn-detection-jev); [Agora community Jev VAD integration example](https://github.com/AgoraIO-Community/convoai-jev-vad/blob/c950900359fecd892e0a51cc7e828f83d425e290/README.md)
 
 <a id="laya"></a>
 ## Laya

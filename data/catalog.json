@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "reviewed_on": "2026-10-27",
+  "reviewed_on": "2026-10-28",
   "scope": "Evidence-backed models, methods and evaluation for bounded decisions in AI systems.",
   "sources": [
     {
@@ -2642,6 +2642,186 @@
       "review_depth": "content_reviewed",
       "source_revision": "811bf5083a12622b0e63a98084312a91ac119b80",
       "review_note": "Read configured processor, trainable parameters, AdamW and accelerator.backward(loss), head/LoRA stages and validation selection. Code-level trainability differs from published weights/results, Mac support and local reproduction. No training run."
+    },
+    {
+      "id": "lecam-feature-risk-oct28",
+      "title": "Le Cam meets LeCun: Deficiency and Generic Feature Learning",
+      "url": "https://arxiv.org/html/1402.4884v1",
+      "kind": "paper",
+      "reviewed_on": "2026-10-28",
+      "review_depth": "content_reviewed",
+      "source_revision": null,
+      "review_note": "2014-02-20 v1. Read decision-risk definitions, factoring/Blackwell/deficiency and generic-feature/reconstruction relations. Provides strong prior art, not novelty or a bound for this proposed restricted rule family. No theorem reproduced or local experiment."
+    },
+    {
+      "id": "eddi-acquisition-oct28",
+      "title": "EDDI: Efficient Dynamic Discovery of High-Value Information with Partial VAE",
+      "url": "https://proceedings.mlr.press/v97/ma19c.html",
+      "kind": "paper",
+      "reviewed_on": "2026-10-28",
+      "review_depth": "abstract_reviewed",
+      "source_revision": null,
+      "review_note": "ICML 2019 publisher title/abstract verified. Partial VAE and expected-information-gain feature acquisition already trade information cost against decision quality. PDF is accessible but yielded no extractable text; do not claim full-method/experimental audit. No numerical results imported."
+    },
+    {
+      "id": "aa-pomdp-oct28",
+      "title": "Towards Cost Sensitive Decision Making",
+      "url": "https://proceedings.mlr.press/v258/li25h.html",
+      "kind": "paper",
+      "reviewed_on": "2026-10-28",
+      "review_depth": "content_reviewed",
+      "source_revision": null,
+      "review_note": "AISTATS 2025 title, abstract and publisher PDF introduction/formulation reviewed via text extraction. Active-Acquisition POMDP integrates feature acquisition costs and decisions using generative beliefs/hierarchical RL. No results reproduced; not a ready multimodal conversational-state method."
+    },
+    {
+      "id": "spo-decision-loss-oct28",
+      "title": "Smart Predict, then Optimize: decision-loss prior art",
+      "url": "https://arxiv.org/abs/1710.08005v5",
+      "kind": "paper",
+      "reviewed_on": "2026-10-28",
+      "review_depth": "abstract_reviewed",
+      "source_revision": null,
+      "review_note": "Original 2017 submission, v5 2020-11-19. Abstract reviewed for downstream decision loss/SPO surrogate motivation only; no transfer of consistency guarantees to arbitrary chatbot actions or local method audit."
+    },
+    {
+      "id": "decision-calibration-2021-oct28",
+      "title": "Calibrating Predictions to Decisions: A Novel Approach to Multi-Class Calibration",
+      "url": "https://papers.neurips.cc/paper_files/paper/2021/hash/bbc92a647199b832ec90d7cf57074e9e-Abstract.html",
+      "kind": "paper",
+      "reviewed_on": "2026-10-28",
+      "review_depth": "content_reviewed",
+      "source_revision": null,
+      "review_note": "NeurIPS 2021 publisher PDF definitions and decision-rule/loss restrictions reviewed. Decision calibration concerns specified downstream decisions and population expected loss, not individual guarantees. Existing theory constrains candidate B's novelty."
+    },
+    {
+      "id": "partial-calibration-2026-oct28",
+      "title": "Robust Decision-Making with Partially Calibrated Forecasters",
+      "url": "https://proceedings.iclr.cc/paper_files/paper/2026/hash/b8b6df58745740e54f00d84534bd182d-Abstract-Conference.html",
+      "kind": "paper",
+      "reviewed_on": "2026-10-28",
+      "review_depth": "content_reviewed",
+      "source_revision": null,
+      "review_note": "ICLR 2026 publisher PDF problem/assumptions reviewed: minimax policies under H-calibration constraints, finite-dimensional tests and utility linear in forecasts. Not a universal shared-error/action-safety guarantee; no experiments reproduced."
+    },
+    {
+      "id": "mmshopbench-v1-oct28",
+      "title": "MMShopBench: A Real-Log Benchmark for Multimodal, Multi-Turn Shopping Agents",
+      "url": "https://arxiv.org/html/2607.29002v1",
+      "kind": "paper",
+      "reviewed_on": "2026-10-28",
+      "review_depth": "content_reviewed",
+      "source_revision": null,
+      "review_note": "2026-07-31 v1 author report. Read target-turn filtering, Chinese histories, frozen catalog, EGVS and existential top-k metrics. Excludes unsatisfiable requests. No live transaction/auth/recovery proof. Code-default mismatch is audited separately and does not prove actual paper leakage. No new leaderboard score imported."
+    },
+    {
+      "id": "mmshop-egvs-contract-oct28",
+      "title": "MMShopBench EGVS constraint-source and selection defaults",
+      "url": "https://github.com/H-cool/MMshopbench/blob/069571a969a34c953e621a029861cdaa0458490d/opencode_searchagent/mmshopbench_ask_ai_eval_pipline/src/mmshopbench_eval/steps/egvs_self_verify.py",
+      "kind": "repository",
+      "reviewed_on": "2026-10-28",
+      "review_depth": "content_reviewed",
+      "source_revision": "069571a969a34c953e621a029861cdaa0458490d",
+      "review_note": "Read CLI defaults and conditional mandatory-from loading of annotated Mandatory_attributes/user_inent_text; infer-constraints replaces them with dialogue inference. Default replace versus paper augmentation is another contract difference. No code executed, private samples read or assertion about actual paper run configuration."
+    },
+    {
+      "id": "realworldshop-v1-oct28",
+      "title": "RealWorldShop: Benchmarking and Improving Conversational Shopping Agents in Real-World E-commerce",
+      "url": "https://arxiv.org/html/2609.38974v1",
+      "kind": "paper",
+      "reviewed_on": "2026-10-28",
+      "review_depth": "content_reviewed",
+      "source_revision": null,
+      "review_note": "2026-09-30 v1 author report. Read inventory/synthetic-profile/simulator/judge protocol, six actions, state/flow/retrieval/guards and ablation interpretation. Simulated success is not real payment conversion; guards are not account authorization, and full production cost/latency/recovery was not established. No result reproduced or score imported."
+    },
+    {
+      "id": "selmroute-v1-oct28",
+      "title": "SeLMRoute: Probabilistic Semantic Evidence for Large Language Model Routing",
+      "url": "https://arxiv.org/html/2609.34736v1",
+      "kind": "paper",
+      "reviewed_on": "2026-10-28",
+      "review_depth": "content_reviewed",
+      "source_revision": null,
+      "review_note": "2026-09-28 v1 author report. Distinguish original-fold direct routing, grouped PM/Hard uncertainty and validation-qualified cost protocol. PM/Hard interval includes zero; strict savings have no positive result and some undefined cases. Main cost excludes semantic extraction. No local run or business action-safety inference; numerical leaderboard scores not imported."
+    },
+    {
+      "id": "selmroute-release-oct28",
+      "title": "SeLMRoute frozen reproduction and cost-accounting contract",
+      "url": "https://github.com/Indigma-Innovations/SeLMRoute/blob/ec42fdbad3d30320679f0a25a7f7df335d379f1d/README.md",
+      "kind": "repository",
+      "reviewed_on": "2026-10-28",
+      "review_depth": "content_reviewed",
+      "source_revision": "ec42fdbad3d30320679f0a25a7f7df335d379f1d",
+      "review_note": "Read frozen feature/reproduction boundary, checkpoint-versus-evaluation distinction, grouped checks and omitted-extractor cost. Released router availability is not a reproduced result; optional live paths were not run."
+    },
+    {
+      "id": "selmroute-risk-oct28",
+      "title": "SeLMRoute risk and strongest-fixed fallback semantics",
+      "url": "https://github.com/Indigma-Innovations/SeLMRoute/blob/ec42fdbad3d30320679f0a25a7f7df335d379f1d/src/selmroute/evaluation/calibrated_selective.py",
+      "kind": "repository",
+      "reviewed_on": "2026-10-28",
+      "review_depth": "content_reviewed",
+      "source_revision": "ec42fdbad3d30320679f0a25a7f7df335d379f1d",
+      "review_note": "Read safe_model=best_single_model(fit_Y) and outcome-score fallback; companion selective.py averages supplied regret as risk. These are routing-score notions, not verified permission/action safety. No code executed."
+    },
+    {
+      "id": "jev-models-oct28",
+      "title": "Jev current model identities and customization boundary",
+      "url": "https://docs.typesafe.ai/models",
+      "kind": "official_docs",
+      "reviewed_on": "2026-10-28",
+      "review_depth": "content_reviewed",
+      "source_revision": null,
+      "review_note": "Live page reviewed 2026-10-28: newest 1.14/aliases, default text input, no customer fine-tuning/LoRA, CJK caveat and version-specific thresholds. Mutable documentation, not an API call or model-byte audit. Experimental images are documented on a separate page."
+    },
+    {
+      "id": "jev-images-oct28",
+      "title": "Jev experimental image and Box contract",
+      "url": "https://docs.typesafe.ai/images",
+      "kind": "official_docs",
+      "reviewed_on": "2026-10-28",
+      "review_depth": "content_reviewed",
+      "source_revision": null,
+      "review_note": "Live page reviewed 2026-10-28: images/Box explicitly not production-ready, off by default, per-request Danger-Zone header; images on 1.13/1.14 and Box on 1.14. Preserves historical text/default interface evidence. No image request or upload performed."
+    },
+    {
+      "id": "jev-confidence-oct28",
+      "title": "Jev probability versus confidence statistics",
+      "url": "https://docs.typesafe.ai/confidence",
+      "kind": "official_docs",
+      "reviewed_on": "2026-10-28",
+      "review_depth": "content_reviewed",
+      "source_revision": null,
+      "review_note": "Read Choice/Score statistics and Noul probability with no separate confidence. Distribution summaries are not action-correctness or permission certificates; do not transfer illustrative thresholds to a domain. No API run."
+    },
+    {
+      "id": "pocos-production-account-oct28",
+      "title": "Pocos author account: evidence, stale-state and phone-agent gates",
+      "url": "https://medium.com/@geo.lomidze/jev-in-production-how-we-turned-our-ai-phone-assistant-into-a-fast-predictable-jev-gated-system-4a1b1a85de6c",
+      "kind": "official_publication",
+      "reviewed_on": "2026-10-28",
+      "review_depth": "content_reviewed",
+      "source_revision": null,
+      "review_note": "Author post dated 2026-09-24. Reviewed ASR upstream error, deterministic policy/permissions, invalidation and tracing. Four-case smoke is wiring evidence, not KPI A/B. No independently auditable large randomized production evaluation established by this account."
+    },
+    {
+      "id": "taritas-turn-detection-oct28",
+      "title": "Taritas semantic turn detection implementation account",
+      "url": "https://taritas.com/blog/semantic-turn-detection-jev",
+      "kind": "official_publication",
+      "reviewed_on": "2026-10-28",
+      "review_depth": "content_reviewed",
+      "source_revision": null,
+      "review_note": "Published/updated 2026-09-28. Author reports lexical/acoustic/semantic integration and a small phrase/synthetic-speech check; not a randomized production KPI evaluation or verified multimodal image use. No tests run here."
+    },
+    {
+      "id": "agora-jev-vad-oct28",
+      "title": "Agora community Jev VAD integration example",
+      "url": "https://github.com/AgoraIO-Community/convoai-jev-vad/blob/c950900359fecd892e0a51cc7e828f83d425e290/README.md",
+      "kind": "repository",
+      "reviewed_on": "2026-10-28",
+      "review_depth": "content_reviewed",
+      "source_revision": "c950900359fecd892e0a51cc7e828f83d425e290",
+      "review_note": "Pinned README describes transcript-based semantic turn detection layered on acoustic signals, state machine, limitations and author spike checks. Integration example, not independently validated large production A/B. No code executed."
     }
   ],
   "entries": [
@@ -2655,7 +2835,13 @@
         "jev-primitives",
         "jev-confidence",
         "financial-documents",
-        "semantic-feature-cookbook"
+        "semantic-feature-cookbook",
+        "jev-models-oct28",
+        "jev-images-oct28",
+        "jev-confidence-oct28",
+        "pocos-production-account-oct28",
+        "taritas-turn-detection-oct28",
+        "agora-jev-vad-oct28"
       ],
       "summary": {
         "en": "Hosted typed judgments: probabilities over supplied choices, propositions and ordinal rubrics.",
@@ -2666,21 +2852,21 @@
         "zh": "可作为托管类型化判断对照或冻结的语义特征提取器；与监督基线比较时统一任务与标签规则。"
       },
       "caveat": {
-        "en": "RLCD is vendor-described; the full training recipe is not public. Valid schemas and confidence fields do not establish semantic reliability.",
-        "zh": "RLCD 的完整训练配方未公开；格式合法与置信度字段不等于语义可靠。"
+        "en": "RLCD is vendor-described; the full training recipe is not public. Valid schemas and confidence fields do not establish semantic reliability. Experimental image support is not production readiness; CJK needs its own evaluation. Author deployment stories/smoke checks do not establish a large independently auditable randomized KPI A/B.",
+        "zh": "RLCD 的完整训练配方未公开；格式合法与置信度字段不等于语义可靠。 实验图片支持不等于生产成熟，CJK 须另测；作者生产案例／smoke 不构成可独立核验的大规模随机 KPI A/B。"
       },
-      "reviewed_on": "2026-10-15",
+      "reviewed_on": "2026-10-28",
       "mechanism": {
-        "en": "Proprietary model. Choice/Score confidence summarizes the returned distribution; it is not a separate probability-of-correctness estimate. Noul returns P(yes) with no separate confidence field. Question IDs are not model input; each instruction must be complete. Same-request answers are documented as independent; dependent evidence requires a later request.",
-        "zh": "专有模型。Choice／Score 的 confidence 是返回分布的统计量，并非独立预测的正确概率；Noul 返回 P(yes)，没有单独 confidence 字段。 文档称问题 ID 不送入模型，instructions 须写完整；同请求答案互不作为上下文，依赖新证据的判断需后续请求。"
+        "en": "Proprietary model. Choice/Score confidence summarizes the returned distribution; it is not a separate probability-of-correctness estimate. Noul returns P(yes) with no separate confidence field. Question IDs are not model input; each instruction must be complete. Same-request answers are documented as independent; dependent evidence requires a later request. Question-context independence is not statistical independence of errors.",
+        "zh": "专有模型。Choice／Score 的 confidence 是返回分布的统计量，并非独立预测的正确概率；Noul 返回 P(yes)，没有单独 confidence 字段。 文档称问题 ID 不送入模型，instructions 须写完整；同请求答案互不作为上下文，依赖新证据的判断需后续请求。 问题上下文互不读取不等于误差在统计上独立。"
       },
       "training": {
-        "en": "Vendor-described RLCD; controlled independent ablations not established here.",
-        "zh": "官方称采用 RLCD；本版未取得受控独立消融证据。"
+        "en": "Vendor-described RLCD; no customer self-service fine-tuning/LoRA. Request state/instruction customization is not weight adaptation; independent controlled training ablations remain unestablished.",
+        "zh": "官方称采用 RLCD；不支持客户自助权重微调／LoRA，state／instructions 定制不是权重适配；独立受控训练消融仍未确立。"
       },
       "availability": {
-        "en": "Hosted API; no public weights verified.",
-        "zh": "托管 API；本版未核实公开权重。"
+        "en": "Hosted API, no verified public weights. Oct28 docs list current 1.14; default interface is text, while images are experimental/off by default with TypeSafe-Danger-Zone-Images:true on 1.13/1.14; Box requires 1.14. No image request tested here.",
+        "zh": "托管 API，未核实公开权重。10 月 28 日文档列当前 1.14；默认接口为文本，1.13／1.14 图片实验入口默认关闭，需 TypeSafe-Danger-Zone-Images:true，Box 需 1.14。本次未发图像请求。"
       },
       "license_note": "Commercial service terms; no open-weight license implied.",
       "weight_revision": null,
@@ -4161,9 +4347,12 @@
       "category": "baselines",
       "url": "https://docs.typesafe.ai/cookbooks/autoresearch_feature_discovery",
       "source_ids": [
-        "semantic-feature-cookbook"
+        "semantic-feature-cookbook",
+        "selmroute-v1-oct28",
+        "selmroute-release-oct28",
+        "selmroute-risk-oct28"
       ],
-      "reviewed_on": "2026-10-15",
+      "reviewed_on": "2026-10-28",
       "summary": {
         "en": "LLM-proposed questions and Jev judgments turn text into features for a supervised CatBoost predictor.",
         "zh": "LLM 提议问题，Jev 将文本转成语义特征，再由监督 CatBoost 预测任务标签。"
@@ -4173,8 +4362,8 @@
         "zh": "在相同标签／推理预算下比较直接判断、普通文本特征和冻结的语义特征。"
       },
       "caveat": {
-        "en": "Author-reported wine regression. Feature discovery belongs inside development folds; downstream training does not fine-tune Jev or establish financial/multimodal generalization.",
-        "zh": "葡萄酒回归属于作者报告；特征发现须限制在开发划分，训练下游模型不等于微调 Jev，也不证明金融／多模态泛化。"
+        "en": "Author-reported wine regression. Feature discovery belongs inside development folds; downstream training does not fine-tune Jev or establish financial/multimodal generalization. Separate SeLMRoute text-routing evidence uses grouped protocols; its regret/fallback and omitted extractor cost must not be read as business action safety or complete savings. Not reproduced here.",
+        "zh": "葡萄酒回归属于作者报告；特征发现须限制在开发划分，训练下游模型不等于微调 Jev，也不证明金融／多模态泛化。 独立 SeLMRoute 文本路由证据须按分组协议阅读；其 regret／fallback 与未计提取器的成本不等于业务动作安全或全链路节省，未在此复现。"
       }
     },
     {
