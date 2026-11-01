@@ -175,3 +175,13 @@ The [October25 methodology review](../updates/2026-10-25-weekly-review.md) separ
 For acceptance policies, [E34](evidence.md#e34) shows opposite false-commitment/false-abstention errors on constructed legal inputs; [E35](evidence.md#e35) shows that lower ECE can leave error ranking unchanged. Specify missing-evidence cases, the cost of unnecessary review and calibration selection before testing. Neither result transfers automatically to screenshot intent or new traffic.
 
 验收策略应同时看 [E34](evidence.md#e34) 的错误承诺／误拒答及 [E35](evidence.md#e35) 的“ECE降低而错误排序不变”。测试前写清缺证据样本、不必要复核成本与校准选择，不能直接迁移为截图意图或新流量的保证。
+
+## November 1 follow-up / 11月1日补核
+
+The [typed-decider audit](evidence.md#e37) tests threshold rules against empirical populations, not unseen deployment guarantees. Its observed-confidence threshold family and temperature fitting share calibration data, so even its nominal LTT construction is approximate. Report coverage as well as violations: accepting nothing can count as keeping a promise. Requalify on language, noise and domain changes; the exploratory fresh-item checks also contain failures. Some full Jev outputs are withheld, so released summaries do not establish complete reproducibility.
+
+[置信审计](evidence.md#e37)检查的是经验总体，不能直接当作未知部署保证；候选阈值与温度共用校准样本，文中的 LTT 构造也只是近似保证。须同时报告覆盖率与违约率，全部拒绝也可能计为“守约”。语言、噪声、领域变化后要重新验证，新增未采样题的探索检查也有失败；部分完整 Jev 输出未公开，不能称全量可复现。
+
+[DFIP](evidence.md#e38) and [Drex Max's native Mac path](sources.md#drex-max-kapitsa-oct30) make the same practical distinction: unchanged categorical answers can coexist with probability drift that changes a routing threshold or fails a declared parity gate. Measure the actual returned fields and policy, then test arrivals, cold capture, queueing, dropped requests and retries. DFIP's short resident ratios are neither a cross-model ranking nor billed savings. Drex Max's text-only Mac checks do not validate its CUDA image path or configured long context.
+
+[DFIP](evidence.md#e38)与 [Drex Max 原生 Mac 路径](sources.md#drex-max-kapitsa-oct30)都说明：选项未变时，概率漂移仍可能改变路由或超过等价门槛。先核实际返回字段与阈值策略，再测真实到达流量、冷捕获、排队、丢请求和重试。DFIP 的短驻留比值不能拼模型总榜或推断账单节省；Drex Max 仅文本 Mac 检查不验证 CUDA 图像或配置的长上下文。
