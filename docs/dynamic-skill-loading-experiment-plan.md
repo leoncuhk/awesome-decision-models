@@ -1,15 +1,30 @@
 # Dynamic skill loading for an enterprise service agent: references, insights and experiment plan
 
-[Home](../README.md) · [中文](dynamic-skill-loading-experiment-plan.zh-CN.md) · [Evidence ledger](evidence.md) · [Selection guide](selection-guide.md) · [Methodology](methodology.md)
+[Evidence and value review (Chinese)](dynamic-skill-loading-value-review.zh-CN.md) · [Home](../README.md) · [中文](dynamic-skill-loading-experiment-plan.zh-CN.md) · [Evidence ledger](evidence.md) · [Selection guide](selection-guide.md) · [Methodology](methodology.md)
 
 Version v1, 2026-11-12. Status: **research plan and source review only.** No model, router, agent or dataset has been run for this document. Numbers are reported by the cited authors unless marked otherwise. The target enterprise is described as an **anonymized archetype**, and no customer data or identifying business details appear here.
+
+> 2026-11-13 review: Stages 1–4 remain conditional options. Apply Stage 0 first; read the historical source-table shorthand with the qualifications below.
+
+### Stage 0: establish a remediable bottleneck
+
+Compare the incumbent, statically pruned/metadata-first loading, an adjudicated sufficient-skill diagnostic reference, and simple retrieval with fallback. Freeze executor, policy, visible evidence and caching. Use a small authorized real-task diagnostic set, reporting natural traffic and stress cases separately. If the reference does not improve outcomes, repair execution/evaluation first; if static pruning suffices, do not build a loader; if simple retrieval passes acceptance, use existing components. Expand the matrix only after multi-turn omissions/interference demonstrably affect task utility. Size and thresholds require pilot evidence and business costs, not universal assumptions about 40 skills, recall .98 or fixed percentage-point gains.
+
+### Primary-source qualifications from this review
+
+- Skill Shadowing v2 retains 38 task/model pairs with at least 4-point isolated skill benefit; the 202-library drop is 21 percentage points. Non-significant context effects are not absent; Sonnet context point estimates are at least as large as shadowing.
+- Demystifying reports precision29.6→3.3 alongside success36.4→39.3; offline retrieval is not fed into the execution arm.
+- Workday eager-loading zero at100 skills is32k overflow; its24 activation-code retrieval tasks do not measure business execution.
+- Wix7.8% is conditional on1000 risk-enriched conversations;90.5% counts only skill-description tokens in a ten-skill family, not overall bills.
+- Dialpad45.0% averages five judges, ranging33.8–58.6 for that model; deterministic checks give90.6%. Its500 synthetic scenarios/mocked tools do not establish production completion.
+- Comparative Retrieval uses different corpus sizes639/690/875 across measurements; headline retrieval has117 queries and measures neither task completion nor latency.
 
 ## 0. Summary
 
 - **Question.** For one enterprise whose service agent covers *dozens* of skills, does routing each turn to a small scoped set of skills (dynamic loading) beat exposing every skill at once, on task success, policy violations and billed cost?
-- **What is already known.** Choosing among many skills degrades as the library grows. The main mechanism is **selecting the wrong skill (shadowing)**, not context length. Narrowing candidates before the model chooses recovers much of the loss. Customer-service-specific evidence is thin: one production selection study, and no public end-to-end scaling study.
+- **Evidence boundary.** Some studies show selection and task-success degradation as libraries grow; others show worse retrieval without worse task success. Diagnose context, candidate confusion and execution separately. These sources do not establish that this enterprise needs dynamic loading.
 - **What this plan adds.** A staged, preregistered comparison against an **oracle-routing diagnostic reference**. It separates three benefits that are often conflated: quality, cost, and governance.
-- **Decisive metric.** The loader **miss rate**, P(correct skill not loaded). Top-1 router accuracy is secondary.
+- **Acceptance.** Task outcomes, consequential-error constraints and full cost. Missing an acceptable skill set, fallback and irrelevant loading are diagnostic metrics; one annotated gold skill need not be necessary or unique.
 
 ---
 
@@ -52,7 +67,7 @@ Only sources that change the design are kept. Grades: **P** = production data, *
 
 ### I.4 Decision-model routers relevant to this plan
 
-[Gemini Decisions API / Gemini Decision 1](https://aistudio.google.com/docs/decisions-api) was announced on 2026-11-11 ([Google blog](https://blog.google/innovation-and-ai/technology/developers-tools/gemini-decisions-api/)) and is not yet in the catalog. It scores up to 1,000 independent typed questions per call, and choice questions take up to 255 options. Google lists tool selection and routing among its uses. Its docs note that a choice question spreads probability across the options **even when none fits**. Benchmarks are vendor claims. In-repo alternatives for the router role include [Microsoft-Decision-1](models.md), D3, Intern-Decision and Verdict (see [models](models.md)). **Under this plan, none of these is preferred over a supervised baseline without the Part III tests.**
+[Gemini Decisions API / Gemini Decision 1](https://aistudio.google.com/docs/decisions-api) was announced on 2026-11-11 ([Google blog](https://blog.google/innovation-and-ai/technology/developers-tools/gemini-decisions-api/)) and is now included in the [catalog](models.md). It scores up to 1,000 independent typed questions per call, and choice questions take up to 255 options. Google lists tool selection and routing among its uses. Its docs note that a choice question spreads probability across the options **even when none fits**. Benchmarks are vendor claims. In-repo alternatives for the router role include [Microsoft-Decision-1](models.md), D3, Intern-Decision and Verdict (see [models](models.md)). **Under this plan, none of these is preferred over a supervised baseline without the Part III tests.**
 
 ### I.5 Public data usable as proxies
 
@@ -70,13 +85,13 @@ There is no public Chinese, multi-skill, policy-bearing customer-service benchma
 
 ## Part II. Insights
 
-1. **The failure to engineer against is wrong selection, not long context.** The library-size curve is driven by *how similar* skills are. A larger library of clearly distinct skills can be safer than a smaller one full of near-duplicates. **Skill granularity is the primary design variable**, ahead of loader technology.
-2. **Dynamic loading changes the error type.** A flat agent dilutes. A routed agent can **amputate**: if the loader misses the right skill, nothing downstream can recover. So the loader must be judged on **recall@k with a fallback path**, not top-1 accuracy. A routed system without a "none of these → widen the search or escalate" path is fragile by construction.
+1. **Diagnose the bottleneck first.** Similarity can impede identification, while long bodies can overflow or interfere. One study does not establish selection as the universal bottleneck; skill granularity is a variable to test.
+2. **Dynamic loading can introduce omissions.** An omission bottlenecks execution when a necessary capability is excluded and alternatives, wider retrieval or clarification cannot recover it. Track acceptable skill sets and task outcomes, not only recall of one gold artifact.
 3. **The benefit has three separable parts, each with different evidence.**
    - *Quality*: moderate experimental evidence, and no customer-service end-to-end evidence.
-   - *Cost*: strong in token counts, but **prompt caching reduces it** for a stable flat prefix, and dynamic loading can break cache reuse. Measure billed cost, not tokens.
-   - *Governance*: per-skill owners, evals, release and rollback. Vendors converge on this (intent-scoped procedures and topic/action structures), but it is not measured. It may be the strongest reason even if the quality gain is small.
-4. **Routing captures only part of the available gain.** With the correct skill already given, real-transcript workflows still fail more than half the time (Dialpad). An oracle-routing arm is mandatory, to know how much loading can possibly buy before optimizing the router.
+   - *Cost*: description tokens may fall, but include extra calls and fallback. Caching depends on the actual request sequence; Anthropic Tool Search retains stable system/core-tool caching, so dynamic loading does not inherently break it.
+   - *Governance*: ownership, versioning, tests and rollback also work with static loading. Do not attribute all modularity benefits to dynamic loading.
+4. **Correct selection still requires execution.** Dialpad evaluates judges on synthetic scenarios and mocked tools; it is not a live failure rate or a bound on this system. Use a locally adjudicated sufficient-skill reference to test whether better selection changes task outcomes.
 5. **Guardrails must never depend on routing.** Red lines, escalation and identity checks belong in an always-on core enforced in code. Otherwise a misroute also removes the protection.
 6. **Code gates are cheap, auditable precision.** Removing skills whose preconditions are false (entitlement, order state, already-applied settings) cut real-traffic candidates by more than half at Wix, without any model call.
 7. **A decision model is a candidate router, not a default.** Calibration claims do not carry over to an enterprise's own thresholds (E35, E37), and abstention collapses on near-miss options (E20). The supervised small classifier is the baseline to beat.
@@ -195,11 +210,14 @@ The plan is built so that **every outcome yields a decision**, including null re
 | --- | --- | --- |
 | H2 holds, H3 holds, η ≥ 0.7, and actual Routed versus Flat meets preregistered success, policy-violation and full-cost acceptance with uncertainty intervals | Dynamic loading improves service quality at this scale, and the router captures most of the available gain | Adopt routed + gated + always-on core; proceed to Tier 4 |
 | H2 holds, H3 fails (Oracle − Flat < 3 pp), H4 shows a real billed saving | The benefit is cost, not quality | Adopt only if the saving matters at volume. Keep Flat with caching as the fallback |
-| H3 fails and there is no cost gain | Selection is not the bottleneck at K≈40. Execution quality inside skills is (as in the Dialpad result) | Do not build dynamic loading for quality. Invest in skill procedures, tools and verification. Adopt per-skill structure for governance only |
+| H3 fails and there is no cost gain | This experiment shows no quality/cost case for dynamic loading; execution as the root cause remains unproven | Stop expanding loader work; diagnose execution, evidence, evaluation and power. Governance can be implemented separately |
 | H2 fails on confusable libraries | The current system misses the target; cause remains unresolved | Diagnose labels, visible evidence, candidate recall, model and granularity separately; fix the supported cause and re-run Tier 1 and 2 |
 | R5 (supervised) ≥ R4 (decision model) | Hosted decision models are not needed for this router | Use the small local classifier; revisit when the taxonomy changes |
 | R4 > R5, with valid held-out thresholds | A typed decision model is worth its cost and dependency | Adopt with per-release threshold re-validation (E19, E38) |
 | H5 holds | Topic switching needs stateful routing | Ship hysteresis; add goal-shift tests to regression |
 | H6 holds | Code gates may help without another model call; include state-fetch and maintenance costs | Make preconditions mandatory in every skill card |
 
-**Expected most-likely result, stated in advance so it can be checked.** H1 and H6 hold. H2 holds only after the confusable pairs are reworked. H3 yields a modest gain (about 3–8 pp). H4 holds, because caching shrinks the cost advantage. R5 is competitive with R4. If so, the recommendation would be: dynamic loading mainly for governance and for robustness to confusable growth, with a supervised router, a code gate and an always-on core.
+**Do not presuppose a winning outcome.** Earlier expectations such as a 3–8-point gain had no local pilot basis. The stages above are conditional options; complete Stage 0 value diagnosis before expanding them.
+
+
+[REFLEX paper and user trajectory: bounded agent control / 论文与用户轨迹对照](agent-control-reflex-trajectory.zh-CN.md) separates faster bounded control from skill loading, and specifies matched latency/quality experiments.
