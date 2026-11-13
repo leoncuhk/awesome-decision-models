@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "reviewed_on": "2026-10-25",
+  "reviewed_on": "2026-11-01",
   "records": [
     {
       "id": "E01",
@@ -2444,6 +2444,142 @@
         "protocol": "Official27B/Flash model-card evaluation and grouping sections",
         "raw_outputs": "Card aggregates inspected; full paired outputs/calibration split IDs not audited",
         "model_hash": "Source revisions pinned; evaluated tensor hashes unknown"
+      },
+      "reproduced_here": false
+    },
+    {
+      "id": "E37",
+      "title": "Typed decider audit: empirical threshold promises do not transfer automatically",
+      "model_ids": [
+        "typed-deciders-audit",
+        "jev",
+        "laya"
+      ],
+      "source_ids": [
+        "typed-audit-v1",
+        "typed-audit-code"
+      ],
+      "evidence_type": "third_party_reported",
+      "reviewed_on": "2026-11-01",
+      "report_date": "2026-10-26",
+      "model_revision": null,
+      "protocol": {
+        "task": "Selective-accuracy threshold rules for typed intent/domain decisions",
+        "test_unit": "190 exchangeable evaluations across static/language/domain fronts; each uses a fixed empirical population, commonly 2000 items",
+        "split": "MASSIVE main: 1000 calibration /1000 report; headline gate test draws calibration samples with replacement and evaluates on the whole empirical population, not an unseen production population",
+        "reference": "MASSIVE 1.1 public labels, gold plus four distractor intents in main comparison; additional domains have2–6 options",
+        "training": "Laya code4066d5d and weights55cf4c4; Portuguese tuning removes240 exact test duplicates but near duplicates may remain. Jev training exposure unknown",
+        "measurement": "Paper section6.4/Table9: kept/broken/undetermined from two-sided95% Clopper-Pearson intervals against5% violation target. Empty acceptance counts kept; coverage must accompany it. Calibration draws2000, repeated to10000 where initially undetermined;190 is not independent deployment replications",
+        "hardware": "Jev1.13 mostly API calls frozen2026-09-26;1.14 only explanation front; exact hosted weight snapshot unknown. Laya static CPU bf16 batches8; not a speed/cost comparison"
+      },
+      "metrics": [
+        {
+          "label": "Point-estimate rule: broken evaluations out of190",
+          "value": 147,
+          "unit": "count"
+        },
+        {
+          "label": "Learn then Test: kept evaluations out of190",
+          "value": 190,
+          "unit": "count"
+        },
+        {
+          "label": "Ascending Beta: evaluations with more mean decisions than LTT out of190",
+          "value": 128,
+          "unit": "count"
+        },
+        {
+          "label": "Ascending Beta: evaluations with fewer mean decisions than LTT out of190",
+          "value": 0,
+          "unit": "count"
+        }
+      ],
+      "conclusion": "Bounded rules improve the empirical risk/coverage tradeoff; this does not establish a production promise or make the heuristic Beta rule guaranteed.",
+      "caveats": [
+        "Third-party report relative to providers; not independently reproduced here.",
+        "Observed-confidence thresholds and Laya temperature are fitted on the same calibration sample, rather than an independently fixed candidate family; the paper itself calls the nominal LTT guarantee approximate in this construction. Plug-in checks do not certify the unseen population.",
+        "Beta rule has no uniform guarantee and one observed evaluation exceeds nominal5% at5.5%; mean decision gains ignore item uncertainty.",
+        "New dev/unsampled-test items break LTT in2 of6 exploratory cases; drift, noise and language changes violate transfer assumptions.",
+        "When no threshold qualifies, all items are rejected and the evaluation counts as kept; inspect coverage as well.",
+        "Mostly five-option MASSIVE; public-data training overlap and near duplicates unresolved; do not identify these hosted responses with current weights."
+      ],
+      "artifacts": {
+        "protocol": "Paperv1 sections5–9 and14; fixed code README/DATASHEET inspected",
+        "raw_outputs": "Reduced Jev decision/probability/correctness answers described; full vectors/raw API responses and several explanation outputs withheld; external archive not retrieved",
+        "model_hash": "Laya abbreviated source/weight revisions reported by author; Jev evaluated binary hash unavailable"
+      },
+      "reproduced_here": false
+    },
+    {
+      "id": "E38",
+      "title": "DFIP: resident gains can change confidence and reverse under arrivals",
+      "model_ids": [
+        "dfip",
+        "pplx-decider",
+        "clef",
+        "gliner-decide"
+      ],
+      "source_ids": [
+        "dfip-v1",
+        "dfip-analysis"
+      ],
+      "evidence_type": "author_reported",
+      "reviewed_on": "2026-11-01",
+      "report_date": "2026-10-27",
+      "model_revision": null,
+      "protocol": {
+        "task": "Paired request-path acceleration and observable-answer fidelity on four pinned typed-decision checkpoints",
+        "test_unit": "Short Boolean paired container rounds: Decider5, Clef4 of5 planned, Liquid3; GLiNER posthoc diverse trace one worker",
+        "split": "50 timed calls after4 warm/admission calls per workload/mode; randomized modes/workloads. Statistical unit container, not repeated call; phases/model workloads kept separate",
+        "reference": "Released native answers for implementation fidelity, not gold task labels; source corpus used in development and training overlap unknown",
+        "training": "No model retraining. Selective CUDA replay, allowed candidate-token projection and schema-compatible length-aware batching change execution only",
+        "measurement": "Native/DFIP geometric mean paired container median ratios with95% bootstrap interval. Resident timing includes encoding/execution/readout, excludes client transport/startup. External60s arrival phases include losses, queues and retained failures",
+        "hardware": "PPLX-Decider B200, Clef/Liquid/GLiNER L40S, one GPU per worker. Torch2.14/CUDA13/Transformers5.17 replay image; GLiNER FP32. Fresh containers need not be distinct hosts"
+      },
+      "metrics": [
+        {
+          "label": "PPLX short Boolean native/DFIP resident ratio (95%CI1.88–3.26)",
+          "value": 2.47,
+          "unit": "ratio"
+        },
+        {
+          "label": "Clef short Boolean native/DFIP resident ratio (95%CI1.33–1.71)",
+          "value": 1.45,
+          "unit": "ratio"
+        },
+        {
+          "label": "Liquid released-compiled native/DFIP ratio (95%CI0.97–1.09)",
+          "value": 1.01,
+          "unit": "ratio"
+        },
+        {
+          "label": "Clef literal maximum confidence drift (3024 audited decisions)",
+          "value": 0.0129,
+          "unit": "fraction"
+        },
+        {
+          "label": "Clef literal maximum ordinal score drift",
+          "value": 0.0188,
+          "unit": "score"
+        },
+        {
+          "label": "Clef serving pairs crossing confidence0.9 (2473 matched successful pairs)",
+          "value": 21,
+          "unit": "count"
+        }
+      ],
+      "conclusion": "Workload-specific execution improvements require the application answer contract and actual traffic to be audited; preserved choices do not imply preserved confidence policies.",
+      "caveats": [
+        "DFIP authors report their own optimization and audits; external to compared model providers, but not independent replication of DFIP and not reproduced here.",
+        "Diverse arrivals reverse Decider/Clef resident gains, with loss/tail latency and retained Decider illegal-memory-access errors; no production-ready claim.",
+        "Clef fifth native preflight failed, estimates conditional; GLiNER compiler followup reuses fixtures and has one worker and worse arrival p95.",
+        "No billed savings measured; resident excludes cold starts, transport, queueing and retries.",
+        "Analysis commitf2eef174 differs from per-trial execution commits; historical GPU dependencies only partially locked."
+      ],
+      "artifacts": {
+        "protocol": "Paperv1 methods and appendices; frozen analysis README; per-run source-index described",
+        "raw_outputs": "Repository includes retained timing/answer/failure records and per-trial source snapshots; not executed or checksum-verified here",
+        "model_hash": "Paper pinned HF revisions: Liquid051bcc464b01b9f92942b364d9586b0ef5912432; Clef8b2e5fd17c09fd49bc2880b805d5323ec7ff4ff3; Decider6195aa55a72ae21e503c8a60198f7b390d42adb5; GLiNER9d1bfb848cd16d93ee56ccbc59cd92bf0f284d90; downloaded weights not checked"
       },
       "reproduced_here": false
     }

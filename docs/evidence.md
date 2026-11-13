@@ -1365,3 +1365,80 @@ Reported fractions are displayed as percentages where appropriate. More printed 
 
 **Sources:** [Perplexity Decider v1.2: joint requests and retrained data mixture](https://huggingface.co/perplexity-ai/pplx-decider-v1.2/blob/cce0f3f80033e9d89d80831d5281fd72124aacce/README.md); [Perplexity Decider Flash v1.2: distilled 4B and grouping regressions](https://huggingface.co/perplexity-ai/pplx-decider-flash-v1.2/blob/9ff7cf9838e59df461c276b7699d56b244d2af58/README.md)
 
+<a id="e37"></a>
+## E37 · Typed decider audit: empirical threshold promises do not transfer automatically
+
+**Evidence:** `third_party_reported` · **Reviewed:** 2026-11-01 · **Reproduced here:** no
+
+| Protocol | Recorded context |
+| --- | --- |
+| Task | Selective-accuracy threshold rules for typed intent/domain decisions |
+| Test unit | 190 exchangeable evaluations across static/language/domain fronts; each uses a fixed empirical population, commonly 2000 items |
+| Split | MASSIVE main: 1000 calibration /1000 report; headline gate test draws calibration samples with replacement and evaluates on the whole empirical population, not an unseen production population |
+| Reference | MASSIVE 1.1 public labels, gold plus four distractor intents in main comparison; additional domains have2–6 options |
+| Training | Laya code4066d5d and weights55cf4c4; Portuguese tuning removes240 exact test duplicates but near duplicates may remain. Jev training exposure unknown |
+| Measurement | Paper section6.4/Table9: kept/broken/undetermined from two-sided95% Clopper-Pearson intervals against5% violation target. Empty acceptance counts kept; coverage must accompany it. Calibration draws2000, repeated to10000 where initially undetermined;190 is not independent deployment replications |
+| Hardware | Jev1.13 mostly API calls frozen2026-09-26;1.14 only explanation front; exact hosted weight snapshot unknown. Laya static CPU bf16 batches8; not a speed/cost comparison |
+
+| Reported measurement | Value |
+| --- | --- |
+| Point-estimate rule: broken evaluations out of190 | 147 |
+| Learn then Test: kept evaluations out of190 | 190 |
+| Ascending Beta: evaluations with more mean decisions than LTT out of190 | 128 |
+| Ascending Beta: evaluations with fewer mean decisions than LTT out of190 | 0 |
+
+**Interpretation:** Bounded rules improve the empirical risk/coverage tradeoff; this does not establish a production promise or make the heuristic Beta rule guaranteed.
+
+- Third-party report relative to providers; not independently reproduced here.
+- Observed-confidence thresholds and Laya temperature are fitted on the same calibration sample, rather than an independently fixed candidate family; the paper itself calls the nominal LTT guarantee approximate in this construction. Plug-in checks do not certify the unseen population.
+- Beta rule has no uniform guarantee and one observed evaluation exceeds nominal5% at5.5%; mean decision gains ignore item uncertainty.
+- New dev/unsampled-test items break LTT in2 of6 exploratory cases; drift, noise and language changes violate transfer assumptions.
+- When no threshold qualifies, all items are rejected and the evaluation counts as kept; inspect coverage as well.
+- Mostly five-option MASSIVE; public-data training overlap and near duplicates unresolved; do not identify these hosted responses with current weights.
+
+**Artifacts and limits:**
+- protocol: Paperv1 sections5–9 and14; fixed code README/DATASHEET inspected
+- raw outputs: Reduced Jev decision/probability/correctness answers described; full vectors/raw API responses and several explanation outputs withheld; external archive not retrieved
+- model hash: Laya abbreviated source/weight revisions reported by author; Jev evaluated binary hash unavailable
+
+**Sources:** [Confidence Is Not a Promise: A Reference Audit of Typed Decision Models](https://arxiv.org/html/2610.36311v1); [Typed deciders audit: fixed README and datasheet](https://github.com/pcbrom/typed-deciders-audit/tree/8187f38fd4981f398d4e0e0d2291281ef5c58496)
+
+<a id="e38"></a>
+## E38 · DFIP: resident gains can change confidence and reverse under arrivals
+
+**Evidence:** `author_reported` · **Reviewed:** 2026-11-01 · **Reproduced here:** no
+
+| Protocol | Recorded context |
+| --- | --- |
+| Task | Paired request-path acceleration and observable-answer fidelity on four pinned typed-decision checkpoints |
+| Test unit | Short Boolean paired container rounds: Decider5, Clef4 of5 planned, Liquid3; GLiNER posthoc diverse trace one worker |
+| Split | 50 timed calls after4 warm/admission calls per workload/mode; randomized modes/workloads. Statistical unit container, not repeated call; phases/model workloads kept separate |
+| Reference | Released native answers for implementation fidelity, not gold task labels; source corpus used in development and training overlap unknown |
+| Training | No model retraining. Selective CUDA replay, allowed candidate-token projection and schema-compatible length-aware batching change execution only |
+| Measurement | Native/DFIP geometric mean paired container median ratios with95% bootstrap interval. Resident timing includes encoding/execution/readout, excludes client transport/startup. External60s arrival phases include losses, queues and retained failures |
+| Hardware | PPLX-Decider B200, Clef/Liquid/GLiNER L40S, one GPU per worker. Torch2.14/CUDA13/Transformers5.17 replay image; GLiNER FP32. Fresh containers need not be distinct hosts |
+
+| Reported measurement | Value |
+| --- | --- |
+| PPLX short Boolean native/DFIP resident ratio (95%CI1.88–3.26) | 2.47 |
+| Clef short Boolean native/DFIP resident ratio (95%CI1.33–1.71) | 1.45 |
+| Liquid released-compiled native/DFIP ratio (95%CI0.97–1.09) | 1.01 |
+| Clef literal maximum confidence drift (3024 audited decisions) | 1.29% |
+| Clef literal maximum ordinal score drift | 0.0188 |
+| Clef serving pairs crossing confidence0.9 (2473 matched successful pairs) | 21 |
+
+**Interpretation:** Workload-specific execution improvements require the application answer contract and actual traffic to be audited; preserved choices do not imply preserved confidence policies.
+
+- DFIP authors report their own optimization and audits; external to compared model providers, but not independent replication of DFIP and not reproduced here.
+- Diverse arrivals reverse Decider/Clef resident gains, with loss/tail latency and retained Decider illegal-memory-access errors; no production-ready claim.
+- Clef fifth native preflight failed, estimates conditional; GLiNER compiler followup reuses fixtures and has one worker and worse arrival p95.
+- No billed savings measured; resident excludes cold starts, transport, queueing and retries.
+- Analysis commitf2eef174 differs from per-trial execution commits; historical GPU dependencies only partially locked.
+
+**Artifacts and limits:**
+- protocol: Paperv1 methods and appendices; frozen analysis README; per-run source-index described
+- raw outputs: Repository includes retained timing/answer/failure records and per-trial source snapshots; not executed or checksum-verified here
+- model hash: Paper pinned HF revisions: Liquid051bcc464b01b9f92942b364d9586b0ef5912432; Clef8b2e5fd17c09fd49bc2880b805d5323ec7ff4ff3; Decider6195aa55a72ae21e503c8a60198f7b390d42adb5; GLiNER9d1bfb848cd16d93ee56ccbc59cd92bf0f284d90; downloaded weights not checked
+
+**Sources:** [DFIP: Decision-Focused Inference Path for System One Models](https://arxiv.org/html/2610.36804v1); [DFIP frozen analysis and research preview](https://github.com/superagent-ai/dfip/tree/f2eef1746e5e39b92827759344d4ef47410fc464)
+

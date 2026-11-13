@@ -276,6 +276,12 @@
       "kind": "github_file",
       "url": "https://api.github.com/repos/nace-ai/kapitsa/contents/docs/systemone.md",
       "meaning": "Inspect released runtime revision, state/branch/packed limits and cache/quantized-quality evidence separately."
+    },
+    {
+      "id": "drex-max-model",
+      "kind": "hf_model",
+      "url": "https://huggingface.co/api/models/nace-ai/drex-max-v1",
+      "meaning": "Separate Max code-readout weights, calibration, license and runtime changes; a repository SHA or stable picks do not establish probability parity or long-context quality."
     }
   ]
 }
