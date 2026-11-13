@@ -8,7 +8,7 @@ Version v1, 2026-11-12. Status: **research plan and source review only.** No mod
 
 - **Question.** For one enterprise whose service agent covers *dozens* of skills, does routing each turn to a small scoped set of skills (dynamic loading) beat exposing every skill at once, on task success, policy violations and billed cost?
 - **What is already known.** Choosing among many skills degrades as the library grows. The main mechanism is **selecting the wrong skill (shadowing)**, not context length. Narrowing candidates before the model chooses recovers much of the loss. Customer-service-specific evidence is thin: one production selection study, and no public end-to-end scaling study.
-- **What this plan adds.** A staged, preregistered comparison against an **oracle-routing upper bound**. It separates three benefits that are often conflated: quality, cost, and governance.
+- **What this plan adds.** A staged, preregistered comparison against an **oracle-routing diagnostic reference**. It separates three benefits that are often conflated: quality, cost, and governance.
 - **Decisive metric.** The loader **miss rate**, P(correct skill not loaded). Top-1 router accuracy is secondary.
 
 ---
@@ -137,7 +137,7 @@ Each skill is specified as: description (≤1 paragraph), procedure body, **tool
 
 **Tier 2: router-only on the enterprise's own turns** (days of labelling, private, offline)
 
-- About 1,500 turns sampled from real conversations, stratified by family and oversampling the confusable pairs and topic switches. Two independent annotators assign the gold skill and mark "skill exists / missing". Report agreement, and adjudicate disagreements.
+- About 1,500 turns sampled from real conversations, stratified by family and oversampling the confusable pairs and topic switches. Report this stress set separately; retain natural-traffic calibration/test sets for threshold, escalation and total-cost acceptance, or preregister identifiable sampling weights. Split training, development, calibration and test by conversation and time. Two independent annotators assign the gold skill and mark "skill exists / missing". Report agreement, and adjudicate disagreements.
 - Run the same arms as Tier 1 on the enterprise's own skill cards at K ∈ {10, 20, 40}. This is the uncontaminated Chinese test of H1, H2 and H6.
 
 **Tier 3: end-to-end with simulated users** (the largest compute tier)
@@ -146,7 +146,7 @@ Each skill is specified as: description (≤1 paragraph), procedure body, **tool
 - **Arms:**
   - Flat
   - Flat with prompt caching (cost only)
-  - **Oracle** (gold skill family only)
+  - **Oracle diagnostic reference** (the independently labelled complete set of required skills at each turn, with identical permissions, evidence and executor; include multi-skill dependencies rather than only the family label; no mathematical upper-bound claim)
   - Routed: best Tier-2 loader, k=5, executability gate and always-on core
   - Routed without gate
   - Routed without stickiness
@@ -154,11 +154,11 @@ Each skill is specified as: description (≤1 paragraph), procedure body, **tool
   - **A/A** (Flat run twice)
 - **Controls:** same model and skill text in every arm; shuffled skill order in Flat; fixed simulator and seed; human audit of about 50 transcripts.
 - **Metrics:** pass^4, policy-violation rate, billed cost per resolved task, latency per turn, failures attributed to the loader vs. to execution, and goal-shift recovery.
-- **Power:** about 300 tasks × 4 trials detects roughly 5–7 pp paired differences.
+- **Power:** 300 tasks × 4 trials is an initial budget, not a promised detectable effect. The independent unit for pass^4 is the task. Estimate baseline, paired discordance and task dependence in a separate pilot; preregister alpha, power and multiplicity rules, then size the study using task-level paired power simulation.
 - **Stop rules:**
   - If the A/A spread exceeds half of (Oracle − Flat), fix the harness.
   - If Oracle − Flat < 3 pp **and** the billed cost gain is < 20%, quality and cost do not justify dynamic loading. Decide on governance alone.
-  - If routing efficiency η = (Routed − Flat)/(Oracle − Flat) is < 0.5, return to Tier 2.
+  - Compute routing efficiency η only when the oracle reference is complete and the lower confidence bound of Oracle − Flat is clearly positive; otherwise report uncertainty. If η = (Routed − Flat)/(Oracle − Flat) is < 0.5, return to Tier 2. Do not reject routing based on an unreliable reference.
 
 **Tier 4: shadow, then canary** (production, after explicit approval)
 
@@ -193,13 +193,13 @@ The plan is built so that **every outcome yields a decision**, including null re
 
 | Observed outcome | Conclusion | Action |
 | --- | --- | --- |
-| H2 holds, H3 holds, η ≥ 0.7 | Dynamic loading improves service quality at this scale, and the router captures most of the available gain | Adopt routed + gated + always-on core; proceed to Tier 4 |
+| H2 holds, H3 holds, η ≥ 0.7, and actual Routed versus Flat meets preregistered success, policy-violation and full-cost acceptance with uncertainty intervals | Dynamic loading improves service quality at this scale, and the router captures most of the available gain | Adopt routed + gated + always-on core; proceed to Tier 4 |
 | H2 holds, H3 fails (Oracle − Flat < 3 pp), H4 shows a real billed saving | The benefit is cost, not quality | Adopt only if the saving matters at volume. Keep Flat with caching as the fallback |
 | H3 fails and there is no cost gain | Selection is not the bottleneck at K≈40. Execution quality inside skills is (as in the Dialpad result) | Do not build dynamic loading for quality. Invest in skill procedures, tools and verification. Adopt per-skill structure for governance only |
-| H2 fails on confusable libraries | Granularity, not the loader, is the problem | Merge or rename confusable skills, add the fallback path, re-run Tier 1 and 2 |
+| H2 fails on confusable libraries | The current system misses the target; cause remains unresolved | Diagnose labels, visible evidence, candidate recall, model and granularity separately; fix the supported cause and re-run Tier 1 and 2 |
 | R5 (supervised) ≥ R4 (decision model) | Hosted decision models are not needed for this router | Use the small local classifier; revisit when the taxonomy changes |
 | R4 > R5, with valid held-out thresholds | A typed decision model is worth its cost and dependency | Adopt with per-release threshold re-validation (E19, E38) |
 | H5 holds | Topic switching needs stateful routing | Ship hysteresis; add goal-shift tests to regression |
-| H6 holds | Code gates are a free precision gain | Make preconditions mandatory in every skill card |
+| H6 holds | Code gates may help without another model call; include state-fetch and maintenance costs | Make preconditions mandatory in every skill card |
 
 **Expected most-likely result, stated in advance so it can be checked.** H1 and H6 hold. H2 holds only after the confusable pairs are reworked. H3 yields a modest gain (about 3–8 pp). H4 holds, because caching shrinks the cost advantage. R5 is competitive with R4. If so, the recommendation would be: dynamic loading mainly for governance and for robustness to confusable growth, with a supervised router, a code gate and an always-on core.

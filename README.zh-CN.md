@@ -6,7 +6,7 @@
 
 收录用于**分类、评分、排序、验证、路由与拒判**的模型和方法。我们关心的不是谁的宣传数字更高，而是：**在具体任务中，哪种方法能以可接受的风险和总成本，交付可验收的结果。**
 
-**本版来源核验日期：2026-11-01。** 精选 59 项资源，其中 20 个核心模型系列、38 条带协议背景的评测记录。本版完成的是公开资料核验，**没有宣称独立运行并复现这些模型**。阅读深度、版本固定情况与未解决的资料缺口均见[来源登记](docs/sources.md)。收录不等于背书，也不等于通过生产可靠性认证。
+**本版来源核验日期：2026-11-13。** 精选 68 项资源，其中 21 个核心模型系列、38 条带协议背景的评测记录。本版完成的是公开资料核验，**没有宣称独立运行并复现这些模型**。阅读深度、版本固定情况与未解决的资料缺口均见[来源登记](docs/sources.md)。收录不等于背书，也不等于通过生产可靠性认证。
 
 ## 目录
 
@@ -39,7 +39,7 @@
 
 | 模型 | 机制／定位 | 适合的实验 | 重要限制 |
 | --- | --- | --- | --- |
-| [Jev / TypeSafe](https://typesafe.ai) | 托管的结构化判断服务：对选项、命题与有序评分标准输出分布。 | 可作为托管类型化判断对照或冻结的语义特征提取器；与监督基线比较时统一任务与标签规则。 | RLCD 的完整训练配方未公开；格式合法与置信度字段不等于语义可靠。 |
+| [Jev / TypeSafe](https://typesafe.ai) | 托管的结构化判断服务：对选项、命题与有序评分标准输出分布。 | 可作为托管类型化判断对照或冻结的语义特征提取器；与监督基线比较时统一任务与标签规则。 确定性业务规则由代码执行，语义判断单独验证。 | RLCD 的完整训练配方未公开；格式合法与置信度字段不等于语义可靠。 实验图片支持不等于生产成熟，CJK 须另测；作者生产案例／smoke 不构成可独立核验的大规模随机 KPI A/B。 |
 | [Laya](https://github.com/NandhaKishorM/laya) | 小型编码器与动态选项判断头；包含通用、多语言及工作流专项检查点。 | 适合有领域训练数据、需要控制高频调用成本的窄域判断。 | 不可混用基础版／专项版成绩；专项卡披露训练／校准重叠和继承温度冲突。布尔标签可能主导 noul／choice；语义标签也不能保证否定句安全。官方称 action.act_probability 几乎恒为 1，不适合作为执行门槛；confidence 也需在实际任务上验证。 |
 | [Kev](https://github.com/jaredpalmer/kev) | Qwen 骨干与动态 pointer head 的类型化判断系列；Kev 1.0 将现有检查点固定为发布基线。 | 可检查、可微调的领域监督判断实验底座。 | 须区分训练任务族测试与迁移测试。27B v2 在长合同上退步且过度自信（CUAD ECE 0.053，v1 为 0.007）；可接收长度和拟合温度不保证新任务的准确率或校准。 |
 | [Contrastive Language Models (CLM)](https://github.com/Contrastive-LM/CLM) | 冻结语言模型编码器，分别表示状态与动作，再用可训练投影头匹配。 | 适合候选可复用的工具目录、排序及领域 Best-of-N 选择。 | 相对排序不能保证识别“全部候选都错”；Best-of-N 成绩不代表模型独立解题能力。 |
@@ -47,13 +47,14 @@
 | [GLiNER2.5-Decide](https://huggingface.co/fastino/GLiNER2.5-Decide-1B) | 通过运行时标签与多个判断头实现模式条件化的本地分类。 | 适合轻量业务分类；跨字段约束需核对具体运行库支持。 | 本版核对的是 1B 模型卡，其中交叉报告 340M 成绩；数据集审计未完成，表中 JevK5 不是 TypeSafe Jev。 |
 | [GLiClass](https://github.com/Knowledgator/GLiClass) | 以用户提供的标签为条件进行文本分类，包含多标签任务。 | 动态意图与标签分类的重要相邻基线。 | 分类能力不等于通用工作流验收能力，也不保证业务风险已校准。 |
 | [jevos](https://github.com/feder-cr/jev) | 通过 llama.cpp 以 GGUF 格式提供本地是非判断，`noul` 请求与响应采用 TypeSafe Jev 的接口格式。 | 用于探索 CPU 本地文本判读与分流；将完整规则写入 `instructions`，并用自己的标注样例验证行为。 | 仅支持是非判断：`choice`、`score` 返回 422，jevos 文档说明 `criteria` 虽被接受却不参与判断。接口格式兼容不等于语义等价。算术、日期错误及评测敏感性由作者自报；旧版 README 的成绩不能代表 v2。 |
-| [Clef / Clef-Flash](https://huggingface.co/Cloudflare/clef) | 多模态 Qwen 骨干加联合 schema 判断头，输出类型化决策，提供 Jev/SystemOne 兼容封装。 | 比较文本／图像分类、分流与有序评分，并按具体任务衡量错误成本。 | 厂商评测存在任务间取舍；接口兼容和概率输出不等于业务风险已校准，本地推理需要定制 schema 运行代码。 |
+| [Clef / Clef-Flash](https://huggingface.co/Cloudflare/clef) | 多模态 Qwen 骨干加联合 schema 判断头，输出类型化决策，提供 Jev/SystemOne 兼容封装。 | 比较文本／图像分类、分流与有序评分，并按具体任务衡量错误成本。 | 厂商评测存在任务间取舍；接口兼容和概率输出不等于业务风险已校准，本地推理需要定制 schema 运行代码。 社区适配属于实验实现，真实权重多模态训练／导出尚未验证。 |
 | [Strands Decider](https://github.com/strands-labs/strands-decider) | Qwen3.5 与 Gemma 4 pointer-head 系列；10 月 v1 发布平均三个训练适配器／判断头后再校准。 | 可作为短文本分类和领域监督判断的本地基线；用实际流量测试问题变化、选项顺序和风险—覆盖率。 | 已公开五份 v1 seed-0 配置，但 Qwen 混合构建器／四项输入及教师分布、Gemma code_v27 仍缺失。若干 dev 评测对应训练划分已用于训练。E2B index 先于 CUDA 注意力修复；Qwen v1 缺图时 POPE 过度自信恶化。E07／E08 保留为历史，不能当作当前保证。 |
 | [Perplexity Decider v1 / v1.1 / v1.2 (27B / Flash 4B)](https://huggingface.co/perplexity-ai/pplx-decider-v1.2) | v1.2 联合请求答码头：Qwen3.8-27B 及蒸馏 Qwen3.5-4B；保留 v1／v1.1 的独立产物身份。 | 经具体任务验证后，作为文本／图像判读的自部署对照。 | 作者对比同时改变训练与请求格式，不能隔离归因；训练任务暴露不等于具体测试泄漏。分组可改善部分任务，也可损害候选排序，Flash 尤甚；不形成通用准确率、校准或成本推荐。 |
 | [Microsoft-Decision-1](https://ai.azure.com/catalog/models/Microsoft-Decision-1) | 托管的 Qwen3.5-9B 后训练模型，对有限选项评分。 | 比较分类、路由和按标准评分。 | 厂商比较缺少已审计的逐项产物；熟悉任务的校准不保证迁移，措辞与安全判断仍可能出错。 |
 | [OpenAI Decisions API / GPT-6 Luna](https://developers.openai.com/api/docs/guides/decisions) | 面向文本与图像的类型化判断 API，处于公开测试。 | 托管分类、路由与有序评分。 | 拒答为单独返回类型，不等于校准后的拒判；confidence 需在目标任务验证，训练与服务身份尚未披露。 |
+| [Google Gemini Decision 1 / Decisions API](https://aistudio.google.com/docs/models/gemini-decision-1) | 11月11日发布的托管模型，支持文本、图像、音频、视频和PDF判断，在共享输入上隔离各问题。 | 在相同证据、风险约束和完整成本下比较多模态分流、媒体规则检查与路由。 | 校准、速度及内部部署由厂商报告；confidence为最高选项概率，不是独立可靠性证据。安全拦截返回HTTP400；无缓存或Batch API。 |
 | [Nace Drex v1.5 / v2.0 / Max v1](https://github.com/nace-ai/drex-decision-models) | Drex 系列：文本 pointer-head v1.5／v2.0，加上独立 255-code 读出的多模态 dense 27B Max v1。 | 比较本地文本／JSON 与 Max CUDA 图像判断；跨版本比较须匹配精度、读出、证据和上下文。 | v1.5 使用基准训练划分，其结果不能视为未知领域零样本；公开 Index 0.3.1 前列处于平局带内，小规模运行器核对不证明普遍等价。 v2.0 作者 JevBench 计数比 Jev 1.13.0 少两题（E32），不作显著性或普遍胜出结论；当前 snapshot 与实测权重未建立同一性。 Max 仅公共 Index 结果不能当作私有文本 Full0.4；须保留原生路径概率等价未通过，不能只看选项未翻转。 |
-| [vLLM-SR Decision 3.0](https://huggingface.co/collections/vllm-sr/decision-30) | 六个多模态 code-readout 检查点；10 月 14 日新增原生 vLLM main 支持，每题仍独立读取 prompt。 | 本地文本／图像／视频分类、评分与路由；固定输入和候选预算比较各型号。 | Index 各版本与公共分数不可混用；10 月 15 日快照的权重／校准标识未变，文本数值领先者处于共享第一平局带；该次服务核验要求原生 vLLM 合并后／nightly 版本，集成报告未测 LoRA 和 CUDA。 |
+| [vLLM-SR Decision 3.0 / D3-Turbo](https://huggingface.co/collections/vllm-sr/decision-30) | 多模态 255 答码系列：经典版逐题编码，Turbo 复用状态后分题读出，须分开记录发布身份。 | 本地文本／图像／视频分类、评分与路由；固定输入和候选预算比较各型号。 | Index 各版本与公共分数不可混用；10 月 15 日快照的权重／校准标识未变，文本数值领先者处于共享第一平局带；该次服务核验要求原生 vLLM 合并后／nightly 版本，集成报告未测 LoRA 和 CUDA。 Turbo 指数为作者估计，未当作官方榜单或导入新数值；API 别名不是冻结检查点身份。 |
 | [Intern-Decision](https://github.com/internlm/Intern-Decision) | Qwen3.5 多模态 0.8B／2B／4B 系列，在一个因果 masked assistant skeleton 中评分多个类型化字段。 | 与每题独立模型比较多字段成本和字段／顺序敏感性，测试基于图像证据的判断。 | 原始训练／校准记录私有；96-case 分布试验只作诊断。型号／后端专属温度与 max(P) confidence 不能直接保证业务风险。 论文七套准确率针对文本任务，视觉轨迹为定性演示；公开 Jevbench 参与开发，已阅证据缺同数据消融及同条件 D3 多模态对照。 |
 | [Verdict / OpenJev](https://github.com/Heman10x-NGU/Verdict-open-jev) | 151M ModernBERT／GLiClass 候选分类器，含显式证据不足选项及 per-K 校准。 | 轻量意图分类与缺少正确选项测试；核对实际服务概率和评测 renderer／校准器。 | 作者测试显示 hard negative 和同义改写下拒答崩塌；转换者报告实际服务校准与保留集评测明显不同，不能保证跨域拒答可靠性。 |
 | [StartLux-Decision v1.1 (Instant / AutoThink)](https://github.com/StartLuxLabs/StartLux-Decision) | 使用 LM 选项字母读出：Instant 的 full-attention 提示双向，因果 AutoThink 按需推理并混合两次分布。 | 在证据充分的判断上以相同风险与总成本比较一次读出和选择性计算；商业使用权重需另获授权。 | 公共 DI 参与开发选择，并非完整／私有榜；DecisionPivot 为作者自建自测。论文 0.9 门槛成绩不代表当前 0.6 默认；confidence／none 须按实际策略验证。 |
@@ -103,6 +104,7 @@
 
 领域评测、训练支持核查与未知／澄清策略见[图片意图适配流程](docs/selection-guide.md#image-intent-adaptation)。先看[多模态后训练一页入口](docs/multimodal-decision-finetuning.zh-CN.md#quick-route)，再深入同条件对照、候选门槛及[分层学术阅读清单](docs/multimodal-decision-finetuning.zh-CN.md#reading-list)。
 
+
 执行细节：[分组划分协议](docs/multimodal-decision-finetuning.zh-CN.md#split-protocol)、[最小实验矩阵](docs/multimodal-decision-finetuning.zh-CN.md#experiment-matrix)、[结果记录与停止决定](docs/multimodal-decision-finetuning.zh-CN.md#result-template)。
 
 具体案例：[MIRE任务、标签与代码](docs/mire-case-study.zh-CN.md#tasks)、[官方综合奖项与复赛成绩](docs/mire-case-study.zh-CN.md#finalists)及[迁移边界](docs/mire-case-study.zh-CN.md#transfer-boundaries)。
@@ -124,9 +126,10 @@
 - **[Outlines](https://github.com/dottxt-ai/outlines)** — 为普通语言模型提供受约束结构化输出。 模式合法不保证事实正确。
 - **[TabICLv2](https://arxiv.org/abs/2602.11139)** — 用于表格分类与回归的基础模型。 按论文收录；未本地复现，不外推自然语言能力。
 - **[FluidUse / decision-model Core ML deployment](https://github.com/FluidInference/FluidUse)** — Apple 部署资源，含原生 Swift manager 与 Python 辅助 Core ML bridge，支持 Decision 3.0 等。 转换等价和 smoke test 不保证质量；须匹配长度 bucket、精度、tokenizer、校准器与媒体路径。bridge 调用串行排队，超时会关闭 session；文档中的自动下载／环境安装本轮未运行。
-- **[Semantic features + supervised predictor](https://docs.typesafe.ai/cookbooks/autoresearch_feature_discovery)** — LLM 提议问题，Jev 将文本转成语义特征，再由监督 CatBoost 预测任务标签。 葡萄酒回归属于作者报告；特征发现须限制在开发划分，训练下游模型不等于微调 Jev，也不证明金融／多模态泛化。
+- **[Semantic features + supervised predictor](https://docs.typesafe.ai/cookbooks/autoresearch_feature_discovery)** — LLM 提议问题，Jev 将文本转成语义特征，再由监督 CatBoost 预测任务标签。 葡萄酒回归属于作者报告；特征发现须限制在开发划分，训练下游模型不等于微调 Jev，也不证明金融／多模态泛化。 独立 SeLMRoute 文本路由证据须按分组协议阅读；其 regret／fallback 与未计提取器的成本不等于业务动作安全或全链路节省，未在此复现。
 - **[ezjev text candidate-logit LoRA](https://github.com/everettjf/ezjev/tree/8b3d88957c0795bea160c8fbc9c6d2a54b051136)** — 可检查的逐题候选 CE＋Brier、回放及温度拟合，训练路径使用 Qwen3.5 文本输入。 不是图像微调实现；MIT 仅覆盖代码，部分训练数据为非商业许可或未说明条款；未在此复现训练或校准。
 - **[decision-pacman decision distillation](https://github.com/grapeot/decision-pacman/tree/593ed1f59f4f97ad0bda7287ff304e9667360089)** — 用文本状态的教师／模拟器标签训练小型候选分布 LoRA 学生。 游戏专项作者报告同时存在通用能力下降；不证明图像训练或客服泛化，完整数据／评测产物未审计。
+- **[Qwen VLM image-supervised SFT / LoRA](https://github.com/QwenLM/Qwen3-VL/blob/96588727e44c78b25ba03ea03b8e12f7e64fd0da/qwen-vl-finetune/README.md)** — 可查图像监督路径：QwenVL 官方、ms-swift Qwen3.5，以及供 Mac 实验的固定 MLX-VLM 图像条件语言 adapter。 框架／检查点不同，未本地运行模型或证明业务收益。mlx-decision 训练拒收图片，mlx-vlm 另有视觉路径；代码与产物权利分别核，容量、梯度、mask 及重载／导出等价仍须过关。 所阅社区 4B 转换快照缺显式许可／模型卡，须追溯上游通知和来源。Jev-Decision 是 Qwen3-VL-2B 图像训练代码先例，已阅树未见公开 checkpoint／结果。
 - **[DFIP / Decision-Focused Inference Path](https://arxiv.org/html/2610.36804v1)** — 配对原生基线系统研究，分别审计驻留加速、对外答案字段与外部到达流量。 四个选定检查点；短驻留加速在多样流量下反转，Clef置信漂移，Liquid与发布版编译基本持平。未测账单节省、未认证生产可用且未复现。
 - **[DICE / Direct Item Choice Estimation](https://arxiv.org/html/2610.34124v1)** — 监督式商品选择，以候选隔离共享前缀注意力和单独校准的置信度进行推荐。 作者评估使用抽样负例，跨划分历史未去重且可能有预训练暴露；下一次观测交互不等于线上效益。级联成本为不含路由开销的估算，未审计代码。
 
@@ -145,6 +148,7 @@
 - **[MAPIE](https://github.com/scikit-learn-contrib/MAPIE)** — 预测集合、不确定性与保形风险工具。 保证依赖方法、风险目标及数据假设。
 - **[Calibration and Risk-Budgeted Decisions with System One Models](https://arxiv.org/html/2610.19811v1)** — 预印本将概率校准与固定序列 LTT 对二元风险预算策略的认证分开。 作者报告六个英文文本数据集、单种子。同分布 iid 保证针对校准抽样认证总体 FOR，不是逐题正确、多类／VLM 任意风险或分布漂移保证；无证书意味着策略回退。
 - **[RouteGuard / Cost-Aware Abstention](https://arxiv.org/html/2610.31657v1)** — 按校准集选成本敏感工单路由，分开概率校准和错误区分能力。 单语料随机划分，类别监督信息不对等、端点较旧。人工分流总正确且成本固定是设定；报告成本未含完整推理／复核费用，未读取外部冻结档案。
+- **[Rep2Act / VAD-R](https://arxiv.org/html/2609.32653v1)** — 证据缺口标注及可答性到动作的对齐；本次新收录 9 月 26 日预印本。 A-Acc 是动作一致率而非答案正确率；模型裁判／平衡划分限制外推，代码数据可得性和复用许可未核实，未本地复现。
 
 - **[HF-hosted Decision Index (archival releases and live board)](https://huggingface.co/spaces/multimodalart/jev-decision-index)** — 具有明确聚合规则的较广覆盖决策评测指数。 10 月 15 日核对了 10 月 14 日生成的 0.3.2 汇总 JSON，私有题目／原始运行仍未审计。文本榜有 0.9 分平局带；0.3.2 含评分／数据修正，不能据此推断重训。 此社区指数与 Artificial Analysis Decision Index 1.0 分属不同协议，不合并排名或成绩标签。 当前 v0.4 文本 Full 为纯私有同技能／新领域 60／40，隐藏新领域集合也修订；公共不再计入。视觉仍为公共／私有 50／50。不能将 0.3.2→0.4 Full 差异当模型增益；上游移除在线旧文件后仍保留历史固定来源。
 - **[Nimble public evaluations](https://github.com/bespokelabsai/nimble/blob/62076b4f2d365b5879dafcf7f6dd072a1fe76df7/docs/PUBLIC_BENCHMARKS.md)** — 人工参考标签子集、配对比较及校准报告。 由项目方运行；本列表未独立复现。
@@ -154,6 +158,12 @@
 - **[DecisionPivot v1.1](https://huggingface.co/datasets/startlux-models/DecisionPivot/tree/b6a65d303f3f8689d293869aff3db41f944984c6)** — 13 个生成对比家族、程序标签及公开生成／求解／评分资产，另有复用公共任务参考轨。 StartLux 作者自建与运行，不是第三方复现。修正版 v1.1 及中间检查点表不能静默等同论文最终成绩；事后覆盖指标不是部署风险保证。
 - **[Artificial Analysis Decision Index](https://artificialanalysis.ai/methodology/decision-index)** — 1.0 版以四等权部分组合知识／幻觉、文本 HLE、工具调用与安全分类。 500 道知识题私有；WildGuardTest 为筛选后 835 行。非幻觉率以未答对集合为分母。未审计当前排名／成绩，不能代替校准、多模态或完整服务延迟测试。
 - **[Commit or Abstain? Missing Legal Authority](https://arxiv.org/html/2610.29961v1)** — 独立于模型提供商的评估，在构造 CaseHOLD 上揭示错误接受与不必要拒答的权衡。 单一英文法律任务、构造性缺失，公共文本训练暴露未排除；API 日志评估不等于本仓库复现，调用费用对比不含人工复核成本。
+- **[VLTest joint image-text testing](https://arxiv.org/html/2610.30794v1)** — 10 月 22 日方法以原始／仅改图／仅改文／联合四格对照，核查扰动是否保持预期答案。 仅种子答对的诊断选择不是流量风险；MIT 代码仍需资产、设置、适配与标注，论文／代码裁判路径有差异，本仓库未复现失效计数。
+- **[Beyond Ranking: calibrated relevance scoring](https://arxiv.org/html/2611.11480v1)** — 同候选相关性排序与留出集概率校准。 第三方论文报告；历史Jev1.13端点、仅已判定样本及截断输入。无生产RAG效果或本地复现。
+- **[System1 perturbation and question-interference audit](https://arxiv.org/html/2611.12521v1)** — 审计分布派生置信度、多题干扰及扰动解释。 评估开放权重模型而非托管Jev；单GPU量化、合成临床案例与平衡安全样本。不证明临床或安全生产效用。
+- **[Decision models for RAG conflict typing](https://arxiv.org/html/2610.36915v1)** — 直接冲突分类、问题拆分与置信门控级联。 单网关盘点；小型偏斜测试集、可变端点及模型裁判。未证明与强LLM统计等价或事实支撑提升。
+- **[Entity matching using decision models](https://arxiv.org/html/2610.34626v1)** — 零样本记录对匹配，比较提示、鲁棒性与级联。 论文基准证据；记录对分类不是端到端实体消歧或已证生产节省，级联另加LLM集成。
+- **[Jev time-series decision benchmark](https://arxiv.org/html/2610.33410v1)** — 评估序列输入、事件类别及方向预测。 历史Jev1.13研究；许多数值任务与股价方向区分弱。无交易收益、工业部署或本地复现。
 - **[Confidence Is Not a Promise / Typed Deciders Audit](https://arxiv.org/html/2610.36311v1)** — 参考审计区分置信排序、选择性准确率承诺及其在分布变化下的失效。 经验总体测试不等于生产保证；主要为五选项MASSIVE，近重复训练暴露未排除，托管快照未知且部分Jev原始输出未公开。
 
 评测应同时看任务质量、关键错误、校准、风险—覆盖率、子群与分布变化，以及完整系统成本。阈值在校准集确定，不能在最终测试集上反复调参。自动放行的案例也必须保留抽检，才能发现“自信地判错”。
@@ -199,3 +209,9 @@ python3 -m unittest discover -s tests -v
 原创代码与整理文字使用 [MIT](LICENSE)；链接的项目、模型、数据与论文保留各自许可证。固定来源文档的提交版本，**不等于**固定模型权重。
 
 [10月25日每周核查](updates/2026-10-25-weekly-review.md)补入联合请求发布、有边界的重复读取／拒答证据及训练／部署修正。
+
+[11月13日更新：机制变化、应用净效用与证据边界](updates/2026-11-13-jev-utility.md).
+
+[11月13日Google最新发布补充](updates/2026-11-13-google-decision.md).
+
+[分支审查与应用意图](docs/branch-review-2026-11-13.md)

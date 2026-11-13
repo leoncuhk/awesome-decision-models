@@ -45,6 +45,7 @@ The table compares mechanisms and use cases, **not incompatible benchmark scores
 
 For domain evaluation and verified training support, see the [image-intent adaptation workflow](docs/selection-guide.md#image-intent-adaptation). Start with the [one-page multimodal post-training route](docs/multimodal-decision-finetuning.md#quick-route), then follow the controlled experiments, candidate gates and [layered academic reading list](docs/multimodal-decision-finetuning.md#reading-list).
 
+
 Execution details: [split protocol](docs/multimodal-decision-finetuning.md#split-protocol), [minimal experiment matrix](docs/multimodal-decision-finetuning.md#experiment-matrix), [result record and stopping decision](docs/multimodal-decision-finetuning.md#result-template).
 
 Worked case: [MIRE tasks, labels and code](docs/mire-case-study.md#tasks), [official composite awards and semifinal scores](docs/mire-case-study.md#finalists), and [transfer limits](docs/mire-case-study.md#transfer-boundaries).
@@ -106,3 +107,9 @@ Read [CONTRIBUTING](CONTRIBUTING.md) before adding a project or result. Negative
 Original code and curation text: [MIT](LICENSE). Linked projects, model weights, datasets and papers retain their own licenses. A source-text revision does **not** pin a model's weights.
 
 [October25 weekly review](updates/2026-10-25-weekly-review.md) adds joint-request releases, bounded reread/abstention evidence and training/deployment corrections.
+
+[November13 review: mechanisms, application utility and evidence limits](updates/2026-11-13-jev-utility.md).
+
+[November13 Google release addendum](updates/2026-11-13-google-decision.md).
+
+[Branch review and application intent](docs/branch-review-2026-11-13.md)
