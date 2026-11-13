@@ -196,11 +196,7 @@
 
 事实资料保存在 [`data/catalog.json`](data/catalog.json)，性能声明保存在 [`data/evaluations.json`](data/evaluations.json)。首页和详细表格由同一份数据生成，避免中英文成绩各自漂移。
 
-```sh
-python3 scripts/render.py
-python3 scripts/validate.py
-python3 -m unittest discover -s tests -v
-```
+[Choose checks by changed files / 按变更范围选择检查](CONTRIBUTING.md#local-checks): prose-only work needs local link review; catalog/template changes need generation validation; code changes need tests.
 
 仓库包含[资料维护 Skill](.agents/skills/decision-models-curator/SKILL.md)和[每周来源检查工作流](.github/workflows/source-watch.yml)。前者规定怎样研究，后者发现来源变化并维护待审核 Issue。**工作流不会自动运行 AI 研究、改写结论或合并代码，也不需要付费模型 API。** 启用条件、调度限制和手动运行方式见[维护说明](docs/maintenance.md)。
 
