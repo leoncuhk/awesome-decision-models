@@ -13,5 +13,6 @@ This repository curates evidence, not marketing. Read `docs/methodology.md` befo
 - Never transmit tokens outside their intended service. Do not collect personal/customer data for this public list.
 - Do not change repository settings, credentials, access, licenses of third-party material or paid-service configuration without authorization.
 - The source watcher only detects changes. It never establishes improved accuracy and never auto-merges.
-- Run `python3 scripts/validate.py` and `python3 -m unittest discover -s tests -v`. Report what was actually checked, including failures.
+- Select checks by changed files using `CONTRIBUTING.md#local-checks`; prose/image updates need local link checks, not the full test suite. Report only relevant checks; successful Git sync is separate from CI status.
+- Reuse the current checkout for sequential work. Create a worktree only for concurrent writes or a required incompatible environment; name its task and remove it after delivery once uncommitted content and recovery backups are verified. Read-only reviews can use Git object reads or automatically cleaned temporary directories.
 - Submit a reviewable branch/PR for subsequent changes; no force push or automatic merge. Empty-repository initialization is handled separately by the opt-in publishing script.

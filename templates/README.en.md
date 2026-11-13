@@ -94,11 +94,7 @@ These maintainers provide complementary discovery paths. This repository adds a 
 
 The factual catalog lives in [`data/catalog.json`](data/catalog.json); numerical claims live in [`data/evaluations.json`](data/evaluations.json). Generated Markdown must stay synchronized with those records.
 
-```sh
-python3 scripts/render.py
-python3 scripts/validate.py
-python3 -m unittest discover -s tests -v
-```
+[Choose checks by changed files / 按变更范围选择检查](CONTRIBUTING.md#local-checks): prose-only work needs local link review; catalog/template changes need generation validation; code changes need tests.
 
 A [repository-scoped curator skill](.agents/skills/decision-models-curator/SKILL.md) defines the research/review procedure. A [weekly source watcher](.github/workflows/source-watch.yml) checks selected sources for changes and maintains an issue for review. **It does not run an AI researcher, update scientific claims, merge changes or require a paid model API.** See [maintenance](docs/maintenance.md) for setup, security, scheduling limits and manual use.
 

@@ -18,7 +18,7 @@ Read `AGENTS.md`, `docs/methodology.md`, the existing catalog/evaluations and th
 5. **Audit the claim.** Read task, labels, split, training, candidate budget, hardware, costs, errors, aggregation and artifact access. Give each result a provenance label. Treat author and third-party claims consistently.
 6. **Write a bounded interpretation.** State what changed, what it supports, what it does not support, and what remains uncertain. Retain negative findings. Never create an overall winner from incomparable protocols.
 7. **Update canonical records.** Modify JSON and templates; preserve historical evidence. Add an update note only for substantive changes. Keep both languages aligned.
-8. **Validate and review.** Run the renderer, validator and unit tests. Inspect the diff, links and both READMEs. Network failures are not evidence that a project is abandoned.
+8. **Validate and review.** Select checks by changed files from `CONTRIBUTING.md#local-checks`. Render only when generated inputs change; prose-only work needs link/content review. Inspect the relevant diff and bilingual text. Network failures are not evidence that a project is abandoned.
 9. **Publish only as authorized.** Normally propose a branch/PR with sources, uncertainty and checks. No automatic merge, force push, access changes or paid API provisioning.
 
 ## Review output
