@@ -1,0 +1,34 @@
+{
+  "status": "template_not_run",
+  "experiment_id": null,
+  "hypothesis": null,
+  "business_policy_version": null,
+  "dataset_revision": null,
+  "split_manifest": null,
+  "independence_unit": "case",
+  "model_version": null,
+  "runtime_revision": null,
+  "skill_library_revision": null,
+  "state_builder_revision": null,
+  "loading_policy": null,
+  "baseline": null,
+  "calibration_policy": null,
+  "acceptance_criteria": {
+    "critical_error_budget": null,
+    "minimum_useful_difference": null,
+    "cost_boundary": null
+  },
+  "results": {
+    "cases": null,
+    "task_success": null,
+    "critical_errors": null,
+    "full_cost": null,
+    "p50_seconds": null,
+    "p95_seconds": null,
+    "fallback_rate": null,
+    "paired_interval": null
+  },
+  "artifacts": [],
+  "decision": "not_run",
+  "limitations": []
+}

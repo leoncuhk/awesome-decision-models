@@ -113,3 +113,5 @@ Original code and curation text: [MIT](LICENSE). Linked projects, model weights,
 [November13 Google release addendum](updates/2026-11-13-google-decision.md).
 
 [Branch review and application intent](docs/branch-review-2026-11-13.md)
+
+[Dynamic skill loading and bounded control: business experiment entry (Chinese)](docs/dynamic-skill-loading-business-playbook.zh-CN.md) — Research branch: protocols and synthetic examples, no model or business validation.

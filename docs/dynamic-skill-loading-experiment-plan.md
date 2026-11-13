@@ -2,7 +2,7 @@
 
 [Evidence and value review (Chinese)](dynamic-skill-loading-value-review.zh-CN.md) · [Home](../README.md) · [中文](dynamic-skill-loading-experiment-plan.zh-CN.md) · [Evidence ledger](evidence.md) · [Selection guide](selection-guide.md) · [Methodology](methodology.md)
 
-Version v1, 2026-11-12. Status: **research plan and source review only.** No model, router, agent or dataset has been run for this document. Numbers are reported by the cited authors unless marked otherwise. The target enterprise is described as an **anonymized archetype**, and no customer data or identifying business details appear here.
+Version v2, 2026-11-13 (v1 hypotheses retained as conditional options). Status: **research plan and source review only.** No model, router, agent or dataset has been run for this document. Numbers are reported by the cited authors unless marked otherwise. The target enterprise is described as an **anonymized archetype**, and no customer data or identifying business details appear here.
 
 > 2026-11-13 review: Stages 1–4 remain conditional options. Apply Stage 0 first; read the historical source-table shorthand with the qualifications below.
 
@@ -36,21 +36,21 @@ Only sources that change the design are kept. Grades: **P** = production data, *
 
 | Source | Grade | Key result | Why it matters here |
 | --- | --- | --- | --- |
-| [More Skills, Worse Agents? Skill Shadowing (Databricks, 2605.24050)](https://arxiv.org/html/2605.24050) | E | Pass rate drops by up to 21% going from a few helpful skills to 202. **Up to 68% of the drop is wrong-skill selection.** The context-overhead effect is indistinguishable from zero. | Puts the problem in *selection*. Making context cheaper alone will not fix it. |
-| [Demystifying Agent Skills (Princeton/Stanford et al., 2608.14036)](https://arxiv.org/html/2608.14036v1) | E | From a pool of 5 to 100 skills, actual-use precision falls **29.6% → 3.3%**. With similar distractors, embedding top-1 falls 70.5% → 53.4%. | **Similarity between skills** hurts more than count. Experiments need confusable libraries, not just larger ones. |
-| [Progressive Disclosure of Agent Skills (Workday, 2609.35692)](https://arxiv.org/html/2609.35692v1) | E | Eager loading collapses to 0 at 100 skills. Frontmatter-first loading recovers 0.79–1.00 with up to 81.7% fewer tokens, at +15% latency. Some cells are non-monotone. | The remedy works, but measures retrieval only, on synthetic skills. |
+| [More Skills, Worse Agents? Skill Shadowing (Databricks, 2605.24050)](https://arxiv.org/html/2605.24050) | E | Selected 38 task–model pairs; 202 skills reduce success by 21 percentage points. The context-effect interval spans zero. | Evidence of selection interference in this subset, not absence of context effects or a universal library-size law. |
+| [Demystifying Agent Skills (Princeton/Stanford et al., 2608.14036)](https://arxiv.org/html/2608.14036v1) | E | Skill-use precision falls while task success can rise; offline retrieval and execution are separate experiments. | Separate exact-gold hits, substitute capabilities and final outcomes. |
+| [Progressive Disclosure of Agent Skills (Workday, 2609.35692)](https://arxiv.org/html/2609.35692v1) | E | 24 activation-code retrieval tasks; zero at 100 eagerly loaded skills reflects 32k overflow. | Disclosure can avoid overflow; this is not enterprise workflow outcome evidence. |
 | [Toollery (Huawei, 2609.22218)](https://arxiv.org/pdf/2609.22218) | E | A Qwen3-8B tool-selection score goes 97.0 at ≤10 candidates → 38.5 at 457. Retrieval plus offline intent queries brings it back to 79.4. | Shows a cheap *loader* design, and a near-duplicate failure mode. |
-| [Comparative Retrieval over Large Skill Libraries (Praetorian, 2608.06196)](https://arxiv.org/html/2608.06196) | E | 690 enterprise skills: hybrid BM25 + embedding hit@5 = 0.735. A skill graph **hurt** by 11.2 pts. **Queries written by the authors inflated hit@5 by 21–44 pts.** | Methods warning. Evaluation queries must come from users or independent writers. |
+| [Comparative Retrieval over Large Skill Libraries (Praetorian, 2608.06196)](https://arxiv.org/html/2608.06196) | E | Main retrieval uses 117 queries; experiments use different 639/690/875 corpora. Author-derived queries inflate scores. | Use independent queries; retrieval scores are not workflow completion. |
 | [Anthropic, Advanced tool use](https://www.anthropic.com/engineering/advanced-tool-use) | V/E | Tool Search: internal MCP eval 49% → 74% (Opus 4). Guidance: keep 3–5 hot tools always loaded and defer the rest. | Vendor confirmation of the pattern. No task counts or variance published. |
 
 ### I.2 Customer-service evidence
 
 | Source | Grade | Key result | Why it matters here |
 | --- | --- | --- | --- |
-| [Deterministic Executability Gating (Wix, 2608.01050)](https://arxiv.org/pdf/2608.01050) | **P** | 757k customer-care messages. A state-predicate gate removed 59.4% of the candidates left after semantic matching, and skill-description context fell 90.5% in total. With all skills exposed, the model chose a skill production would have blocked in **7.8%** of 1,000 replays. | The only production CS number. It supports a **code gate after the router**. It measures selection, not outcomes. |
-| [Agentic Workflow Executors in Customer Support (Dialpad, 2610.14346)](https://arxiv.org/html/2610.14346) | E | 80 skills mined from about 350k real transcripts. **Even with the correct skill given**, the best model passes 45.0%, and the best open model under 20B, 21.6%. | Routing is not the whole problem. It sets a ceiling on what loading can contribute. |
+| [Deterministic Executability Gating (Wix, 2608.01050)](https://arxiv.org/pdf/2608.01050) | **P** | Production records across 10 skill families; 90.5% refers to skill-description tokens, and 7.8% to 1,000 risk-enriched replays. | Motivates state gating, not full-traffic error rates, billed savings or a business A/B. |
+| [Agentic Workflow Executors in Customer Support (Dialpad, 2610.14346)](https://arxiv.org/html/2610.14346) | E | 500 synthetic scenarios derived from real workflows with simulated tools; 45% averages five judges with substantial disagreement. | Execution and evaluator quality need diagnosis; this does not bound routing gains in another business. |
 | [T1-Bench (Capital One, 2606.11070)](https://arxiv.org/html/2606.11070v1) | E | 25 domains, 76 tools. The agent classifies the domain before fetching tools. Best Pass^3 is 41%. **All models score 0 when 8 or 11 domains are combined.** | Multi-domain composition can collapse completely. |
-| [AgentChangeBench (2510.18170)](https://arxiv.org/html/2510.18170) | E | Goal shifts mid-dialogue on τ-bench domains. Recovery ranges from 92.2% to 48.6% depending on model and domain. | Topic switching is the hard case for per-turn routing. |
+| [AgentChangeBench (2510.18170)](https://arxiv.org/html/2510.18170) | E | Goal-switch protocol; recovery can mean acknowledgement without handoff rather than completion of the new goal. | Check terminal outcomes; recovery/composite scores are not business success. |
 | [CRM-Agent-Bench (Salesforce, 2610.32004)](https://arxiv.org/html/2610.32004) | E | 555 tasks, 9 domains, per-turn graph routing to a scoped capability. Strict success 64–84%. | The closest public harness design to this plan (release not confirmed). |
 
 ### I.3 Router-evaluation lessons from this repository's ledger
@@ -79,7 +79,7 @@ Only sources that change the design are kept. Grades: **P** = production data, *
 | [MASSIVE](https://huggingface.co/datasets/AmazonScience/massive) (CC-BY-4.0), [CLINC150](https://github.com/clinc/oos-eval), [BANKING77](https://github.com/PolyAI-LDN/task-specific-datasets) | Chinese (zh-CN) intents, explicit out-of-scope, fine-grained near-duplicates. | Single-turn intent data, not skills. |
 | [SGD / SGD-X](https://github.com/google-research-datasets/dstc8-schema-guided-dialogue) (CC BY-SA 4.0) | Several services per domain give natural confusable skills. SGD-X tests wording sensitivity. | Schemas, not policies. |
 
-There is no public Chinese, multi-skill, policy-bearing customer-service benchmark. The enterprise's own traffic is required for the decisive tier.
+This review did not identify a public benchmark covering Chinese, multiple skills and full policy execution acceptance together. Target-business claims require authorized in-domain evidence.
 
 ---
 
@@ -221,3 +221,5 @@ The plan is built so that **every outcome yields a decision**, including null re
 
 
 [REFLEX paper and user trajectory: bounded agent control / 论文与用户轨迹对照](agent-control-reflex-trajectory.zh-CN.md) separates faster bounded control from skill loading, and specifies matched latency/quality experiments.
+
+[Current business experiment entry / 当前业务实验入口](dynamic-skill-loading-business-playbook.zh-CN.md) · [Additional primary sources / 新增一手资料](dynamic-skill-loading-research-supplement.zh-CN.md)

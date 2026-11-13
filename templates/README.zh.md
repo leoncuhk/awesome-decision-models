@@ -115,3 +115,5 @@ python3 -m unittest discover -s tests -v
 [11月13日Google最新发布补充](updates/2026-11-13-google-decision.md).
 
 [分支审查与应用意图](docs/branch-review-2026-11-13.md)
+
+[动态技能加载与有界控制：业务实验入口](docs/dynamic-skill-loading-business-playbook.zh-CN.md) — Research branch: protocols and synthetic examples, no model or business validation.
