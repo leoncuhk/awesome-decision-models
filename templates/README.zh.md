@@ -45,7 +45,6 @@
 
 领域评测、训练支持核查与未知／澄清策略见[图片意图适配流程](docs/selection-guide.md#image-intent-adaptation)。先看[多模态后训练一页入口](docs/multimodal-decision-finetuning.zh-CN.md#quick-route)，再深入同条件对照、候选门槛及[分层学术阅读清单](docs/multimodal-decision-finetuning.zh-CN.md#reading-list)。
 
-M5 Pro 48 GB、图片＋意图及待补历史的实施与科学验证统一整合到[原多模态主指南](docs/multimodal-decision-finetuning.zh-CN.md#mac-implementation)：Qwen3.5-4B 优先验证与 2B 回退依据、划分预算、短标签分数、业务成本验收与分阶段科研。[10 月 26 日来源核验](updates/2026-10-26-multimodal-training-and-evidence.md)保留历史身份，不再新增实施报告。
 
 执行细节：[分组划分协议](docs/multimodal-decision-finetuning.zh-CN.md#split-protocol)、[最小实验矩阵](docs/multimodal-decision-finetuning.zh-CN.md#experiment-matrix)、[结果记录与停止决定](docs/multimodal-decision-finetuning.zh-CN.md#result-template)。
 
@@ -53,7 +52,7 @@ M5 Pro 48 GB、图片＋意图及待补历史的实施与科学验证统一整�
 
 [读出与自适应推理比较](docs/decision-readout-and-reasoning.md)区分 StartLux Instant／AutoThink、D3、Decider v1.1 与托管 Jev，并分开训练／服务和公共／独立证据。
 
-科研主线见[原指南研究章节](docs/multimodal-decision-finetuning.zh-CN.md#research-agenda)：先诊断规则变化下的状态压缩／有成本补证，联合风险仅留高难度备选；包含 prior art、强基线、反证与停止门槛，尚无已确立原创或实验结果。[10 月 22 日调研](docs/multimodal-decision-research-survey-2026-10-22.md)及[旧协议](docs/multimodal-decision-research-protocol.md)保留历史身份。
+科研立项：[10 月 22 日调研完整转换](docs/multimodal-decision-research-survey-2026-10-22.md)与[可证伪实验协议](docs/multimodal-decision-research-protocol.md)，覆盖 MIRE 数据获取边界、新颖性逐项比较、异质修复动作与停止条件。这些是研究规划，不是复现结果。
 
 零样本分类、专项微调与 Best-of-N 选择不是同一个问题。本地 GPU 前向耗时与远程 API 往返耗时，也不是同一种性能测量。
 
@@ -110,3 +109,9 @@ python3 -m unittest discover -s tests -v
 原创代码与整理文字使用 [MIT](LICENSE)；链接的项目、模型、数据与论文保留各自许可证。固定来源文档的提交版本，**不等于**固定模型权重。
 
 [10月25日每周核查](updates/2026-10-25-weekly-review.md)补入联合请求发布、有边界的重复读取／拒答证据及训练／部署修正。
+
+[11月13日更新：机制变化、应用净效用与证据边界](updates/2026-11-13-jev-utility.md).
+
+[11月13日Google最新发布补充](updates/2026-11-13-google-decision.md).
+
+[分支审查与应用意图](docs/branch-review-2026-11-13.md)

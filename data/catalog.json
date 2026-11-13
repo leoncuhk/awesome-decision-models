@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "reviewed_on": "2026-10-28",
+  "reviewed_on": "2026-11-13",
   "scope": "Evidence-backed models, methods and evaluation for bounded decisions in AI systems.",
   "sources": [
     {
@@ -2822,6 +2822,306 @@
       "review_depth": "content_reviewed",
       "source_revision": "c950900359fecd892e0a51cc7e828f83d425e290",
       "review_note": "Pinned README describes transcript-based semantic turn detection layered on acoustic signals, state machine, limitations and author spike checks. Integration example, not independently validated large production A/B. No code executed."
+    },
+    {
+      "id": "jev-judgment-nov03",
+      "title": "Judgments and code-owned decisions",
+      "url": "https://typesafe.ai/blog/dont-call-it-a-decision-model",
+      "kind": "official_publication",
+      "reviewed_on": "2026-11-13",
+      "review_depth": "content_reviewed",
+      "source_revision": null,
+      "review_note": "Nov3 vendor architecture guidance; not a new checkpoint or measured deployment uplift."
+    },
+    {
+      "id": "jev-changelog-nov13",
+      "title": "Jev model changelog checked November13",
+      "url": "https://docs.typesafe.ai/changelog",
+      "kind": "official_docs",
+      "reviewed_on": "2026-11-13",
+      "review_depth": "content_reviewed",
+      "source_revision": null,
+      "review_note": "Latest listed entry in this review remains Jev1.14, October14. Absence of another entry is not proof that every serving component is unchanged."
+    },
+    {
+      "id": "relevance-calibration-nov08",
+      "title": "Beyond Ranking: calibrated relevance scoring",
+      "url": "https://arxiv.org/html/2611.11480v1",
+      "kind": "paper",
+      "reviewed_on": "2026-11-13",
+      "review_depth": "content_reviewed",
+      "source_revision": null,
+      "review_note": "Version1 full-text protocol/results/limitations sections reviewed; linked code and raw outputs not independently audited; no inference run."
+    },
+    {
+      "id": "system1-audit-nov09",
+      "title": "System1 perturbation and question-interference audit",
+      "url": "https://arxiv.org/html/2611.12521v1",
+      "kind": "paper",
+      "reviewed_on": "2026-11-13",
+      "review_depth": "content_reviewed",
+      "source_revision": null,
+      "review_note": "Version1 full-text protocol/results/limitations sections reviewed; linked code and raw outputs not independently audited; no inference run."
+    },
+    {
+      "id": "conflict-typing-oct27",
+      "title": "Decision models for RAG conflict typing",
+      "url": "https://arxiv.org/html/2610.36915v1",
+      "kind": "paper",
+      "reviewed_on": "2026-11-13",
+      "review_depth": "content_reviewed",
+      "source_revision": null,
+      "review_note": "Version1 full-text protocol/results/limitations sections reviewed; linked code and raw outputs not independently audited; no inference run."
+    },
+    {
+      "id": "entity-matching-oct25",
+      "title": "Entity matching using decision models",
+      "url": "https://arxiv.org/html/2610.34626v1",
+      "kind": "paper",
+      "reviewed_on": "2026-11-13",
+      "review_depth": "content_reviewed",
+      "source_revision": null,
+      "review_note": "Version1 full-text protocol/results/limitations sections reviewed; linked code and raw outputs not independently audited; no inference run."
+    },
+    {
+      "id": "time-series-oct24",
+      "title": "Jev time-series decision benchmark",
+      "url": "https://arxiv.org/html/2610.33410v1",
+      "kind": "paper",
+      "reviewed_on": "2026-11-13",
+      "review_depth": "content_reviewed",
+      "source_revision": null,
+      "review_note": "Version1 full-text protocol/results/limitations sections reviewed; linked code and raw outputs not independently audited; no inference run."
+    },
+    {
+      "id": "google-decision-launch",
+      "title": "Gemini Decisions API launch",
+      "url": "https://blog.google/innovation-and-ai/technology/developers-tools/gemini-decisions-api/",
+      "kind": "official_publication",
+      "reviewed_on": "2026-11-13",
+      "review_depth": "content_reviewed",
+      "source_revision": null,
+      "review_note": "November11 launch. Vendor benchmark/calibration and internal deployment claims; no item-level artifacts or independent production audit inspected."
+    },
+    {
+      "id": "google-decision-changelog",
+      "title": "Gemini API November11 release notes",
+      "url": "https://aistudio.google.com/docs/changelog",
+      "kind": "official_docs",
+      "reviewed_on": "2026-11-13",
+      "review_depth": "content_reviewed",
+      "source_revision": null,
+      "review_note": "November11 entry confirms gemini-decision-1 and Decisions API release. Original ai.google.dev URL redirects here."
+    },
+    {
+      "id": "google-decision-model",
+      "title": "Gemini Decision1 model specification",
+      "url": "https://aistudio.google.com/docs/models/gemini-decision-1",
+      "kind": "official_docs",
+      "reviewed_on": "2026-11-13",
+      "review_depth": "content_reviewed",
+      "source_revision": null,
+      "review_note": "Input modalities, context and question limits, unsupported capabilities reviewed. API model identifier is not a weight hash."
+    },
+    {
+      "id": "google-decision-guide",
+      "title": "Gemini Decisions API guide",
+      "url": "https://aistudio.google.com/docs/decisions-api",
+      "kind": "official_docs",
+      "reviewed_on": "2026-11-13",
+      "review_depth": "content_reviewed",
+      "source_revision": null,
+      "review_note": "Typed outputs, confidence formula, isolation, error semantics, media and request limits reviewed. No SDK or API execution."
+    },
+    {
+      "id": "google-decision-pricing",
+      "title": "Gemini Decision1 pricing",
+      "url": "https://aistudio.google.com/docs/pricing#gemini-decision",
+      "kind": "official_docs",
+      "reviewed_on": "2026-11-13",
+      "review_depth": "content_reviewed",
+      "source_revision": null,
+      "review_note": "Decision-specific Standard table and billing semantics reviewed November13; excludes full application cost."
+    },
+    {
+      "id": "strands-pointer-oct26",
+      "title": "Strands: retire slot heads and require explicit frozen pointer KL reference",
+      "url": "https://github.com/strands-labs/strands-decider/commit/13c05149265dc404c09d2469636f71b1320e1713",
+      "kind": "repository",
+      "reviewed_on": "2026-11-01",
+      "review_depth": "content_reviewed",
+      "source_revision": "13c05149265dc404c09d2469636f71b1320e1713",
+      "review_note": "Merged modeling/training/collator/compatibility patches reviewed. Pointer has been current since v19: removal of old fixed SlotHead is cleanup, not a new checkpoint. Current loader rejects explicit slot configs; historical pointer tensors under slot_head.pt can still load with warning. Frozen KL is retained only with explicit trained pointer reference, precomputation and length grouping; no base-LM numeric-token fallback. No training executed or weight gain inferred."
+    },
+    {
+      "id": "strands-mlx-oct30",
+      "title": "Strands: keep Gemma4 MLX loading and execution on one owned worker",
+      "url": "https://github.com/strands-labs/strands-decider/commit/13faf5214f7cbea07d005278f1aeaf3973611eba",
+      "kind": "repository",
+      "reviewed_on": "2026-11-01",
+      "review_depth": "content_reviewed",
+      "source_revision": "13faf5214f7cbea07d005278f1aeaf3973611eba",
+      "review_note": "Engine/server patches reviewed. MLX lazy arrays and stream ownership now remain on the same worker, correcting no Stream(gpu, 1) in current thread during FastAPI sync serving. Shutdown closes worker; torch paths unchanged. Upstream tests were read, not run here. Serving correctness, not new weights or measured accuracy."
+    },
+    {
+      "id": "prism-instant-oct25",
+      "title": "Prism: bidirectional Instant GGUF path and independent question rows",
+      "url": "https://github.com/StartLuxLabs/StartLux-Prism/commit/cb700d0237ea37dad1772548f1f150dd4fc76b0b",
+      "kind": "repository",
+      "reviewed_on": "2026-11-01",
+      "review_depth": "content_reviewed",
+      "source_revision": "cb700d0237ea37dad1772548f1f150dd4fc76b0b",
+      "review_note": "Instant implementation/README/serving changes inspected: v1.1 4B/9B/27B, Q8_0/W4A8; full attention noncausal, linear attention/convolutions causal. Each question repeats the full prompt; no shared evidence/prefix cache. Instant rejects thought generation. Runtime capability, not new weights. Small public-suite author parity checks are not full calibration or general BF16 equivalence."
+    },
+    {
+      "id": "prism-mxfp4-oct27",
+      "title": "Prism: MXFP4 deferred-residual batch-invariance correction",
+      "url": "https://github.com/StartLuxLabs/StartLux-Prism/commit/35d118d80dbe850d656efb409b2f475c84968e34",
+      "kind": "repository",
+      "reviewed_on": "2026-11-01",
+      "review_depth": "content_reviewed",
+      "source_revision": "35d118d80dbe850d656efb409b2f475c84968e34",
+      "review_note": "Patch and author regression description inspected. A folded pending residual was added twice in split-K/body execution, harming small batches while high concurrency hid it. Internal post-fix bit invariance differs from BF16 probability parity and empirical calibration. No speed or accuracy multiplier generalized; no external code executed."
+    },
+    {
+      "id": "prism-serving-nov1",
+      "title": "Prism current serving: quantization and model-specific execution boundaries",
+      "url": "https://github.com/StartLuxLabs/StartLux-Prism/blob/ef28f6f8d1b19f1336eafe418f26b96d053e8f76/docs/serving.md",
+      "kind": "official_docs",
+      "reviewed_on": "2026-11-01",
+      "review_depth": "content_reviewed",
+      "source_revision": "ef28f6f8d1b19f1336eafe418f26b96d053e8f76",
+      "review_note": "Serving guide/README reviewed. FP8 KV requires sm89+ and excludes attn-qk8; MXFP4 remains opt-in. AutoThink shared-state execution and Instant complete-row execution are distinct. Quantization activation calibration is not probability calibration; reviewed support/tests do not establish all precision/hardware/context behavior."
+    },
+    {
+      "id": "drex-max-release-oct30",
+      "title": "Drex Max v1: dense 27B release, independent code-readout rows and evaluation scope",
+      "url": "https://github.com/nace-ai/drex-decision-models/blob/e206b278e3988ad1b58e6f1556b559a65947a4e6/models/drex-max-v1/README.md",
+      "kind": "model_card",
+      "reviewed_on": "2026-11-01",
+      "review_depth": "content_reviewed",
+      "source_revision": "e206b278e3988ad1b58e6f1556b559a65947a4e6",
+      "review_note": "Release README, drex_max/model.py and model license inspected. Dense nominal27B with biasless255-code readout; full-attention noncausal/linear recurrent layers causal. CUDA supports images, Mac routes text-only. Default16384 versus configurable262144 is not full-context quality evidence. Training/calibration data and overlap audit not established. Author public text score (as of Oct19) is not private Full0.4 or a new independent evaluation. Modified Nace OpenRAIL-M retains commercial/competitor restrictions."
+    },
+    {
+      "id": "drex-max-hf-oct30",
+      "title": "Drex Max HF snapshot: repository identity, not verified tensor hash",
+      "url": "https://huggingface.co/nace-ai/drex-max-v1/tree/a67fa2808b5d91a4db62629beb14eba6d3f3e53c",
+      "kind": "model_card",
+      "reviewed_on": "2026-11-01",
+      "review_depth": "metadata_only",
+      "source_revision": "a67fa2808b5d91a4db62629beb14eba6d3f3e53c",
+      "review_note": "Public API snapshot/file metadata inspected:11 backbone safetensors shards plus readout. Source revision does not identify a locally hashed weight file or prove equality with evaluation-time bytes. No tensors downloaded."
+    },
+    {
+      "id": "drex-max-kapitsa-oct30",
+      "title": "Kapitsa Drex Max: failed probability-parity gate and unrun long-row checks",
+      "url": "https://github.com/nace-ai/kapitsa/blob/dd1a80963dd36023a9889e26214030c2a98214c2/docs/drex-max.md",
+      "kind": "official_docs",
+      "reviewed_on": "2026-11-01",
+      "review_depth": "content_reviewed",
+      "source_revision": "dd1a80963dd36023a9889e26214030c2a98214c2",
+      "review_note": "Full limitation/parity/context sections inspected. Q8 GGUF to native affine conversion changes representation; do not infer bit identity. Native-path author max probability drift 0.0329 exceeds declared 0.02 gate despite no answer flips; path does not pass parity gate. Long-row reference parity and conditional 32k run not done. On 48GB, 128k/262k scratch excluded before weights. No state cache; state cost repeats per question. The separate Q4 21-field/M5Pro48GB/context2048 check is from drex-max-q4-card-oct30, not this document."
+    },
+    {
+      "id": "jev-models-nov1",
+      "title": "Jev versioned IDs, aliases and experimental long context",
+      "url": "https://docs.typesafe.ai/models",
+      "kind": "official_docs",
+      "reviewed_on": "2026-11-01",
+      "review_depth": "content_reviewed",
+      "source_revision": null,
+      "review_note": "Current models page read Nov1:1.14 released Oct14, latest/preview currently alias1.14.0. This corrects omitted prior release coverage, not a new Nov1 weight claim. Pin/log versioned IDs when using tuned thresholds. Default64k/request32k/question; opt-in262k explicitly slower/less accurate. Public docs do not expose hosted weight hashes. Document snapshot SHA2561c56aeadeec0225beccef214dd2f0b4b47d6a0e0d53c356aac46290f9053146c is text, not weights."
+    },
+    {
+      "id": "jev-images-nov1",
+      "title": "Jev experimental image/Box input contract and production caveats",
+      "url": "https://docs.typesafe.ai/images",
+      "kind": "official_docs",
+      "reviewed_on": "2026-11-01",
+      "review_depth": "content_reviewed",
+      "source_revision": null,
+      "review_note": "Current full image docs read. Image danger-zone header required; vendor explicitly says below production standards, format/accuracy/limits may change.1.13/1.14 accept images, Box requires1.14; no audio/video. An experimental endpoint contract is not validated image quality or general calibration. Text SHA256cacc916cf2f5cc79a4be9094bf9ec339649a1a77123e101bfee1085d3da260bc."
+    },
+    {
+      "id": "vllm-request-trust-oct29",
+      "title": "vLLM: enforce request-template trust before structured-decision admission",
+      "url": "https://github.com/vllm-project/vllm/commit/51be9ea6a3a356b42e3b72a0fc6e8cb8c8975944",
+      "kind": "repository",
+      "reviewed_on": "2026-11-01",
+      "review_depth": "content_reviewed",
+      "source_revision": "51be9ea6a3a356b42e3b72a0fc6e8cb8c8975944",
+      "review_note": "Documentation/serving/test patches read. /v1/systemone now rejects request-provided chat_template_kwargs.chat_template by default with400 before model admission; trusted-server opt-in is separate from ordinary kwargs. No recommendation to enable it. Latest official release at review is v0.32.0 Oct18; fixed patch dates Oct29 and is not established as included in that release. D3 fixed prompt ignores template overrides; do not infer weight/calibration changes. No upstream test/model execution."
+    },
+    {
+      "id": "clef-eval-metadata-oct30",
+      "title": "Clef: safeagents evaluation YAML only, unchanged weight identities",
+      "url": "https://huggingface.co/Cloudflare/clef/commit/cfddda043dd190ef3b01cff449d5ee8cff1e8ec6",
+      "kind": "repository",
+      "reviewed_on": "2026-11-01",
+      "review_depth": "content_reviewed",
+      "source_revision": "cfddda043dd190ef3b01cff449d5ee8cff1e8ec6",
+      "review_note": "Full commit diff and parent/current recursive file metadata compared. Only .eval_results/safeagents-judge-bench.yaml is added; existing card/runtime/weight blob identifiers unchanged. Flash fb4417d31c1d0f9e7e77f1141b40aaede7491e00 similarly adds only evaluation YAML. Dataset protocol/raw run/provenance not audited here, so no scores or independence claim imported. Addition of benchmark metadata is not retraining or better accuracy."
+    },
+    {
+      "id": "typed-audit-v1",
+      "title": "Confidence Is Not a Promise: A Reference Audit of Typed Decision Models",
+      "url": "https://arxiv.org/html/2610.36311v1",
+      "kind": "paper",
+      "reviewed_on": "2026-11-01",
+      "review_depth": "content_reviewed",
+      "source_revision": null,
+      "review_note": "Read methods, empirical-population and new-item checks, limitations; source review, not reproduction."
+    },
+    {
+      "id": "typed-audit-code",
+      "title": "Typed deciders audit: fixed README and datasheet",
+      "url": "https://github.com/pcbrom/typed-deciders-audit/tree/8187f38fd4981f398d4e0e0d2291281ef5c58496",
+      "kind": "repository",
+      "reviewed_on": "2026-11-01",
+      "review_depth": "content_reviewed",
+      "source_revision": "8187f38fd4981f398d4e0e0d2291281ef5c58496",
+      "review_note": "README lists withheld Jev full vectors and analyses; DATASHEET describes reduced answers. Did not retrieve Zenodo archive or run scripts."
+    },
+    {
+      "id": "dfip-v1",
+      "title": "DFIP: Decision-Focused Inference Path for System One Models",
+      "url": "https://arxiv.org/html/2610.36804v1",
+      "kind": "paper",
+      "reviewed_on": "2026-11-01",
+      "review_depth": "content_reviewed",
+      "source_revision": null,
+      "review_note": "Read paired native baselines, output/serving audits, failures, limitations and artifact identity."
+    },
+    {
+      "id": "dfip-analysis",
+      "title": "DFIP frozen analysis and research preview",
+      "url": "https://github.com/superagent-ai/dfip/tree/f2eef1746e5e39b92827759344d4ef47410fc464",
+      "kind": "repository",
+      "reviewed_on": "2026-11-01",
+      "review_depth": "content_reviewed",
+      "source_revision": "f2eef1746e5e39b92827759344d4ef47410fc464",
+      "review_note": "Frozen analysis revision, not one execution commit. README inspected; no GPU or CPU reproduction run. Modal usage would incur cost."
+    },
+    {
+      "id": "dice-v1",
+      "title": "Decision-Native Recommendation with Large Language Models",
+      "url": "https://arxiv.org/html/2610.34124v1",
+      "kind": "paper",
+      "reviewed_on": "2026-11-01",
+      "review_depth": "content_reviewed",
+      "source_revision": null,
+      "review_note": "Read method and evaluation appendices; anonymous code link was not audited. Main recommendation uses supervised Qwen3-0.6B, not a general released decider."
+    },
+    {
+      "id": "drex-max-q4-card-oct30",
+      "title": "Drex Max affine Q4: separate 21-field short-context Mac check",
+      "url": "https://huggingface.co/nace-ai/drex-max-v1-affine-q4/blob/e7d0c597706239a015608c06dfe0951197e95096/README.md",
+      "kind": "model_card",
+      "reviewed_on": "2026-11-01",
+      "review_depth": "content_reviewed",
+      "source_revision": "e7d0c597706239a015608c06dfe0951197e95096",
+      "review_note": "Fixed full card read: text-only affine4/group64, 24GB+ fit is author claim. Measured M5Pro48GB/macOS26.5.2/context2048 on Oct30: 21 probability fields versus recorded Q8 GGUF answers, max drift0.0329 Kapitsa and0.0356 MLX, no choice flip. This is a separate small Q4 comparison, not the Kapitsa native parity-gate experiment or broad calibration/context validation. Card-provided SHA256 values are not locally checked tensor bytes."
     }
   ],
   "entries": [
@@ -2841,21 +3141,25 @@
         "jev-confidence-oct28",
         "pocos-production-account-oct28",
         "taritas-turn-detection-oct28",
-        "agora-jev-vad-oct28"
+        "agora-jev-vad-oct28",
+        "jev-judgment-nov03",
+        "jev-changelog-nov13",
+        "jev-models-nov1",
+        "jev-images-nov1"
       ],
       "summary": {
         "en": "Hosted typed judgments: probabilities over supplied choices, propositions and ordinal rubrics.",
         "zh": "托管的结构化判断服务：对选项、命题与有序评分标准输出分布。"
       },
       "use": {
-        "en": "Managed typed-judgment comparator or frozen semantic-feature generator; compare supervised baselines under the same task and label policy.",
-        "zh": "可作为托管类型化判断对照或冻结的语义特征提取器；与监督基线比较时统一任务与标签规则。"
+        "en": "Managed typed-judgment comparator or frozen semantic-feature generator; compare supervised baselines under the same task and label policy. Keep deterministic business rules in code; separately validate semantic judgments.",
+        "zh": "可作为托管类型化判断对照或冻结的语义特征提取器；与监督基线比较时统一任务与标签规则。 确定性业务规则由代码执行，语义判断单独验证。"
       },
       "caveat": {
         "en": "RLCD is vendor-described; the full training recipe is not public. Valid schemas and confidence fields do not establish semantic reliability. Experimental image support is not production readiness; CJK needs its own evaluation. Author deployment stories/smoke checks do not establish a large independently auditable randomized KPI A/B.",
         "zh": "RLCD 的完整训练配方未公开；格式合法与置信度字段不等于语义可靠。 实验图片支持不等于生产成熟，CJK 须另测；作者生产案例／smoke 不构成可独立核验的大规模随机 KPI A/B。"
       },
-      "reviewed_on": "2026-10-28",
+      "reviewed_on": "2026-11-13",
       "mechanism": {
         "en": "Proprietary model. Choice/Score confidence summarizes the returned distribution; it is not a separate probability-of-correctness estimate. Noul returns P(yes) with no separate confidence field. Question IDs are not model input; each instruction must be complete. Same-request answers are documented as independent; dependent evidence requires a later request. Question-context independence is not statistical independence of errors.",
         "zh": "专有模型。Choice／Score 的 confidence 是返回分布的统计量，并非独立预测的正确概率；Noul 返回 P(yes)，没有单独 confidence 字段。 文档称问题 ID 不送入模型，instructions 须写完整；同请求答案互不作为上下文，依赖新证据的判断需后续请求。 问题上下文互不读取不等于误差在统计上独立。"
@@ -2865,8 +3169,8 @@
         "zh": "官方称采用 RLCD；不支持客户自助权重微调／LoRA，state／instructions 定制不是权重适配；独立受控训练消融仍未确立。"
       },
       "availability": {
-        "en": "Hosted API, no verified public weights. Oct28 docs list current 1.14; default interface is text, while images are experimental/off by default with TypeSafe-Danger-Zone-Images:true on 1.13/1.14; Box requires 1.14. No image request tested here.",
-        "zh": "托管 API，未核实公开权重。10 月 28 日文档列当前 1.14；默认接口为文本，1.13／1.14 图片实验入口默认关闭，需 TypeSafe-Danger-Zone-Images:true，Box 需 1.14。本次未发图像请求。"
+        "en": "Hosted API; version1.14 dates Oct14, with latest/preview currently aliasing1.14.0. Pin/log the returned version for tuned policies. No public weights verified. Default64k request/32k per question; opt-in262k is explicitly slower/less accurate. Images/Box require experimental opt-in and are below vendor production standards; Box requires1.14. No audio/video. This availability snapshot was reviewed November1; November13 changelog still lists1.14 as the latest release. No media request run here.",
+        "zh": "托管 API；1.14 发布于10月14日，latest／preview 当前指向1.14.0，已调策略应固定并记录返回版本。未核公开权重。默认每请求64k／每题32k；实验262k明确更慢／更不准确。图像／Box需实验开关且低于厂商生产标准，Box需1.14；无音频／视频。 上述可用性快照核查于11月1日；11月13日changelog仍列1.14为最新发布。本次未执行媒体请求。"
       },
       "license_note": "Commercial service terms; no open-weight license implied.",
       "weight_revision": null,
@@ -3232,7 +3536,8 @@
         "clef-hosted",
         "clef-community-training",
         "clef-community-status",
-        "mlx-vlm-clef-inference-oct27"
+        "mlx-vlm-clef-inference-oct27",
+        "clef-eval-metadata-oct30"
       ],
       "summary": {
         "en": "Multimodal Qwen backbones with a joint schema head for typed decisions and a Jev/SystemOne-compatible wrapper.",
@@ -3246,7 +3551,7 @@
         "en": "Vendor benchmarks have task-specific trade-offs. API compatibility and probability outputs do not establish calibrated business risk; local inference needs the custom schema runtime. Community adaptation is experimental; real-weight multimodal training/export remains unverified.",
         "zh": "厂商评测存在任务间取舍；接口兼容和概率输出不等于业务风险已校准，本地推理需要定制 schema 运行代码。 社区适配属于实验实现，真实权重多模态训练／导出尚未验证。"
       },
-      "reviewed_on": "2026-10-27",
+      "reviewed_on": "2026-11-01",
       "mechanism": {
         "en": "Joint transformer head routes state evidence to questions and jointly scores their allowed options in one forward pass; no free-form answer generation.",
         "zh": "联合 Transformer 判断头把状态证据路由到问题，在一次前向计算中对各题允许的选项评分，不生成自由文本答案。"
@@ -3297,7 +3602,9 @@
         "strands-request-offsets",
         "strands-serving-eval",
         "strands-v1-configs",
-        "strands-init-from-oct19"
+        "strands-init-from-oct19",
+        "strands-pointer-oct26",
+        "strands-mlx-oct30"
       ],
       "summary": {
         "en": "Qwen3.5 and Gemma 4 pointer-head family; October v1 releases average three trained adapters/heads and then calibrate.",
@@ -3311,18 +3618,18 @@
         "en": "Five v1 seed-0 configs are now public, but Qwen mix builders/four inputs plus teacher distributions and Gemma code_v27 remain missing. Several dev evaluations have train splits in the mix. E2B index predates a CUDA attention fix; Qwen v1 missing-image overconfidence worsens on POPE. E07/E08 remain historical, not current guarantees.",
         "zh": "已公开五份 v1 seed-0 配置，但 Qwen 混合构建器／四项输入及教师分布、Gemma code_v27 仍缺失。若干 dev 评测对应训练划分已用于训练。E2B index 先于 CUDA 注意力修复；Qwen v1 缺图时 POPE 过度自信恶化。E07／E08 保留为历史，不能当作当前保证。"
       },
-      "reviewed_on": "2026-10-25",
+      "reviewed_on": "2026-11-01",
       "mechanism": {
         "en": "Replaces the language-model head with a dynamic pointer readout comparing the answer-position state to option-token states; one forward pass for noul, choice or score. Confidence is derived from the distribution, not a separate correctness predictor.",
         "zh": "以动态 pointer 读出替代语言模型输出头，比较答案位置与选项 token 的隐状态，一次前向计算支持 noul、choice、score。置信度由分布推导，并非独立正确率预测器。"
       },
       "training": {
-        "en": "Qwen v1: 246678 balanced rows, Gemma-4-31B teacher and v19 KL anchor. Gemma v1: 135602 rows, Qwen3.5-4B teacher and v19 anchor. Three-seed soups store rank-48 LoRA plus three readouts; recipes differ by family. Published seed-0 settings and input hashes improve traceability, not complete data replay. Oct19 init_from now continues trained text adapter+head, including soups, enforces checkpoint architecture and resets temperatures; recalibrate after adaptation. Vision load explicitly rejects training. No new adapted-model quality result.",
-        "zh": "Qwen v1：246678 条平衡样本、Gemma-4-31B 教师与 v19 KL 锚点。Gemma v1：135602 条样本、Qwen3.5-4B 教师与 v19 锚点。三种子平均保存 rank-48 LoRA 与三个读出头；不同系列配方不同。 公开 seed-0 设置与输入哈希改善可追溯性，不等于完整数据可重放。 10 月 19 日 init_from 改为继续训练已训文本 adapter＋head（含 soup），强制匹配架构并清空温度，适配后须重校准；视觉加载明确拒绝训练，未新增适配效果证据。"
+        "en": "Qwen v1: 246678 balanced rows, Gemma-4-31B teacher and v19 KL anchor. Gemma v1: 135602 rows, Qwen3.5-4B teacher and v19 anchor. Three-seed soups store rank-48 LoRA plus three readouts; recipes differ by family. Published seed-0 settings and input hashes improve traceability, not complete data replay. Oct19 init_from now continues trained text adapter+head, including soups, enforces checkpoint architecture and resets temperatures; recalibrate after adaptation. Vision load explicitly rejects training. No new adapted-model quality result. Oct26 pointer-only code retires old slot configs; positive frozen-KL training requires an explicit trained pointer reference, precomputation and length grouping. This is compatibility/training-contract cleanup, not new released weights.",
+        "zh": "Qwen v1：246678 条平衡样本、Gemma-4-31B 教师与 v19 KL 锚点。Gemma v1：135602 条样本、Qwen3.5-4B 教师与 v19 锚点。三种子平均保存 rank-48 LoRA 与三个读出头；不同系列配方不同。 公开 seed-0 设置与输入哈希改善可追溯性，不等于完整数据可重放。 10 月 19 日 init_from 改为继续训练已训文本 adapter＋head（含 soup），强制匹配架构并清空温度，适配后须重校准；视觉加载明确拒绝训练，未新增适配效果证据。 10 月26日仅保留 pointer，退役旧 slot 配置；正权重 frozen-KL 需显式已训练 pointer 参考、预计算及长度分组。这是兼容／训练契约整理，不是新权重。"
       },
       "availability": {
-        "en": "Current Qwen: strands-decider-2B-qwen3.5-v1-2610; four Gemma v1 sizes are text-only and need runtime main at the reviewed revision. Separate base weights; 4096-token trained/served window. v19/v21 remain published. Oct16 main fixes request-local pointer offsets/tokenizer concurrency and aligns torch eval/calibrate with serving preparation; MLX is not supported by eval/calibrate. Revalidate probabilities/calibration per backend; no new weight/score claim.",
-        "zh": "当前 Qwen 为 strands-decider-2B-qwen3.5-v1-2610；四种 Gemma v1 仅文本，所核版本需运行库 main。另需基座权重，训练／服务窗口 4096 token；v19／v21 继续发布。 10 月 16 日 main 修复每请求 pointer 偏移／分词并发，并让 torch 评测／校准使用服务准备流程；eval／calibrate 不支持 MLX。按后端重验概率／校准，不推断新权重或成绩。"
+        "en": "Current Qwen: strands-decider-2B-qwen3.5-v1-2610; four Gemma v1 sizes are text-only and need runtime main at the reviewed revision. Separate base weights; 4096-token trained/served window. v19/v21 remain published. Oct16 main fixes request-local pointer offsets/tokenizer concurrency and aligns torch eval/calibrate with serving preparation; MLX is not supported by eval/calibrate. Revalidate probabilities/calibration per backend; no new weight/score claim. Oct30 Gemma4 MLX serving fixes stream/thread ownership by loading and running on one worker; this does not add MLX calibration support or a quality result.",
+        "zh": "当前 Qwen 为 strands-decider-2B-qwen3.5-v1-2610；四种 Gemma v1 仅文本，所核版本需运行库 main。另需基座权重，训练／服务窗口 4096 token；v19／v21 继续发布。 10 月 16 日 main 修复每请求 pointer 偏移／分词并发，并让 torch 评测／校准使用服务准备流程；eval／calibrate 不支持 MLX。按后端重验概率／校准，不推断新权重或成绩。 10 月30日 Gemma4 MLX 服务将加载／推理固定在同一 worker，修复 stream／线程错误；不代表新增 MLX 校准支持或质量结果。"
       },
       "license_note": "Repository and published adapter/head declare Apache-2.0. The release contains adapter/head files only; base weights load separately. Check base-model and dataset terms separately.",
       "weight_revision": null,
@@ -4037,11 +4344,60 @@
       ]
     },
     {
+      "id": "gemini-decision-1",
+      "name": "Google Gemini Decision 1 / Decisions API",
       "category": "core_models",
-      "reviewed_on": "2026-10-25",
-      "weight_revision": "v2.0 HF nace-ai/drex-v2.0@3e6d164cb5c8cf264eec167905cc2448d89ea97d (published LFS identities; tensor bytes not locally verified; v1.5 remains unpinned)",
+      "url": "https://aistudio.google.com/docs/models/gemini-decision-1",
+      "source_ids": [
+        "google-decision-launch",
+        "google-decision-changelog",
+        "google-decision-model",
+        "google-decision-guide",
+        "google-decision-pricing"
+      ],
+      "reviewed_on": "2026-11-13",
+      "weight_revision": null,
+      "license_note": "Proprietary hosted Gemini Developer API; no public model-weight license established.",
+      "tags": [
+        "typed-decisions",
+        "hosted",
+        "multimodal"
+      ],
+      "summary": {
+        "en": "November11 hosted model for text, image, audio, video and PDF judgments with shared-input isolated questions.",
+        "zh": "11月11日发布的托管模型，支持文本、图像、音频、视频和PDF判断，在共享输入上隔离各问题。"
+      },
+      "use": {
+        "en": "Compare multimodal triage, media policy checks and routing at fixed evidence, risk and complete cost.",
+        "zh": "在相同证据、风险约束和完整成本下比较多模态分流、媒体规则检查与路由。"
+      },
+      "caveat": {
+        "en": "Calibration, speed and internal deployments are vendor-reported. Confidence is top-outcome probability, not independent reliability evidence. Safety blocks return HTTP400; no cache or Batch API.",
+        "zh": "校准、速度及内部部署由厂商报告；confidence为最高选项概率，不是独立可靠性证据。安全拦截返回HTTP400；无缓存或Batch API。"
+      },
+      "scale": {
+        "en": "Parameter count and public weight identity not established by reviewed official material.",
+        "zh": "所核官方资料未确立参数量或公开权重身份。"
+      },
+      "mechanism": {
+        "en": "Single-prefill noul/choice/score judgments; confidence equals top-outcome probability (max(p,1-p) for noul), unlike an entropy statistic. Score is the expected zero-based rubric index. Documented question isolation is not statistical independence of errors.",
+        "zh": "单次prefill输出noul／choice／score；confidence等于最高选项概率（noul为max(p,1-p)），不是熵统计量。score为从0起的rubric索引期望。文档问题隔离不等于错误统计独立。"
+      },
+      "training": {
+        "en": "Proprietary; no independently audited training mixture, calibration split or contamination analysis obtained.",
+        "zh": "专有模型；未取得独立审计的训练混合、校准划分或污染分析。"
+      },
+      "availability": {
+        "en": "Gemini Developer API v1beta, model gemini-decision-1; up to1000 questions and262144 tokens total. Paid input $0.10/M tokens as reviewed November13; shared input once/request plus question tokens, zero output tokens; no cross-request caching.",
+        "zh": "Gemini Developer API v1beta，模型gemini-decision-1；最多1000题，总上下文262144 tokens。11月13日核价为输入$0.10/百万tokens；每请求共享输入计一次，题目token另计、输出0 tokens，无跨请求缓存。"
+      }
+    },
+    {
+      "category": "core_models",
+      "reviewed_on": "2026-11-01",
+      "weight_revision": "v2.0 HF nace-ai/drex-v2.0@3e6d164cb5c8cf264eec167905cc2448d89ea97d (published LFS identities; tensor bytes not locally verified; v1.5 remains unpinned); Max HF repository a67fa2808b5d91a4db62629beb14eba6d3f3e53c (metadata only; evaluated tensor equality unverified)",
       "id": "drex",
-      "name": "Nace Drex v1.5 / v2.0",
+      "name": "Nace Drex v1.5 / v2.0 / Max v1",
       "url": "https://github.com/nace-ai/drex-decision-models",
       "source_ids": [
         "drex-release",
@@ -4053,42 +4409,48 @@
         "drex-v2-runtime",
         "drex-v2-license",
         "drex-apple-oct23",
-        "kapitsa-systemone-v0215"
+        "kapitsa-systemone-v0215",
+        "drex-max-release-oct30",
+        "drex-max-hf-oct30",
+        "drex-max-kapitsa-oct30",
+        "drex-max-q4-card-oct30"
       ],
       "summary": {
-        "en": "Text-only Kev-pointer family: v1.5 uses MiMo-V2.6-Distill-Qwen-9B; v2.0 uses the Qwen3.6-35B-A3B language tower.",
-        "zh": "仅文本 Kev pointer 系列：v1.5 使用 MiMo-V2.6-Distill-Qwen-9B，v2.0 使用 Qwen3.6-35B-A3B 的语言骨干。"
+        "en": "Drex family: text pointer-head v1.5/v2.0 and dense 27B multimodal Max v1 with a fixed 255-code readout.",
+        "zh": "Drex 系列：文本 pointer-head v1.5／v2.0，加上独立 255-code 读出的多模态 dense 27B Max v1。"
       },
       "use": {
-        "en": "Local candidate for text/JSON decisions, including long inputs.",
-        "zh": "本地文本／JSON 判断候选，可测试长输入。"
+        "en": "Compare local text/JSON decisions and Max CUDA image judgments; match precision, readout, evidence and context before comparing releases.",
+        "zh": "比较本地文本／JSON 与 Max CUDA 图像判断；跨版本比较须匹配精度、读出、证据和上下文。"
       },
       "caveat": {
-        "en": "v1.5 uses benchmark training splits; its results are not unseen-domain zero-shot. Public Index 0.3.1 leaders fall inside its tie band. Small runner checks do not establish broad parity. v2.0 JevBench author counts trail Jev 1.13.0 by two items (E32); this is not a significance result or a universal win. Current snapshot is not proven identical to evaluated weights.",
-        "zh": "v1.5 使用基准训练划分，其结果不能视为未知领域零样本；公开 Index 0.3.1 前列处于平局带内，小规模运行器核对不证明普遍等价。 v2.0 作者 JevBench 计数比 Jev 1.13.0 少两题（E32），不作显著性或普遍胜出结论；当前 snapshot 与实测权重未建立同一性。"
+        "en": "v1.5 uses benchmark training splits; its results are not unseen-domain zero-shot. Public Index 0.3.1 leaders fall inside its tie band. Small runner checks do not establish broad parity. v2.0 JevBench author counts trail Jev 1.13.0 by two items (E32); this is not a significance result or a universal win. Current snapshot is not proven identical to evaluated weights. Max public-only Index results are not private text Full0.4; retain the failed native probability-parity gate, not just stable categorical picks.",
+        "zh": "v1.5 使用基准训练划分，其结果不能视为未知领域零样本；公开 Index 0.3.1 前列处于平局带内，小规模运行器核对不证明普遍等价。 v2.0 作者 JevBench 计数比 Jev 1.13.0 少两题（E32），不作显著性或普遍胜出结论；当前 snapshot 与实测权重未建立同一性。 Max 仅公共 Index 结果不能当作私有文本 Full0.4；须保留原生路径概率等价未通过，不能只看选项未翻转。"
       },
       "scale": {
-        "en": "v1.5 approximately 9B; v2.0 author describes 35B total/~3B active, 256 experts/8 active. Active size is not resident weight memory; tensors not independently counted.",
-        "zh": "v1.5 约 9B；v2.0 作者称总量 35B／激活约 3B，256 专家中激活 8 个。激活规模不等于驻留权重内存，未独立统计张量。"
+        "en": "v1.5 approximately 9B; v2.0 author describes 35B total/~3B active, 256 experts/8 active. Active size is not resident weight memory; tensors not independently counted. Max v1 is nominal dense27B; a runtime docstring identifies Qwen3.8-27B, while release prose omits the base name. No independent tensor count.",
+        "zh": "v1.5 约 9B；v2.0 作者称总量 35B／激活约 3B，256 专家中激活 8 个。激活规模不等于驻留权重内存，未独立统计张量。 Max v1 名义 dense27B；运行库 docstring 称 Qwen3.8-27B，发布正文未列基座名，未独立统计张量。"
       },
       "mechanism": {
-        "en": "Pointer head scores supplied noul/choice/score options without generation, per question. v2.0 runtime extracts Qwen3_5Moe language_model and drops vision; hybrid questions are independent causal rows. Fork runtimes can share state prefixes.",
-        "zh": "pointer head 每题对给定 noul／choice／score 候选评分而不生成。v2.0 运行时提取 Qwen3_5Moe language_model 并舍弃视觉，混合骨干的各题为独立因果 row；分支运行库可共享状态前缀。"
+        "en": "Pointer head scores supplied noul/choice/score options without generation, per question. v2.0 runtime extracts Qwen3_5Moe language_model and drops vision; hybrid questions are independent causal rows. Fork runtimes can share state prefixes. Max differs: last-state biasless255-code head, noncausal full-attention and causal linear layers, a complete independent row per question; no shared state cache.",
+        "zh": "pointer head 每题对给定 noul／choice／score 候选评分而不生成。v2.0 运行时提取 Qwen3_5Moe language_model 并舍弃视觉，混合骨干的各题为独立因果 row；分支运行库可共享状态前缀。 Max 不同：最后状态经无偏置255-code头，full-attention双向而线性层因果；每题完整独立行，无共享状态缓存。"
       },
       "training": {
-        "en": "v1.5 discloses official benchmark training splits plus procedural data. Full v2.0 training/decontamination/calibration artifacts remain unverified; do not transfer v1.5 recipe details or temperatures to v2.0.",
-        "zh": "v1.5 披露使用官方基准训练划分加程序生成数据。完整 v2.0 训练／去污染／校准产物仍未核实，不能将 v1.5 配方细节或温度移植给 v2.0。"
+        "en": "v1.5 discloses official benchmark training splits plus procedural data. Full v2.0 training/decontamination/calibration artifacts remain unverified; do not transfer v1.5 recipe details or temperatures to v2.0. Max training data, overlap and calibration split remain undisclosed in reviewed material; do not inherit the v1.5/v2.0 recipe.",
+        "zh": "v1.5 披露使用官方基准训练划分加程序生成数据。完整 v2.0 训练／去污染／校准产物仍未核实，不能将 v1.5 配方细节或温度移植给 v2.0。 已阅 Max 资料未披露训练数据、重叠审计及校准划分，不能继承 v1.5／v2.0 配方。"
       },
       "availability": {
-        "en": "Python CUDA and Nace llama.cpp/Ollama forks; default state-plus-one-question limit 16384, configurable maximum 131072. v2.0 HF snapshot/card/config plus 16 shard and head LFS identities reviewed; no tensors downloaded or parity tested. Base vision packaging does not establish image input support. Oct23 Q4_K_M Apple path adds Kapitsa v0.2.15 shared-state branches/cache; defaults separately cap state, branch, packed request and sequence at 16384. Hardware-fit/short-ticket medians do not establish quantized decision quality, calibration or 131072-context accuracy.",
-        "zh": "Python CUDA 及 Nace llama.cpp／Ollama 分支；状态加一题默认上限 16384、可配置最大 131072。已核 v2.0 HF snapshot／卡／配置、16 分片及 head 的 LFS 标识，未下载张量或测试等价；基座视觉包装不证明支持图像输入。 10 月 23 日 Q4_K_M 苹果路径新增 Kapitsa v0.2.15 共享状态分支／缓存；状态、分支、整包及序列各默认限 16384。硬件可装载／短工单中位延迟不证明量化决策质量、校准或 131072 长度准确率。"
+        "en": "Python CUDA and Nace llama.cpp/Ollama forks; default state-plus-one-question limit 16384, configurable maximum 131072. v2.0 HF snapshot/card/config plus 16 shard and head LFS identities reviewed; no tensors downloaded or parity tested. Base vision packaging does not establish image input support. Oct23 Q4_K_M Apple path adds Kapitsa v0.2.15 shared-state branches/cache; defaults separately cap state, branch, packed request and sequence at 16384. Hardware-fit/short-ticket medians do not establish quantized decision quality, calibration or 131072-context accuracy. Max CUDA supports images; Mac GGUF/MLX/Kapitsa is text-only. Max default16384/configured262144 is not validated long-context quality. Kapitsa max probability drift0.0329 exceeds its0.02 parity gate despite no flips; long-row/32k reference checks remain unrun. A21-field short Q4 check on48GB is not broad hardware/calibration validation.",
+        "zh": "Python CUDA 及 Nace llama.cpp／Ollama 分支；状态加一题默认上限 16384、可配置最大 131072。已核 v2.0 HF snapshot／卡／配置、16 分片及 head 的 LFS 标识，未下载张量或测试等价；基座视觉包装不证明支持图像输入。 10 月 23 日 Q4_K_M 苹果路径新增 Kapitsa v0.2.15 共享状态分支／缓存；状态、分支、整包及序列各默认限 16384。硬件可装载／短工单中位延迟不证明量化决策质量、校准或 131072 长度准确率。 Max CUDA 支持图像；Mac GGUF／MLX／Kapitsa 仅文本。Max 默认16384／配置262144不证明长上下文质量。Kapitsa 最大概率漂移0.0329超过0.02等价门槛，虽无答案翻转仍未通过；长行／32k参考核验未跑。48GB上的21字段短Q4检查不等于普遍硬件／校准验收。"
       },
       "license_note": "Code Apache-2.0; weights use modified Nace.AI Open RAIL-M with commercial thresholds, competitor exclusions and use restrictions. Public access does not imply unrestricted open source.",
       "tags": [
         "typed-decisions",
         "pointer-head",
         "local",
-        "open-weight"
+        "open-weight",
+        "code-readout",
+        "multimodal"
       ]
     },
     {
@@ -4136,9 +4498,10 @@
         "d3-turbo-runtime",
         "d3-turbo-wrapper",
         "d3-turbo-config",
-        "d3-turbo-eval-runtime"
+        "d3-turbo-eval-runtime",
+        "vllm-request-trust-oct29"
       ],
-      "reviewed_on": "2026-10-26",
+      "reviewed_on": "2026-11-01",
       "weight_revision": null,
       "summary": {
         "en": "Multimodal 255-code family: classic per-question encoding and Turbo shared-state question branches are distinct releases.",
@@ -4165,8 +4528,8 @@
         "zh": "d3 manifest 声明 Qwen3.8-27B，运行架构为 qwen3_5；其他基于 Qwen3.5，edge 也源自 0.8B 基座。完整训练数据／配方、重叠审计及保留集校准报告尚未确证；softmax 和 T=1 不证明经验校准。 独立第三方 Vis Decisions 0.6.1 实现文本 full／LoRA 适配：训练语言骨干／adapter 及完整 255 答码头，使用有效候选 CE 与合并 FP32 导出。它去掉视觉塔，不能证明图像／视频微调，也不等于复现 D3 原始训练配方。 Turbo 仍由 train(True) 拒绝训练，保存也不是通用训练导出；未核实公开图像训练配方，新增推理机制不改变此边界。"
       },
       "availability": {
-        "en": "v3.1.0 weights retained; custom Transformers and vLLM-SR dev Engine paths remain. Native vLLM /v1/systemone merged as 89cab550 on Oct14; the Oct15 review found stable v0.31.0 predating support. D3 uses classify: no prefix caching/chunked prefill, up to 64 questions and 255 choice options; error/confidence/usage semantics differ from the package runtime. Core ML is separate. Video: 2 fps, at most 32 frames; no audio validation. No verified D3 multimodal fine-tuning recipe established here. Null package token limits and backbone context configuration are not validated long-context quality. The inspected official modeling_d3.py rejects train(True); this wrapper restriction does not rule out separate training implementations such as the text-only Vis path. Generic multimodal PEFT support remains unverified. Oct19 Turbo/Oct20 card: own AutoModel and SR Engine paths, Box/Track; API alias vllm-sr/d3 serves Turbo. Oct19 external metadata did not support prefix_bidir in native vLLM nightly; do not silently transfer classic support. Box output alone is not presence evidence.",
-        "zh": "保留 v3.1.0 权重、定制 Transformers 与 vLLM-SR dev Engine。原生 vLLM /v1/systemone 于 10 月 14 日以 89cab550 合入；10 月 15 日核验时的正式版 v0.31.0 早于该支持。D3 走 classify：关闭 prefix cache／chunked prefill，最多 64 题、255 个 choice 选项；错误／confidence／usage 与包运行库不同。Core ML 独立；视频 2 fps、最多 32 帧，未验证音频。本版未确证 D3 多模态微调配方。包中的 null token 上限及骨干上下文配置不等于长上下文质量验收。已阅官方 modeling_d3.py 的 train(True) 拒绝训练；这限制该封装，不排除 Vis 文本路径等独立训练实现。通用多模态 PEFT 支持仍未确证。 10 月 19 日 Turbo／20 日卡：专属 AutoModel 与 SR Engine 路径、Box／Track；API 的 vllm-sr/d3 别名实际服务 Turbo。19 日外评元数据称原生 vLLM nightly 不支持 prefix_bidir，不能照搬经典版支持；框输出本身不是目标存在证据。"
+        "en": "v3.1.0 weights retained; custom Transformers and vLLM-SR dev Engine paths remain. Native vLLM /v1/systemone merged as 89cab550 on Oct14; the Oct15 review found stable v0.31.0 predating support. D3 uses classify: no prefix caching/chunked prefill, up to 64 questions and 255 choice options; error/confidence/usage semantics differ from the package runtime. Core ML is separate. Video: 2 fps, at most 32 frames; no audio validation. No verified D3 multimodal fine-tuning recipe established here. Null package token limits and backbone context configuration are not validated long-context quality. The inspected official modeling_d3.py rejects train(True); this wrapper restriction does not rule out separate training implementations such as the text-only Vis path. Generic multimodal PEFT support remains unverified. Oct19 Turbo/Oct20 card: own AutoModel and SR Engine paths, Box/Track; API alias vllm-sr/d3 serves Turbo. Oct19 external metadata did not support prefix_bidir in native vLLM nightly; do not silently transfer classic support. Box output alone is not presence evidence. Oct29 native main validates request-template trust before admission; D3 retains its fixed prompt and ignores template kwargs. This runtime security fix is not a weight/quality update, and was not established in stable v0.32.0.",
+        "zh": "保留 v3.1.0 权重、定制 Transformers 与 vLLM-SR dev Engine。原生 vLLM /v1/systemone 于 10 月 14 日以 89cab550 合入；10 月 15 日核验时的正式版 v0.31.0 早于该支持。D3 走 classify：关闭 prefix cache／chunked prefill，最多 64 题、255 个 choice 选项；错误／confidence／usage 与包运行库不同。Core ML 独立；视频 2 fps、最多 32 帧，未验证音频。本版未确证 D3 多模态微调配方。包中的 null token 上限及骨干上下文配置不等于长上下文质量验收。已阅官方 modeling_d3.py 的 train(True) 拒绝训练；这限制该封装，不排除 Vis 文本路径等独立训练实现。通用多模态 PEFT 支持仍未确证。 10 月 19 日 Turbo／20 日卡：专属 AutoModel 与 SR Engine 路径、Box／Track；API 的 vllm-sr/d3 别名实际服务 Turbo。19 日外评元数据称原生 vLLM nightly 不支持 prefix_bidir，不能照搬经典版支持；框输出本身不是目标存在证据。 10 月29日原生main在请求进入模型前校验模板信任；D3保持固定prompt并忽略模板kwargs。这是运行库安全修复，不是权重／质量变化，未确证已含于正式v0.32.0。"
       },
       "license_note": "All six pinned cards/manifests declare Apache-2.0 for weights, readout, runtime and listed Qwen bases. Public weights do not establish public training data. Per-package source revisions and author-supplied identity hashes are in the source register; no family-wide weight hash or local binary verification is claimed. Turbo fixed card, LICENSE and manifest also declare Apache-2.0; manifest hashes are author supplied and were not checked against weight bytes here.",
       "tags": [
@@ -4466,9 +4829,12 @@
         "startlux-9b-autothink",
         "startlux-wide-options",
         "startlux-vllm-pin",
-        "startlux-prism-oct22"
+        "startlux-prism-oct22",
+        "prism-instant-oct25",
+        "prism-mxfp4-oct27",
+        "prism-serving-nov1"
       ],
-      "reviewed_on": "2026-10-25",
+      "reviewed_on": "2026-11-01",
       "weight_revision": null,
       "summary": {
         "en": "Option-letter LM readout: Instant uses prompt-bidirectional full-attention; causal AutoThink conditionally reasons and fuses two distributions.",
@@ -4495,8 +4861,8 @@
         "zh": "论文：语言全参数 SFT；adapter／数据／注意力适配后合并，Instant 多种子权重平均；因果推理监督后接 RLCD²，视觉冻结。RLCD² 由冻结起始评分器计算 proper-score 差值及软长度惩罚，以 group-relative policy gradients 优化推理；公开推理加归档 v1 文本 LoRA 不等于完整 v1.1 训练／数据包。"
       },
       "availability": {
-        "en": "Inspected vLLM/llama.cpp/MLX/Transformers paths, not executed. Accuracy release vLLM 0.19.1 is text-only; launcher 0.31 enables up to 8 images, video=0. Default Instant context cap 131072; causal configuration 262144, not verified full-context quality. AutoThink default gate 0.6/budget 4096, loop handling and 4000-character tail; full latency includes reasoning and reread. Oct17 fixes normalize list-form criteria/options before tournament routing (including a 26-choice none slot); optional vLLM extra now pins 0.31.0. Eight card revisions are unchanged; no new measured gain. Prism adds NVIDIA GGUF serving for causal v1/v1.1 AutoThink, not Instant. Shared-state/cache/quantization parity claims are author-tested only; allow_none defaults on. Quantization calibration is separate from probability calibration.",
-        "zh": "已阅 vLLM／llama.cpp／MLX／Transformers 路径，未运行。成绩发布用 vLLM 0.19.1 仅文本；launcher 0.31 最多八图、video=0。默认 Instant 上限 131072，因果配置 262144，不等于全长度质量验证。AutoThink 默认门槛 0.6／预算 4096，含循环处理及末 4000 字符后读；总延迟须含推理与再读出。 10 月 17 日修复将列表式 criteria／options 先规范化再做分组归约，含 26 选项另加 none 的情况；可选 vLLM 依赖现固定 0.31.0。八卡 revision 未变，无新增实测增益。 Prism 新增 NVIDIA GGUF 服务，仅覆盖因果 v1／v1.1 AutoThink，不覆盖 Instant。共享状态／缓存／量化等价仅为作者测试；allow_none 默认开启。量化校准不同于概率校准。"
+        "en": "Inspected vLLM/llama.cpp/MLX/Transformers paths, not executed. Accuracy release vLLM 0.19.1 is text-only; launcher 0.31 enables up to 8 images, video=0. Default Instant context cap 131072; causal configuration 262144, not verified full-context quality. AutoThink default gate 0.6/budget 4096, loop handling and 4000-character tail; full latency includes reasoning and reread. Oct17 fixes normalize list-form criteria/options before tournament routing (including a 26-choice none slot); optional vLLM extra now pins 0.31.0. Eight card revisions are unchanged; no new measured gain. Prism now also serves v1.1 Instant 4B/9B/27B (Q8_0/W4A8), with a complete prompt per question and no shared evidence/prefix cache; thoughts are rejected for Instant. AutoThink uses a separate causal shared-state path; allow_none defaults on. Oct27 fixes MXFP4 double-added residuals that made answers batch-dependent. Internal batch invariance, BF16 parity and probability calibration are separate checks; quantization calibration proves none of the latter.",
+        "zh": "已阅 vLLM／llama.cpp／MLX／Transformers 路径，未运行。成绩发布用 vLLM 0.19.1 仅文本；launcher 0.31 最多八图、video=0。默认 Instant 上限 131072，因果配置 262144，不等于全长度质量验证。AutoThink 默认门槛 0.6／预算 4096，含循环处理及末 4000 字符后读；总延迟须含推理与再读出。 10 月 17 日修复将列表式 criteria／options 先规范化再做分组归约，含 26 选项另加 none 的情况；可选 vLLM 依赖现固定 0.31.0。八卡 revision 未变，无新增实测增益。 Prism 现也支持 v1.1 Instant 4B／9B／27B（Q8_0／W4A8）：每题完整 prompt，不共享证据／前缀缓存，拒绝生成 thoughts。AutoThink 另走因果共享状态路径，allow_none 默认开启。10 月27日修复 MXFP4 重复残差导致答案随批次变化的问题；内部批次不变性、BF16 等价、概率校准须分别核验，量化校准不证明后两者。"
       },
       "license_note": "Inference code Apache-2.0; all eight inspected v1.1 cards declare CC BY-NC 4.0 weights. Commercial use requires a separate license. Training/reference dataset and backbone terms remain separate; no unrestricted open-source model claim. Prism own code has no selected license at reviewed revision; do not extend the Apache license of vendored files to it.",
       "tags": [
@@ -4805,6 +5171,184 @@
       "caveat": {
         "en": "Seed-correct diagnostic selection is not traffic risk. MIT code needs assets, settings, adapters and annotation; paper/code oracle paths differ. No failure counts reproduced here.",
         "zh": "仅种子答对的诊断选择不是流量风险；MIT 代码仍需资产、设置、适配与标注，论文／代码裁判路径有差异，本仓库未复现失效计数。"
+      }
+    },
+    {
+      "id": "relevance-calibration-nov08",
+      "name": "Beyond Ranking: calibrated relevance scoring",
+      "url": "https://arxiv.org/html/2611.11480v1",
+      "category": "evaluation",
+      "source_ids": [
+        "relevance-calibration-nov08"
+      ],
+      "reviewed_on": "2026-11-13",
+      "summary": {
+        "en": "Same-candidate relevance ranking and held-out probability calibration.",
+        "zh": "同候选相关性排序与留出集概率校准。"
+      },
+      "use": {
+        "en": "Choose evidence-set cutoffs after target-task calibration.",
+        "zh": "经目标任务校准后选择证据集合截断点。"
+      },
+      "caveat": {
+        "en": "Third-party paper report; historical Jev1.13 endpoint, judged-pair selection and truncated inputs. No production RAG outcome or local reproduction.",
+        "zh": "第三方论文报告；历史Jev1.13端点、仅已判定样本及截断输入。无生产RAG效果或本地复现。"
+      }
+    },
+    {
+      "id": "system1-audit-nov09",
+      "name": "System1 perturbation and question-interference audit",
+      "url": "https://arxiv.org/html/2611.12521v1",
+      "category": "evaluation",
+      "source_ids": [
+        "system1-audit-nov09"
+      ],
+      "reviewed_on": "2026-11-13",
+      "summary": {
+        "en": "Audits distribution-derived confidence, bundled questions and perturbation explanations.",
+        "zh": "审计分布派生置信度、多题干扰及扰动解释。"
+      },
+      "use": {
+        "en": "Test isolated/bundled parity and retained-label perturbations before deployment.",
+        "zh": "部署前测试单题／多题一致性与保标签扰动。"
+      },
+      "caveat": {
+        "en": "Open-weight models, not hosted Jev; quantized single-GPU runs, synthetic clinical cases and balanced security samples. No clinical or security deployment proof.",
+        "zh": "评估开放权重模型而非托管Jev；单GPU量化、合成临床案例与平衡安全样本。不证明临床或安全生产效用。"
+      }
+    },
+    {
+      "id": "conflict-typing-oct27",
+      "name": "Decision models for RAG conflict typing",
+      "url": "https://arxiv.org/html/2610.36915v1",
+      "category": "evaluation",
+      "source_ids": [
+        "conflict-typing-oct27"
+      ],
+      "reviewed_on": "2026-11-13",
+      "summary": {
+        "en": "Flat conflict classification, decomposition and confidence-gated cascades.",
+        "zh": "直接冲突分类、问题拆分与置信门控级联。"
+      },
+      "use": {
+        "en": "Compare direct choice with decomposition and measure downstream grounded answers.",
+        "zh": "比较直接选择与拆分，并测下游答案证据支撑。"
+      },
+      "caveat": {
+        "en": "One gateway census; small skewed benchmark, mutable endpoints and model judges. Not statistically equivalent to a stronger LLM or a factual-grounding result.",
+        "zh": "单网关盘点；小型偏斜测试集、可变端点及模型裁判。未证明与强LLM统计等价或事实支撑提升。"
+      }
+    },
+    {
+      "id": "entity-matching-oct25",
+      "name": "Entity matching using decision models",
+      "url": "https://arxiv.org/html/2610.34626v1",
+      "category": "evaluation",
+      "source_ids": [
+        "entity-matching-oct25"
+      ],
+      "reviewed_on": "2026-11-13",
+      "summary": {
+        "en": "Zero-shot record-pair matching with prompt, robustness and cascade comparisons.",
+        "zh": "零样本记录对匹配，比较提示、鲁棒性与级联。"
+      },
+      "use": {
+        "en": "Test catalog deduplication after blocking with false-merge costs.",
+        "zh": "在候选阻塞后测试目录去重，计入错误合并代价。"
+      },
+      "caveat": {
+        "en": "Paper benchmark evidence; pair classification is not end-to-end entity resolution or proven production savings. Cascade adds an LLM ensemble.",
+        "zh": "论文基准证据；记录对分类不是端到端实体消歧或已证生产节省，级联另加LLM集成。"
+      }
+    },
+    {
+      "id": "time-series-oct24",
+      "name": "Jev time-series decision benchmark",
+      "url": "https://arxiv.org/html/2610.33410v1",
+      "category": "evaluation",
+      "source_ids": [
+        "time-series-oct24"
+      ],
+      "reviewed_on": "2026-11-13",
+      "summary": {
+        "en": "Evaluates serialized sequences, event types and directional predictions.",
+        "zh": "评估序列输入、事件类别及方向预测。"
+      },
+      "use": {
+        "en": "Keep specialized temporal baselines and explicit negative findings.",
+        "zh": "保留专用时序基线及明确负面结果。"
+      },
+      "caveat": {
+        "en": "Historical Jev1.13 study; many numerical tasks and stock movement show weak discrimination. No trading return, industrial deployment or local reproduction.",
+        "zh": "历史Jev1.13研究；许多数值任务与股价方向区分弱。无交易收益、工业部署或本地复现。"
+      }
+    },
+    {
+      "id": "typed-deciders-audit",
+      "name": "Confidence Is Not a Promise / Typed Deciders Audit",
+      "category": "evaluation",
+      "url": "https://arxiv.org/html/2610.36311v1",
+      "source_ids": [
+        "typed-audit-v1",
+        "typed-audit-code"
+      ],
+      "reviewed_on": "2026-11-01",
+      "summary": {
+        "en": "Reference audit separates confidence ordering, selective-accuracy promises and their failure under shift.",
+        "zh": "参考审计区分置信排序、选择性准确率承诺及其在分布变化下的失效。"
+      },
+      "use": {
+        "en": "Compare threshold rules with coverage and violation accounting; requalify on the actual language/domain/noise.",
+        "zh": "同时比较阈值规则的覆盖率与违约率，在实际语言／领域／噪声上重新验证。"
+      },
+      "caveat": {
+        "en": "Empirical-population tests are not production guarantees. Mostly MASSIVE with five options; near-duplicate training exposure unresolved, hosted snapshots unknown and some Jev raw outputs withheld.",
+        "zh": "经验总体测试不等于生产保证；主要为五选项MASSIVE，近重复训练暴露未排除，托管快照未知且部分Jev原始输出未公开。"
+      }
+    },
+    {
+      "id": "dfip",
+      "name": "DFIP / Decision-Focused Inference Path",
+      "category": "baselines",
+      "url": "https://arxiv.org/html/2610.36804v1",
+      "source_ids": [
+        "dfip-v1",
+        "dfip-analysis"
+      ],
+      "reviewed_on": "2026-11-01",
+      "summary": {
+        "en": "Paired native-baseline systems study audits resident acceleration, exposed answers and external arrivals separately.",
+        "zh": "配对原生基线系统研究，分别审计驻留加速、对外答案字段与外部到达流量。"
+      },
+      "use": {
+        "en": "Test whether replay/projection/batching preserves the confidence policy consumed by an application, alongside tail latency and failures.",
+        "zh": "评估回放／投影／批处理是否保持应用使用的置信阈值策略，并测尾延迟与失败。"
+      },
+      "caveat": {
+        "en": "Four selected checkpoints; short resident gains reverse under diverse traffic. Clef confidence drifts; Liquid ties released compilation. No billed savings, production certification or reproduction here.",
+        "zh": "四个选定检查点；短驻留加速在多样流量下反转，Clef置信漂移，Liquid与发布版编译基本持平。未测账单节省、未认证生产可用且未复现。"
+      }
+    },
+    {
+      "id": "dice",
+      "name": "DICE / Direct Item Choice Estimation",
+      "category": "baselines",
+      "url": "https://arxiv.org/html/2610.34124v1",
+      "source_ids": [
+        "dice-v1"
+      ],
+      "reviewed_on": "2026-11-01",
+      "summary": {
+        "en": "Supervised item choice with candidate-isolated shared-prefix attention and separately calibrated recommendation confidence.",
+        "zh": "监督式商品选择，以候选隔离共享前缀注意力和单独校准的置信度进行推荐。"
+      },
+      "use": {
+        "en": "Compare direct candidate scoring and confidence-guided computation on fixed histories and candidate budgets.",
+        "zh": "在固定历史与候选预算下比较直接候选打分及置信引导计算。"
+      },
+      "caveat": {
+        "en": "Author evaluation with sampled negatives, overlapping histories and possible pretraining exposure; next observed item is not online utility. Cascade cost is an estimate excluding routing overhead; code not audited.",
+        "zh": "作者评估使用抽样负例，跨划分历史未去重且可能有预训练暴露；下一次观测交互不等于线上效益。级联成本为不含路由开销的估算，未审计代码。"
       }
     }
   ]

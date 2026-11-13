@@ -100,6 +100,12 @@ Calibrate and certify thresholds on outputs returned by the actual selection/rou
 
 [Prism](https://github.com/StartLuxLabs/StartLux-Prism/tree/f32ed8eee9d89ea56dde03a978cf4128d2bbf497)为因果 AutoThink 增加 CUDA GGUF 路径，不支持 Instant；整数路径批次／缓存不变性不等于 BF16 等价或生产校准。该版本自有代码尚未选许可证，vendored Apache 文件不解决这一点。[Jeffan](models.md#jeffan)则在低于0.9时重复读取整段输入并替换初判，不是 StartLux 的生成推理／分布混合算法。
 
+## November 1 follow-up / 11月1日补核
+
+The preceding Prism statement records the October22 snapshot. [October25 adds Instant](https://github.com/StartLuxLabs/StartLux-Prism/commit/cb700d0237ea37dad1772548f1f150dd4fc76b0b): noncausal full attention with causal linear layers, one complete prompt per question, no shared evidence/prefix cache and no thoughts. AutoThink retains a separate causal shared-state path. The [MXFP4 correction](https://github.com/StartLuxLabs/StartLux-Prism/commit/35d118d80dbe850d656efb409b2f475c84968e34) fixes a runtime residual error that made answers depend on batch composition; post-fix internal bit invariance does not prove BF16 equivalence or calibrated probabilities. This is runtime support/correctness, not a new checkpoint or architecture-quality result.
+
+上段保留10月22日历史快照。[10月25日已加入 Instant](https://github.com/StartLuxLabs/StartLux-Prism/commit/cb700d0237ea37dad1772548f1f150dd4fc76b0b)：full attention双向、线性层因果，每题完整 prompt、不共享证据／前缀缓存、不生成 thoughts；AutoThink 另走因果共享状态路径。[MXFP4 修正](https://github.com/StartLuxLabs/StartLux-Prism/commit/35d118d80dbe850d656efb409b2f475c84968e34)解决残差重复叠加使答案随批次改变的问题，修后内部 bit 不变不证明 BF16 等价或概率校准。这是运行库支持／正确性变化，不是新检查点或架构质量结论。
+
 The public20% statement above describes historical DI0.3. Current text0.4 Full removes public weight and changes the hidden domain set; vision keeps a different formula. Preserve edition/track with all older evidence rather than updating old scores in place.
 
 上文公共占20%描述历史 DI0.3；当前文本0.4 Full 已取消公共权重并修改隐藏领域集合，视觉公式仍不同。保留旧证据的分轨和版本，不原地改写旧成绩。

@@ -2240,3 +2240,243 @@
 - Source revision: `c950900359fecd892e0a51cc7e828f83d425e290`
 - Note: Pinned README describes transcript-based semantic turn detection layered on acoustic signals, state machine, limitations and author spike checks. Integration example, not independently validated large production A/B. No code executed.
 
+<a id="jev-judgment-nov03"></a>
+## Judgments and code-owned decisions
+
+- Source: https://typesafe.ai/blog/dont-call-it-a-decision-model
+- Kind: `official_publication`; review depth: `content_reviewed`; reviewed: 2026-11-13
+- Source revision: `not captured / live URL`
+- Note: Nov3 vendor architecture guidance; not a new checkpoint or measured deployment uplift.
+
+<a id="jev-changelog-nov13"></a>
+## Jev model changelog checked November13
+
+- Source: https://docs.typesafe.ai/changelog
+- Kind: `official_docs`; review depth: `content_reviewed`; reviewed: 2026-11-13
+- Source revision: `not captured / live URL`
+- Note: Latest listed entry in this review remains Jev1.14, October14. Absence of another entry is not proof that every serving component is unchanged.
+
+<a id="relevance-calibration-nov08"></a>
+## Beyond Ranking: calibrated relevance scoring
+
+- Source: https://arxiv.org/html/2611.11480v1
+- Kind: `paper`; review depth: `content_reviewed`; reviewed: 2026-11-13
+- Source revision: `not captured / live URL`
+- Note: Version1 full-text protocol/results/limitations sections reviewed; linked code and raw outputs not independently audited; no inference run.
+
+<a id="system1-audit-nov09"></a>
+## System1 perturbation and question-interference audit
+
+- Source: https://arxiv.org/html/2611.12521v1
+- Kind: `paper`; review depth: `content_reviewed`; reviewed: 2026-11-13
+- Source revision: `not captured / live URL`
+- Note: Version1 full-text protocol/results/limitations sections reviewed; linked code and raw outputs not independently audited; no inference run.
+
+<a id="conflict-typing-oct27"></a>
+## Decision models for RAG conflict typing
+
+- Source: https://arxiv.org/html/2610.36915v1
+- Kind: `paper`; review depth: `content_reviewed`; reviewed: 2026-11-13
+- Source revision: `not captured / live URL`
+- Note: Version1 full-text protocol/results/limitations sections reviewed; linked code and raw outputs not independently audited; no inference run.
+
+<a id="entity-matching-oct25"></a>
+## Entity matching using decision models
+
+- Source: https://arxiv.org/html/2610.34626v1
+- Kind: `paper`; review depth: `content_reviewed`; reviewed: 2026-11-13
+- Source revision: `not captured / live URL`
+- Note: Version1 full-text protocol/results/limitations sections reviewed; linked code and raw outputs not independently audited; no inference run.
+
+<a id="time-series-oct24"></a>
+## Jev time-series decision benchmark
+
+- Source: https://arxiv.org/html/2610.33410v1
+- Kind: `paper`; review depth: `content_reviewed`; reviewed: 2026-11-13
+- Source revision: `not captured / live URL`
+- Note: Version1 full-text protocol/results/limitations sections reviewed; linked code and raw outputs not independently audited; no inference run.
+
+<a id="google-decision-launch"></a>
+## Gemini Decisions API launch
+
+- Source: https://blog.google/innovation-and-ai/technology/developers-tools/gemini-decisions-api/
+- Kind: `official_publication`; review depth: `content_reviewed`; reviewed: 2026-11-13
+- Source revision: `not captured / live URL`
+- Note: November11 launch. Vendor benchmark/calibration and internal deployment claims; no item-level artifacts or independent production audit inspected.
+
+<a id="google-decision-changelog"></a>
+## Gemini API November11 release notes
+
+- Source: https://aistudio.google.com/docs/changelog
+- Kind: `official_docs`; review depth: `content_reviewed`; reviewed: 2026-11-13
+- Source revision: `not captured / live URL`
+- Note: November11 entry confirms gemini-decision-1 and Decisions API release. Original ai.google.dev URL redirects here.
+
+<a id="google-decision-model"></a>
+## Gemini Decision1 model specification
+
+- Source: https://aistudio.google.com/docs/models/gemini-decision-1
+- Kind: `official_docs`; review depth: `content_reviewed`; reviewed: 2026-11-13
+- Source revision: `not captured / live URL`
+- Note: Input modalities, context and question limits, unsupported capabilities reviewed. API model identifier is not a weight hash.
+
+<a id="google-decision-guide"></a>
+## Gemini Decisions API guide
+
+- Source: https://aistudio.google.com/docs/decisions-api
+- Kind: `official_docs`; review depth: `content_reviewed`; reviewed: 2026-11-13
+- Source revision: `not captured / live URL`
+- Note: Typed outputs, confidence formula, isolation, error semantics, media and request limits reviewed. No SDK or API execution.
+
+<a id="google-decision-pricing"></a>
+## Gemini Decision1 pricing
+
+- Source: https://aistudio.google.com/docs/pricing#gemini-decision
+- Kind: `official_docs`; review depth: `content_reviewed`; reviewed: 2026-11-13
+- Source revision: `not captured / live URL`
+- Note: Decision-specific Standard table and billing semantics reviewed November13; excludes full application cost.
+
+<a id="strands-pointer-oct26"></a>
+## Strands: retire slot heads and require explicit frozen pointer KL reference
+
+- Source: https://github.com/strands-labs/strands-decider/commit/13c05149265dc404c09d2469636f71b1320e1713
+- Kind: `repository`; review depth: `content_reviewed`; reviewed: 2026-11-01
+- Source revision: `13c05149265dc404c09d2469636f71b1320e1713`
+- Note: Merged modeling/training/collator/compatibility patches reviewed. Pointer has been current since v19: removal of old fixed SlotHead is cleanup, not a new checkpoint. Current loader rejects explicit slot configs; historical pointer tensors under slot_head.pt can still load with warning. Frozen KL is retained only with explicit trained pointer reference, precomputation and length grouping; no base-LM numeric-token fallback. No training executed or weight gain inferred.
+
+<a id="strands-mlx-oct30"></a>
+## Strands: keep Gemma4 MLX loading and execution on one owned worker
+
+- Source: https://github.com/strands-labs/strands-decider/commit/13faf5214f7cbea07d005278f1aeaf3973611eba
+- Kind: `repository`; review depth: `content_reviewed`; reviewed: 2026-11-01
+- Source revision: `13faf5214f7cbea07d005278f1aeaf3973611eba`
+- Note: Engine/server patches reviewed. MLX lazy arrays and stream ownership now remain on the same worker, correcting no Stream(gpu, 1) in current thread during FastAPI sync serving. Shutdown closes worker; torch paths unchanged. Upstream tests were read, not run here. Serving correctness, not new weights or measured accuracy.
+
+<a id="prism-instant-oct25"></a>
+## Prism: bidirectional Instant GGUF path and independent question rows
+
+- Source: https://github.com/StartLuxLabs/StartLux-Prism/commit/cb700d0237ea37dad1772548f1f150dd4fc76b0b
+- Kind: `repository`; review depth: `content_reviewed`; reviewed: 2026-11-01
+- Source revision: `cb700d0237ea37dad1772548f1f150dd4fc76b0b`
+- Note: Instant implementation/README/serving changes inspected: v1.1 4B/9B/27B, Q8_0/W4A8; full attention noncausal, linear attention/convolutions causal. Each question repeats the full prompt; no shared evidence/prefix cache. Instant rejects thought generation. Runtime capability, not new weights. Small public-suite author parity checks are not full calibration or general BF16 equivalence.
+
+<a id="prism-mxfp4-oct27"></a>
+## Prism: MXFP4 deferred-residual batch-invariance correction
+
+- Source: https://github.com/StartLuxLabs/StartLux-Prism/commit/35d118d80dbe850d656efb409b2f475c84968e34
+- Kind: `repository`; review depth: `content_reviewed`; reviewed: 2026-11-01
+- Source revision: `35d118d80dbe850d656efb409b2f475c84968e34`
+- Note: Patch and author regression description inspected. A folded pending residual was added twice in split-K/body execution, harming small batches while high concurrency hid it. Internal post-fix bit invariance differs from BF16 probability parity and empirical calibration. No speed or accuracy multiplier generalized; no external code executed.
+
+<a id="prism-serving-nov1"></a>
+## Prism current serving: quantization and model-specific execution boundaries
+
+- Source: https://github.com/StartLuxLabs/StartLux-Prism/blob/ef28f6f8d1b19f1336eafe418f26b96d053e8f76/docs/serving.md
+- Kind: `official_docs`; review depth: `content_reviewed`; reviewed: 2026-11-01
+- Source revision: `ef28f6f8d1b19f1336eafe418f26b96d053e8f76`
+- Note: Serving guide/README reviewed. FP8 KV requires sm89+ and excludes attn-qk8; MXFP4 remains opt-in. AutoThink shared-state execution and Instant complete-row execution are distinct. Quantization activation calibration is not probability calibration; reviewed support/tests do not establish all precision/hardware/context behavior.
+
+<a id="drex-max-release-oct30"></a>
+## Drex Max v1: dense 27B release, independent code-readout rows and evaluation scope
+
+- Source: https://github.com/nace-ai/drex-decision-models/blob/e206b278e3988ad1b58e6f1556b559a65947a4e6/models/drex-max-v1/README.md
+- Kind: `model_card`; review depth: `content_reviewed`; reviewed: 2026-11-01
+- Source revision: `e206b278e3988ad1b58e6f1556b559a65947a4e6`
+- Note: Release README, drex_max/model.py and model license inspected. Dense nominal27B with biasless255-code readout; full-attention noncausal/linear recurrent layers causal. CUDA supports images, Mac routes text-only. Default16384 versus configurable262144 is not full-context quality evidence. Training/calibration data and overlap audit not established. Author public text score (as of Oct19) is not private Full0.4 or a new independent evaluation. Modified Nace OpenRAIL-M retains commercial/competitor restrictions.
+
+<a id="drex-max-hf-oct30"></a>
+## Drex Max HF snapshot: repository identity, not verified tensor hash
+
+- Source: https://huggingface.co/nace-ai/drex-max-v1/tree/a67fa2808b5d91a4db62629beb14eba6d3f3e53c
+- Kind: `model_card`; review depth: `metadata_only`; reviewed: 2026-11-01
+- Source revision: `a67fa2808b5d91a4db62629beb14eba6d3f3e53c`
+- Note: Public API snapshot/file metadata inspected:11 backbone safetensors shards plus readout. Source revision does not identify a locally hashed weight file or prove equality with evaluation-time bytes. No tensors downloaded.
+
+<a id="drex-max-kapitsa-oct30"></a>
+## Kapitsa Drex Max: failed probability-parity gate and unrun long-row checks
+
+- Source: https://github.com/nace-ai/kapitsa/blob/dd1a80963dd36023a9889e26214030c2a98214c2/docs/drex-max.md
+- Kind: `official_docs`; review depth: `content_reviewed`; reviewed: 2026-11-01
+- Source revision: `dd1a80963dd36023a9889e26214030c2a98214c2`
+- Note: Full limitation/parity/context sections inspected. Q8 GGUF to native affine conversion changes representation; do not infer bit identity. Native-path author max probability drift 0.0329 exceeds declared 0.02 gate despite no answer flips; path does not pass parity gate. Long-row reference parity and conditional 32k run not done. On 48GB, 128k/262k scratch excluded before weights. No state cache; state cost repeats per question. The separate Q4 21-field/M5Pro48GB/context2048 check is from drex-max-q4-card-oct30, not this document.
+
+<a id="jev-models-nov1"></a>
+## Jev versioned IDs, aliases and experimental long context
+
+- Source: https://docs.typesafe.ai/models
+- Kind: `official_docs`; review depth: `content_reviewed`; reviewed: 2026-11-01
+- Source revision: `not captured / live URL`
+- Note: Current models page read Nov1:1.14 released Oct14, latest/preview currently alias1.14.0. This corrects omitted prior release coverage, not a new Nov1 weight claim. Pin/log versioned IDs when using tuned thresholds. Default64k/request32k/question; opt-in262k explicitly slower/less accurate. Public docs do not expose hosted weight hashes. Document snapshot SHA2561c56aeadeec0225beccef214dd2f0b4b47d6a0e0d53c356aac46290f9053146c is text, not weights.
+
+<a id="jev-images-nov1"></a>
+## Jev experimental image/Box input contract and production caveats
+
+- Source: https://docs.typesafe.ai/images
+- Kind: `official_docs`; review depth: `content_reviewed`; reviewed: 2026-11-01
+- Source revision: `not captured / live URL`
+- Note: Current full image docs read. Image danger-zone header required; vendor explicitly says below production standards, format/accuracy/limits may change.1.13/1.14 accept images, Box requires1.14; no audio/video. An experimental endpoint contract is not validated image quality or general calibration. Text SHA256cacc916cf2f5cc79a4be9094bf9ec339649a1a77123e101bfee1085d3da260bc.
+
+<a id="vllm-request-trust-oct29"></a>
+## vLLM: enforce request-template trust before structured-decision admission
+
+- Source: https://github.com/vllm-project/vllm/commit/51be9ea6a3a356b42e3b72a0fc6e8cb8c8975944
+- Kind: `repository`; review depth: `content_reviewed`; reviewed: 2026-11-01
+- Source revision: `51be9ea6a3a356b42e3b72a0fc6e8cb8c8975944`
+- Note: Documentation/serving/test patches read. /v1/systemone now rejects request-provided chat_template_kwargs.chat_template by default with400 before model admission; trusted-server opt-in is separate from ordinary kwargs. No recommendation to enable it. Latest official release at review is v0.32.0 Oct18; fixed patch dates Oct29 and is not established as included in that release. D3 fixed prompt ignores template overrides; do not infer weight/calibration changes. No upstream test/model execution.
+
+<a id="clef-eval-metadata-oct30"></a>
+## Clef: safeagents evaluation YAML only, unchanged weight identities
+
+- Source: https://huggingface.co/Cloudflare/clef/commit/cfddda043dd190ef3b01cff449d5ee8cff1e8ec6
+- Kind: `repository`; review depth: `content_reviewed`; reviewed: 2026-11-01
+- Source revision: `cfddda043dd190ef3b01cff449d5ee8cff1e8ec6`
+- Note: Full commit diff and parent/current recursive file metadata compared. Only .eval_results/safeagents-judge-bench.yaml is added; existing card/runtime/weight blob identifiers unchanged. Flash fb4417d31c1d0f9e7e77f1141b40aaede7491e00 similarly adds only evaluation YAML. Dataset protocol/raw run/provenance not audited here, so no scores or independence claim imported. Addition of benchmark metadata is not retraining or better accuracy.
+
+<a id="typed-audit-v1"></a>
+## Confidence Is Not a Promise: A Reference Audit of Typed Decision Models
+
+- Source: https://arxiv.org/html/2610.36311v1
+- Kind: `paper`; review depth: `content_reviewed`; reviewed: 2026-11-01
+- Source revision: `not captured / live URL`
+- Note: Read methods, empirical-population and new-item checks, limitations; source review, not reproduction.
+
+<a id="typed-audit-code"></a>
+## Typed deciders audit: fixed README and datasheet
+
+- Source: https://github.com/pcbrom/typed-deciders-audit/tree/8187f38fd4981f398d4e0e0d2291281ef5c58496
+- Kind: `repository`; review depth: `content_reviewed`; reviewed: 2026-11-01
+- Source revision: `8187f38fd4981f398d4e0e0d2291281ef5c58496`
+- Note: README lists withheld Jev full vectors and analyses; DATASHEET describes reduced answers. Did not retrieve Zenodo archive or run scripts.
+
+<a id="dfip-v1"></a>
+## DFIP: Decision-Focused Inference Path for System One Models
+
+- Source: https://arxiv.org/html/2610.36804v1
+- Kind: `paper`; review depth: `content_reviewed`; reviewed: 2026-11-01
+- Source revision: `not captured / live URL`
+- Note: Read paired native baselines, output/serving audits, failures, limitations and artifact identity.
+
+<a id="dfip-analysis"></a>
+## DFIP frozen analysis and research preview
+
+- Source: https://github.com/superagent-ai/dfip/tree/f2eef1746e5e39b92827759344d4ef47410fc464
+- Kind: `repository`; review depth: `content_reviewed`; reviewed: 2026-11-01
+- Source revision: `f2eef1746e5e39b92827759344d4ef47410fc464`
+- Note: Frozen analysis revision, not one execution commit. README inspected; no GPU or CPU reproduction run. Modal usage would incur cost.
+
+<a id="dice-v1"></a>
+## Decision-Native Recommendation with Large Language Models
+
+- Source: https://arxiv.org/html/2610.34124v1
+- Kind: `paper`; review depth: `content_reviewed`; reviewed: 2026-11-01
+- Source revision: `not captured / live URL`
+- Note: Read method and evaluation appendices; anonymous code link was not audited. Main recommendation uses supervised Qwen3-0.6B, not a general released decider.
+
+<a id="drex-max-q4-card-oct30"></a>
+## Drex Max affine Q4: separate 21-field short-context Mac check
+
+- Source: https://huggingface.co/nace-ai/drex-max-v1-affine-q4/blob/e7d0c597706239a015608c06dfe0951197e95096/README.md
+- Kind: `model_card`; review depth: `content_reviewed`; reviewed: 2026-11-01
+- Source revision: `e7d0c597706239a015608c06dfe0951197e95096`
+- Note: Fixed full card read: text-only affine4/group64, 24GB+ fit is author claim. Measured M5Pro48GB/macOS26.5.2/context2048 on Oct30: 21 probability fields versus recorded Q8 GGUF answers, max drift0.0329 Kapitsa and0.0356 MLX, no choice flip. This is a separate small Q4 comparison, not the Kapitsa native parity-gate experiment or broad calibration/context validation. Card-provided SHA256 values are not locally checked tensor bytes.
+
