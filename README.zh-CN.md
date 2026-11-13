@@ -214,3 +214,5 @@ python3 -m unittest discover -s tests -v
 [11月13日更新：机制变化、应用净效用与证据边界](updates/2026-11-13-jev-utility.md).
 
 [11月13日Google最新发布补充](updates/2026-11-13-google-decision.md).
+
+[分支审查与应用意图](docs/branch-review-2026-11-13.md) · [动态技能加载实验方案](docs/dynamic-skill-loading-experiment-plan.zh-CN.md)

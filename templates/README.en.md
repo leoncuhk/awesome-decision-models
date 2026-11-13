@@ -112,3 +112,5 @@ Original code and curation text: [MIT](LICENSE). Linked projects, model weights,
 [November13 review: mechanisms, application utility and evidence limits](updates/2026-11-13-jev-utility.md).
 
 [November13 Google release addendum](updates/2026-11-13-google-decision.md).
+
+[Branch review and application intent](docs/branch-review-2026-11-13.md) · [Dynamic skill loading experiment plan](docs/dynamic-skill-loading-experiment-plan.md)
