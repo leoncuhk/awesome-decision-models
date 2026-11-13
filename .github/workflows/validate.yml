@@ -2,7 +2,29 @@ name: Validate curated data
 on:
   push:
     branches: [main]
+    paths:
+      - 'data/**'
+      - 'templates/**'
+      - 'scripts/**'
+      - 'tests/**'
+      - '.github/workflows/**'
+      - 'README.md'
+      - 'README.zh-CN.md'
+      - 'docs/models.md'
+      - 'docs/evidence.md'
+      - 'docs/sources.md'
   pull_request:
+    paths:
+      - 'data/**'
+      - 'templates/**'
+      - 'scripts/**'
+      - 'tests/**'
+      - '.github/workflows/**'
+      - 'README.md'
+      - 'README.zh-CN.md'
+      - 'docs/models.md'
+      - 'docs/evidence.md'
+      - 'docs/sources.md'
   workflow_dispatch:
 permissions:
   contents: read
@@ -17,11 +39,32 @@ jobs:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           persist-credentials: false
-      - name: Check generated documents and records
+          fetch-depth: 0
+      - name: Select checks for changed files
+        id: scope
+        env:
+          EVENT_NAME: ${{ github.event_name }}
+          DIFF_BASE: ${{ github.event.pull_request.base.sha || github.event.before }}
+          DIFF_HEAD: ${{ github.event.pull_request.head.sha || github.sha }}
+        run: |
+          python3 - <<'PY'
+          import os, subprocess
+          base, head = os.environ['DIFF_BASE'], os.environ['DIFF_HEAD']
+          full = os.environ['EVENT_NAME'] == 'workflow_dispatch' or not base or set(base) == {'0'}
+          paths = [] if full else subprocess.check_output(
+              ['git', 'diff', '--name-only', '-z', base, head], text=True).split('\0')
+          code = full or any(p.startswith(('scripts/', 'tests/', '.github/workflows/')) for p in paths)
+          publish = full or any(p in {'scripts/publish.sh', 'tests/integration_publish.py'} or p.startswith('.github/workflows/') for p in paths)
+          with open(os.environ['GITHUB_OUTPUT'], 'a') as out:
+              out.write(f'code={str(code).lower()}\npublish={str(publish).lower()}\n')
+          PY
+      - name: Check catalog and generated documents
         run: python3 scripts/validate.py
-      - name: Run offline tests
+      - name: Run offline tests for code changes
+        if: steps.scope.outputs.code == 'true'
         run: python3 -m unittest discover -s tests -v
-      - name: Check publishing script syntax
-        run: bash -n scripts/publish.sh
-      - name: Test publishing against local disposable remotes
-        run: python3 tests/integration_publish.py
+      - name: Check publishing only when relevant
+        if: steps.scope.outputs.publish == 'true'
+        run: |
+          bash -n scripts/publish.sh
+          python3 tests/integration_publish.py

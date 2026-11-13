@@ -49,3 +49,9 @@ Offline checks verify data structure, references, numeric consistency, bilingual
 首版已经包含定期检查的代码，但只有发布到仓库默认分支并允许 Actions／Issues 后才可能执行。第一次运行建立基线，以后报告变化；失败保留上次成功版本。每周运行的是来源检测脚本，不是无人值守的 AI 研究员。
 
 复核时要区分“页面变化”“运行库更新”“权重更新”和“新实验结果”。只有证据支持时才修改结论。新项目发现仍需定期研究，不能仅靠监控现有链接。Skill 文件也不会自动安装到当前对话，更不会自动取得写权限。
+
+## Change-scoped maintenance / 按变更范围维护
+
+Follow [CONTRIBUTING](../CONTRIBUTING.md#local-checks) for local and CI checks. Plain research prose and images do not trigger the validation workflow. Catalog/generated documents retain consistency checks; executable changes retain tests. The weekly source watcher and monthly Dependabot schedule serve different purposes and remain enabled.
+
+Git synchronization is complete when the expected commit is on the remote. CI availability is a separate fact. A billing-blocked job has not executed code and repeated retries do not establish quality. The main branch currently has no required status checks; if this changes, review path-filtered workflow requirements to avoid pending required checks.

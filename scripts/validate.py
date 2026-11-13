@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """Offline structural validation. This does not certify external facts or URLs."""
 from __future__ import annotations
+import argparse
 import json
 import math
 import re
@@ -85,7 +86,7 @@ def slug(text: str) -> str:
 
 def validate_local_links(root: Path) -> list[str]:
     errors=[]
-    link=re.compile(r'(?<!!)\[[^\]\n]*\]\(([^\s)]+)\)')
+    link=re.compile(r'!?\[[^\]\n]*\]\(([^\s)]+)\)')
     for path in root.rglob('*.md'):
         if any(part in {'.git','reports','__pycache__','templates'} for part in path.relative_to(root).parts):continue
         text=path.read_text(encoding='utf-8')
@@ -118,11 +119,14 @@ def validate(root: Path=ROOT) -> list[str]:
     except (OSError,KeyError,TypeError,ValueError) as exc:return [f'Validation could not complete: {exc}']
 
 
-def main() -> int:
-    errors=validate()
+def main(argv=None) -> int:
+    parser=argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('--links-only', action='store_true', help='Check local Markdown links only; skip catalog/render checks.')
+    args=parser.parse_args(argv)
+    errors=validate_local_links(ROOT) if args.links_only else validate()
     if errors:
         print('\n'.join('ERROR: '+e for e in errors));return 1
-    print('PASS: schema, references, bilingual fields, numerical records, generated files and local Markdown links.')
+    print('PASS: local Markdown links.' if args.links_only else 'PASS: schema, references, bilingual fields, numerical records, generated files and local Markdown links.')
     print('Not checked: public URL reachability, model execution, factual truth or benchmark reproduction.')
     return 0
 if __name__=='__main__':raise SystemExit(main())

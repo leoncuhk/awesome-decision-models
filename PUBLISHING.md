@@ -37,7 +37,7 @@ bash scripts/publish.sh leoncuhk/awesome-decision-models --dry-run
 如果远端仍为空，将本文件包作为首版初始化到默认分支；不要 force push。
 如果已有内容，保留原内容，在新分支中比较并提交 PR，不自动合并。
 不要复制任何凭据、私有资料或运行缓存到公开仓库。
-完成后报告真实 commit / PR 链接和实际 CI 状态；失败就报告失败，不能声称已发布。
+完成后以远端 SHA 核实同步并报告 commit / PR 链接。按 CONTRIBUTING 的变更范围检查；只有相关 CI 实际运行时报告其结果，账户原因未启动不等于推送失败。
 ```
 
 ## 发布后核验

@@ -3,6 +3,7 @@ import json
 import sys
 import tempfile
 import unittest
+from unittest.mock import patch
 from pathlib import Path
 ROOT=Path(__file__).resolve().parents[1]
 sys.path.insert(0,str(ROOT/'scripts'))
@@ -15,6 +16,18 @@ class CatalogTests(unittest.TestCase):
         self.ev=json.loads((ROOT/'data/evaluations.json').read_text())
         self.watch=json.loads((ROOT/'data/watchlist.json').read_text())
     def errors(self):return validate.validate_data(self.cat,self.ev,self.watch)
+    def test_links_only_does_not_require_catalog(self):
+        with tempfile.TemporaryDirectory() as d, patch.object(validate, 'ROOT', Path(d)):
+            (Path(d)/'note.md').write_text('# Note')
+            self.assertEqual(validate.main(['--links-only']), 0)
+    def test_links_only_fails_on_broken_link(self):
+        with tempfile.TemporaryDirectory() as d, patch.object(validate, 'ROOT', Path(d)):
+            (Path(d)/'note.md').write_text('[missing](missing.md)')
+            self.assertEqual(validate.main(['--links-only']), 1)
+    def test_missing_image_rejected(self):
+        with tempfile.TemporaryDirectory() as d:
+            p=Path(d);(p/'note.md').write_text('![figure](missing.png)')
+            self.assertTrue(any('missing local link' in e for e in validate.validate_local_links(p)))
     def test_current_catalog_valid(self):self.assertEqual(self.errors(),[])
     def test_duplicate_id_rejected(self):
         self.cat['entries'].append(copy.deepcopy(self.cat['entries'][0]))
