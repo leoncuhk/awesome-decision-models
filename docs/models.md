@@ -2,7 +2,7 @@
 
 [Home](../README.md) · [中文首页](../README.zh-CN.md) · [Evidence](evidence.md)
 
-Source review: 2026-10-28. These are source-backed descriptions and curatorial use cases, not production certifications.
+Source review: 2026-11-13. These are source-backed descriptions and curatorial use cases, not production certifications.
 
 `Unknown` is intentional. An inspected source revision does not identify the deployed weight revision. Language support, licenses and resource requirements must be checked for the exact artifact. Recorded weight identifiers are source-reported unless a local binary verification is explicitly documented; recording an identifier is not a claim that the weights were downloaded or hashed here.
 
@@ -20,13 +20,13 @@ Hosted typed judgments: probabilities over supplied choices, propositions and or
 | Mechanism | Proprietary model. Choice/Score confidence summarizes the returned distribution; it is not a separate probability-of-correctness estimate. Noul returns P(yes) with no separate confidence field. Question IDs are not model input; each instruction must be complete. Same-request answers are documented as independent; dependent evidence requires a later request. Question-context independence is not statistical independence of errors. | 专有模型。Choice／Score 的 confidence 是返回分布的统计量，并非独立预测的正确概率；Noul 返回 P(yes)，没有单独 confidence 字段。 文档称问题 ID 不送入模型，instructions 须写完整；同请求答案互不作为上下文，依赖新证据的判断需后续请求。 问题上下文互不读取不等于误差在统计上独立。 |
 | Training | Vendor-described RLCD; no customer self-service fine-tuning/LoRA. Request state/instruction customization is not weight adaptation; independent controlled training ablations remain unestablished. | 官方称采用 RLCD；不支持客户自助权重微调／LoRA，state／instructions 定制不是权重适配；独立受控训练消融仍未确立。 |
 | Deployment | Hosted API, no verified public weights. Oct28 docs list current 1.14; default interface is text, while images are experimental/off by default with TypeSafe-Danger-Zone-Images:true on 1.13/1.14; Box requires 1.14. No image request tested here. | 托管 API，未核实公开权重。10 月 28 日文档列当前 1.14；默认接口为文本，1.13／1.14 图片实验入口默认关闭，需 TypeSafe-Danger-Zone-Images:true，Box 需 1.14。本次未发图像请求。 |
-| Suggested use | Managed typed-judgment comparator or frozen semantic-feature generator; compare supervised baselines under the same task and label policy. | 可作为托管类型化判断对照或冻结的语义特征提取器；与监督基线比较时统一任务与标签规则。 |
+| Suggested use | Managed typed-judgment comparator or frozen semantic-feature generator; compare supervised baselines under the same task and label policy. Keep deterministic business rules in code; separately validate semantic judgments. | 可作为托管类型化判断对照或冻结的语义特征提取器；与监督基线比较时统一任务与标签规则。 确定性业务规则由代码执行，语义判断单独验证。 |
 | Boundary | RLCD is vendor-described; the full training recipe is not public. Valid schemas and confidence fields do not establish semantic reliability. Experimental image support is not production readiness; CJK needs its own evaluation. Author deployment stories/smoke checks do not establish a large independently auditable randomized KPI A/B. | RLCD 的完整训练配方未公开；格式合法与置信度字段不等于语义可靠。 实验图片支持不等于生产成熟，CJK 须另测；作者生产案例／smoke 不构成可独立核验的大规模随机 KPI A/B。 |
 
 **License note:** Commercial service terms; no open-weight license implied.
 **Recorded weight identifier:** Unknown / not pinned
 
-**Sources:** [Introducing System One Models & Jev](https://typesafe.ai/blog/introducing-system-one-models-and-jev); [TypeSafe primitives](https://docs.typesafe.ai/primitives); [TypeSafe confidence semantics](https://docs.typesafe.ai/confidence); [Stefan Jansen: Testing Jev on Financial Documents](https://insights.ml4trading.io/p/testing-jev-on-financial-documents); [TypeSafe autoresearch semantic features with CatBoost](https://docs.typesafe.ai/cookbooks/autoresearch_feature_discovery); [Jev current model identities and customization boundary](https://docs.typesafe.ai/models); [Jev experimental image and Box contract](https://docs.typesafe.ai/images); [Jev probability versus confidence statistics](https://docs.typesafe.ai/confidence); [Pocos author account: evidence, stale-state and phone-agent gates](https://medium.com/@geo.lomidze/jev-in-production-how-we-turned-our-ai-phone-assistant-into-a-fast-predictable-jev-gated-system-4a1b1a85de6c); [Taritas semantic turn detection implementation account](https://taritas.com/blog/semantic-turn-detection-jev); [Agora community Jev VAD integration example](https://github.com/AgoraIO-Community/convoai-jev-vad/blob/c950900359fecd892e0a51cc7e828f83d425e290/README.md)
+**Sources:** [Introducing System One Models & Jev](https://typesafe.ai/blog/introducing-system-one-models-and-jev); [TypeSafe primitives](https://docs.typesafe.ai/primitives); [TypeSafe confidence semantics](https://docs.typesafe.ai/confidence); [Stefan Jansen: Testing Jev on Financial Documents](https://insights.ml4trading.io/p/testing-jev-on-financial-documents); [TypeSafe autoresearch semantic features with CatBoost](https://docs.typesafe.ai/cookbooks/autoresearch_feature_discovery); [Jev current model identities and customization boundary](https://docs.typesafe.ai/models); [Jev experimental image and Box contract](https://docs.typesafe.ai/images); [Jev probability versus confidence statistics](https://docs.typesafe.ai/confidence); [Pocos author account: evidence, stale-state and phone-agent gates](https://medium.com/@geo.lomidze/jev-in-production-how-we-turned-our-ai-phone-assistant-into-a-fast-predictable-jev-gated-system-4a1b1a85de6c); [Taritas semantic turn detection implementation account](https://taritas.com/blog/semantic-turn-detection-jev); [Agora community Jev VAD integration example](https://github.com/AgoraIO-Community/convoai-jev-vad/blob/c950900359fecd892e0a51cc7e828f83d425e290/README.md); [Judgments and code-owned decisions](https://typesafe.ai/blog/dont-call-it-a-decision-model); [Jev model changelog checked November13](https://docs.typesafe.ai/changelog)
 
 <a id="laya"></a>
 ## Laya
@@ -291,6 +291,28 @@ Public-beta typed judgment API for text and images.
 **Recorded weight identifier:** Unknown / not pinned
 
 **Sources:** [OpenAI Decisions public beta guide](https://developers.openai.com/api/docs/guides/decisions)
+
+<a id="gemini-decision-1"></a>
+## Google Gemini Decision 1 / Decisions API
+
+[Project / model](https://aistudio.google.com/docs/models/gemini-decision-1)
+
+November11 hosted model for text, image, audio, video and PDF judgments with shared-input isolated questions.
+11月11日发布的托管模型，支持文本、图像、音频、视频和PDF判断，在共享输入上隔离各问题。
+
+| Dimension | English | 中文 |
+| --- | --- | --- |
+| Scale | Parameter count and public weight identity not established by reviewed official material. | 所核官方资料未确立参数量或公开权重身份。 |
+| Mechanism | Single-prefill noul/choice/score judgments; confidence equals top-outcome probability (max(p,1-p) for noul), unlike an entropy statistic. Score is the expected zero-based rubric index. Documented question isolation is not statistical independence of errors. | 单次prefill输出noul／choice／score；confidence等于最高选项概率（noul为max(p,1-p)），不是熵统计量。score为从0起的rubric索引期望。文档问题隔离不等于错误统计独立。 |
+| Training | Proprietary; no independently audited training mixture, calibration split or contamination analysis obtained. | 专有模型；未取得独立审计的训练混合、校准划分或污染分析。 |
+| Deployment | Gemini Developer API v1beta, model gemini-decision-1; up to1000 questions and262144 tokens total. Paid input $0.10/M tokens as reviewed November13; shared input once/request plus question tokens, zero output tokens; no cross-request caching. | Gemini Developer API v1beta，模型gemini-decision-1；最多1000题，总上下文262144 tokens。11月13日核价为输入$0.10/百万tokens；每请求共享输入计一次，题目token另计、输出0 tokens，无跨请求缓存。 |
+| Suggested use | Compare multimodal triage, media policy checks and routing at fixed evidence, risk and complete cost. | 在相同证据、风险约束和完整成本下比较多模态分流、媒体规则检查与路由。 |
+| Boundary | Calibration, speed and internal deployments are vendor-reported. Confidence is top-outcome probability, not independent reliability evidence. Safety blocks return HTTP400; no cache or Batch API. | 校准、速度及内部部署由厂商报告；confidence为最高选项概率，不是独立可靠性证据。安全拦截返回HTTP400；无缓存或Batch API。 |
+
+**License note:** Proprietary hosted Gemini Developer API; no public model-weight license established.
+**Recorded weight identifier:** Unknown / not pinned
+
+**Sources:** [Gemini Decisions API launch](https://blog.google/innovation-and-ai/technology/developers-tools/gemini-decisions-api/); [Gemini API November11 release notes](https://aistudio.google.com/docs/changelog); [Gemini Decision1 model specification](https://aistudio.google.com/docs/models/gemini-decision-1); [Gemini Decisions API guide](https://aistudio.google.com/docs/decisions-api); [Gemini Decision1 pricing](https://aistudio.google.com/docs/pricing#gemini-decision)
 
 <a id="drex"></a>
 ## Nace Drex v1.5 / v2.0

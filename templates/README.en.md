@@ -108,3 +108,7 @@ Read [CONTRIBUTING](CONTRIBUTING.md) before adding a project or result. Negative
 Original code and curation text: [MIT](LICENSE). Linked projects, model weights, datasets and papers retain their own licenses. A source-text revision does **not** pin a model's weights.
 
 [October25 weekly review](updates/2026-10-25-weekly-review.md) adds joint-request releases, bounded reread/abstention evidence and training/deployment corrections.
+
+[November13 review: mechanisms, application utility and evidence limits](updates/2026-11-13-jev-utility.md).
+
+[November13 Google release addendum](updates/2026-11-13-google-decision.md).

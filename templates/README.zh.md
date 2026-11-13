@@ -110,3 +110,7 @@ python3 -m unittest discover -s tests -v
 原创代码与整理文字使用 [MIT](LICENSE)；链接的项目、模型、数据与论文保留各自许可证。固定来源文档的提交版本，**不等于**固定模型权重。
 
 [10月25日每周核查](updates/2026-10-25-weekly-review.md)补入联合请求发布、有边界的重复读取／拒答证据及训练／部署修正。
+
+[11月13日更新：机制变化、应用净效用与证据边界](updates/2026-11-13-jev-utility.md).
+
+[11月13日Google最新发布补充](updates/2026-11-13-google-decision.md).

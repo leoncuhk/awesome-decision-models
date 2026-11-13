@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "reviewed_on": "2026-10-28",
+  "reviewed_on": "2026-11-13",
   "scope": "Evidence-backed models, methods and evaluation for bounded decisions in AI systems.",
   "sources": [
     {
@@ -2822,6 +2822,126 @@
       "review_depth": "content_reviewed",
       "source_revision": "c950900359fecd892e0a51cc7e828f83d425e290",
       "review_note": "Pinned README describes transcript-based semantic turn detection layered on acoustic signals, state machine, limitations and author spike checks. Integration example, not independently validated large production A/B. No code executed."
+    },
+    {
+      "id": "jev-judgment-nov03",
+      "title": "Judgments and code-owned decisions",
+      "url": "https://typesafe.ai/blog/dont-call-it-a-decision-model",
+      "kind": "official_publication",
+      "reviewed_on": "2026-11-13",
+      "review_depth": "content_reviewed",
+      "source_revision": null,
+      "review_note": "Nov3 vendor architecture guidance; not a new checkpoint or measured deployment uplift."
+    },
+    {
+      "id": "jev-changelog-nov13",
+      "title": "Jev model changelog checked November13",
+      "url": "https://docs.typesafe.ai/changelog",
+      "kind": "official_docs",
+      "reviewed_on": "2026-11-13",
+      "review_depth": "content_reviewed",
+      "source_revision": null,
+      "review_note": "Latest listed entry in this review remains Jev1.14, October14. Absence of another entry is not proof that every serving component is unchanged."
+    },
+    {
+      "id": "relevance-calibration-nov08",
+      "title": "Beyond Ranking: calibrated relevance scoring",
+      "url": "https://arxiv.org/html/2611.11480v1",
+      "kind": "paper",
+      "reviewed_on": "2026-11-13",
+      "review_depth": "content_reviewed",
+      "source_revision": null,
+      "review_note": "Version1 full-text protocol/results/limitations sections reviewed; linked code and raw outputs not independently audited; no inference run."
+    },
+    {
+      "id": "system1-audit-nov09",
+      "title": "System1 perturbation and question-interference audit",
+      "url": "https://arxiv.org/html/2611.12521v1",
+      "kind": "paper",
+      "reviewed_on": "2026-11-13",
+      "review_depth": "content_reviewed",
+      "source_revision": null,
+      "review_note": "Version1 full-text protocol/results/limitations sections reviewed; linked code and raw outputs not independently audited; no inference run."
+    },
+    {
+      "id": "conflict-typing-oct27",
+      "title": "Decision models for RAG conflict typing",
+      "url": "https://arxiv.org/html/2610.36915v1",
+      "kind": "paper",
+      "reviewed_on": "2026-11-13",
+      "review_depth": "content_reviewed",
+      "source_revision": null,
+      "review_note": "Version1 full-text protocol/results/limitations sections reviewed; linked code and raw outputs not independently audited; no inference run."
+    },
+    {
+      "id": "entity-matching-oct25",
+      "title": "Entity matching using decision models",
+      "url": "https://arxiv.org/html/2610.34626v1",
+      "kind": "paper",
+      "reviewed_on": "2026-11-13",
+      "review_depth": "content_reviewed",
+      "source_revision": null,
+      "review_note": "Version1 full-text protocol/results/limitations sections reviewed; linked code and raw outputs not independently audited; no inference run."
+    },
+    {
+      "id": "time-series-oct24",
+      "title": "Jev time-series decision benchmark",
+      "url": "https://arxiv.org/html/2610.33410v1",
+      "kind": "paper",
+      "reviewed_on": "2026-11-13",
+      "review_depth": "content_reviewed",
+      "source_revision": null,
+      "review_note": "Version1 full-text protocol/results/limitations sections reviewed; linked code and raw outputs not independently audited; no inference run."
+    },
+    {
+      "id": "google-decision-launch",
+      "title": "Gemini Decisions API launch",
+      "url": "https://blog.google/innovation-and-ai/technology/developers-tools/gemini-decisions-api/",
+      "kind": "official_publication",
+      "reviewed_on": "2026-11-13",
+      "review_depth": "content_reviewed",
+      "source_revision": null,
+      "review_note": "November11 launch. Vendor benchmark/calibration and internal deployment claims; no item-level artifacts or independent production audit inspected."
+    },
+    {
+      "id": "google-decision-changelog",
+      "title": "Gemini API November11 release notes",
+      "url": "https://aistudio.google.com/docs/changelog",
+      "kind": "official_docs",
+      "reviewed_on": "2026-11-13",
+      "review_depth": "content_reviewed",
+      "source_revision": null,
+      "review_note": "November11 entry confirms gemini-decision-1 and Decisions API release. Original ai.google.dev URL redirects here."
+    },
+    {
+      "id": "google-decision-model",
+      "title": "Gemini Decision1 model specification",
+      "url": "https://aistudio.google.com/docs/models/gemini-decision-1",
+      "kind": "official_docs",
+      "reviewed_on": "2026-11-13",
+      "review_depth": "content_reviewed",
+      "source_revision": null,
+      "review_note": "Input modalities, context and question limits, unsupported capabilities reviewed. API model identifier is not a weight hash."
+    },
+    {
+      "id": "google-decision-guide",
+      "title": "Gemini Decisions API guide",
+      "url": "https://aistudio.google.com/docs/decisions-api",
+      "kind": "official_docs",
+      "reviewed_on": "2026-11-13",
+      "review_depth": "content_reviewed",
+      "source_revision": null,
+      "review_note": "Typed outputs, confidence formula, isolation, error semantics, media and request limits reviewed. No SDK or API execution."
+    },
+    {
+      "id": "google-decision-pricing",
+      "title": "Gemini Decision1 pricing",
+      "url": "https://aistudio.google.com/docs/pricing#gemini-decision",
+      "kind": "official_docs",
+      "reviewed_on": "2026-11-13",
+      "review_depth": "content_reviewed",
+      "source_revision": null,
+      "review_note": "Decision-specific Standard table and billing semantics reviewed November13; excludes full application cost."
     }
   ],
   "entries": [
@@ -2841,21 +2961,23 @@
         "jev-confidence-oct28",
         "pocos-production-account-oct28",
         "taritas-turn-detection-oct28",
-        "agora-jev-vad-oct28"
+        "agora-jev-vad-oct28",
+        "jev-judgment-nov03",
+        "jev-changelog-nov13"
       ],
       "summary": {
         "en": "Hosted typed judgments: probabilities over supplied choices, propositions and ordinal rubrics.",
         "zh": "托管的结构化判断服务：对选项、命题与有序评分标准输出分布。"
       },
       "use": {
-        "en": "Managed typed-judgment comparator or frozen semantic-feature generator; compare supervised baselines under the same task and label policy.",
-        "zh": "可作为托管类型化判断对照或冻结的语义特征提取器；与监督基线比较时统一任务与标签规则。"
+        "en": "Managed typed-judgment comparator or frozen semantic-feature generator; compare supervised baselines under the same task and label policy. Keep deterministic business rules in code; separately validate semantic judgments.",
+        "zh": "可作为托管类型化判断对照或冻结的语义特征提取器；与监督基线比较时统一任务与标签规则。 确定性业务规则由代码执行，语义判断单独验证。"
       },
       "caveat": {
         "en": "RLCD is vendor-described; the full training recipe is not public. Valid schemas and confidence fields do not establish semantic reliability. Experimental image support is not production readiness; CJK needs its own evaluation. Author deployment stories/smoke checks do not establish a large independently auditable randomized KPI A/B.",
         "zh": "RLCD 的完整训练配方未公开；格式合法与置信度字段不等于语义可靠。 实验图片支持不等于生产成熟，CJK 须另测；作者生产案例／smoke 不构成可独立核验的大规模随机 KPI A/B。"
       },
-      "reviewed_on": "2026-10-28",
+      "reviewed_on": "2026-11-13",
       "mechanism": {
         "en": "Proprietary model. Choice/Score confidence summarizes the returned distribution; it is not a separate probability-of-correctness estimate. Noul returns P(yes) with no separate confidence field. Question IDs are not model input; each instruction must be complete. Same-request answers are documented as independent; dependent evidence requires a later request. Question-context independence is not statistical independence of errors.",
         "zh": "专有模型。Choice／Score 的 confidence 是返回分布的统计量，并非独立预测的正确概率；Noul 返回 P(yes)，没有单独 confidence 字段。 文档称问题 ID 不送入模型，instructions 须写完整；同请求答案互不作为上下文，依赖新证据的判断需后续请求。 问题上下文互不读取不等于误差在统计上独立。"
@@ -4037,6 +4159,55 @@
       ]
     },
     {
+      "id": "gemini-decision-1",
+      "name": "Google Gemini Decision 1 / Decisions API",
+      "category": "core_models",
+      "url": "https://aistudio.google.com/docs/models/gemini-decision-1",
+      "source_ids": [
+        "google-decision-launch",
+        "google-decision-changelog",
+        "google-decision-model",
+        "google-decision-guide",
+        "google-decision-pricing"
+      ],
+      "reviewed_on": "2026-11-13",
+      "weight_revision": null,
+      "license_note": "Proprietary hosted Gemini Developer API; no public model-weight license established.",
+      "tags": [
+        "typed-decisions",
+        "hosted",
+        "multimodal"
+      ],
+      "summary": {
+        "en": "November11 hosted model for text, image, audio, video and PDF judgments with shared-input isolated questions.",
+        "zh": "11月11日发布的托管模型，支持文本、图像、音频、视频和PDF判断，在共享输入上隔离各问题。"
+      },
+      "use": {
+        "en": "Compare multimodal triage, media policy checks and routing at fixed evidence, risk and complete cost.",
+        "zh": "在相同证据、风险约束和完整成本下比较多模态分流、媒体规则检查与路由。"
+      },
+      "caveat": {
+        "en": "Calibration, speed and internal deployments are vendor-reported. Confidence is top-outcome probability, not independent reliability evidence. Safety blocks return HTTP400; no cache or Batch API.",
+        "zh": "校准、速度及内部部署由厂商报告；confidence为最高选项概率，不是独立可靠性证据。安全拦截返回HTTP400；无缓存或Batch API。"
+      },
+      "scale": {
+        "en": "Parameter count and public weight identity not established by reviewed official material.",
+        "zh": "所核官方资料未确立参数量或公开权重身份。"
+      },
+      "mechanism": {
+        "en": "Single-prefill noul/choice/score judgments; confidence equals top-outcome probability (max(p,1-p) for noul), unlike an entropy statistic. Score is the expected zero-based rubric index. Documented question isolation is not statistical independence of errors.",
+        "zh": "单次prefill输出noul／choice／score；confidence等于最高选项概率（noul为max(p,1-p)），不是熵统计量。score为从0起的rubric索引期望。文档问题隔离不等于错误统计独立。"
+      },
+      "training": {
+        "en": "Proprietary; no independently audited training mixture, calibration split or contamination analysis obtained.",
+        "zh": "专有模型；未取得独立审计的训练混合、校准划分或污染分析。"
+      },
+      "availability": {
+        "en": "Gemini Developer API v1beta, model gemini-decision-1; up to1000 questions and262144 tokens total. Paid input $0.10/M tokens as reviewed November13; shared input once/request plus question tokens, zero output tokens; no cross-request caching.",
+        "zh": "Gemini Developer API v1beta，模型gemini-decision-1；最多1000题，总上下文262144 tokens。11月13日核价为输入$0.10/百万tokens；每请求共享输入计一次，题目token另计、输出0 tokens，无跨请求缓存。"
+      }
+    },
+    {
       "category": "core_models",
       "reviewed_on": "2026-10-25",
       "weight_revision": "v2.0 HF nace-ai/drex-v2.0@3e6d164cb5c8cf264eec167905cc2448d89ea97d (published LFS identities; tensor bytes not locally verified; v1.5 remains unpinned)",
@@ -4805,6 +4976,116 @@
       "caveat": {
         "en": "Seed-correct diagnostic selection is not traffic risk. MIT code needs assets, settings, adapters and annotation; paper/code oracle paths differ. No failure counts reproduced here.",
         "zh": "仅种子答对的诊断选择不是流量风险；MIT 代码仍需资产、设置、适配与标注，论文／代码裁判路径有差异，本仓库未复现失效计数。"
+      }
+    },
+    {
+      "id": "relevance-calibration-nov08",
+      "name": "Beyond Ranking: calibrated relevance scoring",
+      "url": "https://arxiv.org/html/2611.11480v1",
+      "category": "evaluation",
+      "source_ids": [
+        "relevance-calibration-nov08"
+      ],
+      "reviewed_on": "2026-11-13",
+      "summary": {
+        "en": "Same-candidate relevance ranking and held-out probability calibration.",
+        "zh": "同候选相关性排序与留出集概率校准。"
+      },
+      "use": {
+        "en": "Choose evidence-set cutoffs after target-task calibration.",
+        "zh": "经目标任务校准后选择证据集合截断点。"
+      },
+      "caveat": {
+        "en": "Third-party paper report; historical Jev1.13 endpoint, judged-pair selection and truncated inputs. No production RAG outcome or local reproduction.",
+        "zh": "第三方论文报告；历史Jev1.13端点、仅已判定样本及截断输入。无生产RAG效果或本地复现。"
+      }
+    },
+    {
+      "id": "system1-audit-nov09",
+      "name": "System1 perturbation and question-interference audit",
+      "url": "https://arxiv.org/html/2611.12521v1",
+      "category": "evaluation",
+      "source_ids": [
+        "system1-audit-nov09"
+      ],
+      "reviewed_on": "2026-11-13",
+      "summary": {
+        "en": "Audits distribution-derived confidence, bundled questions and perturbation explanations.",
+        "zh": "审计分布派生置信度、多题干扰及扰动解释。"
+      },
+      "use": {
+        "en": "Test isolated/bundled parity and retained-label perturbations before deployment.",
+        "zh": "部署前测试单题／多题一致性与保标签扰动。"
+      },
+      "caveat": {
+        "en": "Open-weight models, not hosted Jev; quantized single-GPU runs, synthetic clinical cases and balanced security samples. No clinical or security deployment proof.",
+        "zh": "评估开放权重模型而非托管Jev；单GPU量化、合成临床案例与平衡安全样本。不证明临床或安全生产效用。"
+      }
+    },
+    {
+      "id": "conflict-typing-oct27",
+      "name": "Decision models for RAG conflict typing",
+      "url": "https://arxiv.org/html/2610.36915v1",
+      "category": "evaluation",
+      "source_ids": [
+        "conflict-typing-oct27"
+      ],
+      "reviewed_on": "2026-11-13",
+      "summary": {
+        "en": "Flat conflict classification, decomposition and confidence-gated cascades.",
+        "zh": "直接冲突分类、问题拆分与置信门控级联。"
+      },
+      "use": {
+        "en": "Compare direct choice with decomposition and measure downstream grounded answers.",
+        "zh": "比较直接选择与拆分，并测下游答案证据支撑。"
+      },
+      "caveat": {
+        "en": "One gateway census; small skewed benchmark, mutable endpoints and model judges. Not statistically equivalent to a stronger LLM or a factual-grounding result.",
+        "zh": "单网关盘点；小型偏斜测试集、可变端点及模型裁判。未证明与强LLM统计等价或事实支撑提升。"
+      }
+    },
+    {
+      "id": "entity-matching-oct25",
+      "name": "Entity matching using decision models",
+      "url": "https://arxiv.org/html/2610.34626v1",
+      "category": "evaluation",
+      "source_ids": [
+        "entity-matching-oct25"
+      ],
+      "reviewed_on": "2026-11-13",
+      "summary": {
+        "en": "Zero-shot record-pair matching with prompt, robustness and cascade comparisons.",
+        "zh": "零样本记录对匹配，比较提示、鲁棒性与级联。"
+      },
+      "use": {
+        "en": "Test catalog deduplication after blocking with false-merge costs.",
+        "zh": "在候选阻塞后测试目录去重，计入错误合并代价。"
+      },
+      "caveat": {
+        "en": "Paper benchmark evidence; pair classification is not end-to-end entity resolution or proven production savings. Cascade adds an LLM ensemble.",
+        "zh": "论文基准证据；记录对分类不是端到端实体消歧或已证生产节省，级联另加LLM集成。"
+      }
+    },
+    {
+      "id": "time-series-oct24",
+      "name": "Jev time-series decision benchmark",
+      "url": "https://arxiv.org/html/2610.33410v1",
+      "category": "evaluation",
+      "source_ids": [
+        "time-series-oct24"
+      ],
+      "reviewed_on": "2026-11-13",
+      "summary": {
+        "en": "Evaluates serialized sequences, event types and directional predictions.",
+        "zh": "评估序列输入、事件类别及方向预测。"
+      },
+      "use": {
+        "en": "Keep specialized temporal baselines and explicit negative findings.",
+        "zh": "保留专用时序基线及明确负面结果。"
+      },
+      "caveat": {
+        "en": "Historical Jev1.13 study; many numerical tasks and stock movement show weak discrimination. No trading return, industrial deployment or local reproduction.",
+        "zh": "历史Jev1.13研究；许多数值任务与股价方向区分弱。无交易收益、工业部署或本地复现。"
       }
     }
   ]

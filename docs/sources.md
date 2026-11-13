@@ -2240,3 +2240,99 @@
 - Source revision: `c950900359fecd892e0a51cc7e828f83d425e290`
 - Note: Pinned README describes transcript-based semantic turn detection layered on acoustic signals, state machine, limitations and author spike checks. Integration example, not independently validated large production A/B. No code executed.
 
+<a id="jev-judgment-nov03"></a>
+## Judgments and code-owned decisions
+
+- Source: https://typesafe.ai/blog/dont-call-it-a-decision-model
+- Kind: `official_publication`; review depth: `content_reviewed`; reviewed: 2026-11-13
+- Source revision: `not captured / live URL`
+- Note: Nov3 vendor architecture guidance; not a new checkpoint or measured deployment uplift.
+
+<a id="jev-changelog-nov13"></a>
+## Jev model changelog checked November13
+
+- Source: https://docs.typesafe.ai/changelog
+- Kind: `official_docs`; review depth: `content_reviewed`; reviewed: 2026-11-13
+- Source revision: `not captured / live URL`
+- Note: Latest listed entry in this review remains Jev1.14, October14. Absence of another entry is not proof that every serving component is unchanged.
+
+<a id="relevance-calibration-nov08"></a>
+## Beyond Ranking: calibrated relevance scoring
+
+- Source: https://arxiv.org/html/2611.11480v1
+- Kind: `paper`; review depth: `content_reviewed`; reviewed: 2026-11-13
+- Source revision: `not captured / live URL`
+- Note: Version1 full-text protocol/results/limitations sections reviewed; linked code and raw outputs not independently audited; no inference run.
+
+<a id="system1-audit-nov09"></a>
+## System1 perturbation and question-interference audit
+
+- Source: https://arxiv.org/html/2611.12521v1
+- Kind: `paper`; review depth: `content_reviewed`; reviewed: 2026-11-13
+- Source revision: `not captured / live URL`
+- Note: Version1 full-text protocol/results/limitations sections reviewed; linked code and raw outputs not independently audited; no inference run.
+
+<a id="conflict-typing-oct27"></a>
+## Decision models for RAG conflict typing
+
+- Source: https://arxiv.org/html/2610.36915v1
+- Kind: `paper`; review depth: `content_reviewed`; reviewed: 2026-11-13
+- Source revision: `not captured / live URL`
+- Note: Version1 full-text protocol/results/limitations sections reviewed; linked code and raw outputs not independently audited; no inference run.
+
+<a id="entity-matching-oct25"></a>
+## Entity matching using decision models
+
+- Source: https://arxiv.org/html/2610.34626v1
+- Kind: `paper`; review depth: `content_reviewed`; reviewed: 2026-11-13
+- Source revision: `not captured / live URL`
+- Note: Version1 full-text protocol/results/limitations sections reviewed; linked code and raw outputs not independently audited; no inference run.
+
+<a id="time-series-oct24"></a>
+## Jev time-series decision benchmark
+
+- Source: https://arxiv.org/html/2610.33410v1
+- Kind: `paper`; review depth: `content_reviewed`; reviewed: 2026-11-13
+- Source revision: `not captured / live URL`
+- Note: Version1 full-text protocol/results/limitations sections reviewed; linked code and raw outputs not independently audited; no inference run.
+
+<a id="google-decision-launch"></a>
+## Gemini Decisions API launch
+
+- Source: https://blog.google/innovation-and-ai/technology/developers-tools/gemini-decisions-api/
+- Kind: `official_publication`; review depth: `content_reviewed`; reviewed: 2026-11-13
+- Source revision: `not captured / live URL`
+- Note: November11 launch. Vendor benchmark/calibration and internal deployment claims; no item-level artifacts or independent production audit inspected.
+
+<a id="google-decision-changelog"></a>
+## Gemini API November11 release notes
+
+- Source: https://aistudio.google.com/docs/changelog
+- Kind: `official_docs`; review depth: `content_reviewed`; reviewed: 2026-11-13
+- Source revision: `not captured / live URL`
+- Note: November11 entry confirms gemini-decision-1 and Decisions API release. Original ai.google.dev URL redirects here.
+
+<a id="google-decision-model"></a>
+## Gemini Decision1 model specification
+
+- Source: https://aistudio.google.com/docs/models/gemini-decision-1
+- Kind: `official_docs`; review depth: `content_reviewed`; reviewed: 2026-11-13
+- Source revision: `not captured / live URL`
+- Note: Input modalities, context and question limits, unsupported capabilities reviewed. API model identifier is not a weight hash.
+
+<a id="google-decision-guide"></a>
+## Gemini Decisions API guide
+
+- Source: https://aistudio.google.com/docs/decisions-api
+- Kind: `official_docs`; review depth: `content_reviewed`; reviewed: 2026-11-13
+- Source revision: `not captured / live URL`
+- Note: Typed outputs, confidence formula, isolation, error semantics, media and request limits reviewed. No SDK or API execution.
+
+<a id="google-decision-pricing"></a>
+## Gemini Decision1 pricing
+
+- Source: https://aistudio.google.com/docs/pricing#gemini-decision
+- Kind: `official_docs`; review depth: `content_reviewed`; reviewed: 2026-11-13
+- Source revision: `not captured / live URL`
+- Note: Decision-specific Standard table and billing semantics reviewed November13; excludes full application cost.
+
