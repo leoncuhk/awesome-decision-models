@@ -1,6 +1,6 @@
 # 动态技能加载：业务研究与实验入口
 
-版本2026-11-13。状态：资料核查、可执行实验合同与合成示例；未运行模型，未验证业务收益。本文是本分支的当前执行入口，早期矩阵只作条件性备选。
+版本2026-11-17。状态：资料核查、可执行实验合同与合成示例；未运行模型，未验证业务收益。本文是本分支的当前执行入口，早期矩阵只作条件性备选。
 
 ## 先读什么
 
@@ -8,6 +8,7 @@
 |---|---|
 | 是否值得做，何时停止 | [价值审查](dynamic-skill-loading-value-review.zh-CN.md) |
 | 谁在实际使用，有什么反例 | [decision models应用证据](decision-model-application-evidence.zh-CN.md) |
+| 当前诉求下哪些路径适用，缺什么信息，先处理哪条 | [领域路径判断研究](domain-path-applicability-research.zh-CN.md) |
 | Agent思考步骤能否省掉 | [REFLEX与用户截图](agent-control-reflex-trajectory.zh-CN.md) |
 | 新增一手研究、公共实验资产及版本 | [研究补充](dynamic-skill-loading-research-supplement.zh-CN.md) |
 | 详细研究假设与备选矩阵 | [中文方案](dynamic-skill-loading-experiment-plan.zh-CN.md) / [English](dynamic-skill-loading-experiment-plan.md) |
