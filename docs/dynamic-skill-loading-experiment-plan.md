@@ -6,6 +6,8 @@ Version v2, 2026-11-13 (v1 hypotheses retained as conditional options). Status: 
 
 > 2026-11-13 review: Stages 1–4 remain conditional options. Apply Stage 0 first; read the historical source-table shorthand with the qualifications below.
 
+> 2026-11-17 scope update: the current question is [path applicability, information sufficiency, conflicts and precedence](domain-path-applicability-research.zh-CN.md), with decision models as candidate implementations. This document retains the conditional loading experiment. Define the contract and diagnose the bottleneck through the [current business entry](dynamic-skill-loading-business-playbook.zh-CN.md) before expanding this matrix; the domain note distinguishes direct references, verification methods and KADS's historical status.
+
 ### Stage 0: establish a remediable bottleneck
 
 Compare the incumbent, statically pruned/metadata-first loading, an adjudicated sufficient-skill diagnostic reference, and simple retrieval with fallback. Freeze executor, policy, visible evidence and caching. Use a small authorized real-task diagnostic set, reporting natural traffic and stress cases separately. If the reference does not improve outcomes, repair execution/evaluation first; if static pruning suffices, do not build a loader; if simple retrieval passes acceptance, use existing components. Expand the matrix only after multi-turn omissions/interference demonstrably affect task utility. Size and thresholds require pilot evidence and business costs, not universal assumptions about 40 skills, recall .98 or fixed percentage-point gains.

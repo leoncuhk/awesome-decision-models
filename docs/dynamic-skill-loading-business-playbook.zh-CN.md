@@ -1,4 +1,4 @@
-# 动态技能加载：业务研究与实验入口
+# 企业客服路径判断与动态技能加载：业务研究入口
 
 版本2026-11-17。状态：资料核查、可执行实验合同与合成示例；未运行模型，未验证业务收益。本文是本分支的当前执行入口，早期矩阵只作条件性备选。
 
@@ -6,15 +6,21 @@
 
 | 问题 | 入口 |
 |---|---|
+| 当前研究问题、四项输出和资料对应范围 | [领域路径判断研究](domain-path-applicability-research.zh-CN.md) |
 | 是否值得做，何时停止 | [价值审查](dynamic-skill-loading-value-review.zh-CN.md) |
 | 谁在实际使用，有什么反例 | [decision models应用证据](decision-model-application-evidence.zh-CN.md) |
-| 当前诉求下哪些路径适用，缺什么信息，先处理哪条 | [领域路径判断研究](domain-path-applicability-research.zh-CN.md) |
 | Agent思考步骤能否省掉 | [REFLEX与用户截图](agent-control-reflex-trajectory.zh-CN.md) |
 | 新增一手研究、公共实验资产及版本 | [研究补充](dynamic-skill-loading-research-supplement.zh-CN.md) |
 | 详细研究假设与备选矩阵 | [中文方案](dynamic-skill-loading-experiment-plan.zh-CN.md) / [English](dynamic-skill-loading-experiment-plan.md) |
 | 如何开始标注与记录 | [合成案例](examples/skill-loading/cases.jsonl)、[结果记录模板](examples/skill-loading/run-record.json) |
 
-研究对象分为：判定是否启动流程；在流程中保持/切换/澄清；选择并加载必要技能；执行已加载技能。这四个层次分别测量。权限控制、状态读取和业务政策不是加载器可以绕过的部分。
+## 当前主问题与实验顺序
+
+**面对客户当前诉求、相关对话、已确认状态和候选路径条件，判断哪些路径适用、信息是否充分、是否存在冲突，以及多条路径相关时如何安排先后。** 四项输出及其资料对应只在[领域路径判断研究](domain-path-applicability-research.zh-CN.md)集中维护。
+
+先解决这一业务判断合同，再检验是否需要Jev/Koa类独立判断器。技能的选择与正文加载属于后续可能的上下文干预；条件是已观察到必要技能遗漏或无关上下文干扰。保留原有“触发—保持/切换/澄清—加载—执行”分层，各层分别验收。权限、状态事实与业务政策由企业合同确定。
+
+优先参考Parlant与EMT/MUDERN的部分机制，SOPBench用于检查；Koa用于判定器实现对照，KADS降为历史方法参考。τ²、CARE、FlowBench等按其实际职责提供验收或表示方法，不能合称专用decision model的成功案例，也不把它们强行组装成新平台。
 
 ## 场景一：订阅服务的取消、退款与投诉（建议首个诊断）
 
@@ -54,12 +60,12 @@
 
 来源耗时、浏览失败、并行依赖与模型生成分别记时。若主要时间在网络或深度综合，换判断器不会显著加速。实验协议见[截图与REFLEX分析](agent-control-reflex-trajectory.zh-CN.md)。
 
-## 分两步实验，避免无法归因
+## 分阶段实验，避免无法归因
 
 | 阶段 | 对照 | 固定项 | 推进依据 |
 |---|---|---|---|
-| 0 瓶颈诊断 | 当前系统、静态精简、人工充分技能参考 | 同模型、状态、工具与任务 | 能归因的候选干扰/漏载或控制调用成本 |
-| A 判断器替换 | 现有router、规则/小监督模型、便宜LLM级联、至多2个decision候选 | 同一技能暴露方式 | 关键错误约束内净成本/时延改善 |
+| 0 瓶颈诊断 | 当前系统；核实状态、政策、候选、工具与现有判断 | 同一业务合同与案件 | 明确错误归因；仅当加载是瓶颈时加入静态精简/人工充分技能参考 |
+| A 判断器替换 | 现有LLM/判定流程、规则/小监督模型、便宜级联、至多2个decision候选 | 同状态、候选、政策、执行器与暴露方式 | 四项输出和关键错误约束内净成本/时延改善 |
 | B 加载策略 | 静态分组、原生按需读取、简单检索回退、状态触发补载 | 固定阶段A判断器与执行器 | 在A之外有额外任务/成本收益 |
 | C 验收 | 冻结最佳方案对当前实际基线 | 独立案件/时间留出、冻结规则与阈值 | 达预定业务门槛与不确定性要求 |
 
@@ -88,4 +94,4 @@
 
 ## English orientation
 
-This branch now has a business-first entry point. Use one bounded workflow, diagnose whether context/selection is actually a bottleneck, compare decision-model substitution at fixed loading, then compare loading policies at fixed models. The synthetic fixtures are protocol illustrations, not benchmark data or measured results. The bilingual original plan remains a conditional expansion; this playbook is the current execution guide.
+This branch's current business question is path applicability, information sufficiency, conflicts and precedence under confirmed state. Define and diagnose that contract first, compare judgment implementations at fixed state/candidates/executor, and test dynamic loading only if context or missing skills are an observed bottleneck. References have separate methodological, implementation and evaluation roles; KADS is historical, not a verified production blueprint. The synthetic fixtures are protocol illustrations, not measured results. The bilingual original plan remains a conditional loading experiment; this playbook is the current guide.
