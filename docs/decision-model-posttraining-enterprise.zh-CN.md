@@ -54,7 +54,7 @@ decision-model方法、底座与选型讨论在本仓`docs/`保持正本；工�
 | 候选／当前核查起点 | 适配对象与开放程度 | 48GB Mac上的选择边界 |
 |---|---|---|
 | 普通监督分类器、冻结embedding＋小分类头 | 标签稳定、状态短时可直接训练；模型小、成本容易量清 | 必须有的任务基线。固定标签头无法天然接收任意新路径，但可用请求＋候选配对做条件判断；不是只能用于简单关键词 |
-| [Laya](https://github.com/NandhaKishorM/laya) | English421M／multilingual322M；encoder＋决策头；官方有全参／冻结encoder、CE／RLCD、MPS训练与校准接口；Apache-2.0 | 中文路径判断可作为便宜首轮候选。优先小规模真实数据对照，不能从公开typed-decisions成绩推定企业效果；Mac配方见旁页 |
+| [Laya](https://github.com/NandhaKishorM/laya) | English421M／multilingual322M；encoder＋决策头；官方有全参／冻结encoder、CE／RLCD、MPS训练与校准接口；Apache-2.0 | 只确认可审查训练入口；独立中文／跨域负面证据不支持企业质量优先级。先通过同条件质量门槛，才判断是否值得投入适配；Mac页是实现备选 |
 | [GLiClass](https://github.com/Knowledgator/GLiClass) | 动态标签／描述条件化分类；不同代际有32.7M小模型、多语种encoder与更大decoder模型，训练代码和权重可用 | 对固定与动态标签均是实质候选；需按精确版本检查多语种能力、读出和训练接口。公开train.py的随机切分不能替代企业分组／时间切分 |
 | [Kev](https://github.com/jaredpalmer/kev) | 0.8／4／9B为Qwen3.5-Base＋LoRA与pointer head；27B为Qwen3.8-27B全权重版本；训练、校准和模型卡较完整 | 0.8B或4B可作需更强上下文理解时的候选；MPS训练与MLX服务是两条实现。9B需验证训练余量，27B原精度权重已超出48GB，不是本机首轮方案 |
 | [Strands Decider](https://github.com/strands-labs/strands-decider) | 当前Qwen3.5-2B-Base分支及四种Gemma4指令底座分支；LoRA＋pointer head，版本有多seed合并与后校准；原料有未完整公开部分 | 已有MLX推理不等于MLX训练／校准；官方训练recipe以NVIDIA环境为主。Qwen视觉继承与真实图像适配不同，Gemma发布分支为文本，不能全家族合称多模态已训练 |
@@ -69,7 +69,28 @@ decision-model方法、底座与选型讨论在本仓`docs/`保持正本；工�
 
 上述模型的代码／权重许可与训练来源许可分开。Apache-2.0卡片不能自动覆盖混合训练语料；某个家族含研究用／非商业来源时，需按精确artifact解释，不能用另一个同家族版本代替。
 
-**条件性选择：** 标签固定且低成本基线已达标，就采用小分类器；需要候选描述／状态语义且预算有限，比较Laya／GLiClass；复杂组合、长政策或encoder稳定失败，再有限增加0.8–4B的pointer／token读出候选；确有图像证据需求，才进入多模态分支。只有可复现的独立领域增益足以支持扩大模型和训练方法，不按参数量、发布时间或通用榜单预定冠军。
+**条件性选择：** 标签固定且低成本基线已达标，就采用小分类器；需要候选描述／状态语义时，可将encoder与一个较强的pointer／token读出候选纳入同协议比较。Laya／GLiClass的本地训练实现只解决工程准入，不赋予质量优先级；尤其不能因为便宜而跳过更强质量参考。复杂组合、长政策或encoder稳定失败时优先诊断证据与表示，再决定扩大模型；确有图像需求才进入多模态分支。最终排序由领域质量门槛、风险—覆盖及完整成本决定。
+
+### 选型证据二次核查：Laya低分不能用“可以微调”抵销
+
+前述Laya配方保留为**训练链路候选**，撤回任何由“Mac可训、体积小”推出“应优先作为企业底座”的表述。下列证据来自不同实验家族；论文、其GitHub和转述该论文的文章只计一个来源，不能算三次独立验证。
+
+| 证据家族／固定来源 | 实际比较与可用结果 | 对当前选型的约束 | 证据强度与剩余缺口 |
+|---|---|---|---|
+| [JEVal v2](https://arxiv.org/html/2610.03935v2#S4.T1) | 相同基准下Laya准确率26.30%，Jev78.38%、SII-Decision-27B79.24%；检查点与输入协议细节见[方法核查](decision-model-posttraining-method-audit.zh-CN.md) | 是被测Laya的明确零样本负证据，必须进入选型；不能用“encoder本来要微调”删除此行，也不能把它当所有Laya变体的统一成绩 | 第三方作者报告，本仓未重跑模型；参数、输入长度和训练暴露不匹配，故不是架构或后训练增益的受控比较 |
+| [中文zh-decision-bench，aaf56ff1](https://github.com/CodyQin/zh-decision-bench/tree/aaf56ff139dc5440da3939892cad249154f1d35b) | 直接复算该仓已发布逐题概率：多语种Laya在323题语音路由281题正确，在34题客服路由21题正确；Jev分别310和30，NeoHorse4B分别307和31，Qwen2B探针分别303和30 | 多语种版本也有明显差距，不能把JEVal低分仅解释为英文checkpoint的问题；改A/B、缩短上下文或调温是待测新设计，不代表差距已解决 | 10份原始JSONL的计数/配对已核；模型只记录名称和laya0.3.20，未固定HF权重SHA。客服组小、合成且单人裁定；不同模型预算不匹配，未新运行或独立重标注 |
+| [独立参考审计，表12及§6/9](https://arxiv.org/html/2610.36311v1#S9) | 多语种Laya领域适配有正结果：News Category从.585到.831，Jev.817；Financial tweets从.642到.926，Jev.728；LIAR2从.282到.324，Jev.319。所列适配后分数为最大预算的三seed均值；达到论文2pp非劣界的标签起点随域为250–8000，LIAR2未达到该标准 | 说明低零样本成绩不等于不可适配；也说明适配并不保证解决任务。该证据不足以预先把Laya排在其他可训练底座前面 | 独立作者、三个训练种子、单独校准/报告集，产物在[Zenodo](https://doi.org/10.5281/zenodo.23676316)。非中文客服；同文较难候选对照中相对Jev的优势可由标签频率解释，Fake.Br高分依赖标点，漂移后门槛仍失效，不能只取高分 |
+| [Laya官方训练消融](https://github.com/NandhaKishorM/laya/issues/887)及[固定训练说明](https://github.com/NandhaKishorM/laya/blob/d1282e791d71e92f24f816ff3836e4fd1c2ded4a/docs/finetune.md) | English checkpoint在MASSIVE英语20选项、同测试2974题中，从.730到约.94；两seed监督适配，打乱选项另有小幅收益。typed-decisions的.766也是使用该基准训练划分后的成绩 | 可证明特定协议下有可学习增益；不能拿适配后的英语/typed成绩，覆盖另一基准的零样本失败或证明中文迁移；MASSIVE两臂均soft-CE，也不能用它证明CE优于RLCD | 训练开发方报告与公开notebook，不是独立企业复现；同底座学习曲线有效，但跨方法与跨模型结论另需对照 |
+
+中文逐题复算使用固定提交中的`results/raw/v02_<model>.jsonl`和`v02s_<model>.jsonl`，`<model>`为`jev`、`laya-en`、`laya-multi`、`neohorse`、`qwen`。去除`_meta`后按`(item_id, question)`配对，五组均有相同467个键、相同gold与选项；取`argmax(probs)`对照`gold_idx`。共378个原始case产生467个判断，不能将共享case的多个问题当独立案件。整体正确数分别为416、324、370、405、388；323个语音题占大多数，整体均值不是生产流量权重。仓库README的部分段落仍保留旧数字，本文采用逐题输出，不采用其“某模型胜出”的推广措辞。
+
+**本轮推荐置信度：**
+
+- **高：** “Laya可训”不足以支持“Laya质量优先”；需要保留较强质量参考，并逐一核对零样本、领域适配、语言、候选数和回退成本。中文原始记录与JEVal给出了两条不同来源的负证据。
+- **中：** 有可信领域标签、短文本和明确局部合同的时候，Laya是可以做受限学习曲线的廉价候选；独立适配研究支持这种可能性，未证明它优于其他同预算适配方案。
+- **低／未建立：** 当前没有“同一中文企业数据、同一可见证据、同等训练/选择预算和完整成本”下的底座胜者，也没有“监督CE始终优于RLCD”的证据。Mac实现成熟度不能替代这些缺口。
+
+提高任何候选的优先级，需要在冻结的新请求上证明：关键错误与覆盖达到事先确定的质量底线；相比原版有独立适配增量；在等质量或预定非劣界内节省完整成本；换顺序、近义路径、缺失候选、噪声及新政策后仍满足门槛。任一项失败，就缩窄职责、换候选或停止，不能只增加训练轮次来保护既有推荐。
 
 ## 4. 真实数据应该怎样变成训练信号
 
@@ -93,6 +114,8 @@ decision-model方法、底座与选型讨论在本仓`docs/`保持正本；工�
 
 本轮方法核查的细节和争议见[训练目标审查](decision-model-posttraining-method-audit.zh-CN.md)。交叉熵是清晰监督任务的有效起点，严格适当目标并不免除领域校准，先思考后蒸馏也不免除教师正确性核验。稀疏业务奖励需要独立的结果口径、策略选择与反馈归因；不能先规定要用RL，再把所有案件成败改写成局部路由奖励。
 
+后续多种子核查也限定了方法优先级：Laya的[Gate D配对面板](https://github.com/NandhaKishorM/laya/blob/d1282e791d71e92f24f816ff3836e4fd1c2ded4a/research/scripts/step4_benchmark/GATE_D_RESULTS.md)中，soft-CE相对RLCD三seed准确率差为−1.45、+1.35、+0.15个百分点。已复算公开汇总，没有稳定方向；不能据早期单seed表格认定CE胜出。监督基线的地位与已证明方法最优是两件事，具体限制见[方法核查§7](decision-model-posttraining-method-audit.zh-CN.md#7-同一laya内soft-ce与rlcd复算公开多种子结果)。
+
 | 已有信号与任务 | 优先比较 | 什么时候才扩大方法 |
 |---|---|---|
 | 完整可信标签，能从可见证据作有限答案判断 | 同底座CE／BCE或候选排序监督；与简单分类器、原版模型匹配比较 | 有独立剩余错误时，再比较Brier项、可训练范围、对比反例；不默认RL会更好或更差 |
@@ -109,7 +132,7 @@ decision-model方法、底座与选型讨论在本仓`docs/`保持正本；工�
 
 48GB可以支持有意义的小模型实验，但模型能推理、LoRA参数少、甚至一次训练成功，都不保证同一训练配置的梯度、校准、合并和服务行为正确。先做真实权重的短输入前向／反向、数十次更新、保存重载和概率比对；观察峰值内存、swap、温度与吞吐，再扩到完整训练。固定后端、精度和模板，不能用另一个GPU／MLX后端的校准值直接宣称相同风险。
 
-Laya／GLiClass等encoder较适合首轮；Laya官方MPS full／head训练与LayaStudio MLX LoRA各有真实实现，不把MLX运行时本身当trainer。0.8–4B decoder候选在短序列、参数高效更新下可作工程验证对象；9B与多模态custom head需额外余量和operator验证。27B BF16权重约54GB量级，已超48GB，4-bit推理可用不代表其原始训练配方也可迁移。
+Encoder可以提供资源开销对照，不能据此排在质量候选之前。Laya官方MPS full／head训练与LayaStudio MLX LoRA各有真实实现，不把MLX运行时本身当trainer。0.8–4B decoder候选在短序列、参数高效更新下可作工程验证对象；9B与多模态custom head需额外余量和operator验证。27B BF16权重约54GB量级，已超48GB，4-bit推理可用不代表其原始训练配方也可迁移。
 
 具体安装、版本、数据格式及校准保存见[Mac起步配方](decision-model-posttraining-mac-recipe.zh-CN.md)，平台和发布artifact差异见[平台核查](decision-model-posttraining-platform-audit.zh-CN.md)。硬件只是资源边界；当前缺少真实数据时不创建空实验工程，不把下载模型或通过工程测试记成业务进展。
 

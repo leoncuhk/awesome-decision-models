@@ -1,20 +1,22 @@
 # Mac上训练Skill／工具判断器：条件路线与运行配方
 
-核查日期：2026-11-19。目标硬件为M5 Pro、48GB。本页是官方文档、源码与模型卡核查；没有下载权重、执行模型前向或训练，不给出实测效果或训练耗时承诺。[企业后训练总览](decision-model-posttraining-enterprise.zh-CN.md)负责方法与选型；本页只提供一条可执行候选路线。
+核查日期：2026-11-19。目标硬件为M5 Pro、48GB。本页是官方文档、源码与模型卡核查；没有下载权重、执行模型前向或训练，不给出实测效果或训练耗时承诺。[企业后训练总览](decision-model-posttraining-enterprise.zh-CN.md)负责方法与选型；本页只提供一条训练链路备选，**Laya尚未通过企业效果选型，不能因可在Mac训练就优先采用。**
 
-## 结论与理由
+## 配方对象与选型边界
 
-**当任务是较短文本、候选相关性判断且适合单机Mac试验时，可选官方Laya多语种322M checkpoint，用`laya.train`做监督交叉熵后训练，再独立校准与验证拒判。** 中文／中英混合任务比较多语种；纯英语可将English 421M纳入同协议候选。该判断基于接口和训练实现可审查，尚未由企业数据选出胜者；复杂规则、长上下文或图像任务按总览另选路线。[官方训练说明](https://github.com/NandhaKishorM/laya/blob/d1282e791d71e92f24f816ff3836e4fd1c2ded4a/docs/finetune.md)、[多语种模型](https://huggingface.co/convaiinnovations/laya-multilingual)
+**本文以官方Laya多语种322M checkpoint示范`laya.train`的监督训练、独立校准和拒判链路。** 配方对应较短文本与候选相关性判断；中文／中英混合时需评测多语种检查点，纯英语也可比较English 421M。代码接口可审查是保留这个实现样例的理由，不能据此选出企业效果胜者；模型质量及复杂规则、长上下文或图像任务的路线由总览中的证据和验收门槛决定。[官方训练说明](https://github.com/NandhaKishorM/laya/blob/d1282e791d71e92f24f816ff3836e4fd1c2ded4a/docs/finetune.md)、[多语种模型](https://huggingface.co/convaiinnovations/laya-multilingual)
+
+后续证据交叉核查已发现多语种Laya本身也有中文任务弱于对照的公开结果，不能把JEVal低分简单解释成“用了英文版”或“上下文只有512”。任务内微调高分也需排除空输入、标签先验和同源模板捷径；负面证据与检查点/输入审计见总览及[方法核查](decision-model-posttraining-method-audit.zh-CN.md)。本页保留配方，不代表已决定投资该模型。
 
 任务先定义为：用户请求和当时可见状态，加一个候选 Skill／工具的真实描述／必要正文，判断该候选是否应加载；所有候选都不成立时返回无适用项。每候选使用固定的中性 `A/B` 选项，把候选内容放入 `state`，避免将变化的工具名当成固定输出类。先检索少量候选再逐个判断，保留候选召回率与判断准确率两套指标；多个候选可同时适用，不能把多工具需求强制标成唯一标签。
 
-先做 `soft-ce` 的理由是已有明确监督标签，损失直接可优化，且官方已提供此实现。RLCD 是可另行比较的训练目标；严格适当评分规则的数学性质不证明目标流量上的概率已校准，也不证明它比交叉熵更适合本任务。后续只有同数据、同更新预算的对照能改变这个选择。
+下面的`soft-ce`仅展示一个监督基线，不是已选出的最优目标。公开Laya三种子同协议实验没有复现出它对`rlcd`的稳定准确率优势；两者都需要在相同起点、数据、更新预算和种子下比较。该结论针对Laya的实现，不能替代其他架构上的方法判断，也不等于两种方法等价。严格适当评分规则的数学性质不证明目标流量已校准。[配对多种子结果](https://github.com/NandhaKishorM/laya/blob/d1282e791d71e92f24f816ff3836e4fd1c2ded4a/research/scripts/step4_benchmark/GATE_D_RESULTS.md)
 
 ## 方案比较
 
 | 路线 | 已核查事实 | 本轮判断 |
 |---|---|---|
-| **官方 Laya** | Apache-2.0；多语种321,908,998参数；官方有MPS／CPU训练、逐行问题JSONL、CE／RLCD、冻结encoder、选项打乱及校准接口 | 训练与推理同一上游，适合作为主方案；MPS训练默认fp32，需要显式开启梯度检查点 |
+| **官方 Laya** | Apache-2.0；多语种321,908,998参数；官方有MPS／CPU训练、逐行问题JSONL、CE／RLCD、冻结encoder、选项打乱及校准接口 | 已确认训练入口可审查，未确认企业质量达标；只保留为资源较低的链路备选。MPS训练默认fp32，需要显式开启梯度检查点 |
 | **LayaStudio MLX LoRA** | 独立Apache-2.0项目；确实实现encoder LoRA及完整decision head训练、模型合并和加载；依赖laya-mlx | 是真实Mac训练方案，但不是官方训练器。当前数据集共用一份questions schema，不能直接消费逐行变化候选集合；固定A/B候选相关性任务可用，作为内存／速度备选 |
 | **GLiClass** | Apache-2.0；可训练动态标签分类；instruct-edge仅32.7M，v4-edge约439.8M；两者不是同一版本或同一能力 | 32.7M适合廉价基线，v4可列比较候选；当前上游通用train.py默认随机切分，不应原样作为独立评估协议；未核验MPS真实训练 |
 | **Kev** | Apache-2.0；Qwen底座加LoRA／pointer head；train.py有MPS分支，MLX主要用于服务；0.8B已开放 | 完整、值得参考，不能把Mac MLX推理性能当训练可行性。当前Qwen3.5混合递归结构的MPS backward与内存仍须实测，作为需要更强状态推理时的后续候选 |
@@ -108,7 +110,7 @@ report = finetune(
 )
 ```
 
-这是保守的工程起步配置，未在目标机调优。固定A/B候选条件任务先不加入额外RL或LoRA方法；若改为多个候选的单题`choice`，官方支持`shuffle_options=("choice",)`。`--freeze-encoder`可先做便宜head-only基线；没有独立增益再决定是否扩大可训练范围。不要沿用trainer默认item随机校准切分去处理同请求的多候选派生样本。
+这是工程起步配置，未在目标机调优。正式比较时，分别从同一冻结基座运行`loss="soft-ce"`与`loss="rlcd"`，至少记录多种子差值和失败；每组使用不同输出目录，不能接着上一组的已训练权重继续跑。若改为多个候选的单题`choice`，官方支持`shuffle_options=("choice",)`。`freeze_encoder=True`可作便宜head-only基线。不要沿用trainer默认item随机校准切分去处理同请求的多候选派生样本。
 
 固定A/B示例协议可直接用实际推理runtime收集独立校准记录。下面代码保存为`calibrate_router.py`，执行`python calibrate_router.py`。它只拟合温度，没有更新模型权重，也没有替你决定业务拒判门槛：
 

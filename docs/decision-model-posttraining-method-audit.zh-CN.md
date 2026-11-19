@@ -105,3 +105,38 @@ SII使用同模型两条推理的候选logit分布平均作为目标，不用人
 论文全文核查不等于产物完整审计。PRDO[作者仓库](https://github.com/ZimmyGao/openjev-rlcd)当前HEAD为`5859d2b893314fb3581f06e4e36c303e372b3f48`；README描述`arxiv-v1`与`npj-experiments`两个tag，本次GitHub tags API及`git ls-remote --tags`都未返回tag，故不能把这些名称写成已成功解析的运行pin。真正复现前还需核对论文数据存档、每次run的代码版本和split哈希；当前默认分支存在训练代码不代表论文全部结果已在本地重建。
 
 本轮未下载权重、安装训练依赖、执行模型、核验原始企业数据或生产指标；没有新增`reproduced_here`记录。上述比较用于提出可证伪候选和纠正过度结论，最终方法取决于未来企业的决策合同与独立数据。
+
+## 6. Laya低分与此前优先建议：独立补核
+
+2026-11-19补核直接追查论文、公开数据、当前模型配置和已发布代码。**Mac训练入口可用不能推出效果优先；当前证据不足以把Laya列为企业客服后训练的默认首选。** JEVal中的低分必须保留，不能用未经验证的“语言／截断问题”替它解释。
+
+| 核查项 | 已确认 | 尚不能确认／对应结论 |
+|---|---|---|
+| 26.30%的口径 | [JEVal v2表1](https://arxiv.org/html/2610.03935v2#S4.T1)按10,938个choice/noul合并计数，失败计错；ECE .2485与raw Brier .833只算有效输出。NanoJev为25.34%，所以Laya处于低端但非严格最低 | 不是企业客服专用分数，不是微调后增益；不能与另一任务的作者微调成绩直接相减 |
+| 实际上下文预算 | [附录C.3／表9](https://arxiv.org/html/2610.03935v2#A3.SS3)明确把Laya从512提高至8,192，位置配置不改，保留48-token选项上限 | “因为评测只给512 tokens才低分”与论文说明矛盾。是否截掉关键证据／选项碰撞导致错误，缺逐题产物不能归因 |
+| 哪个Laya | 论文只写Laya和上游GitHub链接。其温度组合与[当前English配置](https://huggingface.co/convaiinnovations/laya/blob/e333cb7c823cd1787276228260f56d02fbf5180b/rl_agent_config.json)一致；[multilingual配置](https://huggingface.co/convaiinnovations/laya-multilingual/blob/92d22143468d8af669dc1a5a0480a2b21b4fe56e/rl_agent_config.json)则为全1温度、不同encoder | 这是English家族的配置指纹线索，不是论文实际权重ID／revision证明；当前配置不能倒填历史run。HF revision、PyPI版本、adapter和run manifest未公开固定 |
+| 原始预测与评测器 | [JEVal固定数据说明](https://huggingface.co/datasets/carlosxiang/JEVal/blob/5d0253c34cf5e371b3ae99c21f0a7170d7289f63/README.md)明确公开的是输入与标签，不含逐请求预测。[SII代码树1723d83](https://github.com/amazingljy1206/SII-Decision/tree/1723d83cbda69f48641c273280b5a2d06d6b3510)有SII训练／推理／验证，没有本次定位到的Laya adapter及原始run | 无法本地重算26.30、核分模型失败数或认证native／wrapper等价；网页、论文和同作者数据卡重复同一数字，不算三次独立复现 |
+
+另实际读取了公开`test.parquet`的固定版本`5d0253c34cf5e371b3ae99c21f0a7170d7289f63`（33,533,925 bytes；SHA-256 `88f090a510e511d1236fdf5ddb428a8b965663ff0cc1061f950b88f0c99d2e82`），只复算输入元数据，没有运行模型。确认11,257行＝9,582 choice＋1,356 noul＋319 score；其中3,297条分类指令含汉字，1,497条同时具有“指令含汉字、state无汉字”；2,294条choice超过20选项，最高255。这里“含汉字”是Unicode范围计数，不是语言识别或失败原因鉴定。
+
+**这些输入差异不能推翻低分。** 对CLINC150和NLU-Eval-68各200条，实际state、instruction、criteria均未检出汉字，论文仍报告Laya准确率39.0%和27.0%，而Jev为86.5%和80.5%；[对应表10–11](https://arxiv.org/html/2610.03935v2#A4.SS1)使“差距全由中文造成”站不住脚。另一方面，同表BoolQ的Laya为79.5%，表现随任务变化，不能以26.30%认定它在所有二元证据判断上都无效。大候选集合、输入预算和语言是需要分切片验证的条件，不是已证实的免责解释。
+
+据此应区分三个待验证命题：现成检查点的零样本能力、特定标注预算下的后训练增益、目标系统的净业务收益。JEVal直接约束第一项；它没有提供同数据、同预算的Laya／其他底座后训练比较。较小模型的训练接口和内存优势只支持把它作为可运行的低成本实验对照；是否进入生产候选，须先在相同状态、候选与中文切片上通过质量门槛，再比较标签效率、风险—覆盖与完整成本。缺少这一证据时，不能用“经过微调也许会更好”恢复默认优先级。
+
+## 7. 同一Laya内soft-CE与RLCD：复算公开多种子结果
+
+只引用官方训练页的单种子`.790`对`.7715`，会遗漏随后公开的[三种子Gate D](https://github.com/NandhaKishorM/laya/blob/d1282e791d71e92f24f816ff3836e4fd1c2ded4a/research/scripts/step4_benchmark/GATE_D_RESULTS.md)。[已合并PR #1012](https://github.com/NandhaKishorM/laya/pull/1012)报告六个训练单元；[PR #1210](https://github.com/NandhaKishorM/laya/pull/1210)提出纠正训练页对单种子优势的暗示，截至本次核查仍未合并。因此只阅读主分支文档并不足以完成方法核查。
+
+本次读取[已发布结果JSON](https://github.com/NandhaKishorM/laya/blob/d1282e791d71e92f24f816ff3836e4fd1c2ded4a/research/scripts/step4_benchmark/results/step4_gate_d_results.json)，执行其标准库分析器，并另用独立算式复核每组均值、标准差和配对差值。结果文件SHA-256为`10a4d02349c631973bde34a0c481a8593095db5cc9dbb9e0c0fb761dca28bd23`；文件归档在代码`d1282e79`中，实际训练记录的上游pin为`a4a8921afebfd852bba0000475cfb6ab737a124c`。这只是公开单元汇总的复算，没有重训或重新计算逐题预测。
+
+合同为English Laya、typed-decisions的1200训练case／6000决策、400校准item、400测试case／2000决策；两种loss使用相同四epochs、长度1024／head256、micro-batch8×accum8及学习率。RLCD seed0复用上一轮Gate R，其余五组为本面板新训。准确率如下，差值单位为**百分点**：
+
+| 种子 | RLCD | soft-CE | soft-CE−RLCD |
+|---|---:|---:|---:|
+| 0 | 77.50% | 76.05% | −1.45 |
+| 1 | 77.80% | 79.15% | +1.35 |
+| 2 | 77.55% | 77.70% | +0.15 |
+
+三组均值约为77.62%与77.63%，从未舍入单元值计算的均值差仅`+0.0167`个百分点；方向随种子改变。样本标准差为RLCD约0.16个百分点、soft-CE约1.55个百分点，但只有三seed，不能据此宣布方差普遍更低或两方法等价。作者结论是证据不足以更换默认loss，仍保留RLCD。该面板的Brier只覆盖choice/noul，校准路径、Torch版本和epoch随机数规则与原notebook还有差异，不能与别处数字直接拼接。
+
+据此，**soft-CE可作清楚可解释的监督基线，但本轮证据不支持其稳定胜过Laya的RLCD，更不支持在所有企业任务上优先采用。** MASSIVE英语约94%的适配结果比较的是选项打乱等因素，不是CE对RLCD；它不能补上这个方法选优缺口。真正选方法需固定底座、数据、可训练模块、更新与推理预算，记录多种子及按案件的配对结果，并保留结果不一致。
