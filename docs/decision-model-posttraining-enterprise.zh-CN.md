@@ -6,6 +6,23 @@
 
 入口：[当前四项判断合同](domain-path-applicability-research.zh-CN.md) · [业务实验入口](dynamic-skill-loading-business-playbook.zh-CN.md) · [训练目标与论文核查](decision-model-posttraining-method-audit.zh-CN.md) · [平台与实际可训练性核查](decision-model-posttraining-platform-audit.zh-CN.md) · [Mac可执行起步配方](decision-model-posttraining-mac-recipe.zh-CN.md)。多模态证据获取与文本化Skill路由保留各自问题，不自动成为彼此的前置模块。
 
+## 当前优先深入的前列路线
+
+后续讨论集中于能力较强且有后训练产物可查的少数路线。这里是**研究投入优先级**，不是企业采用排名；效果落后的路线只保留为背景和必要成本基线，不继续占据主讨论。
+
+| 重点 | 为什么值得优先研究 | 具体深入什么 |
+|---|---|---|
+| **SII-Decision：4B实战候选，27B能力参考** | JEVal论文所测4B准确率71.92%、27B为79.24%；4B高于同表其他4B决策模型。当前代码、训练数据、LoRA／Full权重已发布 | reasoning-to-readout自蒸馏、强模型／自身思考分布怎样压入便宜读出，以及域内标签校准。先核4B训练链路，27B用于能力参照，不把CUDA原配方当Mac已跑通 |
+| **Kev：4B适配链路，9B／27B质量对照** | 同表4B／9B／27B为68.90／70.87／77.17%；公开训练、校准、领域适配及冻结评测更完整 | 用自有标签从已有decision checkpoint继续适配；pointer head、LoRA范围、少数据效果、风险—覆盖及服务一致性。工程完整性与前列27B能力共同支持研究，不代表4B准确率最高 |
+| **Intern-Decision-4B：多字段／多模态专项** | 同表准确率70.74%、ECE .0152；共享状态、多字段回答骨架、CE与后校准的实现可查 | 企业同一状态下多条件判断、视觉证据、字段关系与marker监督。ECE低不是自动化风险保证；完整字段任务和实际训练实现分别验收 |
+| **Nimble-9B：证据敏感的数据与训练方法** | 同表准确率73.87%、ECE .1045；公开对比数据构造、LoRA和候选token读出 | 只改一个关键事实就翻转判断的边界样本、证据引用和schema适配。重点借鉴数据方法；较新托管v4／v4.1与开放9B不是同一个训练产物，代码和权重许可分开核验 |
+
+以上分数仅来自[同一JEVal v2表1](https://arxiv.org/html/2610.03935v2#S4.T1)，分母为10938个choice/noul，属于论文报告；它也是SII作者提出的基准，不能当对SII的独立企业认证，更不能覆盖当前所有版本。当前公开产物参考：[SII训练与数据](https://github.com/amazingljy1206/SII-Decision)、[Kev领域适配](https://github.com/jaredpalmer/kev)、[Intern训练实现](https://github.com/InternLM/Intern-Decision)、[Nimble数据与训练](https://github.com/bespokelabsai/nimble)。
+
+**训练方法先深入三项：**（1）可靠企业标签上的监督适配＋独立校准，作为效果与成本参照；（2）SII式推理到读出的蒸馏，验证是否能保留证据权衡；（3）Nimble式最小事实改动的数据构造，提高边界与反例覆盖——这是数据方法，不是CLM式embedding对比目标。只有明确需要中间计算、愿意承担推理开销时，再深入PRDO等推理分布优化，暂不把它插入所有实时路由。
+
+下一轮首先对照SII-Decision-4B与Kev-4B的任务适配，Intern-Decision-4B作多字段／图像专项，Nimble的数据构造方法可跨模型复用。对目标Mac先核4B的真实梯度、内存、保存重载与概率一致性，再决定训练方案；27B性能参考不能迁写成48GB上的正式训练承诺。
+
 ## 当前研究入口与两条分支
 
 2026-11-19读取远端heads和PR状态：远端是`main`加以下两条研究分支；本地另有历史review分支，不算新的工作主线。
