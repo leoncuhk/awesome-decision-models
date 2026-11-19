@@ -2,7 +2,7 @@
 
 [Home](../README.md) · [中文首页](../README.zh-CN.md) · [Evidence](evidence.md)
 
-Source review: 2026-11-13. These are source-backed descriptions and curatorial use cases, not production certifications.
+Source review: 2026-11-19. These are source-backed descriptions and curatorial use cases, not production certifications.
 
 `Unknown` is intentional. An inspected source revision does not identify the deployed weight revision. Language support, licenses and resource requirements must be checked for the exact artifact. Recorded weight identifiers are source-reported unless a local binary verification is explicitly documented; recording an identifier is not a claim that the weights were downloaded or hashed here.
 

@@ -111,3 +111,5 @@ Original code and curation text: [MIT](LICENSE). Linked projects, model weights,
 [Branch review and application intent](docs/branch-review-2026-11-13.md)
 
 [Dynamic skill loading and bounded control: business experiment entry (Chinese)](docs/dynamic-skill-loading-business-playbook.zh-CN.md) — Research branch: protocols and synthetic examples, no model or business validation.
+
+[Customer-service implementation review: Parlant, Modem and Entagl (Chinese)](docs/customer-service-implementation-review.zh-CN.md) — Pinned code, product contracts and replay evidence have separate roles; no production net-benefit validation.

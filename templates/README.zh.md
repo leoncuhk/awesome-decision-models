@@ -113,3 +113,5 @@
 [分支审查与应用意图](docs/branch-review-2026-11-13.md)
 
 [动态技能加载与有界控制：业务实验入口](docs/dynamic-skill-loading-business-playbook.zh-CN.md) — Research branch: protocols and synthetic examples, no model or business validation.
+
+[客服语义分流实现审查：Parlant、Modem、Entagl](docs/customer-service-implementation-review.zh-CN.md) — 固定源码、产品契约与回放证据分别保留；未验证生产净收益。

@@ -2480,3 +2480,51 @@
 - Source revision: `e7d0c597706239a015608c06dfe0951197e95096`
 - Note: Fixed full card read: text-only affine4/group64, 24GB+ fit is author claim. Measured M5Pro48GB/macOS26.5.2/context2048 on Oct30: 21 probability fields versus recorded Q8 GGUF answers, max drift0.0329 Kapitsa and0.0356 MLX, no choice flip. This is a separate small Q4 comparison, not the Kapitsa native parity-gate experiment or broad calibration/context validation. Card-provided SHA256 values are not locally checked tensor bytes.
 
+<a id="parlant-code-nov19"></a>
+## Parlant: pinned customer-service decision pipeline
+
+- Source: https://github.com/emcie-co/parlant/tree/07b2bcb4bebfeda7c53f1e2bbf2c68415f389e83
+- Kind: `repository`; review depth: `content_reviewed`; reviewed: 2026-11-19
+- Source revision: `07b2bcb4bebfeda7c53f1e2bbf2c68415f389e83`
+- Note: Read engine/matcher/ranker, declared relationships, OpenRouter Decisions adapter, tool boundaries and targeted test source. Ran 12 isolated AST encode/decode observations without importing the package. No pytest, API/model calls, calibration, full-engine or production-effect reproduction; Apache-2.0 code retained in a separate workspace clone.
+
+<a id="parlant-effort-nov19"></a>
+## Parlant: adaptive effort and batch rule matching
+
+- Source: https://www.parlant.io/docs/customizing-behavior/adaptive-effort/
+- Kind: `official_docs`; review depth: `content_reviewed`; reviewed: 2026-11-19
+- Source revision: `not captured / live URL`
+- Note: Read batch-matching/effort description. Current code is authoritative for configured providers and strategy; this live page is not a serving-version or performance pin.
+
+<a id="modem-smart-triggers-oct23"></a>
+## Modem: Smart Triggers powered by Jev
+
+- Source: https://modem.ai/blog/smart-triggers
+- Kind: `official_publication`; review depth: `content_reviewed`; reviewed: 2026-11-19
+- Source revision: `not captured / live URL`
+- Note: Implementer announcement dated Oct23 names Jev and event-trigger gating. No inspectable core server implementation, miss-rate data or independent production gain established; do not extend to arbitrary history-dependent decisions.
+
+<a id="modem-automations-nov19"></a>
+## Modem: event conditions and pre-run evaluation boundary
+
+- Source: https://modem.ai/docs/features/automations
+- Kind: `official_docs`; review depth: `content_reviewed`; reviewed: 2026-11-19
+- Source revision: `not captured / live URL`
+- Note: Current docs dated Nov19 distinguish event-only conditions checked by a fast evaluation model before agent start from history/external-data conditions checked after an agent starts. Docs do not pin that fast model to a current Jev build. Public MCP/API schema is not core source.
+
+<a id="entagl-jev-replay-sep23"></a>
+## Entagl: Jev labeled decisions and customer-routing replay
+
+- Source: https://www.entagl.com/blog/typesafe-jev-benchmark-ai-decision-models
+- Kind: `evaluation_report`; review depth: `content_reviewed`; reviewed: 2026-11-19
+- Source revision: `not captured / live URL`
+- Note: Implementer report separates constructed cases from 402 historical routing decisions; message disposition and specialist choice differ, with missing owner state and uneven fallback effects. No public full harness/labels/per-row output or randomized production result verified. No numerical result imported into the performance ledger.
+
+<a id="entagl-api-nov19"></a>
+## Entagl: public business API reference
+
+- Source: https://www.entagl.com/api/docs
+- Kind: `official_docs`; review depth: `content_reviewed`; reviewed: 2026-11-19
+- Source revision: `not captured / live URL`
+- Note: Read API purpose/auth and conversation/message surface to check artifact identity. Business API documentation is not the Jev routing evaluator source, dataset or independent replay receipt; no authenticated requests sent.
+

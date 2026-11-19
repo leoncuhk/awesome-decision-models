@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "reviewed_on": "2026-11-13",
+  "reviewed_on": "2026-11-19",
   "scope": "Evidence-backed models, methods and evaluation for bounded decisions in AI systems.",
   "sources": [
     {
@@ -3122,6 +3122,66 @@
       "review_depth": "content_reviewed",
       "source_revision": "e7d0c597706239a015608c06dfe0951197e95096",
       "review_note": "Fixed full card read: text-only affine4/group64, 24GB+ fit is author claim. Measured M5Pro48GB/macOS26.5.2/context2048 on Oct30: 21 probability fields versus recorded Q8 GGUF answers, max drift0.0329 Kapitsa and0.0356 MLX, no choice flip. This is a separate small Q4 comparison, not the Kapitsa native parity-gate experiment or broad calibration/context validation. Card-provided SHA256 values are not locally checked tensor bytes."
+    },
+    {
+      "id": "parlant-code-nov19",
+      "title": "Parlant: pinned customer-service decision pipeline",
+      "url": "https://github.com/emcie-co/parlant/tree/07b2bcb4bebfeda7c53f1e2bbf2c68415f389e83",
+      "kind": "repository",
+      "reviewed_on": "2026-11-19",
+      "review_depth": "content_reviewed",
+      "source_revision": "07b2bcb4bebfeda7c53f1e2bbf2c68415f389e83",
+      "review_note": "Read engine/matcher/ranker, declared relationships, OpenRouter Decisions adapter, tool boundaries and targeted test source. Ran 12 isolated AST encode/decode observations without importing the package. No pytest, API/model calls, calibration, full-engine or production-effect reproduction; Apache-2.0 code retained in a separate workspace clone."
+    },
+    {
+      "id": "parlant-effort-nov19",
+      "title": "Parlant: adaptive effort and batch rule matching",
+      "url": "https://www.parlant.io/docs/customizing-behavior/adaptive-effort/",
+      "kind": "official_docs",
+      "reviewed_on": "2026-11-19",
+      "review_depth": "content_reviewed",
+      "source_revision": null,
+      "review_note": "Read batch-matching/effort description. Current code is authoritative for configured providers and strategy; this live page is not a serving-version or performance pin."
+    },
+    {
+      "id": "modem-smart-triggers-oct23",
+      "title": "Modem: Smart Triggers powered by Jev",
+      "url": "https://modem.ai/blog/smart-triggers",
+      "kind": "official_publication",
+      "reviewed_on": "2026-11-19",
+      "review_depth": "content_reviewed",
+      "source_revision": null,
+      "review_note": "Implementer announcement dated Oct23 names Jev and event-trigger gating. No inspectable core server implementation, miss-rate data or independent production gain established; do not extend to arbitrary history-dependent decisions."
+    },
+    {
+      "id": "modem-automations-nov19",
+      "title": "Modem: event conditions and pre-run evaluation boundary",
+      "url": "https://modem.ai/docs/features/automations",
+      "kind": "official_docs",
+      "reviewed_on": "2026-11-19",
+      "review_depth": "content_reviewed",
+      "source_revision": null,
+      "review_note": "Current docs dated Nov19 distinguish event-only conditions checked by a fast evaluation model before agent start from history/external-data conditions checked after an agent starts. Docs do not pin that fast model to a current Jev build. Public MCP/API schema is not core source."
+    },
+    {
+      "id": "entagl-jev-replay-sep23",
+      "title": "Entagl: Jev labeled decisions and customer-routing replay",
+      "url": "https://www.entagl.com/blog/typesafe-jev-benchmark-ai-decision-models",
+      "kind": "evaluation_report",
+      "reviewed_on": "2026-11-19",
+      "review_depth": "content_reviewed",
+      "source_revision": null,
+      "review_note": "Implementer report separates constructed cases from 402 historical routing decisions; message disposition and specialist choice differ, with missing owner state and uneven fallback effects. No public full harness/labels/per-row output or randomized production result verified. No numerical result imported into the performance ledger."
+    },
+    {
+      "id": "entagl-api-nov19",
+      "title": "Entagl: public business API reference",
+      "url": "https://www.entagl.com/api/docs",
+      "kind": "official_docs",
+      "reviewed_on": "2026-11-19",
+      "review_depth": "content_reviewed",
+      "source_revision": null,
+      "review_note": "Read API purpose/auth and conversation/message surface to check artifact identity. Business API documentation is not the Jev routing evaluator source, dataset or independent replay receipt; no authenticated requests sent."
     }
   ],
   "entries": [
@@ -5349,6 +5409,75 @@
       "caveat": {
         "en": "Author evaluation with sampled negatives, overlapping histories and possible pretraining exposure; next observed item is not online utility. Cascade cost is an estimate excluding routing overhead; code not audited.",
         "zh": "作者评估使用抽样负例，跨划分历史未去重且可能有预训练暴露；下一次观测交互不等于线上效益。级联成本为不含路由开销的估算，未审计代码。"
+      }
+    },
+    {
+      "id": "parlant-rule-matching",
+      "name": "Parlant rule matching / Jev integration",
+      "category": "routing",
+      "url": "https://github.com/emcie-co/parlant",
+      "source_ids": [
+        "parlant-code-nov19",
+        "parlant-effort-nov19"
+      ],
+      "reviewed_on": "2026-11-19",
+      "summary": {
+        "en": "Pinned CX engine implementation batches per-rule propositions over shared state and resolves declared rule relationships.",
+        "zh": "已核CX引擎源码：共享状态批量判断逐规则命题，再解析声明的规则关系。"
+      },
+      "use": {
+        "en": "Read discovery vs current-turn evaluation, decision ports, code predicates, precedence/exclusion and tool-result reevaluation as separate contracts.",
+        "zh": "研读候选发现、当轮判断、decision接口、代码谓词、优先/排斥和工具后重判的职责边界。"
+      },
+      "caveat": {
+        "en": "Retained as code reference, not a production recommendation. The 0.5 lean-yes filter is relevance, not eligibility; native verdicts lack domain unknown/conflict states. Local response decoding needs stricter validation and request failure does not transparently switch to a generator. No full-engine/model reproduction.",
+        "zh": "保留为源码参考，非生产采用建议。0.5偏yes过滤测相关性而非执行资格，原生缺少领域未知/冲突状态；局部响应解码需严格校验，请求失败不透明切换generator；未复现完整引擎/模型效果。"
+      }
+    },
+    {
+      "id": "modem-smart-triggers",
+      "name": "Modem Smart Triggers",
+      "category": "routing",
+      "url": "https://modem.ai/blog/smart-triggers",
+      "source_ids": [
+        "modem-smart-triggers-oct23",
+        "modem-automations-nov19"
+      ],
+      "reviewed_on": "2026-11-19",
+      "summary": {
+        "en": "Implementer-described product gates event-triggered agent runs with exact filters and a semantic condition.",
+        "zh": "实施者产品案例：精确过滤与语义条件控制事件是否启动完整Agent。"
+      },
+      "use": {
+        "en": "Reference for bounded event-only prechecks before expensive downstream work.",
+        "zh": "参考在昂贵后续流程前，对事件自身可判条件做有界预检。"
+      },
+      "caveat": {
+        "en": "No core server source or full effectiveness protocol found. Nov19 docs still start an agent for history/external-data conditions and do not identify a current fast-model build; Oct23 Jev announcement is not a universal current-version claim or a demonstrated production saving.",
+        "zh": "未定位核心服务端代码或完整效果协议；11月19日文档对历史/外部信息条件仍启动Agent，也未固定当前fast模型版本；10月23日Jev公告不能外推为通用现行实现或已验证生产节省。"
+      }
+    },
+    {
+      "id": "entagl-jev-replay",
+      "name": "Entagl customer-routing replay",
+      "category": "evaluation",
+      "url": "https://www.entagl.com/blog/typesafe-jev-benchmark-ai-decision-models",
+      "source_ids": [
+        "entagl-jev-replay-sep23",
+        "entagl-api-nov19"
+      ],
+      "reviewed_on": "2026-11-19",
+      "summary": {
+        "en": "Implementer-reported labeled decisions and replay of historical customer-routing decisions.",
+        "zh": "实施者报告的标注决策与真实客服历史路由回放。"
+      },
+      "use": {
+        "en": "Separate message disposition, specialist routing, missing state, conflicting rules and fallback effects.",
+        "zh": "分别检查消息处置、专员路由、状态缺失、规则冲突和回退效果。"
+      },
+      "caveat": {
+        "en": "Retain as a report and negative lessons, not a reproducible code project. Public business APIs do not expose the evaluation harness; complete labels/per-row outputs were not located. Offline replay and constructed-case accuracy do not establish production or Chinese-service benefit.",
+        "zh": "保留报告与反例，非可复算源码项目；公开业务API不是评测harness，未定位完整标签/逐条输出；离线回放和构造测试准确率不证明生产或中文客服收益。"
       }
     }
   ]

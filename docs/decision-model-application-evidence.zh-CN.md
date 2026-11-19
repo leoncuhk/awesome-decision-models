@@ -1,5 +1,7 @@
 # Decision models实际应用证据与技能加载判断（2026-11-13）
 
+2026-11-19补充：[Parlant、Modem、Entagl实现审查](customer-service-implementation-review.zh-CN.md)固定可研究源码和资料身份。Modem的新automation契约限定了可避免Agent运行的条件；原表保留当时公告口径，不能解释成任意历史相关条件均由Jev前置处理。
+
 [价值复核](dynamic-skill-loading-value-review.zh-CN.md) · [实验方案](dynamic-skill-loading-experiment-plan.zh-CN.md)
 
 ## 核查范围

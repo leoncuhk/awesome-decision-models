@@ -6,7 +6,7 @@
 
 A curated guide to systems that **classify, score, rank, verify, route or abstain** rather than primarily generate prose. The central question is not which model has the most impressive headline, but **which method delivers acceptable outcomes at acceptable risk and total cost for a particular task**.
 
-**Source review: 2026-11-13.** 68 selected resources, including 21 core model families and 38 contextualized evidence records. This edition reviews public sources; **it does not claim independent model reproduction**. Review depth and unresolved gaps are recorded in the [source register](docs/sources.md). Inclusion is not an endorsement or a production-readiness certification.
+**Source review: 2026-11-19.** 71 selected resources, including 21 core model families and 38 contextualized evidence records. This edition reviews public sources; **it does not claim independent model reproduction**. Review depth and unresolved gaps are recorded in the [source register](docs/sources.md). Inclusion is not an endorsement or a production-readiness certification.
 
 ## Contents
 
@@ -138,6 +138,8 @@ Also retain a deterministic rule or ordinary supervised classifier where the tas
 - **[RouteLLM](https://github.com/lm-sys/RouteLLM)** — Routes between stronger and cheaper language models using learned signals. Performance depends on the model pair, traffic and router training distribution.
 - **[LLMRouter](https://github.com/ulab-uiuc/LLMRouter)** — Research infrastructure for building and comparing routing strategies. The August 2026 paper is a preprint; do not equate infrastructure with a proven best policy.
 - **[Vowpal Wabbit](https://github.com/VowpalWabbit/vowpal_wabbit)** — Online-learning and contextual-bandit tooling. Requires appropriate logging, exploration and evaluation assumptions.
+- **[Parlant rule matching / Jev integration](https://github.com/emcie-co/parlant)** — Pinned CX engine implementation batches per-rule propositions over shared state and resolves declared rule relationships. Retained as code reference, not a production recommendation. The 0.5 lean-yes filter is relevance, not eligibility; native verdicts lack domain unknown/conflict states. Local response decoding needs stricter validation and request failure does not transparently switch to a generator. No full-engine/model reproduction.
+- **[Modem Smart Triggers](https://modem.ai/blog/smart-triggers)** — Implementer-described product gates event-triggered agent runs with exact filters and a semantic condition. No core server source or full effectiveness protocol found. Nov19 docs still start an agent for history/external-data conditions and do not identify a current fast-model build; Oct23 Jev announcement is not a universal current-version claim or a demonstrated production saving.
 
 For executor selection, collect **task, available evidence, executor, outcome, latency and cost**. Observed success for one selected executor does not reveal how every alternative would have performed. See the learning-to-defer and causal references below.
 
@@ -163,6 +165,7 @@ For executor selection, collect **task, available evidence, executor, outcome, l
 - **[Entity matching using decision models](https://arxiv.org/html/2610.34626v1)** — Zero-shot record-pair matching with prompt, robustness and cascade comparisons. Paper benchmark evidence; pair classification is not end-to-end entity resolution or proven production savings. Cascade adds an LLM ensemble.
 - **[Jev time-series decision benchmark](https://arxiv.org/html/2610.33410v1)** — Evaluates serialized sequences, event types and directional predictions. Historical Jev1.13 study; many numerical tasks and stock movement show weak discrimination. No trading return, industrial deployment or local reproduction.
 - **[Confidence Is Not a Promise / Typed Deciders Audit](https://arxiv.org/html/2610.36311v1)** — Reference audit separates confidence ordering, selective-accuracy promises and their failure under shift. Empirical-population tests are not production guarantees. Mostly MASSIVE with five options; near-duplicate training exposure unresolved, hosted snapshots unknown and some Jev raw outputs withheld.
+- **[Entagl customer-routing replay](https://www.entagl.com/blog/typesafe-jev-benchmark-ai-decision-models)** — Implementer-reported labeled decisions and replay of historical customer-routing decisions. Retain as a report and negative lessons, not a reproducible code project. Public business APIs do not expose the evaluation harness; complete labels/per-row outputs were not located. Offline replay and constructed-case accuracy do not establish production or Chinese-service benefit.
 
 A useful scorecard includes task quality, consequential errors, calibration, risk–coverage, subgroup/shift behavior and full-system cost. Fix the acceptance threshold on calibration data, not on the final test set. Keep sampling automatically accepted cases so confidently wrong decisions remain visible.
 
@@ -211,3 +214,5 @@ Original code and curation text: [MIT](LICENSE). Linked projects, model weights,
 [Branch review and application intent](docs/branch-review-2026-11-13.md)
 
 [Dynamic skill loading and bounded control: business experiment entry (Chinese)](docs/dynamic-skill-loading-business-playbook.zh-CN.md) — Research branch: protocols and synthetic examples, no model or business validation.
+
+[Customer-service implementation review: Parlant, Modem and Entagl (Chinese)](docs/customer-service-implementation-review.zh-CN.md) — Pinned code, product contracts and replay evidence have separate roles; no production net-benefit validation.

@@ -2,6 +2,8 @@
 
 审阅日期：2026-11-17。[业务实验入口](dynamic-skill-loading-business-playbook.zh-CN.md) · [应用证据](decision-model-application-evidence.zh-CN.md) · [方法](methodology.md)
 
+2026-11-19实现复核：[Parlant、Modem、Entagl源码与保留审查](customer-service-implementation-review.zh-CN.md)区分实际可读源码、产品契约和历史回放；新增Parlant源码pin及协议边界观察。下文11月17日固定来源保留原时点。
+
 ## 问题与结论
 
 **当前问题：面对客户当前诉求和已确认事实，哪些业务处理路径适用，信息是否足够，多条路径相关时先处理哪条？**

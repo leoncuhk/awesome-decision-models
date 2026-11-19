@@ -9,6 +9,7 @@
 | 当前研究问题、四项输出和资料对应范围 | [领域路径判断研究](domain-path-applicability-research.zh-CN.md) |
 | 是否值得做，何时停止 | [价值审查](dynamic-skill-loading-value-review.zh-CN.md) |
 | 谁在实际使用，有什么反例 | [decision models应用证据](decision-model-application-evidence.zh-CN.md) |
+| 三个客服案例中哪些有源码，值得保留什么 | [实现与保留审查](customer-service-implementation-review.zh-CN.md) |
 | Agent思考步骤能否省掉 | [REFLEX与用户截图](agent-control-reflex-trajectory.zh-CN.md) |
 | 新增一手研究、公共实验资产及版本 | [研究补充](dynamic-skill-loading-research-supplement.zh-CN.md) |
 | 详细研究假设与备选矩阵 | [中文方案](dynamic-skill-loading-experiment-plan.zh-CN.md) / [English](dynamic-skill-loading-experiment-plan.md) |

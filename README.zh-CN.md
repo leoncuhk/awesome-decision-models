@@ -6,7 +6,7 @@
 
 收录用于**分类、评分、排序、验证、路由与拒判**的模型和方法。我们关心的不是谁的宣传数字更高，而是：**在具体任务中，哪种方法能以可接受的风险和总成本，交付可验收的结果。**
 
-**本版来源核验日期：2026-11-13。** 精选 68 项资源，其中 21 个核心模型系列、38 条带协议背景的评测记录。本版完成的是公开资料核验，**没有宣称独立运行并复现这些模型**。阅读深度、版本固定情况与未解决的资料缺口均见[来源登记](docs/sources.md)。收录不等于背书，也不等于通过生产可靠性认证。
+**本版来源核验日期：2026-11-19。** 精选 71 项资源，其中 21 个核心模型系列、38 条带协议背景的评测记录。本版完成的是公开资料核验，**没有宣称独立运行并复现这些模型**。阅读深度、版本固定情况与未解决的资料缺口均见[来源登记](docs/sources.md)。收录不等于背书，也不等于通过生产可靠性认证。
 
 ## 目录
 
@@ -140,6 +140,8 @@
 - **[RouteLLM](https://github.com/lm-sys/RouteLLM)** — 利用学习到的信号在强模型与便宜模型间路由。 效果依赖候选模型、流量与路由训练分布。
 - **[LLMRouter](https://github.com/ulab-uiuc/LLMRouter)** — 构建和比较路由策略的研究基础设施。 2026 年 8 月论文为预印本；基础设施不是已证明的最优策略。
 - **[Vowpal Wabbit](https://github.com/VowpalWabbit/vowpal_wabbit)** — 在线学习与上下文老虎机工具。 需要合适的日志、探索与评估假设。
+- **[Parlant rule matching / Jev integration](https://github.com/emcie-co/parlant)** — 已核CX引擎源码：共享状态批量判断逐规则命题，再解析声明的规则关系。 保留为源码参考，非生产采用建议。0.5偏yes过滤测相关性而非执行资格，原生缺少领域未知/冲突状态；局部响应解码需严格校验，请求失败不透明切换generator；未复现完整引擎/模型效果。
+- **[Modem Smart Triggers](https://modem.ai/blog/smart-triggers)** — 实施者产品案例：精确过滤与语义条件控制事件是否启动完整Agent。 未定位核心服务端代码或完整效果协议；11月19日文档对历史/外部信息条件仍启动Agent，也未固定当前fast模型版本；10月23日Jev公告不能外推为通用现行实现或已验证生产节省。
 
 选择执行者时，应记录**任务、可用证据、执行者、结果、耗时和成本**。只知道已选执行者的表现，并不知道所有其他执行者会怎样。相关假设可从下方的交接学习与因果研究继续了解。
 
@@ -165,6 +167,7 @@
 - **[Entity matching using decision models](https://arxiv.org/html/2610.34626v1)** — 零样本记录对匹配，比较提示、鲁棒性与级联。 论文基准证据；记录对分类不是端到端实体消歧或已证生产节省，级联另加LLM集成。
 - **[Jev time-series decision benchmark](https://arxiv.org/html/2610.33410v1)** — 评估序列输入、事件类别及方向预测。 历史Jev1.13研究；许多数值任务与股价方向区分弱。无交易收益、工业部署或本地复现。
 - **[Confidence Is Not a Promise / Typed Deciders Audit](https://arxiv.org/html/2610.36311v1)** — 参考审计区分置信排序、选择性准确率承诺及其在分布变化下的失效。 经验总体测试不等于生产保证；主要为五选项MASSIVE，近重复训练暴露未排除，托管快照未知且部分Jev原始输出未公开。
+- **[Entagl customer-routing replay](https://www.entagl.com/blog/typesafe-jev-benchmark-ai-decision-models)** — 实施者报告的标注决策与真实客服历史路由回放。 保留报告与反例，非可复算源码项目；公开业务API不是评测harness，未定位完整标签/逐条输出；离线回放和构造测试准确率不证明生产或中文客服收益。
 
 评测应同时看任务质量、关键错误、校准、风险—覆盖率、子群与分布变化，以及完整系统成本。阈值在校准集确定，不能在最终测试集上反复调参。自动放行的案例也必须保留抽检，才能发现“自信地判错”。
 
@@ -213,3 +216,5 @@
 [分支审查与应用意图](docs/branch-review-2026-11-13.md)
 
 [动态技能加载与有界控制：业务实验入口](docs/dynamic-skill-loading-business-playbook.zh-CN.md) — Research branch: protocols and synthetic examples, no model or business validation.
+
+[客服语义分流实现审查：Parlant、Modem、Entagl](docs/customer-service-implementation-review.zh-CN.md) — 固定源码、产品契约与回放证据分别保留；未验证生产净收益。
