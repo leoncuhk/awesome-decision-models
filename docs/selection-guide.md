@@ -2,6 +2,8 @@
 
 [Home](../README.md) · [Model cards](models.md) · [Evidence](evidence.md)
 
+Enterprise post-training: the [research and adoption guide / 企业后训练总览](decision-model-posttraining-enterprise.zh-CN.md) connects trainable bases, learning signals, enterprise data and production acceptance. See the [method audit](decision-model-posttraining-method-audit.zh-CN.md), [platform audit](decision-model-posttraining-platform-audit.zh-CN.md) and [conditional Mac recipe](decision-model-posttraining-mac-recipe.zh-CN.md). These are source-checked research and protocols, not a completed enterprise fine-tune or a deployment recommendation.
+
 ## 1. Define the decision before selecting the model
 
 Write one small **decision contract**: available evidence, question, allowed answers, what makes an answer correct, cost of each error, and what happens when evidence is insufficient. Keep semantic judgment separate from permission to act.

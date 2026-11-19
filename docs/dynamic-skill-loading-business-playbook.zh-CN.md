@@ -7,6 +7,7 @@
 | 问题 | 入口 |
 |---|---|
 | 当前研究问题、四项输出和资料对应范围 | [领域路径判断研究](domain-path-applicability-research.zh-CN.md) |
+| 后训练方法、可训练底座、企业数据与生产验收 | [企业后训练总览](decision-model-posttraining-enterprise.zh-CN.md) · [Mac候选配方](decision-model-posttraining-mac-recipe.zh-CN.md) |
 | 是否值得做，何时停止 | [价值审查](dynamic-skill-loading-value-review.zh-CN.md) |
 | 谁在实际使用，有什么反例 | [decision models应用证据](decision-model-application-evidence.zh-CN.md) |
 | 三个客服案例中哪些有源码，值得保留什么 | [实现与保留审查](customer-service-implementation-review.zh-CN.md) |

@@ -4,6 +4,8 @@
 
 2026-11-19实现复核：[Parlant、Modem、Entagl源码与保留审查](customer-service-implementation-review.zh-CN.md)区分实际可读源码、产品契约和历史回放；新增Parlant源码pin及协议边界观察。下文11月17日固定来源保留原时点。
 
+2026-11-19后训练研究：[企业后训练总览](decision-model-posttraining-enterprise.zh-CN.md)统筹方法、可训练底座、企业数据与生产验收；引用材料的[方法核查](decision-model-posttraining-method-audit.zh-CN.md)和[平台核查](decision-model-posttraining-platform-audit.zh-CN.md)分别保留版本、数字口径及适用条件。当前没有本次企业项目数据，未开始该企业训练或验证生产收益。
+
 ## 问题与结论
 
 **当前问题：面对客户当前诉求和已确认事实，哪些业务处理路径适用，信息是否足够，多条路径相关时先处理哪条？**
