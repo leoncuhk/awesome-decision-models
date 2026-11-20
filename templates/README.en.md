@@ -2,11 +2,11 @@
 
 **Models, methods and evidence for reliable decisions in AI systems.**
 
-[简体中文](README.zh-CN.md) · [Model cards](docs/models.md) · [Evidence ledger](docs/evidence.md) · [Selection guide](docs/selection-guide.md) · [Methodology](docs/methodology.md) · [Sources](docs/sources.md)
+[简体中文](README.zh-CN.md) · [Document map](docs/README.md) · [Model cards](docs/models.md) · [Evidence ledger](docs/evidence.md) · [Selection guide](docs/selection-guide.md) · [Methodology](docs/methodology.md) · [Sources](docs/sources.md)
 
 A curated guide to systems that **classify, score, rank, verify, route or abstain** rather than primarily generate prose. The central question is not which model has the most impressive headline, but **which method delivers acceptable outcomes at acceptable risk and total cost for a particular task**.
 
-**Source review: {{DATE}}.** {{ENTRY_COUNT}} selected resources, including {{CORE_COUNT}} core model families and {{EVIDENCE_COUNT}} contextualized evidence records. This edition reviews public sources; **it does not claim independent model reproduction**. Review depth and unresolved gaps are recorded in the [source register](docs/sources.md). Inclusion is not an endorsement or a production-readiness certification.
+**Latest review batch: {{DATE}}.** {{ENTRY_COUNT}} selected resources, including {{CORE_COUNT}} core model families and {{EVIDENCE_COUNT}} contextualized evidence records. This edition reviews public sources; **it does not claim independent model reproduction**. Review depth and unresolved gaps are recorded in the [source register](docs/sources.md). Individual review dates/depths differ; this date does not mean every source was reread. Inclusion is not an endorsement or a production-readiness certification.
 
 ## Contents
 
@@ -20,6 +20,8 @@ A curated guide to systems that **classify, score, rank, verify, route or abstai
 - [Maintenance and contribution](#maintenance-and-contribution)
 
 ## Start with the task
+
+For current enterprise research, start with the [post-training synthesis (Chinese)](docs/decision-model-posttraining-enterprise.zh-CN.md): direct low-latency judgments, reasoning-preserving selective prediction, and conditional multi-field/image tasks have different comparison sets. The [document map](docs/README.md) distinguishes current judgments, proposed experiments, PR #5 multimodal revisions and history. No enterprise fine-tune or production gain is claimed.
 
 Here, **decision model** is an organizing label, not a claim that all these projects form one new, unified discipline. *Typed decisions* describes an output contract; *System One* is terminology used by some projects; *RLCD*, contrastive learning and supervised classification are different training approaches. Routing and selective prediction concern what the system does with a judgment.
 

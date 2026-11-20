@@ -3182,6 +3182,146 @@
       "review_depth": "content_reviewed",
       "source_revision": null,
       "review_note": "Read API purpose/auth and conversation/message surface to check artifact identity. Business API documentation is not the Jev routing evaluator source, dataset or independent replay receipt; no authenticated requests sent."
+    },
+    {
+      "id": "jeval-sii-v2",
+      "title": "JEVal and SII-Decision: General Decision Models, paper v2",
+      "url": "https://arxiv.org/html/2610.03935v2",
+      "kind": "paper",
+      "reviewed_on": "2026-11-19",
+      "review_depth": "content_reviewed",
+      "source_revision": null,
+      "review_note": "Read evaluation denominator/invalid-output rules, main table, distillation method and limitations. SII is proposed by these authors; not independent replication of SII."
+    },
+    {
+      "id": "sii-code-oct13",
+      "title": "SII-Decision: released training and readout implementation",
+      "url": "https://github.com/amazingljy1206/SII-Decision/tree/1723d83cbda69f48641c273280b5a2d06d6b3510",
+      "kind": "repository",
+      "reviewed_on": "2026-11-19",
+      "review_depth": "content_reviewed",
+      "source_revision": "1723d83cbda69f48641c273280b5a2d06d6b3510",
+      "review_note": "Read repository, exact backbone mapping and training contract; gold_target/train_target/p0 are required. Released multi-GPU training is not Mac validation."
+    },
+    {
+      "id": "sii-4b-lora",
+      "title": "SII-Decision-4B-LoRA: merged BF16 release",
+      "url": "https://huggingface.co/jylin001206/SII-Decision-4B-LoRA/tree/5c77219871d297bd375c033eb63ad2cd010af657",
+      "kind": "model_card",
+      "reviewed_on": "2026-11-19",
+      "review_depth": "content_reviewed",
+      "source_revision": "5c77219871d297bd375c033eb63ad2cd010af657",
+      "review_note": "Relevant body and artifact contract inspected; no training or model inference performed."
+    },
+    {
+      "id": "sii-27b-lora",
+      "title": "SII-Decision-27B-LoRA: merged BF16 release",
+      "url": "https://huggingface.co/jylin001206/SII-Decision-27B-LoRA/tree/a7e7f9686bb9dad88b378978a984e3a52c13e649",
+      "kind": "model_card",
+      "reviewed_on": "2026-11-19",
+      "review_depth": "content_reviewed",
+      "source_revision": "a7e7f9686bb9dad88b378978a984e3a52c13e649",
+      "review_note": "Relevant body and artifact contract inspected; no training or model inference performed."
+    },
+    {
+      "id": "sii-27b-full",
+      "title": "SII-Decision-27B-Full: language-linear full-tuning release",
+      "url": "https://huggingface.co/jylin001206/SII-Decision-27B-Full/tree/8f5a51dcde7b0fd6a2eea3ab423bad5e3b11dfda",
+      "kind": "model_card",
+      "reviewed_on": "2026-11-19",
+      "review_depth": "content_reviewed",
+      "source_revision": "8f5a51dcde7b0fd6a2eea3ab423bad5e3b11dfda",
+      "review_note": "Relevant body and artifact contract inspected; no training or model inference performed."
+    },
+    {
+      "id": "prdo-v2",
+      "title": "PRDO: post-rationale distribution optimization, paper v2",
+      "url": "https://arxiv.org/html/2609.38850v2",
+      "kind": "paper",
+      "reviewed_on": "2026-11-19",
+      "review_depth": "content_reviewed",
+      "source_revision": null,
+      "review_note": "Read v2 method, matched controls, selective metrics, verification-task boundary and provenance. It supersedes v1 framing but does not disclose TypeSafe RLCD."
+    },
+    {
+      "id": "prdo-code-nov3",
+      "title": "PRDO: public OpenJev-RLCD implementation",
+      "url": "https://github.com/ZimmyGao/openjev-rlcd/tree/5859d2b893314fb3581f06e4e36c303e372b3f48",
+      "kind": "repository",
+      "reviewed_on": "2026-11-19",
+      "review_depth": "content_reviewed",
+      "source_revision": "5859d2b893314fb3581f06e4e36c303e372b3f48",
+      "review_note": "Code available. README-referenced tags/external analysis-plan artifacts were not found in this audit; full paper replay is not certified."
+    },
+    {
+      "id": "pplx-v13-card",
+      "title": "Perplexity Decider v1.3 27B: card and saved configuration",
+      "url": "https://huggingface.co/perplexity-ai/pplx-decider-v1.3/tree/9c2ebb27470d3dec2ad7ab727727e40d142c7213",
+      "kind": "model_card",
+      "reviewed_on": "2026-11-19",
+      "review_depth": "content_reviewed",
+      "source_revision": "9c2ebb27470d3dec2ad7ab727727e40d142c7213",
+      "review_note": "Card/runtime/config inspected. HF API public/ungated on Nov19 despite residual private-repository wording; no tensor download. v1.2 results remain historical."
+    },
+    {
+      "id": "pplx-flash-v13-card",
+      "title": "Perplexity Decider Flash v1.3: card and saved configuration",
+      "url": "https://huggingface.co/perplexity-ai/pplx-decider-flash-v1.3/tree/d06fb3f2d97e0a52325a0d463c450cf0338f44fe",
+      "kind": "model_card",
+      "reviewed_on": "2026-11-19",
+      "review_depth": "content_reviewed",
+      "source_revision": "d06fb3f2d97e0a52325a0d463c450cf0338f44fe",
+      "review_note": "Card/runtime/config inspected. Flash uses Qwen3.5-4B, distinct from 27B Qwen3.8 and earlier calibrators. No tensor download."
+    },
+    {
+      "id": "laya-gate-d-nov19",
+      "title": "Laya Gate D: paired three-seed RLCD / soft-CE panel",
+      "url": "https://github.com/NandhaKishorM/laya/blob/d1282e791d71e92f24f816ff3836e4fd1c2ded4a/research/scripts/step4_benchmark/GATE_D_RESULTS.md",
+      "kind": "evaluation_report",
+      "reviewed_on": "2026-11-19",
+      "review_depth": "content_reviewed",
+      "source_revision": "d1282e791d71e92f24f816ff3836e4fd1c2ded4a",
+      "review_note": "Six author/contributor-run T4 cells; fixed source report and limitations read. Reused RLCD seed0, shipped-temperature path and choice+noul-only Brier retained. No training repeated here."
+    },
+    {
+      "id": "nimble-current-nov19",
+      "title": "Nimble current repository: hosted versions and local training/inference",
+      "url": "https://github.com/bespokelabsai/nimble/tree/b30ec429fcd78c15fa12a5d3b68c5fbc3bf0430f",
+      "kind": "repository",
+      "reviewed_on": "2026-11-19",
+      "review_depth": "content_reviewed",
+      "source_revision": "b30ec429fcd78c15fa12a5d3b68c5fbc3bf0430f",
+      "review_note": "Current hosted v4/v4.1 wording and public open9B artifact are distinct. Training/data/readout documentation reviewed; no root LICENSE located in inspected tree, so no blanket source-code license inferred."
+    },
+    {
+      "id": "nimble-open9b-sep24",
+      "title": "Bespoke-Nimble-9B: exact open adapter card",
+      "url": "https://huggingface.co/bespokelabs/Bespoke-Nimble-9B/tree/bd792f44ec8e265be861bfcdf4e05967ffe0e858",
+      "kind": "model_card",
+      "reviewed_on": "2026-11-19",
+      "review_depth": "content_reviewed",
+      "source_revision": "bd792f44ec8e265be861bfcdf4e05967ffe0e858",
+      "review_note": "Pinned Qwen3.5-9B PEFT adapter; current card/context/calibration and original-2676 identity inspected. HF metadata public/ungated; base weights not included or downloaded."
+    },
+    {
+      "id": "jeval-fixed-data-nov19",
+      "title": "JEVal fixed public test inputs and labels",
+      "url": "https://huggingface.co/datasets/carlosxiang/JEVal/tree/5d0253c34cf5e371b3ae99c21f0a7170d7289f63",
+      "kind": "repository",
+      "reviewed_on": "2026-11-19",
+      "review_depth": "content_reviewed",
+      "source_revision": "5d0253c34cf5e371b3ae99c21f0a7170d7289f63",
+      "review_note": "Read and checksum-verified public test.parquet, 11257 inputs. Reaggregated type/input metadata only; released inputs do not supply original per-model predictions."
+    },
+    {
+      "id": "zh-decision-bench-output-nov19",
+      "title": "Chinese decision benchmark: fixed released prediction panel",
+      "url": "https://github.com/CodyQin/zh-decision-bench/tree/aaf56ff139dc5440da3939892cad249154f1d35b",
+      "kind": "evaluation_report",
+      "reviewed_on": "2026-11-19",
+      "review_depth": "content_reviewed",
+      "source_revision": "aaf56ff139dc5440da3939892cad249154f1d35b",
+      "review_note": "Read source/run metadata and reaggregated 10 released JSONL files across five models. 467 matching item/question keys, 378 cases. No model inference or independent label adjudication; no evaluated HF weight SHA recorded."
     }
   ],
   "entries": [
@@ -3400,34 +3540,36 @@
       "url": "https://github.com/bespokelabsai/nimble",
       "source_ids": [
         "nimble",
-        "nimble-eval"
+        "nimble-eval",
+        "nimble-current-nov19",
+        "nimble-open9b-sep24"
       ],
       "summary": {
-        "en": "Qwen-based supervised adapter that reads answer-label logits instead of generating an explanation.",
-        "zh": "Qwen 监督适配器，直接读取答案标签 logits，而非生成解释。"
+        "en": "Open Qwen3.5-9B supervised decision adapter, distinct from the later Nimble hosted v4/v4.1 service.",
+        "zh": "开放Qwen3.5-9B监督判断adapter，与后续Nimble托管v4／v4.1服务分别识别。"
       },
       "use": {
         "en": "A transparent baseline for evidence-sensitive judgments and minimal-edit training examples.",
         "zh": "适合证据敏感的判断，也可借鉴最小差异训练样本。"
       },
       "caveat": {
-        "en": "Contrastive data construction is not CLM-style contrastive embedding training. Public benchmark reporting is author-run and raw run outputs are not all committed.",
-        "zh": "对比式样本构造不等于 CLM 的对比表示训练；公开比较由项目方运行，完整逐行输出并未全部提交。"
+        "en": "Keep the open 9B model, historical evaluated checkpoints and hosted versions separate. Public benchmarks are author-run and raw runs are incomplete. Minimal-edit examples are a reusable data idea, not production outcome evidence.",
+        "zh": "须区分开放9B、历史被测检查点及托管版本。公开基准由作者运行，完整原始逐次输出不全。最小事实改动法可借鉴，但不是生产效果证明。"
       },
-      "reviewed_on": "2026-09-25",
+      "reviewed_on": "2026-11-19",
       "mechanism": {
-        "en": "Qwen3.5-9B plus LoRA, scoring allowed answer tokens.",
-        "zh": "Qwen3.5-9B 加 LoRA，对允许的答案 token 评分。"
+        "en": "The open 9B model applies LoRA and reads allowed answer-token logits; candidate logits are divided by temperature before softmax, once.",
+        "zh": "开放9B用LoRA并读允许答案token的logits；候选logits除以温度后做softmax，温度只应用一次。"
       },
       "training": {
-        "en": "Supervised learning; minimal changes to decisive evidence help define the boundary.",
-        "zh": "监督学习；用决定性证据的最小变化构造判断边界。"
+        "en": "Supervised candidate-token CE; minimal-edit evidence pairs are data construction, not an embedding contrastive loss. The reviewed curriculum has 2,676 synthetic training and 324 synthetic evaluation rows; these are not independently adjudicated human benchmark labels.",
+        "zh": "候选token交叉熵监督；最小事实改动对是数据构造，不是表示层对比损失。已阅课程含2676合成训练／324合成评测行；不等同独立人工基准参考标签。"
       },
       "availability": {
-        "en": "Adapter and code are public; load the base model as well.",
-        "zh": "公开适配器与代码；仍需加载基础模型。"
+        "en": "The open 9B model requires the Qwen3.5-9B base plus a PEFT adapter; the pinned card specifies 8k context, 255 options and T=1.0, distinct from original-2676/v2. Public MLX inference does not establish Mac training. Later hosted version claims do not identify an open v4 weight release.",
+        "zh": "开放9B需Qwen3.5-9B底座加PEFTadapter；当前卡为8k上下文、255选项、T1.0，与original-2676／v2区分。MLX推理不证明Mac训练；后续托管版本声明不等于开放v4权重。"
       },
-      "license_note": "Reviewed model card declares Apache-2.0; inherited dependencies retain their terms.",
+      "license_note": "Pinned open9B model card declares Apache-2.0; base/dependencies retain their terms. No root LICENSE found in the inspected current GitHub tree; do not infer a blanket source-code license from model metadata.",
       "weight_revision": null,
       "tags": [
         "typed-decisions",
@@ -4263,9 +4405,9 @@
     },
     {
       "id": "pplx-decider",
-      "name": "Perplexity Decider v1 / v1.1 / v1.2 (27B / Flash 4B)",
+      "name": "Perplexity Decider (current v1.3; archival v1 / v1.1 / v1.2)",
       "category": "core_models",
-      "url": "https://huggingface.co/perplexity-ai/pplx-decider-v1.2",
+      "url": "https://huggingface.co/perplexity-ai/pplx-decider-v1.3",
       "source_ids": [
         "pplx-card",
         "pplx-inference",
@@ -4273,32 +4415,34 @@
         "pplx-v11-card",
         "pplx-v11-runtime",
         "pplx-v12-card",
-        "pplx-flash-v12-card"
+        "pplx-flash-v12-card",
+        "pplx-v13-card",
+        "pplx-flash-v13-card"
       ],
-      "reviewed_on": "2026-10-25",
+      "reviewed_on": "2026-11-19",
       "summary": {
-        "en": "v1.2 joint-request decision heads on Qwen3.8-27B and distilled Qwen3.5-4B; retain v1/v1.1 as distinct artifacts.",
-        "zh": "v1.2 联合请求答码头：Qwen3.8-27B 及蒸馏 Qwen3.5-4B；保留 v1／v1.1 的独立产物身份。"
+        "en": "v1.3 typed-decision and optional span-location family; 27B Qwen3.8 and distilled Flash 4B Qwen3.5, with distinct earlier versions.",
+        "zh": "v1.3类型化判断及可选span定位系列；27B Qwen3.8与蒸馏Flash 4B Qwen3.5，早期版本分别保留。"
       },
       "use": {
         "en": "A self-hosted comparator for text/image judgments after task-specific validation.",
         "zh": "经具体任务验证后，作为文本／图像判读的自部署对照。"
       },
       "caveat": {
-        "en": "Author card comparisons mix training and request-format changes, so gains do not isolate either cause. Public-task training exposure is not proof of exact test leakage. Grouping helps some tasks and hurts candidate ranking, especially Flash. No new universal accuracy, calibration or cost recommendation.",
-        "zh": "作者对比同时改变训练与请求格式，不能隔离归因；训练任务暴露不等于具体测试泄漏。分组可改善部分任务，也可损害候选排序，Flash 尤甚；不形成通用准确率、校准或成本推荐。"
+        "en": "Version, mode, grouping, images and backend alter the inference contract. v1.2 historical results cannot be relabeled v1.3. Neither near-identical fast-path choices nor a fitted temperature establish new-domain quality, production risk or Mac training.",
+        "zh": "版本、mode、分组、图像与后端改变推理合同。不可把v1.2历史结果重命名为v1.3。fast近似答案与拟合温度均不证明新域质量、生产风险控制或Mac训练。"
       },
       "mechanism": {
-        "en": "v1.2 reads 255-code heads at each question marker. Full attention spans all questions in a request; linear attention stays causal. Grouped questions influence each other; use separate requests for independent candidates. Packing isolates requests, unlike grouping inside one request.",
-        "zh": "v1.2 在每题标记处读 255 答码头；full-attention 覆盖同请求所有问题，linear-attention 仍因果。组内问题相互影响，独立候选宜分请求；跨请求 packing 保持隔离，不等于请求内分组。"
+        "en": "Default separate encodes each state/images/question independently; isolated uses shared state with a different attention contract. A 255-code readout replaces full-vocabulary generation. Locate uses a separate optional span adapter; mixed Locate/decisions require two passes.",
+        "zh": "默认separate逐题独立编码state／images／question；isolated共享状态且attention合同不同。255答码readout不生成完整词表文本。Locate另用可选span adapter；与判断混合需两次pass。"
       },
       "training": {
-        "en": "v1.2 retrains with more data including official benchmark training splits; test decontamination is author-described. Flash distills full teacher distributions and soups runs. Temperatures 1.382 (27B) / 1.554 (Flash) fitted in joint format, distinct from v1/v1.1; changed grouping/backend requires recalibration checks. Full data replay remains unaudited.",
-        "zh": "v1.2 增加数据并使用官方基准训练划分，测试去污染为作者披露；Flash 蒸馏教师完整分布并平均权重。联合格式温度 27B 为 1.382、Flash 为 1.554，区别于 v1／v1.1；改变分组／后端须重验校准，完整数据重放未审计。"
+        "en": "v1.3 saved configs disclose CE for 27B and teacher-distribution distillation for Flash, frozen readouts. Temperatures 1.2263882168038833 / 1.3302962111834522 are v1.3-specific. Complete original training data/replay not verified. Preserve v1.2 training and comparisons in its dated records.",
+        "zh": "v1.3保存配置披露27B用CE、Flash蒸馏教师分布、readout冻结；温度分别1.2263882168038833／1.3302962111834522，专属v1.3。未验证完整原始训练数据／重放；v1.2训练与对比保留在带日期记录。"
       },
       "availability": {
-        "en": "v1.2 cards/tree public-readable; residual private-repository wording and untested tensor access noted. Text/images at saved 1.6MP; 262144 configured length versus about 32k training, beyond that only long-log spot checks. Overlength splits question groups retaining state/images, changing joint semantics; a single overlong question rejects, never truncates. BF16 fast path permits near-tie differences; FP8 moves probabilities further. Latest tag-only commits do not change weights.",
-        "zh": "v1.2 卡片／目录可公开阅读，仍有私有库措辞，未测试张量下载。文本／图像按保存的 1.6MP 配置；可配置 262144 长度，训练约 32k，之外仅长日志点测。超长拆问题组并保留状态／图像，会改变联合语义；单题超长拒绝，不截断。BF16 fast 有近似平局差异，FP8 概率偏移更大；最新标签提交不改变权重。"
+        "en": "November 19 HF metadata public/ungated despite residual private-repository wording; tensors not downloaded. Saved image cap 1.6 MP. Locate is text-only with nonempty state and at most 128 questions; either fast=True or locate=False disables Locate. Configured length is not a quality guarantee; overlength rejects or splits question groups retaining state.",
+        "zh": "Nov19 HF元数据公开且无门控，卡片仍有private措辞；未下载tensor。保存图像上限1.6MP。Locate仅非空文本state、最多128题；fast或locate=False关闭。配置长度不保证质量；超长拒绝或保留state拆问题组。"
       },
       "scale": {
         "en": "27B Qwen3.8 and Flash 4B Qwen3.5; distinct head sizes and calibrators.",
@@ -5478,6 +5622,102 @@
       "caveat": {
         "en": "Retain as a report and negative lessons, not a reproducible code project. Public business APIs do not expose the evaluation harness; complete labels/per-row outputs were not located. Offline replay and constructed-case accuracy do not establish production or Chinese-service benefit.",
         "zh": "保留报告与反例，非可复算源码项目；公开业务API不是评测harness，未定位完整标签/逐条输出；离线回放和构造测试准确率不证明生产或中文客服收益。"
+      }
+    },
+    {
+      "id": "sii-decision",
+      "name": "SII-Decision (4B / 27B)",
+      "category": "core_models",
+      "url": "https://github.com/amazingljy1206/SII-Decision",
+      "source_ids": [
+        "jeval-sii-v2",
+        "sii-code-oct13",
+        "sii-4b-lora",
+        "sii-27b-lora",
+        "sii-27b-full"
+      ],
+      "reviewed_on": "2026-11-19",
+      "weight_revision": null,
+      "summary": {
+        "en": "Reasoning-to-readout self-distillation into non-generative typed decisions; open 4B and 27B releases.",
+        "zh": "将推理后概率自蒸馏为零生成类型化判断；公开4B与27B产物。"
+      },
+      "use": {
+        "en": "Capability and distillation comparator; evaluate exact released checkpoints separately from enterprise adaptation.",
+        "zh": "作为能力与蒸馏参照；发布检查点评测与企业领域适配分别验证。"
+      },
+      "caveat": {
+        "en": "JEVal is reported by SII authors. Required teacher/reference/gold fields and original-base training configurations are not a generic released-checkpoint hard-label warm-start recipe. No matched Chinese enterprise or Mac training result here.",
+        "zh": "JEVal包含作者对自有SII的报告。教师／参考／gold字段及从原始底座开始的配置，不等于从发布检查点直接硬标签续训。这里无共同中文企业数据或Mac训练实测。"
+      },
+      "scale": {
+        "en": "4B: Qwen3.5-4B; 27B LoRA/Full: Qwen3.8-27B.",
+        "zh": "4B基于Qwen3.5-4B；27B LoRA／Full基于Qwen3.8-27B。"
+      },
+      "mechanism": {
+        "en": "Candidate probabilities at a fixed first-answer-token readout without a generated rationale at deployment.",
+        "zh": "部署不生成推理，在固定首个答案token位置读出候选概率。"
+      },
+      "training": {
+        "en": "Average two same-size reasoning-teacher distributions, distill by weighted soft cross-entropy, ordinal expected-score penalty and KL to p0. Released loader requires gold_target, train_target and p0; gold also controls hard-Noul weighting. LoRA and language-linear full tuning are distinct; Full still freezes embeddings/output head/norm/vision.",
+        "zh": "平均同规模教师两次推理分布，以加权软交叉熵、序数期望差惩罚及对p0的KL蒸馏。公开loader要求gold_target、train_target与p0；gold还控制hard-Noul权重。LoRA与语言linear层Full训练分开；Full仍冻结embedding／输出头／norm／vision。"
+      },
+      "availability": {
+        "en": "Public standalone BF16 HF releases and code. LoRA training saves adapters; published LoRA releases merge them into BF16 weights. Full training saves separate standalone checkpoints. Current multi-GPU launchers and inference demonstrations do not establish M5 training. The family has multiple HF revisions.",
+        "zh": "公开独立BF16 HF产物与源码。LoRA训练保存adapter，发布LoRA是合并后的BF16权重；Full训练保存独立完整检查点。当前多GPU启动器及推理演示不能证明M5训练可行；系列有多个HF revision。"
+      },
+      "license_note": "Repository/model cards declare Apache-2.0; retain upstream model and dataset obligations. No local tensor download or authentication of paper-evaluated weights.",
+      "tags": [
+        "typed-decisions",
+        "self-distillation",
+        "local",
+        "open-weight"
+      ]
+    },
+    {
+      "id": "jeval",
+      "name": "JEVal v2",
+      "category": "evaluation",
+      "url": "https://arxiv.org/html/2610.03935v2",
+      "source_ids": [
+        "jeval-sii-v2",
+        "jeval-fixed-data-nov19"
+      ],
+      "reviewed_on": "2026-11-19",
+      "summary": {
+        "en": "Multidomain English/Chinese evaluation of local typed decisions, reasoning limits and workflow composition.",
+        "zh": "面向中英文多领域的局部类型化判断、推理边界与工作流组合评测。"
+      },
+      "use": {
+        "en": "Check comparable task-level metrics and failure modes before task-specific acceptance.",
+        "zh": "在具体任务验收前检查同协议指标与失败类型。"
+      },
+      "caveat": {
+        "en": "SII authors evaluate their own model; 10938 classification accuracy and valid-only calibration differ in denominator. Pooled benchmark results are not Chinese enterprise production proof or an all-version ranking.",
+        "zh": "SII作者评测自有模型；10938分类准确率与仅valid输出的校准指标分母不同。汇总基准不是中文企业生产证明，也不是跨版本总榜。"
+      }
+    },
+    {
+      "id": "prdo",
+      "name": "Post-Rationale Distribution Optimization (PRDO v2)",
+      "category": "foundations",
+      "url": "https://arxiv.org/html/2609.38850v2",
+      "source_ids": [
+        "prdo-v2",
+        "prdo-code-nov3"
+      ],
+      "reviewed_on": "2026-11-19",
+      "summary": {
+        "en": "Proper-score optimization of each sampled rationale’s answer distribution for selective prediction.",
+        "zh": "为选择性预测优化每条采样推理之后的答案分布，以恰当评分规则为目标。"
+      },
+      "use": {
+        "en": "Compare with matched generative SFT/GRPO plus calibration when production retains reasoning and accepts or defers on the resulting distribution.",
+        "zh": "生产保留推理、按其后概率接受或转交时，与匹配的生成式SFT／GRPO加校准比较。"
+      },
+      "caveat": {
+        "en": "A method/code artifact, not TypeSafe RLCD disclosure or a no-generation model release. Accuracy and ranking can trade off; public code alone does not establish full paper reproduction or Mac feasibility.",
+        "zh": "这是方法／代码产物，不是TypeSafe RLCD披露或零生成模型发布。准确率与排序可权衡；公开源码不证明论文完全复现或Mac可行。"
       }
     }
   ]

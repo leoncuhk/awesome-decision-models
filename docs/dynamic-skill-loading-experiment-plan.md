@@ -2,11 +2,13 @@
 
 [Evidence and value review (Chinese)](dynamic-skill-loading-value-review.zh-CN.md) · [Home](../README.md) · [中文](dynamic-skill-loading-experiment-plan.zh-CN.md) · [Evidence ledger](evidence.md) · [Selection guide](selection-guide.md) · [Methodology](methodology.md)
 
-Version v2, 2026-11-13 (v1 hypotheses retained as conditional options). Status: **research plan and source review only.** No model, router, agent or dataset has been run for this document. Numbers are reported by the cited authors unless marked otherwise. The target enterprise is described as an **anonymized archetype**, and no customer data or identifying business details appear here.
+Version v2, 2026-11-13 (v1 hypotheses retained as conditional options). Status: **research plan and source review only.** No model, router, agent or dataset has been run for this document. Numbers are reported by the cited authors unless marked otherwise. The target enterprise is a **hypothetical archetype, not an actual anonymized deployment**, and no customer data or identifying business details appear here.
 
 > 2026-11-13 review: Stages 1–4 remain conditional options. Apply Stage 0 first; read the historical source-table shorthand with the qualifications below.
 
 > 2026-11-17 scope update: the current question is [path applicability, information sufficiency, conflicts and precedence](domain-path-applicability-research.zh-CN.md), with decision models as candidate implementations. This document retains the conditional loading experiment. Define the contract and diagnose the bottleneck through the [current business entry](dynamic-skill-loading-business-playbook.zh-CN.md) before expanding this matrix; the domain note distinguishes direct references, verification methods and KADS's historical status.
+
+> 2026-11-19 status: this is a conditional loading sub-experiment, not a registered study or a current enterprise deployment. Inventory sizes, top-k, sample counts and rollout percentages below are illustrative planning values. Actual quality/risk/cost limits and a timestamped protocol must be set from the business contract and pilot before execution. [Current decision framework](decision-model-posttraining-enterprise.zh-CN.md) · [Document map](README.md).
 
 ### Stage 0: establish a remediable bottleneck
 
@@ -25,18 +27,18 @@ Compare the incumbent, statically pruned/metadata-first loading, an adjudicated 
 
 - **Question.** For one enterprise whose service agent covers *dozens* of skills, does routing each turn to a small scoped set of skills (dynamic loading) beat exposing every skill at once, on task success, policy violations and billed cost?
 - **Evidence boundary.** Some studies show selection and task-success degradation as libraries grow; others show worse retrieval without worse task success. Diagnose context, candidate confusion and execution separately. These sources do not establish that this enterprise needs dynamic loading.
-- **What this plan adds.** A staged, preregistered comparison against an **oracle-routing diagnostic reference**. It separates three benefits that are often conflated: quality, cost, and governance.
+- **Proposed comparison.** A staged comparison to freeze before execution against an **oracle-routing diagnostic reference**. It separates three benefits that are often conflated: quality, cost, and governance.
 - **Acceptance.** Task outcomes, consequential-error constraints and full cost. Missing an acceptable skill set, fallback and irrelevant loading are diagnostic metrics; one annotated gold skill need not be necessary or unique.
 
 ---
 
 ## Part I. The most valuable references
 
-Only sources that change the design are kept. Grades: **P** = production data, **E** = controlled experiment, **V** = vendor documentation or claim.
+Only sources that change the design are kept. Source-type tags: **P** = production-derived data, **E** = controlled experiment, **V** = vendor documentation or claim. These are not quality ranks: production-derived offline replay is not a causal production comparison, and vendors can also report experiments.
 
 ### I.1 Skill-library scaling and its mechanism
 
-| Source | Grade | Key result | Why it matters here |
+| Source | Type | Key result | Why it matters here |
 | --- | --- | --- | --- |
 | [More Skills, Worse Agents? Skill Shadowing (Databricks, 2605.24050)](https://arxiv.org/html/2605.24050) | E | Selected 38 task–model pairs; 202 skills reduce success by 21 percentage points. The context-effect interval spans zero. | Evidence of selection interference in this subset, not absence of context effects or a universal library-size law. |
 | [Demystifying Agent Skills (Princeton/Stanford et al., 2608.14036)](https://arxiv.org/html/2608.14036v1) | E | Skill-use precision falls while task success can rise; offline retrieval and execution are separate experiments. | Separate exact-gold hits, substitute capabilities and final outcomes. |
@@ -47,7 +49,7 @@ Only sources that change the design are kept. Grades: **P** = production data, *
 
 ### I.2 Customer-service evidence
 
-| Source | Grade | Key result | Why it matters here |
+| Source | Type | Key result | Why it matters here |
 | --- | --- | --- | --- |
 | [Deterministic Executability Gating (Wix, 2608.01050)](https://arxiv.org/pdf/2608.01050) | **P** | Production records across 10 skill families; 90.5% refers to skill-description tokens, and 7.8% to 1,000 risk-enriched replays. | Motivates state gating, not full-traffic error rates, billed savings or a business A/B. |
 | [Agentic Workflow Executors in Customer Support (Dialpad, 2610.14346)](https://arxiv.org/html/2610.14346) | E | 500 synthetic scenarios derived from real workflows with simulated tools; 45% averages five judges with substantial disagreement. | Execution and evaluator quality need diagnosis; this does not bound routing gains in another business. |
@@ -65,7 +67,7 @@ Only sources that change the design are kept. Grades: **P** = production data, *
 | [E37](evidence.md#e37) | Point-estimate thresholds broke in 147 of 190 evaluations. Bounded rules (Learn-then-Test) held empirically but do not transfer under shift. |
 | [E19](evidence.md#e19), [E38](evidence.md#e38) | The serving path changes calibration and moves confidences across thresholds. Accept a router only on the exact serving path. |
 | [E17](evidence.md#e17) | Errors came from a rule pre-filter the model never saw. Evaluate rule layers as their own component. |
-| [E01](evidence.md#e01) | A specialist adapted in-domain was far ahead of its base model. A small supervised router may beat any hosted decision API. |
+| [E01](evidence.md#e01) | That domain-adapted specialist outperformed its base in the reported task. Retain a small supervised router as a direct comparator; E01 does not compare all hosted APIs or establish their inferiority. |
 
 ### I.4 Decision-model routers relevant to this plan
 
@@ -75,10 +77,10 @@ Only sources that change the design are kept. Grades: **P** = production data, *
 
 | Asset | Why use it | Caveat |
 | --- | --- | --- |
-| [ABCD](https://github.com/asappresearch/abcd) (MIT) | **One retail business with 55 subflows**, written agent guidelines, actions, and subflow labels. A subflow maps to a skill and the guidelines map to the skill body. | English, 2021, likely in pretraining data. |
+| [ABCD](https://github.com/asappresearch/abcd) (MIT) | **One retail business with 55 subflows**, written agent guidelines, actions, and subflow labels. A subflow maps to a skill and the guidelines map to the skill body. | English, 2021, possible pretraining exposure. Its scenario subflow is a collection target, not automatically a label identifiable from every visible dialogue prefix; audit the mapping and allow unknown/multiple acceptable skills. |
 | [τ-bench family](https://github.com/sierra-research/tau2-bench) (MIT) | Policies, tools, database state, user simulator, pass^k. Merging its domains into one agent creates the "flat" condition. | Public and widely trained on. Pre-v1.0.1 results are not comparable. |
-| [AgentChangeBench](https://arxiv.org/html/2510.18170) | Goal-shift sequences. | License not stated. |
-| [MASSIVE](https://huggingface.co/datasets/AmazonScience/massive) (CC-BY-4.0), [CLINC150](https://github.com/clinc/oos-eval), [BANKING77](https://github.com/PolyAI-LDN/task-specific-datasets) | Chinese (zh-CN) intents, explicit out-of-scope, fine-grained near-duplicates. | Single-turn intent data, not skills. |
+| [AgentChangeBench](https://arxiv.org/html/2510.18170) | Goal-shift sequences. | The [fixed code LICENSE](https://github.com/Maniktherana/AgentChangeBench/blob/22f2cec4ac0ec6c4d68b2fab856da78054c8980b/LICENSE) is MIT; check the applicable terms of task data and bundled upstream resources separately. |
+| [MASSIVE](https://huggingface.co/datasets/AmazonScience/massive) (CC-BY-4.0), [CLINC150](https://github.com/clinc/oos-eval), [BANKING77](https://github.com/PolyAI-LDN/task-specific-datasets) | MASSIVE supplies zh-CN intents; CLINC150 supplies explicit out-of-scope cases; BANKING77 supplies fine-grained financial intents. | Single-turn intent data, not skills. |
 | [SGD / SGD-X](https://github.com/google-research-datasets/dstc8-schema-guided-dialogue) (CC BY-SA 4.0) | Several services per domain give natural confusable skills. SGD-X tests wording sensitivity. | Schemas, not policies. |
 
 This review did not identify a public benchmark covering Chinese, multiple skills and full policy execution acceptance together. Target-business claims require authorized in-domain evidence.
@@ -102,7 +104,7 @@ This review did not identify a public benchmark covering Chinese, multiple skill
 
 ## Part III. Experiment plan for the enterprise archetype
 
-### III.1 Enterprise archetype (anonymized)
+### III.1 Hypothetical enterprise archetype
 
 - **Service:** a large Chinese-language consumer subscription service. Text chat on several IM channels. Mixed service and sales conversations.
 - **Skill inventory (target about 40), grouped into eight families:**
@@ -118,28 +120,30 @@ This review did not identify a public benchmark covering Chinese, multiple skill
 | Sales consultation | package comparison, price questions, promotion eligibility | price question vs. discount request |
 | Complaints and escalation | complaint intake, human handoff | complaint vs. refund |
 
-- **Current system:** a closed-set intent classifier (about 10–15 intents), workflow templates and human handoff.
+- **Assumed baseline:** a closed-set intent classifier (about 10–15 intents), workflow templates and human handoff.
 - **Red lines (always-on core):** no outcome guarantees, no unauthorized discounts, mandatory handoff triggers, privacy handling.
 
 Each skill is specified as: description (≤1 paragraph), procedure body, **tool whitelist**, **preconditions** (gate predicates), and links to red-line rules. The taxonomy and granularity are fixed **by the business owner** before any labelling.
 
-### III.2 Hypotheses (preregistered)
+### III.2 Proposed hypotheses to freeze before execution
 
-| ID | Hypothesis | Falsified if |
+The future protocol must define `r_min` (acceptable-set coverage), `δ_success` (minimum useful task gain), `δ_cost` (minimum useful complete-cost gain) and any non-inferiority margin. Bounds crossing an acceptance boundary are inconclusive; lack of significance alone is not falsification.
+
+| ID | Proposed hypothesis | Decision rule to freeze |
 | --- | --- | --- |
-| H1 | Flat top-1 selection degrades with K, and more steeply on confusable libraries than on diverse ones at equal K | No significant slope difference at K=40 |
-| H2 | A scoped loader (k=5) reaches recall@5 ≥ 0.98 on independently written queries at K=40 confusable | No loader arm reaches 0.98 |
-| H3 | End to end, Oracle − Flat ≥ 5 pp pass^4 at K≈40 | Paired difference < 3 pp |
-| H4 | With prompt caching on, Routed's billed-cost advantage is under half its token advantage | Billed ratio ≈ token ratio |
-| H5 | On topic-switch dialogues, per-turn routing with hysteresis beats per-conversation routing and memoryless per-turn routing | No difference, or the reverse |
-| H6 | A deterministic executability gate cuts blocked-skill selections with no loss in task success | Success drops, or blocked selections do not fall |
+| H1 | Within the chosen inventory range, confusable candidates harm flat selection more than diverse candidates | Use a paired, grouped slope/interaction estimate; define a useful difference and its interval before testing |
+| H2 | A loader at a fixed candidate budget preserves acceptable skill sets at coverage at least `r_min` while meeting risk/cost limits | Pass only under the predeclared bound; an upper bound below the target fails, overlap remains uncertain |
+| H3 | The sufficient-skill diagnostic reference has end-to-end headroom of at least `δ_success` over Flat | A lower bound above the target supports headroom; an upper bound below it does not; neither declares the actual router effective |
+| H4 | Prompt-cache behavior changes the relation between saved description tokens and full billed cost | Compare the actual frozen cache/readout paths and full costs, without a universal one-half ratio |
+| H5 | A specified stateful policy improves goal-shift handling relative to its matched stateless controls | Freeze the state policy, task outcome and allowed regression; do not infer that all workflows require hysteresis |
+| H6 | An executability gate reduces forbidden selections with task success within a predeclared non-inferiority margin | Test state freshness, gate predicates and downstream outcomes; permissions remain enforced outside the model |
 
 ### III.3 Tiers, cheapest first
 
-**Tier 1: router-only, public proxies** (hours, classification calls only, local models)
+**Tier 1: router-only, public proxies** (classification calls only; runtime and access remain to be measured)
 
 - **Library:** the 55 ABCD subflows converted into skill cards at K ∈ {10, 30, 55} × {diverse, confusable}. Confusable distractors are paraphrased near-duplicates written by a separate author or model, plus SGD sibling services. Add a MASSIVE zh-CN scenario set for Chinese.
-- **Queries:** real dialogue turns (gold = subflow). Abstention items come from CLINC out-of-scope plus **gold-removed hard negatives**, following the E20 protocol.
+- **Queries:** public collected-dialogue prefixes with manually checked visible evidence and acceptable skill sets. The full-session scenario label is not copied to every turn as gold. Keep insufficient-information and alternative-skill cases explicit. CLINC OOS and gold-removed negatives are controlled proxies, not natural enterprise no-skill traffic.
 - **Arms:**
   - R0: flat LLM choice over all K
   - R1: frontmatter progressive disclosure
@@ -149,13 +153,13 @@ Each skill is specified as: description (≤1 paragraph), procedure body, **tool
   - R5: small supervised classifier (**baseline**)
   - R6: two-level family → skill
 - **Metrics:** recall@{1,3,5,10}; risk–coverage and AURC; wrong-pick rate on absent-gold items and false-abstain rate on present-gold items, kept separate; ECE **and** correctness AUROC; p50/p95 latency; cost per 1k routes.
-- **Statistics:** about 1,000 items per cell, paired bootstrap clustered by dialogue, McNemar between arms. Thresholds are fitted on a calibration split with Learn-then-Test and reported on held-out data.
-- **Stop rule:** if no arm reaches recall@5 ≥ 0.98 at K=55 confusable, redesign the granularity or add a fallback before Tier 2.
+- **Statistics:** sample counts are pilot-dependent. Use paired inference clustered by dialogue/case; ordinary McNemar requires independent comparison units, so do not treat correlated turns as independent pairs. Select and freeze the scorer on Dev, fit temperature on Cal-fit, select the complete acceptance/defer rule on independent Cal-policy under the required assumptions, then confirm on frozen Test.
+- **Stop rule:** if coverage, risk or complete cost misses the predeclared target, stop escalation and diagnose labels, visible evidence, candidate recall, model and granularity separately; do not assign the failure to granularity from one low score.
 
-**Tier 2: router-only on the enterprise's own turns** (days of labelling, private, offline)
+**Tier 2: router-only on the enterprise's own turns** (private, offline; annotation effort requires a pilot)
 
 - About 1,500 turns sampled from real conversations, stratified by family and oversampling the confusable pairs and topic switches. Report this stress set separately; retain natural-traffic calibration/test sets for threshold, escalation and total-cost acceptance, or preregister identifiable sampling weights. Split training, development, calibration and test by conversation and time. Two independent annotators assign the gold skill and mark "skill exists / missing". Report agreement, and adjudicate disagreements.
-- Run the same arms as Tier 1 on the enterprise's own skill cards at K ∈ {10, 20, 40}. This is the uncontaminated Chinese test of H1, H2 and H6.
+- Run the same arms as Tier 1 on the enterprise's own skill cards at K ∈ {10, 20, 40}. This is a proposed independent in-domain Chinese check of H1, H2 and H6 after auditing splits, prior tuning and label visibility; it is not automatically contamination-free.
 
 **Tier 3: end-to-end with simulated users** (the largest compute tier)
 
@@ -173,9 +177,9 @@ Each skill is specified as: description (≤1 paragraph), procedure body, **tool
 - **Metrics:** pass^4, policy-violation rate, billed cost per resolved task, latency per turn, failures attributed to the loader vs. to execution, and goal-shift recovery.
 - **Power:** 300 tasks × 4 trials is an initial budget, not a promised detectable effect. The independent unit for pass^4 is the task. Estimate baseline, paired discordance and task dependence in a separate pilot; preregister alpha, power and multiplicity rules, then size the study using task-level paired power simulation.
 - **Stop rules:**
-  - If the A/A spread exceeds half of (Oracle − Flat), fix the harness.
-  - If Oracle − Flat < 3 pp **and** the billed cost gain is < 20%, quality and cost do not justify dynamic loading. Decide on governance alone.
-  - Compute routing efficiency η only when the oracle reference is complete and the lower confidence bound of Oracle − Flat is clearly positive; otherwise report uncertainty. If η = (Routed − Flat)/(Oracle − Flat) is < 0.5, return to Tier 2. Do not reject routing based on an unreliable reference.
+  - If A/A noise or reviewer disagreement prevents identifying the minimum useful effect, repair measurement or revise the pilot-based budget before selection.
+  - If uncertainty bounds put both diagnostic headroom below `δ_success` and complete-cost gains below `δ_cost`, stop expanding loading work. Wide bounds remain inconclusive; governance can be evaluated separately.
+  - Compute η = (Routed − Flat)/(Oracle − Flat) only as a diagnostic when the reference is complete and its headroom reliably positive. Adoption depends on actual Routed outcomes, risk and cost; no universal η cutoff is imposed.
 
 **Tier 4: shadow, then canary** (production, after explicit approval)
 
@@ -197,7 +201,7 @@ Each skill is specified as: description (≤1 paragraph), procedure body, **tool
 
 ### III.5 Where human judgment remains
 
-- **Skill taxonomy and granularity.** These are business and liability boundaries, and the evidence says they dominate the outcome.
+- **Skill taxonomy and granularity.** These are business and liability boundaries to control and test; current evidence does not establish that they dominate other causes.
 - **The relative cost of a misroute vs. an escalation.** This picks the operating point on the risk–coverage curve.
 - **Contents of the always-on core.**
 - **Gold labels and promotion decisions.**
@@ -206,18 +210,17 @@ Each skill is specified as: description (≤1 paragraph), procedure body, **tool
 
 ## Part IV. Conclusions the experiment is designed to reach
 
-The plan is built so that **every outcome yields a decision**, including null results.
+The plan supports a bounded next step, including stopping, obtaining more evidence or reporting an inconclusive result. Point estimates alone do not select an architecture or provider.
 
-| Observed outcome | Conclusion | Action |
+| Observed outcome | Bounded interpretation | Next step |
 | --- | --- | --- |
-| H2 holds, H3 holds, η ≥ 0.7, and actual Routed versus Flat meets preregistered success, policy-violation and full-cost acceptance with uncertainty intervals | Dynamic loading improves service quality at this scale, and the router captures most of the available gain | Adopt routed + gated + always-on core; proceed to Tier 4 |
-| H2 holds, H3 fails (Oracle − Flat < 3 pp), H4 shows a real billed saving | The benefit is cost, not quality | Adopt only if the saving matters at volume. Keep Flat with caching as the fallback |
-| H3 fails and there is no cost gain | This experiment shows no quality/cost case for dynamic loading; execution as the root cause remains unproven | Stop expanding loader work; diagnose execution, evidence, evaluation and power. Governance can be implemented separately |
-| H2 fails on confusable libraries | The current system misses the target; cause remains unresolved | Diagnose labels, visible evidence, candidate recall, model and granularity separately; fix the supported cause and re-run Tier 1 and 2 |
-| R5 (supervised) ≥ R4 (decision model) | Hosted decision models are not needed for this router | Use the small local classifier; revisit when the taxonomy changes |
-| R4 > R5, with valid held-out thresholds | A typed decision model is worth its cost and dependency | Adopt with per-release threshold re-validation (E19, E38) |
-| H5 holds | Topic switching needs stateful routing | Ship hysteresis; add goal-shift tests to regression |
-| H6 holds | Code gates may help without another model call; include state-fetch and maintenance costs | Make preconditions mandatory in every skill card |
+| Actual Routed meets frozen task, consequential-error and full-cost acceptance, with adequate uncertainty bounds | This implementation is supported for the tested scope | Freeze it and proceed to shadow acceptance; η is diagnostic only |
+| Quality is within its non-inferiority margin and complete savings exceed `δ_cost` | A cost benefit is supported within the tested volume/cache conditions | Consider adoption with the tested fallback; do not claim a quality gain |
+| Neither a useful quality nor cost gain is supported | No current case for expanding this loading implementation | Stop or diagnose only unresolved causes with a bounded budget |
+| Intervals overlap the useful-gain or risk boundaries | Evidence is insufficient to choose | Obtain independent cases if worthwhile; do not force a winner |
+| R5 and R4 meet the same quality/risk constraints, and R5 has a supported lower complete cost | Prefer the simpler tested implementation in this contract | Record non-inferiority, uncertainty and drift limits; model type does not determine hosted versus local deployment |
+| R4 has independently supported value over R5 under the same contract and budget | Retain that typed-model implementation as a candidate | Revalidate the actual serving/threshold path before production; do not infer a family-wide advantage |
+| H5 or H6 is supported | The tested state policy or gate helped under its declared conditions | Retain only the verified mechanism and add matching regression cases |
 
 **Do not presuppose a winning outcome.** Earlier expectations such as a 3–8-point gain had no local pilot basis. The stages above are conditional options; complete Stage 0 value diagnosis before expanding them.
 

@@ -99,22 +99,22 @@ Separate state and action representations with learned projection heads on a fro
 
 [Project / model](https://github.com/bespokelabsai/nimble)
 
-Qwen-based supervised adapter that reads answer-label logits instead of generating an explanation.
-Qwen 监督适配器，直接读取答案标签 logits，而非生成解释。
+Open Qwen3.5-9B supervised decision adapter, distinct from the later Nimble hosted v4/v4.1 service.
+开放Qwen3.5-9B监督判断adapter，与后续Nimble托管v4／v4.1服务分别识别。
 
 | Dimension | English | 中文 |
 | --- | --- | --- |
 | Scale | 9B backbone plus adapter; adapter bytes alone are not required memory. | 9B 骨干加适配器；适配器文件大小不等于所需内存。 |
-| Mechanism | Qwen3.5-9B plus LoRA, scoring allowed answer tokens. | Qwen3.5-9B 加 LoRA，对允许的答案 token 评分。 |
-| Training | Supervised learning; minimal changes to decisive evidence help define the boundary. | 监督学习；用决定性证据的最小变化构造判断边界。 |
-| Deployment | Adapter and code are public; load the base model as well. | 公开适配器与代码；仍需加载基础模型。 |
+| Mechanism | The open 9B model applies LoRA and reads allowed answer-token logits; candidate logits are divided by temperature before softmax, once. | 开放9B用LoRA并读允许答案token的logits；候选logits除以温度后做softmax，温度只应用一次。 |
+| Training | Supervised candidate-token CE; minimal-edit evidence pairs are data construction, not an embedding contrastive loss. The reviewed curriculum has 2,676 synthetic training and 324 synthetic evaluation rows; these are not independently adjudicated human benchmark labels. | 候选token交叉熵监督；最小事实改动对是数据构造，不是表示层对比损失。已阅课程含2676合成训练／324合成评测行；不等同独立人工基准参考标签。 |
+| Deployment | The open 9B model requires the Qwen3.5-9B base plus a PEFT adapter; the pinned card specifies 8k context, 255 options and T=1.0, distinct from original-2676/v2. Public MLX inference does not establish Mac training. Later hosted version claims do not identify an open v4 weight release. | 开放9B需Qwen3.5-9B底座加PEFTadapter；当前卡为8k上下文、255选项、T1.0，与original-2676／v2区分。MLX推理不证明Mac训练；后续托管版本声明不等于开放v4权重。 |
 | Suggested use | A transparent baseline for evidence-sensitive judgments and minimal-edit training examples. | 适合证据敏感的判断，也可借鉴最小差异训练样本。 |
-| Boundary | Contrastive data construction is not CLM-style contrastive embedding training. Public benchmark reporting is author-run and raw run outputs are not all committed. | 对比式样本构造不等于 CLM 的对比表示训练；公开比较由项目方运行，完整逐行输出并未全部提交。 |
+| Boundary | Keep the open 9B model, historical evaluated checkpoints and hosted versions separate. Public benchmarks are author-run and raw runs are incomplete. Minimal-edit examples are a reusable data idea, not production outcome evidence. | 须区分开放9B、历史被测检查点及托管版本。公开基准由作者运行，完整原始逐次输出不全。最小事实改动法可借鉴，但不是生产效果证明。 |
 
-**License note:** Reviewed model card declares Apache-2.0; inherited dependencies retain their terms.
+**License note:** Pinned open9B model card declares Apache-2.0; base/dependencies retain their terms. No root LICENSE found in the inspected current GitHub tree; do not infer a blanket source-code license from model metadata.
 **Recorded weight identifier:** Unknown / not pinned
 
-**Sources:** [Bespoke Nimble model card](https://huggingface.co/bespokelabs/Bespoke-Nimble-9B); [Nimble public human-reference benchmark protocol and results](https://github.com/bespokelabsai/nimble/blob/62076b4f2d365b5879dafcf7f6dd072a1fe76df7/docs/PUBLIC_BENCHMARKS.md)
+**Sources:** [Bespoke Nimble model card](https://huggingface.co/bespokelabs/Bespoke-Nimble-9B); [Nimble public human-reference benchmark protocol and results](https://github.com/bespokelabsai/nimble/blob/62076b4f2d365b5879dafcf7f6dd072a1fe76df7/docs/PUBLIC_BENCHMARKS.md); [Nimble current repository: hosted versions and local training/inference](https://github.com/bespokelabsai/nimble/tree/b30ec429fcd78c15fa12a5d3b68c5fbc3bf0430f); [Bespoke-Nimble-9B: exact open adapter card](https://huggingface.co/bespokelabs/Bespoke-Nimble-9B/tree/bd792f44ec8e265be861bfcdf4e05967ffe0e858)
 
 <a id="gliner-decide"></a>
 ## GLiNER2.5-Decide
@@ -227,26 +227,26 @@ Qwen3.5 与 Gemma 4 pointer-head 系列；10 月 v1 发布平均三个训练适�
 **Sources:** [Strands Decider repository](https://github.com/strands-labs/strands-decider/blob/aa92b075ff297d7bf17c18bf6c676ab4df0fa9a9/README.md); [Strands Decider architecture](https://github.com/strands-labs/strands-decider/blob/aa92b075ff297d7bf17c18bf6c676ab4df0fa9a9/docs/architecture.md); [Strands Decider v19 experiment configuration](https://github.com/strands-labs/strands-decider/blob/aa92b075ff297d7bf17c18bf6c676ab4df0fa9a9/configs/experiments/v19.yaml); [Strands Decider evaluation and limitations](https://github.com/strands-labs/strands-decider/blob/aa92b075ff297d7bf17c18bf6c676ab4df0fa9a9/evaluation/README.md); [Strands Decider experiment record](https://github.com/strands-labs/strands-decider/blob/aa92b075ff297d7bf17c18bf6c676ab4df0fa9a9/research/README.md); [Strands Decider original and AWS retrain results](https://github.com/strands-labs/strands-decider/blob/aa92b075ff297d7bf17c18bf6c676ab4df0fa9a9/evaluation/results.md); [Strands Decider published v19 adapter card](https://huggingface.co/StrandsAgents/strands-decider-2B-hobson-v19/blob/bb282d786bc251fd4e3068de3ada9ddbb38127cd/README.md); [Strands Decider published adapter provenance](https://huggingface.co/StrandsAgents/strands-decider-2B-hobson-v19/blob/bb282d786bc251fd4e3068de3ada9ddbb38127cd/provenance.json); [Strands Decider v21 release and same-host seed results](https://github.com/strands-labs/strands-decider/blob/3e94e9d84c620ed5a95f1a3310c3decb971e261c/evaluation/results.md); [Strands Decider released v21b recipe](https://github.com/strands-labs/strands-decider/blob/3e94e9d84c620ed5a95f1a3310c3decb971e261c/configs/experiments/v21b.yaml); [Strands October 9 v1 releases](https://github.com/strands-labs/strands-decider/blob/0ac22a97e584f3ccf87cc9b8cc5fdbad57cdf534/CHANGELOG.md); [Strands Qwen3.5 / Gemma 4 v1 results](https://github.com/strands-labs/strands-decider/blob/0ac22a97e584f3ccf87cc9b8cc5fdbad57cdf534/evaluation/results.md); [Strands Gemma 4 serving limits and attention fix](https://github.com/strands-labs/strands-decider/blob/0ac22a97e584f3ccf87cc9b8cc5fdbad57cdf534/docs/inference.md); [Strands Qwen v1 missing-image reliability](https://github.com/strands-labs/strands-decider/blob/0ac22a97e584f3ccf87cc9b8cc5fdbad57cdf534/docs/vision.md); [Strands dataset/source inventory](https://github.com/strands-labs/strands-decider/blob/0ac22a97e584f3ccf87cc9b8cc5fdbad57cdf534/data/sources.md); [Strands: request-local pointer offsets and tokenizer/cache concurrency fixes](https://github.com/strands-labs/strands-decider/commit/6039cf8b64c6074e75804000c07ac3d4cce795f7); [Strands: eval/calibrate use serving model preparation](https://github.com/strands-labs/strands-decider/commit/930e6d5de16309be32579f5631a7369a3322140c); [Strands: five published v1 seed-0 training configurations and missing-input disclosure](https://github.com/strands-labs/strands-decider/commit/94f1cc1d491ebc456140103ea60c5f7daa21eca8); [Strands: continuing released adapter and head training](https://github.com/strands-labs/strands-decider/commit/e69edb2650d87ecdd28e6ff0563c5a40d716f1f1); [Strands: retire slot heads and require explicit frozen pointer KL reference](https://github.com/strands-labs/strands-decider/commit/13c05149265dc404c09d2469636f71b1320e1713); [Strands: keep Gemma4 MLX loading and execution on one owned worker](https://github.com/strands-labs/strands-decider/commit/13faf5214f7cbea07d005278f1aeaf3973611eba)
 
 <a id="pplx-decider"></a>
-## Perplexity Decider v1 / v1.1 / v1.2 (27B / Flash 4B)
+## Perplexity Decider (current v1.3; archival v1 / v1.1 / v1.2)
 
-[Project / model](https://huggingface.co/perplexity-ai/pplx-decider-v1.2)
+[Project / model](https://huggingface.co/perplexity-ai/pplx-decider-v1.3)
 
-v1.2 joint-request decision heads on Qwen3.8-27B and distilled Qwen3.5-4B; retain v1/v1.1 as distinct artifacts.
-v1.2 联合请求答码头：Qwen3.8-27B 及蒸馏 Qwen3.5-4B；保留 v1／v1.1 的独立产物身份。
+v1.3 typed-decision and optional span-location family; 27B Qwen3.8 and distilled Flash 4B Qwen3.5, with distinct earlier versions.
+v1.3类型化判断及可选span定位系列；27B Qwen3.8与蒸馏Flash 4B Qwen3.5，早期版本分别保留。
 
 | Dimension | English | 中文 |
 | --- | --- | --- |
 | Scale | 27B Qwen3.8 and Flash 4B Qwen3.5; distinct head sizes and calibrators. | 27B Qwen3.8 与 Flash 4B Qwen3.5；头维度、校准器分别匹配。 |
-| Mechanism | v1.2 reads 255-code heads at each question marker. Full attention spans all questions in a request; linear attention stays causal. Grouped questions influence each other; use separate requests for independent candidates. Packing isolates requests, unlike grouping inside one request. | v1.2 在每题标记处读 255 答码头；full-attention 覆盖同请求所有问题，linear-attention 仍因果。组内问题相互影响，独立候选宜分请求；跨请求 packing 保持隔离，不等于请求内分组。 |
-| Training | v1.2 retrains with more data including official benchmark training splits; test decontamination is author-described. Flash distills full teacher distributions and soups runs. Temperatures 1.382 (27B) / 1.554 (Flash) fitted in joint format, distinct from v1/v1.1; changed grouping/backend requires recalibration checks. Full data replay remains unaudited. | v1.2 增加数据并使用官方基准训练划分，测试去污染为作者披露；Flash 蒸馏教师完整分布并平均权重。联合格式温度 27B 为 1.382、Flash 为 1.554，区别于 v1／v1.1；改变分组／后端须重验校准，完整数据重放未审计。 |
-| Deployment | v1.2 cards/tree public-readable; residual private-repository wording and untested tensor access noted. Text/images at saved 1.6MP; 262144 configured length versus about 32k training, beyond that only long-log spot checks. Overlength splits question groups retaining state/images, changing joint semantics; a single overlong question rejects, never truncates. BF16 fast path permits near-tie differences; FP8 moves probabilities further. Latest tag-only commits do not change weights. | v1.2 卡片／目录可公开阅读，仍有私有库措辞，未测试张量下载。文本／图像按保存的 1.6MP 配置；可配置 262144 长度，训练约 32k，之外仅长日志点测。超长拆问题组并保留状态／图像，会改变联合语义；单题超长拒绝，不截断。BF16 fast 有近似平局差异，FP8 概率偏移更大；最新标签提交不改变权重。 |
+| Mechanism | Default separate encodes each state/images/question independently; isolated uses shared state with a different attention contract. A 255-code readout replaces full-vocabulary generation. Locate uses a separate optional span adapter; mixed Locate/decisions require two passes. | 默认separate逐题独立编码state／images／question；isolated共享状态且attention合同不同。255答码readout不生成完整词表文本。Locate另用可选span adapter；与判断混合需两次pass。 |
+| Training | v1.3 saved configs disclose CE for 27B and teacher-distribution distillation for Flash, frozen readouts. Temperatures 1.2263882168038833 / 1.3302962111834522 are v1.3-specific. Complete original training data/replay not verified. Preserve v1.2 training and comparisons in its dated records. | v1.3保存配置披露27B用CE、Flash蒸馏教师分布、readout冻结；温度分别1.2263882168038833／1.3302962111834522，专属v1.3。未验证完整原始训练数据／重放；v1.2训练与对比保留在带日期记录。 |
+| Deployment | November 19 HF metadata public/ungated despite residual private-repository wording; tensors not downloaded. Saved image cap 1.6 MP. Locate is text-only with nonempty state and at most 128 questions; either fast=True or locate=False disables Locate. Configured length is not a quality guarantee; overlength rejects or splits question groups retaining state. | Nov19 HF元数据公开且无门控，卡片仍有private措辞；未下载tensor。保存图像上限1.6MP。Locate仅非空文本state、最多128题；fast或locate=False关闭。配置长度不保证质量；超长拒绝或保留state拆问题组。 |
 | Suggested use | A self-hosted comparator for text/image judgments after task-specific validation. | 经具体任务验证后，作为文本／图像判读的自部署对照。 |
-| Boundary | Author card comparisons mix training and request-format changes, so gains do not isolate either cause. Public-task training exposure is not proof of exact test leakage. Grouping helps some tasks and hurts candidate ranking, especially Flash. No new universal accuracy, calibration or cost recommendation. | 作者对比同时改变训练与请求格式，不能隔离归因；训练任务暴露不等于具体测试泄漏。分组可改善部分任务，也可损害候选排序，Flash 尤甚；不形成通用准确率、校准或成本推荐。 |
+| Boundary | Version, mode, grouping, images and backend alter the inference contract. v1.2 historical results cannot be relabeled v1.3. Neither near-identical fast-path choices nor a fitted temperature establish new-domain quality, production risk or Mac training. | 版本、mode、分组、图像与后端改变推理合同。不可把v1.2历史结果重命名为v1.3。fast近似答案与拟合温度均不证明新域质量、生产风险控制或Mac训练。 |
 
 **License note:** Official model card declares Apache-2.0; public weights do not imply public training data.
 **Recorded weight identifier:** Unknown / not pinned
 
-**Sources:** [Perplexity pplx-decider-v1-27b model card](https://huggingface.co/perplexity-ai/pplx-decider-v1-27b); [Perplexity local inference wrapper](https://huggingface.co/perplexity-ai/pplx-decider-v1-27b/blob/main/inference.py); [Perplexity released decision configuration](https://huggingface.co/perplexity-ai/pplx-decider-v1-27b/blob/main/decision_config.json); [Perplexity Decider v1.1: native head, attention and deployment card](https://huggingface.co/perplexity-ai/pplx-decider-v1.1-27b/blob/14c9d90137962d300f3de95633f7b6535e80c5ce/README.md); [Perplexity Decider v1.1: fixed native code and calibration configuration](https://huggingface.co/perplexity-ai/pplx-decider-v1.1-27b/blob/14c9d90137962d300f3de95633f7b6535e80c5ce/source/src/autojev/model.py); [Perplexity Decider v1.2: joint requests and retrained data mixture](https://huggingface.co/perplexity-ai/pplx-decider-v1.2/blob/cce0f3f80033e9d89d80831d5281fd72124aacce/README.md); [Perplexity Decider Flash v1.2: distilled 4B and grouping regressions](https://huggingface.co/perplexity-ai/pplx-decider-flash-v1.2/blob/9ff7cf9838e59df461c276b7699d56b244d2af58/README.md)
+**Sources:** [Perplexity pplx-decider-v1-27b model card](https://huggingface.co/perplexity-ai/pplx-decider-v1-27b); [Perplexity local inference wrapper](https://huggingface.co/perplexity-ai/pplx-decider-v1-27b/blob/main/inference.py); [Perplexity released decision configuration](https://huggingface.co/perplexity-ai/pplx-decider-v1-27b/blob/main/decision_config.json); [Perplexity Decider v1.1: native head, attention and deployment card](https://huggingface.co/perplexity-ai/pplx-decider-v1.1-27b/blob/14c9d90137962d300f3de95633f7b6535e80c5ce/README.md); [Perplexity Decider v1.1: fixed native code and calibration configuration](https://huggingface.co/perplexity-ai/pplx-decider-v1.1-27b/blob/14c9d90137962d300f3de95633f7b6535e80c5ce/source/src/autojev/model.py); [Perplexity Decider v1.2: joint requests and retrained data mixture](https://huggingface.co/perplexity-ai/pplx-decider-v1.2/blob/cce0f3f80033e9d89d80831d5281fd72124aacce/README.md); [Perplexity Decider Flash v1.2: distilled 4B and grouping regressions](https://huggingface.co/perplexity-ai/pplx-decider-flash-v1.2/blob/9ff7cf9838e59df461c276b7699d56b244d2af58/README.md); [Perplexity Decider v1.3 27B: card and saved configuration](https://huggingface.co/perplexity-ai/pplx-decider-v1.3/tree/9c2ebb27470d3dec2ad7ab727727e40d142c7213); [Perplexity Decider Flash v1.3: card and saved configuration](https://huggingface.co/perplexity-ai/pplx-decider-flash-v1.3/tree/d06fb3f2d97e0a52325a0d463c450cf0338f44fe)
 
 <a id="ms-decision"></a>
 ## Microsoft-Decision-1
@@ -467,4 +467,26 @@ Gemma-4-31B 选项 logits 判断，加有条件的整段重复读取策略。
 **Recorded weight identifier:** Unknown / not pinned
 
 **Sources:** [Jeffan-31b-1710: model card and published conditional-reread engine](https://huggingface.co/tattrongvu/Jeffan-31b-1710/blob/cebfa86c2bed2b5c83b12e44de4374b20c87fd79/inference/README.md); [Jeffan: license-only change to Apache-2.0](https://huggingface.co/tattrongvu/Jeffan-31b-1710/commit/cebfa86c2bed2b5c83b12e44de4374b20c87fd79)
+
+<a id="sii-decision"></a>
+## SII-Decision (4B / 27B)
+
+[Project / model](https://github.com/amazingljy1206/SII-Decision)
+
+Reasoning-to-readout self-distillation into non-generative typed decisions; open 4B and 27B releases.
+将推理后概率自蒸馏为零生成类型化判断；公开4B与27B产物。
+
+| Dimension | English | 中文 |
+| --- | --- | --- |
+| Scale | 4B: Qwen3.5-4B; 27B LoRA/Full: Qwen3.8-27B. | 4B基于Qwen3.5-4B；27B LoRA／Full基于Qwen3.8-27B。 |
+| Mechanism | Candidate probabilities at a fixed first-answer-token readout without a generated rationale at deployment. | 部署不生成推理，在固定首个答案token位置读出候选概率。 |
+| Training | Average two same-size reasoning-teacher distributions, distill by weighted soft cross-entropy, ordinal expected-score penalty and KL to p0. Released loader requires gold_target, train_target and p0; gold also controls hard-Noul weighting. LoRA and language-linear full tuning are distinct; Full still freezes embeddings/output head/norm/vision. | 平均同规模教师两次推理分布，以加权软交叉熵、序数期望差惩罚及对p0的KL蒸馏。公开loader要求gold_target、train_target与p0；gold还控制hard-Noul权重。LoRA与语言linear层Full训练分开；Full仍冻结embedding／输出头／norm／vision。 |
+| Deployment | Public standalone BF16 HF releases and code. LoRA training saves adapters; published LoRA releases merge them into BF16 weights. Full training saves separate standalone checkpoints. Current multi-GPU launchers and inference demonstrations do not establish M5 training. The family has multiple HF revisions. | 公开独立BF16 HF产物与源码。LoRA训练保存adapter，发布LoRA是合并后的BF16权重；Full训练保存独立完整检查点。当前多GPU启动器及推理演示不能证明M5训练可行；系列有多个HF revision。 |
+| Suggested use | Capability and distillation comparator; evaluate exact released checkpoints separately from enterprise adaptation. | 作为能力与蒸馏参照；发布检查点评测与企业领域适配分别验证。 |
+| Boundary | JEVal is reported by SII authors. Required teacher/reference/gold fields and original-base training configurations are not a generic released-checkpoint hard-label warm-start recipe. No matched Chinese enterprise or Mac training result here. | JEVal包含作者对自有SII的报告。教师／参考／gold字段及从原始底座开始的配置，不等于从发布检查点直接硬标签续训。这里无共同中文企业数据或Mac训练实测。 |
+
+**License note:** Repository/model cards declare Apache-2.0; retain upstream model and dataset obligations. No local tensor download or authentication of paper-evaluated weights.
+**Recorded weight identifier:** Unknown / not pinned
+
+**Sources:** [JEVal and SII-Decision: General Decision Models, paper v2](https://arxiv.org/html/2610.03935v2); [SII-Decision: released training and readout implementation](https://github.com/amazingljy1206/SII-Decision/tree/1723d83cbda69f48641c273280b5a2d06d6b3510); [SII-Decision-4B-LoRA: merged BF16 release](https://huggingface.co/jylin001206/SII-Decision-4B-LoRA/tree/5c77219871d297bd375c033eb63ad2cd010af657); [SII-Decision-27B-LoRA: merged BF16 release](https://huggingface.co/jylin001206/SII-Decision-27B-LoRA/tree/a7e7f9686bb9dad88b378978a984e3a52c13e649); [SII-Decision-27B-Full: language-linear full-tuning release](https://huggingface.co/jylin001206/SII-Decision-27B-Full/tree/8f5a51dcde7b0fd6a2eea3ab423bad5e3b11dfda)
 

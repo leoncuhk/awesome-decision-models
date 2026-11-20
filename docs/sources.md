@@ -2528,3 +2528,115 @@
 - Source revision: `not captured / live URL`
 - Note: Read API purpose/auth and conversation/message surface to check artifact identity. Business API documentation is not the Jev routing evaluator source, dataset or independent replay receipt; no authenticated requests sent.
 
+<a id="jeval-sii-v2"></a>
+## JEVal and SII-Decision: General Decision Models, paper v2
+
+- Source: https://arxiv.org/html/2610.03935v2
+- Kind: `paper`; review depth: `content_reviewed`; reviewed: 2026-11-19
+- Source revision: `not captured / live URL`
+- Note: Read evaluation denominator/invalid-output rules, main table, distillation method and limitations. SII is proposed by these authors; not independent replication of SII.
+
+<a id="sii-code-oct13"></a>
+## SII-Decision: released training and readout implementation
+
+- Source: https://github.com/amazingljy1206/SII-Decision/tree/1723d83cbda69f48641c273280b5a2d06d6b3510
+- Kind: `repository`; review depth: `content_reviewed`; reviewed: 2026-11-19
+- Source revision: `1723d83cbda69f48641c273280b5a2d06d6b3510`
+- Note: Read repository, exact backbone mapping and training contract; gold_target/train_target/p0 are required. Released multi-GPU training is not Mac validation.
+
+<a id="sii-4b-lora"></a>
+## SII-Decision-4B-LoRA: merged BF16 release
+
+- Source: https://huggingface.co/jylin001206/SII-Decision-4B-LoRA/tree/5c77219871d297bd375c033eb63ad2cd010af657
+- Kind: `model_card`; review depth: `content_reviewed`; reviewed: 2026-11-19
+- Source revision: `5c77219871d297bd375c033eb63ad2cd010af657`
+- Note: Relevant body and artifact contract inspected; no training or model inference performed.
+
+<a id="sii-27b-lora"></a>
+## SII-Decision-27B-LoRA: merged BF16 release
+
+- Source: https://huggingface.co/jylin001206/SII-Decision-27B-LoRA/tree/a7e7f9686bb9dad88b378978a984e3a52c13e649
+- Kind: `model_card`; review depth: `content_reviewed`; reviewed: 2026-11-19
+- Source revision: `a7e7f9686bb9dad88b378978a984e3a52c13e649`
+- Note: Relevant body and artifact contract inspected; no training or model inference performed.
+
+<a id="sii-27b-full"></a>
+## SII-Decision-27B-Full: language-linear full-tuning release
+
+- Source: https://huggingface.co/jylin001206/SII-Decision-27B-Full/tree/8f5a51dcde7b0fd6a2eea3ab423bad5e3b11dfda
+- Kind: `model_card`; review depth: `content_reviewed`; reviewed: 2026-11-19
+- Source revision: `8f5a51dcde7b0fd6a2eea3ab423bad5e3b11dfda`
+- Note: Relevant body and artifact contract inspected; no training or model inference performed.
+
+<a id="prdo-v2"></a>
+## PRDO: post-rationale distribution optimization, paper v2
+
+- Source: https://arxiv.org/html/2609.38850v2
+- Kind: `paper`; review depth: `content_reviewed`; reviewed: 2026-11-19
+- Source revision: `not captured / live URL`
+- Note: Read v2 method, matched controls, selective metrics, verification-task boundary and provenance. It supersedes v1 framing but does not disclose TypeSafe RLCD.
+
+<a id="prdo-code-nov3"></a>
+## PRDO: public OpenJev-RLCD implementation
+
+- Source: https://github.com/ZimmyGao/openjev-rlcd/tree/5859d2b893314fb3581f06e4e36c303e372b3f48
+- Kind: `repository`; review depth: `content_reviewed`; reviewed: 2026-11-19
+- Source revision: `5859d2b893314fb3581f06e4e36c303e372b3f48`
+- Note: Code available. README-referenced tags/external analysis-plan artifacts were not found in this audit; full paper replay is not certified.
+
+<a id="pplx-v13-card"></a>
+## Perplexity Decider v1.3 27B: card and saved configuration
+
+- Source: https://huggingface.co/perplexity-ai/pplx-decider-v1.3/tree/9c2ebb27470d3dec2ad7ab727727e40d142c7213
+- Kind: `model_card`; review depth: `content_reviewed`; reviewed: 2026-11-19
+- Source revision: `9c2ebb27470d3dec2ad7ab727727e40d142c7213`
+- Note: Card/runtime/config inspected. HF API public/ungated on Nov19 despite residual private-repository wording; no tensor download. v1.2 results remain historical.
+
+<a id="pplx-flash-v13-card"></a>
+## Perplexity Decider Flash v1.3: card and saved configuration
+
+- Source: https://huggingface.co/perplexity-ai/pplx-decider-flash-v1.3/tree/d06fb3f2d97e0a52325a0d463c450cf0338f44fe
+- Kind: `model_card`; review depth: `content_reviewed`; reviewed: 2026-11-19
+- Source revision: `d06fb3f2d97e0a52325a0d463c450cf0338f44fe`
+- Note: Card/runtime/config inspected. Flash uses Qwen3.5-4B, distinct from 27B Qwen3.8 and earlier calibrators. No tensor download.
+
+<a id="laya-gate-d-nov19"></a>
+## Laya Gate D: paired three-seed RLCD / soft-CE panel
+
+- Source: https://github.com/NandhaKishorM/laya/blob/d1282e791d71e92f24f816ff3836e4fd1c2ded4a/research/scripts/step4_benchmark/GATE_D_RESULTS.md
+- Kind: `evaluation_report`; review depth: `content_reviewed`; reviewed: 2026-11-19
+- Source revision: `d1282e791d71e92f24f816ff3836e4fd1c2ded4a`
+- Note: Six author/contributor-run T4 cells; fixed source report and limitations read. Reused RLCD seed0, shipped-temperature path and choice+noul-only Brier retained. No training repeated here.
+
+<a id="nimble-current-nov19"></a>
+## Nimble current repository: hosted versions and local training/inference
+
+- Source: https://github.com/bespokelabsai/nimble/tree/b30ec429fcd78c15fa12a5d3b68c5fbc3bf0430f
+- Kind: `repository`; review depth: `content_reviewed`; reviewed: 2026-11-19
+- Source revision: `b30ec429fcd78c15fa12a5d3b68c5fbc3bf0430f`
+- Note: Current hosted v4/v4.1 wording and public open9B artifact are distinct. Training/data/readout documentation reviewed; no root LICENSE located in inspected tree, so no blanket source-code license inferred.
+
+<a id="nimble-open9b-sep24"></a>
+## Bespoke-Nimble-9B: exact open adapter card
+
+- Source: https://huggingface.co/bespokelabs/Bespoke-Nimble-9B/tree/bd792f44ec8e265be861bfcdf4e05967ffe0e858
+- Kind: `model_card`; review depth: `content_reviewed`; reviewed: 2026-11-19
+- Source revision: `bd792f44ec8e265be861bfcdf4e05967ffe0e858`
+- Note: Pinned Qwen3.5-9B PEFT adapter; current card/context/calibration and original-2676 identity inspected. HF metadata public/ungated; base weights not included or downloaded.
+
+<a id="jeval-fixed-data-nov19"></a>
+## JEVal fixed public test inputs and labels
+
+- Source: https://huggingface.co/datasets/carlosxiang/JEVal/tree/5d0253c34cf5e371b3ae99c21f0a7170d7289f63
+- Kind: `repository`; review depth: `content_reviewed`; reviewed: 2026-11-19
+- Source revision: `5d0253c34cf5e371b3ae99c21f0a7170d7289f63`
+- Note: Read and checksum-verified public test.parquet, 11257 inputs. Reaggregated type/input metadata only; released inputs do not supply original per-model predictions.
+
+<a id="zh-decision-bench-output-nov19"></a>
+## Chinese decision benchmark: fixed released prediction panel
+
+- Source: https://github.com/CodyQin/zh-decision-bench/tree/aaf56ff139dc5440da3939892cad249154f1d35b
+- Kind: `evaluation_report`; review depth: `content_reviewed`; reviewed: 2026-11-19
+- Source revision: `aaf56ff139dc5440da3939892cad249154f1d35b`
+- Note: Read source/run metadata and reaggregated 10 released JSONL files across five models. 467 matching item/question keys, 378 cases. No model inference or independent label adjudication; no evaluated HF weight SHA recorded.
+

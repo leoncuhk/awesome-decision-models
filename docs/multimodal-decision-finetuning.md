@@ -1,5 +1,7 @@
 # Fine-tuning multimodal decision models: research and acceptance plan
 
+> Branch/version note, 2026-11-19: PR #6 retains the October 18 baseline on this page. The independent [PR #5](https://github.com/leoncuhk/awesome-decision-models/pull/5) has a later [fixed 784b6d6 version](https://github.com/leoncuhk/awesome-decision-models/blob/784b6d6f3e830c106dfbfc20b945524e271d8092/docs/multimodal-decision-finetuning.md). These are distinct revisions, not synchronized copies. This branch's current enterprise post-training judgment is in the [synthesis](decision-model-posttraining-enterprise.zh-CN.md); see the [document map](README.md).
+
 [简体中文](multimodal-decision-finetuning.zh-CN.md) · [Home](../README.md) · [Selection guide](selection-guide.md#image-intent-adaptation) · [Evidence ledger](evidence.md)
 
 Sources reviewed: 2026-10-18. This is a testable research design for general multimodal customer-support intent recognition. No model was trained and no production benefit was demonstrated here. Public implementations, author reports and proposed experiments are distinguished below. Image understanding, intent, calibration and abstention policy are separate questions.

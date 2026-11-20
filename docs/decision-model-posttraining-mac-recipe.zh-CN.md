@@ -1,12 +1,26 @@
-# Mac上训练Skill／工具判断器：条件路线与运行配方
+# Mac训练准入：候选可行性与Skill／工具判断示例
 
 核查日期：2026-11-19。目标硬件为M5 Pro、48GB。本页是官方文档、源码与模型卡核查；没有下载权重、执行模型前向或训练，不给出实测效果或训练耗时承诺。[企业后训练总览](decision-model-posttraining-enterprise.zh-CN.md)负责方法与选型；本页只提供一条训练链路备选，**Laya尚未通过企业效果选型，不能因可在Mac训练就优先采用。**
 
-## 配方对象与选型边界
+## 先核前列候选的训练准入
+
+下面区分“值得研究”与“已能在目标机完成训练”。未在M5 Pro 48GB测量真实前向、反向、峰值内存、swap或导出重载；公开CUDA脚本不能据此视为Mac配方。
+
+| 对象 | 发布训练产物与输入合同 | Mac上的下一步及停止条件 |
+|---|---|---|
+| SII-Decision | 4B／27B分别基于Qwen3.5／3.8；原始底座蒸馏，需`gold_target`、教师`train_target`和原版`p0`；发布wrapper为多GPU | 先审数据转换、adapter加载及算子支持，再尝试代表性小批次；不能将企业硬标签直接代入并声称复现原法 |
+| Kev | 有`--data`与`--init_from`的领域适配，训练器含MPS分支；MLX服务与训练分开 | 是直接自有标签适配的优先工程核查对象；混合递归结构的MPS backward、内存或保存重载失败时，先定位后决定移植或换算力 |
+| Intern-Decision | CUDA／XTuner、全语言参数训练及冻结视觉部分 | 是多字段／视觉条件下的专项候选；改为Mac LoRA需独立验证，不能沿用原训练效果承诺 |
+| PRDO | 全参训练，包含rollout与参考模型；论文48GB独显另配约125GB主机内存 | 仅服务保留推理的选择性判断；48GB统一内存不等价，现阶段没有可直接执行的Mac复现配方 |
+| Nimble | 开放9B的候选token监督／LoRA；新托管v4／v4.1另论 | 先借鉴数据构造并做匹配消融；MLX推理支持不证明CUDA训练代码可直接迁移 |
+
+固定版本、源码和模型卡见[产物矩阵](decision-model-posttraining-platform-audit.zh-CN.md#可训练产物矩阵)与[PRDO审计](decision-model-posttraining-method-audit.zh-CN.md#8-prdo-v2全文复核怎样改变当前路线)。工程smoke只决定是否可运行；企业数据上的质量、风险、完整成本才决定是否采用。
+
+## 实现附录：资源较低的链路示例
 
 **本文以官方Laya多语种322M checkpoint示范`laya.train`的监督训练、独立校准和拒判链路。** 配方对应较短文本与候选相关性判断；中文／中英混合时需评测多语种检查点，纯英语也可比较English 421M。代码接口可审查是保留这个实现样例的理由，不能据此选出企业效果胜者；模型质量及复杂规则、长上下文或图像任务的路线由总览中的证据和验收门槛决定。[官方训练说明](https://github.com/NandhaKishorM/laya/blob/d1282e791d71e92f24f816ff3836e4fd1c2ded4a/docs/finetune.md)、[多语种模型](https://huggingface.co/convaiinnovations/laya-multilingual)
 
-后续证据交叉核查已发现多语种Laya本身也有中文任务弱于对照的公开结果，不能把JEVal低分简单解释成“用了英文版”或“上下文只有512”。任务内微调高分也需排除空输入、标签先验和同源模板捷径；负面证据与检查点/输入审计见总览及[方法核查](decision-model-posttraining-method-audit.zh-CN.md)。本页保留配方，不代表已决定投资该模型。
+另一个中文公开输出面板中，多语种Laya也弱于对照；换多语种不自动解决任务。这不能解释JEVal原差距的成因，原评测仍需精确权重与输入配置复验，不能由“英文版”或“512上下文”单因定论。任务内微调高分也需排除空输入、标签先验和同源模板捷径；负面证据与检查点/输入审计见总览及[方法核查](decision-model-posttraining-method-audit.zh-CN.md)。本页保留配方，不代表已决定投资该模型。
 
 任务先定义为：用户请求和当时可见状态，加一个候选 Skill／工具的真实描述／必要正文，判断该候选是否应加载；所有候选都不成立时返回无适用项。每候选使用固定的中性 `A/B` 选项，把候选内容放入 `state`，避免将变化的工具名当成固定输出类。先检索少量候选再逐个判断，保留候选召回率与判断准确率两套指标；多个候选可同时适用，不能把多工具需求强制标成唯一标签。
 
@@ -19,7 +33,7 @@
 | **官方 Laya** | Apache-2.0；多语种321,908,998参数；官方有MPS／CPU训练、逐行问题JSONL、CE／RLCD、冻结encoder、选项打乱及校准接口 | 已确认训练入口可审查，未确认企业质量达标；只保留为资源较低的链路备选。MPS训练默认fp32，需要显式开启梯度检查点 |
 | **LayaStudio MLX LoRA** | 独立Apache-2.0项目；确实实现encoder LoRA及完整decision head训练、模型合并和加载；依赖laya-mlx | 是真实Mac训练方案，但不是官方训练器。当前数据集共用一份questions schema，不能直接消费逐行变化候选集合；固定A/B候选相关性任务可用，作为内存／速度备选 |
 | **GLiClass** | Apache-2.0；可训练动态标签分类；instruct-edge仅32.7M，v4-edge约439.8M；两者不是同一版本或同一能力 | 32.7M适合廉价基线，v4可列比较候选；当前上游通用train.py默认随机切分，不应原样作为独立评估协议；未核验MPS真实训练 |
-| **Kev** | Apache-2.0；Qwen底座加LoRA／pointer head；train.py有MPS分支，MLX主要用于服务；0.8B已开放 | 完整、值得参考，不能把Mac MLX推理性能当训练可行性。当前Qwen3.5混合递归结构的MPS backward与内存仍须实测，作为需要更强状态推理时的后续候选 |
+| **Kev** | Apache-2.0；Qwen底座加LoRA／pointer head；train.py有MPS分支，MLX主要用于服务；0.8B已开放 | 上表直接领域适配候选；本实现附录未给出其目标机配方。训练可行性与是否生成推理、领域效果分别核查 |
 | **静态embedding／小分类头 ToolRouter** | 模型MIT、数据标CC-BY4.0；约8MB；只有7种已知工具的identity head被训练，未见工具走固定语义分数 | 必留便宜基线；不能据其接口支持任意候选，就说训练已学会任意新工具路由 |
 
 源码依据：[Laya train](https://github.com/NandhaKishorM/laya/blob/d1282e791d71e92f24f816ff3836e4fd1c2ded4a/laya/train.py)、[LayaStudio engine](https://github.com/biplovgautam/LayaStudio/blob/71f1a01466e247c4ac9a8afe681e3491cb0f2e06/layastudio/engine.py)、[GLiClass训练](https://github.com/Knowledgator/GLiClass/blob/af82d425c0259a6f46f240bb0633fcdab821eaea/train.py)、[Kev训练](https://github.com/jaredpalmer/kev/blob/2074cc44256200bb37540103fa4572901faa10f3/kev/train.py)、[ToolRouter方法与限制](https://huggingface.co/stanley-nv/toolrouter/blob/b2607a34877cc9211ec1e715c703966bf5f20c2a/docs/REPORT.md)。LayaStudio的作者报告可用于确定应测什么，不能直接移植为M5 Pro上的预期成绩；`laya-mlx`本身仍将训练列为范围外，LoRA来自Studio而非该运行时。
@@ -28,7 +42,7 @@
 
 **主数据应来自实际要路由的Skill／工具目录与请求。** 同名、近义和适用条件不同的候选要保留正文依据。`read`日志只能说明曾加载，未加载不等于不需要；未知标签应跳过，不能自动造负例。需要人工核对或独立标注的正例、相邻能力硬负例、无工具需求、候选缺失、否定／目标撤销及多工具需求。路由结果不能越过执行层的权限、状态和参数校验。
 
-先按原始请求／会话／任务来源分组切分train、dev、calibration、final test，之后才做候选配对、翻译、改写或选项顺序增强。同一原始请求派生的正负例必须同组。分别报告已见工具的新请求与未见工具／新版本描述；中文不能用英语集替代。校准集拟合温度和阈值，测试集只作最终冻结评估，不在上面挑阈值或方法。
+先按原始请求／会话／任务来源分组切分Train、Dev、Cal-fit、Cal-policy、Test，之后才做候选配对、翻译、改写或选项顺序增强。同一原始请求派生的正负例必须同组。分别报告已见工具的新请求与未见工具／新版本描述；中文不能用英语集替代。Cal-fit拟合温度，独立Cal-policy选择完整接受／转交规则，Test只作冻结评估。若小样本探索共用校准数据，须明确选择偏差，不声称满足原独立校准风险界的前提。
 
 | 公共材料 | 能提供什么 | 不能替代什么 |
 |---|---|---|
@@ -94,7 +108,7 @@ PY
 
 官方Python API比CLI多暴露MPS检查点及校准切分控制，建议以此起步：
 
-先在同一目录准备四份已按原始请求分组隔离的`train.jsonl`、`dev.jsonl`、`calibration.jsonl`、`test.jsonl`。下面代码保存为`train_router.py`后执行`python train_router.py`；这不是自动生成标签或下载业务数据的脚本。
+先在同一目录准备五份已按原始请求分组隔离的`train.jsonl`、`dev.jsonl`、`cal-fit.jsonl`、`cal-policy.jsonl`、`test.jsonl`。下面代码保存为`train_router.py`后执行`python train_router.py`；这不是自动生成标签或下载业务数据的脚本。
 
 ```python
 from laya.train import TrainConfig, finetune
@@ -121,7 +135,7 @@ from laya.calibrate import records_from_labeled
 
 agent = laya.load("./route-model", device="mps")
 pairs = []
-with open("calibration.jsonl", encoding="utf-8") as source:
+with open("cal-fit.jsonl", encoding="utf-8") as source:
     for line in source:
         if not line.strip():
             continue
@@ -141,7 +155,7 @@ agent.save_calibration("route-calibration.json")
 print(fitted)
 ```
 
-新进程须先`agent = laya.load("./route-model", device="mps")`，再`agent.load_calibration("route-calibration.json")`。每个候选读取`agent.predict(state, questions)["answers"]["load"]["probabilities"]["A"]`，只在该概率达到校准组预定阈值时选入。全部低于阈值返回空集合／交回主Agent处理；不能把B的高置信度当成应该加载候选。阈值需按正例误触发、漏载及请求分组的风险—覆盖选择，不能以多数负例拉低总体错误率来掩盖错误加载；final test不参与选择。
+新进程须先`agent = laya.load("./route-model", device="mps")`，再`agent.load_calibration("route-calibration.json")`。每个候选读取`agent.predict(state, questions)["answers"]["load"]["probabilities"]["A"]`。在独立`cal-policy.jsonl`上选择完整规则，冻结后用于Test：概率达到规则阈值时选入，全部低于阈值返回空集合／交回主Agent处理。不能把B的高置信度当成应该加载候选。规则需按正例误触发、漏载及请求分组的风险—覆盖选择，不能以多数负例拉低总体错误率来掩盖错误加载；Test不参与选择。仅做经验阈值扫描不自动得到有限样本风险证书，若需风险界须另核方法假设和独立性。
 
 温度缩放不改变argmax，不能据此宣称准确率提高。多候选只用一个全局A/B问题，`questions.json`可以复用；若改为逐请求变化的choice候选集合，运行时必须重建问题，不能依赖trainer仅保存首个版本的`questions.json`。[校准源码](https://github.com/NandhaKishorM/laya/blob/d1282e791d71e92f24f816ff3836e4fd1c2ded4a/laya/calibrate.py)、[Agent保存／加载接口](https://github.com/NandhaKishorM/laya/blob/d1282e791d71e92f24f816ff3836e4fd1c2ded4a/laya/agent.py)
 

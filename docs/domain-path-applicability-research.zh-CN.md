@@ -1,5 +1,7 @@
 # 领域对话：路径适用性、信息缺口与优先关系
 
+> 页面角色：本页维护领域决策问题和标签语义；当前后训练候选与证据门槛见[总览](decision-model-posttraining-enterprise.zh-CN.md)，全量导航见[文档地图](README.md)。
+
 审阅日期：2026-11-17。[业务实验入口](dynamic-skill-loading-business-playbook.zh-CN.md) · [应用证据](decision-model-application-evidence.zh-CN.md) · [方法](methodology.md)
 
 2026-11-19实现复核：[Parlant、Modem、Entagl源码与保留审查](customer-service-implementation-review.zh-CN.md)区分实际可读源码、产品契约和历史回放；新增Parlant源码pin及协议边界观察。下文11月17日固定来源保留原时点。

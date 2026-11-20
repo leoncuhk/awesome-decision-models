@@ -2,11 +2,11 @@
 
 **面向 AI 系统可靠判断的模型、方法与实证资料。**
 
-[English](README.md) · [模型卡](docs/models.md) · [评测证据](docs/evidence.md) · [选型指南](docs/selection-guide.md) · [收录与评测方法](docs/methodology.md) · [来源登记](docs/sources.md)
+[English](README.md) · [文档地图](docs/README.md) · [模型卡](docs/models.md) · [评测证据](docs/evidence.md) · [选型指南](docs/selection-guide.md) · [收录与评测方法](docs/methodology.md) · [来源登记](docs/sources.md)
 
 收录用于**分类、评分、排序、验证、路由与拒判**的模型和方法。我们关心的不是谁的宣传数字更高，而是：**在具体任务中，哪种方法能以可接受的风险和总成本，交付可验收的结果。**
 
-**本版来源核验日期：{{DATE}}。** 精选 {{ENTRY_COUNT}} 项资源，其中 {{CORE_COUNT}} 个核心模型系列、{{EVIDENCE_COUNT}} 条带协议背景的评测记录。本版完成的是公开资料核验，**没有宣称独立运行并复现这些模型**。阅读深度、版本固定情况与未解决的资料缺口均见[来源登记](docs/sources.md)。收录不等于背书，也不等于通过生产可靠性认证。
+**最近一批审查日期：{{DATE}}。** 精选 {{ENTRY_COUNT}} 项资源，其中 {{CORE_COUNT}} 个核心模型系列、{{EVIDENCE_COUNT}} 条带协议背景的评测记录。本版完成的是公开资料核验，**没有宣称独立运行并复现这些模型**。阅读深度、版本固定情况与未解决的资料缺口均见[来源登记](docs/sources.md)。各来源审查日期与深度不同，批次日期不表示全部来源重新审读。收录不等于背书，也不等于通过生产可靠性认证。
 
 ## 目录
 
@@ -20,6 +20,8 @@
 - [维护与贡献](#维护与贡献)
 
 ## 先看任务，而不是模型名称
+
+企业研究先读[后训练总览](docs/decision-model-posttraining-enterprise.zh-CN.md)：直接低延迟判断、保留推理的选择性判断、多字段／图像专项分别比较。[文档地图](docs/README.md)区分当前判断、拟议实验、PR #5多模态版本与历史记录。尚无本次企业训练或生产增益证据。
 
 本仓库用 **Decision Models（决策／判断模型）** 组织资料，不声称它们已经构成一门统一的新学科。*Typed decisions* 描述输出契约；*System One* 是部分项目采用的类别名称；RLCD、对比学习、监督分类是不同训练路线。路由与选择性预测则进一步研究如何使用一个判断。
 

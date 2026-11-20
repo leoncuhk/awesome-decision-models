@@ -1,5 +1,7 @@
 # 多模态决策模型微调：研究与验收方案
 
+> 2026-11-19分支说明：PR #6本页保留10月18日基础稿。独立[PR #5](https://github.com/leoncuhk/awesome-decision-models/pull/5)有较新的[固定784b6d6版本](https://github.com/leoncuhk/awesome-decision-models/blob/784b6d6f3e830c106dfbfc20b945524e271d8092/docs/multimodal-decision-finetuning.zh-CN.md)，两者不是同步副本。当前企业后训练判断见[总览](decision-model-posttraining-enterprise.zh-CN.md)，页面分工见[文档地图](README.md)。
+
 [English](multimodal-decision-finetuning.md) · [首页](../README.zh-CN.md) · [选型指南](selection-guide.md#image-intent-adaptation) · [证据台账](evidence.md)
 
 来源核验：2026-10-18。本方案面向通用多模态客服意图识别，属于可检验的研究设计；没有执行模型训练或证明生产收益。下面分别标明公开实现、作者报告和建议实验。图像理解、意图判断、概率校准及拒判策略是不同问题。

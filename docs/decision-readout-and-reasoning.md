@@ -1,5 +1,7 @@
 # Decision readouts and adaptive reasoning / 决策读出与自适应推理
 
+> Status reviewed 2026-11-19: this page preserves the dated mechanism comparisons below; it is not a complete current candidate shortlist. Use the [enterprise post-training synthesis](decision-model-posttraining-enterprise.zh-CN.md) for current judgments and the [document map](README.md) for scope. / 本页保留有日期的机制案例；当前选型判断见总览。
+
 [Home](../README.md) · [中文首页](../README.zh-CN.md) · [Model cards](models.md) · [Evidence](evidence.md) · [Selection guide](selection-guide.md)
 
 Reviewed 2026-10-17. This compares mechanisms and evidence boundaries, not an overall ranking. StartLux facts below come from [arXiv v1](https://arxiv.org/html/2610.17309v1), the [fixed inference repository](https://github.com/StartLuxLabs/StartLux-Decision/tree/cb1d11f1ac9e9b43b95ef3a6468fa29b607c40fd) and model cards. Existing D3/Jev evidence remains archival. No model was run here.

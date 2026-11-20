@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "reviewed_on": "2026-11-01",
+  "reviewed_on": "2026-11-19",
   "records": [
     {
       "id": "E01",
@@ -1078,9 +1078,9 @@
         "intern-4b"
       ],
       "evidence_type": "author_reported",
-      "reviewed_on": "2026-10-13",
+      "reviewed_on": "2026-11-19",
       "report_date": null,
-      "model_revision": "3572c8a68b5df5dafe02d0e093989ba8ec0183bc",
+      "model_revision": null,
       "protocol": {
         "task": "Known-distribution-pilot-v1: predict probabilities of random outcomes under stated mechanisms",
         "test_unit": "96 cases, six categories, 24 families and 48 paired settings; all settings report 96 valid predictions",
@@ -1132,7 +1132,9 @@
       "artifacts": {
         "protocol": "Pinned repository, pilot documentation and public reference/scorer paths read",
         "raw_outputs": "Complete replay not performed here",
-        "temperature": "Author-provided preset; private fitting/validation records unavailable"
+        "temperature": "Author-provided preset; private fitting/validation records unavailable",
+        "source_code_revision": "3572c8a68b5df5dafe02d0e093989ba8ec0183bc",
+        "provenance_correction": "2026-11-19: previous model_revision was a source/report implementation revision, not an authenticated evaluated weight revision; numerical result retained."
       },
       "reproduced_here": false
     },
@@ -1233,9 +1235,9 @@
         "verdict-abstention"
       ],
       "evidence_type": "author_reported",
-      "reviewed_on": "2026-10-13",
+      "reviewed_on": "2026-11-19",
       "report_date": null,
-      "model_revision": "30f15564821626ca5c1ad5b2638c4eb7078787dd",
+      "model_revision": null,
       "protocol": {
         "task": "Missing-correct-option abstention, standard versus hard-negative K=9 / synonym / combined conditions",
         "test_unit": "200 cases per condition; paired perturbations, not 800 independent cases",
@@ -1284,7 +1286,9 @@
       "artifacts": {
         "protocol": "Pinned raw exp_e5 report read",
         "raw_outputs": "Aggregate counts public; per-example inference not replayed here",
-        "upstream_revision": "30f15564821626ca5c1ad5b2638c4eb7078787dd"
+        "upstream_revision": "30f15564821626ca5c1ad5b2638c4eb7078787dd",
+        "report_revision": "30f15564821626ca5c1ad5b2638c4eb7078787dd",
+        "provenance_correction": "2026-11-19: previous model_revision was a source/report implementation revision, not an authenticated evaluated weight revision; numerical result retained."
       },
       "reproduced_here": false
     },
@@ -1500,9 +1504,9 @@
         "decision3-d3-oct15"
       ],
       "evidence_type": "author_reported",
-      "reviewed_on": "2026-10-15",
+      "reviewed_on": "2026-11-19",
       "report_date": "2026-10-14",
-      "model_revision": "89cab550862e4b7f08d70c19682121362d7dd0c5",
+      "model_revision": null,
       "protocol": {
         "task": "Native D3Strategy classify/pooling on /v1/systemone; one prompt/classify read per question with shared media features",
         "test_unit": "PR: 416 questions per d3/mini/edge. Mixed throughput: 40% one-question text, 20% four-question text, 10% JSON, 10% 40-option choice, 15% new image, 5% new video",
@@ -1583,7 +1587,9 @@
         "merge_commit": "89cab550862e4b7f08d70c19682121362d7dd0c5",
         "pr_body_sha256": "0ae4020db2a05e5caa67309f962810bed64cb36b9f67c49b740080acf75f12a5",
         "raw_outputs": "Author tables/tests read; no model execution",
-        "release_check": "Latest official release rechecked Oct 15: v0.31.0"
+        "release_check": "Latest official release rechecked Oct 15: v0.31.0",
+        "source_code_revision": "89cab550862e4b7f08d70c19682121362d7dd0c5",
+        "provenance_correction": "2026-11-19: previous model_revision was a source/report implementation revision, not an authenticated evaluated weight revision; numerical result retained."
       },
       "reproduced_here": false
     },
@@ -2580,6 +2586,318 @@
         "protocol": "Paperv1 methods and appendices; frozen analysis README; per-run source-index described",
         "raw_outputs": "Repository includes retained timing/answer/failure records and per-trial source snapshots; not executed or checksum-verified here",
         "model_hash": "Paper pinned HF revisions: Liquid051bcc464b01b9f92942b364d9586b0ef5912432; Clef8b2e5fd17c09fd49bc2880b805d5323ec7ff4ff3; Decider6195aa55a72ae21e503c8a60198f7b390d42adb5; GLiNER9d1bfb848cd16d93ee56ccbc59cd92bf0f284d90; downloaded weights not checked"
+      },
+      "reproduced_here": false
+    },
+    {
+      "id": "E39",
+      "title": "JEVal v2: pooled local-decision evidence and model/version limits",
+      "model_ids": [
+        "sii-decision",
+        "jev",
+        "kev",
+        "intern-decision",
+        "nimble",
+        "laya"
+      ],
+      "source_ids": [
+        "jeval-sii-v2",
+        "jeval-fixed-data-nov19"
+      ],
+      "evidence_type": "author_reported",
+      "reviewed_on": "2026-11-19",
+      "report_date": null,
+      "model_revision": null,
+      "protocol": {
+        "task": "Ten-domain English/Chinese typed local decisions; separate workflow and reasoning analyses",
+        "test_unit": "10938 classification instances (choice/noul); 319 score items excluded from main accuracy",
+        "split": "Paper-curated public task evaluation; no local enterprise test or independent training-contamination certification",
+        "reference": "Benchmark labels; invalid responses count as incorrect for accuracy",
+        "training": "SII authors evaluate their own models and released comparators. Paper model names are not independently authenticated against current HF tensors",
+        "measurement": "Pooled classification accuracy; ECE with 10 equal-width bins and raw-vector Brier only on each model valid subset, not the same denominator as accuracy",
+        "hardware": "Open models served on author NVIDIA systems; separate 200-question latency test contrasts local RTX 4090 with hosted API transport; no Mac measurement"
+      },
+      "metrics": [
+        {
+          "label": "Table1 SII-4B pooled accuracy",
+          "value": 0.7192,
+          "unit": "fraction"
+        },
+        {
+          "label": "Table1 SII-27B pooled accuracy",
+          "value": 0.7924,
+          "unit": "fraction"
+        },
+        {
+          "label": "Table1 Jev pooled accuracy",
+          "value": 0.7838,
+          "unit": "fraction"
+        },
+        {
+          "label": "Table1 Kev-27B pooled accuracy",
+          "value": 0.7717,
+          "unit": "fraction"
+        },
+        {
+          "label": "Table1 Intern-4B pooled accuracy",
+          "value": 0.7074,
+          "unit": "fraction"
+        },
+        {
+          "label": "Table1 Nimble-9B pooled accuracy",
+          "value": 0.7387,
+          "unit": "fraction"
+        },
+        {
+          "label": "Table1 Laya pooled accuracy",
+          "value": 0.263,
+          "unit": "fraction"
+        }
+      ],
+      "conclusion": "The paper motivates testing SII and other typed readouts, not a universal enterprise winner; pooled classification, workflow success and domain adaptation are separate claims.",
+      "caveats": [
+        "SII is proposed by these evaluators; not independent replication of SII.",
+        "Do not mix pooled JEVal accuracy with the SII release README equal-benchmark aggregate or a different current weight revision.",
+        "Laya zero-shot configuration here is not evidence about a specialist retrained on its target workload.",
+        "Calibration is conditional on valid output; latency includes unequal local/API transport contracts.",
+        "Exact Laya evaluated weight/runtime and raw per-model JEVal outputs remain unpinned/unavailable here; public input audit cannot independently rescore Table 1."
+      ],
+      "artifacts": {
+        "protocol": "Paper v2 body and denominator rules inspected",
+        "model_identity": "Per-model inference settings reported; current tensor bytes and all evaluated revisions not independently authenticated",
+        "raw_outputs": "No model run or full independent rescore here"
+      },
+      "reproduced_here": false
+    },
+    {
+      "id": "E40",
+      "title": "PRDO v2: same-backbone selective prediction with rationale-conditioned readouts",
+      "model_ids": [
+        "prdo"
+      ],
+      "source_ids": [
+        "prdo-v2",
+        "prdo-code-nov3"
+      ],
+      "evidence_type": "author_reported",
+      "reviewed_on": "2026-11-19",
+      "report_date": "2026-11-01",
+      "model_revision": null,
+      "protocol": {
+        "task": "Post-rationale selective prediction; scoped example Qwen3-1.7B on MMLU-Pro",
+        "test_unit": "1000 MMLU-Pro final-test questions per arm, three training seeds; paired over the same items",
+        "split": "Development temperature fitting and threshold calibration distinct from test in paper protocol; public-code completeness not certified",
+        "reference": "Task labels; each actual sampled rationale yields its own scored answer distribution",
+        "training": "PRDO proper score plus reference KL; main path is not token-REINFORCE on rationale reward. SFT direct readout and generated baselines have different deployment contracts",
+        "measurement": "Mean accuracy, Brier and AURC after stated calibration; same-base controls are not a universal no-generation-head comparison",
+        "hardware": "Author CUDA experiments; matched update budgets do not guarantee equal generated-token compute or M5 feasibility"
+      },
+      "metrics": [
+        {
+          "label": "Qwen3-1.7B MMLU-Pro SFT+TS accuracy mean",
+          "value": 0.395,
+          "unit": "fraction"
+        },
+        {
+          "label": "Qwen3-1.7B MMLU-Pro GRPO+TS accuracy mean",
+          "value": 0.418,
+          "unit": "fraction"
+        },
+        {
+          "label": "Qwen3-1.7B MMLU-Pro PRDO(Brier) accuracy mean",
+          "value": 0.444,
+          "unit": "fraction"
+        },
+        {
+          "label": "SFT+TS Brier mean",
+          "value": 0.71,
+          "unit": "brier"
+        },
+        {
+          "label": "GRPO+TS Brier mean",
+          "value": 0.75,
+          "unit": "brier"
+        },
+        {
+          "label": "PRDO(Brier) Brier mean",
+          "value": 0.67,
+          "unit": "brier"
+        },
+        {
+          "label": "SFT+TS AURC mean",
+          "value": 0.383,
+          "unit": "aurc"
+        },
+        {
+          "label": "GRPO+TS AURC mean",
+          "value": 0.472,
+          "unit": "aurc"
+        },
+        {
+          "label": "PRDO(Brier) AURC mean",
+          "value": 0.317,
+          "unit": "aurc"
+        }
+      ],
+      "conclusion": "PRDO is a promising matched generative selective-prediction method when reasoning is retained; it neither proves CE inferior on direct enterprise routing nor discloses proprietary TypeSafe RLCD.",
+      "caveats": [
+        "Other model/task cells and verification tasks establish boundaries; accuracy and risk ranking may move in different directions.",
+        "Same updates are not strict same token/latency cost. SFT direct readout is not the same inference contract as sampled rationale methods.",
+        "Source code and referenced plans/tags have gaps; this repository did not reproduce paper training or recalibration.",
+        "Distinct from StartLux RLCD² archival E31."
+      ],
+      "artifacts": {
+        "paper": "arXiv:2609.38850v2 fixed URL",
+        "source_code_revision": "5859d2b893314fb3581f06e4e36c303e372b3f48",
+        "raw_outputs": "Author tables inspected; no local model inference or training"
+      },
+      "reproduced_here": false
+    },
+    {
+      "id": "E41",
+      "title": "Chinese released-output panel: multilingual Laya also trails stronger comparators",
+      "model_ids": [
+        "jev",
+        "laya"
+      ],
+      "source_ids": [
+        "zh-decision-bench-output-nov19"
+      ],
+      "evidence_type": "third_party_reported",
+      "reviewed_on": "2026-11-19",
+      "report_date": null,
+      "model_revision": null,
+      "protocol": {
+        "task": "Chinese voice-assistant routing, synthetic ecommerce decisions and moderation in a released matched panel",
+        "test_unit": "467 item/question decisions from 378 original cases; customer-service routing slice: 34 decisions",
+        "split": "Author-released v02 and v02s outputs; the same 467 keys, gold labels and options across five models; not an independent enterprise holdout",
+        "reference": "Original author labels; converted public data and small synthetic/manual slices, not independently re-adjudicated here",
+        "training": "Author-run existing checkpoints; Laya package 0.3.20/model names reported, evaluated HF weight identities unpinned; no new training or inference",
+        "measurement": "Argmax of each published probability vector compared with gold_idx; dependent questions retained as shared cases",
+        "hardware": "Original hosted/local runtime differences retained; arithmetic audit on CPU does not measure model latency"
+      },
+      "metrics": [
+        {
+          "label": "Jev released-panel correct decisions",
+          "value": 0.8907922912205567,
+          "unit": "fraction",
+          "numerator": 416,
+          "denominator": 467
+        },
+        {
+          "label": "Multilingual Laya released-panel correct decisions",
+          "value": 0.7922912205567452,
+          "unit": "fraction",
+          "numerator": 370,
+          "denominator": 467
+        },
+        {
+          "label": "English Laya released-panel correct decisions",
+          "value": 0.6937901498929336,
+          "unit": "fraction",
+          "numerator": 324,
+          "denominator": 467
+        },
+        {
+          "label": "Jev synthetic customer-service route slice",
+          "value": 0.8823529411764706,
+          "unit": "fraction",
+          "numerator": 30,
+          "denominator": 34
+        },
+        {
+          "label": "Multilingual Laya synthetic customer-service route slice",
+          "value": 0.6176470588235294,
+          "unit": "fraction",
+          "numerator": 21,
+          "denominator": 34
+        }
+      ],
+      "conclusion": "A separate released-output panel shows multilingual Laya also trailing Jev on these Chinese tasks; it does not identify the cause of the JEVal gap or select a production or post-training winner.",
+      "caveats": [
+        "378 cases are not 467 independent cases; voice routing dominates the combined panel, not a production traffic weighting.",
+        "Small synthetic customer-service slice and author labels do not establish enterprise generalization.",
+        "Same keys and labels do not prove identical runtime budgets, rendering, probability calibration or current checkpoint identity.",
+        "Public output arithmetic was independently reaggregated here; source labels/model responses were not regenerated."
+      ],
+      "artifacts": {
+        "source_report_revision": "aaf56ff139dc5440da3939892cad249154f1d35b",
+        "raw_outputs": "results/raw/v02_<model>.jsonl and v02s_<model>.jsonl; 10 file hashes compared in the local audit",
+        "arithmetic_audit": "Coordinator reran checksum/key/count aggregation and agreed with independent reviewer; no model inference or new labels",
+        "model_hash": "Not recorded in source run metadata"
+      },
+      "reproduced_here": false
+    },
+    {
+      "id": "E42",
+      "title": "Laya Gate D: three paired seeds do not select soft-CE over RLCD",
+      "model_ids": [
+        "laya"
+      ],
+      "source_ids": [
+        "laya-gate-d-nov19"
+      ],
+      "evidence_type": "author_reported",
+      "reviewed_on": "2026-11-19",
+      "report_date": null,
+      "model_revision": null,
+      "protocol": {
+        "task": "Compare default rlcd and soft-ce losses in the same encoder fine-tuning contract",
+        "test_unit": "6 cells across 3 seeds; rlcd seed 0 reused from Gate R; 400 test cases / 2,000 typed decisions",
+        "split": "LocalLLaMA/typed-decisions config all; 1,200 train cases / 6,000 decisions before the CLI holds out 400 calibration items",
+        "reference": "Dataset typed labels; no independently collected enterprise labels",
+        "training": "Same 4 epochs, microbatch 8, accumulation 8, encoder LR 2.5e-5, head LR 1e-4, max_len 1024 and head_max_len 256; loss is the only varying field",
+        "measurement": "Shipped-temperature path. Brier follows choice+noul only; paired accuracy deltas change sign; no raw-temperature panel",
+        "hardware": "One author/contributor Tesla T4 per run, torch 2.11.0+cu128; no Mac run"
+      },
+      "metrics": [
+        {
+          "label": "RLCD seed0 accuracy",
+          "value": 0.775,
+          "unit": "fraction"
+        },
+        {
+          "label": "RLCD seed1 accuracy",
+          "value": 0.778,
+          "unit": "fraction"
+        },
+        {
+          "label": "RLCD seed2 accuracy",
+          "value": 0.7755,
+          "unit": "fraction"
+        },
+        {
+          "label": "soft-CE seed0 accuracy",
+          "value": 0.7605,
+          "unit": "fraction"
+        },
+        {
+          "label": "soft-CE seed1 accuracy",
+          "value": 0.7915,
+          "unit": "fraction"
+        },
+        {
+          "label": "soft-CE seed2 accuracy",
+          "value": 0.777,
+          "unit": "fraction"
+        },
+        {
+          "label": "Mean paired soft-CE minus RLCD accuracy in percentage points",
+          "value": 0.0167,
+          "unit": "percentage_points"
+        }
+      ],
+      "conclusion": "This panel does not justify changing the default loss; it does not establish a universal CE or RLCD winner or a current enterprise base-model recommendation.",
+      "caveats": [
+        "Seed deltas change sign and soft-CE spread is large; three seeds do not establish universal equality.",
+        "RNG and calibration paths differ from original notebook; inherited metadata and choice+noul-only Brier restrict cross-report comparisons.",
+        "Author/contributor-run cells inspected, not model training rerun here."
+      ],
+      "artifacts": {
+        "source_code_revision": "d1282e791d71e92f24f816ff3836e4fd1c2ded4a",
+        "training_upstream_revision": "a4a8921afebfd852bba0000475cfb6ab737a124c",
+        "raw_outputs": "Public result tables and report limitations read; no original model training repeated",
+        "arithmetic_audit": "Published six aggregate cells recomputed using the source analyzer and independent arithmetic; this is not new inference or training."
       },
       "reproduced_here": false
     }
