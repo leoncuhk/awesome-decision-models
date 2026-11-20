@@ -45,7 +45,7 @@
 | Mac示例静态检查 | 2个Python块通过`ast.parse`、1个JSON块通过解析、2个shell块通过`bash -n`；未执行其训练／推理命令 |
 | 独立复审与关闭核验 | 科学、导航／双语和规范目录分别复审；发现的SII保存含义、温度位置、跨评测归因、Dev／校准分工均修正。未留已识别的P1／P2，不表示不存在未知错误 |
 
-生成脚本仅新增E39–E42的中文短标题，因此按仓库要求执行完整单元测试。源码核查及此前公开输出复算的边界仍按[方法审计](../docs/decision-model-posttraining-method-audit.zh-CN.md)记录；本轮未把公开输出算术升级为新模型运行。
+生成脚本仅新增E39–E42的中文短标题，因此按仓库要求执行完整单元测试。源码核查及此前公开输出复算的边界仍按[方法审计](https://github.com/leoncuhk/awesome-decision-models/blob/bfe34486a0537cca5eda963315ae612a6184ca8d/docs/decision-model-posttraining-method-audit.zh-CN.md)记录；本轮未把公开输出算术升级为新模型运行。
 
 ## 仍然未知
 

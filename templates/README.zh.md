@@ -47,12 +47,11 @@
 
 领域评测、训练支持核查与未知／澄清策略见[图片意图适配流程](docs/selection-guide.md#image-intent-adaptation)。先看[多模态后训练一页入口](docs/multimodal-decision-finetuning.zh-CN.md#quick-route)，再深入同条件对照、候选门槛及[分层学术阅读清单](docs/multimodal-decision-finetuning.zh-CN.md#reading-list)。
 
-
 执行细节：[分组划分协议](docs/multimodal-decision-finetuning.zh-CN.md#split-protocol)、[最小实验矩阵](docs/multimodal-decision-finetuning.zh-CN.md#experiment-matrix)、[结果记录与停止决定](docs/multimodal-decision-finetuning.zh-CN.md#result-template)。
 
 具体案例：[MIRE任务、标签与代码](docs/mire-case-study.zh-CN.md#tasks)、[官方综合奖项与复赛成绩](docs/mire-case-study.zh-CN.md#finalists)及[迁移边界](docs/mire-case-study.zh-CN.md#transfer-boundaries)。
 
-[读出与自适应推理比较](docs/decision-readout-and-reasoning.md)区分 StartLux Instant／AutoThink、D3、Decider v1.1 与托管 Jev，并分开训练／服务和公共／独立证据。
+企业指南区分[读出、运行时推理和参数适配](docs/decision-model-posttraining-enterprise.zh-CN.md#readout)，具体模型的版本机制保留在[模型卡](docs/models.md)。
 
 科研立项：[10 月 22 日调研完整转换](docs/multimodal-decision-research-survey-2026-10-22.md)与[可证伪实验协议](docs/multimodal-decision-research-protocol.md)，覆盖 MIRE 数据获取边界、新颖性逐项比较、异质修复动作与停止条件。这些是研究规划，不是复现结果。
 
@@ -113,7 +112,3 @@
 [11月13日Google最新发布补充](updates/2026-11-13-google-decision.md).
 
 [分支审查与应用意图](docs/branch-review-2026-11-13.md)
-
-[动态技能加载与有界控制：业务实验入口](docs/dynamic-skill-loading-business-playbook.zh-CN.md) — Research branch: protocols and synthetic examples, no model or business validation.
-
-[客服语义分流实现审查：Parlant、Modem、Entagl](docs/customer-service-implementation-review.zh-CN.md) — 固定源码、产品契约与回放证据分别保留；未验证生产净收益。

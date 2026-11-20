@@ -47,12 +47,11 @@ The table compares mechanisms and use cases, **not incompatible benchmark scores
 
 For domain evaluation and verified training support, see the [image-intent adaptation workflow](docs/selection-guide.md#image-intent-adaptation). Start with the [one-page multimodal post-training route](docs/multimodal-decision-finetuning.md#quick-route), then follow the controlled experiments, candidate gates and [layered academic reading list](docs/multimodal-decision-finetuning.md#reading-list).
 
-
 Execution details: [split protocol](docs/multimodal-decision-finetuning.md#split-protocol), [minimal experiment matrix](docs/multimodal-decision-finetuning.md#experiment-matrix), [result record and stopping decision](docs/multimodal-decision-finetuning.md#result-template).
 
 Worked case: [MIRE tasks, labels and code](docs/mire-case-study.md#tasks), [official composite awards and semifinal scores](docs/mire-case-study.md#finalists), and [transfer limits](docs/mire-case-study.md#transfer-boundaries).
 
-The [readout and adaptive-reasoning comparison](docs/decision-readout-and-reasoning.md) separates StartLux Instant/AutoThink, D3, Decider v1.1 and hosted Jev, including training versus serving and public versus independent evidence.
+The enterprise guide separates [readout, runtime reasoning and weight adaptation](docs/decision-model-posttraining-enterprise.zh-CN.md#readout). Version-specific model mechanisms remain in the [model cards](docs/models.md).
 
 Research planning (Chinese): [full October 22 survey](docs/multimodal-decision-research-survey-2026-10-22.md) and [falsifiable experiment protocol](docs/multimodal-decision-research-protocol.md), covering MIRE data-access limits, novelty comparisons, heterogeneous repair actions and stopping criteria. These are research plans, not reproduced results.
 
@@ -111,7 +110,3 @@ Original code and curation text: [MIT](LICENSE). Linked projects, model weights,
 [November13 Google release addendum](updates/2026-11-13-google-decision.md).
 
 [Branch review and application intent](docs/branch-review-2026-11-13.md)
-
-[Dynamic skill loading and bounded control: business experiment entry (Chinese)](docs/dynamic-skill-loading-business-playbook.zh-CN.md) — Research branch: protocols and synthetic examples, no model or business validation.
-
-[Customer-service implementation review: Parlant, Modem and Entagl (Chinese)](docs/customer-service-implementation-review.zh-CN.md) — Pinned code, product contracts and replay evidence have separate roles; no production net-benefit validation.

@@ -1,6 +1,6 @@
 # 2026-11-17：收敛领域路径问题与研究对应范围
 
-[业务研究入口](../docs/dynamic-skill-loading-business-playbook.zh-CN.md) · [领域研究与来源](../docs/domain-path-applicability-research.zh-CN.md) · [当日首次整理](2026-11-17-domain-path-applicability.md)
+[业务研究入口](https://github.com/leoncuhk/awesome-decision-models/blob/bfe34486a0537cca5eda963315ae612a6184ca8d/docs/dynamic-skill-loading-business-playbook.zh-CN.md) · [领域研究与来源](https://github.com/leoncuhk/awesome-decision-models/blob/bfe34486a0537cca5eda963315ae612a6184ca8d/docs/domain-path-applicability-research.zh-CN.md) · [当日首次整理](2026-11-17-domain-path-applicability.md)
 
 ## 当前问题
 

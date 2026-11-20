@@ -1,6 +1,6 @@
 # 2026-10-17 · StartLux, DecisionPivot and adaptive computation
 
-[Home](../README.md) · [中文首页](../README.zh-CN.md) · [Mechanism comparison / 机制比较](../docs/decision-readout-and-reasoning.md) · [Evidence](../docs/evidence.md)
+[Home](../README.md) · [中文首页](../README.zh-CN.md) · [Mechanism comparison / 机制比较](https://github.com/leoncuhk/awesome-decision-models/blob/bfe34486a0537cca5eda963315ae612a6184ca8d/docs/decision-readout-and-reasoning.md) · [Evidence](../docs/evidence.md)
 
 ## Scope and identities
 

@@ -2,7 +2,7 @@
 
 > 2026-11-19状态复核：下文仍是有条件的科研协议，尚无执行结果。它研究修复动作与日志可识别性，不替代[当前企业后训练判断](decision-model-posttraining-enterprise.zh-CN.md)；多模态分支版本边界见[文档地图](README.md)。
 
-[首页](../README.zh-CN.md) · [原报告完整转换](multimodal-decision-research-survey-2026-10-22.md) · [已有适配方案](multimodal-decision-finetuning.zh-CN.md#quick-route) · [MIRE 案例](mire-case-study.zh-CN.md#tasks) · [读出与推理机制](decision-readout-and-reasoning.md)
+[首页](../README.zh-CN.md) · [原报告完整转换](multimodal-decision-research-survey-2026-10-22.md) · [已有适配方案](multimodal-decision-finetuning.zh-CN.md#quick-route) · [MIRE 案例](mire-case-study.zh-CN.md#tasks) · [读出与推理机制](decision-model-posttraining-enterprise.zh-CN.md#readout)
 
 版本：v1，2026-10-22。状态：研究规划与来源核验，尚未运行模型、训练、数据采集或因果实验。目标是产生可反驳、可复现、超出简单模块组合的领域发现；不预先承诺首创、正收益或顶会录用。原 PDF 的历史观点保留在独立转换文档，本协议补充可执行的实验合同，不静默改写报告。
 

@@ -1,6 +1,6 @@
 # 2026-11-19：客服分流案例的源码与保留复核
 
-[实现审查](../docs/customer-service-implementation-review.zh-CN.md) · [领域主问题](../docs/domain-path-applicability-research.zh-CN.md)
+[实现审查](https://github.com/leoncuhk/awesome-decision-models/blob/bfe34486a0537cca5eda963315ae612a6184ca8d/docs/customer-service-implementation-review.zh-CN.md) · [领域主问题](https://github.com/leoncuhk/awesome-decision-models/blob/bfe34486a0537cca5eda963315ae612a6184ca8d/docs/domain-path-applicability-research.zh-CN.md)
 
 ## 保留决定
 

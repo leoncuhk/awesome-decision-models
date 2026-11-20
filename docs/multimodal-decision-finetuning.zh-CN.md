@@ -99,7 +99,7 @@ B0／B1／D0 确认存在可学习领域差距后，先 B2，再决定 B3／C。
 
 新增 [Intern-Decision 论文 v1](https://arxiv.org/html/2610.22131v1)称训练有 17,880 条样本，其中 5,500 条带图，训练语言骨干、冻结视觉塔／projector。这支持“有带图训练”，不是 LoRA 效果报告。七套定量比较针对文本任务，视觉演示为定性；公开 Jevbench 参与开发，且缺同数据消融。已阅论文没有给出同条件多模态 D3 对照，也不足以确立完整原始训练数据已公开。
 
-[10 月 17 日机制核查](decision-readout-and-reasoning.md)补充 StartLux v1.1：公开推理／服务包及归档 v1 文本 LoRA 示例，不等于已验证的完整多模态 v1.1／RLCD² 训练配方；权重为非商业许可，应核查使用权和精确运行时后再作有条件对照。
+[10 月 17 日机制核查](decision-model-posttraining-enterprise.zh-CN.md#readout)补充 StartLux v1.1：公开推理／服务包及归档 v1 文本 LoRA 示例，不等于已验证的完整多模态 v1.1／RLCD² 训练配方；权重为非商业许可，应核查使用权和精确运行时后再作有条件对照。
 
 ezjev 的 MIT 代码许可证不能覆盖模型与训练数据；[模型卡](https://huggingface.co/everettjf/ezjev-4b-s3/blob/a2faa581dc5e48c0c41ce388d056fed8e8fa6b4d/README.md)明确提醒部分训练来源为非商业许可或未注明许可。其历史训练费用是作者某次实验记录，不能作为新的训练报价。MIRE／EcomMIR 的论文可读性同样不代替数据、底座、代码及权重的逐项使用权核查。所有来源均为阅读核验，未在此复现。
 
@@ -330,7 +330,7 @@ flowchart TD
 | --- | --- | --- |
 | [Calibration and Risk-Budgeted Decisions with System One Models](https://arxiv.org/html/2610.19811v1) — arXiv v1，2026-10-14 | LTT 认证前定义二元 FOR、冻结评分器／阈值族、独立 Fit／Cal／Test 与保守回退。 | 作者六个英文文本集／单种子；校准抽样下的总体风险保证不是逐题正确率或图像／多类／漂移保证。 |
 | [Intern-Decision: Efficient Multimodal Decision Making with Autoregressive Masked Language Modeling](https://arxiv.org/html/2610.22131v1) — arXiv v1，2026-10-15 | 带图的全语言参数训练、多字段因果 masked 读出，视觉／projector 冻结。 | 文本套件成绩与定性视觉示例没有提供同条件 D3 多模态对照或 LoRA 效果；完整原始训练数据公开未确立。 |
-| [StartLux-Decision: AutoThink Decision Models with Reinforcement Learning for Calibrated Deliberative Decisions](https://arxiv.org/html/2610.17309v1) — arXiv v1，2026-10-12 | 候选概率、按需推理及策略条件校准，见[机制核查](decision-readout-and-reasoning.md)。 | 公共 DI 开发选择、作者 DecisionPivot 与 NC 权重限制结论／使用范围，不是已验证领域图片训练配方。 |
+| [StartLux-Decision: AutoThink Decision Models with Reinforcement Learning for Calibrated Deliberative Decisions](https://arxiv.org/html/2610.17309v1) — arXiv v1，2026-10-12 | 候选概率、按需推理及策略条件校准，见[机制核查](decision-model-posttraining-enterprise.zh-CN.md#readout)。 | 公共 DI 开发选择、作者 DecisionPivot 与 NC 权重限制结论／使用范围，不是已验证领域图片训练配方。 |
 | [MIRE: Multimodal Intent Recognition for Dialogue Systems challenge baseline](https://github.com/liujunwen23/MIRE/tree/d101287af90d114c5bf0cbfbd56fe9c52358e3bb) — WWW2025 挑战工程仓库 | 场景／意图任务的 Qwen2-VL-7B **全参数 SFT** 基线。 | 不是 EcomMIR 实现或 LoRA 结果；本轮未核得独立的同行评议方法论文。 |
 | [Vis Decisions 0.6.1 D3 路径](https://github.com/Blockether/vis-decisions/blob/d73768e3c18d89d11f6b9a774b87d64ccd55f27d/src/blockether/vis_decisions/_d3_trainer.py) — 第三方工程 | 文本 full／LoRA＋可训练答码头及合并导出实现。 | 去掉视觉塔，不能证明多模态适配或独立评测复现。 |
 

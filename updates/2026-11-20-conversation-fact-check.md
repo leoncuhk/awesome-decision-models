@@ -2,7 +2,7 @@
 
 日期：2026-11-20。沿用`research/dynamic-skill-loading-2026-11`／Draft PR #6；未改PR #5或合并主线。
 
-[逐项核查正文](../docs/decision-model-discussion-fact-check-2026-11-20.zh-CN.md)覆盖用户提交的11月19–20日整段讨论。按模型／平台、方法／旧数字、PRDO、StartLux、路由和业务推论分开记录；重复主张合并，实施边界明确标出，非逐字引文不冒充原话。
+[逐项核查正文](https://github.com/leoncuhk/awesome-decision-models/blob/bfe34486a0537cca5eda963315ae612a6184ca8d/docs/decision-model-discussion-fact-check-2026-11-20.zh-CN.md)覆盖用户提交的11月19–20日整段讨论。按模型／平台、方法／旧数字、PRDO、StartLux、路由和业务推论分开记录；重复主张合并，实施边界明确标出，非逐字引文不冒充原话。
 
 主要发现：
 

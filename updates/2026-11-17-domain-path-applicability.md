@@ -1,6 +1,6 @@
 # 2026-11-17：领域对话的路径适用性与优先关系
 
-[业务实验入口](../docs/dynamic-skill-loading-business-playbook.zh-CN.md) · [领域路径判断研究](../docs/domain-path-applicability-research.zh-CN.md)
+[业务实验入口](https://github.com/leoncuhk/awesome-decision-models/blob/bfe34486a0537cca5eda963315ae612a6184ca8d/docs/dynamic-skill-loading-business-playbook.zh-CN.md) · [领域路径判断研究](https://github.com/leoncuhk/awesome-decision-models/blob/bfe34486a0537cca5eda963315ae612a6184ca8d/docs/domain-path-applicability-research.zh-CN.md)
 
 本次将当前诉求、已确认状态与候选路径条件的探索整理进动态技能加载研究分支。保留原实验：先固定候选与执行器比较判断器，必要时再比较加载策略。
 

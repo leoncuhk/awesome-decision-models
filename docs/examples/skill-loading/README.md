@@ -1,6 +1,6 @@
 # Protocol illustrations, not a benchmark
 
-Read the [business playbook](../../dynamic-skill-loading-business-playbook.zh-CN.md) first. All eight JSONL cases are fictional examples authored for this repository; no customer data is included. Policy `subscription-demo-v1` is the fictional policy in that playbook.
+Read the [enterprise decision contract](../../decision-model-posttraining-enterprise.zh-CN.md#training-protocol) first. All eight JSONL cases are fictional examples authored for this repository; no customer data is included. Policy `subscription-demo-v1` is the fictional policy in that guide.
 
 - `input`: information visible before the decision; missing/unknown state remains null.
 - `acceptable_capability_sets`: alternative sufficient sets, each inner list is conjunctive. They describe required capabilities for a possible episode, not immediate authorization for writes. These examples have one set each; real annotation may have multiple valid sets.

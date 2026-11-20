@@ -5,9 +5,9 @@
 ## 入口与归属
 
 - [企业后训练总览](../docs/decision-model-posttraining-enterprise.zh-CN.md)：现有分支分工、四项业务判断、可训练模型家族、数据、对照、校准与生产验收。
-- [方法与横向比较核查](../docs/decision-model-posttraining-method-audit.zh-CN.md)：RLCD／PRDO、CE／Brier、蒸馏、部分反馈及原引用的数值口径。
-- [平台与生产证据核查](../docs/decision-model-posttraining-platform-audit.zh-CN.md)：TypeSafe、阿里、Clef、Tev与具名应用的权限、训练、成本及证据边界。
-- [Mac条件路线](../docs/decision-model-posttraining-mac-recipe.zh-CN.md)：固定Laya代码／权重版本、MPS配方、数据格式和独立校准；不是已测胜出模型。
+- [方法与横向比较核查](https://github.com/leoncuhk/awesome-decision-models/blob/bfe34486a0537cca5eda963315ae612a6184ca8d/docs/decision-model-posttraining-method-audit.zh-CN.md)：RLCD／PRDO、CE／Brier、蒸馏、部分反馈及原引用的数值口径。
+- [平台与生产证据核查](https://github.com/leoncuhk/awesome-decision-models/blob/bfe34486a0537cca5eda963315ae612a6184ca8d/docs/decision-model-posttraining-platform-audit.zh-CN.md)：TypeSafe、阿里、Clef、Tev与具名应用的权限、训练、成本及证据边界。
+- [Mac条件路线](https://github.com/leoncuhk/awesome-decision-models/blob/bfe34486a0537cca5eda963315ae612a6184ca8d/docs/decision-model-posttraining-mac-recipe.zh-CN.md)：固定Laya代码／权重版本、MPS配方、数据格式和独立校准；不是已测胜出模型。
 
 研究正本统一在本仓docs；工作区原来的后训练选型页仅保留引用入口。PR #5继续多模态证据与修复研究，PR #6维护领域路径判断及本轮后训练研究，不合并两条研究问题。
 
