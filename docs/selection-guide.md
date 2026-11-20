@@ -2,6 +2,8 @@
 
 [Home](../README.md) · [Model cards](models.md) · [Evidence](evidence.md)
 
+Enterprise post-training: the single [proprietary-data guide / 企业独有数据后训练指南](decision-model-posttraining-enterprise.zh-CN.md) covers the decision contract, method/base selection, supporting evidence, data, training and production acceptance. Follow its [method choices](decision-model-posttraining-enterprise.zh-CN.md#method-selection) and [Mac feasibility gates](decision-model-posttraining-enterprise.zh-CN.md#mac-feasibility); it is a research/implementation protocol, not a completed enterprise fine-tune.
+
 ## 1. Define the decision before selecting the model
 
 Write one small **decision contract**: available evidence, question, allowed answers, what makes an answer correct, cost of each error, and what happens when evidence is insufficient. Keep semantic judgment separate from permission to act.
@@ -136,9 +138,9 @@ The [financial-document comparison](evidence.md#e24) separates reading a reporte
 <a id="adaptive-reasoning"></a>
 ## 9. Read or think / 一次判断还是按需推理
 
-The [mechanism comparison](decision-readout-and-reasoning.md) separates option-letter readouts, dedicated code heads and hosted unknowns. Compare StartLux Instant with AutoThink only after freezing evidence, gate, mixture, candidate reduction and backend; a gate is a compute policy, not a risk certificate. For a generic support image with missing conversational context, clarify or retrieve rather than expecting a longer thought to invent the evidence. Exact dates/arithmetic retain deterministic-tool baselines. Fit calibration on the actual returned selection/routing policy and include thought generation, rereads, queueing and failures in cost. StartLux weights require separate commercial authorization.
+The [mechanism comparison](decision-model-posttraining-enterprise.zh-CN.md#readout) separates option-letter readouts, dedicated code heads and hosted unknowns. Compare StartLux Instant with AutoThink only after freezing evidence, gate, mixture, candidate reduction and backend; a gate is a compute policy, not a risk certificate. For a generic support image with missing conversational context, clarify or retrieve rather than expecting a longer thought to invent the evidence. Exact dates/arithmetic retain deterministic-tool baselines. Fit calibration on the actual returned selection/routing policy and include thought generation, rereads, queueing and failures in cost. StartLux weights require separate commercial authorization.
 
-[机制比较](decision-readout-and-reasoning.md)分开选项字母读出、独立答码头和托管未知实现。比较 StartLux Instant／AutoThink 前冻结证据、门槛、混合、候选归约与后端；门槛是计算策略，不是风险认证。通用客服图像缺会话上下文时应澄清或取证，不能期待长推理补造证据；日期／算术保留确定性工具基线。按实际选择／路由输出校准，并把推理生成、再读、排队与失败计入总成本；StartLux 权重商用需另获授权。
+[机制比较](decision-model-posttraining-enterprise.zh-CN.md#readout)分开选项字母读出、独立答码头和托管未知实现。比较 StartLux Instant／AutoThink 前冻结证据、门槛、混合、候选归约与后端；门槛是计算策略，不是风险认证。通用客服图像缺会话上下文时应澄清或取证，不能期待长推理补造证据；日期／算术保留确定性工具基线。按实际选择／路由输出校准，并把推理生成、再读、排队与失败计入总成本；StartLux 权重商用需另获授权。
 
 ## 中文：一页决策建议
 

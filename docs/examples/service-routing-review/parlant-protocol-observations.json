@@ -1,0 +1,263 @@
+{
+  "source_head": "07b2bcb4bebfeda7c53f1e2bbf2c68415f389e83",
+  "boundary": "AST-extracted upstream dataclasses and encode/decode functions only; no upstream imports, provider requests, model calls or engine integration",
+  "source_sha256": {
+    "src/parlant/core/nlp/decision.py": "375899f93493488fd88a9dd399faf90e51da1b38237a1bf26a02ecddf945868d",
+    "src/parlant/adapters/nlp/openrouter_service.py": "3417b6134da3ce23e5a7b1fe13c440a3dfcdc7f1d3d1359fbab675fa3ed93d03"
+  },
+  "observations": [
+    {
+      "case": "encode proposition",
+      "observed_status": "returned",
+      "observed": {
+        "type": "noul",
+        "instructions": "condition"
+      },
+      "input": {
+        "question": {
+          "type": "Proposition",
+          "instructions": "condition"
+        }
+      }
+    },
+    {
+      "case": "encode choice",
+      "observed_status": "returned",
+      "observed": {
+        "type": "choice",
+        "instructions": "route",
+        "criteria": {
+          "refund": "money back",
+          "track": "status"
+        }
+      },
+      "input": {
+        "question": {
+          "type": "Choice",
+          "instructions": "route",
+          "criteria": {
+            "refund": "money back",
+            "track": "status"
+          }
+        }
+      }
+    },
+    {
+      "case": "encode scale",
+      "observed_status": "returned",
+      "observed": {
+        "type": "score",
+        "instructions": "severity",
+        "criteria": [
+          "low",
+          "high"
+        ]
+      },
+      "input": {
+        "question": {
+          "type": "Scale",
+          "instructions": "severity",
+          "criteria": [
+            "low",
+            "high"
+          ]
+        }
+      }
+    },
+    {
+      "case": "valid noul",
+      "observed_status": "returned",
+      "observed": {
+        "type": "PropositionAnswer",
+        "probability": 0.8
+      },
+      "input": {
+        "question": {
+          "type": "Proposition",
+          "instructions": "?"
+        },
+        "raw_answers": {
+          "q": {
+            "type": "noul",
+            "noul": 0.8
+          }
+        }
+      }
+    },
+    {
+      "case": "missing answer",
+      "observed_status": "raised",
+      "observed": {
+        "exception": "DecisionError"
+      },
+      "input": {
+        "question": {
+          "type": "Proposition",
+          "instructions": "?"
+        },
+        "raw_answers": {}
+      }
+    },
+    {
+      "case": "unknown answer type",
+      "observed_status": "raised",
+      "observed": {
+        "exception": "DecisionError"
+      },
+      "input": {
+        "question": {
+          "type": "Proposition",
+          "instructions": "?"
+        },
+        "raw_answers": {
+          "q": {
+            "type": "future"
+          }
+        }
+      }
+    },
+    {
+      "case": "out of range noul",
+      "observed_status": "returned",
+      "observed": {
+        "type": "PropositionAnswer",
+        "probability": 1.4
+      },
+      "input": {
+        "question": {
+          "type": "Proposition",
+          "instructions": "?"
+        },
+        "raw_answers": {
+          "q": {
+            "type": "noul",
+            "noul": 1.4
+          }
+        }
+      }
+    },
+    {
+      "case": "nonfinite noul",
+      "observed_status": "returned",
+      "observed": {
+        "type": "PropositionAnswer",
+        "probability": "nan"
+      },
+      "input": {
+        "question": {
+          "type": "Proposition",
+          "instructions": "?"
+        },
+        "raw_answers": {
+          "q": {
+            "type": "noul",
+            "noul": "NaN"
+          }
+        }
+      }
+    },
+    {
+      "case": "question answer primitive mismatch",
+      "observed_status": "returned",
+      "observed": {
+        "type": "ChoiceAnswer",
+        "option": "x",
+        "confidence": 0.0,
+        "probabilities": {}
+      },
+      "input": {
+        "question": {
+          "type": "Proposition",
+          "instructions": "?"
+        },
+        "raw_answers": {
+          "q": {
+            "type": "choice",
+            "choice": "x"
+          }
+        }
+      }
+    },
+    {
+      "case": "choice outside candidate set",
+      "observed_status": "returned",
+      "observed": {
+        "type": "ChoiceAnswer",
+        "option": "unlisted",
+        "confidence": 0.0,
+        "probabilities": {
+          "unlisted": 1.0
+        }
+      },
+      "input": {
+        "question": {
+          "type": "Choice",
+          "instructions": "?",
+          "criteria": {
+            "refund": "money back"
+          }
+        },
+        "raw_answers": {
+          "q": {
+            "type": "choice",
+            "choice": "unlisted",
+            "probabilities": {
+              "unlisted": 1.0
+            }
+          }
+        }
+      }
+    },
+    {
+      "case": "unnormalized choice probabilities",
+      "observed_status": "returned",
+      "observed": {
+        "type": "ChoiceAnswer",
+        "option": "refund",
+        "confidence": 0.0,
+        "probabilities": {
+          "refund": 0.8,
+          "track": 0.8
+        }
+      },
+      "input": {
+        "question": {
+          "type": "Choice",
+          "instructions": "?",
+          "criteria": {
+            "refund": "money back",
+            "track": "status"
+          }
+        },
+        "raw_answers": {
+          "q": {
+            "type": "choice",
+            "choice": "refund",
+            "probabilities": {
+              "refund": 0.8,
+              "track": 0.8
+            }
+          }
+        }
+      }
+    },
+    {
+      "case": "missing primitive value",
+      "observed_status": "raised",
+      "observed": {
+        "exception": "KeyError"
+      },
+      "input": {
+        "question": {
+          "type": "Proposition",
+          "instructions": "?"
+        },
+        "raw_answers": {
+          "q": {
+            "type": "noul"
+          }
+        }
+      }
+    }
+  ]
+}

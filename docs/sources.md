@@ -2480,3 +2480,883 @@
 - Source revision: `e7d0c597706239a015608c06dfe0951197e95096`
 - Note: Fixed full card read: text-only affine4/group64, 24GB+ fit is author claim. Measured M5Pro48GB/macOS26.5.2/context2048 on Oct30: 21 probability fields versus recorded Q8 GGUF answers, max drift0.0329 Kapitsa and0.0356 MLX, no choice flip. This is a separate small Q4 comparison, not the Kapitsa native parity-gate experiment or broad calibration/context validation. Card-provided SHA256 values are not locally checked tensor bytes.
 
+<a id="parlant-code-nov19"></a>
+## Parlant: pinned customer-service decision pipeline
+
+- Source: https://github.com/emcie-co/parlant/tree/07b2bcb4bebfeda7c53f1e2bbf2c68415f389e83
+- Kind: `repository`; review depth: `content_reviewed`; reviewed: 2026-11-19
+- Source revision: `07b2bcb4bebfeda7c53f1e2bbf2c68415f389e83`
+- Note: Read engine/matcher/ranker, declared relationships, OpenRouter Decisions adapter, tool boundaries and targeted test source. Ran 12 isolated AST encode/decode observations without importing the package. No pytest, API/model calls, calibration, full-engine or production-effect reproduction; Apache-2.0 code retained in a separate workspace clone.
+
+<a id="parlant-effort-nov19"></a>
+## Parlant: adaptive effort and batch rule matching
+
+- Source: https://www.parlant.io/docs/customizing-behavior/adaptive-effort/
+- Kind: `official_docs`; review depth: `content_reviewed`; reviewed: 2026-11-19
+- Source revision: `not captured / live URL`
+- Note: Read batch-matching/effort description. Current code is authoritative for configured providers and strategy; this live page is not a serving-version or performance pin.
+
+<a id="modem-smart-triggers-oct23"></a>
+## Modem: Smart Triggers powered by Jev
+
+- Source: https://modem.ai/blog/smart-triggers
+- Kind: `official_publication`; review depth: `content_reviewed`; reviewed: 2026-11-19
+- Source revision: `not captured / live URL`
+- Note: Implementer announcement dated Oct23 names Jev and event-trigger gating. No inspectable core server implementation, miss-rate data or independent production gain established; do not extend to arbitrary history-dependent decisions.
+
+<a id="modem-automations-nov19"></a>
+## Modem: event conditions and pre-run evaluation boundary
+
+- Source: https://modem.ai/docs/features/automations
+- Kind: `official_docs`; review depth: `content_reviewed`; reviewed: 2026-11-19
+- Source revision: `not captured / live URL`
+- Note: Current docs dated Nov19 distinguish event-only conditions checked by a fast evaluation model before agent start from history/external-data conditions checked after an agent starts. Docs do not pin that fast model to a current Jev build. Public MCP/API schema is not core source.
+
+<a id="entagl-jev-replay-sep23"></a>
+## Entagl: Jev labeled decisions and customer-routing replay
+
+- Source: https://www.entagl.com/blog/typesafe-jev-benchmark-ai-decision-models
+- Kind: `evaluation_report`; review depth: `content_reviewed`; reviewed: 2026-11-19
+- Source revision: `not captured / live URL`
+- Note: Implementer report separates constructed cases from 402 historical routing decisions; message disposition and specialist choice differ, with missing owner state and uneven fallback effects. No public full harness/labels/per-row output or randomized production result verified. No numerical result imported into the performance ledger.
+
+<a id="entagl-api-nov19"></a>
+## Entagl: public business API reference
+
+- Source: https://www.entagl.com/api/docs
+- Kind: `official_docs`; review depth: `content_reviewed`; reviewed: 2026-11-19
+- Source revision: `not captured / live URL`
+- Note: Read API purpose/auth and conversation/message surface to check artifact identity. Business API documentation is not the Jev routing evaluator source, dataset or independent replay receipt; no authenticated requests sent.
+
+<a id="jeval-sii-v2"></a>
+## JEVal and SII-Decision: General Decision Models, paper v2
+
+- Source: https://arxiv.org/html/2610.03935v2
+- Kind: `paper`; review depth: `content_reviewed`; reviewed: 2026-11-19
+- Source revision: `not captured / live URL`
+- Note: Read evaluation denominator/invalid-output rules, main table, distillation method and limitations. SII is proposed by these authors; not independent replication of SII.
+
+<a id="sii-code-oct13"></a>
+## SII-Decision: released training and readout implementation
+
+- Source: https://github.com/amazingljy1206/SII-Decision/tree/1723d83cbda69f48641c273280b5a2d06d6b3510
+- Kind: `repository`; review depth: `content_reviewed`; reviewed: 2026-11-19
+- Source revision: `1723d83cbda69f48641c273280b5a2d06d6b3510`
+- Note: Read repository, exact backbone mapping and training contract; gold_target/train_target/p0 are required. Released multi-GPU training is not Mac validation.
+
+<a id="sii-4b-lora"></a>
+## SII-Decision-4B-LoRA: merged BF16 release
+
+- Source: https://huggingface.co/jylin001206/SII-Decision-4B-LoRA/tree/5c77219871d297bd375c033eb63ad2cd010af657
+- Kind: `model_card`; review depth: `content_reviewed`; reviewed: 2026-11-19
+- Source revision: `5c77219871d297bd375c033eb63ad2cd010af657`
+- Note: Relevant body and artifact contract inspected; no training or model inference performed.
+
+<a id="sii-27b-lora"></a>
+## SII-Decision-27B-LoRA: merged BF16 release
+
+- Source: https://huggingface.co/jylin001206/SII-Decision-27B-LoRA/tree/a7e7f9686bb9dad88b378978a984e3a52c13e649
+- Kind: `model_card`; review depth: `content_reviewed`; reviewed: 2026-11-19
+- Source revision: `a7e7f9686bb9dad88b378978a984e3a52c13e649`
+- Note: Relevant body and artifact contract inspected; no training or model inference performed.
+
+<a id="sii-27b-full"></a>
+## SII-Decision-27B-Full: language-linear full-tuning release
+
+- Source: https://huggingface.co/jylin001206/SII-Decision-27B-Full/tree/8f5a51dcde7b0fd6a2eea3ab423bad5e3b11dfda
+- Kind: `model_card`; review depth: `content_reviewed`; reviewed: 2026-11-19
+- Source revision: `8f5a51dcde7b0fd6a2eea3ab423bad5e3b11dfda`
+- Note: Relevant body and artifact contract inspected; no training or model inference performed.
+
+<a id="prdo-v2"></a>
+## PRDO: post-rationale distribution optimization, paper v2
+
+- Source: https://arxiv.org/html/2609.38850v2
+- Kind: `paper`; review depth: `content_reviewed`; reviewed: 2026-11-19
+- Source revision: `not captured / live URL`
+- Note: Read v2 method, matched controls, selective metrics, verification-task boundary and provenance. It supersedes v1 framing but does not disclose TypeSafe RLCD.
+
+<a id="prdo-code-nov3"></a>
+## PRDO: public OpenJev-RLCD implementation
+
+- Source: https://github.com/ZimmyGao/openjev-rlcd/tree/5859d2b893314fb3581f06e4e36c303e372b3f48
+- Kind: `repository`; review depth: `content_reviewed`; reviewed: 2026-11-19
+- Source revision: `5859d2b893314fb3581f06e4e36c303e372b3f48`
+- Note: Code available. README-referenced tags/external analysis-plan artifacts were not found in this audit; full paper replay is not certified.
+
+<a id="pplx-v13-card"></a>
+## Perplexity Decider v1.3 27B: card and saved configuration
+
+- Source: https://huggingface.co/perplexity-ai/pplx-decider-v1.3/tree/9c2ebb27470d3dec2ad7ab727727e40d142c7213
+- Kind: `model_card`; review depth: `content_reviewed`; reviewed: 2026-11-19
+- Source revision: `9c2ebb27470d3dec2ad7ab727727e40d142c7213`
+- Note: Card/runtime/config inspected. HF API public/ungated on Nov19 despite residual private-repository wording; no tensor download. v1.2 results remain historical.
+
+<a id="pplx-flash-v13-card"></a>
+## Perplexity Decider Flash v1.3: card and saved configuration
+
+- Source: https://huggingface.co/perplexity-ai/pplx-decider-flash-v1.3/tree/d06fb3f2d97e0a52325a0d463c450cf0338f44fe
+- Kind: `model_card`; review depth: `content_reviewed`; reviewed: 2026-11-19
+- Source revision: `d06fb3f2d97e0a52325a0d463c450cf0338f44fe`
+- Note: Card/runtime/config inspected. Flash uses Qwen3.5-4B, distinct from 27B Qwen3.8 and earlier calibrators. No tensor download.
+
+<a id="laya-gate-d-nov19"></a>
+## Laya Gate D: paired three-seed RLCD / soft-CE panel
+
+- Source: https://github.com/NandhaKishorM/laya/blob/d1282e791d71e92f24f816ff3836e4fd1c2ded4a/research/scripts/step4_benchmark/GATE_D_RESULTS.md
+- Kind: `evaluation_report`; review depth: `content_reviewed`; reviewed: 2026-11-19
+- Source revision: `d1282e791d71e92f24f816ff3836e4fd1c2ded4a`
+- Note: Six author/contributor-run T4 cells; fixed source report and limitations read. Reused RLCD seed0, shipped-temperature path and choice+noul-only Brier retained. No training repeated here.
+
+<a id="nimble-current-nov19"></a>
+## Nimble current repository: hosted versions and local training/inference
+
+- Source: https://github.com/bespokelabsai/nimble/tree/b30ec429fcd78c15fa12a5d3b68c5fbc3bf0430f
+- Kind: `repository`; review depth: `content_reviewed`; reviewed: 2026-11-19
+- Source revision: `b30ec429fcd78c15fa12a5d3b68c5fbc3bf0430f`
+- Note: Current hosted v4/v4.1 wording and public open9B artifact are distinct. Training/data/readout documentation reviewed; no root LICENSE located in inspected tree, so no blanket source-code license inferred.
+
+<a id="nimble-open9b-sep24"></a>
+## Bespoke-Nimble-9B: exact open adapter card
+
+- Source: https://huggingface.co/bespokelabs/Bespoke-Nimble-9B/tree/bd792f44ec8e265be861bfcdf4e05967ffe0e858
+- Kind: `model_card`; review depth: `content_reviewed`; reviewed: 2026-11-19
+- Source revision: `bd792f44ec8e265be861bfcdf4e05967ffe0e858`
+- Note: Pinned Qwen3.5-9B PEFT adapter; current card/context/calibration and original-2676 identity inspected. HF metadata public/ungated; base weights not included or downloaded.
+
+<a id="jeval-fixed-data-nov19"></a>
+## JEVal fixed public test inputs and labels
+
+- Source: https://huggingface.co/datasets/carlosxiang/JEVal/tree/5d0253c34cf5e371b3ae99c21f0a7170d7289f63
+- Kind: `repository`; review depth: `content_reviewed`; reviewed: 2026-11-19
+- Source revision: `5d0253c34cf5e371b3ae99c21f0a7170d7289f63`
+- Note: Read and checksum-verified public test.parquet, 11257 inputs. Reaggregated type/input metadata only; released inputs do not supply original per-model predictions.
+
+<a id="zh-decision-bench-output-nov19"></a>
+## Chinese decision benchmark: fixed released prediction panel
+
+- Source: https://github.com/CodyQin/zh-decision-bench/tree/aaf56ff139dc5440da3939892cad249154f1d35b
+- Kind: `evaluation_report`; review depth: `content_reviewed`; reviewed: 2026-11-19
+- Source revision: `aaf56ff139dc5440da3939892cad249154f1d35b`
+- Note: Read source/run metadata and reaggregated 10 released JSONL files across five models. 467 matching item/question keys, 378 cases. No model inference or independent label adjudication; no evaluated HF weight SHA recorded.
+
+<a id="startlux-paper-v2-nov20"></a>
+## StartLux v2: training stages, selective computation and policy-aware calibration
+
+- Source: https://arxiv.org/html/2610.17309v2
+- Kind: `paper`; review depth: `content_reviewed`; reviewed: 2026-11-20
+- Source revision: `not captured / live URL`
+- Note: Full v2 body and appendices inspected. Separate public development scores from DI snapshots, post-reasoning from gated/fused probabilities, and frozen reward scorer from updated policy. No model run or full training-package reproduction.
+
+<a id="startlux-code-oct23-review-nov20"></a>
+## StartLux current inference and archived v1 training boundary
+
+- Source: https://github.com/StartLuxLabs/StartLux-Decision/tree/a99977d9332decc9fb27a2488b4a83b533b6cd5f
+- Kind: `repository`; review depth: `content_reviewed`; reviewed: 2026-11-20
+- Source revision: `a99977d9332decc9fb27a2488b4a83b533b6cd5f`
+- Note: Current default gate 0.6 differs from paper 0.9; mix 0.75. Current tree and archived v1 text-LoRA entry inspected; no complete public v1.1/RLCD2 training package located. Code scope is not a claim of no private trainer.
+
+<a id="di041-nov19-review-nov20"></a>
+## Decision Index 0.4.1: November 19 frozen public aggregate
+
+- Source: https://huggingface.co/spaces/multimodalart/jev-decision-index/blob/4ee57a1610e0547634ba0ec11990d10122672191/data/v03.json
+- Kind: `evaluation_report`; review depth: `content_reviewed`; reviewed: 2026-11-20
+- Source revision: `4ee57a1610e0547634ba0ec11990d10122672191`
+- Note: File path v03 contains edition 0.4 / label 0.4.1; 327 entries. StartLux27B Instant v67.92, rank_v29, tie group6. Public aggregate order and 0.9-band grouping recomputed, not private model evaluation. Full score now uses private same/new 60/40 after equating; not comparable by subtraction with October 0.3.2.
+
+<a id="di041-method-nov20"></a>
+## DI 0.4.1 scoring, equating and display ties
+
+- Source: https://huggingface.co/spaces/multimodalart/jev-decision-index/blob/4ee57a1610e0547634ba0ec11990d10122672191/methodology.html
+- Kind: `official_docs`; review depth: `content_reviewed`; reviewed: 2026-11-20
+- Source revision: `4ee57a1610e0547634ba0ec11990d10122672191`
+- Note: Task/weight revisions, stock-base moment equating and 0.9-band display ties inspected. A hidden set is not independent certification of business generalization.
+
+<a id="laya-vega-learner-nov20"></a>
+## Laya current Learner: Banking77 table belongs to a 4B reader/head path
+
+- Source: https://github.com/NandhaKishorM/laya/blob/76c9184871feac23609362315cb40f9c32caafc6/README.md
+- Kind: `repository`; review depth: `content_reviewed`; reviewed: 2026-11-20
+- Source revision: `76c9184871feac23609362315cb40f9c32caafc6`
+- Note: Current 4928/924 Banking77 table is labeled 4B reader; classic encoder requires explicit model path or vegaml=False. Not evidence for 322M/421M encoder SFT. Raw table split/weights/predictions and threshold isolation not fully authenticated.
+
+<a id="vegaml-learning-nov20"></a>
+## Vega learning: frozen reader features and fitted TTT head
+
+- Source: https://github.com/NandhaKishorM/vegaml/blob/8b0ca58e8d92ac3fc9c5cc682c93aebc7b885a20/docs/learn.md
+- Kind: `repository`; review depth: `content_reviewed`; reviewed: 2026-11-20
+- Source revision: `8b0ca58e8d92ac3fc9c5cc682c93aebc7b885a20`
+- Note: Learner and TTTHead source inspected: PCA and multiclass logistic fit on frozen features, not reader LoRA/full tuning. Documentation says fitted-head confidence has no own calibration; aggregate ECE does not certify deployment risk.
+
+<a id="intern-license-sep29-review-nov20"></a>
+## Intern-Decision root Apache license, already present September 29
+
+- Source: https://github.com/InternLM/Intern-Decision/blob/3572c8a68b5df5dafe02d0e093989ba8ec0183bc/LICENSE
+- Kind: `repository`; review depth: `content_reviewed`; reviewed: 2026-11-20
+- Source revision: `3572c8a68b5df5dafe02d0e093989ba8ec0183bc`
+- Note: Root Apache-2.0 added 2026-09-29, not a new November 20 grant. Model cards and training/data terms remain distinct.
+
+<a id="chinese-jev-medical-release-oct18"></a>
+## Chinese-Jev README links CJ-Medical weights since October 18
+
+- Source: https://github.com/gulucaptain/Chinese-Jev/commit/02a84752a7915a6c66baf434e6d58ea5909f1e0e
+- Kind: `repository`; review depth: `content_reviewed`; reviewed: 2026-11-20
+- Source revision: `02a84752a7915a6c66baf434e6d58ea5909f1e0e`
+- Note: README weight-link addition dated 2026-10-18T08:51:19Z. Corrects previous all-domain-weights-planned wording; does not establish all General/industry releases or paper checkpoint equivalence.
+
+<a id="cj-medical-card-oct18-review-nov20"></a>
+## CJ-Medical fixed model card and license statement
+
+- Source: https://huggingface.co/bbldCVer-hf/CJ-Medical/blob/1ae360b3ec9927622dd82f1430f0111f292ee17f/README.md
+- Kind: `model_card`; review depth: `content_reviewed`; reviewed: 2026-11-20
+- Source revision: `1ae360b3ec9927622dd82f1430f0111f292ee17f`
+- Note: Public card declares Apache-2.0. No tensor bytes downloaded or paper-run weight identity authenticated. Mixed CJ-Dataset source licenses remain separate; reported medical gain is relative 4.0%, not 4 percentage points.
+
+<a id="aliyun-systemone-api-nov20"></a>
+## Bailian native decision API: 16 questions and authentication contract
+
+- Source: https://help.aliyun.com/en/model-studio/decision-model-api
+- Kind: `official_docs`; review depth: `content_reviewed`; reviewed: 2026-11-20
+- Source revision: `not captured / live URL`
+- Note: Native API page explicitly limits requests to 16 questions and declares Bearer authorization. The fine-tuning guide demonstrates a bare key at the same invocation path for fine-tuned artifacts. Record both documented examples; no authenticated request was executed to establish whether both are accepted. Do not turn one example into a universal no-Bearer rule.
+
+<a id="small-heads-v4-nov20"></a>
+## Small Heads, Strong Decisions: latest controlled readout study v4
+
+- Source: https://arxiv.org/html/2611.15592v4
+- Kind: `paper`; review depth: `content_reviewed`; reviewed: 2026-11-20
+- Source revision: `not captured / live URL`
+- Note: Latest v4 adds retrieval-tuned checkpoints. Five readouts train with backbone LoRA under one English recipe; single seed and per-head LR selection. Similar accuracy and cheaper heads do not prove frozen features sufficient or Chinese/long-state superiority.
+
+<a id="tdm-label-budgets-v2-nov20"></a>
+## Typed decision models under prevalence shift and label budgets v2
+
+- Source: https://arxiv.org/html/2610.26325v2
+- Kind: `paper`; review depth: `content_reviewed`; reviewed: 2026-11-20
+- Source revision: `not captured / live URL`
+- Note: November 17 v2 adds 100/500/2500-label curves and in-budget selection. English intent decisions use gold intent groups rather than full-label routing; CLINC margin does not survive budget-internal selection. Compare supervised domain learning, not an unconditional label threshold or Chinese winner.
+
+<a id="tdm-gauntlet-v1-nov20"></a>
+## TDM-Gauntlet: typed models versus task adaptation across ACL papers
+
+- Source: https://arxiv.org/html/2611.20191v1
+- Kind: `paper`; review depth: `content_reviewed`; reviewed: 2026-11-20
+- Source revision: `not captured / live URL`
+- Note: English task-swap study. Adaptation on 13 selected configurations uses 500 training labels plus 376–1000 validation labels. Median gap closure is not accuracy; LoRA 27B one seed versus encoder three seeds, distinct tuning/compute budgets. No Mac or Chinese result.
+
+<a id="amazon-multiturn-intent-2026"></a>
+## Amazon multi-turn intent classification with LLM-based labeling
+
+- Source: https://aclanthology.org/2026.customnlp4u-1.8.pdf
+- Kind: `paper`; review depth: `content_reviewed`; reviewed: 2026-11-20
+- Source revision: `not captured / live URL`
+- Note: Formal July 2026 PDF read; SHA256 fcf06cda1b53fb97144553767b794ec48854acf8c1f9304951b11079c3ba24ce. Three separate RoBERTa-base classifiers, not one shared multi-head model. Label-audit and human classifier evaluation differ. Production section reports deployed classifier, not offline hybrid; A/B sample/allocation/intervals and relative-vs-pp changes are unspecified.
+
+<a id="drex-paper-v2-nov20"></a>
+## Drex v2 paper: RLAF objectives and stage ablations
+
+- Source: https://arxiv.org/html/2611.07854v2
+- Kind: `paper`; review depth: `content_reviewed`; reviewed: 2026-11-20
+- Source revision: `not captured / live URL`
+- Note: Pointer RLAF directly differentiates adjusted-target proper losses; Max instead sums finite-action reward with reference KL. Max stage comparison has positive reported metrics but no equal-extra-compute continued-SFT control or train-seed robustness. Judge can override verified gold; full trainer/data not established by inference release.
+
+<a id="mapika-rl-v10-nov20"></a>
+## Mapika v8 to v10: actor, true-belief supervision and retention
+
+- Source: https://github.com/Mapika/decider/blob/91b6fa9b94ab6c4dc2c63d3b14d413243b4fffcc/docs/RL.md
+- Kind: `repository`; review depth: `content_reviewed`; reviewed: 2026-11-20
+- Source revision: `91b6fa9b94ab6c4dc2c63d3b14d413243b4fffcc`
+- Note: Positive sampled closed-loop task outcomes coexist with greedy and transfer limits. Mixed PPO actor, known environment probability laws, consistency, KL and supervised replay; four arms and checkpoint selection. Never-rewarded tasks enter validation; exact research trainer not in core release. Not pure business-outcome logs or static-classification RL proof.
+
+<a id="correctness-gated-distill-v1-nov20"></a>
+## Correctness-gated multi-teacher distillation: label collapse and grounding limits
+
+- Source: https://arxiv.org/html/2609.09702v1
+- Kind: `paper`; review depth: `content_reviewed`; reviewed: 2026-11-20
+- Source revision: `not captured / live URL`
+- Note: Fixed response pool, three seeds and matched updates help isolate some effects, but weighted method does not beat hard filter; Refuted recall collapses. Most source labels are weak/silver, row artifacts incomplete and grounding audit not paired. Do not infer universal correctness-weighted distillation superiority.
+
+<a id="self-retrospection-distill-v3-nov20"></a>
+## Self-Retrospection Distillation v3: hindsight-to-foresight for generative agents
+
+- Source: https://arxiv.org/html/2610.08077v3
+- Kind: `paper`; review depth: `content_reviewed`; reviewed: 2026-11-20
+- Source revision: `not captured / live URL`
+- Note: Long-horizon generative reasoning/agent tasks, not a typed classifier substitute. Official code exists, but additional teacher channels and dense training add compute; reported reference configuration uses eight H200s, not a tested 48GB Mac recipe. Some negative and weak-seed results retained.
+
+<a id="clef-omni-refresh-nov20"></a>
+## Clef-Omni: fixed model, media and memory contract
+
+- Source: https://huggingface.co/Cloudflare/clef-omni/blob/189097bdeaaaea246bd876310d4ae30f9a50415a/README.md
+- Kind: `model_card`; review depth: `content_reviewed`; reviewed: 2026-11-20
+- Source revision: `189097bdeaaaea246bd876310d4ae30f9a50415a`
+- Note: Relevant card sections inspected. Original binary package uploaded October9; November10 change is evaluation metadata. The 64GB BF16 H200 example is inference, not M5 training.
+
+<a id="clef-omni-launch-refresh-nov20"></a>
+## Cloudflare October9: Clef-Omni release and Clef serving changes
+
+- Source: https://blog.cloudflare.com/clef-faster-cheaper-multimodal/
+- Kind: `official_publication`; review depth: `content_reviewed`; reviewed: 2026-11-20
+- Source revision: `not captured / live URL`
+- Note: Read release and serving-change claims. Clef speed/Flash price and hosted context changes do not identify new Clef/Flash weights.
+
+<a id="clairic-open-release-nov18"></a>
+## Cloudflare November18: redesigned open Clairic and Clairic-Flash
+
+- Source: https://blog.cloudflare.com/open-clairic/
+- Kind: `official_publication`; review depth: `content_reviewed`; reviewed: 2026-11-20
+- Source revision: `not captured / live URL`
+- Note: Read updated extraction architecture, public release date, endpoint migration and evaluation limitations. Ordinary extraction now uses parallel slot autoregressive generation; input-only billing does not mean zero generation.
+
+<a id="clairic-card-nov20"></a>
+## Clairic 27B: typed extraction release
+
+- Source: https://huggingface.co/Cloudflare/clairic/blob/2c161be5cc71bacd6605b99a8c07547e58cfa434/README.md
+- Kind: `model_card`; review depth: `content_reviewed`; reviewed: 2026-11-20
+- Source revision: `2c161be5cc71bacd6605b99a8c07547e58cfa434`
+- Note: Read model/schema/response/runtime sections. Binary metadata dates to November13; November18 announcement/card clarification are distinct events. No extraction benchmark reproduction or training recipe validation.
+
+<a id="clairic-flash-card-nov20"></a>
+## Clairic-Flash 9B: typed extraction release
+
+- Source: https://huggingface.co/Cloudflare/clairic-flash/blob/36ad68b999560f56b57ef16a22180f8cb83c6d77/README.md
+- Kind: `model_card`; review depth: `content_reviewed`; reviewed: 2026-11-20
+- Source revision: `36ad68b999560f56b57ef16a22180f8cb83c6d77`
+- Note: Card contract matches the 27B family with Qwen3.5-9B base. November13 artifacts versus November18 announcement distinguished; CUDA example does not establish Mac execution or training.
+
+<a id="d3-ultra-card-refresh-nov20"></a>
+## D3-Ultra: October26 release, current fixed card
+
+- Source: https://huggingface.co/vllm-sr/d3-ultra/blob/3ac9ff15579ca9193a0d44f4fa9056f2ea62731d/README.md
+- Kind: `model_card`; review depth: `content_reviewed`; reviewed: 2026-11-20
+- Source revision: `3ac9ff15579ca9193a0d44f4fa9056f2ea62731d`
+- Note: Read identity, serving/evaluation protocol and license sections. Card explicitly dates release October26; November17 cache fix and parameter-count correction are runtime/card changes, not new training.
+
+<a id="d31-nano-card-nov20"></a>
+## D3.1-nano: November12 2B release and public-suite protocol
+
+- Source: https://huggingface.co/vllm-sr/d3.1-nano/blob/71d06677f56e243042fe5d5f983804648a5689e8/README.md
+- Kind: `model_card`; review depth: `content_reviewed`; reviewed: 2026-11-20
+- Source revision: `71d06677f56e243042fe5d5f983804648a5689e8`
+- Note: Read readout/inputs and evaluation sections. Binary uploaded November12; November16 manifest/card updates. DI engine averages original/reversed choice orders; ordinary runtime uses one order. Image/video quality not evaluated for this version.
+
+<a id="d3-edge-coreml-refresh-nov20"></a>
+## D3 CoreML: October14 edge conversion artifacts
+
+- Source: https://huggingface.co/FluidInference/d3-coreml/tree/78a1f66580199e5eca3c5ff60a265b0f691b38fd
+- Kind: `repository`; review depth: `metadata_only`; reviewed: 2026-11-20
+- Source revision: `78a1f66580199e5eca3c5ff60a265b0f691b38fd`
+- Note: Complete paginated tree compared with earlier source pin. Eight added edge CoreML/MLX binary files are conversion artifacts, not evidence of a newly trained native model or new quality result.
+
+<a id="strands-v2-e2b-card-nov20"></a>
+## Strands Decider v2 E2B: merged decision checkpoint
+
+- Source: https://huggingface.co/StrandsAgents/strands-decider-E2B-gemma4-v2-2611/blob/a74ee815c2af08d16afd0b9dfa079ce260cfafdb/README.md
+- Kind: `model_card`; review depth: `content_reviewed`; reviewed: 2026-11-20
+- Source revision: `a74ee815c2af08d16afd0b9dfa079ce260cfafdb`
+- Note: Read v2 architecture, checkpoint layout, limits, calibration, inference/MPS and author evaluation protocol. Four binary files uploaded November17; later HOWTO edit is not a new weight release.
+
+<a id="strands-v2-training-nov20"></a>
+## Strands v2: recipe, data conversion and release-checkpoint boundaries
+
+- Source: https://github.com/strands-labs/strands-decider/blob/d4915c9b11f61bb01ed293f4dc4c770a0a51792b/training/README.md
+- Kind: `repository`; review depth: `content_reviewed`; reviewed: 2026-11-20
+- Source revision: `d4915c9b11f61bb01ed293f4dc4c770a0a51792b`
+- Note: Read v2 recipes and init_from sections. Original v2 data is absent; a from-base token-readout training route is public. Old adapter-checkpoint init_from instructions do not certify loading a merged HF v2 release.
+
+<a id="strands-v2-config-nov20"></a>
+## Strands v2 E2B: fixed from-base LoRA configuration
+
+- Source: https://github.com/strands-labs/strands-decider/blob/d4915c9b11f61bb01ed293f4dc4c770a0a51792b/configs/v2/strands-decider-E2B-gemma4-v2-2611.yaml
+- Kind: `repository`; review depth: `content_reviewed`; reviewed: 2026-11-20
+- Source revision: `d4915c9b11f61bb01ed293f4dc4c770a0a51792b`
+- Note: Read complete configuration: fixed Gemma base, rank64/alpha128, token_readout/prefix_bidir and supervised recipe. This starts at the original base, not the merged v2 release.
+
+<a id="strands-v2-trainer-nov20"></a>
+## Strands trainer: token-readout, init_from and device contracts
+
+- Source: https://github.com/strands-labs/strands-decider/blob/d4915c9b11f61bb01ed293f4dc4c770a0a51792b/training/train.py
+- Kind: `repository`; review depth: `content_reviewed`; reviewed: 2026-11-20
+- Source revision: `d4915c9b11f61bb01ed293f4dc4c770a0a51792b`
+- Note: Inspected _init_from, device selection, token-readout defaults and frozen-KL rejection. Trainer selects CUDA else CPU, not MPS. Static source/format analysis, not a failed or successful training run.
+
+<a id="strands-v2-data-nov20"></a>
+## Strands v2: supervised row converter
+
+- Source: https://github.com/strands-labs/strands-decider/blob/d4915c9b11f61bb01ed293f4dc4c770a0a51792b/training/data/strands_v2.py
+- Kind: `repository`; review depth: `content_reviewed`; reviewed: 2026-11-20
+- Source revision: `d4915c9b11f61bb01ed293f4dc4c770a0a51792b`
+- Note: Read converter: state/question/target/label; missing instructions, images and unrenderable rows are dropped and counted. This is a text-training path, not evidence of image adaptation.
+
+<a id="strands-v2-export-nov20"></a>
+## Strands v2: merge and decision-checkpoint export
+
+- Source: https://github.com/strands-labs/strands-decider/blob/d4915c9b11f61bb01ed293f4dc4c770a0a51792b/training/export_v2.py
+- Kind: `repository`; review depth: `content_reviewed`; reviewed: 2026-11-20
+- Source revision: `d4915c9b11f61bb01ed293f4dc4c770a0a51792b`
+- Note: Read export contract and merge/export functions. LoRA is merged in float32 then BF16; readout and decision_config are separate. Exporting an already merged decoder does not recover adapters for init_from.
+
+<a id="strands-v2-checkpoint-format-nov20"></a>
+## Strands training checkpoints: required config and adapter layout
+
+- Source: https://github.com/strands-labs/strands-decider/blob/d4915c9b11f61bb01ed293f4dc4c770a0a51792b/src/strands_decider/modeling.py
+- Kind: `repository`; review depth: `content_reviewed`; reviewed: 2026-11-20
+- Source revision: `d4915c9b11f61bb01ed293f4dc4c770a0a51792b`
+- Note: Read config_path/checkpoint_dir/load and trainable checkpoint contract. Training loader expects strands_decider_config.json (or legacy hobson_config), whereas released v2 has decision_config.json and merged weights.
+
+<a id="jevos-v5-release-refresh-nov20"></a>
+## jevos v5: dated release and downloadable asset identities
+
+- Source: https://github.com/feder-cr/jev/releases/tag/jevos-v5
+- Kind: `repository`; review depth: `metadata_only`; reviewed: 2026-11-20
+- Source revision: `not captured / live URL`
+- Note: GitHub release published October16; API lists OpenVINO INT8, GGUF, SHA256SUMS and Linux/Windows/macOS-arm64 assets. Large artifacts were not downloaded or hashed locally.
+
+<a id="jevos-v5-readme-refresh-nov20"></a>
+## jevos current README: v5 typed CPU decisions
+
+- Source: https://github.com/feder-cr/jev/blob/2383312e05b4379aee3432140f44b06eaa53dddd/README.md
+- Kind: `repository`; review depth: `content_reviewed`; reviewed: 2026-11-20
+- Source revision: `2383312e05b4379aee3432140f44b06eaa53dddd`
+- Note: Read current v5 capabilities, selected-checkpoint evaluation caveat and runtime contract. This supersedes v2 noul-only capability descriptions; full v5 model internals/training were not audited.
+
+<a id="gliclass-code-refresh-nov20"></a>
+## GLiClass current repository: versions and training entry
+
+- Source: https://github.com/Knowledgator/GLiClass/blob/af82d425c0259a6f46f240bb0633fcdab821eaea/README.md
+- Kind: `repository`; review depth: `content_reviewed`; reviewed: 2026-11-20
+- Source revision: `af82d425c0259a6f46f240bb0633fcdab821eaea`
+- Note: Read current feature/training references; no claim of having audited every v4 architecture training path.
+
+<a id="gliclass-v4-edge-nov20"></a>
+## GLiClass v4 Edge: DeBERTa decision scorer and calibrator
+
+- Source: https://huggingface.co/knowledgator/gliclass-v4-edge/blob/885af1af8a07edf4ed34df83ca0d995ed8201283/README.md
+- Kind: `model_card`; review depth: `content_reviewed`; reviewed: 2026-11-20
+- Source revision: `885af1af8a07edf4ed34df83ca0d995ed8201283`
+- Note: Relevant architecture, training/calibrator and limitations sections read. This calibrated edge checkpoint must not supply calibration claims to other v4 checkpoints.
+
+<a id="gliclass-v4-2b-nov20"></a>
+## GLiClass v4 2B: multimodal decoder-KV scorer
+
+- Source: https://huggingface.co/knowledgator/gliclass-v4-2b/blob/40fe023b45e8d97d1ae4f7f9342279ac1c76317d/README.md
+- Kind: `model_card`; review depth: `content_reviewed`; reviewed: 2026-11-20
+- Source revision: `40fe023b45e8d97d1ae4f7f9342279ac1c76317d`
+- Note: Read architecture/usage and explicit absence of a post-hoc calibrator. Raw scores are not validated operational probabilities.
+
+<a id="gliclass-v4-27b-nov20"></a>
+## GLiClass v4 27B: Qwen-based multimodal scorer
+
+- Source: https://huggingface.co/knowledgator/gliclass-v4-27b/blob/acd9c277c2175de565cc9546e1cc3a45b1a63d5c/README.md
+- Kind: `model_card`; review depth: `content_reviewed`; reviewed: 2026-11-20
+- Source revision: `acd9c277c2175de565cc9546e1cc3a45b1a63d5c`
+- Note: Relevant model/card identity inspected. Exact checkpoints, upstream terms and calibration must remain separate.
+
+<a id="gliclass-v41-edge-metadata-nov20"></a>
+## GLiClass v4.1 Edge: unreviewed artifact metadata
+
+- Source: https://huggingface.co/knowledgator/gliclass-v4.1-edge/tree/6a05e85cbaa7ab536d6dcd19bcfb3ab3b63d6a4d
+- Kind: `repository`; review depth: `metadata_only`; reviewed: 2026-11-20
+- Source revision: `6a05e85cbaa7ab536d6dcd19bcfb3ab3b63d6a4d`
+- Note: November9 model/config/tokenizer files exist; no README, LICENSE or cardData found in the inspected tree/API. A README404 did not mean the model was absent. Do not inherit v4 license, quality or training claims.
+
+<a id="baseten-joey-card-nov20"></a>
+## Baseten Joey-1: 2B sibling and training disclosure
+
+- Source: https://huggingface.co/baselabs/joey-1/blob/9efbe485efbed9598dfca5294cbbe8da00e21908/README.md
+- Kind: `model_card`; review depth: `content_reviewed`; reviewed: 2026-11-20
+- Source revision: `9efbe485efbed9598dfca5294cbbe8da00e21908`
+- Note: Read model, limits, public-suite versus replica evaluation and training-recipe disclosure. Binary uploaded October27; October29 card links launch. Recipe disclosure is not full training-data access or a verified Mac fine-tuning workflow.
+
+<a id="jeffan-27b-nov20"></a>
+## Jeffan 27B-1211: new weight identity and layer-loop contract
+
+- Source: https://huggingface.co/tattrongvu/Jeffan-27B-1211/blob/f0ce7043ca32ebfe6613615e573a5010bda7228a/README.md
+- Kind: `model_card`; review depth: `content_reviewed`; reviewed: 2026-11-20
+- Source revision: `f0ce7043ca32ebfe6613615e573a5010bda7228a`
+- Note: Read architecture, defaults, public-suite evaluation and limitations. Binary uploaded November9; later card/vLLM edits are runtime documentation. Default loop_passes=1; public self-run score is not official Full.
+
+<a id="jeffan-9b-nov20"></a>
+## Jeffan 9B-1211: two-pass default and serving contract
+
+- Source: https://huggingface.co/tattrongvu/Jeffan-9B-1211/blob/862d1a7a8b64a8d708ddb0b0cd775a740f01841a/README.md
+- Kind: `model_card`; review depth: `content_reviewed`; reviewed: 2026-11-20
+- Source revision: `862d1a7a8b64a8d708ddb0b0cd775a740f01841a`
+- Note: Read architecture/defaults, vLLM, public-suite and limits. Binary uploaded November9; default loop_passes=2 differs from 27B and one-pass serving.
+
+<a id="jeffan-4b-nov20"></a>
+## Jeffan 4B-2010: earlier sibling and license change
+
+- Source: https://huggingface.co/tattrongvu/Jeffan-4B-2010/blob/937a008f86f4a20a903d628f22ffad3e3f431d2c/README.md
+- Kind: `model_card`; review depth: `content_reviewed`; reviewed: 2026-11-20
+- Source revision: `937a008f86f4a20a903d628f22ffad3e3f431d2c`
+- Note: Model/release metadata and relevant card checked. October20 weights versus October22 Apache-2.0 licensing edit are separate changes; no Mac training claim.
+
+<a id="laya-050-default-nov20"></a>
+## Laya 0.5: default Vega engine and classic-checkpoint selection
+
+- Source: https://github.com/NandhaKishorM/laya/blob/416dd9ed20da2d43fc40e23712e9adceefabf634/README.md
+- Kind: `repository`; review depth: `content_reviewed`; reviewed: 2026-11-20
+- Source revision: `416dd9ed20da2d43fc40e23712e9adceefabf634`
+- Note: Read default-engine, classic selection, Learner, fit/calibrate and training sections. This package switch does not identify new classic encoder weights.
+
+<a id="laya-050-pypi-nov20"></a>
+## Laya 0.5.0: fixed package-release metadata
+
+- Source: https://pypi.org/pypi/laya/0.5.0/json
+- Kind: `official_docs`; review depth: `metadata_only`; reviewed: 2026-11-20
+- Source revision: `not captured / live URL`
+- Note: PyPI records version0.5.0 files uploaded November19 17:30UTC. Package upload is not a model training date.
+
+<a id="vegaml-0172-pypi-nov20"></a>
+## vegaml 0.17.2: fixed dependency-release metadata
+
+- Source: https://pypi.org/pypi/vegaml/0.17.2/json
+- Kind: `official_docs`; review depth: `metadata_only`; reviewed: 2026-11-20
+- Source revision: `not captured / live URL`
+- Note: PyPI files uploaded November19 17:11UTC; metadata-only release check, not new reader weight or learner-effect verification.
+
+<a id="glide-2b-card-nov20"></a>
+## fastino/GLiDE-2B — fixed release card
+
+- Source: https://huggingface.co/fastino/GLiDE-2B/blob/00f122c120cdeed82284106cb77d9bab5a50ad16/README.md
+- Kind: `model_card`; review depth: `content_reviewed`; reviewed: 2026-11-20
+- Source revision: `00f122c120cdeed82284106cb77d9bab5a50ad16`
+- Note: Primary content and selected artifact metadata reviewed; no model run or tensor-byte verification.
+
+<a id="glide-family-nov05"></a>
+## GLiDE decision model family
+
+- Source: https://fastino.ai/blog/glide-decision-model-family
+- Kind: `official_publication`; review depth: `content_reviewed`; reviewed: 2026-11-20
+- Source revision: `not captured / live URL`
+- Note: Primary content and selected artifact metadata reviewed; no model run or tensor-byte verification.
+
+<a id="glide-training-api-nov20"></a>
+## GLiDE Training API
+
+- Source: https://docs.fastino.ai/training
+- Kind: `official_docs`; review depth: `content_reviewed`; reviewed: 2026-11-20
+- Source revision: `not captured / live URL`
+- Note: Primary content and selected artifact metadata reviewed; no model run or tensor-byte verification.
+
+<a id="glide-training-loss-nov20"></a>
+## Native decision forward/backward contract
+
+- Source: https://docs.fastino.ai/api-reference/training-jobs/interactive/forward-backward
+- Kind: `official_docs`; review depth: `content_reviewed`; reviewed: 2026-11-20
+- Source revision: `not captured / live URL`
+- Note: Primary content and selected artifact metadata reviewed; no model run or tensor-byte verification.
+
+<a id="glide-training-demo-nov18"></a>
+## GLiDE small-model fine-tuning example
+
+- Source: https://fastino.ai/blog/glide-multimodal-decisions-fine-tuning
+- Kind: `official_publication`; review depth: `content_reviewed`; reviewed: 2026-11-20
+- Source revision: `not captured / live URL`
+- Note: Primary content and selected artifact metadata reviewed; no model run or tensor-byte verification.
+
+<a id="glide-license-nov20"></a>
+## GLiDE-2B Community License
+
+- Source: https://huggingface.co/fastino/GLiDE-2B/blob/00f122c120cdeed82284106cb77d9bab5a50ad16/LICENSE
+- Kind: `official_docs`; review depth: `content_reviewed`; reviewed: 2026-11-20
+- Source revision: `00f122c120cdeed82284106cb77d9bab5a50ad16`
+- Note: Primary content and selected artifact metadata reviewed; no model run or tensor-byte verification.
+
+<a id="glide-pricing-nov20"></a>
+## GLiDE model/training pricing
+
+- Source: https://docs.fastino.ai/pricing
+- Kind: `official_docs`; review depth: `content_reviewed`; reviewed: 2026-11-20
+- Source revision: `not captured / live URL`
+- Note: Primary content and selected artifact metadata reviewed; no model run or tensor-byte verification.
+
+<a id="liquid-d1-2b-nov20"></a>
+## LiquidAI/d1-2B — fixed release card
+
+- Source: https://huggingface.co/LiquidAI/d1-2B/blob/a6bce774e6dde338dcc3036ceb5d91f78bf4c19e/README.md
+- Kind: `model_card`; review depth: `content_reviewed`; reviewed: 2026-11-20
+- Source revision: `a6bce774e6dde338dcc3036ceb5d91f78bf4c19e`
+- Note: Primary content and selected artifact metadata reviewed; no model run or tensor-byte verification.
+
+<a id="liquid-d1-omni-nov20"></a>
+## LiquidAI/d1-Omni-2B — fixed release card
+
+- Source: https://huggingface.co/LiquidAI/d1-Omni-2B/blob/51918b53052eacfd24062f99f13556c3c56fcf63/README.md
+- Kind: `model_card`; review depth: `content_reviewed`; reviewed: 2026-11-20
+- Source revision: `51918b53052eacfd24062f99f13556c3c56fcf63`
+- Note: Primary content and selected artifact metadata reviewed; no model run or tensor-byte verification.
+
+<a id="liquid-d12-nov16"></a>
+## Introducing d1.2
+
+- Source: https://www.liquid.ai/blog/d1-2
+- Kind: `official_publication`; review depth: `content_reviewed`; reviewed: 2026-11-20
+- Source revision: `not captured / live URL`
+- Note: Primary content and selected artifact metadata reviewed; no model run or tensor-byte verification.
+
+<a id="liquid-decision-docs-nov20"></a>
+## Liquid decision-model contracts
+
+- Source: https://docs.liquid.ai/lfm/models/decision-models
+- Kind: `official_docs`; review depth: `content_reviewed`; reviewed: 2026-11-20
+- Source revision: `not captured / live URL`
+- Note: Primary content and selected artifact metadata reviewed; no model run or tensor-byte verification.
+
+<a id="liquid-license-nov20"></a>
+## LFM license guide
+
+- Source: https://docs.liquid.ai/lfm/help/model-license
+- Kind: `official_docs`; review depth: `content_reviewed`; reviewed: 2026-11-20
+- Source revision: `not captured / live URL`
+- Note: Primary content and selected artifact metadata reviewed; no model run or tensor-byte verification.
+
+<a id="liquid-finetune-nov20"></a>
+## Liquid Finetune scope
+
+- Source: https://docs.liquid.ai/lfm/fine-tuning/liquid-finetune
+- Kind: `official_docs`; review depth: `content_reviewed`; reviewed: 2026-11-20
+- Source revision: `not captured / live URL`
+- Note: Primary content and selected artifact metadata reviewed; no model run or tensor-byte verification.
+
+<a id="mapika-2b-nov20"></a>
+## Mapika/decider-2b — fixed release card
+
+- Source: https://huggingface.co/Mapika/decider-2b/blob/7614a6c7ea5a047aa7d7bcfb1a0015469381c3e3/README.md
+- Kind: `model_card`; review depth: `content_reviewed`; reviewed: 2026-11-20
+- Source revision: `7614a6c7ea5a047aa7d7bcfb1a0015469381c3e3`
+- Note: Primary content and selected artifact metadata reviewed; no model run or tensor-byte verification.
+
+<a id="mapika-4b-nov20"></a>
+## Mapika/decider-4b — fixed release card
+
+- Source: https://huggingface.co/Mapika/decider-4b/blob/585473dec4fa93f0325c2bf02dda7273b61f44c1/README.md
+- Kind: `model_card`; review depth: `content_reviewed`; reviewed: 2026-11-20
+- Source revision: `585473dec4fa93f0325c2bf02dda7273b61f44c1`
+- Note: Primary content and selected artifact metadata reviewed; no model run or tensor-byte verification.
+
+<a id="mapika-code-nov20"></a>
+## Mapika supervised training and deployment
+
+- Source: https://github.com/Mapika/decider/tree/91b6fa9b94ab6c4dc2c63d3b14d413243b4fffcc
+- Kind: `repository`; review depth: `content_reviewed`; reviewed: 2026-11-20
+- Source revision: `91b6fa9b94ab6c4dc2c63d3b14d413243b4fffcc`
+- Note: Primary content and selected artifact metadata reviewed; no model run or tensor-byte verification.
+
+<a id="rsi-jev-4b-nov20"></a>
+## shgao/rsi-jev-v7.0-vl-4b — fixed release card
+
+- Source: https://huggingface.co/shgao/rsi-jev-v7.0-vl-4b/blob/58baf6fc961f42108756b27ff92fddf4aea3b1d8/README.md
+- Kind: `model_card`; review depth: `content_reviewed`; reviewed: 2026-11-20
+- Source revision: `58baf6fc961f42108756b27ff92fddf4aea3b1d8`
+- Note: Primary content and selected artifact metadata reviewed; no model run or tensor-byte verification.
+
+<a id="rsi-jev-train-nov20"></a>
+## RSI-Jev v7 training and recipe
+
+- Source: https://github.com/Shanghua-Gao/RSI-Jev/tree/e58526f061afd4c383d33a22b309b888f8a3e3c7
+- Kind: `repository`; review depth: `content_reviewed`; reviewed: 2026-11-20
+- Source revision: `e58526f061afd4c383d33a22b309b888f8a3e3c7`
+- Note: Primary content and selected artifact metadata reviewed; no model run or tensor-byte verification.
+
+<a id="jgeuter-jeff-4b-nov20"></a>
+## jgeuter/Jeff-1.1-Qwen-4B — fixed release card
+
+- Source: https://huggingface.co/jgeuter/Jeff-1.1-Qwen-4B/blob/e2c4fb2f00189672c77e9d9a1619a8fd4884ab2d/README.md
+- Kind: `model_card`; review depth: `content_reviewed`; reviewed: 2026-11-20
+- Source revision: `e2c4fb2f00189672c77e9d9a1619a8fd4884ab2d`
+- Note: Primary content and selected artifact metadata reviewed; no model run or tensor-byte verification.
+
+<a id="jgeuter-jeff-trainer-nov20"></a>
+## Jeff public training/export and own JSONL
+
+- Source: https://github.com/j-geuter/Jeff/tree/938ac5a03c6ac43512e61266d9febf691edc17f8
+- Kind: `repository`; review depth: `content_reviewed`; reviewed: 2026-11-20
+- Source revision: `938ac5a03c6ac43512e61266d9febf691edc17f8`
+- Note: Primary content and selected artifact metadata reviewed; no model run or tensor-byte verification.
+
+<a id="decisionbank-nov20"></a>
+## DecisionBank source/label provenance
+
+- Source: https://huggingface.co/datasets/jgeuter/DecisionBank/tree/fbeee67758966fe78bfb008b28fc771924c0bc71
+- Kind: `repository`; review depth: `content_reviewed`; reviewed: 2026-11-20
+- Source revision: `fbeee67758966fe78bfb008b28fc771924c0bc71`
+- Note: Primary content and selected artifact metadata reviewed; no model run or tensor-byte verification.
+
+<a id="jad-s1-v05-nov20"></a>
+## DreamBlooms/JAD-S1-7B-A1B-v0.5 — fixed release card
+
+- Source: https://huggingface.co/DreamBlooms/JAD-S1-7B-A1B-v0.5/blob/178febae0936d8c0f71312421d65e5b6baca466c/README.md
+- Kind: `model_card`; review depth: `content_reviewed`; reviewed: 2026-11-20
+- Source revision: `178febae0936d8c0f71312421d65e5b6baca466c`
+- Note: Primary content and selected artifact metadata reviewed; no model run or tensor-byte verification.
+
+<a id="h2o-lightning-4b-nov20"></a>
+## h2oai/h2o-lightning-4b — fixed release card
+
+- Source: https://huggingface.co/h2oai/h2o-lightning-4b/blob/659fc412de8486dbc2477b0d1cb4121e97e72471/README.md
+- Kind: `model_card`; review depth: `content_reviewed`; reviewed: 2026-11-20
+- Source revision: `659fc412de8486dbc2477b0d1cb4121e97e72471`
+- Note: Primary content and selected artifact metadata reviewed; no model run or tensor-byte verification.
+
+<a id="mnn-pocket-dec-nov20"></a>
+## taobao-mnn/MNN-Pocket-0.3B-Dec — fixed release card
+
+- Source: https://huggingface.co/taobao-mnn/MNN-Pocket-0.3B-Dec/blob/7d5b512f3fe579418c45a77b178da39273b2a114/README.md
+- Kind: `model_card`; review depth: `content_reviewed`; reviewed: 2026-11-20
+- Source revision: `7d5b512f3fe579418c45a77b178da39273b2a114`
+- Note: Primary content and selected artifact metadata reviewed; no model run or tensor-byte verification.
+
+<a id="granite-switch-launch-nov20"></a>
+## IBM Granite Switch introduction
+
+- Source: https://huggingface.co/blog/ibm-granite/granite-switch-4-1
+- Kind: `official_publication`; review depth: `content_reviewed`; reviewed: 2026-11-20
+- Source revision: `not captured / live URL`
+- Note: Primary content and selected artifact metadata reviewed; no model run or tensor-byte verification.
+
+<a id="granite-decision-adapter-nov20"></a>
+## Granite decision adapter v1.1
+
+- Source: https://huggingface.co/ibm-granite/granitelib-core-r1.0/blob/b881a4371db7284beac66a658b0cadcd32b12977/decision/README.md
+- Kind: `model_card`; review depth: `content_reviewed`; reviewed: 2026-11-20
+- Source revision: `b881a4371db7284beac66a658b0cadcd32b12977`
+- Note: Primary content and selected artifact metadata reviewed; no model run or tensor-byte verification.
+
+<a id="ant-lingdt-contract-nov20"></a>
+## Ant Digital public LingDT decision service contract
+
+- Source: https://maas.antdigital.com/api/v1/model-service/public/get/modelservice-1792325631780001741
+- Kind: `official_docs`; review depth: `content_reviewed`; reviewed: 2026-11-20
+- Source revision: `not captured / live URL`
+- Note: Primary content and selected artifact metadata reviewed; no model run or tensor-byte verification.
+
+<a id="span02-release-nov20"></a>
+## respanai/span-02 — fixed release card
+
+- Source: https://huggingface.co/respanai/span-02/blob/63cbdd774391f1b7d9bc3829179efe996d0191ce/README.md
+- Kind: `model_card`; review depth: `content_reviewed`; reviewed: 2026-11-20
+- Source revision: `63cbdd774391f1b7d9bc3829179efe996d0191ce`
+- Note: Primary content and selected artifact metadata reviewed; no model run or tensor-byte verification.
+
+<a id="span02-launch-nov20"></a>
+## Introducing Span-02
+
+- Source: https://www.respan.ai/blog/introducing-span-2
+- Kind: `official_publication`; review depth: `content_reviewed`; reviewed: 2026-11-20
+- Source revision: `not captured / live URL`
+- Note: Primary content and selected artifact metadata reviewed; no model run or tensor-byte verification.
+
+<a id="decisio-v3-calibrated-nov20"></a>
+## tachara-ai/Decisio-12b-tuned-v3-calibrated — fixed release card
+
+- Source: https://huggingface.co/tachara-ai/Decisio-12b-tuned-v3-calibrated/blob/1e9159cc082c689fd95381e0ed6306402dc932d2/README.md
+- Kind: `model_card`; review depth: `content_reviewed`; reviewed: 2026-11-20
+- Source revision: `1e9159cc082c689fd95381e0ed6306402dc932d2`
+- Note: Primary content and selected artifact metadata reviewed; no model run or tensor-byte verification.
+
+<a id="decisio-server-nov20"></a>
+## Decisio serving repository
+
+- Source: https://github.com/aminry/decisio/tree/ad9c265abd677fd7113435bd5e4b766c9a4848ce
+- Kind: `repository`; review depth: `content_reviewed`; reviewed: 2026-11-20
+- Source revision: `ad9c265abd677fd7113435bd5e4b766c9a4848ce`
+- Note: Primary content and selected artifact metadata reviewed; no model run or tensor-byte verification.
+
+<a id="ms-decision-ga-nov17"></a>
+## Microsoft Decision1.1 GA
+
+- Source: https://commandline.microsoft.com/microsoft-decision-model-ga/
+- Kind: `official_publication`; review depth: `content_reviewed`; reviewed: 2026-11-20
+- Source revision: `not captured / live URL`
+- Note: Primary content and selected artifact metadata reviewed; no model run or tensor-byte verification.
+
+<a id="ms-decision-current-nov20"></a>
+## Microsoft Decision current Foundry contract
+
+- Source: https://learn.microsoft.com/en-us/azure/foundry/foundry-models/how-to/use-foundry-models-microsoft-decision
+- Kind: `official_docs`; review depth: `content_reviewed`; reviewed: 2026-11-20
+- Source revision: `not captured / live URL`
+- Note: Primary content and selected artifact metadata reviewed; no model run or tensor-byte verification.
+
+<a id="openai-decisions-ga-nov20"></a>
+## OpenAI Decisions GA announcement
+
+- Source: https://openai.com/index/decisions-api/
+- Kind: `official_publication`; review depth: `content_reviewed`; reviewed: 2026-11-20
+- Source revision: `not captured / live URL`
+- Note: Primary content and selected artifact metadata reviewed; no model run or tensor-byte verification.
+
+<a id="openai-decisions-current-nov20"></a>
+## OpenAI Decisions current contract
+
+- Source: https://developers.openai.com/api/docs/guides/decisions
+- Kind: `official_docs`; review depth: `content_reviewed`; reviewed: 2026-11-20
+- Source revision: `not captured / live URL`
+- Note: Primary content and selected artifact metadata reviewed; no model run or tensor-byte verification.
+
+<a id="glide-2b-readout-nov20"></a>
+## GLiDE-2B fixed public readout implementation
+
+- Source: https://huggingface.co/fastino/GLiDE-2B/blob/00f122c120cdeed82284106cb77d9bab5a50ad16/glide/model.py
+- Kind: `repository`; review depth: `content_reviewed`; reviewed: 2026-11-20
+- Source revision: `00f122c120cdeed82284106cb77d9bab5a50ad16`
+- Note: Selected confidence and score implementation inspected, not executed; applies to this public2B runtime, not an inferred hosted backend.
+
+<a id="synth-ptbr-laya-nov20"></a>
+## Synth-NLP/laya-intencao-ptbr-sintetico — real-label and synthetic augmentation experiment
+
+- Source: https://huggingface.co/Synth-NLP/laya-intencao-ptbr-sintetico/blob/eae976f3b0663d67fe09b92fb5b04d9887f4efc8/README.md
+- Kind: `model_card`; review depth: `content_reviewed`; reviewed: 2026-11-20
+- Source revision: `eae976f3b0663d67fe09b92fb5b04d9887f4efc8`
+- Note: Author offline Portuguese intent adaptation with a real-label-only control and inspectable data/predictions. New repository tensors match November15 prior releases by complete declared LFS metadata. Validation reuse, one scenario split, limited seeds, translation/no native-human audit and no equal-token control limit conclusions; no local inference or training.
+
+<a id="synth-ptbr-kev-0.8b-nov20"></a>
+## Synth-NLP/kev-0.8b-intencao-ptbr-sintetico — real-label and synthetic augmentation experiment
+
+- Source: https://huggingface.co/Synth-NLP/kev-0.8b-intencao-ptbr-sintetico/blob/fbe9f5a9e420fe46f5db2825581a5e68c7704c3f/README.md
+- Kind: `model_card`; review depth: `content_reviewed`; reviewed: 2026-11-20
+- Source revision: `fbe9f5a9e420fe46f5db2825581a5e68c7704c3f`
+- Note: Author offline Portuguese intent adaptation with a real-label-only control and inspectable data/predictions. New repository tensors match November15 prior releases by complete declared LFS metadata. Validation reuse, one scenario split, limited seeds, translation/no native-human audit and no equal-token control limit conclusions; no local inference or training.
+
+<a id="synth-ptbr-kev-4b-nov20"></a>
+## Synth-NLP/kev-4b-intencao-ptbr-sintetico — real-label and synthetic augmentation experiment
+
+- Source: https://huggingface.co/Synth-NLP/kev-4b-intencao-ptbr-sintetico/blob/0aa1eaea1d8f0c684b5ff1058112a9fa49f45d94/README.md
+- Kind: `model_card`; review depth: `content_reviewed`; reviewed: 2026-11-20
+- Source revision: `0aa1eaea1d8f0c684b5ff1058112a9fa49f45d94`
+- Note: Author offline Portuguese intent adaptation with a real-label-only control and inspectable data/predictions. New repository tensors match November15 prior releases by complete declared LFS metadata. Validation reuse, one scenario split, limited seeds, translation/no native-human audit and no equal-token control limit conclusions; no local inference or training.
+
+<a id="valen15-4b-nov20"></a>
+## Valen Decision1.5 4B fixed native release
+
+- Source: https://huggingface.co/Valen-Team/Valen-Decision-1.5-4B/blob/9b0cacc976d7fb72f252ee1adb1564f5f15e462c/README.md
+- Kind: `model_card`; review depth: `content_reviewed`; reviewed: 2026-11-20
+- Source revision: `9b0cacc976d7fb72f252ee1adb1564f5f15e462c`
+- Note: Fixed4B native card and complete file metadata reviewed; five-size family/format claims distinguished from the audited4B artifact. Native tensors existed by Nov9; Nov12 card links do not identify new training.
+
+<a id="valen-training-nov20"></a>
+## Valen native own-data SFT/RLCD training
+
+- Source: https://github.com/Valen-Team/Valen/blob/f6df4fdbc45bf44a4ffbebaeda53f5fe6e49b339/valen/training/README.md
+- Kind: `repository`; review depth: `content_reviewed`; reviewed: 2026-11-20
+- Source revision: `f6df4fdbc45bf44a4ffbebaeda53f5fe6e49b339`
+- Note: Training entry, native full/LoRA configs, schema, builder, runner and published-finetuning tests inspected. SFT defaults to distribution CE; optional losses and discrete sampled RLCD are separate methods, not TypeSafe replication.
+
+<a id="valen-training-device-nov20"></a>
+## Valen training device/statistics boundary
+
+- Source: https://github.com/Valen-Team/Valen/blob/f6df4fdbc45bf44a4ffbebaeda53f5fe6e49b339/valen/training/distributed.py
+- Kind: `repository`; review depth: `content_reviewed`; reviewed: 2026-11-20
+- Source revision: `f6df4fdbc45bf44a4ffbebaeda53f5fe6e49b339`
+- Note: Static device review: runner uses this float64 statistics path on configured device. Default CUDA; changing to MPS needs compatibility work, not inference-format conversion. No local training executed.
+
+<a id="valen-domain-cookbook-nov20"></a>
+## Valen complete domain adaptation workflow
+
+- Source: https://valen-team.github.io/cookbook/domain-finetuning/
+- Kind: `official_docs`; review depth: `content_reviewed`; reviewed: 2026-11-20
+- Source revision: `not captured / live URL`
+- Note: Own JSONL split/train/resume/compare workflow and author0.8B H200 short smoke receipt reviewed; one/two updates on three synthetic cases are engineering checks, not4B/M5 training or domain-effect proof.
+

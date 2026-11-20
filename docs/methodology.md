@@ -26,7 +26,7 @@ A model is not called “open source” simply because its weights can be downlo
 | Artifact audit | Specified data, code, hashes and outputs can be inspected and related to the claim. |
 | Reproduction | An identified evaluator ran an identified protocol and obtained recorded results. |
 
-The initial edition performs source review. It does not claim complete artifact audits or any model reproduction. A repository commit pins text or code; a live Hugging Face name does not pin weights. A hash printed in a model card is **author-supplied** until the corresponding bytes have been checked.
+The initial edition performed source review. Later updates identify targeted artifact audits and reaggregation of published outputs separately; none of those activities establishes a new model inference, training run or production effect. This repository does not claim complete artifact audits or model reproduction. A repository commit pins text or code; a live Hugging Face name does not pin weights. A hash printed in a model card is **author-supplied** until the corresponding bytes have been checked.
 
 ## Evidence types
 
@@ -55,7 +55,7 @@ If the same examples have multiple paraphrases, steps, candidates or labels, ret
 
 **Task quality.** Use appropriate task metrics: accuracy or macro-F1 for classification, MAE with an explicit ordinal scale, ranking quality at a specified candidate budget, or observable execution success. Report critical error types, not just the average.
 
-**Probability quality.** State the NLL/Brier convention, class aggregation, clipping and ECE binning. A scoring rule's theoretical optimum does not establish empirical calibration. Post-hoc calibration needs data separated from model training and final testing. See [proper scoring rules](https://doi.org/10.1198/016214506000001437) and [Guo et al.](https://proceedings.mlr.press/v70/guo17a.html).
+**Probability quality.** State the NLL/Brier convention, class aggregation, clipping and ECE binning. A scoring rule's theoretical optimum does not establish empirical calibration. Post-hoc calibration needs data separated from model training and final testing. If a subsequent policy-selection method assumes a fixed predictor on independent calibration cases, fit temperature on Cal-fit and select the complete acceptance/defer rule on a separate Cal-policy set. Reusing data requires an explicitly justified alternative procedure; exploratory scans alone do not inherit an independent-calibration risk guarantee. See [proper scoring rules](https://doi.org/10.1198/016214506000001437) and [Guo et al.](https://proceedings.mlr.press/v70/guo17a.html).
 
 **Selective behavior.** For an acceptance set \(S_t\), report coverage \(P(X\in S_t)\) and error conditional on acceptance, not only overall error. Specify whether the threshold was fixed before testing. Distinguish an observed risk on a finite sample from a statistically supported bound and from a production service-level objective. Relevant starting points are [selective classification](https://arxiv.org/abs/1705.08500v2), [conformal risk control](https://arxiv.org/abs/2208.02814v4) and its [non-monotonic-loss extension](https://arxiv.org/abs/2602.20151v1); their assumptions are not interchangeable.
 
@@ -68,6 +68,14 @@ If the same examples have multiple paraphrases, steps, candidates or labels, ret
 A normalized probability over candidates answers a relative question. It need not measure the absolute chance that any candidate is acceptable. A confidence margin is not necessarily an independently estimated probability of correctness. Lower ECE does not imply higher useful coverage. Logically consistent outputs can still be false.
 
 A scoring model should not decide its own permissions. Validate schemas and hard constraints in code. Let policies determine the allowable actions and error costs. For routing, use actual executor performance, including human fallibility; [learning to defer](https://proceedings.mlr.press/v119/mozannar20b.html) is not merely a synonym for classifying task difficulty.
+
+## Maintain a judgment rather than a moving leaderboard
+
+The [document map](README.md) identifies current syntheses, conditional plans, generated records and preserved history. The [enterprise synthesis](decision-model-posttraining-enterprise.zh-CN.md) owns current enterprise research roles; older thematic notes do not each maintain a competing shortlist.
+
+Separate the base/checkpoint, readout and inference mode, trainable parameters, objective, data construction, calibration and execution policy. Change one factor or use a declared factorial design before attributing an improvement. Low resource use, an inspectable trainer and an author benchmark are different reasons to study a candidate; none establishes domain superiority.
+
+Update a recommendation when the target contract changes, a source error is corrected, or a relevant matched comparison supplies new evidence. Record the affected condition, prior claim, new evidence, uncertainty and remaining transfer gap. A nonsignificant difference does not establish equivalence; a useful margin and appropriate independent unit must be specified before a confirmatory comparison. Do not prescribe a universal number of steps, labels, model parameters or minimum percentage gain.
 
 ## Chinese summary / 中文要点
 

@@ -1,0 +1,4 @@
+# Figure provenance
+
+- `user-agent-trajectory.png`: original screenshot supplied by the user in this conversation, included under their explicit request to publish it on this research branch. 1568 × 982 PNG. SHA-256: `49a30f34d52e34232432d17b3d25a1922445b695db3eb2abdba527f5c4890810`. No editing or reconstruction. This screenshot is not a measured Jev experiment and is not relicensed as repository MIT code.
+- `reflex-architecture.svg`: Figure 1, Tiantong Wu and Wei Yang Bryan Lim, *REFLEX with Jev for Efficient Selective Control in LLM Agents*, arXiv:2609.26532v1. Retrieved 2026-11-13 from https://arxiv.org/html/2609.26532v1/fig0_architecture.svg. Original unmodified figure, CC BY 4.0 (https://creativecommons.org/licenses/by/4.0/), as marked on the source paper; third-party license retained.
