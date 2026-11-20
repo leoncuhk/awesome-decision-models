@@ -3502,6 +3502,726 @@
       "review_depth": "content_reviewed",
       "source_revision": null,
       "review_note": "Long-horizon generative reasoning/agent tasks, not a typed classifier substitute. Official code exists, but additional teacher channels and dense training add compute; reported reference configuration uses eight H200s, not a tested 48GB Mac recipe. Some negative and weak-seed results retained."
+    },
+    {
+      "id": "clef-omni-refresh-nov20",
+      "title": "Clef-Omni: fixed model, media and memory contract",
+      "url": "https://huggingface.co/Cloudflare/clef-omni/blob/189097bdeaaaea246bd876310d4ae30f9a50415a/README.md",
+      "kind": "model_card",
+      "reviewed_on": "2026-11-20",
+      "review_depth": "content_reviewed",
+      "source_revision": "189097bdeaaaea246bd876310d4ae30f9a50415a",
+      "review_note": "Relevant card sections inspected. Original binary package uploaded October9; November10 change is evaluation metadata. The 64GB BF16 H200 example is inference, not M5 training."
+    },
+    {
+      "id": "clef-omni-launch-refresh-nov20",
+      "title": "Cloudflare October9: Clef-Omni release and Clef serving changes",
+      "url": "https://blog.cloudflare.com/clef-faster-cheaper-multimodal/",
+      "kind": "official_publication",
+      "reviewed_on": "2026-11-20",
+      "review_depth": "content_reviewed",
+      "source_revision": null,
+      "review_note": "Read release and serving-change claims. Clef speed/Flash price and hosted context changes do not identify new Clef/Flash weights."
+    },
+    {
+      "id": "clairic-open-release-nov18",
+      "title": "Cloudflare November18: redesigned open Clairic and Clairic-Flash",
+      "url": "https://blog.cloudflare.com/open-clairic/",
+      "kind": "official_publication",
+      "reviewed_on": "2026-11-20",
+      "review_depth": "content_reviewed",
+      "source_revision": null,
+      "review_note": "Read updated extraction architecture, public release date, endpoint migration and evaluation limitations. Ordinary extraction now uses parallel slot autoregressive generation; input-only billing does not mean zero generation."
+    },
+    {
+      "id": "clairic-card-nov20",
+      "title": "Clairic 27B: typed extraction release",
+      "url": "https://huggingface.co/Cloudflare/clairic/blob/2c161be5cc71bacd6605b99a8c07547e58cfa434/README.md",
+      "kind": "model_card",
+      "reviewed_on": "2026-11-20",
+      "review_depth": "content_reviewed",
+      "source_revision": "2c161be5cc71bacd6605b99a8c07547e58cfa434",
+      "review_note": "Read model/schema/response/runtime sections. Binary metadata dates to November13; November18 announcement/card clarification are distinct events. No extraction benchmark reproduction or training recipe validation."
+    },
+    {
+      "id": "clairic-flash-card-nov20",
+      "title": "Clairic-Flash 9B: typed extraction release",
+      "url": "https://huggingface.co/Cloudflare/clairic-flash/blob/36ad68b999560f56b57ef16a22180f8cb83c6d77/README.md",
+      "kind": "model_card",
+      "reviewed_on": "2026-11-20",
+      "review_depth": "content_reviewed",
+      "source_revision": "36ad68b999560f56b57ef16a22180f8cb83c6d77",
+      "review_note": "Card contract matches the 27B family with Qwen3.5-9B base. November13 artifacts versus November18 announcement distinguished; CUDA example does not establish Mac execution or training."
+    },
+    {
+      "id": "d3-ultra-card-refresh-nov20",
+      "title": "D3-Ultra: October26 release, current fixed card",
+      "url": "https://huggingface.co/vllm-sr/d3-ultra/blob/3ac9ff15579ca9193a0d44f4fa9056f2ea62731d/README.md",
+      "kind": "model_card",
+      "reviewed_on": "2026-11-20",
+      "review_depth": "content_reviewed",
+      "source_revision": "3ac9ff15579ca9193a0d44f4fa9056f2ea62731d",
+      "review_note": "Read identity, serving/evaluation protocol and license sections. Card explicitly dates release October26; November17 cache fix and parameter-count correction are runtime/card changes, not new training."
+    },
+    {
+      "id": "d31-nano-card-nov20",
+      "title": "D3.1-nano: November12 2B release and public-suite protocol",
+      "url": "https://huggingface.co/vllm-sr/d3.1-nano/blob/71d06677f56e243042fe5d5f983804648a5689e8/README.md",
+      "kind": "model_card",
+      "reviewed_on": "2026-11-20",
+      "review_depth": "content_reviewed",
+      "source_revision": "71d06677f56e243042fe5d5f983804648a5689e8",
+      "review_note": "Read readout/inputs and evaluation sections. Binary uploaded November12; November16 manifest/card updates. DI engine averages original/reversed choice orders; ordinary runtime uses one order. Image/video quality not evaluated for this version."
+    },
+    {
+      "id": "d3-edge-coreml-refresh-nov20",
+      "title": "D3 CoreML: October14 edge conversion artifacts",
+      "url": "https://huggingface.co/FluidInference/d3-coreml/tree/78a1f66580199e5eca3c5ff60a265b0f691b38fd",
+      "kind": "repository",
+      "reviewed_on": "2026-11-20",
+      "review_depth": "metadata_only",
+      "source_revision": "78a1f66580199e5eca3c5ff60a265b0f691b38fd",
+      "review_note": "Complete paginated tree compared with earlier source pin. Eight added edge CoreML/MLX binary files are conversion artifacts, not evidence of a newly trained native model or new quality result."
+    },
+    {
+      "id": "strands-v2-e2b-card-nov20",
+      "title": "Strands Decider v2 E2B: merged decision checkpoint",
+      "url": "https://huggingface.co/StrandsAgents/strands-decider-E2B-gemma4-v2-2611/blob/a74ee815c2af08d16afd0b9dfa079ce260cfafdb/README.md",
+      "kind": "model_card",
+      "reviewed_on": "2026-11-20",
+      "review_depth": "content_reviewed",
+      "source_revision": "a74ee815c2af08d16afd0b9dfa079ce260cfafdb",
+      "review_note": "Read v2 architecture, checkpoint layout, limits, calibration, inference/MPS and author evaluation protocol. Four binary files uploaded November17; later HOWTO edit is not a new weight release."
+    },
+    {
+      "id": "strands-v2-training-nov20",
+      "title": "Strands v2: recipe, data conversion and release-checkpoint boundaries",
+      "url": "https://github.com/strands-labs/strands-decider/blob/d4915c9b11f61bb01ed293f4dc4c770a0a51792b/training/README.md",
+      "kind": "repository",
+      "reviewed_on": "2026-11-20",
+      "review_depth": "content_reviewed",
+      "source_revision": "d4915c9b11f61bb01ed293f4dc4c770a0a51792b",
+      "review_note": "Read v2 recipes and init_from sections. Original v2 data is absent; a from-base token-readout training route is public. Old adapter-checkpoint init_from instructions do not certify loading a merged HF v2 release."
+    },
+    {
+      "id": "strands-v2-config-nov20",
+      "title": "Strands v2 E2B: fixed from-base LoRA configuration",
+      "url": "https://github.com/strands-labs/strands-decider/blob/d4915c9b11f61bb01ed293f4dc4c770a0a51792b/configs/v2/strands-decider-E2B-gemma4-v2-2611.yaml",
+      "kind": "repository",
+      "reviewed_on": "2026-11-20",
+      "review_depth": "content_reviewed",
+      "source_revision": "d4915c9b11f61bb01ed293f4dc4c770a0a51792b",
+      "review_note": "Read complete configuration: fixed Gemma base, rank64/alpha128, token_readout/prefix_bidir and supervised recipe. This starts at the original base, not the merged v2 release."
+    },
+    {
+      "id": "strands-v2-trainer-nov20",
+      "title": "Strands trainer: token-readout, init_from and device contracts",
+      "url": "https://github.com/strands-labs/strands-decider/blob/d4915c9b11f61bb01ed293f4dc4c770a0a51792b/training/train.py",
+      "kind": "repository",
+      "reviewed_on": "2026-11-20",
+      "review_depth": "content_reviewed",
+      "source_revision": "d4915c9b11f61bb01ed293f4dc4c770a0a51792b",
+      "review_note": "Inspected _init_from, device selection, token-readout defaults and frozen-KL rejection. Trainer selects CUDA else CPU, not MPS. Static source/format analysis, not a failed or successful training run."
+    },
+    {
+      "id": "strands-v2-data-nov20",
+      "title": "Strands v2: supervised row converter",
+      "url": "https://github.com/strands-labs/strands-decider/blob/d4915c9b11f61bb01ed293f4dc4c770a0a51792b/training/data/strands_v2.py",
+      "kind": "repository",
+      "reviewed_on": "2026-11-20",
+      "review_depth": "content_reviewed",
+      "source_revision": "d4915c9b11f61bb01ed293f4dc4c770a0a51792b",
+      "review_note": "Read converter: state/question/target/label; missing instructions, images and unrenderable rows are dropped and counted. This is a text-training path, not evidence of image adaptation."
+    },
+    {
+      "id": "strands-v2-export-nov20",
+      "title": "Strands v2: merge and decision-checkpoint export",
+      "url": "https://github.com/strands-labs/strands-decider/blob/d4915c9b11f61bb01ed293f4dc4c770a0a51792b/training/export_v2.py",
+      "kind": "repository",
+      "reviewed_on": "2026-11-20",
+      "review_depth": "content_reviewed",
+      "source_revision": "d4915c9b11f61bb01ed293f4dc4c770a0a51792b",
+      "review_note": "Read export contract and merge/export functions. LoRA is merged in float32 then BF16; readout and decision_config are separate. Exporting an already merged decoder does not recover adapters for init_from."
+    },
+    {
+      "id": "strands-v2-checkpoint-format-nov20",
+      "title": "Strands training checkpoints: required config and adapter layout",
+      "url": "https://github.com/strands-labs/strands-decider/blob/d4915c9b11f61bb01ed293f4dc4c770a0a51792b/src/strands_decider/modeling.py",
+      "kind": "repository",
+      "reviewed_on": "2026-11-20",
+      "review_depth": "content_reviewed",
+      "source_revision": "d4915c9b11f61bb01ed293f4dc4c770a0a51792b",
+      "review_note": "Read config_path/checkpoint_dir/load and trainable checkpoint contract. Training loader expects strands_decider_config.json (or legacy hobson_config), whereas released v2 has decision_config.json and merged weights."
+    },
+    {
+      "id": "jevos-v5-release-refresh-nov20",
+      "title": "jevos v5: dated release and downloadable asset identities",
+      "url": "https://github.com/feder-cr/jev/releases/tag/jevos-v5",
+      "kind": "repository",
+      "reviewed_on": "2026-11-20",
+      "review_depth": "metadata_only",
+      "source_revision": null,
+      "review_note": "GitHub release published October16; API lists OpenVINO INT8, GGUF, SHA256SUMS and Linux/Windows/macOS-arm64 assets. Large artifacts were not downloaded or hashed locally."
+    },
+    {
+      "id": "jevos-v5-readme-refresh-nov20",
+      "title": "jevos current README: v5 typed CPU decisions",
+      "url": "https://github.com/feder-cr/jev/blob/2383312e05b4379aee3432140f44b06eaa53dddd/README.md",
+      "kind": "repository",
+      "reviewed_on": "2026-11-20",
+      "review_depth": "content_reviewed",
+      "source_revision": "2383312e05b4379aee3432140f44b06eaa53dddd",
+      "review_note": "Read current v5 capabilities, selected-checkpoint evaluation caveat and runtime contract. This supersedes v2 noul-only capability descriptions; full v5 model internals/training were not audited."
+    },
+    {
+      "id": "gliclass-code-refresh-nov20",
+      "title": "GLiClass current repository: versions and training entry",
+      "url": "https://github.com/Knowledgator/GLiClass/blob/af82d425c0259a6f46f240bb0633fcdab821eaea/README.md",
+      "kind": "repository",
+      "reviewed_on": "2026-11-20",
+      "review_depth": "content_reviewed",
+      "source_revision": "af82d425c0259a6f46f240bb0633fcdab821eaea",
+      "review_note": "Read current feature/training references; no claim of having audited every v4 architecture training path."
+    },
+    {
+      "id": "gliclass-v4-edge-nov20",
+      "title": "GLiClass v4 Edge: DeBERTa decision scorer and calibrator",
+      "url": "https://huggingface.co/knowledgator/gliclass-v4-edge/blob/885af1af8a07edf4ed34df83ca0d995ed8201283/README.md",
+      "kind": "model_card",
+      "reviewed_on": "2026-11-20",
+      "review_depth": "content_reviewed",
+      "source_revision": "885af1af8a07edf4ed34df83ca0d995ed8201283",
+      "review_note": "Relevant architecture, training/calibrator and limitations sections read. This calibrated edge checkpoint must not supply calibration claims to other v4 checkpoints."
+    },
+    {
+      "id": "gliclass-v4-2b-nov20",
+      "title": "GLiClass v4 2B: multimodal decoder-KV scorer",
+      "url": "https://huggingface.co/knowledgator/gliclass-v4-2b/blob/40fe023b45e8d97d1ae4f7f9342279ac1c76317d/README.md",
+      "kind": "model_card",
+      "reviewed_on": "2026-11-20",
+      "review_depth": "content_reviewed",
+      "source_revision": "40fe023b45e8d97d1ae4f7f9342279ac1c76317d",
+      "review_note": "Read architecture/usage and explicit absence of a post-hoc calibrator. Raw scores are not validated operational probabilities."
+    },
+    {
+      "id": "gliclass-v4-27b-nov20",
+      "title": "GLiClass v4 27B: Qwen-based multimodal scorer",
+      "url": "https://huggingface.co/knowledgator/gliclass-v4-27b/blob/acd9c277c2175de565cc9546e1cc3a45b1a63d5c/README.md",
+      "kind": "model_card",
+      "reviewed_on": "2026-11-20",
+      "review_depth": "content_reviewed",
+      "source_revision": "acd9c277c2175de565cc9546e1cc3a45b1a63d5c",
+      "review_note": "Relevant model/card identity inspected. Exact checkpoints, upstream terms and calibration must remain separate."
+    },
+    {
+      "id": "gliclass-v41-edge-metadata-nov20",
+      "title": "GLiClass v4.1 Edge: unreviewed artifact metadata",
+      "url": "https://huggingface.co/knowledgator/gliclass-v4.1-edge/tree/6a05e85cbaa7ab536d6dcd19bcfb3ab3b63d6a4d",
+      "kind": "repository",
+      "reviewed_on": "2026-11-20",
+      "review_depth": "metadata_only",
+      "source_revision": "6a05e85cbaa7ab536d6dcd19bcfb3ab3b63d6a4d",
+      "review_note": "November9 model/config/tokenizer files exist; no README, LICENSE or cardData found in the inspected tree/API. A README404 did not mean the model was absent. Do not inherit v4 license, quality or training claims."
+    },
+    {
+      "id": "baseten-joey-card-nov20",
+      "title": "Baseten Joey-1: 2B sibling and training disclosure",
+      "url": "https://huggingface.co/baselabs/joey-1/blob/9efbe485efbed9598dfca5294cbbe8da00e21908/README.md",
+      "kind": "model_card",
+      "reviewed_on": "2026-11-20",
+      "review_depth": "content_reviewed",
+      "source_revision": "9efbe485efbed9598dfca5294cbbe8da00e21908",
+      "review_note": "Read model, limits, public-suite versus replica evaluation and training-recipe disclosure. Binary uploaded October27; October29 card links launch. Recipe disclosure is not full training-data access or a verified Mac fine-tuning workflow."
+    },
+    {
+      "id": "jeffan-27b-nov20",
+      "title": "Jeffan 27B-1211: new weight identity and layer-loop contract",
+      "url": "https://huggingface.co/tattrongvu/Jeffan-27B-1211/blob/f0ce7043ca32ebfe6613615e573a5010bda7228a/README.md",
+      "kind": "model_card",
+      "reviewed_on": "2026-11-20",
+      "review_depth": "content_reviewed",
+      "source_revision": "f0ce7043ca32ebfe6613615e573a5010bda7228a",
+      "review_note": "Read architecture, defaults, public-suite evaluation and limitations. Binary uploaded November9; later card/vLLM edits are runtime documentation. Default loop_passes=1; public self-run score is not official Full."
+    },
+    {
+      "id": "jeffan-9b-nov20",
+      "title": "Jeffan 9B-1211: two-pass default and serving contract",
+      "url": "https://huggingface.co/tattrongvu/Jeffan-9B-1211/blob/862d1a7a8b64a8d708ddb0b0cd775a740f01841a/README.md",
+      "kind": "model_card",
+      "reviewed_on": "2026-11-20",
+      "review_depth": "content_reviewed",
+      "source_revision": "862d1a7a8b64a8d708ddb0b0cd775a740f01841a",
+      "review_note": "Read architecture/defaults, vLLM, public-suite and limits. Binary uploaded November9; default loop_passes=2 differs from 27B and one-pass serving."
+    },
+    {
+      "id": "jeffan-4b-nov20",
+      "title": "Jeffan 4B-2010: earlier sibling and license change",
+      "url": "https://huggingface.co/tattrongvu/Jeffan-4B-2010/blob/937a008f86f4a20a903d628f22ffad3e3f431d2c/README.md",
+      "kind": "model_card",
+      "reviewed_on": "2026-11-20",
+      "review_depth": "content_reviewed",
+      "source_revision": "937a008f86f4a20a903d628f22ffad3e3f431d2c",
+      "review_note": "Model/release metadata and relevant card checked. October20 weights versus October22 Apache-2.0 licensing edit are separate changes; no Mac training claim."
+    },
+    {
+      "id": "laya-050-default-nov20",
+      "title": "Laya 0.5: default Vega engine and classic-checkpoint selection",
+      "url": "https://github.com/NandhaKishorM/laya/blob/416dd9ed20da2d43fc40e23712e9adceefabf634/README.md",
+      "kind": "repository",
+      "reviewed_on": "2026-11-20",
+      "review_depth": "content_reviewed",
+      "source_revision": "416dd9ed20da2d43fc40e23712e9adceefabf634",
+      "review_note": "Read default-engine, classic selection, Learner, fit/calibrate and training sections. This package switch does not identify new classic encoder weights."
+    },
+    {
+      "id": "laya-050-pypi-nov20",
+      "title": "Laya 0.5.0: fixed package-release metadata",
+      "url": "https://pypi.org/pypi/laya/0.5.0/json",
+      "kind": "official_docs",
+      "reviewed_on": "2026-11-20",
+      "review_depth": "metadata_only",
+      "source_revision": null,
+      "review_note": "PyPI records version0.5.0 files uploaded November19 17:30UTC. Package upload is not a model training date."
+    },
+    {
+      "id": "vegaml-0172-pypi-nov20",
+      "title": "vegaml 0.17.2: fixed dependency-release metadata",
+      "url": "https://pypi.org/pypi/vegaml/0.17.2/json",
+      "kind": "official_docs",
+      "reviewed_on": "2026-11-20",
+      "review_depth": "metadata_only",
+      "source_revision": null,
+      "review_note": "PyPI files uploaded November19 17:11UTC; metadata-only release check, not new reader weight or learner-effect verification."
+    },
+    {
+      "id": "glide-2b-card-nov20",
+      "title": "fastino/GLiDE-2B — fixed release card",
+      "url": "https://huggingface.co/fastino/GLiDE-2B/blob/00f122c120cdeed82284106cb77d9bab5a50ad16/README.md",
+      "kind": "model_card",
+      "reviewed_on": "2026-11-20",
+      "review_depth": "content_reviewed",
+      "source_revision": "00f122c120cdeed82284106cb77d9bab5a50ad16",
+      "review_note": "Primary content and selected artifact metadata reviewed; no model run or tensor-byte verification."
+    },
+    {
+      "id": "glide-family-nov05",
+      "title": "GLiDE decision model family",
+      "url": "https://fastino.ai/blog/glide-decision-model-family",
+      "kind": "official_publication",
+      "reviewed_on": "2026-11-20",
+      "review_depth": "content_reviewed",
+      "source_revision": null,
+      "review_note": "Primary content and selected artifact metadata reviewed; no model run or tensor-byte verification."
+    },
+    {
+      "id": "glide-training-api-nov20",
+      "title": "GLiDE Training API",
+      "url": "https://docs.fastino.ai/training",
+      "kind": "official_docs",
+      "reviewed_on": "2026-11-20",
+      "review_depth": "content_reviewed",
+      "source_revision": null,
+      "review_note": "Primary content and selected artifact metadata reviewed; no model run or tensor-byte verification."
+    },
+    {
+      "id": "glide-training-loss-nov20",
+      "title": "Native decision forward/backward contract",
+      "url": "https://docs.fastino.ai/api-reference/training-jobs/interactive/forward-backward",
+      "kind": "official_docs",
+      "reviewed_on": "2026-11-20",
+      "review_depth": "content_reviewed",
+      "source_revision": null,
+      "review_note": "Primary content and selected artifact metadata reviewed; no model run or tensor-byte verification."
+    },
+    {
+      "id": "glide-training-demo-nov18",
+      "title": "GLiDE small-model fine-tuning example",
+      "url": "https://fastino.ai/blog/glide-multimodal-decisions-fine-tuning",
+      "kind": "official_publication",
+      "reviewed_on": "2026-11-20",
+      "review_depth": "content_reviewed",
+      "source_revision": null,
+      "review_note": "Primary content and selected artifact metadata reviewed; no model run or tensor-byte verification."
+    },
+    {
+      "id": "glide-license-nov20",
+      "title": "GLiDE-2B Community License",
+      "url": "https://huggingface.co/fastino/GLiDE-2B/blob/00f122c120cdeed82284106cb77d9bab5a50ad16/LICENSE",
+      "kind": "official_docs",
+      "reviewed_on": "2026-11-20",
+      "review_depth": "content_reviewed",
+      "source_revision": "00f122c120cdeed82284106cb77d9bab5a50ad16",
+      "review_note": "Primary content and selected artifact metadata reviewed; no model run or tensor-byte verification."
+    },
+    {
+      "id": "glide-pricing-nov20",
+      "title": "GLiDE model/training pricing",
+      "url": "https://docs.fastino.ai/pricing",
+      "kind": "official_docs",
+      "reviewed_on": "2026-11-20",
+      "review_depth": "content_reviewed",
+      "source_revision": null,
+      "review_note": "Primary content and selected artifact metadata reviewed; no model run or tensor-byte verification."
+    },
+    {
+      "id": "liquid-d1-2b-nov20",
+      "title": "LiquidAI/d1-2B — fixed release card",
+      "url": "https://huggingface.co/LiquidAI/d1-2B/blob/a6bce774e6dde338dcc3036ceb5d91f78bf4c19e/README.md",
+      "kind": "model_card",
+      "reviewed_on": "2026-11-20",
+      "review_depth": "content_reviewed",
+      "source_revision": "a6bce774e6dde338dcc3036ceb5d91f78bf4c19e",
+      "review_note": "Primary content and selected artifact metadata reviewed; no model run or tensor-byte verification."
+    },
+    {
+      "id": "liquid-d1-omni-nov20",
+      "title": "LiquidAI/d1-Omni-2B — fixed release card",
+      "url": "https://huggingface.co/LiquidAI/d1-Omni-2B/blob/51918b53052eacfd24062f99f13556c3c56fcf63/README.md",
+      "kind": "model_card",
+      "reviewed_on": "2026-11-20",
+      "review_depth": "content_reviewed",
+      "source_revision": "51918b53052eacfd24062f99f13556c3c56fcf63",
+      "review_note": "Primary content and selected artifact metadata reviewed; no model run or tensor-byte verification."
+    },
+    {
+      "id": "liquid-d12-nov16",
+      "title": "Introducing d1.2",
+      "url": "https://www.liquid.ai/blog/d1-2",
+      "kind": "official_publication",
+      "reviewed_on": "2026-11-20",
+      "review_depth": "content_reviewed",
+      "source_revision": null,
+      "review_note": "Primary content and selected artifact metadata reviewed; no model run or tensor-byte verification."
+    },
+    {
+      "id": "liquid-decision-docs-nov20",
+      "title": "Liquid decision-model contracts",
+      "url": "https://docs.liquid.ai/lfm/models/decision-models",
+      "kind": "official_docs",
+      "reviewed_on": "2026-11-20",
+      "review_depth": "content_reviewed",
+      "source_revision": null,
+      "review_note": "Primary content and selected artifact metadata reviewed; no model run or tensor-byte verification."
+    },
+    {
+      "id": "liquid-license-nov20",
+      "title": "LFM license guide",
+      "url": "https://docs.liquid.ai/lfm/help/model-license",
+      "kind": "official_docs",
+      "reviewed_on": "2026-11-20",
+      "review_depth": "content_reviewed",
+      "source_revision": null,
+      "review_note": "Primary content and selected artifact metadata reviewed; no model run or tensor-byte verification."
+    },
+    {
+      "id": "liquid-finetune-nov20",
+      "title": "Liquid Finetune scope",
+      "url": "https://docs.liquid.ai/lfm/fine-tuning/liquid-finetune",
+      "kind": "official_docs",
+      "reviewed_on": "2026-11-20",
+      "review_depth": "content_reviewed",
+      "source_revision": null,
+      "review_note": "Primary content and selected artifact metadata reviewed; no model run or tensor-byte verification."
+    },
+    {
+      "id": "mapika-2b-nov20",
+      "title": "Mapika/decider-2b — fixed release card",
+      "url": "https://huggingface.co/Mapika/decider-2b/blob/7614a6c7ea5a047aa7d7bcfb1a0015469381c3e3/README.md",
+      "kind": "model_card",
+      "reviewed_on": "2026-11-20",
+      "review_depth": "content_reviewed",
+      "source_revision": "7614a6c7ea5a047aa7d7bcfb1a0015469381c3e3",
+      "review_note": "Primary content and selected artifact metadata reviewed; no model run or tensor-byte verification."
+    },
+    {
+      "id": "mapika-4b-nov20",
+      "title": "Mapika/decider-4b — fixed release card",
+      "url": "https://huggingface.co/Mapika/decider-4b/blob/585473dec4fa93f0325c2bf02dda7273b61f44c1/README.md",
+      "kind": "model_card",
+      "reviewed_on": "2026-11-20",
+      "review_depth": "content_reviewed",
+      "source_revision": "585473dec4fa93f0325c2bf02dda7273b61f44c1",
+      "review_note": "Primary content and selected artifact metadata reviewed; no model run or tensor-byte verification."
+    },
+    {
+      "id": "mapika-code-nov20",
+      "title": "Mapika supervised training and deployment",
+      "url": "https://github.com/Mapika/decider/tree/91b6fa9b94ab6c4dc2c63d3b14d413243b4fffcc",
+      "kind": "repository",
+      "reviewed_on": "2026-11-20",
+      "review_depth": "content_reviewed",
+      "source_revision": "91b6fa9b94ab6c4dc2c63d3b14d413243b4fffcc",
+      "review_note": "Primary content and selected artifact metadata reviewed; no model run or tensor-byte verification."
+    },
+    {
+      "id": "rsi-jev-4b-nov20",
+      "title": "shgao/rsi-jev-v7.0-vl-4b — fixed release card",
+      "url": "https://huggingface.co/shgao/rsi-jev-v7.0-vl-4b/blob/58baf6fc961f42108756b27ff92fddf4aea3b1d8/README.md",
+      "kind": "model_card",
+      "reviewed_on": "2026-11-20",
+      "review_depth": "content_reviewed",
+      "source_revision": "58baf6fc961f42108756b27ff92fddf4aea3b1d8",
+      "review_note": "Primary content and selected artifact metadata reviewed; no model run or tensor-byte verification."
+    },
+    {
+      "id": "rsi-jev-train-nov20",
+      "title": "RSI-Jev v7 training and recipe",
+      "url": "https://github.com/Shanghua-Gao/RSI-Jev/tree/e58526f061afd4c383d33a22b309b888f8a3e3c7",
+      "kind": "repository",
+      "reviewed_on": "2026-11-20",
+      "review_depth": "content_reviewed",
+      "source_revision": "e58526f061afd4c383d33a22b309b888f8a3e3c7",
+      "review_note": "Primary content and selected artifact metadata reviewed; no model run or tensor-byte verification."
+    },
+    {
+      "id": "jgeuter-jeff-4b-nov20",
+      "title": "jgeuter/Jeff-1.1-Qwen-4B — fixed release card",
+      "url": "https://huggingface.co/jgeuter/Jeff-1.1-Qwen-4B/blob/e2c4fb2f00189672c77e9d9a1619a8fd4884ab2d/README.md",
+      "kind": "model_card",
+      "reviewed_on": "2026-11-20",
+      "review_depth": "content_reviewed",
+      "source_revision": "e2c4fb2f00189672c77e9d9a1619a8fd4884ab2d",
+      "review_note": "Primary content and selected artifact metadata reviewed; no model run or tensor-byte verification."
+    },
+    {
+      "id": "jgeuter-jeff-trainer-nov20",
+      "title": "Jeff public training/export and own JSONL",
+      "url": "https://github.com/j-geuter/Jeff/tree/938ac5a03c6ac43512e61266d9febf691edc17f8",
+      "kind": "repository",
+      "reviewed_on": "2026-11-20",
+      "review_depth": "content_reviewed",
+      "source_revision": "938ac5a03c6ac43512e61266d9febf691edc17f8",
+      "review_note": "Primary content and selected artifact metadata reviewed; no model run or tensor-byte verification."
+    },
+    {
+      "id": "decisionbank-nov20",
+      "title": "DecisionBank source/label provenance",
+      "url": "https://huggingface.co/datasets/jgeuter/DecisionBank/tree/fbeee67758966fe78bfb008b28fc771924c0bc71",
+      "kind": "repository",
+      "reviewed_on": "2026-11-20",
+      "review_depth": "content_reviewed",
+      "source_revision": "fbeee67758966fe78bfb008b28fc771924c0bc71",
+      "review_note": "Primary content and selected artifact metadata reviewed; no model run or tensor-byte verification."
+    },
+    {
+      "id": "jad-s1-v05-nov20",
+      "title": "DreamBlooms/JAD-S1-7B-A1B-v0.5 — fixed release card",
+      "url": "https://huggingface.co/DreamBlooms/JAD-S1-7B-A1B-v0.5/blob/178febae0936d8c0f71312421d65e5b6baca466c/README.md",
+      "kind": "model_card",
+      "reviewed_on": "2026-11-20",
+      "review_depth": "content_reviewed",
+      "source_revision": "178febae0936d8c0f71312421d65e5b6baca466c",
+      "review_note": "Primary content and selected artifact metadata reviewed; no model run or tensor-byte verification."
+    },
+    {
+      "id": "h2o-lightning-4b-nov20",
+      "title": "h2oai/h2o-lightning-4b — fixed release card",
+      "url": "https://huggingface.co/h2oai/h2o-lightning-4b/blob/659fc412de8486dbc2477b0d1cb4121e97e72471/README.md",
+      "kind": "model_card",
+      "reviewed_on": "2026-11-20",
+      "review_depth": "content_reviewed",
+      "source_revision": "659fc412de8486dbc2477b0d1cb4121e97e72471",
+      "review_note": "Primary content and selected artifact metadata reviewed; no model run or tensor-byte verification."
+    },
+    {
+      "id": "mnn-pocket-dec-nov20",
+      "title": "taobao-mnn/MNN-Pocket-0.3B-Dec — fixed release card",
+      "url": "https://huggingface.co/taobao-mnn/MNN-Pocket-0.3B-Dec/blob/7d5b512f3fe579418c45a77b178da39273b2a114/README.md",
+      "kind": "model_card",
+      "reviewed_on": "2026-11-20",
+      "review_depth": "content_reviewed",
+      "source_revision": "7d5b512f3fe579418c45a77b178da39273b2a114",
+      "review_note": "Primary content and selected artifact metadata reviewed; no model run or tensor-byte verification."
+    },
+    {
+      "id": "granite-switch-launch-nov20",
+      "title": "IBM Granite Switch introduction",
+      "url": "https://huggingface.co/blog/ibm-granite/granite-switch-4-1",
+      "kind": "official_publication",
+      "reviewed_on": "2026-11-20",
+      "review_depth": "content_reviewed",
+      "source_revision": null,
+      "review_note": "Primary content and selected artifact metadata reviewed; no model run or tensor-byte verification."
+    },
+    {
+      "id": "granite-decision-adapter-nov20",
+      "title": "Granite decision adapter v1.1",
+      "url": "https://huggingface.co/ibm-granite/granitelib-core-r1.0/blob/b881a4371db7284beac66a658b0cadcd32b12977/decision/README.md",
+      "kind": "model_card",
+      "reviewed_on": "2026-11-20",
+      "review_depth": "content_reviewed",
+      "source_revision": "b881a4371db7284beac66a658b0cadcd32b12977",
+      "review_note": "Primary content and selected artifact metadata reviewed; no model run or tensor-byte verification."
+    },
+    {
+      "id": "ant-lingdt-contract-nov20",
+      "title": "Ant Digital public LingDT decision service contract",
+      "url": "https://maas.antdigital.com/api/v1/model-service/public/get/modelservice-1792325631780001741",
+      "kind": "official_docs",
+      "reviewed_on": "2026-11-20",
+      "review_depth": "content_reviewed",
+      "source_revision": null,
+      "review_note": "Primary content and selected artifact metadata reviewed; no model run or tensor-byte verification."
+    },
+    {
+      "id": "span02-release-nov20",
+      "title": "respanai/span-02 — fixed release card",
+      "url": "https://huggingface.co/respanai/span-02/blob/63cbdd774391f1b7d9bc3829179efe996d0191ce/README.md",
+      "kind": "model_card",
+      "reviewed_on": "2026-11-20",
+      "review_depth": "content_reviewed",
+      "source_revision": "63cbdd774391f1b7d9bc3829179efe996d0191ce",
+      "review_note": "Primary content and selected artifact metadata reviewed; no model run or tensor-byte verification."
+    },
+    {
+      "id": "span02-launch-nov20",
+      "title": "Introducing Span-02",
+      "url": "https://www.respan.ai/blog/introducing-span-2",
+      "kind": "official_publication",
+      "reviewed_on": "2026-11-20",
+      "review_depth": "content_reviewed",
+      "source_revision": null,
+      "review_note": "Primary content and selected artifact metadata reviewed; no model run or tensor-byte verification."
+    },
+    {
+      "id": "decisio-v3-calibrated-nov20",
+      "title": "tachara-ai/Decisio-12b-tuned-v3-calibrated — fixed release card",
+      "url": "https://huggingface.co/tachara-ai/Decisio-12b-tuned-v3-calibrated/blob/1e9159cc082c689fd95381e0ed6306402dc932d2/README.md",
+      "kind": "model_card",
+      "reviewed_on": "2026-11-20",
+      "review_depth": "content_reviewed",
+      "source_revision": "1e9159cc082c689fd95381e0ed6306402dc932d2",
+      "review_note": "Primary content and selected artifact metadata reviewed; no model run or tensor-byte verification."
+    },
+    {
+      "id": "decisio-server-nov20",
+      "title": "Decisio serving repository",
+      "url": "https://github.com/aminry/decisio/tree/ad9c265abd677fd7113435bd5e4b766c9a4848ce",
+      "kind": "repository",
+      "reviewed_on": "2026-11-20",
+      "review_depth": "content_reviewed",
+      "source_revision": "ad9c265abd677fd7113435bd5e4b766c9a4848ce",
+      "review_note": "Primary content and selected artifact metadata reviewed; no model run or tensor-byte verification."
+    },
+    {
+      "id": "ms-decision-ga-nov17",
+      "title": "Microsoft Decision1.1 GA",
+      "url": "https://commandline.microsoft.com/microsoft-decision-model-ga/",
+      "kind": "official_publication",
+      "reviewed_on": "2026-11-20",
+      "review_depth": "content_reviewed",
+      "source_revision": null,
+      "review_note": "Primary content and selected artifact metadata reviewed; no model run or tensor-byte verification."
+    },
+    {
+      "id": "ms-decision-current-nov20",
+      "title": "Microsoft Decision current Foundry contract",
+      "url": "https://learn.microsoft.com/en-us/azure/foundry/foundry-models/how-to/use-foundry-models-microsoft-decision",
+      "kind": "official_docs",
+      "reviewed_on": "2026-11-20",
+      "review_depth": "content_reviewed",
+      "source_revision": null,
+      "review_note": "Primary content and selected artifact metadata reviewed; no model run or tensor-byte verification."
+    },
+    {
+      "id": "openai-decisions-ga-nov20",
+      "title": "OpenAI Decisions GA announcement",
+      "url": "https://openai.com/index/decisions-api/",
+      "kind": "official_publication",
+      "reviewed_on": "2026-11-20",
+      "review_depth": "content_reviewed",
+      "source_revision": null,
+      "review_note": "Primary content and selected artifact metadata reviewed; no model run or tensor-byte verification."
+    },
+    {
+      "id": "openai-decisions-current-nov20",
+      "title": "OpenAI Decisions current contract",
+      "url": "https://developers.openai.com/api/docs/guides/decisions",
+      "kind": "official_docs",
+      "reviewed_on": "2026-11-20",
+      "review_depth": "content_reviewed",
+      "source_revision": null,
+      "review_note": "Primary content and selected artifact metadata reviewed; no model run or tensor-byte verification."
+    },
+    {
+      "id": "glide-2b-readout-nov20",
+      "title": "GLiDE-2B fixed public readout implementation",
+      "url": "https://huggingface.co/fastino/GLiDE-2B/blob/00f122c120cdeed82284106cb77d9bab5a50ad16/glide/model.py",
+      "kind": "repository",
+      "reviewed_on": "2026-11-20",
+      "review_depth": "content_reviewed",
+      "source_revision": "00f122c120cdeed82284106cb77d9bab5a50ad16",
+      "review_note": "Selected confidence and score implementation inspected, not executed; applies to this public2B runtime, not an inferred hosted backend."
+    },
+    {
+      "id": "synth-ptbr-laya-nov20",
+      "title": "Synth-NLP/laya-intencao-ptbr-sintetico — real-label and synthetic augmentation experiment",
+      "url": "https://huggingface.co/Synth-NLP/laya-intencao-ptbr-sintetico/blob/eae976f3b0663d67fe09b92fb5b04d9887f4efc8/README.md",
+      "kind": "model_card",
+      "reviewed_on": "2026-11-20",
+      "review_depth": "content_reviewed",
+      "source_revision": "eae976f3b0663d67fe09b92fb5b04d9887f4efc8",
+      "review_note": "Author offline Portuguese intent adaptation with a real-label-only control and inspectable data/predictions. New repository tensors match November15 prior releases by complete declared LFS metadata. Validation reuse, one scenario split, limited seeds, translation/no native-human audit and no equal-token control limit conclusions; no local inference or training."
+    },
+    {
+      "id": "synth-ptbr-kev-0.8b-nov20",
+      "title": "Synth-NLP/kev-0.8b-intencao-ptbr-sintetico — real-label and synthetic augmentation experiment",
+      "url": "https://huggingface.co/Synth-NLP/kev-0.8b-intencao-ptbr-sintetico/blob/fbe9f5a9e420fe46f5db2825581a5e68c7704c3f/README.md",
+      "kind": "model_card",
+      "reviewed_on": "2026-11-20",
+      "review_depth": "content_reviewed",
+      "source_revision": "fbe9f5a9e420fe46f5db2825581a5e68c7704c3f",
+      "review_note": "Author offline Portuguese intent adaptation with a real-label-only control and inspectable data/predictions. New repository tensors match November15 prior releases by complete declared LFS metadata. Validation reuse, one scenario split, limited seeds, translation/no native-human audit and no equal-token control limit conclusions; no local inference or training."
+    },
+    {
+      "id": "synth-ptbr-kev-4b-nov20",
+      "title": "Synth-NLP/kev-4b-intencao-ptbr-sintetico — real-label and synthetic augmentation experiment",
+      "url": "https://huggingface.co/Synth-NLP/kev-4b-intencao-ptbr-sintetico/blob/0aa1eaea1d8f0c684b5ff1058112a9fa49f45d94/README.md",
+      "kind": "model_card",
+      "reviewed_on": "2026-11-20",
+      "review_depth": "content_reviewed",
+      "source_revision": "0aa1eaea1d8f0c684b5ff1058112a9fa49f45d94",
+      "review_note": "Author offline Portuguese intent adaptation with a real-label-only control and inspectable data/predictions. New repository tensors match November15 prior releases by complete declared LFS metadata. Validation reuse, one scenario split, limited seeds, translation/no native-human audit and no equal-token control limit conclusions; no local inference or training."
+    },
+    {
+      "id": "valen15-4b-nov20",
+      "title": "Valen Decision1.5 4B fixed native release",
+      "url": "https://huggingface.co/Valen-Team/Valen-Decision-1.5-4B/blob/9b0cacc976d7fb72f252ee1adb1564f5f15e462c/README.md",
+      "kind": "model_card",
+      "reviewed_on": "2026-11-20",
+      "review_depth": "content_reviewed",
+      "source_revision": "9b0cacc976d7fb72f252ee1adb1564f5f15e462c",
+      "review_note": "Fixed4B native card and complete file metadata reviewed; five-size family/format claims distinguished from the audited4B artifact. Native tensors existed by Nov9; Nov12 card links do not identify new training."
+    },
+    {
+      "id": "valen-training-nov20",
+      "title": "Valen native own-data SFT/RLCD training",
+      "url": "https://github.com/Valen-Team/Valen/blob/f6df4fdbc45bf44a4ffbebaeda53f5fe6e49b339/valen/training/README.md",
+      "kind": "repository",
+      "reviewed_on": "2026-11-20",
+      "review_depth": "content_reviewed",
+      "source_revision": "f6df4fdbc45bf44a4ffbebaeda53f5fe6e49b339",
+      "review_note": "Training entry, native full/LoRA configs, schema, builder, runner and published-finetuning tests inspected. SFT defaults to distribution CE; optional losses and discrete sampled RLCD are separate methods, not TypeSafe replication."
+    },
+    {
+      "id": "valen-training-device-nov20",
+      "title": "Valen training device/statistics boundary",
+      "url": "https://github.com/Valen-Team/Valen/blob/f6df4fdbc45bf44a4ffbebaeda53f5fe6e49b339/valen/training/distributed.py",
+      "kind": "repository",
+      "reviewed_on": "2026-11-20",
+      "review_depth": "content_reviewed",
+      "source_revision": "f6df4fdbc45bf44a4ffbebaeda53f5fe6e49b339",
+      "review_note": "Static device review: runner uses this float64 statistics path on configured device. Default CUDA; changing to MPS needs compatibility work, not inference-format conversion. No local training executed."
+    },
+    {
+      "id": "valen-domain-cookbook-nov20",
+      "title": "Valen complete domain adaptation workflow",
+      "url": "https://valen-team.github.io/cookbook/domain-finetuning/",
+      "kind": "official_docs",
+      "reviewed_on": "2026-11-20",
+      "review_depth": "content_reviewed",
+      "source_revision": null,
+      "review_note": "Own JSONL split/train/resume/compare workflow and author0.8B H200 short smoke receipt reviewed; one/two updates on three synthetic cases are engineering checks, not4B/M5 training or domain-effect proof."
     }
   ],
   "entries": [
@@ -3566,7 +4286,7 @@
     },
     {
       "id": "laya",
-      "name": "Laya",
+      "name": "Laya classic encoders (package 0.5 defaults to Vega)",
       "category": "core_models",
       "url": "https://github.com/NandhaKishorM/laya",
       "source_ids": [
@@ -3574,34 +4294,38 @@
         "laya-specialist",
         "laya-limits",
         "laya-vega-learner-nov20",
-        "vegaml-learning-nov20"
+        "vegaml-learning-nov20",
+        "laya-050-default-nov20",
+        "laya-050-pypi-nov20",
+        "vegaml-0172-pypi-nov20",
+        "synth-ptbr-laya-nov20"
       ],
       "summary": {
-        "en": "Compact encoder family with dynamic option heads; general, multilingual and workflow-specialized checkpoints.",
-        "zh": "小型编码器与动态选项判断头；包含通用、多语言及工作流专项检查点。"
+        "en": "Classic 421M / 322M encoder checkpoints with dynamic option heads; package 0.5 now defaults to a separate Vega frozen-reader engine unless a classic checkpoint is selected.",
+        "zh": "经典421M／322M编码器检查点及动态选项头；包0.5默认已转为独立Vega冻结reader引擎，使用经典模型须显式选择。"
       },
       "use": {
-        "en": "Narrow, high-volume judgments with domain training and measured hardware costs.",
-        "zh": "适合有领域训练数据、需要控制高频调用成本的窄域判断。"
+        "en": "Use explicitly selected classic encoders as low-resource supervised controls; consider Vega fitted-head learning as a separate hypothesis with its own baseline and held-out acceptance.",
+        "zh": "显式选择经典encoder作低资源监督对照；Vega拟合头学习另立假设、基线及保留集验收。"
       },
       "caveat": {
-        "en": "Do not mix base/specialist scores; the typed card discloses training/calibration overlap and inherited-temperature conflicts. Boolean labels can dominate noul/choice; semantic labels alone do not make negation safe. action.act_probability is documented as nearly constant at 1 and unsuitable as an execution gate. Validate confidence on your workload instead. Targeted November 20 identity check: current package Learner/Vega 4B-reader fitted-head results are separate from this classic encoder family; do not transfer that Banking77 table to 322M/421M backbone tuning.",
-        "zh": "不可混用基础版／专项版成绩；专项卡披露训练／校准重叠和继承温度冲突。布尔标签可能主导 noul／choice；语义标签也不能保证否定句安全。官方称 action.act_probability 几乎恒为 1，不适合作为执行门槛；confidence 也需在实际任务上验证。 11月20日身份补核：当前包Learner／Vega的4B reader拟合头结果与此经典encoder家族分开，不能把其Banking77表移作322M／421M骨干后训练证据。"
+        "en": "Classic base/specialist, language and calibration-overlap limitations remain. action.act_probability from the older path is not a safe execution gate. Vega package defaults and conformal/route fields do not certify future shifted traffic; small calibration examples and fitted-head gains are not classic-backbone or production evidence.",
+        "zh": "经典基础／专项、语言及校准重叠限制仍保留；旧路径action.act_probability不能作安全执行门槛。Vega默认及conformal／route字段不认证未来漂移流量，小校准例及拟合头收益不是经典骨干或生产证据。"
       },
       "reviewed_on": "2026-11-20",
       "mechanism": {
-        "en": "Bidirectional encoder plus option-conditioned decision head.",
-        "zh": "双向编码器加选项条件化判断头。"
+        "en": "Classic checkpoints use a bidirectional encoder and option-conditioned head. Since 0.5, unnamed Agent/load selects Vega: frozen reader features feed a separate decision engine/fitted heads and calibration. Explicit classic names or vegaml=False retain the encoder path.",
+        "zh": "经典检查点为双向encoder加选项条件头；0.5起未指定模型的Agent／load选Vega，以冻结reader特征供独立判断引擎／拟合头及校准。显式经典模型名或vegaml=False保留encoder路径。"
       },
       "training": {
-        "en": "Proper-score rewards and policy gradients; the typed specialist also uses soft cross-entropy. Not a confirmed reproduction of Jev training.",
-        "zh": "适当评分奖励与策略梯度；专项训练还使用软交叉熵。不是已确认的 Jev 训练复现。"
+        "en": "Classic cards describe proper-score/policy-gradient training and specialist soft CE; this is not confirmed Jev training reproduction. Vega fit/Learner fits small heads and updates/calibration over frozen-reader features; it does not fine-tune the classic 322M / 421M backbone. Do not merge their label-efficiency or Banking77 results.",
+        "zh": "经典卡描述proper-score／策略梯度训练及专项soft CE，不是确认的Jev训练复现。Vega的fit／Learner在冻结reader特征上拟合小头并更新／校准，不微调经典322M／421M骨干；两者标签效率或Banking77结果不得合并。"
       },
       "availability": {
-        "en": "Local weights/runtime; checkpoint and language must be selected explicitly.",
-        "zh": "本地权重与运行库；应明确检查点及语言。"
+        "en": "Package 0.5.0 and vegaml 0.17.2 were uploaded November 19. Current classic English/multilingual HF comparisons changed README only, not binary identities. Classic MPS/CPU training examples and Vega local fitting are different workflows; neither is a verified M5 enterprise training outcome here. Record package, reader, head and calibration identities separately.",
+        "zh": "包0.5.0及vegaml0.17.2于11月19日上传；所比经典英语／多语种HF仅README改变，binary身份未变。经典MPS／CPU训练例与Vega本地拟合是不同流程，本仓均无M5企业训练效果验证；包、reader、head及校准身份分别记录。"
       },
-      "license_note": "Reviewed family/specialist cards declare Apache-2.0; verify each selected artifact.",
+      "license_note": "Reviewed classic cards and package sources declare Apache-2.0; exact Vega reader, fitted artifact, dependency and data terms remain separate. No new classic weights inferred from package/card dates.",
       "weight_revision": null,
       "tags": [
         "typed-decisions",
@@ -3610,8 +4334,8 @@
         "rlcd"
       ],
       "scale": {
-        "en": "English and workflow specialist: about 421M; multilingual: about 322M.",
-        "zh": "英语及专项版约 421M；多语言版约 322M。"
+        "en": "Classic English/specialist about 421M, multilingual about 322M. Default Vega reader starts at 0.8B and supports other selected readers; those are not new classic-encoder sizes.",
+        "zh": "经典英语／专项约421M，多语种约322M。默认Vega reader从0.8B起并可另选reader；它们不是经典encoder的新尺寸。"
       }
     },
     {
@@ -3626,7 +4350,9 @@
         "kev27-v2",
         "kev-current",
         "kev-data-contract-oct22",
-        "kev-score-decimal-oct22"
+        "kev-score-decimal-oct22",
+        "synth-ptbr-kev-0.8b-nov20",
+        "synth-ptbr-kev-4b-nov20"
       ],
       "summary": {
         "en": "Qwen-based typed decision family with a dynamic pointer head; Kev 1.0 freezes existing checkpoints as a release baseline.",
@@ -3816,38 +4542,43 @@
     },
     {
       "id": "gliclass",
-      "name": "GLiClass",
+      "name": "GLiClass (v4 family; v4.1 Edge metadata only)",
       "category": "core_models",
       "url": "https://github.com/Knowledgator/GLiClass",
       "source_ids": [
-        "gliclass"
+        "gliclass",
+        "gliclass-code-refresh-nov20",
+        "gliclass-v4-edge-nov20",
+        "gliclass-v4-2b-nov20",
+        "gliclass-v4-27b-nov20",
+        "gliclass-v41-edge-metadata-nov20"
       ],
       "summary": {
-        "en": "Label-conditioned text classification with user-supplied labels, including multilabel tasks.",
-        "zh": "以用户提供的标签为条件进行文本分类，包含多标签任务。"
+        "en": "Label-conditioned classification family: v4 adds decoder-KV/label scoring and multimodal Qwen variants; v4.1 Edge is an incompletely documented artifact.",
+        "zh": "标签条件分类系列：v4有decoder-KV／label评分及多模态Qwen变体；v4.1 Edge目前属于文档不完整的产物。"
       },
       "use": {
-        "en": "An adjacent baseline for dynamic intent and label classification.",
-        "zh": "动态意图与标签分类的重要相邻基线。"
+        "en": "Dynamic intent/label classification comparator, choosing single-label or multilabel semantics and measuring task-specific calibration.",
+        "zh": "作为动态意图／标签分类对照，先选单标签或多标签语义，再量具体任务的校准。"
       },
       "caveat": {
-        "en": "Classification capability does not establish general workflow verification or calibrated operational risk.",
-        "zh": "分类能力不等于通用工作流验收能力，也不保证业务风险已校准。"
+        "en": "Architecture, label cardinality and calibrator differ by release. Do not inherit v4 license/quality/training claims into undocumented v4.1; a high label score is not a certified correctness probability or enterprise routing guarantee.",
+        "zh": "不同发布物的架构、标签数及calibrator不同；不得将v4许可／质量／训练声明继承给缺文档v4.1，高label分数不是认证正确概率或企业路由保证。"
       },
-      "reviewed_on": "2026-09-25",
+      "reviewed_on": "2026-11-20",
       "mechanism": {
-        "en": "Joint text/label representation and label scoring.",
-        "zh": "联合表示文本与标签，再对标签评分。"
+        "en": "In reviewed v4 decoder-KV variants, the backbone encodes input evidence, transient label tokens read its cache, and a label scorer/refinement cell produces scores without text generation. Single-label softmax and multilabel scores are different contracts; inspect the chosen architecture.",
+        "zh": "所阅v4 decoder-KV变体先编码输入证据，再由临时label token读缓存，label评分／迭代模块输出分数，不生成文本。单标签softmax与多标签分数的合同不同，须核具体架构。"
       },
       "training": {
-        "en": "Consult the selected checkpoint; do not attribute every GLiClass variant one recipe.",
-        "zh": "以具体检查点为准，不给所有版本统一指定训练配方。"
+        "en": "The repository provides supervised training entry points; reviewed v4 cards describe decision-mixture training and, for calibrated releases, a fitted per-pair calibrator. The exact released-v4 full pipeline and all data were not independently replayed. Do not infer a usable v4.1 recipe from the older family trainer.",
+        "zh": "仓库提供监督训练入口；所阅v4卡描述判断数据混合训练，带校准器的发布物另拟合逐对calibrator。未独立重放精确v4完整流程和所有数据，也不能从旧family trainer推定v4.1已有可用配方。"
       },
       "availability": {
-        "en": "Open repository with links to model checkpoints.",
-        "zh": "公开仓库，并链接模型检查点。"
+        "en": "Public v4 cards and weights exist. v4 Edge includes a calibrator; the reviewed 2B card explicitly ships without one and warns of saturated raw scores. November 9 v4.1 Edge has model/config/tokenizer files but no inspected README/LICENSE/cardData. No verified M5 training result or v4.1 deployment contract.",
+        "zh": "v4模型卡及权重公开；v4 Edge带calibrator，所阅2B卡明确未带并提醒raw分数趋0／1。11月9日v4.1 Edge有model／config／tokenizer，但所查无README／LICENSE／cardData；没有已验证M5训练结果或v4.1部署合同。"
       },
-      "license_note": "Consult repository and chosen checkpoint license; not fully audited in this edition.",
+      "license_note": "Reviewed v4 cards/repository declare Apache-2.0; v4.1 Edge lacks inspected license metadata/files and remains unresolved. Verify each model/base/data artifact separately.",
       "weight_revision": null,
       "tags": [
         "classification",
@@ -3855,47 +4586,49 @@
         "baseline"
       ],
       "scale": {
-        "en": "Checkpoint-dependent; no single family-wide parameter claim made here.",
-        "zh": "依具体检查点而定；本版不为整个系列指定单一参数量。"
+        "en": "Checkpoint-specific: v4 Edge 0.4B uses DeBERTa; v4 Qwen-based 2B / 9B / 27B variants have separate identities. No single family size or calibration claim.",
+        "zh": "依检查点而定：v4 Edge0.4B用DeBERTa，v4 Qwen系2B／9B／27B分别固定身份，不为整族指定单一规模或校准结论。"
       }
     },
     {
       "id": "jevos",
-      "name": "jevos",
+      "name": "jevos (current v5; historical v2)",
       "category": "core_models",
       "url": "https://github.com/feder-cr/jev",
       "source_ids": [
         "jevos-current",
         "jevos-v2-release",
-        "jevos-repo"
+        "jevos-repo",
+        "jevos-v5-release-refresh-nov20",
+        "jevos-v5-readme-refresh-nov20"
       ],
       "summary": {
-        "en": "Local yes/no decision model served as GGUF through llama.cpp, with a TypeSafe Jev-compatible request/response shape for `noul` questions.",
-        "zh": "通过 llama.cpp 以 GGUF 格式提供本地是非判断，`noul` 请求与响应采用 TypeSafe Jev 的接口格式。"
+        "en": "Local CPU typed decisions in a Jev-shaped API: v5 adds documented choice and early score support alongside yes/no, with OpenVINO INT8 and GGUF assets.",
+        "zh": "本地CPU类型化判断，采用Jev形状的API：v5文档在是非之外加入choice和早期score支持，发布OpenVINO INT8及GGUF产物。"
       },
       "use": {
-        "en": "Experiment with CPU-local reading and triage questions; put the full policy in `instructions` and validate behavior on your own labeled cases.",
-        "zh": "用于探索 CPU 本地文本判读与分流；将完整规则写入 `instructions`，并用自己的标注样例验证行为。"
+        "en": "A CPU inference comparator for short policy/triage decisions; validate each supported type and the exact released artifact before considering adaptation.",
+        "zh": "作为短规则／分流判断的CPU推理对照；考虑适配前，先验证各题型与精确发布产物。"
       },
       "caveat": {
-        "en": "Yes/no only: `choice` and `score` return 422, and the jevos documentation says `criteria` is accepted but ignored. Wire-format compatibility is not semantic equivalence. Arithmetic/date errors and benchmark sensitivity are author-reported; old README results do not identify v2 performance.",
-        "zh": "仅支持是非判断：`choice`、`score` 返回 422，jevos 文档说明 `criteria` 虽被接受却不参与判断。接口格式兼容不等于语义等价。算术、日期错误及评测敏感性由作者自报；旧版 README 的成绩不能代表 v2。"
+        "en": "Do not apply old v2 noul-only/422/ignored-criteria descriptions to v5. Wire-format compatibility does not establish semantic equivalence; score support is labeled early. Current parameter lineage, calibrated risk and a usable enterprise fine-tuning path remain unknown.",
+        "zh": "不可把旧v2仅noul／422／忽略criteria的描述套给v5。接口形状兼容不等于语义等价，score仍标为早期支持；当前参数谱系、校准风险及可用企业续训链仍未知。"
       },
-      "reviewed_on": "2026-09-30",
+      "reviewed_on": "2026-11-20",
       "mechanism": {
-        "en": "The inspected binary runtime reads logits at fixed 0/1 answer-token slots and applies softmax to return P(yes), without text generation. The submitted MiniCPM5 base and 17-layer count remain unestablished; this code path was not executed here.",
-        "zh": "核读源码的二元模式读取固定 0/1 答案 token 槽的 logits，再通过 softmax 返回 P(yes)，不生成文本。投稿所述 MiniCPM5 基座和 17 层结构仍未确证；本次没有执行这条代码路径。"
+        "en": "Current v5 documentation returns per-answer probabilities and expected score levels without free-form output; several questions share an input request. The earlier audited fixed binary-token readout belongs to an older version, not a verified complete v5 implementation audit.",
+        "zh": "当前v5文档返回候选概率和期望评分，不输出自由文本；同输入可带多个问题。此前核读的固定二元token读出属于旧版，不能冒称已完整审计v5内部实现。"
       },
       "training": {
-        "en": "Training recipe, dataset and base-checkpoint provenance were not established by the reviewed sources; no independent training reproduction.",
-        "zh": "核读来源未确证训练配方、数据集和基座检查点来源；没有独立训练复现。"
+        "en": "A complete training recipe, dataset and base-checkpoint lineage remain unestablished. The seven task sets described in the v5 README helped select the released checkpoint, so they are development evidence rather than an untouched independent test.",
+        "zh": "完整训练配方、数据及base谱系仍未建立；v5 README所列七组任务参与发布检查点选择，属于开发证据，不是未触及的独立测试。"
       },
       "availability": {
-        "en": "The v2 release lists q4_k_m (619,289,280 bytes) and q8_0 GGUF assets. Documentation describes offline CPU use via llama.cpp. Listed hashes are publisher/API metadata, not local binary verification.",
-        "zh": "v2 发布页列出 q4_k_m（619,289,280 字节）和 q8_0 GGUF 权重，文档说明可通过 llama.cpp 在 CPU 上离线运行。记录的哈希来自发布方/API 元数据，未经本地下载核验。"
+        "en": "GitHub v5 release published October 16 with Linux, Windows and macOS-arm64 binaries, OpenVINO INT8 and q4/q8 GGUF plus SHA256SUMS. HF main has a different earlier timestamp; equality to the GitHub v5 package is not authenticated. Asset metadata and Mac binary existence are not a local weight hash or M5 training result.",
+        "zh": "GitHub v5于10月16日发布Linux／Windows／macOS-arm64程序、OpenVINO INT8及q4／q8 GGUF和SHA256SUMS。HF main时间较早，尚未认证其与GitHub v5包相同；asset元数据及Mac程序存在不等于本地权重hash或M5训练结果。"
       },
-      "license_note": "Repository LICENSE is MIT; reviewed release metadata does not separately establish base-weight license provenance.",
-      "weight_revision": "3cbf010ce06cba932af73346ee683ee98d375dc284c029967eb418472a4993f3",
+      "license_note": "Repository LICENSE is MIT and the inspected HF metadata declares MIT; exact GitHub v5 weight/base provenance and any inherited terms are not fully authenticated here.",
+      "weight_revision": null,
       "tags": [
         "typed-decisions",
         "local",
@@ -3904,13 +4637,13 @@
         "gguf"
       ],
       "scale": {
-        "en": "Project documentation describes 1B parameters; this review did not inspect the weight tensors or independently count parameters.",
-        "zh": "项目文档称为 1B 参数；本次没有检查权重张量或独立核算参数量。"
+        "en": "Earlier documentation described 1B; an independently checked current-v5 tensor parameter count and exact base identity were not established.",
+        "zh": "早期资料称1B；本轮未独立核算当前v5张量参数量，也未建立精确base身份。"
       }
     },
     {
       "id": "clef",
-      "name": "Clef / Clef-Flash",
+      "name": "Clef / Clef-Flash / Clef-Omni",
       "category": "core_models",
       "url": "https://huggingface.co/Cloudflare/clef",
       "source_ids": [
@@ -3921,34 +4654,36 @@
         "clef-community-training",
         "clef-community-status",
         "mlx-vlm-clef-inference-oct27",
-        "clef-eval-metadata-oct30"
+        "clef-eval-metadata-oct30",
+        "clef-omni-refresh-nov20",
+        "clef-omni-launch-refresh-nov20"
       ],
       "summary": {
-        "en": "Multimodal Qwen backbones with a joint schema head for typed decisions and a Jev/SystemOne-compatible wrapper.",
-        "zh": "多模态 Qwen 骨干加联合 schema 判断头，输出类型化决策，提供 Jev/SystemOne 兼容封装。"
+        "en": "Cloudflare typed-decision family: dense Clef/Flash and October 9 Clef-Omni use joint schema scoring; Clairic is a separate extraction family.",
+        "zh": "Cloudflare类型化判断系列：稠密Clef／Flash及10月9日Clef-Omni用联合schema评分；Clairic是独立提取系列。"
       },
       "use": {
-        "en": "Compare text/image-based classification, triage and ordinal judgments with task-specific error costs.",
-        "zh": "比较文本／图像分类、分流与有序评分，并按具体任务衡量错误成本。"
+        "en": "Compare bounded judgments using required text/image/audio/video evidence, at matched workload risk and full-system cost.",
+        "zh": "按任务所需文本／图像／音频／视频证据，在相同风险与完整系统成本下比较有界判断。"
       },
       "caveat": {
-        "en": "Vendor benchmarks have task-specific trade-offs. API compatibility and probability outputs do not establish calibrated business risk; local inference needs the custom schema runtime. Community adaptation is experimental; real-weight multimodal training/export remains unverified.",
-        "zh": "厂商评测存在任务间取舍；接口兼容和概率输出不等于业务风险已校准，本地推理需要定制 schema 运行代码。 社区适配属于实验实现，真实权重多模态训练／导出尚未验证。"
+        "en": "Vendor task-specific benchmarks and API compatibility do not certify business risk. Keep Omni, dense releases and adjacent Clairic extraction distinct. Public weights do not prove complete original-data replay, a customer-training service contract, or local Mac training feasibility.",
+        "zh": "厂商分任务基准及API兼容不认证业务风险。Omni、稠密发布物及邻接Clairic提取须分别识别；公开权重不证明完整原始数据重放、客户训练服务合同或Mac本地训练可行。"
       },
-      "reviewed_on": "2026-11-01",
+      "reviewed_on": "2026-11-20",
       "mechanism": {
-        "en": "Joint transformer head routes state evidence to questions and jointly scores their allowed options in one forward pass; no free-form answer generation.",
-        "zh": "联合 Transformer 判断头把状态证据路由到问题，在一次前向计算中对各题允许的选项评分，不生成自由文本答案。"
+        "en": "A joint transformer schema head routes state evidence and scores allowed options without free-form text generation. Omni retains visual/audio encoders, while unused speech-output modules are not loaded. Clairic extraction generation must not be attributed to these decision releases.",
+        "zh": "联合Transformer schema头路由state证据并给允许选项评分，不生成自由文本；Omni保留视觉／音频编码器，不加载未用的语音输出模块。不可将Clairic提取生成机制归入这些判断发布物。"
       },
       "training": {
-        "en": "Cloudflare reports rank-256 LoRA plus the routing head, label-smoothed cross-entropy, Brier loss and a secondary RLCD objective on internal synthetic data; the full data/recipe was not audited. Separate Oct2 MersivMedia community adapter wires image encoding into supervised LoRA+FP32-head loss, but explicitly has no real Clef GPU run or image-training test. Tiny random CPU checks and supervised ordinal EMD do not establish image effectiveness or reproduce RLCD.",
-        "zh": "Cloudflare 称使用 rank-256 LoRA 与路由头、标签平滑交叉熵、Brier 损失及辅助 RLCD 目标，训练数据为内部合成数据；完整数据和配方未审计。 独立的 10 月 2 日 MersivMedia 社区实现将图像编码接入 LoRA＋FP32 head 监督损失，但明确没有真实 Clef GPU run 或图像训练测试；随机小模型 CPU 检查及监督 ordinal EMD 不证明图片效果，也不等于 RLCD 复现。"
+        "en": "The original dense Clef report describes rank 256 LoRA plus routing head, smoothed CE, Brier and secondary RLCD on internal synthetic data; full data/recipe not independently audited. Do not silently assign that exact recipe to Omni. The MersivMedia community adaptation remains experimental, without a verified real-weight multimodal run/export or RLCD reproduction. No complete Omni enterprise fine-tuning package was established in this refresh.",
+        "zh": "原稠密Clef报告描述rank256 LoRA加routing head、平滑CE、Brier与辅助RLCD，数据为内部合成；完整数据／配方未经独立审计，不可默认为Omni也用完全相同配方。MersivMedia社区适配仍为实验实现，未验证真实权重多模态训练／导出或RLCD复现。本轮未建立完整Omni企业微调包。"
       },
       "availability": {
-        "en": "Public weights and custom load_release_model/systemone helpers; also Workers AI. The hosted Clef page lists 65,536 tokens, while local encode_record defaults to 16,384. Check the specific endpoint schema for supported media and truncation. Pinned MLX-VLM also has image/video predict support; its custom schema spans/qtype call does not establish ordinary SFT-CLI head training.",
-        "zh": "公开权重及定制 load_release_model／systemone 函数，另有 Workers AI。Clef 托管页面列 65,536 token，本地 encode_record 默认 16,384；媒体支持与截断行为须核对具体接口。 固定 MLX-VLM 另有图像／视频 predict 支持；专用 schema spans／qtype 调用不证明通用 SFT CLI 能训练其 head。"
+        "en": "Public custom HF runtimes and Workers AI. Omni binary package dates to October 9; later metadata are evaluations. October 9 Clef serving speedups and Flash hosted context 64k→24k did not change dense weights. Local defaults, hosted limits and media/truncation differ. Existing MLX-VLM inference support is not generic SFT-head training support; no M5 training verified.",
+        "zh": "公开定制HF运行库及Workers AI；Omni binary包始于10月9日，后续metadata为评测。10月9日Clef服务提速及Flash托管context64k→24k未改变稠密权重。本地默认、托管上限、媒体与截断合同不同；已有MLX-VLM推理支持不等于通用SFT-head训练，未验证M5训练。"
       },
-      "license_note": "Both reviewed release cards declare Apache-2.0; this does not establish that all training data or the full training recipe are public.",
+      "license_note": "Reviewed dense and Omni cards declare Apache-2.0; exact bases, datasets, runtime notices and any training-service terms require separate checks.",
       "weight_revision": null,
       "tags": [
         "typed-decisions",
@@ -3958,13 +4693,13 @@
         "hosted"
       ],
       "scale": {
-        "en": "Cards describe Clef as 27B (Qwen3.8-27B) and Clef-Flash as 9B (Qwen3.5-9B), each retaining a vision encoder; parameter counts are source-reported.",
-        "zh": "模型卡称 Clef 为 27B（Qwen3.8-27B），Clef-Flash 为 9B（Qwen3.5-9B），均保留视觉编码器；参数量为来源自报。"
+        "en": "Clef 27B Qwen3.8, Flash 9B Qwen3.5, and Omni Qwen3-Omni-30B-A3B-Instruct thinker. Omni card reports about 64 GB BF16 on H200; active MoE size does not imply 48 GB training fit.",
+        "zh": "Clef27B基于Qwen3.8，Flash9B基于Qwen3.5，Omni基于Qwen3-Omni-30B-A3B-Instruct thinker。Omni卡示例BF16约64GB／H200，MoE激活规模不意味着48GB能训练。"
       }
     },
     {
       "id": "strands-decider",
-      "name": "Strands Decider",
+      "name": "Strands Decider (v1 pointer / v2 code readout)",
       "category": "core_models",
       "url": "https://github.com/strands-labs/strands-decider",
       "source_ids": [
@@ -3988,34 +4723,41 @@
         "strands-v1-configs",
         "strands-init-from-oct19",
         "strands-pointer-oct26",
-        "strands-mlx-oct30"
+        "strands-mlx-oct30",
+        "strands-v2-e2b-card-nov20",
+        "strands-v2-training-nov20",
+        "strands-v2-config-nov20",
+        "strands-v2-trainer-nov20",
+        "strands-v2-data-nov20",
+        "strands-v2-export-nov20",
+        "strands-v2-checkpoint-format-nov20"
       ],
       "summary": {
-        "en": "Qwen3.5 and Gemma 4 pointer-head family; October v1 releases average three trained adapters/heads and then calibrate.",
-        "zh": "Qwen3.5 与 Gemma 4 pointer-head 系列；10 月 v1 发布平均三个训练适配器／判断头后再校准。"
+        "en": "Qwen / Gemma decision family: v1 adapter-and-pointer releases and November 17 Gemma 4 E2B v2 merged code-readout release have different training and serving contracts.",
+        "zh": "Qwen／Gemma判断系列：v1为adapter与pointer发布物，11月17日Gemma4 E2B v2为合并权重与答码读出；训练及服务合同不同。"
       },
       "use": {
-        "en": "A local baseline for short classification and domain-supervised decisions; test question changes, option order and risk–coverage on your own traffic.",
-        "zh": "可作为短文本分类和领域监督判断的本地基线；用实际流量测试问题变化、选项顺序和风险—覆盖率。"
+        "en": "Compare v1 and v2 on the same bounded text decisions; audit the actual domain-training starting point and exported inference path before selecting a recipe.",
+        "zh": "在相同有界文本判断上比较v1与v2；选配方前核对领域训练从何种权重开始及导出后的推理路径。"
       },
       "caveat": {
-        "en": "Five v1 seed-0 configs are now public, but Qwen mix builders/four inputs plus teacher distributions and Gemma code_v27 remain missing. Several dev evaluations have train splits in the mix. E2B index predates a CUDA attention fix; Qwen v1 missing-image overconfidence worsens on POPE. E07/E08 remain historical, not current guarantees.",
-        "zh": "已公开五份 v1 seed-0 配置，但 Qwen 混合构建器／四项输入及教师分布、Gemma code_v27 仍缺失。若干 dev 评测对应训练划分已用于训练。E2B index 先于 CUDA 注意力修复；Qwen v1 缺图时 POPE 过度自信恶化。E07／E08 保留为历史，不能当作当前保证。"
+        "en": "Do not transfer v1 pointer/soup/KL or missing-image results to v2. v2 was trained on text; inherited image input is not image-adaptation evidence. Author public benchmarks and calibrated temperature do not certify enterprise risk. Legacy E07/E08/E11 and their missing-data/development-selection limitations remain dated records.",
+        "zh": "不可将v1的pointer／soup／KL或缺图结果直接套给v2。v2仅用文本训练，继承图片输入不等于图像适配证据。作者公共基准及拟合温度不认证企业风险；E07／E08／E11及其缺数据、开发选择限制保留为带日期记录。"
       },
-      "reviewed_on": "2026-11-01",
+      "reviewed_on": "2026-11-20",
       "mechanism": {
-        "en": "Replaces the language-model head with a dynamic pointer readout comparing the answer-position state to option-token states; one forward pass for noul, choice or score. Confidence is derived from the distribution, not a separate correctness predictor.",
-        "zh": "以动态 pointer 读出替代语言模型输出头，比较答案位置与选项 token 的隐状态，一次前向计算支持 noul、choice、score。置信度由分布推导，并非独立正确率预测器。"
+        "en": "v1 replaces the LM head with a dynamic pointer head. v2 E2B trains a 255-code LM-row readout with strands-chat and prefix_bidir: state is shared, question branches are isolated, and all Gemma layers use the stated full-prompt mask, including normally sliding-window layers. No free-text generation.",
+        "zh": "v1以动态pointer头替代LM头；v2 E2B用255答码LM-row读出、strands-chat及prefix_bidir：共享state，各题分支隔离；按其专用mask处理全部Gemma层，包括通常的滑窗层。不生成自由文本。"
       },
       "training": {
-        "en": "Qwen v1: 246678 balanced rows, Gemma-4-31B teacher and v19 KL anchor. Gemma v1: 135602 rows, Qwen3.5-4B teacher and v19 anchor. Three-seed soups store rank-48 LoRA plus three readouts; recipes differ by family. Published seed-0 settings and input hashes improve traceability, not complete data replay. Oct19 init_from now continues trained text adapter+head, including soups, enforces checkpoint architecture and resets temperatures; recalibrate after adaptation. Vision load explicitly rejects training. No new adapted-model quality result. Oct26 pointer-only code retires old slot configs; positive frozen-KL training requires an explicit trained pointer reference, precomputation and length grouping. This is compatibility/training-contract cleanup, not new released weights.",
-        "zh": "Qwen v1：246678 条平衡样本、Gemma-4-31B 教师与 v19 KL 锚点。Gemma v1：135602 条样本、Qwen3.5-4B 教师与 v19 锚点。三种子平均保存 rank-48 LoRA 与三个读出头；不同系列配方不同。 公开 seed-0 设置与输入哈希改善可追溯性，不等于完整数据可重放。 10 月 19 日 init_from 改为继续训练已训文本 adapter＋head（含 soup），强制匹配架构并清空温度，适配后须重校准；视觉加载明确拒绝训练，未新增适配效果证据。 10 月26日仅保留 pointer，退役旧 slot 配置；正权重 frozen-KL 需显式已训练 pointer 参考、预计算及长度分组。这是兼容／训练契约整理，不是新权重。"
+        "en": "v1 Qwen / Gemma recipes and three-seed adapter/head soups remain historical and have missing inputs. Current source also publishes v2 from-base supervised recipes: E2B rank 64 / alpha 128 LoRA plus token readout, prefix_bidir and a typed-row converter. Original v2 training/dev data are absent; the converter drops images and missing instructions. Export merges adapters into base BF16 shards and saves readout.safetensors plus decision_config.json. The trainer supports token-readout training but rejects its frozen-KL anchor option.",
+        "zh": "v1的Qwen／Gemma配方与三种子adapter／head平均保留为历史，部分输入缺失。当前源码也公开v2从原始底座开始的监督配方：E2B为rank64／alpha128 LoRA加token readout、prefix_bidir及typed-row转换；原v2训练／开发数据未公开，转换器丢弃图片及缺instructions行。导出将adapter合入base BF16 shards，另存readout.safetensors和decision_config.json；trainer支持token-readout训练，但拒绝其frozen-KL选项。"
       },
       "availability": {
-        "en": "Current Qwen: strands-decider-2B-qwen3.5-v1-2610; four Gemma v1 sizes are text-only and need runtime main at the reviewed revision. Separate base weights; 4096-token trained/served window. v19/v21 remain published. Oct16 main fixes request-local pointer offsets/tokenizer concurrency and aligns torch eval/calibrate with serving preparation; MLX is not supported by eval/calibrate. Revalidate probabilities/calibration per backend; no new weight/score claim. Oct30 Gemma4 MLX serving fixes stream/thread ownership by loading and running on one worker; this does not add MLX calibration support or a quality result.",
-        "zh": "当前 Qwen 为 strands-decider-2B-qwen3.5-v1-2610；四种 Gemma v1 仅文本，所核版本需运行库 main。另需基座权重，训练／服务窗口 4096 token；v19／v21 继续发布。 10 月 16 日 main 修复每请求 pointer 偏移／分词并发，并让 torch 评测／校准使用服务准备流程；eval／calibrate 不支持 MLX。按后端重验概率／校准，不推断新权重或成绩。 10 月30日 Gemma4 MLX 服务将加载／推理固定在同一 worker，修复 stream／线程错误；不代表新增 MLX 校准支持或质量结果。"
+        "en": "v1 trained adapter/head checkpoints can use init_from and then recalibrate. Released v2 is a merged decision checkpoint without the training config/adapter layout expected by that init_from loader; direct domain continuation from its HF ID is not established. Public v2 recipes can train on supplied text rows from the original base, or continue a retained unmerged training checkpoint. v2 MPS/CPU support on the card is inference; training selects CUDA else CPU and documents Linux/WSL NVIDIA. No M5 training run or generic MLX calibration support verified.",
+        "zh": "v1已训adapter／head检查点可用init_from并重新校准；发布v2为合并decision检查点，不含该init_from loader要求的训练config／adapter布局，尚未建立直接从其HF ID领域续训的路径。公开v2配方可从原始底座用自备文本训练，或继续保留的未合并训练检查点。卡片的MPS／CPU支持指推理；训练器选择CUDA否则CPU，文档以Linux／WSL NVIDIA为环境，未验证M5训练或通用MLX校准。"
       },
-      "license_note": "Repository and published adapter/head declare Apache-2.0. The release contains adapter/head files only; base weights load separately. Check base-model and dataset terms separately.",
+      "license_note": "Reviewed v1 adapter/head and v2 model/code declare Apache-2.0; v1 loads a separate base, v2 ships merged base plus readout. Check exact base/data terms; no M5 or original-data replay claim.",
       "weight_revision": null,
       "tags": [
         "typed-decisions",
@@ -4025,8 +4767,8 @@
         "calibration"
       ],
       "scale": {
-        "en": "Qwen3.5 2B and Gemma 4 E2B/E4B/12B/26B-A4B; active MoE size does not equal resident weight memory.",
-        "zh": "Qwen3.5 2B 与 Gemma 4 E2B／E4B／12B／26B-A4B；MoE 激活参数量不等于驻留权重内存。"
+        "en": "v1 spans Qwen3.5 2B and Gemma 4 E2B/E4B/12B/26B-A4B. Released v2 E2B is 2.3B effective and 5.1B with embeddings, about 10.3 GB BF16; active size is not resident memory.",
+        "zh": "v1覆盖Qwen3.5 2B及Gemma4 E2B／E4B／12B／26B-A4B。已发布v2 E2B为2.3B有效参数、含embedding共5.1B，BF16约10.3GB；激活规模不等于驻留内存。"
       }
     },
     {
@@ -4641,18 +5383,20 @@
     },
     {
       "category": "core_models",
-      "reviewed_on": "2026-10-11",
+      "reviewed_on": "2026-11-20",
       "weight_revision": null,
       "id": "ms-decision",
-      "name": "Microsoft-Decision-1",
-      "url": "https://ai.azure.com/catalog/models/Microsoft-Decision-1",
+      "name": "Microsoft-Decision-1.1",
+      "url": "https://ai.azure.com/catalog/models/Microsoft-Decision-1.1",
       "source_ids": [
         "ms-decision-launch",
-        "ms-decision-docs"
+        "ms-decision-docs",
+        "ms-decision-ga-nov17",
+        "ms-decision-current-nov20"
       ],
       "summary": {
-        "en": "Hosted Qwen3.5-9B post-training for bounded option scoring.",
-        "zh": "托管的 Qwen3.5-9B 后训练模型，对有限选项评分。"
+        "en": "GA hosted typed decisions on Gemma4, including images.",
+        "zh": "Gemma4托管类型化判断，GA且支持图像。"
       },
       "use": {
         "en": "Compare classification, routing and rubric judgments.",
@@ -4663,22 +5407,22 @@
         "zh": "厂商比较缺少已审计的逐项产物；熟悉任务的校准不保证迁移，措辞与安全判断仍可能出错。"
       },
       "scale": {
-        "en": "9B-class backbone, author described.",
-        "zh": "作者描述为 9B 级骨干。"
+        "en": "Gemma4 26B-A4B; previous1.0 used a Qwen9B backbone.",
+        "zh": "Gemma4 26B-A4B；旧1.0使用Qwen9B底座。"
       },
       "mechanism": {
-        "en": "Single-pass scoring; Foundry uses state and named noul/choice/score questions.",
-        "zh": "单次前向评分；Foundry 接收 state 及命名的 noul／choice／score 问题。"
+        "en": "Foundry state and named noul/choice/score questions; text/image contract must match the deployed version.",
+        "zh": "Foundry接收state及命名noul／choice／score；文本／图像合同须匹配部署版本。"
       },
       "training": {
-        "en": "Microsoft post-training; complete recipe, calibration splits and exact weights not verified.",
-        "zh": "Microsoft 后训练；完整配方、校准划分和精确权重未核实。"
+        "en": "Vendor post-training; exact recipe, raw data and customer self-service decision-specific tuning not established.",
+        "zh": "厂商后训练；精确配方、原始数据及客户自助判断模型微调未确立。"
       },
       "availability": {
-        "en": "Foundry model version 1 and OpenRouter; no public weights verified.",
-        "zh": "Foundry 模型版本 1 及 OpenRouter；未核实公开权重。"
+        "en": "GA1.1 announced Nov17; no public weights verified. Product1.1, deployment name and Foundry model-version1 are different identifiers.",
+        "zh": "11月17日宣布1.1 GA，未核公开权重；产品1.1、部署名及Foundry model-version1为不同标识。"
       },
-      "license_note": "Hosted service terms; Qwen backbone availability does not make the Microsoft checkpoint open-weight.",
+      "license_note": "Proprietary hosted service; open Gemma backbone does not make the Microsoft checkpoint open-weight.",
       "tags": [
         "typed-decisions",
         "hosted"
@@ -4686,17 +5430,19 @@
     },
     {
       "category": "core_models",
-      "reviewed_on": "2026-10-11",
+      "reviewed_on": "2026-11-20",
       "weight_revision": null,
       "id": "openai-decisions",
       "name": "OpenAI Decisions API / GPT-6 Luna",
       "url": "https://developers.openai.com/api/docs/guides/decisions",
       "source_ids": [
-        "openai-decisions"
+        "openai-decisions",
+        "openai-decisions-ga-nov20",
+        "openai-decisions-current-nov20"
       ],
       "summary": {
-        "en": "Public-beta typed judgment API for text and images.",
-        "zh": "面向文本与图像的类型化判断 API，处于公开测试。"
+        "en": "GA typed-judgment API for text and images.",
+        "zh": "面向文本／图像的GA类型化判断API。"
       },
       "use": {
         "en": "Managed classification, routing and ordinal scoring.",
@@ -4711,16 +5457,16 @@
         "zh": "指南未确立参数规模。"
       },
       "mechanism": {
-        "en": "POST /v1/decisions: input plus named predicate/choice/score questions; answers is an array.",
-        "zh": "POST /v1/decisions：input 加命名的 predicate／choice／score 问题；answers 为数组。"
+        "en": "POST /v1/decisions has a top-level input (string or ordered items), including messages, user input_json content parts and tool/image context; predicate/choice/score questions return an answers array. GA supports up to400 questions.",
+        "zh": "POST /v1/decisions顶层input为字符串或有序items，可含messages、user的input_json内容part及工具／图像上下文；predicate／choice／score问题返回answers数组，GA最多400题。"
       },
       "training": {
-        "en": "No audited recipe or held-out calibration protocol.",
-        "zh": "未取得已审计配方或独立留出校准流程。"
+        "en": "No public weights or Decisions-specific customer tuning entry verified; generic model fine-tuning support is not this product contract.",
+        "zh": "未核公开权重或Decisions专属客户调优入口；通用模型微调支持不自动成为本产品合同。"
       },
       "availability": {
-        "en": "Only gpt-6-luna supported in the reviewed beta; paid hosted service.",
-        "zh": "所核测试版仅支持 gpt-6-luna；付费托管服务。"
+        "en": "GA announced Oct22; current guide supports only gpt-6-luna, with caching and Private Link. Account/region availability not tested here.",
+        "zh": "10月22日宣布GA；当前指南仅支持gpt-6-luna，含缓存及Private Link，本次未实测账号／地域可用性。"
       },
       "license_note": "Proprietary hosted API; no public-weight license established.",
       "tags": [
@@ -4842,7 +5588,7 @@
     },
     {
       "id": "decision3",
-      "name": "vLLM-SR Decision 3.0 / D3-Turbo",
+      "name": "vLLM-SR D3 / Turbo / Ultra / D3.1-nano",
       "category": "core_models",
       "url": "https://huggingface.co/collections/vllm-sr/decision-30",
       "source_ids": [
@@ -4886,39 +5632,42 @@
         "d3-turbo-wrapper",
         "d3-turbo-config",
         "d3-turbo-eval-runtime",
-        "vllm-request-trust-oct29"
+        "vllm-request-trust-oct29",
+        "d3-ultra-card-refresh-nov20",
+        "d31-nano-card-nov20",
+        "d3-edge-coreml-refresh-nov20"
       ],
-      "reviewed_on": "2026-11-01",
+      "reviewed_on": "2026-11-20",
       "weight_revision": null,
       "summary": {
-        "en": "Multimodal 255-code family: classic per-question encoding and Turbo shared-state question branches are distinct releases.",
-        "zh": "多模态 255 答码系列：经典版逐题编码，Turbo 复用状态后分题读出，须分开记录发布身份。"
+        "en": "Multimodal typed-decision family with distinct classic per-question, Turbo/Ultra shared-state and November 12 D3.1-nano releases.",
+        "zh": "多模态类型化判断系列，经典逐题、Turbo／Ultra共享state及11月12日D3.1-nano发布物须分别识别。"
       },
       "use": {
-        "en": "Local text/image/video classification, scoring and routing; compare sizes at fixed input and candidate budgets.",
-        "zh": "本地文本／图像／视频分类、评分与路由；固定输入和候选预算比较各型号。"
+        "en": "Matched text/image/video decision comparisons, with small D3.1-nano as a separate capability candidate and Ultra as a larger reference; verify adaptation separately.",
+        "zh": "固定文本／图像／视频判断合同对比；将小型D3.1-nano作为独立能力候选、Ultra作为大模型参照，适配可行性另验。"
       },
       "caveat": {
-        "en": "Index versions and public-only scores differ. In the Oct15 snapshot, weight/calibration identities were unchanged and the text numerical leader shared the top tie band. That serving review required post-merge/nightly native vLLM; LoRA and CUDA were unmeasured in the integration report. Turbo Index figures are author estimates, not official board updates; no numeric gain imported. API aliases are not frozen checkpoint identities.",
-        "zh": "Index 各版本与公共分数不可混用；10 月 15 日快照的权重／校准标识未变，文本数值领先者处于共享第一平局带；该次服务核验要求原生 vLLM 合并后／nightly 版本，集成报告未测 LoRA 和 CUDA。 Turbo 指数为作者估计，未当作官方榜单或导入新数值；API 别名不是冻结检查点身份。"
+        "en": "Keep official private Full, public-suite and author SR-Text/SR-Box results separate. D3.1-nano reported public score uses two choice orders averaged; ordinary runtime reads one order, and its image/video quality is unevaluated. CoreML/quantized ports and security/cache fixes are not new native training. API aliases do not freeze model identity; historical E12–E16/E21–E23 protocols remain unchanged.",
+        "zh": "官方private Full、public suite及作者SR-Text／SR-Box结果分别记录。D3.1-nano报告的公共分数平均两种choice顺序，普通运行库只读一种；该版本图像／视频质量未评测。CoreML／量化端口及安全／cache修复不等于新的native训练；API别名不固定模型身份，E12–E16／E21–E23历史协议不变。"
       },
       "scale": {
-        "en": "Card counts / nominal base labels: d3 26.09B / 27B; flash 8.39B / 9B; mini 4.54B / 4B; nano 2.21B / 2B; lite 0.85B / 0.8B; edge 0.59B / 0.6B. Counts include vision; manifests also count the readout.",
-        "zh": "模型卡参数量／宣传基座尺寸：d3 26.09B／27B；flash 8.39B／9B；mini 4.54B／4B；nano 2.21B／2B；lite 0.85B／0.8B；edge 0.59B／0.6B。包含视觉编码器，manifest 另计读出头。"
+        "en": "Classic card counts range from 0.59B edge to 26.09B d3 including vision. Ultra is 26.09B including 0.46B vision; D3.1-nano is 2.21B including 0.33B vision, based on Qwen3.5-2B. Nominal size and serving memory differ.",
+        "zh": "经典卡片参数量含视觉，从edge 0.59B到d3 26.09B。Ultra为26.09B（视觉0.46B）；D3.1-nano基于Qwen3.5-2B，共2.21B（视觉0.33B）。名义规模不同于服务内存。"
       },
       "mechanism": {
-        "en": "Classic D3: Last prompt position → 255-code FP32 readout → mask unused codes → temperature 1.0 softmax. Questions have separate state/question/option rows; the package runtime's default batches of 8 do not encode all questions as one shared text sequence. Qwen full-attention layers are noncausal; DeltaNet layers stay causal. The pinned package choice/score confidence is 1-H(P)/log(K) for K>1 (one option: 1), a concentration statistic rather than a calibrated probability of correctness; native/backend semantics must be checked separately. Turbo prefix_bidir computes state once and runs separate question blocks on cached state; it does not let questions attend to one another.",
-        "zh": "经典 D3：最后 prompt 位置 → 255-code FP32 读出 → 掩蔽未使用 code → 温度 1.0 softmax。每题有独立状态／问题／选项行；包运行库默认 8 行批处理不等于所有问题共用一次序列编码。Qwen full-attention 层双向，DeltaNet 层保持因果。 固定包的 choice／score confidence 为 K>1 时的 1-H(P)/log(K)（单候选为 1），是分布集中度统计量，不是已校准的正确概率；原生／其他后端语义须另查。 Turbo prefix_bidir 先算一次状态，再让各题独立分支读取缓存；不是题目之间相互注意。"
+        "en": "Classic D3 and D3.1-nano use an independent forward pass per question despite one HTTP call; candidate-code readouts normalize allowed options. Turbo/Ultra reuse state for question branches. Full-attention layers and causal DeltaNet behavior require the release runtime. Confidence fields/backend semantics are not interchangeable correctness probabilities; Ultra adds Box/Track, which require their own presence and localization checks.",
+        "zh": "经典D3及D3.1-nano即使一次HTTP调用也逐题独立前向，以答码读出归一化允许选项；Turbo／Ultra为问题分支复用state。Full-attention与因果DeltaNet行为须匹配发布运行库。不同后端confidence不能当作同一正确概率；Ultra另有Box／Track，须分别验目标存在及定位。"
       },
       "training": {
-        "en": "d3 manifest declares Qwen3.8-27B, with qwen3_5 runtime architecture; others declare Qwen3.5, including edge derived from the 0.8B base. Public training data/recipe, overlap audits and held-out calibration reports were not established. Softmax and T=1 do not establish empirical calibration. Separate third-party Vis Decisions 0.6.1 implements text-only full or LoRA adaptation: language backbone/adapters plus a trainable 255-code readout, valid-option CE and merged FP32 export. It strips the vision tower; this does not establish image/video fine-tuning or reproduce the original D3 training recipe. Turbo retains an inference-only train(True) guard and non-generic saving; no released image-training recipe verified. Its new inference mechanism does not change this boundary.",
-        "zh": "d3 manifest 声明 Qwen3.8-27B，运行架构为 qwen3_5；其他基于 Qwen3.5，edge 也源自 0.8B 基座。完整训练数据／配方、重叠审计及保留集校准报告尚未确证；softmax 和 T=1 不证明经验校准。 独立第三方 Vis Decisions 0.6.1 实现文本 full／LoRA 适配：训练语言骨干／adapter 及完整 255 答码头，使用有效候选 CE 与合并 FP32 导出。它去掉视觉塔，不能证明图像／视频微调，也不等于复现 D3 原始训练配方。 Turbo 仍由 train(True) 拒绝训练，保存也不是通用训练导出；未核实公开图像训练配方，新增推理机制不改变此边界。"
+        "en": "Original full training mixture/recipe and overlap/calibration audits remain unestablished. Prior classic/Turbo wrapper audits found inference-only restrictions; those are not proof about every external trainer. The separate Vis Decisions path provides text-only full/LoRA adaptation and strips vision, not original or multimodal D3 training reproduction. This refresh establishes new release identities, not an audited Ultra/D3.1-nano enterprise fine-tuning workflow.",
+        "zh": "原始完整训练混合、配方及重叠／校准审计仍未确立。既有经典／Turbo封装审查发现仅推理限制，但这不能否定所有外部训练器。独立Vis Decisions提供去视觉的文本full／LoRA适配，不是原始或多模态D3训练复现。本轮确认新发布身份，未建立已审计的Ultra／D3.1-nano企业续训链。"
       },
       "availability": {
-        "en": "v3.1.0 weights retained; custom Transformers and vLLM-SR dev Engine paths remain. Native vLLM /v1/systemone merged as 89cab550 on Oct14; the Oct15 review found stable v0.31.0 predating support. D3 uses classify: no prefix caching/chunked prefill, up to 64 questions and 255 choice options; error/confidence/usage semantics differ from the package runtime. Core ML is separate. Video: 2 fps, at most 32 frames; no audio validation. No verified D3 multimodal fine-tuning recipe established here. Null package token limits and backbone context configuration are not validated long-context quality. The inspected official modeling_d3.py rejects train(True); this wrapper restriction does not rule out separate training implementations such as the text-only Vis path. Generic multimodal PEFT support remains unverified. Oct19 Turbo/Oct20 card: own AutoModel and SR Engine paths, Box/Track; API alias vllm-sr/d3 serves Turbo. Oct19 external metadata did not support prefix_bidir in native vLLM nightly; do not silently transfer classic support. Box output alone is not presence evidence. Oct29 native main validates request-template trust before admission; D3 retains its fixed prompt and ignores template kwargs. This runtime security fix is not a weight/quality update, and was not established in stable v0.32.0.",
-        "zh": "保留 v3.1.0 权重、定制 Transformers 与 vLLM-SR dev Engine。原生 vLLM /v1/systemone 于 10 月 14 日以 89cab550 合入；10 月 15 日核验时的正式版 v0.31.0 早于该支持。D3 走 classify：关闭 prefix cache／chunked prefill，最多 64 题、255 个 choice 选项；错误／confidence／usage 与包运行库不同。Core ML 独立；视频 2 fps、最多 32 帧，未验证音频。本版未确证 D3 多模态微调配方。包中的 null token 上限及骨干上下文配置不等于长上下文质量验收。已阅官方 modeling_d3.py 的 train(True) 拒绝训练；这限制该封装，不排除 Vis 文本路径等独立训练实现。通用多模态 PEFT 支持仍未确证。 10 月 19 日 Turbo／20 日卡：专属 AutoModel 与 SR Engine 路径、Box／Track；API 的 vllm-sr/d3 别名实际服务 Turbo。19 日外评元数据称原生 vLLM nightly 不支持 prefix_bidir，不能照搬经典版支持；框输出本身不是目标存在证据。 10 月29日原生main在请求进入模型前校验模板信任；D3保持固定prompt并忽略模板kwargs。这是运行库安全修复，不是权重／质量变化，未确证已含于正式v0.32.0。"
+        "en": "Ultra was released October 26; November 17 cache/card edits are runtime/metadata. D3.1-nano weights were uploaded November 12; later manifest/card edits are not retraining. Existing six native models and Turbo binary identities match the compared pins; a separate CoreML repo added edge conversion/MLX binaries on October 14. Custom Transformers/Router/native-vLLM support differs by release and build; historical integration limits are not current universal guarantees. No weights downloaded or M5 training verified.",
+        "zh": "Ultra于10月26日发布，11月17日cache／card改动属运行库及元数据；D3.1-nano权重11月12日上传，后续manifest／card不是重训。既有六个native模型及Turbo与对比pin的binary身份相同；另一个CoreML仓10月14日新增edge转换／MLX binary。定制Transformers／Router／原生vLLM能力依发布物和build不同，历史集成限制不是当前通用保证；未下载权重或验证M5训练。"
       },
-      "license_note": "All six pinned cards/manifests declare Apache-2.0 for weights, readout, runtime and listed Qwen bases. Public weights do not establish public training data. Per-package source revisions and author-supplied identity hashes are in the source register; no family-wide weight hash or local binary verification is claimed. Turbo fixed card, LICENSE and manifest also declare Apache-2.0; manifest hashes are author supplied and were not checked against weight bytes here.",
+      "license_note": "Reviewed classic/Turbo and new Ultra/D3.1-nano cards declare Apache-2.0; check exact base/runtime notices. Binary metadata comparison is not local tensor-byte verification or full training-data availability.",
       "tags": [
         "typed-decisions",
         "code-readout",
@@ -5336,44 +6085,45 @@
     },
     {
       "id": "baseten-decision",
-      "name": "Baseten mammoth-1 / elephant-1",
+      "name": "Baseten mammoth-1 / elephant-1 / joey-1",
       "category": "core_models",
       "url": "https://huggingface.co/baselabs/mammoth-1",
       "source_ids": [
         "baseten-decision-report",
-        "mammoth-card-oct25"
+        "mammoth-card-oct25",
+        "baseten-joey-card-nov20"
       ],
-      "reviewed_on": "2026-10-25",
+      "reviewed_on": "2026-11-20",
       "summary": {
-        "en": "Qwen3.5 27B/9B family with option-letter LM readout and block-bidirectional full attention.",
-        "zh": "Qwen3.5 27B／9B 系列，使用 LM 选项字母读出及分块双向 full-attention。"
+        "en": "Qwen-based 27B / 9B / 2B typed-decision family using shared-prefix evidence and separate question readouts; Joey is the smaller October sibling.",
+        "zh": "基于Qwen的27B／9B／2B类型化判断系列，共享证据前缀、分别读问题；Joey是10月新增的小型号。"
       },
       "use": {
-        "en": "Compare independent-question typed decisions with supervised and generative baselines at matched evidence/risk.",
-        "zh": "以相同证据／风险，与监督和生成基线比较独立问题的类型化判断。"
+        "en": "Matched independent-question comparisons across 2B / 9B / 27B, keeping public-suite and replicated-index evaluations separate.",
+        "zh": "在2B／9B／27B之间做同合同独立问题对照，将公共suite与复制指数评测分开。"
       },
       "caveat": {
-        "en": "Card says text+image training, report says text-only; image supervision remains unresolved. Repeated public-index feedback, hidden private items and gated data limit independent audit; no imported rank or overall-winner claim.",
-        "zh": "卡片称图文训练，报告称仅文本，图像监督仍有冲突。反复公共指数反馈、隐藏私有题与 gated 数据限制独立审计；不引入排名或总冠军结论。"
+        "en": "Author public scores and a replica of Artificial Analysis are not official private Full results. Card image-input support does not establish image supervision or production risk. No universal-winner or 48 GB training-fit claim.",
+        "zh": "作者公共成绩及Artificial Analysis复制评测不等于官方private Full；卡片支持图像输入不证明图像监督或生产风险控制，不声称通用胜出或48GB训练可行。"
       },
       "weight_revision": null,
       "scale": {
-        "en": "mammoth-1 27B and elephant-1 9B nominal Qwen3.5 derivatives.",
-        "zh": "mammoth-1 名义 27B、elephant-1 名义 9B，均基于 Qwen3.5。"
+        "en": "mammoth-1 nominal 27B from Qwen3.5-27B, elephant-1 9B from Qwen3.5-9B, Joey-1 2B from Qwen3.5-2B; no local tensor count.",
+        "zh": "mammoth-1名义27B基于Qwen3.5-27B，elephant-1 9B基于Qwen3.5-9B，Joey-1 2B基于Qwen3.5-2B；未本地统计张量。"
       },
       "mechanism": {
-        "en": "Existing LM option logits; shared state prefix and separate question suffixes. Full attention is block-bidirectional; Gated DeltaNet remains causal. Choice up to255, score2–10 levels; output confidence is not a risk certificate.",
-        "zh": "使用已有 LM 候选 logits；共享状态前缀、问题后缀分离。Full-attention 分块双向，Gated DeltaNet 保持因果；Choice 最多 255、Score 为 2–10 级，confidence 不是风险证书。"
+        "en": "Existing LM answer-code logits with shared-state prefix and separated question suffixes. Full-attention layers use block-bidirectional masks; Gated DeltaNet remains causal. Bounded choice/noul/score outputs require the released prompt/runtime contract.",
+        "zh": "使用LM答码logits，共享state前缀、问题后缀分开；full-attention用分块双向mask，Gated DeltaNet保持因果。有界choice／noul／score须匹配发布prompt／runtime合同。"
       },
       "training": {
-        "en": "Report: full language-model fine-tuning, frozen vision, CE plus Brier and evolving6.21M-row Mix8. Public benchmark feedback selects data recipes; decontamination is author-described. Brier training does not prove deployment calibration.",
-        "zh": "报告：语言模型全参微调、视觉冻结，CE 加 Brier，最终 Mix8 为 621 万行。公共基准反馈参与数据配方选择；去污染为作者描述，Brier 训练不证明部署校准。"
+        "en": "Report/cards describe full language-model fine-tuning with frozen vision and CE plus Brier on a 6.21M-row Mix8; Joey card states one epoch and 16 H100s. Original report and earlier cards conflict on image supervision, so do not certify complete image-training provenance. Recipe disclosure and Brier training are not an audited enterprise fine-tuning package or deployment calibration.",
+        "zh": "报告／卡描述冻结视觉、全语言微调，以CE加Brier训练621万行Mix8；Joey卡称一epoch、16张H100。原报告与早期卡在图像监督上有冲突，不认证完整图像训练谱系。披露配方及Brier训练不等于已审计企业续训包或部署校准。"
       },
       "availability": {
-        "en": "Public HF serving bundle; trained length16384, oversized inputs rejected. Card image-input support is distinct from validated image quality. Historical fixed blobs and tensor identities not independently checked; training dataset access not granted.",
-        "zh": "公开 HF 服务包；训练长度 16384，超长拒绝。卡片图像输入支持不同于已验证图像质量；历史固定 blob／张量身份未独立核验，未获取训练数据权限。"
+        "en": "Public HF serving bundles. Joey binary uploaded October 27; October 29 card links launch. Its trained length is 16,384 and longer requests reject rather than truncate. Public benchmark recipe selection and gated/missing training data still limit reproduction. No verified M5 training workflow.",
+        "zh": "公开HF服务包；Joey binary于10月27日上传，10月29日卡链接launch。训练长度16384，超长拒绝而非截断；公共基准参与配方选择及gated／缺失训练数据仍限制复现，未验证M5训练链。"
       },
-      "license_note": "Current mammoth card declares MIT; inspect exact model/base/data terms. No blanket training-data availability claim.",
+      "license_note": "Reviewed mammoth/elephant/Joey cards declare MIT; check each base, dataset and runtime term. No blanket public-data or commercial-service assurance.",
       "tags": [
         "typed-decisions",
         "option-logits",
@@ -5383,44 +6133,47 @@
     },
     {
       "id": "jeffan",
-      "name": "Jeffan-31b-1710",
+      "name": "Jeffan (31B-1710 / 4B-2010 / 9B and 27B-1211)",
       "category": "core_models",
       "url": "https://huggingface.co/tattrongvu/Jeffan-31b-1710",
       "source_ids": [
         "jeffan-card-oct25",
-        "jeffan-license-oct25"
+        "jeffan-license-oct25",
+        "jeffan-27b-nov20",
+        "jeffan-9b-nov20",
+        "jeffan-4b-nov20"
       ],
-      "reviewed_on": "2026-10-25",
+      "reviewed_on": "2026-11-20",
       "summary": {
-        "en": "Gemma-4-31B option-logit decisions with a conditional whole-input reread policy.",
-        "zh": "Gemma-4-31B 选项 logits 判断，加有条件的整段重复读取策略。"
+        "en": "Text decision releases with distinct compute policies: older Gemma 31B selective rereading and newer Qwen 9B / 27B bidirectional code-readout models with optional layer loops.",
+        "zh": "文本判断发布物采用不同计算策略：较早Gemma31B选择性重读，较新Qwen9B／27B为双向答码读出并可循环中层。"
       },
       "use": {
-        "en": "A text-only comparator for read-once versus selective reread, freezing threshold and full request cost.",
-        "zh": "用于文本单读与选择性重复读取对照，须冻结阈值并计算完整请求成本。"
+        "en": "Compare bounded text decisions at fixed loop/reread policies and full request cost, then validate domain/language transfer separately.",
+        "zh": "固定loop／重读策略及完整请求成本比较有界文本判断，再单独验证领域／语言迁移。"
       },
       "caveat": {
-        "en": "Training data/recipe and overlap undisclosed. Card 8192 and engine 98304 are different boundaries; public-suite maximum lengths and simulated memory caps do not validate arbitrary context or hardware.",
-        "zh": "训练数据／配方及重叠未披露。卡片 8192 与引擎 98304 是不同边界；公共套件最长样本及模拟显存上限不验证任意上下文或硬件。"
+        "en": "New public-suite scores are author runs, not official private Full. New cards report weaker non-English/unfamiliar-task behavior. Do not transfer old 31B results, thresholds or calibration to new 9B/27B, or treat a passing serving path as a post-training result.",
+        "zh": "新公共suite成绩由作者运行，不是官方private Full；新卡披露非英语／陌生任务较弱。不可把旧31B成绩、阈值或校准移给新9B／27B，也不可把服务可运行当后训练效果。"
       },
       "weight_revision": null,
       "scale": {
-        "en": "Gemma-4-31B-it derivative; no independent parameter count.",
-        "zh": "基于 Gemma-4-31B-it，未独立统计参数。"
+        "en": "Older Gemma 4-31B and 4B sibling; new Qwen3.5-9B card counts 8.95B and Qwen3.8-27B counts 26.90B, text-only. Layer-loop passes change compute without adding parameters.",
+        "zh": "较早有Gemma4-31B及4B型号；新Qwen3.5-9B卡统计8.95B、Qwen3.8-27B统计26.90B，均仅文本。Layer-loop次数改变计算，不新增参数。"
       },
       "mechanism": {
-        "en": "Next-token logits over up to255 option codes; below top-probability0.9 repeats whole input and replaces initial distribution. No candidate permutation; text-only engine leaves vision unused.",
-        "zh": "在最多 255 个答码上读 next-token logits；最高概率低于 0.9 时重复整段输入并替换初判分布。不做候选置换；文本引擎未使用视觉塔。"
+        "en": "Older 31B rereads the whole input below top probability 0.9 and replaces the first distribution. New 9B / 27B use noncausal full-attention with causal DeltaNet and code logits; repeated middle-layer blocks use damped updates. New 27B default loop_passes=1, new 9B default=2; one-pass vLLM and multi-pass reference are different workloads.",
+        "zh": "旧31B在最高概率低于0.9时重读整段输入并替换初判；新9B／27B用非因果full-attention、因果DeltaNet及答码logits，以阻尼更新重复部分中层。新27B默认loop_passes=1，新9B默认=2；单pass vLLM与多pass参考是不同负载。"
       },
       "training": {
-        "en": "No verified full training recipe or data lineage. Reread is an inference policy, not training disclosure; probabilities lack production validation.",
-        "zh": "无已验证完整训练配方或数据谱系；重复读取是推理策略，不能当训练披露，概率未做生产验证。"
+        "en": "The new fixed cards identify bases and release weights but do not establish a full original training dataset/recipe or a domain fine-tuning workflow. Rereading and layer loops are inference policies, not training disclosures; no verified production probability calibration.",
+        "zh": "新固定卡给出base及发布权重，但未建立完整原始训练数据／配方或领域续训链。重读和layer-loop是推理策略，不是训练披露；概率未验证生产校准。"
       },
       "availability": {
-        "en": "Published vLLM0.29 BF16 engine/kit integration; sequential B200 author public-suite run. Count rereads, prefix-cache state and all tokens in latency/cost; no model executed here.",
-        "zh": "公开 vLLM0.29 BF16 引擎／评测套件接入；作者公共测试用串行 B200。延迟／成本须计重复读取、前缀缓存状态及全部 token；本仓库未运行模型。"
+        "en": "New 9B / 27B binaries uploaded November 9; later November 12/13 edits concern card/vLLM serving. Published wrappers support different loop/backend settings; keep exact prompts and total latency. Quantized/GGUF siblings are inference artifacts, not M5 training evidence. Historical 31B context boundaries and unsupported image use remain version-specific.",
+        "zh": "新9B／27B binary于11月9日上传；11月12／13日改动主要是卡及vLLM服务。发布封装支持的loop／后端配置不同，须固定prompt并计完整延迟。量化／GGUF sibling是推理产物，不是M5训练证据；旧31B上下文边界及未用图像应限于其版本。"
       },
-      "license_note": "Fixed license-only source commit declares Apache-2.0 for weights and inference, replacing prior CC BY-NC4.0/MIT. Verify upstream Gemma terms separately; no new weights inferred.",
+      "license_note": "Reviewed current cards declare Apache-2.0 for weights/inference; earlier 31B / 4B license-only edits remain dated history. Verify exact upstream base terms and any new artifact separately.",
       "tags": [
         "typed-decisions",
         "option-logits",
@@ -5928,6 +6681,634 @@
       "caveat": {
         "en": "Author-reported production A/B lacks sample/allocation/interval details and changes several system factors. Private data are unavailable; deployed classifier is not evidence that the offline LLM hybrid or soft-distribution distillation caused the online gain.",
         "zh": "作者生产A/B未披露样本／分配／区间，系统同时改变多项因素；原数据私有。部署分类器不证明离线LLM级联或软分布蒸馏导致了线上收益。"
+      }
+    },
+    {
+      "id": "clairic",
+      "name": "Clairic / Clairic-Flash (typed extraction)",
+      "category": "baselines",
+      "url": "https://blog.cloudflare.com/open-clairic/",
+      "source_ids": [
+        "clairic-open-release-nov18",
+        "clairic-card-nov20",
+        "clairic-flash-card-nov20"
+      ],
+      "reviewed_on": "2026-11-20",
+      "summary": {
+        "en": "Adjacent typed extraction/estimation family: November 18 redesign uses parallel slot autoregressive extraction plus specialized numerical heads, separate from Clef closed-option decisions.",
+        "zh": "相邻的类型化提取／估计系列：11月18日改版用并行slot自回归提取及专用数值头，与Clef闭集判断分开。"
+      },
+      "use": {
+        "en": "Study extraction of business facts before downstream decisions, with field completeness, evidence grounding and total latency measured.",
+        "zh": "研究下游判断前的业务事实提取，验收字段完整性、证据定位及完整延迟。"
+      },
+      "caveat": {
+        "en": "Input-only pricing does not mean zero generation. Official results are internal author evaluations; no complete enterprise fine-tuning package or M5 run was established. The released 27B / 9B cards declare Apache-2.0, but open weights do not prove production confidence calibration.",
+        "zh": "只按输入计费不等于零生成；官方结果为内部作者评测，未建立完整企业续训包或M5运行证据。发布27B／9B卡声明Apache-2.0，但公开权重不证明生产置信度已校准。"
+      },
+      "tags": [
+        "typed-extraction",
+        "adjacent",
+        "multimodal",
+        "open-weight"
+      ]
+    },
+    {
+      "id": "glide",
+      "name": "GLiDE / Fastino",
+      "category": "core_models",
+      "url": "https://fastino.ai/blog/glide-decision-model-family",
+      "source_ids": [
+        "glide-2b-card-nov20",
+        "glide-family-nov05",
+        "glide-training-api-nov20",
+        "glide-training-loss-nov20",
+        "glide-training-demo-nov18",
+        "glide-license-nov20",
+        "glide-pricing-nov20",
+        "glide-2b-readout-nov20"
+      ],
+      "summary": {
+        "en": "Five-size open-weight decision family plus a native customer training API.",
+        "zh": "五尺寸开放权重判断系列，并有面向客户数据的原生训练API。"
+      },
+      "scale": {
+        "en": "0.4B / 0.8B / 2B / 9B / 27B; inspect each backbone/readout separately.",
+        "zh": "0.4B／0.8B／2B／9B／27B；各尺寸骨干与读出分别核验。"
+      },
+      "mechanism": {
+        "en": "Typed closed-option readout. The fixed public 2B runtime reports top1-minus-top2 confidence; score is the argmax level, with expectation in expected_level. Larger variants add recurrent depth.",
+        "zh": "类型化闭集读出。固定公开2B运行库的confidence为top1与top2概率差；score为最高概率档，期望另在expected_level；大尺寸另有循环深度。"
+      },
+      "training": {
+        "en": "Native text rows accept gold and/or soft_target; glide_decision combines CE/KL (.3/.7 by default). A specific training/deploy API exists; complete public local trainer not located. Small-model prices and a 2B demo exist, but exact self-service IDs/account access/export remain untested.",
+        "zh": "原生文本行接受gold及／或soft_target，glide_decision默认组合CE／KL(.3／.7)。已有具体训练／部署API，未定位完整公开本地trainer；有小模型报价及2B示例，但精确自助ID、账号开放性及导出未实调。"
+      },
+      "availability": {
+        "en": "Family announced Nov5; fine-tuning example Nov18. Five public HF sizes; reviewed cloud training is text-only, 16,384 tokens/row, 512 rows/batch and no lora_config. No M5 backward or local training validation.",
+        "zh": "11月5日发布家族、18日有微调示例；五个HF尺寸公开。所核云训练仅文本，每行16,384 tokens、每批512行，不接lora_config；未验证M5反向或本地训练。"
+      },
+      "use": {
+        "en": "Add a small-model/readout comparator and, if data may leave the enterprise, a managed domain-adaptation route.",
+        "zh": "新增小模型／读出对照；企业数据可获准上云时比较托管领域适配。"
+      },
+      "caveat": {
+        "en": "Do not inherit thresholds from another System One service. Public weights, a synthetic simulator improvement and training API documentation do not establish Chinese customer-service superiority or five-size self-service support.",
+        "zh": "不能继承其他System One服务阈值；公开权重、合成模拟器增益及训练API文档不确立中文客服优势，也不证明五尺寸均已自助可训。"
+      },
+      "license_note": "Fastino Community License, not Apache; production commercial use by entities above the stated US$10M revenue threshold requires a separate agreement. Backbone terms also apply.",
+      "weight_revision": null,
+      "reviewed_on": "2026-11-20",
+      "tags": [
+        "typed-decisions",
+        "open-weight"
+      ]
+    },
+    {
+      "id": "liquid-d1",
+      "name": "Liquid d1 / d1.2",
+      "category": "core_models",
+      "url": "https://docs.liquid.ai/lfm/models/decision-models",
+      "source_ids": [
+        "liquid-d1-2b-nov20",
+        "liquid-d1-omni-nov20",
+        "liquid-d12-nov16",
+        "liquid-decision-docs-nov20",
+        "liquid-license-nov20",
+        "liquid-finetune-nov20"
+      ],
+      "summary": {
+        "en": "Open d1-2B/Omni-2B and separate hosted d1.2/ultra decision products.",
+        "zh": "开放d1-2B／Omni-2B与独立托管d1.2／ultra产品。"
+      },
+      "scale": {
+        "en": "Open d1-2B about1.92B, with text/image/video inputs; Omni-2B is a separate artifact. Hosted ultra scale is not inferred from open2B.",
+        "zh": "开放d1-2B约1.92B，支持文本／图像／视频输入；Omni-2B为另一产物。不从开放2B推测托管ultra规模。"
+      },
+      "mechanism": {
+        "en": "Typed decisions and extraction shapes vary by runtime. Multi-choice reports per-option P(yes), not a normalized single-choice simplex.",
+        "zh": "类型化判断与提取形状依运行库而异；多选返回各项P(yes)，不是和为1的单选分布。"
+      },
+      "training": {
+        "en": "Generic LFM fine-tuning tooling is public, but a complete d1-specific typed-head training/save/reload/calibration path was not established.",
+        "zh": "通用LFM微调工具公开，尚未建立d1专属typed-head训练、保存重载及校准闭环。"
+      },
+      "availability": {
+        "en": "Hosted d1.2 announced Nov16; open2B replaces old3B. Official MPS/MLX inference and Chinese among16 languages; no user-machine training run.",
+        "zh": "托管d1.2于11月16日发布；开放2B替代旧3B。官方有MPS／MLX推理、16语言含中文；无用户目标机训练实测。"
+      },
+      "use": {
+        "en": "Study a small non-Qwen implementation and multi-label contract; evaluate hosted and local artifacts separately.",
+        "zh": "研究小型非Qwen实现及多标签合同，托管与本地产物分别比较。"
+      },
+      "caveat": {
+        "en": "Do not transfer ultra benchmarks to open2B or confuse M5 inference with48GB training. Typed-answer support and reported calibration vary by release/runtime.",
+        "zh": "不能将ultra成绩搬给开放2B，也不能将M5推理当48GB训练；类型与校准声明依版本／运行库而异。"
+      },
+      "license_note": "LFM Open License v1.0; commercial revenue threshold and separate-agreement conditions apply, not unconditional Apache.",
+      "weight_revision": null,
+      "reviewed_on": "2026-11-20",
+      "tags": [
+        "typed-decisions",
+        "open-weight"
+      ]
+    },
+    {
+      "id": "mapika-decider",
+      "name": "Mapika Decider",
+      "category": "core_models",
+      "url": "https://github.com/Mapika/decider",
+      "source_ids": [
+        "mapika-2b-nov20",
+        "mapika-4b-nov20",
+        "mapika-code-nov20"
+      ],
+      "summary": {
+        "en": "Open typed-decision family with supervised training/data builders; previously sourced but missing a core catalog entry.",
+        "zh": "有监督训练及数据构造器的开放判断系列；此前已有研读来源，但缺核心索引条目。"
+      },
+      "scale": {
+        "en": "Reviewed2B v12,4B v3 and31B v2 releases date through Oct20.",
+        "zh": "本轮核2B v12、4B v3及31B v2，发布至10月20日。"
+      },
+      "mechanism": {
+        "en": "Candidate-conditioned Qwen readouts and per-type temperatures; text/image contracts depend on size and release.",
+        "zh": "候选条件化Qwen读出及按题型温度；文本／图片合同依尺寸与版本。"
+      },
+      "training": {
+        "en": "Public supervised recipe, data builders and own-label conversion. Environment PPO is a separate reported experiment; its complete research trainer was not located.",
+        "zh": "监督配方、数据构造及自有标签转换公开；环境PPO为另一报告实验，未定位完整研究trainer。"
+      },
+      "availability": {
+        "en": "Open weights/code; existing October releases, not newly trained today. MPS/MLX domain training not validated.",
+        "zh": "权重／代码公开；属于10月发布补录，非今天新训练；未验证MPS／MLX领域训练。"
+      },
+      "use": {
+        "en": "Compare an inspectable supervised implementation and its per-type calibration; study environment learning only with matching feedback.",
+        "zh": "比较可审查的监督实现与逐题型校准；反馈匹配时才研究环境学习。"
+      },
+      "caveat": {
+        "en": "Default Noul T=.05 targets score optimization, not a validated probability. Fitted-temperature alternatives and all mixed-source licenses need separate review.",
+        "zh": "默认Noul T=.05用于分数优化，不代表概率已校准；拟合温度替代项与混合来源许可分别核验。"
+      },
+      "license_note": "Apache-2.0 project/model declarations; upstream and mixed training-source conditions remain separate.",
+      "weight_revision": null,
+      "reviewed_on": "2026-11-20",
+      "tags": [
+        "typed-decisions",
+        "open-weight"
+      ]
+    },
+    {
+      "id": "rsi-jev",
+      "name": "RSI-Jev v7.0-VL",
+      "category": "core_models",
+      "url": "https://github.com/Shanghua-Gao/RSI-Jev",
+      "source_ids": [
+        "rsi-jev-4b-nov20",
+        "rsi-jev-train-nov20"
+      ],
+      "summary": {
+        "en": "Open Qwen decision implementation with public full training code and a truncated3B derivative.",
+        "zh": "公开完整训练代码的Qwen判断实现，另有截断3B衍生物。"
+      },
+      "scale": {
+        "en": "4B instruction backbone;3B is the first20 language layers without retraining.",
+        "zh": "4B指令底座；3B由前20语言层截断，未另训。"
+      },
+      "mechanism": {
+        "en": "Option-echo token pooling, bidirectional prefix and detached early-exit heads.",
+        "zh": "候选复述的token pooling、双向前缀及分离梯度的早退头。"
+      },
+      "training": {
+        "en": "Full language fine-tuning with soft CE, retention/permutation KL and ranking; train/v7.0 and recipe public. Original2.76M rows/traces/dev not released; reported run used4 H200s.",
+        "zh": "语言全参训练，含soft CE、保留／排列KL及排序；train/v7.0及配方公开。原276万行／轨迹／dev未发布；作者运行用4张H200。"
+      },
+      "availability": {
+        "en": "4B weights Nov5, truncated3B Nov7, MLX4bit conversion Nov10; fixed CUDA/NCCL trainer, MLX inference is separate. No M5 training receipt.",
+        "zh": "4B权重11月5日、截断3B于7日、MLX4bit转换于10日；trainer固定CUDA／NCCL，MLX为推理；无M5训练回执。"
+      },
+      "use": {
+        "en": "Prioritize code inspection and a small own-label comparison, including simple readout/LoRA controls.",
+        "zh": "优先审实现并做小规模自有标签对照，保留简单读出／LoRA基线。"
+      },
+      "caveat": {
+        "en": "Public code is not full original-data reproduction; 3B/quantized variants are not independent training gains. Author benchmarks do not establish target-domain superiority.",
+        "zh": "源码公开不等于原数据完整复现；截断／量化不是独立训练增益，作者成绩不确立目标域优势。"
+      },
+      "license_note": "Apache-2.0 declarations; inspect exact backbone, data and runtime dependencies before deployment.",
+      "weight_revision": "58baf6fc961f42108756b27ff92fddf4aea3b1d8",
+      "reviewed_on": "2026-11-20",
+      "tags": [
+        "typed-decisions",
+        "open-weight"
+      ]
+    },
+    {
+      "id": "jgeuter-jeff",
+      "name": "Jeff 1.1 / j-geuter",
+      "category": "core_models",
+      "url": "https://github.com/j-geuter/Jeff",
+      "source_ids": [
+        "jgeuter-jeff-4b-nov20",
+        "jgeuter-jeff-trainer-nov20",
+        "decisionbank-nov20"
+      ],
+      "summary": {
+        "en": "Open decision training implementation, distinct from Jeffan; published weights/data have noncommercial restrictions.",
+        "zh": "与Jeffan不同的公开判断训练实现；发布权重／数据有非商用限制。"
+      },
+      "scale": {
+        "en": "Qwen4B/27B and Gemma12B/31B variants; complete4B weights existed by the reviewed Oct23 snapshot and are unchanged through Nov14.",
+        "zh": "Qwen4B／27B及Gemma12B／31B；所核10月23日快照已有完整4B权重，至11月14日tensor未变。"
+      },
+      "mechanism": {
+        "en": "Residual LM-row head with rank32 LoRA and three-seed adapter/head soup.",
+        "zh": "残差LM-row读出，rank32 LoRA及三seed adapter／head平均。"
+      },
+      "training": {
+        "en": "Trainer/export, four configs and --data own JSONL were published Nov14; soft CE. DecisionBank mixes annotator votes and a Qwen teacher, including on annotator rows.",
+        "zh": "11月14日公开trainer／export、四配置及--data自有JSONL；用soft CE。DecisionBank结合标注票数与Qwen教师，含有人类票数的行也混教师。"
+      },
+      "availability": {
+        "en": "Code and raw dataset inspectable; current trainer selects CUDA/CPU, not native MPS. Existing4B tensors did not change with new trainer publication.",
+        "zh": "源码及原始数据可审；当前trainer选择CUDA／CPU，无原生MPS路径；新公开trainer没有改变既有4B tensor。"
+      },
+      "use": {
+        "en": "Study data/training mechanics; for commercial use train an appropriately licensed base on authorized own data.",
+        "zh": "参考数据／训练机制；商用应从许可合适底座与获授权自有数据起训。"
+      },
+      "caveat": {
+        "en": "Published weights and full mixed dataset cannot be assumed commercially reusable. No Chinese-enterprise adaptation or M5 training evidence; do not conflate this owner with Jeffan.",
+        "zh": "不能默认发布权重及全量混合数据可商用；无中文企业适配或M5训练证据，不能与Jeffan混同。"
+      },
+      "license_note": "Published weights CC-BY-NC-4.0; full mixed DecisionBank explicitly noncommercial. Code, base and individual data licenses are separate.",
+      "weight_revision": "e2c4fb2f00189672c77e9d9a1619a8fd4884ab2d",
+      "reviewed_on": "2026-11-20",
+      "tags": [
+        "typed-decisions",
+        "open-weight"
+      ]
+    },
+    {
+      "id": "jad",
+      "name": "JAD-S1 v0.5",
+      "category": "core_models",
+      "url": "https://huggingface.co/DreamBlooms/JAD-S1-7B-A1B-v0.5",
+      "source_ids": [
+        "jad-s1-v05-nov20"
+      ],
+      "summary": {
+        "en": "Diffusion/MoE-based closed-option decision adapter with single-mask readout.",
+        "zh": "基于扩散／MoE、单mask读出的闭集判断adapter。"
+      },
+      "scale": {
+        "en": "LLaDA-MoE7B total /1B active; resident memory is not1B.",
+        "zh": "LLaDA-MoE总7B／激活1B，驻留内存不等于1B。"
+      },
+      "mechanism": {
+        "en": "Read candidate-letter logits at one masked position rather than autoregressive answer generation.",
+        "zh": "在单个mask位置读取候选字母logit，不自回归生成答案。"
+      },
+      "training": {
+        "en": "Rank8 adapter and inference/calibration package public; no complete trainer or raw training corpus in inspected release tree.",
+        "zh": "rank8 adapter及推理／校准包公开；所审发布树无完整trainer或原始训练语料。"
+      },
+      "availability": {
+        "en": "v0.5 adapter uploaded Nov12 UTC, card version Nov13. Author ROCm128GB environment; not a validated M5 training path.",
+        "zh": "v0.5 adapter于UTC11月12日上传、卡标13日；作者用ROCm／128GB环境，非已验证M5训练路径。"
+      },
+      "use": {
+        "en": "A different-backbone/readout research control if the local task justifies it.",
+        "zh": "任务有需要时作为不同骨干／读出的研究对照。"
+      },
+      "caveat": {
+        "en": "Author Chinese translations/benchmarks are not enterprise data; active parameter count and open adapter do not establish low-memory training.",
+        "zh": "作者中文翻译／基准非企业数据；激活参数与开放adapter不确立低内存训练。"
+      },
+      "license_note": "Apache-2.0 declarations for base/adapter code; exact dependencies and data rights remain separate.",
+      "weight_revision": "178febae0936d8c0f71312421d65e5b6baca466c",
+      "reviewed_on": "2026-11-20",
+      "tags": [
+        "typed-decisions",
+        "open-weight"
+      ]
+    },
+    {
+      "id": "h2o-lightning",
+      "name": "H2O Lightning 4B",
+      "category": "core_models",
+      "url": "https://huggingface.co/h2oai/h2o-lightning-4b",
+      "source_ids": [
+        "h2o-lightning-4b-nov20"
+      ],
+      "summary": {
+        "en": "Open Qwen4B typed-decision engine; this is a catch-up inclusion, not a November20 weight release.",
+        "zh": "开放Qwen4B类型化判断引擎；属于补录，非11月20日新权重。"
+      },
+      "scale": {
+        "en": "Qwen3.5-4B; reviewed package v1.2.2.",
+        "zh": "Qwen3.5-4B；所核包v1.2.2。"
+      },
+      "mechanism": {
+        "en": "Custom typed readout/attention; option-order averaging, two-way reading and calculator settings change the measured path.",
+        "zh": "定制类型读出／注意力；候选顺序平均、双向重读及计算器配置改变实际测量路径。"
+      },
+      "training": {
+        "en": "Training descriptions do not establish a complete own-data training/save/reload loop in this release.",
+        "zh": "训练描述尚未建立本发布物的完整自有数据训练／保存重载链。"
+      },
+      "availability": {
+        "en": "Created Oct2, current snapshot Nov1; image-capable inference package, no M5 backward verification.",
+        "zh": "10月2日创建、当前快照11月1日；有图片推理包，无M5反向验证。"
+      },
+      "use": {
+        "en": "Small typed-inference comparator after protocol and prompt settings are fixed.",
+        "zh": "固定协议／提示配置后作为小型类型化推理对照。"
+      },
+      "caveat": {
+        "en": "Do not use stale October leaderboard placement as current quality or mistake HF auto-generated chat examples for the typed API.",
+        "zh": "不能用10月旧榜位代表当前质量，也不能把HF自动聊天示例当类型化API。"
+      },
+      "license_note": "Apache-2.0 card declaration; check exact upstream/runtime licenses.",
+      "weight_revision": "659fc412de8486dbc2477b0d1cb4121e97e72471",
+      "reviewed_on": "2026-11-20",
+      "tags": [
+        "typed-decisions",
+        "open-weight"
+      ]
+    },
+    {
+      "id": "mnn-pocket-dec",
+      "name": "MNN-Pocket-0.3B-Dec",
+      "category": "core_models",
+      "url": "https://huggingface.co/taobao-mnn/MNN-Pocket-0.3B-Dec",
+      "source_ids": [
+        "mnn-pocket-dec-nov20"
+      ],
+      "summary": {
+        "en": "Small Chinese/English choice, proposition and ordinal pointer-head package.",
+        "zh": "小型中英Choice／命题／有序评分pointer-head发布包。"
+      },
+      "scale": {
+        "en": "About300M base plus rank16 adapter and pointer head; bundled base is about723MB.",
+        "zh": "约300M底座加rank16 adapter及pointer head；包内底座约723MB。"
+      },
+      "mechanism": {
+        "en": "Escaped reserved markers, shared state and isolated question branches; up to255 options with32k request rejection boundary.",
+        "zh": "转义保留marker、共享state并隔离问题分支；最多255选项，32k请求边界超长拒绝。"
+      },
+      "training": {
+        "en": "Unmerged adapter/head present; inspected bundle exposes inference/calibration, not a complete domain-training loop.",
+        "zh": "有未合并adapter／head；所审包提供推理／校准，非完整领域训练loop。"
+      },
+      "availability": {
+        "en": "Created Oct15; metadata current Nov10. Original quantized/mobile MNN formats are separate artifacts; M5 training untested.",
+        "zh": "10月15日创建、元数据至11月10日；原移动量化MNN格式为不同产物，M5训练未测。"
+      },
+      "use": {
+        "en": "Very small Chinese readout/cost control, paired with a trained multilingual encoder.",
+        "zh": "极小中文读出／成本对照，同时保留已训多语encoder。"
+      },
+      "caveat": {
+        "en": "Reported temperature fit on600 calibration cases is not held-out task accuracy or an enterprise risk guarantee.",
+        "zh": "600个校准样本的温度拟合不等于独立任务准确率或企业风险保证。"
+      },
+      "license_note": "Apache-2.0 LICENSE.txt declaration; upstream terms remain applicable.",
+      "weight_revision": "7d5b512f3fe579418c45a77b178da39273b2a114",
+      "reviewed_on": "2026-11-20",
+      "tags": [
+        "typed-decisions",
+        "open-weight"
+      ]
+    },
+    {
+      "id": "granite-switch",
+      "name": "IBM Granite Switch / decision adapter",
+      "category": "core_models",
+      "url": "https://huggingface.co/blog/ibm-granite/granite-switch-4-1",
+      "source_ids": [
+        "granite-switch-launch-nov20",
+        "granite-decision-adapter-nov20"
+      ],
+      "summary": {
+        "en": "A reusable decision adapter alongside chat, guard and ASR capabilities on Granite4.1.",
+        "zh": "Granite4.1上可复用的decision adapter，与聊天、guard及ASR并列。"
+      },
+      "scale": {
+        "en": "Frozen8B/30B base plus rank64 adapters; tiny adapter does not remove the resident base.",
+        "zh": "冻结8B／30B底座加rank64 adapter；小adapter不消除底座驻留。"
+      },
+      "mechanism": {
+        "en": "LoRA/aLoRA decision marker activates single-label-token logits; no sampling/generate for decisions. Each question uses a pass; aLoRA reuses pre-marker base cache.",
+        "zh": "LoRA／aLoRA判断marker激活单标签token读出；判断不采样／generate，每题一次pass，aLoRA复用marker前底座cache。"
+      },
+      "training": {
+        "en": "Adapter artifacts and inference contract public; generic PEFT adaptation is not a verified complete decision-domain training pipeline. aLoRA is not merged into the base.",
+        "zh": "adapter产物及推理合同公开；通用PEFT可适配不等于完整判断领域trainer已验证；aLoRA不合入base。"
+      },
+      "availability": {
+        "en": "Official introduction Oct15; current core/adapter revision Oct28, v1.1. English card; no M5 training validation.",
+        "zh": "官方10月15日介绍；当前core／adapter于28日、v1.1；卡为英语，无M5训练验证。"
+      },
+      "use": {
+        "en": "Study decision/chat sharing and cache-aware adapters when a larger resident base is justified.",
+        "zh": "较大底座确有必要时，研究判断／聊天共用及cache-aware adapter。"
+      },
+      "caveat": {
+        "en": "Adapter size and cache sharing are efficiency mechanisms, not calibrated correctness or Chinese adaptation evidence.",
+        "zh": "adapter大小与cache共享是效率机制，不是概率校准或中文适配证据。"
+      },
+      "license_note": "Apache-2.0 declarations; base, adapter and dependencies must be pinned separately.",
+      "weight_revision": null,
+      "reviewed_on": "2026-11-20",
+      "tags": [
+        "typed-decisions",
+        "open-weight"
+      ]
+    },
+    {
+      "id": "ant-lingdt",
+      "name": "Ant Digital LingDT-Decision-1.0",
+      "category": "core_models",
+      "url": "https://maas.antdigital.com/models/modelservice-1792325631780001741",
+      "source_ids": [
+        "ant-lingdt-contract-nov20"
+      ],
+      "summary": {
+        "en": "Hosted typed decision service with native question-dependency DAG.",
+        "zh": "托管类型化判断服务，原生支持问题依赖DAG。"
+      },
+      "scale": {
+        "en": "Current public contract identifies a4B test endpoint; no public weight identity established.",
+        "zh": "当前公开合同列4B测试端点，未建立公开权重身份。"
+      },
+      "mechanism": {
+        "en": "Choice, multi-choice, proposition, score and extraction. The native depth3 DAG service calls layers sequentially and injects upstream_answers into later state; this is orchestration, not established single-forward model dependency reasoning.",
+        "zh": "单／多选、命题、评分与提取。原生深度3 DAG服务逐层调用，并将upstream_answers注入后续state；这是编排合同，不证明模型单前向完成依赖推理。"
+      },
+      "training": {
+        "en": "No public weights or this decision product-specific customer fine-tuning entry verified.",
+        "zh": "未核公开权重或本判断产品专属客户微调入口。"
+      },
+      "availability": {
+        "en": "Observed free test-period contract:4B endpoint,16k request,32 questions,255 options, default60RPM. A production reference to LingDT1.1 does not identify a new Decision1.1 checkpoint.",
+        "zh": "本次观察免费测试期合同：4B端点、16k请求、32题、255选项、默认60RPM；建议生产用LingDT1.1不等于确立新Decision1.1检查点。"
+      },
+      "use": {
+        "en": "Domestic hosted contract/dependency reference; evaluate access and data governance separately.",
+        "zh": "国内托管合同／依赖参考，另验访问与数据治理。"
+      },
+      "caveat": {
+        "en": "Public service metadata establishes an advertised contract, not actual account availability, self-training or production effect.",
+        "zh": "公开服务元数据只确立声明的合同，不证明账号可用、自主后训练或生产效果。"
+      },
+      "license_note": "Proprietary service terms; no open-weight or customer training license established.",
+      "weight_revision": null,
+      "reviewed_on": "2026-11-20",
+      "tags": [
+        "typed-decisions",
+        "hosted",
+        "question-dependencies"
+      ]
+    },
+    {
+      "id": "span-02",
+      "name": "Respan Span-02",
+      "category": "core_models",
+      "url": "https://www.respan.ai/blog/introducing-span-2",
+      "source_ids": [
+        "span02-release-nov20",
+        "span02-launch-nov20"
+      ],
+      "summary": {
+        "en": "Open decision serving artifact with a specialized quantized Rust/CUDA engine and optional reasoning.",
+        "zh": "使用专用量化Rust／CUDA引擎、可选推理的开放判断服务产物。"
+      },
+      "scale": {
+        "en": "Gemma4 26B-A4B; about4B active is not4B resident or trainable-package memory.",
+        "zh": "Gemma4 26B-A4B；约4B激活不等于4B驻留或训练包内存。"
+      },
+      "mechanism": {
+        "en": "Choice is non-generative readout; number questions generate numeric tokens. auto/on/off and budget_ms change the returned decision path.",
+        "zh": "Choice为非生成读出，number题生成数字token；auto／on／off及budget_ms改变实际判断路径。"
+      },
+      "training": {
+        "en": "No full trainer, raw training data or trainable BF16 release established; current engine is an inference artifact.",
+        "zh": "未建立完整trainer、原始训练数据或可训练BF16发布物；现有engine为推理产物。"
+      },
+      "availability": {
+        "en": "Blog Oct15, gateway changelog Oct19. Specific NVIDIA engine, about28GB GPU memory; not ordinary Transformers/vLLM or a verified M5 route.",
+        "zh": "博客10月15日、gateway于19日更新；专用NVIDIA引擎、约28GB GPU内存，非普通Transformers／vLLM或已验证M5路线。"
+      },
+      "use": {
+        "en": "Study self-hosted inference and budgeted reasoning as separate serving controls.",
+        "zh": "研究自托管推理与预算推理，作为独立服务策略对照。"
+      },
+      "caveat": {
+        "en": "Span-01 behavior detection is a different contract. Quantized open serving weights do not establish enterprise post-training or portable confidence thresholds.",
+        "zh": "Span-01行为检测为另一合同；开放量化服务权重不确立企业后训练或可移植置信阈值。"
+      },
+      "license_note": "Apache-2.0/Gemma4 declarations; inspect engine and upstream terms separately.",
+      "weight_revision": "63cbdd774391f1b7d9bc3829179efe996d0191ce",
+      "reviewed_on": "2026-11-20",
+      "tags": [
+        "typed-decisions",
+        "open-weight"
+      ]
+    },
+    {
+      "id": "decisio",
+      "name": "Decisio tuned v3 / Tachara AI",
+      "category": "core_models",
+      "url": "https://github.com/aminry/decisio",
+      "source_ids": [
+        "decisio-v3-calibrated-nov20",
+        "decisio-server-nov20"
+      ],
+      "summary": {
+        "en": "November20 Gemma12B tuned release with calibrated and commit serving policies and multiple precision ports.",
+        "zh": "11月20日发布的Gemma12B适配权重，含calibrated／commit策略及多精度部署包。"
+      },
+      "scale": {
+        "en": "12B; about22GB merged BF16 weights, not total training memory.",
+        "zh": "12B；合并BF16约22GB，仅权重、非完整训练内存。"
+      },
+      "mechanism": {
+        "en": "One forward per question reads typed-option probabilities; per-type temperature and an external calculator affect the service.",
+        "zh": "每题一次前向读取类型化选项概率；逐题型温度及外部计算器影响服务。"
+      },
+      "training": {
+        "en": "Card reports rank32/alpha64 LoRA on463,859 questions for one epoch. Inspected server tree does not establish a complete public own-data trainer; card calibration claims need independent task validation.",
+        "zh": "卡称rank32／alpha64 LoRA、463,859题一epoch；所审服务树未建立完整公开自有数据trainer，卡的校准声明须独立任务验证。"
+      },
+      "availability": {
+        "en": "Eight November20 repos include policy/FP8/MLX variants. Complete declared LFS tensor sets match between the two BF16 flavors; no tensor bytes downloaded. MLX inference is not MLX training.",
+        "zh": "11月20日八个仓包含策略／FP8／MLX变体；两BF16策略包完整声明LFS tensor集合相同，未下载tensor字节；MLX推理不等于训练。"
+      },
+      "use": {
+        "en": "A fresh serving/readout comparator; evaluate calibrated policy, commit policy and calculator under the same contract.",
+        "zh": "新增服务／读出对照；同合同分验calibrated、commit及计算器。"
+      },
+      "caveat": {
+        "en": "Author held-out tests come from its training distribution, not an independent enterprise benchmark. Policy variants are not eight separately trained models; calibration is not guaranteed under shift.",
+        "zh": "作者留出测试来自其训练分布，非独立企业基准；策略变体不是八个独立训练模型，漂移下不保证校准。"
+      },
+      "license_note": "Apache-2.0 card/LICENSE declaration; base, runtime and derived artifacts separately pinned.",
+      "weight_revision": "1e9159cc082c689fd95381e0ed6306402dc932d2",
+      "reviewed_on": "2026-11-20",
+      "tags": [
+        "typed-decisions",
+        "open-weight"
+      ]
+    },
+    {
+      "id": "valen-decision",
+      "name": "Valen-Decision1.5",
+      "category": "core_models",
+      "url": "https://github.com/Valen-Team/Valen",
+      "source_ids": [
+        "valen15-4b-nov20",
+        "valen-training-nov20",
+        "valen-training-device-nov20",
+        "valen-domain-cookbook-nov20"
+      ],
+      "reviewed_on": "2026-11-20",
+      "weight_revision": "9b0cacc976d7fb72f252ee1adb1564f5f15e462c",
+      "license_note": "Apache-2.0 native model/code declarations; original training data not public, upstream and media/data rights remain separate.",
+      "tags": [
+        "typed-decisions",
+        "open-weight",
+        "multimodal",
+        "domain-adaptation"
+      ],
+      "summary": {
+        "en": "Multimodal typed-decision family with native published-checkpoint domain training, separate from its ONNX/GGUF/ANE conversions.",
+        "zh": "多模态类型化判断系列，有从已发布native检查点领域训练的入口，与ONNX／GGUF／ANE转换分开。"
+      },
+      "scale": {
+        "en": "Fixed4B audit; family card lists0.8B/2B/4B/9B/27B. BF16 backbone and FP32 decision/grounding heads.",
+        "zh": "固定核4B；家族卡列0.8B／2B／4B／9B／27B；BF16骨干、FP32判断／grounding头。"
+      },
+      "mechanism": {
+        "en": "Block-bidirectional attention, trained Mixer and bbox grounding; typed predicate/choice/score/bbox readout, with shared-state question branches.",
+        "zh": "block-bidirectional注意力、已训练Mixer及bbox grounding；predicate／choice／score／bbox类型化读出，shared-state问题分支。"
+      },
+      "training": {
+        "en": "Complete native checkpoint can retain Mixer/grounding for own-JSONL full or LoRA SFT. Public runner, schema/configs, resume/export tests and cookbook; the SFT loss defaults to distribution CE, with optional RPS/Brier used by the domain example. Sampled discrete-action RLCD is a separate experimental objective, not PRDO or a verified TypeSafe recipe. Original training data not public.",
+        "zh": "完整native检查点可保留Mixer／grounding，用自有JSONL做full／LoRA SFT；公开runner、schema／配置、恢复／导出测试及cookbook。SFT loss缺省为分布CE，领域示例另配可选RPS／Brier；采样离散动作RLCD是另一个实验目标，不是PRDO或已验证TypeSafe配方。原始训练数据未公开。"
+      },
+      "availability": {
+        "en": "Complete4B tensors uploaded Nov9; Nov12 card edit, Nov15 source snapshot. Official0.8B/H200 one-update plus resume smoke is not a4B/M5 run. Trainer defaults CUDA; configured-device float64 statistics need MPS compatibility work. ANE/ONNX/GGUF are inference formats.",
+        "zh": "完整4B tensor于11月9日上传，12日改卡，源码快照15日。官方0.8B／H200单步加恢复smoke不是4B／M5运行。默认CUDA；配置device上的float64统计需处理MPS兼容；ANE／ONNX／GGUF为推理格式。"
+      },
+      "use": {
+        "en": "Prioritize an inspectable native-checkpoint LoRA comparator for proprietary data on compatible hardware; keep original and direct CE controls.",
+        "zh": "在兼容硬件上优先纳入可审查的native续训LoRA对照，保留原版及直接CE控制。"
+      },
+      "caveat": {
+        "en": "Short engineering receipts and author public index results do not establish enterprise adaptation gains, Chinese long-state performance or calibrated acceptance risk. A Metal/ANE port does not solve training device, gradient or export contracts.",
+        "zh": "短工程回执及作者公共指数不确立企业适配增益、中文长状态表现或校准放行风险；Metal／ANE端口不解决训练设备、梯度及导出合同。"
       }
     }
   ]

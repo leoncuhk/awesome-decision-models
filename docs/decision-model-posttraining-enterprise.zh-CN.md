@@ -4,6 +4,8 @@
 
 当前处于研究与协议准备阶段：没有本次目标企业的数据、训练结果或生产对照；目标训练机为用户的M5 Pro 48GB，未访问或运行该设备。下文分别标明来源报告、公开产物核查与实施建议。
 
+11月20日的[发布覆盖复核](../updates/2026-11-20-release-coverage.md)确认旧模型池有遗漏：本轮核心索引由22族补至35族，另收Clairic为相邻提取任务。新增来源、旧漏项与新权重分开记录，未给全部历史来源刷新核查日期。模型载体增加，不意味着下述算法采纳顺序或企业赢家已被新榜单改写。
+
 **当前实施起点：** 用可信领域标签比较简单监督基线、候选原版和小模型直接适配；CE／BCE是起点，硬标签与有依据的软目标按任务选择，概率校准和完整接受／转交策略另验。先验证可用的小模型，再决定是否增加教师、蒸馏、级联、部分反馈或推理训练。当前没有得到企业效果最优的模型或固定升级链。
 
 阅读顺序：[业务合同](#decision-contract) → [方法与基座](#method-selection) → [选型证据](#evidence) → [企业数据](#data-plan) → [训练实施](#training-protocol) → [业务验收](#enterprise-gates)。
@@ -88,19 +90,26 @@
 
 首选算法内也要比较合适的模型实现：有复杂状态／条件组合、候选描述且标签较少时，优先试0.6–4B语义底座的LoRA＋简单读出；短输入、稳定标签、标签较充分且延迟极严时，多语encoder微调前移。冻结多语embedding＋正则化LR／小头可最先跑，等质量达标即可采用。现有新研究主要是英语，不证明中文长状态4B已胜过现代多语encoder。
 
-可训练候选限定为少数；下表是可审查实现，不是品牌效果排名。
+首轮适配与参照候选限定为少数；下表是可审查实现，不是品牌效果排名。
 
 | 角色 | 候选与可查入口 | 关键实施边界 |
 |---|---|---|
 | 强监督对照／可采用的轻量实现 | 合适的中文／多语encoder＋CE；冻结多语embedding＋LR／小头 | 固定标签低延迟任务可优先；长状态／新条件语义与分组留出另测。它们是实际采用候选，不能用陈旧弱基线衬托LLM。 |
 | 直接自有标签适配 | **Kev-4B**的`--data`、`--init_from`与pointer head；同原版作前后对照 | 固定问题／标签合同；MPS分支存在，Qwen3.5混合结构backward、内存和保存重载仍须目标机实测。[训练源码](https://github.com/jaredpalmer/kev/blob/051142bf849c2c6ad3f23e17a7b5aea2686d9a91/kev/train.py) |
+| 新增native检查点领域续训 | **Valen-Decision1.5**的full／LoRA、自有JSONL、恢复／导出与已训Mixer保留 | 训练代码及完整cookbook确实存在；loss缺省分布CE，领域示例另配RPS／Brier，并有实验性离散动作RLCD，不能从名称认定优于CE。官方0.8B／H200的短smoke不是4B效果证据；当前训练统计在device上分配float64，MPS兼容需处理，不能靠ANE转换获得Mac训练。[训练源码](https://github.com/Valen-Team/Valen/blob/f6df4fdbc45bf44a4ffbebaeda53f5fe6e49b339/valen/training/README.md)／[领域流程](https://valen-team.github.io/cookbook/domain-finetuning/) |
+| 新增公开训练实现 | **Strands Gemma4 v2**；**RSI-Jev v7.0-VL** | Strands v2有从原始底座起训的LoRA／token-readout配方，但合并HF发布物不满足原`init_from`的未合并训练checkpoint格式，不能声称拿HF ID即可续训。RSI公开全语言训练代码，原始训练数据未公开。两者当前trainer均为CUDA路线，均非已验证M5方案。[Strands配方](https://github.com/strands-labs/strands-decider/blob/d4915c9b11f61bb01ed293f4dc4c770a0a51792b/training/README.md)／[RSI实现](https://github.com/Shanghua-Gao/RSI-Jev/tree/e58526f061afd4c383d33a22b309b888f8a3e3c7) |
+| 新增训练器参考／监督对照 | **j-geuter/Jeff 1.1**；**Mapika Decider** | Jeff于11月14日公开自有JSONL训练器，但发布权重及全量混合DecisionBank限非商用；商用另从许可合适底座与自有数据起训。Mapika的监督配方及转换器公开，其环境PPO研究trainer未定位；默认Noul温度不能当概率校准。[Jeff源码](https://github.com/j-geuter/Jeff/tree/938ac5a03c6ac43512e61266d9febf691edc17f8)／[Mapika](https://github.com/Mapika/decider/tree/91b6fa9b94ab6c4dc2c63d3b14d413243b4fffcc) |
 | 读出／参数化对照 | **Qwen3.5-4B指令版＋明确的候选读出／LoRA实现** | 作为原始底座路线对照；不能只改模型名就复用另一家的head。当前无本仓Mac配方实测。[Inner Jev配方](https://arxiv.org/html/2610.17205v1#S4) |
 | 能力与蒸馏参照 | **SII-Decision-4B**；27B只在可承担的教师／质量参照条件下使用 | 4B基于Qwen3.5、27B基于Qwen3.8；原法从原始底座蒸馏，发布loader要求`gold_target/train_target/p0`。gold字段不必被解释成人工来源，但其语义及hard-Noul／验证用途要明确；不是仅换企业硬标签即可复用的续训入口。[固定代码](https://github.com/amazingljy1206/SII-Decision/tree/1723d83cbda69f48641c273280b5a2d06d6b3510) |
 | 多字段／视觉专项 | **Intern-Decision**等与任务匹配的产物 | 官方XTuner／CUDA训练语言骨干、冻结视觉部分；不是现成Mac LoRA。字段共用序列也不保证顺序或关系不变。[官方训练入口](https://github.com/InternLM/Intern-Decision/tree/a7b01e276cd5e18bae640be925e685ba6f5159ad) |
 | 托管定制备选 | 百炼`decision-model-preview-2026-09-24`的`efficient_sft` | 官方有LoRA流程，但需开通、数据可获准上云且匹配版本／地域／schema；部署费用与训练总成本分开。不是微调TypeSafe Jev，也不是已持有开放权重。[官方指南](https://help.aliyun.com/en/model-studio/decision-model-tuning-guide) |
+| 新增托管定制备选 | **Fastino GLiDE Training API**；开放小尺寸另作对照 | 原生typed-row有gold／soft_target与CE／KL训练及checkpoint部署合同；已有2B示例及0.8B／2B报价，精确自助base ID、账号开放性及本地导出尚未实调。仅文本、未定位完整本地trainer；Community License有收入门槛，非Apache。公开2B的confidence为概率差，不能继承原阈值。[训练合同](https://docs.fastino.ai/training)／[许可](https://huggingface.co/fastino/GLiDE-2B/blob/00f122c120cdeed82284106cb77d9bab5a50ad16/LICENSE) |
+| 小型／不同骨干推理参照 | **Liquid d1-2B／Omni-2B、MNN-Pocket-0.3B-Dec、H2O Lightning、JAD** | 分别有开放产物，但尚未建立各自完整自有数据续训闭环。Liquid有MPS／MLX推理，商业收入门槛适用；MNN的600条温度拟合不是独立准确率。先按实际错误选少数，不全部开实验。[逐项资格](models.md) |
 | 强参考及其他机制 | PPLX、Clef、StartLux、许可允许的强LLM；Nimble的数据构造可跨路线使用 | 权重／代码／原数据／完整训练器分开。PPLX已到v1.3；StartLux权重非商业许可且完整v1.1训练包未定位；Jev不提供客户FT。详见[逐项模型卡](models.md) |
 
 不因可在Mac训练而给Laya质量优先级。经典322M／421M encoder可作有理由的成本基线；当前Laya／Vega的4B reader拟合头是另一个对象，不能互借Banking77成绩。小于2B也不应按尺寸排除，是否纳入由目标错误和预算决定。
+
+11月20日新上传的Decisio v3值得作读出／服务对照；calibrated与commit两份BF16包的声明tensor身份相同，FP8／MLX等版本不应算成多个独立训练增益。当前仅有作者分布内留出与推理服务包，未建立其企业训练链。Clairic改为生成式slot提取；Span-02是专用量化推理engine；WPS v1.1在显式tag而非默认main。这些产物不能因“新”直接进入本机后训练前三名。具体版本、许可及未覆盖项统一见[本轮记录](../updates/2026-11-20-release-coverage.md)。
 
 <a id="evidence"></a>
 ## 3. 哪些证据支持上述选择
@@ -135,6 +144,7 @@
 |---|---|---|
 | [Amazon团队多轮意图论文](https://aclanthology.org/2026.customnlp4u-1.8.pdf) | 从真实客服transcripts生成解释＋自检标签，人工抽查，再分别训练Domain／Intent／Issue三个RoBERTa；有人工评测与一个月线上比较 | 教师审计、学生评测、线上终点分开；线上样本／分配／区间未披露，系统还同时引入多轮状态。不是soft-KL胜过hard CE或单项蒸馏因果证明，线上部署也不能混成离线Hybrid。[标注](evidence.md#e43)／[线上](evidence.md#e44) |
 | [Salesforce Koa](https://arxiv.org/html/2609.36115v2)／HyperClassifier | 高频路由可拆为专门组件；当前任务、状态与服务协议要匹配 | 平台方报告产品使用，587条生产来源路由是通用适配后零样本评估；不是客户上传自身数据后训练取得的独立生产增量 |
+| [葡语意图合成增强](https://huggingface.co/Synth-NLP/laya-intencao-ptbr-sintetico)及对应Kev实验 | 同底座保留真实标签only对照，再增加经筛选合成样本；公开数据与逐题输出，适合借实验结构 | 作者离线实验，非企业生产；单scenario划分、验证复用／有限seed、无等训练token控制及语言审校缺口。11月20日三份新入口tensor与11月15日旧分支相同，不证明当天重训或RLCD优于CE |
 | [Kev适配示例](https://github.com/jaredpalmer/kev/blob/051142bf849c2c6ad3f23e17a7b5aea2686d9a91/skills/kev-finetune/README.md) | 领域适配链路与前后对照可审查 | 67.7→73.6来自1050条生成记录；约1美元／H100是示例，不含全部数据与服务成本。CFPB历史成绩是公开文本离线适配，不是企业私有生产收益 |
 | [Parlant固定源码](https://github.com/emcie-co/parlant/tree/07b2bcb4bebfeda7c53f1e2bbf2c68415f389e83) | 共用state、逐条件判断、代码关系解析及工具后重判可借鉴 | 高召回相关性过滤不等于执行资格，ledger不等于成功回执。回退、概率有限性／归一化／成员校验要有显式合同；已有[隔离协议观察](examples/service-routing-review/parlant-protocol-observations.json)非完整引擎或模型运行 |
 | [Modem事件触发](https://modem.ai/blog/smart-triggers)／[Entagl回放](https://www.entagl.com/blog/typesafe-jev-benchmark-ai-decision-models) | 事件内可判条件可前置过滤；owner及流程状态缺失会导致错路由 | 依赖外部历史时仍须取证／启动Agent；历史回放输入不匹配不能单归因模型，阈值回退不保证更好 |
@@ -193,6 +203,7 @@
 - 固定模型与代码revision、Python／框架／算子、精度及完整输入分布。先跑含代表性最长状态／候选的真实前向和反向，再测少量更新；记录峰值、swap、跳过样本、梯度有限性和失败。
 - 检查head或特殊marker是否实际被训练、候选顺序是否映射正确。保存adapter／head／tokenizer／schema和校准，重载后对同批输入比较概率与最终判定；服务端不能悄悄改模板或截断。
 - Kev有MPS分支但目标机backward未验证；SII公开wrapper用多GPU，已核LoRA发布为合并BF16独立权重、训练器另存adapter；Intern当前CUDA全语言训练不能按推理内存估算。改成MLX／LoRA是新实现，须重新验合同。
+- 新增Strands v2／RSI训练代码仍以CUDA为路径，Jeff当前仅CUDA／CPU；Valen native续训已公开，但其设备上float64统计是MPS兼容阻碍；Liquid、RSI量化及Decisio的MPS／MLX推理包不构成Mac后训练证据。Strands E2B的2.3B有效参数、MoE的active参数和adapter文件大小都不能代替完整驻留／反向内存。
 - 27B BF16仅权重通常已超48GB；量化教师推理与27B训练是不同任务。PRDO论文每run用48GB Ada，**另有125GB主机内存**；CPU offload不能给48GB统一内存凭空增加容量。[PRDO实现](https://github.com/ZimmyGao/openjev-rlcd/tree/5859d2b893314fb3581f06e4e36c303e372b3f48)
 - 首轮数据量、更新预算、学习率、LoRA范围／rank、batch与停止规则先在Dev和资源预算内冻结；不抄400步、某个学习率或某张H100的美元数作保证。没有目标机receipt就写未测。
 
