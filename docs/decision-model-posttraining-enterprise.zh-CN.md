@@ -1,8 +1,10 @@
 # 企业决策模型后训练：当前判断与实施依据
 
-核查日期：2026-11-19。目标是用企业数据改进有界语义判断，并以完整任务结果验收。**当前没有本次目标企业项目、数据或训练结果；本页给出研究角色与可证伪的选型规则，不宣布企业效果胜者。** 目标计算机为M5 Pro 48GB，未在该设备执行训练。
+综合更新：2026-11-20，逐来源审查日期见附页。目标是用企业数据改进有界语义判断，并以完整任务结果验收。**当前没有本次目标企业项目、数据或训练结果；本页给出研究角色与可证伪的选型规则，不宣布企业效果胜者。** 目标计算机为M5 Pro 48GB，未在该设备执行训练。
 
 [文档导航与状态](README.md) · [方法与数值核查](decision-model-posttraining-method-audit.zh-CN.md) · [产物、平台与应用证据](decision-model-posttraining-platform-audit.zh-CN.md) · [Mac训练准入与示例](decision-model-posttraining-mac-recipe.zh-CN.md)
+
+11月19–20日后续讨论的[逐项事实核查](decision-model-discussion-fact-check-2026-11-20.zh-CN.md)不支持改成“StartLux／PPLX默认最优”或“SFT→CAPS→PRDO默认升级链”。StartLux可作有条件的能力／系统参照，但历史榜首、商业授权、完整训练产物和目标域效果分别验收；固定小动作集也不自动等于无须推理。下述研究角色保持按合同区分。
 
 <a id="current-decision"></a>
 ## 1. 当前结论：按部署目标选路线

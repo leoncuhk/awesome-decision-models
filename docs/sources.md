@@ -2640,3 +2640,83 @@
 - Source revision: `aaf56ff139dc5440da3939892cad249154f1d35b`
 - Note: Read source/run metadata and reaggregated 10 released JSONL files across five models. 467 matching item/question keys, 378 cases. No model inference or independent label adjudication; no evaluated HF weight SHA recorded.
 
+<a id="startlux-paper-v2-nov20"></a>
+## StartLux v2: training stages, selective computation and policy-aware calibration
+
+- Source: https://arxiv.org/html/2610.17309v2
+- Kind: `paper`; review depth: `content_reviewed`; reviewed: 2026-11-20
+- Source revision: `not captured / live URL`
+- Note: Full v2 body and appendices inspected. Separate public development scores from DI snapshots, post-reasoning from gated/fused probabilities, and frozen reward scorer from updated policy. No model run or full training-package reproduction.
+
+<a id="startlux-code-oct23-review-nov20"></a>
+## StartLux current inference and archived v1 training boundary
+
+- Source: https://github.com/StartLuxLabs/StartLux-Decision/tree/a99977d9332decc9fb27a2488b4a83b533b6cd5f
+- Kind: `repository`; review depth: `content_reviewed`; reviewed: 2026-11-20
+- Source revision: `a99977d9332decc9fb27a2488b4a83b533b6cd5f`
+- Note: Current default gate 0.6 differs from paper 0.9; mix 0.75. Current tree and archived v1 text-LoRA entry inspected; no complete public v1.1/RLCD2 training package located. Code scope is not a claim of no private trainer.
+
+<a id="di041-nov19-review-nov20"></a>
+## Decision Index 0.4.1: November 19 frozen public aggregate
+
+- Source: https://huggingface.co/spaces/multimodalart/jev-decision-index/blob/4ee57a1610e0547634ba0ec11990d10122672191/data/v03.json
+- Kind: `evaluation_report`; review depth: `content_reviewed`; reviewed: 2026-11-20
+- Source revision: `4ee57a1610e0547634ba0ec11990d10122672191`
+- Note: File path v03 contains edition 0.4 / label 0.4.1; 327 entries. StartLux27B Instant v67.92, rank_v29, tie group6. Public aggregate order and 0.9-band grouping recomputed, not private model evaluation. Full score now uses private same/new 60/40 after equating; not comparable by subtraction with October 0.3.2.
+
+<a id="di041-method-nov20"></a>
+## DI 0.4.1 scoring, equating and display ties
+
+- Source: https://huggingface.co/spaces/multimodalart/jev-decision-index/blob/4ee57a1610e0547634ba0ec11990d10122672191/methodology.html
+- Kind: `official_docs`; review depth: `content_reviewed`; reviewed: 2026-11-20
+- Source revision: `4ee57a1610e0547634ba0ec11990d10122672191`
+- Note: Task/weight revisions, stock-base moment equating and 0.9-band display ties inspected. A hidden set is not independent certification of business generalization.
+
+<a id="laya-vega-learner-nov20"></a>
+## Laya current Learner: Banking77 table belongs to a 4B reader/head path
+
+- Source: https://github.com/NandhaKishorM/laya/blob/76c9184871feac23609362315cb40f9c32caafc6/README.md
+- Kind: `repository`; review depth: `content_reviewed`; reviewed: 2026-11-20
+- Source revision: `76c9184871feac23609362315cb40f9c32caafc6`
+- Note: Current 4928/924 Banking77 table is labeled 4B reader; classic encoder requires explicit model path or vegaml=False. Not evidence for 322M/421M encoder SFT. Raw table split/weights/predictions and threshold isolation not fully authenticated.
+
+<a id="vegaml-learning-nov20"></a>
+## Vega learning: frozen reader features and fitted TTT head
+
+- Source: https://github.com/NandhaKishorM/vegaml/blob/8b0ca58e8d92ac3fc9c5cc682c93aebc7b885a20/docs/learn.md
+- Kind: `repository`; review depth: `content_reviewed`; reviewed: 2026-11-20
+- Source revision: `8b0ca58e8d92ac3fc9c5cc682c93aebc7b885a20`
+- Note: Learner and TTTHead source inspected: PCA and multiclass logistic fit on frozen features, not reader LoRA/full tuning. Documentation says fitted-head confidence has no own calibration; aggregate ECE does not certify deployment risk.
+
+<a id="intern-license-sep29-review-nov20"></a>
+## Intern-Decision root Apache license, already present September 29
+
+- Source: https://github.com/InternLM/Intern-Decision/blob/3572c8a68b5df5dafe02d0e093989ba8ec0183bc/LICENSE
+- Kind: `repository`; review depth: `content_reviewed`; reviewed: 2026-11-20
+- Source revision: `3572c8a68b5df5dafe02d0e093989ba8ec0183bc`
+- Note: Root Apache-2.0 added 2026-09-29, not a new November 20 grant. Model cards and training/data terms remain distinct.
+
+<a id="chinese-jev-medical-release-oct18"></a>
+## Chinese-Jev README links CJ-Medical weights since October 18
+
+- Source: https://github.com/gulucaptain/Chinese-Jev/commit/02a84752a7915a6c66baf434e6d58ea5909f1e0e
+- Kind: `repository`; review depth: `content_reviewed`; reviewed: 2026-11-20
+- Source revision: `02a84752a7915a6c66baf434e6d58ea5909f1e0e`
+- Note: README weight-link addition dated 2026-10-18T08:51:19Z. Corrects previous all-domain-weights-planned wording; does not establish all General/industry releases or paper checkpoint equivalence.
+
+<a id="cj-medical-card-oct18-review-nov20"></a>
+## CJ-Medical fixed model card and license statement
+
+- Source: https://huggingface.co/bbldCVer-hf/CJ-Medical/blob/1ae360b3ec9927622dd82f1430f0111f292ee17f/README.md
+- Kind: `model_card`; review depth: `content_reviewed`; reviewed: 2026-11-20
+- Source revision: `1ae360b3ec9927622dd82f1430f0111f292ee17f`
+- Note: Public card declares Apache-2.0. No tensor bytes downloaded or paper-run weight identity authenticated. Mixed CJ-Dataset source licenses remain separate; reported medical gain is relative 4.0%, not 4 percentage points.
+
+<a id="aliyun-systemone-api-nov20"></a>
+## Bailian native decision API: 16 questions and authentication contract
+
+- Source: https://help.aliyun.com/en/model-studio/decision-model-api
+- Kind: `official_docs`; review depth: `content_reviewed`; reviewed: 2026-11-20
+- Source revision: `not captured / live URL`
+- Note: Native API page explicitly limits requests to 16 questions and declares Bearer authorization. The fine-tuning guide demonstrates a bare key at the same invocation path for fine-tuned artifacts. Record both documented examples; no authenticated request was executed to establish whether both are accepted. Do not turn one example into a universal no-Bearer rule.
+

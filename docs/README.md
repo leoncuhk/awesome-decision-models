@@ -1,6 +1,6 @@
 # 文档地图：当前判断、证据与实验边界
 
-来源审视截至2026-11-19；最终整理与交付检查于2026-11-20完成。当前分支为`research/dynamic-skill-loading-2026-11`、[Draft PR #6](https://github.com/leoncuhk/awesome-decision-models/pull/6)。以下覆盖本分支原有全部29份`docs/**/*.md`，加本导航共30份。审视包括全文、相互引用、现行结论与重要主张的一手来源核对；不表示重新检索每个来源、复现模型或验证企业收益。
+首轮来源审视截至2026-11-19，整理于11月20日完成；11月20日追加了[后续讨论逐项核查](decision-model-discussion-fact-check-2026-11-20.zh-CN.md)及定向纠错。当前分支为`research/dynamic-skill-loading-2026-11`、[Draft PR #6](https://github.com/leoncuhk/awesome-decision-models/pull/6)。首轮原有29份`docs/**/*.md`加本导航为30份，本轮新增核查后共31份。审视包括全文、相互引用、现行结论与重要主张的一手来源核对；不表示重新检索每个来源、复现模型或验证企业收益。
 
 **当前判断统一在[企业决策模型后训练总览](decision-model-posttraining-enterprise.zh-CN.md)。** 按部署合同与可用学习信号确定候选，不维护一个混合总榜。没有本次目标企业项目或数据；尚未在用户的M5 Pro 48GB执行训练。
 
@@ -11,6 +11,7 @@
 | 为什么训练、目前该研究哪些路线 | [企业后训练总览](decision-model-posttraining-enterprise.zh-CN.md) | 当前综合判断；候选角色、改变判断的条件和实施门槛 |
 | 企业到底要判断什么 | [领域路径与标签语义](domain-path-applicability-research.zh-CN.md)、[业务实验合同](dynamic-skill-loading-business-playbook.zh-CN.md) | 当前问题定义与条件性验收步骤，尚无企业执行结果 |
 | 论文的数字和方法是否支持推论 | [方法审计](decision-model-posttraining-method-audit.zh-CN.md)、[平台／可训练产物审计](decision-model-posttraining-platform-audit.zh-CN.md) | 有版本的来源、元数据与公开输出复算；保留反例和未知项 |
+| 长篇讨论中的每个结论是否成立 | [11月19–20日逐项核查](decision-model-discussion-fact-check-2026-11-20.zh-CN.md) | 按主张分开判定；补StartLux最新榜单、路由协议、CAPS反馈及本仓旧错误，不另建采用排名 |
 | 目标机上怎样起步 | [Mac训练准入及实现示例](decision-model-posttraining-mac-recipe.zh-CN.md) | 先核前列候选可行性；Laya附录只示范链路，未执行模型训练 |
 | 其他客服系统给了什么证据 | [应用证据](decision-model-application-evidence.zh-CN.md)、[Parlant／Modem／Entagl实现核查](customer-service-implementation-review.zh-CN.md) | 有日期的主题审查；产品合同、代码、历史回放和生产结果分开 |
 | 全仓如何比较、记录和解释结果 | [选型通则](selection-guide.md)、[证据方法](methodology.md) | 通用规则；具体企业候选以总览为准 |

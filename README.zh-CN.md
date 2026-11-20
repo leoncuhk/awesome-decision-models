@@ -6,7 +6,7 @@
 
 收录用于**分类、评分、排序、验证、路由与拒判**的模型和方法。我们关心的不是谁的宣传数字更高，而是：**在具体任务中，哪种方法能以可接受的风险和总成本，交付可验收的结果。**
 
-**最近一批审查日期：2026-11-19。** 精选 74 项资源，其中 22 个核心模型系列、42 条带协议背景的评测记录。本版完成的是公开资料核验，**没有宣称独立运行并复现这些模型**。阅读深度、版本固定情况与未解决的资料缺口均见[来源登记](docs/sources.md)。各来源审查日期与深度不同，批次日期不表示全部来源重新审读。收录不等于背书，也不等于通过生产可靠性认证。
+**最近一批审查日期：2026-11-20。** 精选 74 项资源，其中 22 个核心模型系列、42 条带协议背景的评测记录。本版完成的是公开资料核验，**没有宣称独立运行并复现这些模型**。阅读深度、版本固定情况与未解决的资料缺口均见[来源登记](docs/sources.md)。各来源审查日期与深度不同，批次日期不表示全部来源重新审读。收录不等于背书，也不等于通过生产可靠性认证。
 
 ## 目录
 
@@ -42,7 +42,7 @@
 | 模型 | 机制／定位 | 适合的实验 | 重要限制 |
 | --- | --- | --- | --- |
 | [Jev / TypeSafe](https://typesafe.ai) | 托管的结构化判断服务：对选项、命题与有序评分标准输出分布。 | 可作为托管类型化判断对照或冻结的语义特征提取器；与监督基线比较时统一任务与标签规则。 确定性业务规则由代码执行，语义判断单独验证。 | RLCD 的完整训练配方未公开；格式合法与置信度字段不等于语义可靠。 实验图片支持不等于生产成熟，CJK 须另测；作者生产案例／smoke 不构成可独立核验的大规模随机 KPI A/B。 |
-| [Laya](https://github.com/NandhaKishorM/laya) | 小型编码器与动态选项判断头；包含通用、多语言及工作流专项检查点。 | 适合有领域训练数据、需要控制高频调用成本的窄域判断。 | 不可混用基础版／专项版成绩；专项卡披露训练／校准重叠和继承温度冲突。布尔标签可能主导 noul／choice；语义标签也不能保证否定句安全。官方称 action.act_probability 几乎恒为 1，不适合作为执行门槛；confidence 也需在实际任务上验证。 |
+| [Laya](https://github.com/NandhaKishorM/laya) | 小型编码器与动态选项判断头；包含通用、多语言及工作流专项检查点。 | 适合有领域训练数据、需要控制高频调用成本的窄域判断。 | 不可混用基础版／专项版成绩；专项卡披露训练／校准重叠和继承温度冲突。布尔标签可能主导 noul／choice；语义标签也不能保证否定句安全。官方称 action.act_probability 几乎恒为 1，不适合作为执行门槛；confidence 也需在实际任务上验证。 11月20日身份补核：当前包Learner／Vega的4B reader拟合头结果与此经典encoder家族分开，不能把其Banking77表移作322M／421M骨干后训练证据。 |
 | [Kev](https://github.com/jaredpalmer/kev) | Qwen 骨干与动态 pointer head 的类型化判断系列；Kev 1.0 将现有检查点固定为发布基线。 | 可检查、可微调的领域监督判断实验底座。 | 须区分训练任务族测试与迁移测试。27B v2 在长合同上退步且过度自信（CUAD ECE 0.053，v1 为 0.007）；可接收长度和拟合温度不保证新任务的准确率或校准。 |
 | [Contrastive Language Models (CLM)](https://github.com/Contrastive-LM/CLM) | 冻结语言模型编码器，分别表示状态与动作，再用可训练投影头匹配。 | 适合候选可复用的工具目录、排序及领域 Best-of-N 选择。 | 相对排序不能保证识别“全部候选都错”；Best-of-N 成绩不代表模型独立解题能力。 |
 | [Bespoke Nimble](https://github.com/bespokelabsai/nimble) | 开放Qwen3.5-9B监督判断adapter，与后续Nimble托管v4／v4.1服务分别识别。 | 适合证据敏感的判断，也可借鉴最小差异训练样本。 | 须区分开放9B、历史被测检查点及托管版本。公开基准由作者运行，完整原始逐次输出不全。最小事实改动法可借鉴，但不是生产效果证明。 |
@@ -59,7 +59,7 @@
 | [vLLM-SR Decision 3.0 / D3-Turbo](https://huggingface.co/collections/vllm-sr/decision-30) | 多模态 255 答码系列：经典版逐题编码，Turbo 复用状态后分题读出，须分开记录发布身份。 | 本地文本／图像／视频分类、评分与路由；固定输入和候选预算比较各型号。 | Index 各版本与公共分数不可混用；10 月 15 日快照的权重／校准标识未变，文本数值领先者处于共享第一平局带；该次服务核验要求原生 vLLM 合并后／nightly 版本，集成报告未测 LoRA 和 CUDA。 Turbo 指数为作者估计，未当作官方榜单或导入新数值；API 别名不是冻结检查点身份。 |
 | [Intern-Decision](https://github.com/internlm/Intern-Decision) | Qwen3.5 多模态 0.8B／2B／4B 系列，在一个因果 masked assistant skeleton 中评分多个类型化字段。 | 与每题独立模型比较多字段成本和字段／顺序敏感性，测试基于图像证据的判断。 | 原始训练／校准记录私有；96-case 分布试验只作诊断。型号／后端专属温度与 max(P) confidence 不能直接保证业务风险。 论文七套准确率针对文本任务，视觉轨迹为定性演示；公开 Jevbench 参与开发，已阅证据缺同数据消融及同条件 D3 多模态对照。 |
 | [Verdict / OpenJev](https://github.com/Heman10x-NGU/Verdict-open-jev) | 151M ModernBERT／GLiClass 候选分类器，含显式证据不足选项及 per-K 校准。 | 轻量意图分类与缺少正确选项测试；核对实际服务概率和评测 renderer／校准器。 | 作者测试显示 hard negative 和同义改写下拒答崩塌；转换者报告实际服务校准与保留集评测明显不同，不能保证跨域拒答可靠性。 |
-| [StartLux-Decision v1.1 (Instant / AutoThink)](https://github.com/StartLuxLabs/StartLux-Decision) | 使用 LM 选项字母读出：Instant 的 full-attention 提示双向，因果 AutoThink 按需推理并混合两次分布。 | 在证据充分的判断上以相同风险与总成本比较一次读出和选择性计算；商业使用权重需另获授权。 | 公共 DI 参与开发选择，并非完整／私有榜；DecisionPivot 为作者自建自测。论文 0.9 门槛成绩不代表当前 0.6 默认；confidence／none 须按实际策略验证。 |
+| [StartLux-Decision v1.1 (Instant / AutoThink)](https://github.com/StartLuxLabs/StartLux-Decision) | 使用 LM 选项字母读出：Instant 的 full-attention 提示双向，因果 AutoThink 按需推理并混合两次分布。 | 在证据充分的判断上以相同风险与总成本比较一次读出和选择性计算；商业使用权重需另获授权。 | 公共 DI 参与开发选择，并非完整／私有榜；DecisionPivot 为作者自建自测。论文 0.9 门槛成绩不代表当前 0.6 默认；confidence／none 须按实际策略验证。 11月20日定向复核：10月16日DI榜首为历史结果，DI0.4.1改变任务／权重后已非第一；汇总排名或取得商业授权都不证明领域后训练最优。 |
 | [Baseten mammoth-1 / elephant-1](https://huggingface.co/baselabs/mammoth-1) | Qwen3.5 27B／9B 系列，使用 LM 选项字母读出及分块双向 full-attention。 | 以相同证据／风险，与监督和生成基线比较独立问题的类型化判断。 | 卡片称图文训练，报告称仅文本，图像监督仍有冲突。反复公共指数反馈、隐藏私有题与 gated 数据限制独立审计；不引入排名或总冠军结论。 |
 | [Jeffan-31b-1710](https://huggingface.co/tattrongvu/Jeffan-31b-1710) | Gemma-4-31B 选项 logits 判断，加有条件的整段重复读取策略。 | 用于文本单读与选择性重复读取对照，须冻结阈值并计算完整请求成本。 | 训练数据／配方及重叠未披露。卡片 8192 与引擎 98304 是不同边界；公共套件最长样本及模拟显存上限不验证任意上下文或硬件。 |
 | [SII-Decision (4B / 27B)](https://github.com/amazingljy1206/SII-Decision) | 将推理后概率自蒸馏为零生成类型化判断；公开4B与27B产物。 | 作为能力与蒸馏参照；发布检查点评测与企业领域适配分别验证。 | JEVal包含作者对自有SII的报告。教师／参考／gold字段及从原始底座开始的配置，不等于从发布检查点直接硬标签续训。这里无共同中文企业数据或Mac训练实测。 |

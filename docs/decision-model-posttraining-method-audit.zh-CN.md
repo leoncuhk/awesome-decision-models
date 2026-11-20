@@ -2,6 +2,8 @@
 
 核查日期：2026-11-19。对象是TypeSafe Jev式有界概率判断，不是JEPA、交易策略或泛指Agent RL。本文核查用户提供材料中的方法、数字与推论，供[企业后训练主线](decision-model-posttraining-enterprise.zh-CN.md)使用。证据为论文正文、表格、版本历史及作者代码说明；没有执行训练、推理或独立重标注，所有外部成绩均为作者报告。
 
+2026-11-20补核：[完整逐项讨论审查](decision-model-discussion-fact-check-2026-11-20.zh-CN.md)覆盖后续StartLux、三篇路由工作及客服训练链。此处CAPS表已补明10-way，不能与完整77-way比较；其他旧表保留其版本与协议，未改为新模型结果。
+
 ## 1. 先固定论文版本与对象
 
 | 来源 | 本次核查版本与实际对象 | 使用边界 |
@@ -68,7 +70,7 @@ v1表1中，Qwen3-1.7B GSM8K-Verify的SFT准确率70.4%、GRPO91.8%、两阶段R
 
 ### 3.3 部分反馈：CAPS能支持到哪里
 
-[CAPS表1](https://arxiv.org/html/2611.15572v1#S4.T1)，Banking77，0.6B，N=5,000：
+[CAPS表1](https://arxiv.org/html/2611.15572v1#S4.T1)，Banking77，0.6B，N=5,000；每题gold＋8个干扰项＋other的10-way，**不是完整77-way**（other从不为gold）：
 
 | 方法 | 准确率 | ECE | AURC |
 |---|---:|---:|---:|

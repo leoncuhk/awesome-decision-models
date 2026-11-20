@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "reviewed_on": "2026-11-19",
+  "reviewed_on": "2026-11-20",
   "scope": "Evidence-backed models, methods and evaluation for bounded decisions in AI systems.",
   "sources": [
     {
@@ -3322,6 +3322,106 @@
       "review_depth": "content_reviewed",
       "source_revision": "aaf56ff139dc5440da3939892cad249154f1d35b",
       "review_note": "Read source/run metadata and reaggregated 10 released JSONL files across five models. 467 matching item/question keys, 378 cases. No model inference or independent label adjudication; no evaluated HF weight SHA recorded."
+    },
+    {
+      "id": "startlux-paper-v2-nov20",
+      "title": "StartLux v2: training stages, selective computation and policy-aware calibration",
+      "url": "https://arxiv.org/html/2610.17309v2",
+      "kind": "paper",
+      "reviewed_on": "2026-11-20",
+      "review_depth": "content_reviewed",
+      "source_revision": null,
+      "review_note": "Full v2 body and appendices inspected. Separate public development scores from DI snapshots, post-reasoning from gated/fused probabilities, and frozen reward scorer from updated policy. No model run or full training-package reproduction."
+    },
+    {
+      "id": "startlux-code-oct23-review-nov20",
+      "title": "StartLux current inference and archived v1 training boundary",
+      "url": "https://github.com/StartLuxLabs/StartLux-Decision/tree/a99977d9332decc9fb27a2488b4a83b533b6cd5f",
+      "kind": "repository",
+      "reviewed_on": "2026-11-20",
+      "review_depth": "content_reviewed",
+      "source_revision": "a99977d9332decc9fb27a2488b4a83b533b6cd5f",
+      "review_note": "Current default gate 0.6 differs from paper 0.9; mix 0.75. Current tree and archived v1 text-LoRA entry inspected; no complete public v1.1/RLCD2 training package located. Code scope is not a claim of no private trainer."
+    },
+    {
+      "id": "di041-nov19-review-nov20",
+      "title": "Decision Index 0.4.1: November 19 frozen public aggregate",
+      "url": "https://huggingface.co/spaces/multimodalart/jev-decision-index/blob/4ee57a1610e0547634ba0ec11990d10122672191/data/v03.json",
+      "kind": "evaluation_report",
+      "reviewed_on": "2026-11-20",
+      "review_depth": "content_reviewed",
+      "source_revision": "4ee57a1610e0547634ba0ec11990d10122672191",
+      "review_note": "File path v03 contains edition 0.4 / label 0.4.1; 327 entries. StartLux27B Instant v67.92, rank_v29, tie group6. Public aggregate order and 0.9-band grouping recomputed, not private model evaluation. Full score now uses private same/new 60/40 after equating; not comparable by subtraction with October 0.3.2."
+    },
+    {
+      "id": "di041-method-nov20",
+      "title": "DI 0.4.1 scoring, equating and display ties",
+      "url": "https://huggingface.co/spaces/multimodalart/jev-decision-index/blob/4ee57a1610e0547634ba0ec11990d10122672191/methodology.html",
+      "kind": "official_docs",
+      "reviewed_on": "2026-11-20",
+      "review_depth": "content_reviewed",
+      "source_revision": "4ee57a1610e0547634ba0ec11990d10122672191",
+      "review_note": "Task/weight revisions, stock-base moment equating and 0.9-band display ties inspected. A hidden set is not independent certification of business generalization."
+    },
+    {
+      "id": "laya-vega-learner-nov20",
+      "title": "Laya current Learner: Banking77 table belongs to a 4B reader/head path",
+      "url": "https://github.com/NandhaKishorM/laya/blob/76c9184871feac23609362315cb40f9c32caafc6/README.md",
+      "kind": "repository",
+      "reviewed_on": "2026-11-20",
+      "review_depth": "content_reviewed",
+      "source_revision": "76c9184871feac23609362315cb40f9c32caafc6",
+      "review_note": "Current 4928/924 Banking77 table is labeled 4B reader; classic encoder requires explicit model path or vegaml=False. Not evidence for 322M/421M encoder SFT. Raw table split/weights/predictions and threshold isolation not fully authenticated."
+    },
+    {
+      "id": "vegaml-learning-nov20",
+      "title": "Vega learning: frozen reader features and fitted TTT head",
+      "url": "https://github.com/NandhaKishorM/vegaml/blob/8b0ca58e8d92ac3fc9c5cc682c93aebc7b885a20/docs/learn.md",
+      "kind": "repository",
+      "reviewed_on": "2026-11-20",
+      "review_depth": "content_reviewed",
+      "source_revision": "8b0ca58e8d92ac3fc9c5cc682c93aebc7b885a20",
+      "review_note": "Learner and TTTHead source inspected: PCA and multiclass logistic fit on frozen features, not reader LoRA/full tuning. Documentation says fitted-head confidence has no own calibration; aggregate ECE does not certify deployment risk."
+    },
+    {
+      "id": "intern-license-sep29-review-nov20",
+      "title": "Intern-Decision root Apache license, already present September 29",
+      "url": "https://github.com/InternLM/Intern-Decision/blob/3572c8a68b5df5dafe02d0e093989ba8ec0183bc/LICENSE",
+      "kind": "repository",
+      "reviewed_on": "2026-11-20",
+      "review_depth": "content_reviewed",
+      "source_revision": "3572c8a68b5df5dafe02d0e093989ba8ec0183bc",
+      "review_note": "Root Apache-2.0 added 2026-09-29, not a new November 20 grant. Model cards and training/data terms remain distinct."
+    },
+    {
+      "id": "chinese-jev-medical-release-oct18",
+      "title": "Chinese-Jev README links CJ-Medical weights since October 18",
+      "url": "https://github.com/gulucaptain/Chinese-Jev/commit/02a84752a7915a6c66baf434e6d58ea5909f1e0e",
+      "kind": "repository",
+      "reviewed_on": "2026-11-20",
+      "review_depth": "content_reviewed",
+      "source_revision": "02a84752a7915a6c66baf434e6d58ea5909f1e0e",
+      "review_note": "README weight-link addition dated 2026-10-18T08:51:19Z. Corrects previous all-domain-weights-planned wording; does not establish all General/industry releases or paper checkpoint equivalence."
+    },
+    {
+      "id": "cj-medical-card-oct18-review-nov20",
+      "title": "CJ-Medical fixed model card and license statement",
+      "url": "https://huggingface.co/bbldCVer-hf/CJ-Medical/blob/1ae360b3ec9927622dd82f1430f0111f292ee17f/README.md",
+      "kind": "model_card",
+      "reviewed_on": "2026-11-20",
+      "review_depth": "content_reviewed",
+      "source_revision": "1ae360b3ec9927622dd82f1430f0111f292ee17f",
+      "review_note": "Public card declares Apache-2.0. No tensor bytes downloaded or paper-run weight identity authenticated. Mixed CJ-Dataset source licenses remain separate; reported medical gain is relative 4.0%, not 4 percentage points."
+    },
+    {
+      "id": "aliyun-systemone-api-nov20",
+      "title": "Bailian native decision API: 16 questions and authentication contract",
+      "url": "https://help.aliyun.com/en/model-studio/decision-model-api",
+      "kind": "official_docs",
+      "reviewed_on": "2026-11-20",
+      "review_depth": "content_reviewed",
+      "source_revision": null,
+      "review_note": "Native API page explicitly limits requests to 16 questions and declares Bearer authorization. The fine-tuning guide demonstrates a bare key at the same invocation path for fine-tuned artifacts. Record both documented examples; no authenticated request was executed to establish whether both are accepted. Do not turn one example into a universal no-Bearer rule."
     }
   ],
   "entries": [
@@ -3392,7 +3492,9 @@
       "source_ids": [
         "laya-family",
         "laya-specialist",
-        "laya-limits"
+        "laya-limits",
+        "laya-vega-learner-nov20",
+        "vegaml-learning-nov20"
       ],
       "summary": {
         "en": "Compact encoder family with dynamic option heads; general, multilingual and workflow-specialized checkpoints.",
@@ -3403,10 +3505,10 @@
         "zh": "适合有领域训练数据、需要控制高频调用成本的窄域判断。"
       },
       "caveat": {
-        "en": "Do not mix base/specialist scores; the typed card discloses training/calibration overlap and inherited-temperature conflicts. Boolean labels can dominate noul/choice; semantic labels alone do not make negation safe. action.act_probability is documented as nearly constant at 1 and unsuitable as an execution gate. Validate confidence on your workload instead.",
-        "zh": "不可混用基础版／专项版成绩；专项卡披露训练／校准重叠和继承温度冲突。布尔标签可能主导 noul／choice；语义标签也不能保证否定句安全。官方称 action.act_probability 几乎恒为 1，不适合作为执行门槛；confidence 也需在实际任务上验证。"
+        "en": "Do not mix base/specialist scores; the typed card discloses training/calibration overlap and inherited-temperature conflicts. Boolean labels can dominate noul/choice; semantic labels alone do not make negation safe. action.act_probability is documented as nearly constant at 1 and unsuitable as an execution gate. Validate confidence on your workload instead. Targeted November 20 identity check: current package Learner/Vega 4B-reader fitted-head results are separate from this classic encoder family; do not transfer that Banking77 table to 322M/421M backbone tuning.",
+        "zh": "不可混用基础版／专项版成绩；专项卡披露训练／校准重叠和继承温度冲突。布尔标签可能主导 noul／choice；语义标签也不能保证否定句安全。官方称 action.act_probability 几乎恒为 1，不适合作为执行门槛；confidence 也需在实际任务上验证。 11月20日身份补核：当前包Learner／Vega的4B reader拟合头结果与此经典encoder家族分开，不能把其Banking77表移作322M／421M骨干后训练证据。"
       },
-      "reviewed_on": "2026-10-06",
+      "reviewed_on": "2026-11-20",
       "mechanism": {
         "en": "Bidirectional encoder plus option-conditioned decision head.",
         "zh": "双向编码器加选项条件化判断头。"
@@ -4792,7 +4894,8 @@
         "intern-visual-loader-oct26",
         "intern-visual-masking-oct26",
         "intern-visual-model-oct26",
-        "intern-visual-save-oct26"
+        "intern-visual-save-oct26",
+        "intern-license-sep29-review-nov20"
       ],
       "reviewed_on": "2026-10-26",
       "weight_revision": null,
@@ -4824,7 +4927,7 @@
         "en": "Public HF weights, own inference.py and repository HF/XTuner paths. HF card default 8192 tokens rejects overlength, up to 8 images. Core ML 0.8B port in FluidUse is text-only and uses smaller fixed buckets; it does not inherit HF image/context support.",
         "zh": "公开 HF 权重、专属 inference.py 及仓库 HF／XTuner 路径。HF 卡默认 8192 token、超长拒绝，最多 8 图；FluidUse 的 Core ML 0.8B 仅文本、较小固定 bucket，不能继承 HF 的图像／上下文支持。"
       },
-      "license_note": "Three inspected cards declare Apache-2.0 and retained Qwen notices. Check evaluation dataset licenses separately; original training/private calibration records are not released.",
+      "license_note": "Three inspected cards declare Apache-2.0 and retained Qwen notices. Check evaluation dataset licenses separately; original training/private calibration records are not released. Root repository Apache-2.0 LICENSE was already present at the September 29 commit; the November 20 check is a correction of contrary claims, not a new license grant.",
       "tags": [
         "typed-decisions",
         "masked-next-token",
@@ -5036,9 +5139,13 @@
         "startlux-prism-oct22",
         "prism-instant-oct25",
         "prism-mxfp4-oct27",
-        "prism-serving-nov1"
+        "prism-serving-nov1",
+        "startlux-paper-v2-nov20",
+        "startlux-code-oct23-review-nov20",
+        "di041-nov19-review-nov20",
+        "di041-method-nov20"
       ],
-      "reviewed_on": "2026-11-01",
+      "reviewed_on": "2026-11-20",
       "weight_revision": null,
       "summary": {
         "en": "Option-letter LM readout: Instant uses prompt-bidirectional full-attention; causal AutoThink conditionally reasons and fuses two distributions.",
@@ -5049,8 +5156,8 @@
         "zh": "在证据充分的判断上以相同风险与总成本比较一次读出和选择性计算；商业使用权重需另获授权。"
       },
       "caveat": {
-        "en": "Public DI is development-selected, not the full/private board. DecisionPivot is author-built/evaluated. Gate 0.9 paper results do not describe current 0.6 defaults; confidence/none signals need policy-specific validation.",
-        "zh": "公共 DI 参与开发选择，并非完整／私有榜；DecisionPivot 为作者自建自测。论文 0.9 门槛成绩不代表当前 0.6 默认；confidence／none 须按实际策略验证。"
+        "en": "Public DI is development-selected, not the full/private board. DecisionPivot is author-built/evaluated. Gate 0.9 paper results do not describe current 0.6 defaults; confidence/none signals need policy-specific validation. November 20 targeted review: the October 16 DI lead is historical; DI 0.4.1 changes tasks/weights and no longer places this release first. Neither an aggregate rank nor commercial authorization establishes domain post-training superiority.",
+        "zh": "公共 DI 参与开发选择，并非完整／私有榜；DecisionPivot 为作者自建自测。论文 0.9 门槛成绩不代表当前 0.6 默认；confidence／none 须按实际策略验证。 11月20日定向复核：10月16日DI榜首为历史结果，DI0.4.1改变任务／权重后已非第一；汇总排名或取得商业授权都不证明领域后训练最优。"
       },
       "scale": {
         "en": "Five Instant nominal sizes: 0.8B/2B/4B/9B/27B; AutoThink: 4B/9B/27B. Cards separately pinned; no independent tensor count.",
@@ -5061,8 +5168,8 @@
         "zh": "不新增分类头：选已有 LM 的 A–Z 行，每次最多 26 候选，长列表分组／决赛归约；每题独立 row。Instant 仅改 full-attention，linear-attention 保持因果；AutoThink 全因果，以 max(P) 开门，通常初判 25%＋后判 75%；API confidence 是不同统计量。"
       },
       "training": {
-        "en": "Paper: full-language SFT; merged adapters/data/attention specialization and Instant seed-weight averaging; causal reasoning supervision then RLCD². Vision frozen. RLCD² uses a frozen starting scorer, proper-score difference and soft length penalty with group-relative policy gradients. Public inference plus archived v1 text LoRA does not establish the complete v1.1 training/data package.",
-        "zh": "论文：语言全参数 SFT；adapter／数据／注意力适配后合并，Instant 多种子权重平均；因果推理监督后接 RLCD²，视觉冻结。RLCD² 由冻结起始评分器计算 proper-score 差值及软长度惩罚，以 group-relative policy gradients 优化推理；公开推理加归档 v1 文本 LoRA 不等于完整 v1.1 训练／数据包。"
+        "en": "Paper: full-language SFT; merged adapters/data/attention specialization and Instant seed-weight averaging; causal reasoning supervision then RLCD². Vision frozen. RLCD² uses a frozen starting scorer, proper-score difference and soft length penalty with group-relative policy gradients. Public inference plus archived v1 text LoRA does not establish the complete v1.1 training/data package. V2 specifies about 2.7M stage-1 examples for 0.8–9B but 0.8M for 27B; its policy-aware calibration is not a universal per-type temperature guarantee.",
+        "zh": "论文：语言全参数 SFT；adapter／数据／注意力适配后合并，Instant 多种子权重平均；因果推理监督后接 RLCD²，视觉冻结。RLCD² 由冻结起始评分器计算 proper-score 差值及软长度惩罚，以 group-relative policy gradients 优化推理；公开推理加归档 v1 文本 LoRA 不等于完整 v1.1 训练／数据包。 v2的Stage1约270万只适用于0.8–9B，27B约80万；其策略感知校准也不是单一按题型温度的普遍保证。"
       },
       "availability": {
         "en": "Inspected vLLM/llama.cpp/MLX/Transformers paths, not executed. Accuracy release vLLM 0.19.1 is text-only; launcher 0.31 enables up to 8 images, video=0. Default Instant context cap 131072; causal configuration 262144, not verified full-context quality. AutoThink default gate 0.6/budget 4096, loop handling and 4000-character tail; full latency includes reasoning and reread. Oct17 fixes normalize list-form criteria/options before tournament routing (including a 26-choice none slot); optional vLLM extra now pins 0.31.0. Eight card revisions are unchanged; no new measured gain. Prism now also serves v1.1 Instant 4B/9B/27B (Q8_0/W4A8), with a complete prompt per question and no shared evidence/prefix cache; thoughts are rejected for Instant. AutoThink uses a separate causal shared-state path; allow_none defaults on. Oct27 fixes MXFP4 double-added residuals that made answers batch-dependent. Internal batch invariance, BF16 parity and probability calibration are separate checks; quantization calibration proves none of the latter.",

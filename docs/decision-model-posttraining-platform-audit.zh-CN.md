@@ -4,6 +4,8 @@
 
 **结论：领域后训练已有可查路线，但不能把它们统称为“微调 Jev”。** TypeSafe 当前不提供客户权重适配；阿里有受限开放的托管 LoRA；Together 有普通语言模型 SFT 配方；Clef 有开放权重和人工协作代训服务。公开证据仍不足以证明“某企业用自己的客服数据训练 Jev 类模型，经过独立线上对照改善了客户结果”已普遍成立。
 
+2026-11-20定向纠错：本页此前将Chinese-Jev行业权重统称planned，漏核了**10月18日已发布的CJ-Medical**；这不是当天新增。固定产物、许可证、Intern许可和StartLux／PPLX版本等后续事实见[逐项讨论核查](decision-model-discussion-fact-check-2026-11-20.zh-CN.md)。下方该行已修正；其余来源仍按各自核查日理解。
+
 证据标记：**D**＝官方产品/接口文档；**A**＝模型作者离线实验/配方；**P**＝供应商或使用方报告实际生产使用，仍非独立审计；**I**＝本次据来源推断。所有性能数字均非 `reproduced_here`。
 
 ## 产品能力与训练契约
@@ -13,7 +15,7 @@
 | Jev 仍须等候名单，企业可微调专属 Jev | 前半过时，后半不成立 | 当前开放注册；Models 明说同一权重服务所有账户，不用客户数据作 fine-tune/LoRA。业务适配靠 state、规则、示例和代码组合。 | [注册帮助](https://help.typesafe.ai/articles/4519713419-how-do-i-create-or-activate-my-account-after-an-invitation-or-waitlist-approval)、[Customizing Jev](https://docs.typesafe.ai/models#customizing-jev) | D |
 | Jev 仅文本、64k、255 选项、$0.042/M | 部分过时 | 1.14 已发布，默认请求64k/单题32k，Choice最多255项；输入还支持图像，图像/Box仍是实验状态。长上下文须显式开启至262k；输入价仍为$0.042/百万tokens、输出免费。 | [模型](https://docs.typesafe.ai/models)、[Choice](https://docs.typesafe.ai/primitives/choice)、[图像状态](https://docs.typesafe.ai/images)、[价格](https://help.typesafe.ai/articles/5187202169-how-much-does-jev-cost) | D |
 | 能下载官方 Jev 权重，在 M5 上训练 | 未找到支持 | 本次官方文档/发布入口未发现 Jev 权重或本地训练包。不能从兼容 API 的其他模型反推 Jev 内部结构，更不能把 Kev/Tev 权重称为 Jev 权重。 | [TypeSafe 模型与定制契约](https://docs.typesafe.ai/models) | D＋I，缺公开产物 |
-| `/v1/systemone` 已是事实标准，阿里/Ollama可无差别替换 | 表述过强 | 多家沿用该接口形状，可称生态兼容约定；未见正式共同规范/一致性认证。阿里推理鉴权不用Bearer前缀；Ollama支持取决于版本和模型，模型类型、概率、校准与图像合同仍须逐项验收。 | [阿里调用契约](https://help.aliyun.com/en/model-studio/decision-model-tuning-guide)、[Ollama 官方发布](https://ollama.com/blog/ollama-now-supports-jev-style-decision-models) | D＋I |
+| `/v1/systemone` 已是事实标准，阿里/Ollama可无差别替换 | 表述过强 | 多家沿用该接口形状，可称生态兼容约定；未见正式共同规范/一致性认证。阿里原生API写Bearer，微调指南推理示例用裸key；本轮未实测两者是否都接受，不能概括成一律不用Bearer。Ollama支持取决于版本和模型，模型类型、概率、校准与图像合同仍须逐项验收。 | [阿里调用契约](https://help.aliyun.com/en/model-studio/decision-model-tuning-guide)、[Ollama 官方发布](https://ollama.com/blog/ollama-now-supports-jev-style-decision-models) | D＋I |
 | 阿里 decision-model-preview 可领域后训练 | 成立，但有准入与版本限制 | 官方版本`decision-model-preview-2026-09-24`，方法`efficient_sft`＝LoRA；需客户经理开通。控制台限北京，OpenAPI另支持新加坡。预览模型仍迭代，文档建议高稳定性业务等待正式版。 | [官方微调指南](https://help.aliyun.com/en/model-studio/decision-model-tuning-guide) | D，未实测授权 |
 | 阿里 soft label 自动解决校准，均匀目标等于可靠拒判 | 只支持训练建议 | 必填hard label、可选覆盖全部选项的概率target；示例用教师标注并调温，对不可判断输入设均匀target且不计accuracy。它不证明独立校准、OOD拒判或业务风险界限。问题ID/type/instructions/criteria变更须按指南重制数据/重训。 | [Soft labels / FAQ](https://help.aliyun.com/en/model-studio/decision-model-tuning-guide) | D；效果为服务方主张 |
 | 阿里训练成本21元/小时、10139元/月 | 成本归属错误 | 这是MU5×1**部署**规格的按量/月租价；训练暂免token费用，教师生成数据另收费。不是任意本地/GPU训练的通用报价，也不是全流程总价。 | [Deployment / billing FAQ](https://help.aliyun.com/en/model-studio/decision-model-tuning-guide) | D，限当前页面/规格 |
@@ -67,7 +69,7 @@ Salesforce另有[2025-11工程访谈](https://engineering.salesforce.com/solving
 | [Intern-Decision](https://github.com/InternLM/Intern-Decision) | Qwen3.5指令检查点；固定回答骨架、决策marker的causal CE；冻结vision／projector并训练语言骨干；源码和权重分开发布，原训练数据不完整公开 | 官方配置不是现成LoRA，当前训练实现要求Linux／CUDA／XTuner。把4B推理放入48GB不能证明可原样全语言参数训练；新增LoRA需验证marker与视觉链路 |
 | [SII-Decision](https://github.com/amazingljy1206/SII-Decision) | 4B为Qwen3.5-4B指令版、27B为Qwen3.8-27B；第一token候选读出，同底座思考分布蒸馏；现有代码、训练数据、LoRA与Full发布；训练器从原始底座起步，要求gold_target、train_target和p0，并非只收企业硬标签的续训入口。Full只更新与LoRA相同的指定语言线性层，非每个参数 | 4B值得保留为不同信号路线；提供的4／8GPU训练wrapper与4090推理脚本不能称单Mac已可复现。LoRA发布为合并权重，继续训练前核查起点及保存格式 |
 | [Nimble开放9B](https://huggingface.co/bespokelabs/Bespoke-Nimble-9B) | Qwen3.5-9B＋PEFT adapter、候选token CE；最小事实改动是数据方法，非表示层contrastive loss；2676合成训练／324合成评测行不等于独立人工金标 | MLX推理不证明Mac训练；旧开放9B与新托管v4／v4.1分别识别。模型卡Apache-2.0不自动证明当前GitHub全部代码同许可；版本与许可边界见[模型卡](models.md#nimble) |
-| [Chinese-Jev](https://github.com/gulucaptain/Chinese-Jev) | 已有encoder训练／数据构造代码，推荐Laya multilingual兼容bundle；CJ数据已发布但混合来源许可；General／行业权重仍列计划发布 | 中文研究参考不等于已有可下载中文行业检查点。当前可验证的是代码与数据合同，不能把社区底座适配称为复现论文原检查点 |
+| [Chinese-Jev](https://github.com/gulucaptain/Chinese-Jev) | 已有encoder训练／数据构造代码；[10月18日发布记录](https://github.com/gulucaptain/Chinese-Jev/commit/02a84752a7915a6c66baf434e6d58ea5909f1e0e)链接CJ-Medical，[固定权重卡](https://huggingface.co/bbldCVer-hf/CJ-Medical/blob/1ae360b3ec9927622dd82f1430f0111f292ee17f/README.md)声明Apache-2.0。General及其他行业产物分别核查；混合CJ数据保留各来源许可 | 本轮只核卡／元数据，未下载权重或认证论文原run身份；医学题表现不等于中文客服效果或目标Mac训练可行。不能再写所有行业权重均未发布，也不能把社区底座适配当原论文复现 |
 | [Koa Decisions](https://www.salesforce.com/news/stories/koa-decisions-salesforce-decision-models/) | 供应商生产组件与论文方法参考，原企业数据及部署检查点不公开 | 主要借鉴原子标签映射、匹配服务评估和状态合同；不属于现成的本地开放权重训练方案 |
 
 上述模型的代码／权重许可与训练来源许可分开。Apache-2.0卡片不能自动覆盖混合训练语料；某个家族含研究用／非商业来源时，需按精确artifact解释，不能用另一个同家族版本代替。
