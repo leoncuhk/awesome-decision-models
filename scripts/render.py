@@ -65,7 +65,10 @@ def outputs(root: Path = ROOT) -> dict[Path, str]:
           'E39':'JEVal：汇总分类、检查点与作者评测边界。',
           'E40':'PRDO：保留推理的同底座选择性判断比较。',
           'E41':'中文公开输出：多语种差距与小样本边界。',
-          'E42':'Laya多种子：未选出CE或RLCD的通用胜者。'}
+          'E42':'Laya多种子：未选出CE或RLCD的通用胜者。',
+          'E43':'企业教师标注：解释与自检的人工审核结果。',
+          'E44':'企业多轮分类：作者线上比较与归因边界。',
+          'E45':'Drex Max：追加RLAF正结果与控制缺口。'}
         replacements['EVIDENCE_LINKS']='\n'.join(f"- [{e['id']} — {e['title'] if lang=='en' else short_zh[e['id']]}](docs/evidence.md#{e['id'].lower()})" for e in evs)
         for category in ['baselines','routing','reliability','evaluation','foundations','related_lists']:
             lines=[]

@@ -3422,6 +3422,86 @@
       "review_depth": "content_reviewed",
       "source_revision": null,
       "review_note": "Native API page explicitly limits requests to 16 questions and declares Bearer authorization. The fine-tuning guide demonstrates a bare key at the same invocation path for fine-tuned artifacts. Record both documented examples; no authenticated request was executed to establish whether both are accepted. Do not turn one example into a universal no-Bearer rule."
+    },
+    {
+      "id": "small-heads-v4-nov20",
+      "title": "Small Heads, Strong Decisions: latest controlled readout study v4",
+      "url": "https://arxiv.org/html/2611.15592v4",
+      "kind": "paper",
+      "reviewed_on": "2026-11-20",
+      "review_depth": "content_reviewed",
+      "source_revision": null,
+      "review_note": "Latest v4 adds retrieval-tuned checkpoints. Five readouts train with backbone LoRA under one English recipe; single seed and per-head LR selection. Similar accuracy and cheaper heads do not prove frozen features sufficient or Chinese/long-state superiority."
+    },
+    {
+      "id": "tdm-label-budgets-v2-nov20",
+      "title": "Typed decision models under prevalence shift and label budgets v2",
+      "url": "https://arxiv.org/html/2610.26325v2",
+      "kind": "paper",
+      "reviewed_on": "2026-11-20",
+      "review_depth": "content_reviewed",
+      "source_revision": null,
+      "review_note": "November 17 v2 adds 100/500/2500-label curves and in-budget selection. English intent decisions use gold intent groups rather than full-label routing; CLINC margin does not survive budget-internal selection. Compare supervised domain learning, not an unconditional label threshold or Chinese winner."
+    },
+    {
+      "id": "tdm-gauntlet-v1-nov20",
+      "title": "TDM-Gauntlet: typed models versus task adaptation across ACL papers",
+      "url": "https://arxiv.org/html/2611.20191v1",
+      "kind": "paper",
+      "reviewed_on": "2026-11-20",
+      "review_depth": "content_reviewed",
+      "source_revision": null,
+      "review_note": "English task-swap study. Adaptation on 13 selected configurations uses 500 training labels plus 376–1000 validation labels. Median gap closure is not accuracy; LoRA 27B one seed versus encoder three seeds, distinct tuning/compute budgets. No Mac or Chinese result."
+    },
+    {
+      "id": "amazon-multiturn-intent-2026",
+      "title": "Amazon multi-turn intent classification with LLM-based labeling",
+      "url": "https://aclanthology.org/2026.customnlp4u-1.8.pdf",
+      "kind": "paper",
+      "reviewed_on": "2026-11-20",
+      "review_depth": "content_reviewed",
+      "source_revision": null,
+      "review_note": "Formal July 2026 PDF read; SHA256 fcf06cda1b53fb97144553767b794ec48854acf8c1f9304951b11079c3ba24ce. Three separate RoBERTa-base classifiers, not one shared multi-head model. Label-audit and human classifier evaluation differ. Production section reports deployed classifier, not offline hybrid; A/B sample/allocation/intervals and relative-vs-pp changes are unspecified."
+    },
+    {
+      "id": "drex-paper-v2-nov20",
+      "title": "Drex v2 paper: RLAF objectives and stage ablations",
+      "url": "https://arxiv.org/html/2611.07854v2",
+      "kind": "paper",
+      "reviewed_on": "2026-11-20",
+      "review_depth": "content_reviewed",
+      "source_revision": null,
+      "review_note": "Pointer RLAF directly differentiates adjusted-target proper losses; Max instead sums finite-action reward with reference KL. Max stage comparison has positive reported metrics but no equal-extra-compute continued-SFT control or train-seed robustness. Judge can override verified gold; full trainer/data not established by inference release."
+    },
+    {
+      "id": "mapika-rl-v10-nov20",
+      "title": "Mapika v8 to v10: actor, true-belief supervision and retention",
+      "url": "https://github.com/Mapika/decider/blob/91b6fa9b94ab6c4dc2c63d3b14d413243b4fffcc/docs/RL.md",
+      "kind": "repository",
+      "reviewed_on": "2026-11-20",
+      "review_depth": "content_reviewed",
+      "source_revision": "91b6fa9b94ab6c4dc2c63d3b14d413243b4fffcc",
+      "review_note": "Positive sampled closed-loop task outcomes coexist with greedy and transfer limits. Mixed PPO actor, known environment probability laws, consistency, KL and supervised replay; four arms and checkpoint selection. Never-rewarded tasks enter validation; exact research trainer not in core release. Not pure business-outcome logs or static-classification RL proof."
+    },
+    {
+      "id": "correctness-gated-distill-v1-nov20",
+      "title": "Correctness-gated multi-teacher distillation: label collapse and grounding limits",
+      "url": "https://arxiv.org/html/2609.09702v1",
+      "kind": "paper",
+      "reviewed_on": "2026-11-20",
+      "review_depth": "content_reviewed",
+      "source_revision": null,
+      "review_note": "Fixed response pool, three seeds and matched updates help isolate some effects, but weighted method does not beat hard filter; Refuted recall collapses. Most source labels are weak/silver, row artifacts incomplete and grounding audit not paired. Do not infer universal correctness-weighted distillation superiority."
+    },
+    {
+      "id": "self-retrospection-distill-v3-nov20",
+      "title": "Self-Retrospection Distillation v3: hindsight-to-foresight for generative agents",
+      "url": "https://arxiv.org/html/2610.08077v3",
+      "kind": "paper",
+      "reviewed_on": "2026-11-20",
+      "review_depth": "content_reviewed",
+      "source_revision": null,
+      "review_note": "Long-horizon generative reasoning/agent tasks, not a typed classifier substitute. Official code exists, but additional teacher channels and dense training add compute; reported reference configuration uses eight H200s, not a tested 48GB Mac recipe. Some negative and weak-seed results retained."
     }
   ],
   "entries": [
@@ -4700,7 +4780,7 @@
     },
     {
       "category": "core_models",
-      "reviewed_on": "2026-11-01",
+      "reviewed_on": "2026-11-20",
       "weight_revision": "v2.0 HF nace-ai/drex-v2.0@3e6d164cb5c8cf264eec167905cc2448d89ea97d (published LFS identities; tensor bytes not locally verified; v1.5 remains unpinned); Max HF repository a67fa2808b5d91a4db62629beb14eba6d3f3e53c (metadata only; evaluated tensor equality unverified)",
       "id": "drex",
       "name": "Nace Drex v1.5 / v2.0 / Max v1",
@@ -4719,7 +4799,8 @@
         "drex-max-release-oct30",
         "drex-max-hf-oct30",
         "drex-max-kapitsa-oct30",
-        "drex-max-q4-card-oct30"
+        "drex-max-q4-card-oct30",
+        "drex-paper-v2-nov20"
       ],
       "summary": {
         "en": "Drex family: text pointer-head v1.5/v2.0 and dense 27B multimodal Max v1 with a fixed 255-code readout.",
@@ -4730,8 +4811,8 @@
         "zh": "比较本地文本／JSON 与 Max CUDA 图像判断；跨版本比较须匹配精度、读出、证据和上下文。"
       },
       "caveat": {
-        "en": "v1.5 uses benchmark training splits; its results are not unseen-domain zero-shot. Public Index 0.3.1 leaders fall inside its tie band. Small runner checks do not establish broad parity. v2.0 JevBench author counts trail Jev 1.13.0 by two items (E32); this is not a significance result or a universal win. Current snapshot is not proven identical to evaluated weights. Max public-only Index results are not private text Full0.4; retain the failed native probability-parity gate, not just stable categorical picks.",
-        "zh": "v1.5 使用基准训练划分，其结果不能视为未知领域零样本；公开 Index 0.3.1 前列处于平局带内，小规模运行器核对不证明普遍等价。 v2.0 作者 JevBench 计数比 Jev 1.13.0 少两题（E32），不作显著性或普遍胜出结论；当前 snapshot 与实测权重未建立同一性。 Max 仅公共 Index 结果不能当作私有文本 Full0.4；须保留原生路径概率等价未通过，不能只看选项未翻转。"
+        "en": "v1.5 uses benchmark training splits; its results are not unseen-domain zero-shot. Public Index 0.3.1 leaders fall inside its tie band. Small runner checks do not establish broad parity. v2.0 JevBench author counts trail Jev 1.13.0 by two items (E32); this is not a significance result or a universal win. Current snapshot is not proven identical to evaluated weights. Max public-only Index results are not private text Full0.4; retain the failed native probability-parity gate, not just stable categorical picks. Max RLAF stage gains (E45) lack equal-extra-compute continued-SFT and training-seed controls; they do not erase the earlier serving-parity limits.",
+        "zh": "v1.5 使用基准训练划分，其结果不能视为未知领域零样本；公开 Index 0.3.1 前列处于平局带内，小规模运行器核对不证明普遍等价。 v2.0 作者 JevBench 计数比 Jev 1.13.0 少两题（E32），不作显著性或普遍胜出结论；当前 snapshot 与实测权重未建立同一性。 Max 仅公共 Index 结果不能当作私有文本 Full0.4；须保留原生路径概率等价未通过，不能只看选项未翻转。 Max RLAF阶段正结果（E45）缺等新增算力的继续SFT与训练种子控制，也不能抹去旧服务路径的概率等价限制。"
       },
       "scale": {
         "en": "v1.5 approximately 9B; v2.0 author describes 35B total/~3B active, 256 experts/8 active. Active size is not resident weight memory; tensors not independently counted. Max v1 is nominal dense27B; a runtime docstring identifies Qwen3.8-27B, while release prose omits the base name. No independent tensor count.",
@@ -4742,8 +4823,8 @@
         "zh": "pointer head 每题对给定 noul／choice／score 候选评分而不生成。v2.0 运行时提取 Qwen3_5Moe language_model 并舍弃视觉，混合骨干的各题为独立因果 row；分支运行库可共享状态前缀。 Max 不同：最后状态经无偏置255-code头，full-attention双向而线性层因果；每题完整独立行，无共享状态缓存。"
       },
       "training": {
-        "en": "v1.5 discloses official benchmark training splits plus procedural data. Full v2.0 training/decontamination/calibration artifacts remain unverified; do not transfer v1.5 recipe details or temperatures to v2.0. Max training data, overlap and calibration split remain undisclosed in reviewed material; do not inherit the v1.5/v2.0 recipe.",
-        "zh": "v1.5 披露使用官方基准训练划分加程序生成数据。完整 v2.0 训练／去污染／校准产物仍未核实，不能将 v1.5 配方细节或温度移植给 v2.0。 已阅 Max 资料未披露训练数据、重叠审计及校准划分，不能继承 v1.5／v2.0 配方。"
+        "en": "v1.5 uses benchmark training splits plus procedural data. The November 9 v2 paper describes staged supervision, adjusted feedback, v2.0 specialization and Max vision tuning. Pointer RLAF directly differentiates corrected-target proper losses; Max uses finite-action verified/judge reward with reference KL. These versions have different recipes. Full raw training/calibration data, complete RLAF trainer and identity of every evaluated tensor remain unverified; do not transfer one release recipe or temperature to another.",
+        "zh": "v1.5使用基准训练划分加程序数据。11月9日论文v2补充阶段监督、修正反馈、v2.0专项及Max视觉训练；pointer RLAF直接求修正目标的proper loss梯度，Max为有限动作verified／judge奖励加参考KL，各版配方不同。原始训练／校准数据、完整RLAF训练器与全部被测张量身份仍未核实，不能移植某一版配方或温度。"
       },
       "availability": {
         "en": "Python CUDA and Nace llama.cpp/Ollama forks; default state-plus-one-question limit 16384, configurable maximum 131072. v2.0 HF snapshot/card/config plus 16 shard and head LFS identities reviewed; no tensors downloaded or parity tested. Base vision packaging does not establish image input support. Oct23 Q4_K_M Apple path adds Kapitsa v0.2.15 shared-state branches/cache; defaults separately cap state, branch, packed request and sequence at 16384. Hardware-fit/short-ticket medians do not establish quantized decision quality, calibration or 131072-context accuracy. Max CUDA supports images; Mac GGUF/MLX/Kapitsa is text-only. Max default16384/configured262144 is not validated long-context quality. Kapitsa max probability drift0.0329 exceeds its0.02 parity gate despite no flips; long-row/32k reference checks remain unrun. A21-field short Q4 check on48GB is not broad hardware/calibration validation.",
@@ -5825,6 +5906,28 @@
       "caveat": {
         "en": "A method/code artifact, not TypeSafe RLCD disclosure or a no-generation model release. Accuracy and ranking can trade off; public code alone does not establish full paper reproduction or Mac feasibility.",
         "zh": "这是方法／代码产物，不是TypeSafe RLCD披露或零生成模型发布。准确率与排序可权衡；公开源码不证明论文完全复现或Mac可行。"
+      }
+    },
+    {
+      "id": "amazon-multiturn-intent",
+      "name": "Enterprise multi-turn intent learning (Amazon study)",
+      "category": "routing",
+      "url": "https://aclanthology.org/2026.customnlp4u-1.8/",
+      "source_ids": [
+        "amazon-multiturn-intent-2026"
+      ],
+      "reviewed_on": "2026-11-20",
+      "summary": {
+        "en": "Evidence-guided and self-critique teacher labeling, followed by separate domain/intent/issue RoBERTa classifiers for real ecommerce conversations.",
+        "zh": "以证据解释和自检改善教师标签，再为真实电商对话训练独立的领域／意图／问题RoBERTa分类器。"
+      },
+      "use": {
+        "en": "Study enterprise label quality, multi-turn state and supervised low-latency routing; keep labeler audit, classifier evaluation and online outcomes separate.",
+        "zh": "研究企业标注质量、多轮状态与低延迟监督路由；区分教师审计、分类评测和线上结果。"
+      },
+      "caveat": {
+        "en": "Author-reported production A/B lacks sample/allocation/interval details and changes several system factors. Private data are unavailable; deployed classifier is not evidence that the offline LLM hybrid or soft-distribution distillation caused the online gain.",
+        "zh": "作者生产A/B未披露样本／分配／区间，系统同时改变多项因素；原数据私有。部署分类器不证明离线LLM级联或软分布蒸馏导致了线上收益。"
       }
     }
   ]

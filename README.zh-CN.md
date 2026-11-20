@@ -6,7 +6,7 @@
 
 收录用于**分类、评分、排序、验证、路由与拒判**的模型和方法。我们关心的不是谁的宣传数字更高，而是：**在具体任务中，哪种方法能以可接受的风险和总成本，交付可验收的结果。**
 
-**最近一批审查日期：2026-11-20。** 精选 74 项资源，其中 22 个核心模型系列、42 条带协议背景的评测记录。本版完成的是公开资料核验，**没有宣称独立运行并复现这些模型**。阅读深度、版本固定情况与未解决的资料缺口均见[来源登记](docs/sources.md)。各来源审查日期与深度不同，批次日期不表示全部来源重新审读。收录不等于背书，也不等于通过生产可靠性认证。
+**最近一批审查日期：2026-11-20。** 精选 75 项资源，其中 22 个核心模型系列、45 条带协议背景的评测记录。本版完成的是公开资料核验，**没有宣称独立运行并复现这些模型**。阅读深度、版本固定情况与未解决的资料缺口均见[来源登记](docs/sources.md)。各来源审查日期与深度不同，批次日期不表示全部来源重新审读。收录不等于背书，也不等于通过生产可靠性认证。
 
 ## 目录
 
@@ -55,7 +55,7 @@
 | [Microsoft-Decision-1](https://ai.azure.com/catalog/models/Microsoft-Decision-1) | 托管的 Qwen3.5-9B 后训练模型，对有限选项评分。 | 比较分类、路由和按标准评分。 | 厂商比较缺少已审计的逐项产物；熟悉任务的校准不保证迁移，措辞与安全判断仍可能出错。 |
 | [OpenAI Decisions API / GPT-6 Luna](https://developers.openai.com/api/docs/guides/decisions) | 面向文本与图像的类型化判断 API，处于公开测试。 | 托管分类、路由与有序评分。 | 拒答为单独返回类型，不等于校准后的拒判；confidence 需在目标任务验证，训练与服务身份尚未披露。 |
 | [Google Gemini Decision 1 / Decisions API](https://aistudio.google.com/docs/models/gemini-decision-1) | 11月11日发布的托管模型，支持文本、图像、音频、视频和PDF判断，在共享输入上隔离各问题。 | 在相同证据、风险约束和完整成本下比较多模态分流、媒体规则检查与路由。 | 校准、速度及内部部署由厂商报告；confidence为最高选项概率，不是独立可靠性证据。安全拦截返回HTTP400；无缓存或Batch API。 |
-| [Nace Drex v1.5 / v2.0 / Max v1](https://github.com/nace-ai/drex-decision-models) | Drex 系列：文本 pointer-head v1.5／v2.0，加上独立 255-code 读出的多模态 dense 27B Max v1。 | 比较本地文本／JSON 与 Max CUDA 图像判断；跨版本比较须匹配精度、读出、证据和上下文。 | v1.5 使用基准训练划分，其结果不能视为未知领域零样本；公开 Index 0.3.1 前列处于平局带内，小规模运行器核对不证明普遍等价。 v2.0 作者 JevBench 计数比 Jev 1.13.0 少两题（E32），不作显著性或普遍胜出结论；当前 snapshot 与实测权重未建立同一性。 Max 仅公共 Index 结果不能当作私有文本 Full0.4；须保留原生路径概率等价未通过，不能只看选项未翻转。 |
+| [Nace Drex v1.5 / v2.0 / Max v1](https://github.com/nace-ai/drex-decision-models) | Drex 系列：文本 pointer-head v1.5／v2.0，加上独立 255-code 读出的多模态 dense 27B Max v1。 | 比较本地文本／JSON 与 Max CUDA 图像判断；跨版本比较须匹配精度、读出、证据和上下文。 | v1.5 使用基准训练划分，其结果不能视为未知领域零样本；公开 Index 0.3.1 前列处于平局带内，小规模运行器核对不证明普遍等价。 v2.0 作者 JevBench 计数比 Jev 1.13.0 少两题（E32），不作显著性或普遍胜出结论；当前 snapshot 与实测权重未建立同一性。 Max 仅公共 Index 结果不能当作私有文本 Full0.4；须保留原生路径概率等价未通过，不能只看选项未翻转。 Max RLAF阶段正结果（E45）缺等新增算力的继续SFT与训练种子控制，也不能抹去旧服务路径的概率等价限制。 |
 | [vLLM-SR Decision 3.0 / D3-Turbo](https://huggingface.co/collections/vllm-sr/decision-30) | 多模态 255 答码系列：经典版逐题编码，Turbo 复用状态后分题读出，须分开记录发布身份。 | 本地文本／图像／视频分类、评分与路由；固定输入和候选预算比较各型号。 | Index 各版本与公共分数不可混用；10 月 15 日快照的权重／校准标识未变，文本数值领先者处于共享第一平局带；该次服务核验要求原生 vLLM 合并后／nightly 版本，集成报告未测 LoRA 和 CUDA。 Turbo 指数为作者估计，未当作官方榜单或导入新数值；API 别名不是冻结检查点身份。 |
 | [Intern-Decision](https://github.com/internlm/Intern-Decision) | Qwen3.5 多模态 0.8B／2B／4B 系列，在一个因果 masked assistant skeleton 中评分多个类型化字段。 | 与每题独立模型比较多字段成本和字段／顺序敏感性，测试基于图像证据的判断。 | 原始训练／校准记录私有；96-case 分布试验只作诊断。型号／后端专属温度与 max(P) confidence 不能直接保证业务风险。 论文七套准确率针对文本任务，视觉轨迹为定性演示；公开 Jevbench 参与开发，已阅证据缺同数据消融及同条件 D3 多模态对照。 |
 | [Verdict / OpenJev](https://github.com/Heman10x-NGU/Verdict-open-jev) | 151M ModernBERT／GLiClass 候选分类器，含显式证据不足选项及 per-K 校准。 | 轻量意图分类与缺少正确选项测试；核对实际服务概率和评测 renderer／校准器。 | 作者测试显示 hard negative 和同义改写下拒答崩塌；转换者报告实际服务校准与保留集评测明显不同，不能保证跨域拒答可靠性。 |
@@ -108,6 +108,9 @@
 - [E40 — PRDO：保留推理的同底座选择性判断比较。](docs/evidence.md#e40)
 - [E41 — 中文公开输出：多语种差距与小样本边界。](docs/evidence.md#e41)
 - [E42 — Laya多种子：未选出CE或RLCD的通用胜者。](docs/evidence.md#e42)
+- [E43 — 企业教师标注：解释与自检的人工审核结果。](docs/evidence.md#e43)
+- [E44 — 企业多轮分类：作者线上比较与归因边界。](docs/evidence.md#e44)
+- [E45 — Drex Max：追加RLAF正结果与控制缺口。](docs/evidence.md#e45)
 
 领域评测、训练支持核查与未知／澄清策略见[图片意图适配流程](docs/selection-guide.md#image-intent-adaptation)。先看[多模态后训练一页入口](docs/multimodal-decision-finetuning.zh-CN.md#quick-route)，再深入同条件对照、候选门槛及[分层学术阅读清单](docs/multimodal-decision-finetuning.zh-CN.md#reading-list)。
 
@@ -148,6 +151,7 @@
 - **[Vowpal Wabbit](https://github.com/VowpalWabbit/vowpal_wabbit)** — 在线学习与上下文老虎机工具。 需要合适的日志、探索与评估假设。
 - **[Parlant rule matching / Jev integration](https://github.com/emcie-co/parlant)** — 已核CX引擎源码：共享状态批量判断逐规则命题，再解析声明的规则关系。 保留为源码参考，非生产采用建议。0.5偏yes过滤测相关性而非执行资格，原生缺少领域未知/冲突状态；局部响应解码需严格校验，请求失败不透明切换generator；未复现完整引擎/模型效果。
 - **[Modem Smart Triggers](https://modem.ai/blog/smart-triggers)** — 实施者产品案例：精确过滤与语义条件控制事件是否启动完整Agent。 未定位核心服务端代码或完整效果协议；11月19日文档对历史/外部信息条件仍启动Agent，也未固定当前fast模型版本；10月23日Jev公告不能外推为通用现行实现或已验证生产节省。
+- **[Enterprise multi-turn intent learning (Amazon study)](https://aclanthology.org/2026.customnlp4u-1.8/)** — 以证据解释和自检改善教师标签，再为真实电商对话训练独立的领域／意图／问题RoBERTa分类器。 作者生产A/B未披露样本／分配／区间，系统同时改变多项因素；原数据私有。部署分类器不证明离线LLM级联或软分布蒸馏导致了线上收益。
 
 选择执行者时，应记录**任务、可用证据、执行者、结果、耗时和成本**。只知道已选执行者的表现，并不知道所有其他执行者会怎样。相关假设可从下方的交接学习与因果研究继续了解。
 

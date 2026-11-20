@@ -2720,3 +2720,67 @@
 - Source revision: `not captured / live URL`
 - Note: Native API page explicitly limits requests to 16 questions and declares Bearer authorization. The fine-tuning guide demonstrates a bare key at the same invocation path for fine-tuned artifacts. Record both documented examples; no authenticated request was executed to establish whether both are accepted. Do not turn one example into a universal no-Bearer rule.
 
+<a id="small-heads-v4-nov20"></a>
+## Small Heads, Strong Decisions: latest controlled readout study v4
+
+- Source: https://arxiv.org/html/2611.15592v4
+- Kind: `paper`; review depth: `content_reviewed`; reviewed: 2026-11-20
+- Source revision: `not captured / live URL`
+- Note: Latest v4 adds retrieval-tuned checkpoints. Five readouts train with backbone LoRA under one English recipe; single seed and per-head LR selection. Similar accuracy and cheaper heads do not prove frozen features sufficient or Chinese/long-state superiority.
+
+<a id="tdm-label-budgets-v2-nov20"></a>
+## Typed decision models under prevalence shift and label budgets v2
+
+- Source: https://arxiv.org/html/2610.26325v2
+- Kind: `paper`; review depth: `content_reviewed`; reviewed: 2026-11-20
+- Source revision: `not captured / live URL`
+- Note: November 17 v2 adds 100/500/2500-label curves and in-budget selection. English intent decisions use gold intent groups rather than full-label routing; CLINC margin does not survive budget-internal selection. Compare supervised domain learning, not an unconditional label threshold or Chinese winner.
+
+<a id="tdm-gauntlet-v1-nov20"></a>
+## TDM-Gauntlet: typed models versus task adaptation across ACL papers
+
+- Source: https://arxiv.org/html/2611.20191v1
+- Kind: `paper`; review depth: `content_reviewed`; reviewed: 2026-11-20
+- Source revision: `not captured / live URL`
+- Note: English task-swap study. Adaptation on 13 selected configurations uses 500 training labels plus 376–1000 validation labels. Median gap closure is not accuracy; LoRA 27B one seed versus encoder three seeds, distinct tuning/compute budgets. No Mac or Chinese result.
+
+<a id="amazon-multiturn-intent-2026"></a>
+## Amazon multi-turn intent classification with LLM-based labeling
+
+- Source: https://aclanthology.org/2026.customnlp4u-1.8.pdf
+- Kind: `paper`; review depth: `content_reviewed`; reviewed: 2026-11-20
+- Source revision: `not captured / live URL`
+- Note: Formal July 2026 PDF read; SHA256 fcf06cda1b53fb97144553767b794ec48854acf8c1f9304951b11079c3ba24ce. Three separate RoBERTa-base classifiers, not one shared multi-head model. Label-audit and human classifier evaluation differ. Production section reports deployed classifier, not offline hybrid; A/B sample/allocation/intervals and relative-vs-pp changes are unspecified.
+
+<a id="drex-paper-v2-nov20"></a>
+## Drex v2 paper: RLAF objectives and stage ablations
+
+- Source: https://arxiv.org/html/2611.07854v2
+- Kind: `paper`; review depth: `content_reviewed`; reviewed: 2026-11-20
+- Source revision: `not captured / live URL`
+- Note: Pointer RLAF directly differentiates adjusted-target proper losses; Max instead sums finite-action reward with reference KL. Max stage comparison has positive reported metrics but no equal-extra-compute continued-SFT control or train-seed robustness. Judge can override verified gold; full trainer/data not established by inference release.
+
+<a id="mapika-rl-v10-nov20"></a>
+## Mapika v8 to v10: actor, true-belief supervision and retention
+
+- Source: https://github.com/Mapika/decider/blob/91b6fa9b94ab6c4dc2c63d3b14d413243b4fffcc/docs/RL.md
+- Kind: `repository`; review depth: `content_reviewed`; reviewed: 2026-11-20
+- Source revision: `91b6fa9b94ab6c4dc2c63d3b14d413243b4fffcc`
+- Note: Positive sampled closed-loop task outcomes coexist with greedy and transfer limits. Mixed PPO actor, known environment probability laws, consistency, KL and supervised replay; four arms and checkpoint selection. Never-rewarded tasks enter validation; exact research trainer not in core release. Not pure business-outcome logs or static-classification RL proof.
+
+<a id="correctness-gated-distill-v1-nov20"></a>
+## Correctness-gated multi-teacher distillation: label collapse and grounding limits
+
+- Source: https://arxiv.org/html/2609.09702v1
+- Kind: `paper`; review depth: `content_reviewed`; reviewed: 2026-11-20
+- Source revision: `not captured / live URL`
+- Note: Fixed response pool, three seeds and matched updates help isolate some effects, but weighted method does not beat hard filter; Refuted recall collapses. Most source labels are weak/silver, row artifacts incomplete and grounding audit not paired. Do not infer universal correctness-weighted distillation superiority.
+
+<a id="self-retrospection-distill-v3-nov20"></a>
+## Self-Retrospection Distillation v3: hindsight-to-foresight for generative agents
+
+- Source: https://arxiv.org/html/2610.08077v3
+- Kind: `paper`; review depth: `content_reviewed`; reviewed: 2026-11-20
+- Source revision: `not captured / live URL`
+- Note: Long-horizon generative reasoning/agent tasks, not a typed classifier substitute. Official code exists, but additional teacher channels and dense training add compute; reported reference configuration uses eight H200s, not a tested 48GB Mac recipe. Some negative and weak-seed results retained.
+

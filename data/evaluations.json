@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "reviewed_on": "2026-11-19",
+  "reviewed_on": "2026-11-20",
   "records": [
     {
       "id": "E01",
@@ -2898,6 +2898,188 @@
         "training_upstream_revision": "a4a8921afebfd852bba0000475cfb6ab737a124c",
         "raw_outputs": "Public result tables and report limitations read; no original model training repeated",
         "arithmetic_audit": "Published six aggregate cells recomputed using the source analyzer and independent arithmetic; this is not new inference or training."
+      },
+      "reproduced_here": false
+    },
+    {
+      "id": "E43",
+      "title": "Enterprise teacher-label audit: evidence reasoning plus self-critique",
+      "model_ids": [
+        "amazon-multiturn-intent"
+      ],
+      "source_ids": [
+        "amazon-multiturn-intent-2026"
+      ],
+      "evidence_type": "author_reported",
+      "reviewed_on": "2026-11-20",
+      "report_date": "2026-07-03",
+      "model_revision": null,
+      "protocol": {
+        "task": "Label intent from real ecommerce customer turns and prior dialogue",
+        "test_unit": "5522 manually reviewed labeler-output instances, Table 1; not student classifier accuracy",
+        "split": "Randomly sampled author test audit; private record identities and independence/blinding not independently authenticated",
+        "reference": "Author manual review, not teacher agreement alone",
+        "training": "Same Claude 3.7 labeler with one-stage explanation versus an additional critique/revision stage; more teacher computation, no teacher weight update",
+        "measurement": "Stage-1 correctness = 4802 both-correct + 84 stage-1-only; stage-2 = 4802 + 566 stage-2-only; paper rounds to 88% and 97%",
+        "hardware": "No local labeler run or Mac measurement; teacher computation and human costs not fully reported"
+      },
+      "metrics": [
+        {
+          "label": "One-stage labeler correctness from Table 1 counts",
+          "value": 0.8848243390076059,
+          "unit": "fraction",
+          "numerator": 4886,
+          "denominator": 5522
+        },
+        {
+          "label": "Two-stage labeler correctness from Table 1 counts",
+          "value": 0.9721115537848606,
+          "unit": "fraction",
+          "numerator": 5368,
+          "denominator": 5522
+        }
+      ],
+      "conclusion": "A task-specific example supports auditing and improving teacher labels before small-model SFT; it does not establish soft probabilities or self-critique as universally superior.",
+      "caveats": [
+        "Additional critique spends extra annotation compute; not equal-call-budget comparison.",
+        "Private audit records, adjudication detail and source grouping remain unavailable; reported figures are not independent enterprise replication.",
+        "The 1206 human-annotated classifier-evaluation instances and production comparison are different datasets/endpoints."
+      ],
+      "artifacts": {
+        "paper_pdf_sha256": "fcf06cda1b53fb97144553767b794ec48854acf8c1f9304951b11079c3ba24ce",
+        "source": "Official ACL PDF Table 1 and Section 4.1 inspected",
+        "raw_outputs": "Not public or re-executed; arithmetic on reported table cells only"
+      },
+      "reproduced_here": false
+    },
+    {
+      "id": "E44",
+      "title": "Enterprise multi-turn classifier: author-reported one-month online comparison",
+      "model_ids": [
+        "amazon-multiturn-intent"
+      ],
+      "source_ids": [
+        "amazon-multiturn-intent-2026"
+      ],
+      "evidence_type": "author_reported",
+      "reviewed_on": "2026-11-20",
+      "report_date": "2026-07-03",
+      "model_revision": null,
+      "protocol": {
+        "task": "Production ecommerce multi-turn intent routing with fine-tuned RoBERTa",
+        "test_unit": "One-month author-described A/B; traffic sample size and allocation unspecified",
+        "split": "Online deployment versus previous single-turn intent system; transcript and production data private",
+        "reference": "Bot automation rate and positive customer response rate as defined by the author",
+        "training": "Paper studies teacher-labeled transcripts, simulated intent switches and three separate domain/intent/issue classifiers. Production section names a fine-tuned RoBERTa but does not disclose the exact labeling/augmentation variant or checkpoint deployed; several representation/system changes coexist.",
+        "measurement": "Section 6.3 reports increases of 4.91% and 7.89% without stating relative versus percentage-point interpretation; no conversion made",
+        "hardware": "Author production end-to-end latency; infrastructure and batching not sufficiently specified for Mac transfer"
+      },
+      "metrics": [
+        {
+          "label": "Bot automation rate increase, % as reported (relative/pp unspecified)",
+          "value": 4.91,
+          "unit": "percent_as_reported"
+        },
+        {
+          "label": "Positive customer response rate increase, % as reported (relative/pp unspecified)",
+          "value": 7.89,
+          "unit": "percent_as_reported"
+        },
+        {
+          "label": "Production end-to-end p50 seconds",
+          "value": 0.12,
+          "unit": "seconds"
+        },
+        {
+          "label": "Production end-to-end p90 seconds",
+          "value": 0.16,
+          "unit": "seconds"
+        },
+        {
+          "label": "Production end-to-end p99 seconds",
+          "value": 0.2,
+          "unit": "seconds"
+        }
+      ],
+      "conclusion": "This is author-reported enterprise system use and an online comparison; it strengthens the practical supervised-data route, not single-factor algorithm attribution.",
+      "caveats": [
+        "No traffic counts, randomization/allocation details or confidence intervals disclosed.",
+        "Multi-turn context, taxonomy/data and modeling changed together; the comparison does not isolate teacher critique, CE, or distillation.",
+        "Section 6.3 names the deployed fine-tuned classifier, not the separately evaluated offline LLM hybrid.",
+        "No independent replication or target Chinese-customer/Mac result."
+      ],
+      "artifacts": {
+        "paper_pdf_sha256": "fcf06cda1b53fb97144553767b794ec48854acf8c1f9304951b11079c3ba24ce",
+        "source": "Official ACL PDF Section 6.3; offline Table 3 kept separate",
+        "raw_online_results": "Not published; no service or customer-data access here"
+      },
+      "reproduced_here": false
+    },
+    {
+      "id": "E45",
+      "title": "Drex Max: positive appended RLAF stage with missing continued-SFT control",
+      "model_ids": [
+        "drex"
+      ],
+      "source_ids": [
+        "drex-paper-v2-nov20"
+      ],
+      "evidence_type": "author_reported",
+      "reviewed_on": "2026-11-20",
+      "report_date": "2026-11-09",
+      "model_revision": null,
+      "protocol": {
+        "task": "Drex Max typed text decisions and calibration after appended training stages",
+        "test_unit": "Author retained SFT checkpoint versus post-RLAF/pre-vision checkpoint, Table 7; training-seed robustness not disclosed",
+        "split": "Public Decision Index suite and held-out Choice accuracy; temperature fit on a separate half per author protocol; exact run artifacts not independently authenticated",
+        "reference": "Author benchmark labels and verified/generative-judge training signal",
+        "training": "Same dense 27B lineage; append finite-action gold/judge expected reward with reference KL and consistency terms. No equal-extra-compute continued-SFT comparator",
+        "measurement": "DI points, Choice accuracy and ECE as reported; stage improvement is not a universally isolated RL objective advantage",
+        "hardware": "Author GPU training; source repository exposes inference/serving/tests, not a complete RLAF trainer or tested M5 recipe"
+      },
+      "metrics": [
+        {
+          "label": "SFT-only Decision Index points",
+          "value": 64.9,
+          "unit": "score"
+        },
+        {
+          "label": "Post-RLAF/pre-vision Decision Index points",
+          "value": 66.9,
+          "unit": "score"
+        },
+        {
+          "label": "SFT-only held-out Choice accuracy",
+          "value": 0.865,
+          "unit": "fraction"
+        },
+        {
+          "label": "Post-RLAF/pre-vision held-out Choice accuracy",
+          "value": 0.88,
+          "unit": "fraction"
+        },
+        {
+          "label": "SFT-only ECE",
+          "value": 0.044,
+          "unit": "fraction"
+        },
+        {
+          "label": "Post-RLAF/pre-vision ECE",
+          "value": 0.035,
+          "unit": "fraction"
+        }
+      ],
+      "conclusion": "A positive RLAF-stage report prevents blanket dismissal of decision RL, while missing continued-supervision/compute/seed controls keep it below directly deployable supervised choices for this task.",
+      "caveats": [
+        "The teacher term can override a verified answer in the derived optimum; occurrence rate was not measured.",
+        "Pointer RLAF uses a different, directly differentiated adjusted-target proper objective and should not be identified with Max or PPO.",
+        "Extra training, data and consistency terms are not fully isolated by retained intermediate checkpoints.",
+        "No tensor download, new inference/training or business/Mac validation."
+      ],
+      "artifacts": {
+        "source_code_revision": "112f75b54e3257ad38c0349274ca5fdb7408452b",
+        "source": "Paper v2 Sections 6.3/6.5/8.8, Table 7 inspected",
+        "raw_outputs": "Author results only; original training not repeated"
       },
       "reproduced_here": false
     }
