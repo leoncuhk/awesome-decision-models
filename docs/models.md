@@ -2,7 +2,7 @@
 
 [Home](../README.md) · [中文首页](../README.zh-CN.md) · [Evidence](evidence.md)
 
-Source review: 2026-11-20. These are source-backed descriptions and curatorial use cases, not production certifications.
+Source review: 2026-11-21. These are source-backed descriptions and curatorial use cases, not production certifications.
 
 `Unknown` is intentional. An inspected source revision does not identify the deployed weight revision. Language support, licenses and resource requirements must be checked for the exact artifact. Recorded weight identifiers are source-reported unless a local binary verification is explicitly documented; recording an identifier is not a claim that the weights were downloaded or hashed here.
 
@@ -775,4 +775,300 @@ Multimodal typed-decision family with native published-checkpoint domain trainin
 **Recorded weight identifier:** 9b0cacc976d7fb72f252ee1adb1564f5f15e462c
 
 **Sources:** [Valen Decision1.5 4B fixed native release](https://huggingface.co/Valen-Team/Valen-Decision-1.5-4B/blob/9b0cacc976d7fb72f252ee1adb1564f5f15e462c/README.md); [Valen native own-data SFT/RLCD training](https://github.com/Valen-Team/Valen/blob/f6df4fdbc45bf44a4ffbebaeda53f5fe6e49b339/valen/training/README.md); [Valen training device/statistics boundary](https://github.com/Valen-Team/Valen/blob/f6df4fdbc45bf44a4ffbebaeda53f5fe6e49b339/valen/training/distributed.py); [Valen complete domain adaptation workflow](https://valen-team.github.io/cookbook/domain-finetuning/)
+
+# Other resources / 其他资源
+
+Summary and boundary for every non-core entry. / 非核心条目的定位与边界。
+
+## Baselines / 基线
+
+<a id="setfit"></a>
+**[SetFit](https://github.com/huggingface/setfit)** — Few-shot sentence-transformer adaptation followed by a classification head. Not an arbitrary typed-question API.
+
+少样本句向量适配，再训练分类头。 不等于任意类型化问题接口。
+
+<a id="qwen-reranker"></a>
+**[Qwen3-Reranker](https://huggingface.co/Qwen/Qwen3-Reranker-0.6B)** — Task-trained query/document reranking. A relevance score is not a probability of business correctness.
+
+面向查询与文档的任务专用重排。 相关性分数不是业务正确概率。
+
+<a id="outlines"></a>
+**[Outlines](https://github.com/dottxt-ai/outlines)** — Constrained structured output for ordinary language models. Schema validity does not guarantee factual validity.
+
+为普通语言模型提供受约束结构化输出。 模式合法不保证事实正确。
+
+<a id="tabicl"></a>
+**[TabICLv2](https://arxiv.org/abs/2602.11139)** — A tabular foundation model for classification and regression. Paper-level inclusion; no local reproduction or natural-language claim.
+
+用于表格分类与回归的基础模型。 按论文收录；未本地复现，不外推自然语言能力。
+
+<a id="fluiduse"></a>
+**[FluidUse / decision-model Core ML deployment](https://github.com/FluidInference/FluidUse)** — Apple deployment resource with native Swift managers and Python-assisted Core ML bridges, including Decision 3.0. Conversion parity and smoke tests are not quality guarantees. Match length buckets, precision, tokenizer, calibrator and media path; bridge calls queue serially and timeouts close the session. Automatic downloads/environment setup are documented, not run here.
+
+Apple 部署资源，含原生 Swift manager 与 Python 辅助 Core ML bridge，支持 Decision 3.0 等。 转换等价和 smoke test 不保证质量；须匹配长度 bucket、精度、tokenizer、校准器与媒体路径。bridge 调用串行排队，超时会关闭 session；文档中的自动下载／环境安装本轮未运行。
+
+<a id="semantic-features"></a>
+**[Semantic features + supervised predictor](https://docs.typesafe.ai/cookbooks/autoresearch_feature_discovery)** — LLM-proposed questions and Jev judgments turn text into features for a supervised CatBoost predictor. Author-reported wine regression. Feature discovery belongs inside development folds; downstream training does not fine-tune Jev or establish financial/multimodal generalization. Separate SeLMRoute text-routing evidence uses grouped protocols; its regret/fallback and omitted extractor cost must not be read as business action safety or complete savings. Not reproduced here.
+
+LLM 提议问题，Jev 将文本转成语义特征，再由监督 CatBoost 预测任务标签。 葡萄酒回归属于作者报告；特征发现须限制在开发划分，训练下游模型不等于微调 Jev，也不证明金融／多模态泛化。 独立 SeLMRoute 文本路由证据须按分组协议阅读；其 regret／fallback 与未计提取器的成本不等于业务动作安全或全链路节省，未在此复现。
+
+<a id="ezjev-training-baseline"></a>
+**[ezjev text candidate-logit LoRA](https://github.com/everettjf/ezjev/tree/8b3d88957c0795bea160c8fbc9c6d2a54b051136)** — Inspectable per-question candidate CE+Brier, replay and temperature fitting on a Qwen3.5 text-training path. Not an image fine-tuning implementation. MIT covers code only; some training data are non-commercial or lack stated terms. No training or calibration result reproduced here.
+
+可检查的逐题候选 CE＋Brier、回放及温度拟合，训练路径使用 Qwen3.5 文本输入。 不是图像微调实现；MIT 仅覆盖代码，部分训练数据为非商业许可或未说明条款；未在此复现训练或校准。
+
+<a id="decision-pacman-distillation"></a>
+**[decision-pacman decision distillation](https://github.com/grapeot/decision-pacman/tree/593ed1f59f4f97ad0bda7287ff304e9667360089)** — Text-state teacher/simulator labels train a small option-distribution LoRA student. Game-specific author reports include lost generality. Not image-training or customer-support transfer evidence; complete data/evaluated artifacts not audited.
+
+用文本状态的教师／模拟器标签训练小型候选分布 LoRA 学生。 游戏专项作者报告同时存在通用能力下降；不证明图像训练或客服泛化，完整数据／评测产物未审计。
+
+<a id="qwen-image-sft"></a>
+**[Qwen VLM image-supervised SFT / LoRA](https://github.com/QwenLM/Qwen3-VL/blob/96588727e44c78b25ba03ea03b8e12f7e64fd0da/qwen-vl-finetune/README.md)** — Inspectable image-supervised routes: official QwenVL, ms-swift Qwen3.5, and pinned MLX-VLM image-conditioned language adapters for Mac experiments. Frameworks/checkpoints differ; no local model run or business gain. mlx-decision rejects image training, while mlx-vlm has a separate visual path. Code licenses and per-artifact rights differ; capacity, gradients, masks and reload/export parity remain gates. Community 4B conversion lacks an explicit license/card in the inspected snapshot; trace upstream notices/provenance. Jev-Decision is a Qwen3-VL-2B image-training code precedent, without a public checkpoint/result found in the inspected tree.
+
+可查图像监督路径：QwenVL 官方、ms-swift Qwen3.5，以及供 Mac 实验的固定 MLX-VLM 图像条件语言 adapter。 框架／检查点不同，未本地运行模型或证明业务收益。mlx-decision 训练拒收图片，mlx-vlm 另有视觉路径；代码与产物权利分别核，容量、梯度、mask 及重载／导出等价仍须过关。 所阅社区 4B 转换快照缺显式许可／模型卡，须追溯上游通知和来源。Jev-Decision 是 Qwen3-VL-2B 图像训练代码先例，已阅树未见公开 checkpoint／结果。
+
+<a id="dfip"></a>
+**[DFIP / Decision-Focused Inference Path](https://arxiv.org/html/2610.36804v1)** — Paired native-baseline systems study audits resident acceleration, exposed answers and external arrivals separately. Four selected checkpoints; short resident gains reverse under diverse traffic. Clef confidence drifts; Liquid ties released compilation. No billed savings, production certification or reproduction here.
+
+配对原生基线系统研究，分别审计驻留加速、对外答案字段与外部到达流量。 四个选定检查点；短驻留加速在多样流量下反转，Clef置信漂移，Liquid与发布版编译基本持平。未测账单节省、未认证生产可用且未复现。
+
+<a id="dice"></a>
+**[DICE / Direct Item Choice Estimation](https://arxiv.org/html/2610.34124v1)** — Supervised item choice with candidate-isolated shared-prefix attention and separately calibrated recommendation confidence. Author evaluation with sampled negatives, overlapping histories and possible pretraining exposure; next observed item is not online utility. Cascade cost is an estimate excluding routing overhead; code not audited.
+
+监督式商品选择，以候选隔离共享前缀注意力和单独校准的置信度进行推荐。 作者评估使用抽样负例，跨划分历史未去重且可能有预训练暴露；下一次观测交互不等于线上效益。级联成本为不含路由开销的估算，未审计代码。
+
+<a id="clairic"></a>
+**[Clairic / Clairic-Flash (typed extraction)](https://blog.cloudflare.com/open-clairic/)** — Adjacent typed extraction/estimation family: November 18 redesign uses parallel slot autoregressive extraction plus specialized numerical heads, separate from Clef closed-option decisions. Input-only pricing does not mean zero generation. Official results are internal author evaluations; no complete enterprise fine-tuning package or M5 run was established. The released 27B / 9B cards declare Apache-2.0, but open weights do not prove production confidence calibration.
+
+相邻的类型化提取／估计系列：11月18日改版用并行slot自回归提取及专用数值头，与Clef闭集判断分开。 只按输入计费不等于零生成；官方结果为内部作者评测，未建立完整企业续训包或M5运行证据。发布27B／9B卡声明Apache-2.0，但公开权重不证明生产置信度已校准。
+
+## Routing / 路由
+
+<a id="routellm"></a>
+**[RouteLLM](https://github.com/lm-sys/RouteLLM)** — Routes between stronger and cheaper language models using learned signals. Performance depends on the model pair, traffic and router training distribution.
+
+利用学习到的信号在强模型与便宜模型间路由。 效果依赖候选模型、流量与路由训练分布。
+
+<a id="llmrouter"></a>
+**[LLMRouter](https://github.com/ulab-uiuc/LLMRouter)** — Research infrastructure for building and comparing routing strategies. The August 2026 paper is a preprint; do not equate infrastructure with a proven best policy.
+
+构建和比较路由策略的研究基础设施。 2026 年 8 月论文为预印本；基础设施不是已证明的最优策略。
+
+<a id="vw"></a>
+**[Vowpal Wabbit](https://github.com/VowpalWabbit/vowpal_wabbit)** — Online-learning and contextual-bandit tooling. Requires appropriate logging, exploration and evaluation assumptions.
+
+在线学习与上下文老虎机工具。 需要合适的日志、探索与评估假设。
+
+<a id="parlant-rule-matching"></a>
+**[Parlant rule matching / Jev integration](https://github.com/emcie-co/parlant)** — Pinned CX engine implementation batches per-rule propositions over shared state and resolves declared rule relationships. Retained as code reference, not a production recommendation. The 0.5 lean-yes filter is relevance, not eligibility; native verdicts lack domain unknown/conflict states. Local response decoding needs stricter validation and request failure does not transparently switch to a generator. No full-engine/model reproduction.
+
+已核CX引擎源码：共享状态批量判断逐规则命题，再解析声明的规则关系。 保留为源码参考，非生产采用建议。0.5偏yes过滤测相关性而非执行资格，原生缺少领域未知/冲突状态；局部响应解码需严格校验，请求失败不透明切换generator；未复现完整引擎/模型效果。
+
+<a id="modem-smart-triggers"></a>
+**[Modem Smart Triggers](https://modem.ai/blog/smart-triggers)** — Implementer-described product gates event-triggered agent runs with exact filters and a semantic condition. No core server source or full effectiveness protocol found. Nov19 docs still start an agent for history/external-data conditions and do not identify a current fast-model build; Oct23 Jev announcement is not a universal current-version claim or a demonstrated production saving.
+
+实施者产品案例：精确过滤与语义条件控制事件是否启动完整Agent。 未定位核心服务端代码或完整效果协议；11月19日文档对历史/外部信息条件仍启动Agent，也未固定当前fast模型版本；10月23日Jev公告不能外推为通用现行实现或已验证生产节省。
+
+<a id="amazon-multiturn-intent"></a>
+**[Enterprise multi-turn intent learning (Amazon study)](https://aclanthology.org/2026.customnlp4u-1.8/)** — Evidence-guided and self-critique teacher labeling, followed by separate domain/intent/issue RoBERTa classifiers for real ecommerce conversations. Author-reported production A/B lacks sample/allocation/interval details and changes several system factors. Private data are unavailable; deployed classifier is not evidence that the offline LLM hybrid or soft-distribution distillation caused the online gain.
+
+以证据解释和自检改善教师标签，再为真实电商对话训练独立的领域／意图／问题RoBERTa分类器。 作者生产A/B未披露样本／分配／区间，系统同时改变多项因素；原数据私有。部署分类器不证明离线LLM级联或软分布蒸馏导致了线上收益。
+
+## Reliability / 可靠性
+
+<a id="mapie"></a>
+**[MAPIE](https://github.com/scikit-learn-contrib/MAPIE)** — Prediction-set, uncertainty and conformal-risk tooling. Guarantees depend on the procedure, target risk and data assumptions.
+
+预测集合、不确定性与保形风险工具。 保证依赖方法、风险目标及数据假设。
+
+<a id="system-one-risk-budget"></a>
+**[Calibration and Risk-Budgeted Decisions with System One Models](https://arxiv.org/html/2610.19811v1)** — Preprint separates probability calibration from fixed-sequence LTT certification of a binary decision policy under a risk budget. Author-reported six English-text datasets, single seed. The iid same-population guarantee is over calibration samples certifying population FOR, not per-item correctness, arbitrary multiclass/VLM risk or distribution shift. No certificate means policy fallback.
+
+预印本将概率校准与固定序列 LTT 对二元风险预算策略的认证分开。 作者报告六个英文文本数据集、单种子。同分布 iid 保证针对校准抽样认证总体 FOR，不是逐题正确、多类／VLM 任意风险或分布漂移保证；无证书意味着策略回退。
+
+<a id="routeguard"></a>
+**[RouteGuard / Cost-Aware Abstention](https://arxiv.org/html/2610.31657v1)** — Calibration-selected cost-aware ticket routing separates probability calibration from error discrimination. One corpus/random split, unequal taxonomy supervision and historical endpoints. Correct fixed-cost human triage is an assumption; reported costs omit full inference/review expense. External frozen archive not accessed.
+
+按校准集选成本敏感工单路由，分开概率校准和错误区分能力。 单语料随机划分，类别监督信息不对等、端点较旧。人工分流总正确且成本固定是设定；报告成本未含完整推理／复核费用，未读取外部冻结档案。
+
+<a id="rep2act-vadr"></a>
+**[Rep2Act / VAD-R](https://arxiv.org/html/2609.32653v1)** — Evidence-gap annotation and answerability-to-action alignment; newly cataloged Sep26 preprint. A-Acc is action agreement, not answer correctness. Model judges/balanced splits limit transfer; code/data availability and reuse rights remain unverified. No local reproduction.
+
+证据缺口标注及可答性到动作的对齐；本次新收录 9 月 26 日预印本。 A-Acc 是动作一致率而非答案正确率；模型裁判／平衡划分限制外推，代码数据可得性和复用许可未核实，未本地复现。
+
+## Evaluation / 评测
+
+<a id="decision-index"></a>
+**[HF-hosted Decision Index (archival releases and live board)](https://huggingface.co/spaces/multimodalart/jev-decision-index)** — A broader decision benchmark index with explicit aggregation rules. Oct14-generated 0.3.2 aggregate JSON inspected on Oct15; private items/raw runs remain unaudited. Text uses a 0.9-point tie band. Archive scoring versions separately: 0.3.2 includes scoring/data corrections, not evidence of retraining. This community index is separate from Artificial Analysis Decision Index 1.0; do not merge rankings or score labels. Current v0.4 text Full is private-only 60/40 same-skill/new-domain with a revised hidden domain set; public no longer contributes. Vision remains 50/50 public/private. Do not compare 0.3.2 and 0.4 Full as a model gain; archived pins survive removed live files.
+
+具有明确聚合规则的较广覆盖决策评测指数。 10 月 15 日核对了 10 月 14 日生成的 0.3.2 汇总 JSON，私有题目／原始运行仍未审计。文本榜有 0.9 分平局带；0.3.2 含评分／数据修正，不能据此推断重训。 此社区指数与 Artificial Analysis Decision Index 1.0 分属不同协议，不合并排名或成绩标签。 当前 v0.4 文本 Full 为纯私有同技能／新领域 60／40，隐藏新领域集合也修订；公共不再计入。视觉仍为公共／私有 50／50。不能将 0.3.2→0.4 Full 差异当模型增益；上游移除在线旧文件后仍保留历史固定来源。
+
+<a id="nimble-evaluation"></a>
+**[Nimble public evaluations](https://github.com/bespokelabsai/nimble/blob/62076b4f2d365b5879dafcf7f6dd072a1fe76df7/docs/PUBLIC_BENCHMARKS.md)** — Human-reference subsets, paired comparisons and calibration reporting. Project-author-run, not independently reproduced by this list.
+
+人工参考标签子集、配对比较及校准报告。 由项目方运行；本列表未独立复现。
+
+<a id="independent-bench"></a>
+**[Decision-model benchmark](https://github.com/nibzard/decision-model-benchmark)** — Third-party code and protocols for decision-model comparisons. Third-party status alone does not certify methodology or labels.
+
+用于判断模型比较的第三方代码与协议。 第三方身份本身不保证方法或标签可靠。
+
+<a id="financial-document-eval"></a>
+**[Financial-document decision tests](https://insights.ml4trading.io/p/testing-jev-on-financial-documents)** — Original-evaluator comparison of Jev and supervised text/TF-IDF models on earnings, 8-K labels and SEC follow-up. Vendor API support; historical selected populations, hindsight screening, post-hoc prompts and split limitations. No universal tree-versus-Jev winner or investment-return claim.
+
+原评测者比较 Jev 与监督文本／TF-IDF 模型，分别测试财报变化、8-K 标签和 SEC 后续问询。 厂商提供 API；历史筛选样本含回顾检查、事后提示和划分限制，不能宣布树模型／Jev 通用胜负或投资收益。
+
+<a id="mire-ecommir"></a>
+**[MIRE / WWW2025 multimodal intent competition](https://github.com/liujunwen23/MIRE/tree/d101287af90d114c5bf0cbfbd56fe9c52358e3bb)** — Parallel 23-class scene and 23-class dialogue-intent tasks, official full-SFT baseline, and sourced gold/silver/bronze methods and semifinal scores. Composite final prizes differ from online F1 ranks. E33 records official semifinal scores; E28 preserves author EcomMIR task results. Pseudo-label exposure and missing exact artifacts limit causal claims, replay and domain transfer.
+
+并列的 23 类场景／23 类对话意图任务、官方 full-SFT 基线，以及有来源的金银铜方法和复赛成绩。 综合最终奖项与线上 F1 排名不同；E33 保存官方复赛成绩，E28 保留 EcomMIR 作者分任务结果。伪标签接触与精确产物缺失限制归因、重放和跨域结论。
+
+<a id="decisionpivot"></a>
+**[DecisionPivot v1.1](https://huggingface.co/datasets/startlux-models/DecisionPivot/tree/b6a65d303f3f8689d293869aff3db41f944984c6)** — 13 generated contrast families, programmatic labels and public generator/solver/scoring assets; separate reused-public-task reference track. StartLux-author benchmark and runs, not third-party reproduction. Corrected v1.1 and intermediate tables must not be silently equated to the paper release scores. Hindsight coverage metrics are not deployment risk guarantees.
+
+13 个生成对比家族、程序标签及公开生成／求解／评分资产，另有复用公共任务参考轨。 StartLux 作者自建与运行，不是第三方复现。修正版 v1.1 及中间检查点表不能静默等同论文最终成绩；事后覆盖指标不是部署风险保证。
+
+<a id="artificial-analysis-decision-index"></a>
+**[Artificial Analysis Decision Index](https://artificialanalysis.ai/methodology/decision-index)** — Hosted-and-open decision-model index; v2 (Nov8) scores 50×(1+accuracy−Brier), so calibration enters the headline number, and moves 45% of items to private data. v1.0 and v2 are different indices; do not compare scores across versions. The reported v2 top three sit within one point, so rank order is not a selection signal. Leaderboard table and per-task results not audited here.
+
+托管与开放决策模型指数；11月8日 v2 以 50×(1+准确率−Brier) 计分，把校准计入主分，私有数据占比升至 45%。 v1.0 与 v2 是不同指数，分数不可跨版比较。v2 前三名相差在 1 分内，名次本身不构成选型信号；本仓未审计完整榜单与分任务结果。
+
+<a id="commit-or-abstain"></a>
+**[Commit or Abstain? Missing Legal Authority](https://arxiv.org/html/2610.29961v1)** — Third-party provider comparison exposes wrong acceptance versus unnecessary abstention on constructed CaseHOLD. One English legal task, synthetic absence, public-text training exposure unresolved. Logged API evaluation is not local reproduction; billed call comparisons omit human-review cost.
+
+独立于模型提供商的评估，在构造 CaseHOLD 上揭示错误接受与不必要拒答的权衡。 单一英文法律任务、构造性缺失，公共文本训练暴露未排除；API 日志评估不等于本仓库复现，调用费用对比不含人工复核成本。
+
+<a id="vltest"></a>
+**[VLTest joint image-text testing](https://arxiv.org/html/2610.30794v1)** — Oct22 method uses matched original/image/text/joint controls and checks that mutations preserve the expected answer. Seed-correct diagnostic selection is not traffic risk. MIT code needs assets, settings, adapters and annotation; paper/code oracle paths differ. No failure counts reproduced here.
+
+10 月 22 日方法以原始／仅改图／仅改文／联合四格对照，核查扰动是否保持预期答案。 仅种子答对的诊断选择不是流量风险；MIT 代码仍需资产、设置、适配与标注，论文／代码裁判路径有差异，本仓库未复现失效计数。
+
+<a id="relevance-calibration-nov08"></a>
+**[Beyond Ranking: calibrated relevance scoring](https://arxiv.org/html/2611.11480v1)** — Same-candidate relevance ranking and held-out probability calibration. Third-party paper report; historical Jev1.13 endpoint, judged-pair selection and truncated inputs. No production RAG outcome or local reproduction.
+
+同候选相关性排序与留出集概率校准。 第三方论文报告；历史Jev1.13端点、仅已判定样本及截断输入。无生产RAG效果或本地复现。
+
+<a id="system1-audit-nov09"></a>
+**[System1 perturbation and question-interference audit](https://arxiv.org/html/2611.12521v1)** — Audits distribution-derived confidence, bundled questions and perturbation explanations. Open-weight models, not hosted Jev; quantized single-GPU runs, synthetic clinical cases and balanced security samples. No clinical or security deployment proof.
+
+审计分布派生置信度、多题干扰及扰动解释。 评估开放权重模型而非托管Jev；单GPU量化、合成临床案例与平衡安全样本。不证明临床或安全生产效用。
+
+<a id="conflict-typing-oct27"></a>
+**[Decision models for RAG conflict typing](https://arxiv.org/html/2610.36915v1)** — Flat conflict classification, decomposition and confidence-gated cascades. One gateway census; small skewed benchmark, mutable endpoints and model judges. Not statistically equivalent to a stronger LLM or a factual-grounding result.
+
+直接冲突分类、问题拆分与置信门控级联。 单网关盘点；小型偏斜测试集、可变端点及模型裁判。未证明与强LLM统计等价或事实支撑提升。
+
+<a id="entity-matching-oct25"></a>
+**[Entity matching using decision models](https://arxiv.org/html/2610.34626v1)** — Zero-shot record-pair matching with prompt, robustness and cascade comparisons. Paper benchmark evidence; pair classification is not end-to-end entity resolution or proven production savings. Cascade adds an LLM ensemble.
+
+零样本记录对匹配，比较提示、鲁棒性与级联。 论文基准证据；记录对分类不是端到端实体消歧或已证生产节省，级联另加LLM集成。
+
+<a id="time-series-oct24"></a>
+**[Jev time-series decision benchmark](https://arxiv.org/html/2610.33410v1)** — Evaluates serialized sequences, event types and directional predictions. Historical Jev1.13 study; many numerical tasks and stock movement show weak discrimination. No trading return, industrial deployment or local reproduction.
+
+评估序列输入、事件类别及方向预测。 历史Jev1.13研究；许多数值任务与股价方向区分弱。无交易收益、工业部署或本地复现。
+
+<a id="typed-deciders-audit"></a>
+**[Confidence Is Not a Promise / Typed Deciders Audit](https://arxiv.org/html/2610.36311v1)** — Reference audit separates confidence ordering, selective-accuracy promises and their failure under shift. Empirical-population tests are not production guarantees. Mostly MASSIVE with five options; near-duplicate training exposure unresolved, hosted snapshots unknown and some Jev raw outputs withheld.
+
+参考审计区分置信排序、选择性准确率承诺及其在分布变化下的失效。 经验总体测试不等于生产保证；主要为五选项MASSIVE，近重复训练暴露未排除，托管快照未知且部分Jev原始输出未公开。
+
+<a id="entagl-jev-replay"></a>
+**[Entagl customer-routing replay](https://www.entagl.com/blog/typesafe-jev-benchmark-ai-decision-models)** — Implementer-reported labeled decisions and replay of historical customer-routing decisions. Retain as a report and negative lessons, not a reproducible code project. Public business APIs do not expose the evaluation harness; complete labels/per-row outputs were not located. Offline replay and constructed-case accuracy do not establish production or Chinese-service benefit.
+
+实施者报告的标注决策与真实客服历史路由回放。 保留报告与反例，非可复算源码项目；公开业务API不是评测harness，未定位完整标签/逐条输出；离线回放和构造测试准确率不证明生产或中文客服收益。
+
+<a id="jeval"></a>
+**[JEVal v2](https://arxiv.org/html/2610.03935v2)** — Multidomain English/Chinese evaluation of local typed decisions, reasoning limits and workflow composition. SII authors evaluate their own model; 10938 classification accuracy and valid-only calibration differ in denominator. Pooled benchmark results are not Chinese enterprise production proof or an all-version ranking.
+
+面向中英文多领域的局部类型化判断、推理边界与工作流组合评测。 SII作者评测自有模型；10938分类准确率与仅valid输出的校准指标分母不同。汇总基准不是中文企业生产证明，也不是跨版本总榜。
+
+<a id="to-jev-or-not"></a>
+**[To Jev or Not to Jev (System-1 models as LLM judges)](https://arxiv.org/abs/2611.00505)** — Pre-registered comparison of 14 System-1 decision models with four generative judges on eleven judge benchmarks, including reference-guided judging, calibration and injected-instruction robustness. Abstract-level review only. Judge benchmarks are public English tasks; injection robustness is model-specific, not a property of the System-1 design.
+
+预先声明协议，在 11 个评审基准上比较 14 个 System-1 决策模型与 4 个生成式评审，覆盖参考答案引导、校准与注入指令鲁棒性。 仅摘要级阅读。评审基准为公开英文任务；注入鲁棒性取决于具体模型，不是 System-1 设计的共性。
+
+<a id="reading-right-acting-wrong"></a>
+**[Reading Right, Acting Wrong (agent-loop decision diagnosis)](https://arxiv.org/abs/2610.18579)** — Pairs each agent next-action question with independent factual probes on the same state to separate misreading from wrong action. Preliminary v1, abstract-level review. Frozen states from simulated and benchmark environments, not live enterprise traffic.
+
+对同一 agent 状态同时提问下一步动作与独立事实探针，区分“读错状态”与“读对仍选错”。 初版预印本，仅摘要级阅读。冻结状态来自模拟与基准环境，不是真实企业流量。
+
+## Foundations / 基础文献
+
+<a id="scoring"></a>
+**[Strictly Proper Scoring Rules (2007)](https://doi.org/10.1198/016214506000001437)** — Why log loss and other proper scores target truthful distributions. An ideal optimization target is not proof of deployment calibration.
+
+为什么对数损失等适当评分规则以真实分布为目标。 理想优化目标不等于部署已校准。
+
+<a id="calibration"></a>
+**[On Calibration of Modern Neural Networks (2017)](https://proceedings.mlr.press/v70/guo17a.html)** — Empirical calibration and post-hoc temperature scaling. Calibration cannot repair incorrect rankings or missing evidence.
+
+经验校准及事后温度缩放。 校准不能修复错误排序或证据缺失。
+
+<a id="selective"></a>
+**[Selective Classification (2017)](https://arxiv.org/abs/1705.08500v2)** — Classification with abstention and risk/coverage trade-offs. Source experiments are not guarantees for unrelated LLM tasks.
+
+带拒判的分类与风险／覆盖率权衡。 原始实验不是无关 LLM 任务的保证。
+
+<a id="defer"></a>
+**[Learning to Defer to an Expert (2020)](https://proceedings.mlr.press/v119/mozannar20b.html)** — Jointly learn prediction and handoff to an expert. Humans and tools are not assumed infallible.
+
+联合学习预测与向专家交接。 不能假设人工与工具不会犯错。
+
+<a id="crc"></a>
+**[Conformal Risk Control (2022; reviewed v4)](https://arxiv.org/abs/2208.02814v4)** — Calibrate risk-controlling procedures under stated conditions. Read exchangeability, loss and monotonicity assumptions.
+
+在明确条件下校准风险控制程序。 检查交换性、损失与单调性等假设。
+
+<a id="crc-2026"></a>
+**[Non-Monotonic Conformal Risk Control (2026)](https://arxiv.org/abs/2602.20151v1)** — Extends the risk-control discussion beyond monotone losses. Preprint; stability-dependent bounds, not unconditional safety.
+
+将风险控制讨论扩展到非单调损失。 预印本；依赖稳定性的界，不是无条件安全。
+
+<a id="scoring-review"></a>
+**[Proper Scoring Rules: 2026 review](https://doi.org/10.1146/annurev-statistics-042424-050626)** — A recent review of estimation and forecast evaluation. Included from the abstract and publication metadata.
+
+近期关于估计与预测评估的适当评分综述。 基于摘要与出版元数据收录。
+
+<a id="causal-defer"></a>
+**[Causal Learning to Defer (AAAI 2026)](https://ojs.aaai.org/index.php/AAAI/article/view/39493)** — Studies handoff learning with hidden confounding. Adjacent research, not a turnkey production router.
+
+研究存在隐藏混杂时的交接学习。 相邻研究，不是即用型生产路由器。
+
+<a id="jev-in-the-wild"></a>
+**[Jev in the Wild (2026)](https://arxiv.org/abs/2609.30216)** — Data-driven survey and analysis of 2,170 public GitHub Jev projects, including early growth, application domains and decision-use patterns. Public repository counts do not establish deployment adoption or model accuracy; included from the abstract, not an independent reproduction.
+
+基于 2,170 个公开 GitHub Jev 项目的数据驱动综述与分析，涵盖早期增长、应用领域及决策用途分布。 公开仓库数量不能证明实际部署规模或模型准确率；此处仅核读摘要，未独立复现。
+
+<a id="prdo"></a>
+**[Post-Rationale Distribution Optimization (PRDO v2)](https://arxiv.org/html/2609.38850v2)** — Proper-score optimization of each sampled rationale’s answer distribution for selective prediction. A method/code artifact, not TypeSafe RLCD disclosure or a no-generation model release. Accuracy and ranking can trade off; public code alone does not establish full paper reproduction or Mac feasibility.
+
+为选择性预测优化每条采样推理之后的答案分布，以恰当评分规则为目标。 这是方法／代码产物，不是TypeSafe RLCD披露或零生成模型发布。准确率与排序可权衡；公开源码不证明论文完全复现或Mac可行。
+
+## Related lists / 相关列表
+
+<a id="awesome-system-one"></a>
+**[Awesome System One](https://github.com/andyrewlee/awesome-system-one)** — Closest ecosystem list; useful for discovery. Inclusion here does not endorse every linked item.
+
+最接近主题的生态列表，适合发现项目。 本版收录不代表认可其中每个条目。
+
+<a id="awesome-jev-zh"></a>
+**[Awesome Jev 中文](https://github.com/yzfly/awesome-jev-zh)** — Chinese-language Jev ecosystem resources. Inclusion here does not endorse every linked item.
+
+Jev 生态的中文资料。 本版收录不代表认可其中每个条目。
+
+<a id="awesome-routing"></a>
+**[Awesome LLM Routing and Cascading](https://github.com/ymoslem/awesome-llm-routing-cascading)** — Specialist routing and cascading bibliography. Inclusion here does not endorse every linked item.
+
+专门的路由与级联文献目录。 本版收录不代表认可其中每个条目。
+
+<a id="awesome-conformal"></a>
+**[Awesome Conformal Prediction](https://github.com/valeman/awesome-conformal-prediction)** — Specialist uncertainty and conformal prediction resources. Inclusion here does not endorse every linked item.
+
+专门的不确定性与保形预测资料。 本版收录不代表认可其中每个条目。
+
+<a id="awesome-martech-ai"></a>
+**[Awesome Martech AI](https://github.com/leoncuhk/awesome-martech-ai)** — Marketing data, intelligence, decision, activation and measurement resources with applied playbooks. Companion navigation, not independent product validation; its synthetic demo does not establish customer uplift.
+
+涵盖营销数据、智能、决策、激活和测量的资源及实践指南。 相关导航不构成独立产品验证；合成演示不证明客户业务增量。
 

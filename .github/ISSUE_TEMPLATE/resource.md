@@ -15,6 +15,6 @@ Dataset/split, reference labels, training mode, candidate budget, metric, hardwa
 
 ## Limitations or inaccessible material
 
-## Does this change a practical selection recommendation?
+## Which problem or playbook does this change?
 
 ## Affiliation / conflict of interest

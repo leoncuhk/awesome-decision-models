@@ -3360,3 +3360,27 @@
 - Source revision: `not captured / live URL`
 - Note: Own JSONL split/train/resume/compare workflow and author0.8B H200 short smoke receipt reviewed; one/two updates on three synthetic cases are engineering checks, not4B/M5 training or domain-effect proof.
 
+<a id="aa-decision-index-v2"></a>
+## Introducing the Artificial Analysis Decision Index v2
+
+- Source: https://artificialanalysis.ai/articles/decision-index-v2
+- Kind: `evaluation_report`; review depth: `abstract_reviewed`; reviewed: 2026-11-21
+- Source revision: `not captured / live URL`
+- Note: Announcement excerpt reviewed Nov21 (published Nov8). Headline score per question 50x(1+c-(p-c)^2), i.e. 50x(1+Accuracy-Brier) over an evaluation, so calibration enters the ranking. Private datasets 45% (v1: 25%). Adds AA-Paperclip and EvalSafe-O*NET-AA (15%); When2Call down to 10%; WildGuardTest removed. Reported top three within one point: Drex Max v1.1 73, GLiDE v1.2 73, Mammoth 27B 72; cost spread reported as $14 to $859 per 1M tasks. Full leaderboard table and per-task results not audited.
+
+<a id="to-jev-or-not-2611-00505"></a>
+## To Jev or Not to Jev: When Can System-1 Decision Models Replace LLM Judges?
+
+- Source: https://arxiv.org/abs/2611.00505
+- Kind: `paper`; review depth: `abstract_reviewed`; reviewed: 2026-11-21
+- Source revision: `not captured / live URL`
+- Note: Abstract only. 14 System-1 models chosen by a pre-stated protocol versus four generative judges on eleven judge benchmarks. Five of 14 statistically indistinguishable from GPT-5.6 without reasoning on pairwise/best-of-4; with a once-per-prompt reference answer eleven reach 90.3-93.4% on JudgeBench. Appended evaluator-directed injection reverses 0-5% of correct verdicts for five models and 17-49% for nine. Calibrated first stage matches Opus on LLMBar while escalating 17%. 4B correctness deficit attributed to reasoning, not size, via same-size controls. Body not reviewed; no number imported into evaluations.json.
+
+<a id="reading-right-acting-wrong-2610-18579"></a>
+## Reading Right, Acting Wrong: Diagnosing Decision Failures of System One Models in Agent Loops
+
+- Source: https://arxiv.org/abs/2610.18579
+- Kind: `paper`; review depth: `abstract_reviewed`; reviewed: 2026-11-21
+- Source revision: `not captured / live URL`
+- Note: Abstract only (v1, Oct13). Frozen agent decision states (simulated environments, customer-service policies, tool use, web navigation, coding); each next-action question paired with independent factual probes about the same state. Across seventeen fast systems and a reasoning model, most wrong actions follow correct reading, and more accurate systems have a larger share of such errors. Preliminary version; body not reviewed.
+

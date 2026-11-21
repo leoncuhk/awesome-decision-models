@@ -17,64 +17,18 @@ def outputs(root: Path = ROOT) -> dict[Path, str]:
     out = {}
     for lang, template, target in [('en','README.en.md','README.md'),('zh','README.zh.md','README.zh-CN.md')]:
         text=(root/'templates'/template).read_text()
-        h = ['Model','Mechanism / proposition','Useful experiment','Important limitation'] if lang=='en' else ['模型','机制／定位','适合的实验','重要限制']
-        table=['| '+' | '.join(h)+' |','| --- | --- | --- | --- |']
+        h = ['Model','Mechanism','Suggested experiment'] if lang=='en' else ['模型','机制','建议实验']
+        table=['| '+' | '.join(h)+' |','| --- | --- | --- |']
+        card='card' if lang=='en' else '模型卡'
         for e in core:
-            name=f"[{e['name']}]({e['url']})"
-            table.append('| '+' | '.join([name,cell(e['summary'][lang]),cell(e['use'][lang]),cell(e['caveat'][lang])])+' |')
+            name=f"[{e['name']}]({e['url']}) · [{card}](docs/models.md#{e['id']})"
+            table.append('| '+' | '.join([name,cell(e['summary'][lang]),cell(e['use'][lang])])+' |')
         replacements={'DATE':cat['reviewed_on'],'ENTRY_COUNT':str(len(entries)),'CORE_COUNT':str(len(core)),'EVIDENCE_COUNT':str(len(evs)),'CORE_TABLE':'\n'.join(table)}
-        short_zh={
-          'E01':'Laya：专项训练收益与校准数据问题需要分开。',
-          'E02':'CLM：在 38 个保留任务上选择候选，不是独立完成编码。',
-          'E03':'Nimble / Jev：配对人工标签评测仍须按任务解读。',
-          'E04':'GLiNER2.5-Decide：新评测范围、来源可见性与名称辨别。',
-          'E05':'Kev：区分开发集、测试集与来源域。',
-          'E06':'Clef：厂商比较中的任务取舍，不是通用胜出。',
-          'E07':'Strands Decider：问题指令敏感性与实验选择限制。',
-          'E08':'Strands v21：发布种子与同机多种子比较。',
-          'E09':'Drex v1.5：公开套件平局与基准训练重叠。',
-          'E10':'Microsoft-Decision-1：作者报告的扰动稳定性。',
-          'E11':'Strands Qwen v1：新配方、种子平均及缺图限制。',
-          'E12':'Decision 3.0：内部 Index 与单设备延迟边界。',
-          'E13':'Decision 3.0：完整公共套件与其他协议分开。',
-          'E14':'Decision 3.0 视频：采样帧问答不验证音频或实时可靠性。',
-          'E15':'Decision 3.0 Core ML：转换与公共评测证据。',
-          'E16':'Decision 3.0 PR 分流：吞吐与真实标签一致率分开。',
-          'E17':'WebMCP 应用：小样本差异与前置规则错误。',
-          'E18':'Intern-Decision：精确分布校准试验。',
-          'E19':'Verdict 部署：评测校准不等于实际服务校准。',
-          'E20':'Verdict 拒答：保留 hard negative 与同义改写失败。',
-          'E21':'Decision 3.0：0.3.2 评分变化与不变的权重标识。',
-          'E22':'Decision 3.0：批处理吞吐、延迟与过载边界。',
-          'E23':'原生 vLLM D3：已合入源码与有限工程测试。',
-          'E24':'财报变化：条件标签和不等长文本窗口。',
-          'E25':'8-K 分类：监督标签与事后选择。',
-          'E26':'SEC 后续问询：90 日预测不同于文本完整性。',
-          'E27':'语义特征：开发集内发现与葡萄酒评分预测。',
-          'E28':'EcomMIR：多模态场景与意图的组合竞赛方案。',
-          'E29':'StartLux：公共 DI 开发选择不等于完整盲测。',
-          'E30':'DecisionPivot：作者对比及版本／成对正确率边界。',
-          'E31':'RLCD²：强制推理子集的终止与长度变化。',
-          'E32':'Drex v2.0：公共 JevBench 作者计数与比较边界。',
-          'E33':'MIRE：官方复赛成绩与综合最终奖项分别记录。',
-          'E34':'法律正确选项缺失：错误承诺与误拒答的相反代价。',
-          'E35':'RouteGuard：降低 ECE 不会凭空改善错误排序。',
-          'E36':'Decider v1.2：联合请求收益依赖任务与型号。',
-          'E37':'置信审计：经验总体阈值承诺不能直接迁移。',
-          'E38':'DFIP：驻留加速不等于置信等价或流量提速。',
-          'E39':'JEVal：汇总分类、检查点与作者评测边界。',
-          'E40':'PRDO：保留推理的同底座选择性判断比较。',
-          'E41':'中文公开输出：多语种差距与小样本边界。',
-          'E42':'Laya多种子：未选出CE或RLCD的通用胜者。',
-          'E43':'企业教师标注：解释与自检的人工审核结果。',
-          'E44':'企业多轮分类：作者线上比较与归因边界。',
-          'E45':'Drex Max：追加RLAF正结果与控制缺口。'}
-        replacements['EVIDENCE_LINKS']='\n'.join(f"- [{e['id']} — {e['title'] if lang=='en' else short_zh[e['id']]}](docs/evidence.md#{e['id'].lower()})" for e in evs)
         for category in ['baselines','routing','reliability','evaluation','foundations','related_lists']:
             lines=[]
             for e in entries:
                 if e['category']!=category:continue
-                line=f"- **[{e['name']}]({e['url']})** — {e['summary'][lang]} {e['caveat'][lang]}"
+                line=f"- **[{e['name']}]({e['url']})** — {e['summary'][lang]}"
                 lines.append(line)
             replacements[category.upper()]='\n'.join(lines)
         for key,value in replacements.items():text=text.replace('{{'+key+'}}',value)
@@ -85,6 +39,13 @@ def outputs(root: Path = ROOT) -> dict[Path, str]:
         for key,label in [('scale','Scale'),('mechanism','Mechanism'),('training','Training'),('availability','Deployment'),('use','Suggested use'),('caveat','Boundary')]:
             models.append('| '+label+' | '+cell(e[key]['en'])+' | '+cell(e[key]['zh'])+' |')
         models += ['',f"**License note:** {e['license_note']}",f"**Recorded weight identifier:** {e['weight_revision'] or 'Unknown / not pinned'}",'','**Sources:** '+'; '.join(f"[{sources[s]['title']}]({sources[s]['url']})" for s in e['source_ids']), '']
+    labels={'baselines':'Baselines / 基线','routing':'Routing / 路由','reliability':'Reliability / 可靠性','evaluation':'Evaluation / 评测','foundations':'Foundations / 基础文献','related_lists':'Related lists / 相关列表'}
+    models += ['# Other resources / 其他资源','','Summary and boundary for every non-core entry. / 非核心条目的定位与边界。','']
+    for category,label in labels.items():
+        models += [f"## {label}",'']
+        for e in entries:
+            if e['category']!=category:continue
+            models += [f"<a id=\"{e['id']}\"></a>",f"**[{e['name']}]({e['url']})** — {e['summary']['en']} {e['caveat']['en']}",'',f"{e['summary']['zh']} {e['caveat']['zh']}",'']
     out[root/'docs/models.md']='\n'.join(models)+'\n'
     evid=['# Evidence ledger / 评测证据','', '[Home](../README.md) · [中文首页](../README.zh-CN.md) · [Methodology](methodology.md)','','These are **archival claim records**, not a common leaderboard. None was rerun by this repository. A source review checks what was reported, not whether the underlying experiment is reproducible or unbiased.','','本页保存带条件的历史声明，不生成混合排名。所列记录均为来源报告，不是本仓库独立复现。来源阅读、产物审计与实验复现是三种不同工作。','', 'Reported fractions are displayed as percentages where appropriate. More printed digits do not imply greater statistical precision. Source publication dates remain unknown unless independently established.','']
     for e in evs:

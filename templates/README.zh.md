@@ -1,114 +1,87 @@
 # Awesome Decision Models [![Awesome](https://awesome.re/badge.svg)](https://awesome.re)
 
-**面向 AI 系统可靠判断的模型、方法与实证资料。**
+**AI 系统中有界决策的模型、方法与证据，按企业大模型应用真正面对的问题组织。**
 
-[English](README.md) · [文档地图](docs/README.md) · [模型卡](docs/models.md) · [评测证据](docs/evidence.md) · [选型指南](docs/selection-guide.md) · [收录与评测方法](docs/methodology.md) · [来源登记](docs/sources.md)
+[English](README.md) · [问题地图](#problem-map) · [落地手册](#playbooks) · [领域图谱](docs/landscape.md) · [模型卡](docs/models.md) · [证据台账](docs/evidence.md) · [方法论](docs/methodology.md)
 
-收录用于**分类、评分、排序、验证、路由与拒判**的模型和方法。我们关心的不是谁的宣传数字更高，而是：**在具体任务中，哪种方法能以可接受的风险和总成本，交付可验收的结果。**
+决策模型由 TypeSafe 的 Jev 于 2026 年 9 月带火：对给定选项**一次前向输出类型化概率**，不生成文本。新东西是这个输出合同：它让有界判断可以计价、校准、设门槛。本仓只回答一个问题：**对一个具体决策，哪种方法能以可接受的风险和完整成本得到可接受的结果？**
 
-**最近一批审查日期：{{DATE}}。** 精选 {{ENTRY_COUNT}} 项资源，其中 {{CORE_COUNT}} 个核心模型系列、{{EVIDENCE_COUNT}} 条带协议背景的评测记录。本版完成的是公开资料核验，**没有宣称独立运行并复现这些模型**。阅读深度、版本固定情况与未解决的资料缺口均见[来源登记](docs/sources.md)。各来源审查日期与深度不同，批次日期不表示全部来源重新审读。收录不等于背书，也不等于通过生产可靠性认证。
+核查批次 {{DATE}}：{{ENTRY_COUNT}} 项资源，{{CORE_COUNT}} 个核心模型族，{{EVIDENCE_COUNT}} 条证据记录。仅做来源审阅，**尚无本仓独立复现**。收录不代表推荐。
 
-## 目录
+## 仓库怎么组织
 
-- [先看任务，而不是模型名称](#先看任务而不是模型名称)
-- [核心模型](#核心模型)
-- [应该保留的基线](#应该保留的基线)
-- [路由与结果反馈学习](#路由与结果反馈学习)
-- [可靠性与评测](#可靠性与评测)
-- [基础原理与近期研究](#基础原理与近期研究)
-- [相关资料库](#相关资料库)
-- [维护与贡献](#维护与贡献)
-
-## 先看任务，而不是模型名称
-
-企业研究先读[后训练总览](docs/decision-model-posttraining-enterprise.zh-CN.md)：直接低延迟判断、保留推理的选择性判断、多字段／图像专项分别比较。[文档地图](docs/README.md)区分当前判断、拟议实验、PR #5多模态版本与历史记录。尚无本次企业训练或生产增益证据。
-
-本仓库用 **Decision Models（决策／判断模型）** 组织资料，不声称它们已经构成一门统一的新学科。*Typed decisions* 描述输出契约；*System One* 是部分项目采用的类别名称；RLCD、对比学习、监督分类是不同训练路线。路由与选择性预测则进一步研究如何使用一个判断。
-
-| 真正要解决的问题 | 值得优先比较的方案 | 不要混淆成 |
+| 层 | 回答什么 | 位置 |
 | --- | --- | --- |
-| 理解消息、核对有限条件 | 类型化判断模型、标签分类器、监督学习基线 | 某个行动能否改善结果 |
-| 从大量可复用候选中选择 | 双编码器、重排器、领域选择器 | 最好的候选一定正确 |
-| 交给哪个模型、工具或人 | 基于实际执行结果的路由与交接学习 | 给任务打一个泛化的难度分 |
-| 哪些案例可以自动处理 | 独立校准、风险—覆盖率评估、拒判 | 相信名为 `confidence` 的字段 |
-| 哪个行动会带来更好结果 | 上下文老虎机或合适的因果方法 | 从历史日志中预测相关性 |
+| 问题 | 知道什么、不知道什么、有多确定 | [problems/](problems/)：一个问题一个文件，含判断、证据、反证、开放实验 |
+| 落地 | 企业里怎么做 | [playbooks/](playbooks/)：通用流程加场景手册 |
+| 查阅 | 查事实 | [领域图谱](docs/landscape.md)，以及生成的[模型卡](docs/models.md)、[证据](docs/evidence.md)、[来源](docs/sources.md) |
+| 规则 | 证据怎么判 | [方法论](docs/methodology.md)、[贡献规则](CONTRIBUTING.md) |
 
-这是**实验起点，不是已测出的通用赢家**。决策契约和最小测试方案见[选型指南](docs/selection-guide.md)。
+<a id="problem-map"></a>
+## 问题地图
+
+成熟度：**共识**＝多来源、含第三方对照；**有据**＝有对照但条件窄；**开放**＝缺关键证据。
+
+| | 问题 | 当前判断 | 成熟度 |
+| --- | --- | --- | --- |
+| **判断本身** | [P01 输出合同与读出](problems/P01-output-contract.md) | 价值在合同而非新智能；读出头选择影响小 | 有据 |
+| | [P02 适配的学习信号](problems/P02-learning-signal.md) | 直接 CE/BCE 监督是默认；RL、蒸馏、软标签须证明增量 | 有据 |
+| | [P03 读一次还是先推理](problems/P03-read-or-reason.md) | 差距来自推理而非规模；把推理外包给参考答案往往更省 | 开放 |
+| **概率到决策** | [P04 confidence 语义与服务保真](problems/P04-confidence-fidelity.md) | confidence 只是接口字段；按任务、返回对象、服务链路重新校准 | 共识 |
+| | [P05 策略级风险认证与漂移](problems/P05-policy-risk.md) | 认证接受策略而非单题置信度；漂移后保证失效 | 理论共识／实证开放 |
+| | [P06 缺选项与候选覆盖](problems/P06-candidate-coverage.md) | softmax 发现不了“全错”；NONE 在困难负例下崩溃 | 有据 |
+| **系统集成** | [P07 读对了仍然做错](problems/P07-state-and-action.md) | 多数错误在状态与动作合同，不在读出 | 有据 |
+| | [P08 技能与路径的动态加载](problems/P08-skill-loading.md) | 问题在选错而非上下文长度；优化带回退的加载召回 | 有据 |
+| | [P09 System-1 作评审与评测层](problems/P09-judge-layer.md) | 低成本一级评审＋升级；最先成熟的落地点 | 有据 |
+| | [P10 部分反馈与异质修复动作](problems/P10-repair-actions.md) | 追问、补证、扩候选、转人是不同干预；研究前沿 | 开放 |
+| **多模态** | [P11 多模态判断的后训练](problems/P11-multimodal.md) | 视觉常常没有真正参与训练；先验证视觉路径再比质量 | 有据 |
+| **选型** | [P12 评测碎片化与选型经济学](problems/P12-benchmarks-and-selection.md) | 名次不是选型信号；按许可、可训练性、硬件、服务保真准入 | 共识 |
+
+<a id="playbooks"></a>
+## 落地手册
+
+| 手册 | 适用场景 |
+| --- | --- |
+| [通用流程](playbooks/decision-pipeline.md) | 任何企业决策：合同 → 方法与底座 → 数据 → 训练 → 验收 |
+| [多模态后训练](playbooks/multimodal-posttraining.md) | 截图加意图标签；本地 Mac 训练；G0–G4 关卡 |
+| [Skill 路由选择器](playbooks/skill-routing.md) | 几十个技能的服务 Agent；选择器训练、分阶段实验 H1–H6 |
 
 ## 核心模型
 
-首页比较机制、用途与限制，**不把不同协议的准确率拼成总榜**。每个项目均链接原始资料；训练方式、部署和许可证注意事项见[模型卡](docs/models.md)。
+下表只列机制和建议实验；版本边界、许可与限制见[模型卡](docs/models.md)。不做混合排行：零样本、微调与 Best-of-N 回答的是不同问题。
 
 {{CORE_TABLE}}
 
-### 重要成绩必须连同条件阅读
+## 值得保留的基线
 
-{{EVIDENCE_LINKS}}
-
-领域评测、训练支持核查与未知／澄清策略见[图片意图适配流程](docs/selection-guide.md#image-intent-adaptation)。先看[多模态后训练一页入口](docs/multimodal-decision-finetuning.zh-CN.md#quick-route)，再深入同条件对照、候选门槛及[分层学术阅读清单](docs/multimodal-decision-finetuning.zh-CN.md#reading-list)。
-
-执行细节：[分组划分协议](docs/multimodal-decision-finetuning.zh-CN.md#split-protocol)、[最小实验矩阵](docs/multimodal-decision-finetuning.zh-CN.md#experiment-matrix)、[结果记录与停止决定](docs/multimodal-decision-finetuning.zh-CN.md#result-template)。
-
-具体案例：[MIRE任务、标签与代码](docs/mire-case-study.zh-CN.md#tasks)、[官方综合奖项与复赛成绩](docs/mire-case-study.zh-CN.md#finalists)及[迁移边界](docs/mire-case-study.zh-CN.md#transfer-boundaries)。
-
-企业指南区分[读出、运行时推理和参数适配](docs/decision-model-posttraining-enterprise.zh-CN.md#readout)，具体模型的版本机制保留在[模型卡](docs/models.md)。
-
-科研立项：[10 月 22 日调研完整转换](docs/multimodal-decision-research-survey-2026-10-22.md)与[可证伪实验协议](docs/multimodal-decision-research-protocol.md)，覆盖 MIRE 数据获取边界、新颖性逐项比较、异质修复动作与停止条件。这些是研究规划，不是复现结果。
-
-零样本分类、专项微调与 Best-of-N 选择不是同一个问题。本地 GPU 前向耗时与远程 API 往返耗时，也不是同一种性能测量。
-
-## 应该保留的基线
-
-新术语不能证明旧方法已经过时。这些基线有助于判断收益究竟来自数据、输出约束、模型结构还是训练目标。
-
-部署资源也用于核对本地实现是否保留原有判断行为；转换等价须与任务质量分开。
+新的训练名称不会让熟悉的基线过时。
 
 {{BASELINES}}
 
-能够用规则或普通监督分类器解决的任务，也应保留相应对照。只有可靠地增加了价值，复杂性才值得付出。
-
-## 路由与结果反馈学习
+## 路由与从结果中学习
 
 {{ROUTING}}
 
-选择执行者时，应记录**任务、可用证据、执行者、结果、耗时和成本**。只知道已选执行者的表现，并不知道所有其他执行者会怎样。相关假设可从下方的交接学习与因果研究继续了解。
-
-## 可靠性与评测
+## 可靠性
 
 {{RELIABILITY}}
 
+## 评测
+
 {{EVALUATION}}
 
-评测应同时看任务质量、关键错误、校准、风险—覆盖率、子群与分布变化，以及完整系统成本。阈值在校准集确定，不能在最终测试集上反复调参。自动放行的案例也必须保留抽检，才能发现“自信地判错”。
+## 基础文献
 
-## 基础原理与近期研究
-
-建议按“概率质量 → 拒判 → 执行者交接 → 风险控制”阅读。年份是论文或版本时间，不代表穷尽了全部最新文献；只审阅摘要的条目在来源登记中明确标注。
+阅读顺序：概率质量 → 弃权 → 转交执行者 → 风险控制。
 
 {{FOUNDATIONS}}
 
-## 相关资料库
-
-以下项目提供互补的发现入口。本仓库侧重任务分类、机制比较与结论级证据记录，不复制它们的全部链接，也不按 Star 排序。
+## 相关列表
 
 {{RELATED_LISTS}}
 
-## 维护与贡献
+## 贡献
 
-事实资料保存在 [`data/catalog.json`](data/catalog.json)，性能声明保存在 [`data/evaluations.json`](data/evaluations.json)。首页和详细表格由同一份数据生成，避免中英文成绩各自漂移。
+规范数据在 [`data/`](data/)；README、模型卡、证据和来源页由 `python3 scripts/render.py` 生成。新资料只有在改变某个问题的判断、证据或开放实验时才值得加入，见 [CONTRIBUTING](CONTRIBUTING.md)。变更记录见 [CHANGELOG](CHANGELOG.md)。
 
-[Choose checks by changed files / 按变更范围选择检查](CONTRIBUTING.md#local-checks): prose-only work needs local link review; catalog/template changes need generation validation; code changes need tests.
-
-仓库包含[资料维护 Skill](.agents/skills/decision-models-curator/SKILL.md)和[每周来源检查工作流](.github/workflows/source-watch.yml)。前者规定怎样研究，后者发现来源变化并维护待审核 Issue。**工作流不会自动运行 AI 研究、改写结论或合并代码，也不需要付费模型 API。** 启用条件、调度限制和手动运行方式见[维护说明](docs/maintenance.md)。
-
-新增项目或成绩前请阅读 [CONTRIBUTING](CONTRIBUTING.md)。欢迎负面结果、假设变化与纠错。[首版核验记录](updates/2026-09-25.md)保留原始限制；[10 月 6 日发布核验记录](updates/2026-10-06-release-boundaries.md)与[10 月 11 日核验记录](updates/2026-10-11-typed-releases.md)说明新增、修正及证据缺口；[10 月 13 日多模态／部署核验](updates/2026-10-13-multimodal-deployment.md)区分新发布、校准和应用证据；[10 月 15 日更新](updates/2026-10-15-serving-and-adaptation.md)核查原生 vLLM、评分变化、语义特征与领域适配；[10 月 16 日研究更新](updates/2026-10-16-multimodal-finetuning.md)补充训练路径与竞赛证据核查；[10 月 17 日 StartLux 核验](updates/2026-10-17-startlux-and-decisionpivot.md)记录新增模型、评测与机制证据；[多模态后训练指南更新](updates/2026-10-17-d3-text-training.md)补充论文支撑的实验路线及 D3 文本训练边界；[发布说明](PUBLISHING.md)提供面向空仓库的安全初始化步骤。
-
-原创代码与整理文字使用 [MIT](LICENSE)；链接的项目、模型、数据与论文保留各自许可证。固定来源文档的提交版本，**不等于**固定模型权重。
-
-[10月25日每周核查](updates/2026-10-25-weekly-review.md)补入联合请求发布、有边界的重复读取／拒答证据及训练／部署修正。
-
-[11月13日更新：机制变化、应用净效用与证据边界](updates/2026-11-13-jev-utility.md).
-
-[11月13日Google最新发布补充](updates/2026-11-13-google-decision.md).
-
-[分支审查与应用意图](docs/branch-review-2026-11-13.md)
+原创代码与整理文字采用 [MIT](LICENSE)；所链接的项目、权重、数据与论文保留各自许可。

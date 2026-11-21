@@ -58,11 +58,17 @@ class CatalogTests(unittest.TestCase):
         self.assertTrue(any('unsafe' in e for e in self.errors()))
     def test_generated_documents_synced(self):
         for path,text in render.outputs().items():self.assertEqual(path.read_text(),text,str(path))
-    def test_new_evidence_links_render_in_both_languages(self):
+    def test_readmes_link_cards_and_core_docs(self):
         rendered=render.outputs()
         for name in ('README.md','README.zh-CN.md'):
-            for eid in ('e06','e07','e08'):
-                self.assertIn(f'(docs/evidence.md#{eid})',rendered[ROOT/name])
+            text=rendered[ROOT/name]
+            for target in ('problems/P01-output-contract.md','playbooks/decision-pipeline.md','playbooks/multimodal-posttraining.md','playbooks/skill-routing.md','docs/landscape.md','(docs/models.md#jev)'):
+                self.assertIn(target,text)
+            self.assertNotIn('{{',text)
+    def test_every_entry_has_a_card_anchor(self):
+        models=render.outputs()[ROOT/'docs/models.md']
+        for e in self.cat['entries']:
+            self.assertIn(f'<a id="{e["id"]}"></a>',models)
     def test_evidence_intro_does_not_freeze_record_count(self):
         self.assertNotIn('五项记录',render.outputs()[ROOT/'docs/evidence.md'])
     def test_current_and_historical_strands_evidence_are_separate(self):

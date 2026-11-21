@@ -71,7 +71,7 @@ A scoring model should not decide its own permissions. Validate schemas and hard
 
 ## Maintain a judgment rather than a moving leaderboard
 
-The [document map](README.md) identifies current syntheses, conditional plans, generated records and preserved history. The [enterprise synthesis](decision-model-posttraining-enterprise.zh-CN.md) owns current enterprise research roles; older thematic notes do not each maintain a competing shortlist.
+Each judgment has one canonical home: a [problem file](../problems/) holds the judgment, its evidence, counter-evidence and open experiments; a [playbook](../playbooks/) holds implementation steps. Other pages link to them instead of restating them.
 
 Separate the base/checkpoint, readout and inference mode, trainable parameters, objective, data construction, calibration and execution policy. Change one factor or use a declared factorial design before attributing an improvement. Low resource use, an inspectable trainer and an author benchmark are different reasons to study a candidate; none establishes domain superiority.
 

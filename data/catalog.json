@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "reviewed_on": "2026-11-20",
+  "reviewed_on": "2026-11-21",
   "scope": "Evidence-backed models, methods and evaluation for bounded decisions in AI systems.",
   "sources": [
     {
@@ -4222,6 +4222,36 @@
       "review_depth": "content_reviewed",
       "source_revision": null,
       "review_note": "Own JSONL split/train/resume/compare workflow and author0.8B H200 short smoke receipt reviewed; one/two updates on three synthetic cases are engineering checks, not4B/M5 training or domain-effect proof."
+    },
+    {
+      "id": "aa-decision-index-v2",
+      "title": "Introducing the Artificial Analysis Decision Index v2",
+      "url": "https://artificialanalysis.ai/articles/decision-index-v2",
+      "kind": "evaluation_report",
+      "reviewed_on": "2026-11-21",
+      "review_depth": "abstract_reviewed",
+      "source_revision": null,
+      "review_note": "Announcement excerpt reviewed Nov21 (published Nov8). Headline score per question 50x(1+c-(p-c)^2), i.e. 50x(1+Accuracy-Brier) over an evaluation, so calibration enters the ranking. Private datasets 45% (v1: 25%). Adds AA-Paperclip and EvalSafe-O*NET-AA (15%); When2Call down to 10%; WildGuardTest removed. Reported top three within one point: Drex Max v1.1 73, GLiDE v1.2 73, Mammoth 27B 72; cost spread reported as $14 to $859 per 1M tasks. Full leaderboard table and per-task results not audited."
+    },
+    {
+      "id": "to-jev-or-not-2611-00505",
+      "title": "To Jev or Not to Jev: When Can System-1 Decision Models Replace LLM Judges?",
+      "url": "https://arxiv.org/abs/2611.00505",
+      "kind": "paper",
+      "reviewed_on": "2026-11-21",
+      "review_depth": "abstract_reviewed",
+      "source_revision": null,
+      "review_note": "Abstract only. 14 System-1 models chosen by a pre-stated protocol versus four generative judges on eleven judge benchmarks. Five of 14 statistically indistinguishable from GPT-5.6 without reasoning on pairwise/best-of-4; with a once-per-prompt reference answer eleven reach 90.3-93.4% on JudgeBench. Appended evaluator-directed injection reverses 0-5% of correct verdicts for five models and 17-49% for nine. Calibrated first stage matches Opus on LLMBar while escalating 17%. 4B correctness deficit attributed to reasoning, not size, via same-size controls. Body not reviewed; no number imported into evaluations.json."
+    },
+    {
+      "id": "reading-right-acting-wrong-2610-18579",
+      "title": "Reading Right, Acting Wrong: Diagnosing Decision Failures of System One Models in Agent Loops",
+      "url": "https://arxiv.org/abs/2610.18579",
+      "kind": "paper",
+      "reviewed_on": "2026-11-21",
+      "review_depth": "abstract_reviewed",
+      "source_revision": null,
+      "review_note": "Abstract only (v1, Oct13). Frozen agent decision states (simulated environments, customer-service policies, tool use, web navigation, coding); each next-action question paired with independent factual probes about the same state. Across seventeen fast systems and a reasoning model, most wrong actions follow correct reading, and more accurate systems have a larger share of such errors. Preliminary version; body not reviewed."
     }
   ],
   "entries": [
@@ -6045,20 +6075,21 @@
       "category": "evaluation",
       "url": "https://artificialanalysis.ai/methodology/decision-index",
       "source_ids": [
-        "aa-decision-index-v1"
+        "aa-decision-index-v1",
+        "aa-decision-index-v2"
       ],
-      "reviewed_on": "2026-10-18",
+      "reviewed_on": "2026-11-21",
       "summary": {
-        "en": "Version 1.0 combines knowledge/hallucination, text HLE, tool calling and safety classification with four equal weights.",
-        "zh": "1.0 版以四等权部分组合知识／幻觉、文本 HLE、工具调用与安全分类。"
+        "en": "Hosted-and-open decision-model index; v2 (Nov8) scores 50×(1+accuracy−Brier), so calibration enters the headline number, and moves 45% of items to private data.",
+        "zh": "托管与开放决策模型指数；11月8日 v2 以 50×(1+准确率−Brier) 计分，把校准计入主分，私有数据占比升至 45%。"
       },
       "use": {
         "en": "Compare task coverage, label mapping and aggregation alongside the separate HF-hosted index; review per-task outcomes before selecting a model.",
         "zh": "与独立的 HF 托管指数并列核对任务覆盖、标签映射及聚合；选型前查看分任务结果。"
       },
       "caveat": {
-        "en": "500 knowledge items are private; WildGuardTest is a filtered 835-row subset. Non-hallucination is conditional on not being correct. No current ranks/scores audited; not a calibration, multimodal or full-service latency test.",
-        "zh": "500 道知识题私有；WildGuardTest 为筛选后 835 行。非幻觉率以未答对集合为分母。未审计当前排名／成绩，不能代替校准、多模态或完整服务延迟测试。"
+        "en": "v1.0 and v2 are different indices; do not compare scores across versions. The reported v2 top three sit within one point, so rank order is not a selection signal. Leaderboard table and per-task results not audited here.",
+        "zh": "v1.0 与 v2 是不同指数，分数不可跨版比较。v2 前三名相差在 1 分内，名次本身不构成选型信号；本仓未审计完整榜单与分任务结果。"
       }
     },
     {
@@ -7309,6 +7340,50 @@
       "caveat": {
         "en": "Short engineering receipts and author public index results do not establish enterprise adaptation gains, Chinese long-state performance or calibrated acceptance risk. A Metal/ANE port does not solve training device, gradient or export contracts.",
         "zh": "短工程回执及作者公共指数不确立企业适配增益、中文长状态表现或校准放行风险；Metal／ANE端口不解决训练设备、梯度及导出合同。"
+      }
+    },
+    {
+      "id": "to-jev-or-not",
+      "name": "To Jev or Not to Jev (System-1 models as LLM judges)",
+      "category": "evaluation",
+      "url": "https://arxiv.org/abs/2611.00505",
+      "source_ids": [
+        "to-jev-or-not-2611-00505"
+      ],
+      "reviewed_on": "2026-11-21",
+      "summary": {
+        "en": "Pre-registered comparison of 14 System-1 decision models with four generative judges on eleven judge benchmarks, including reference-guided judging, calibration and injected-instruction robustness.",
+        "zh": "预先声明协议，在 11 个评审基准上比较 14 个 System-1 决策模型与 4 个生成式评审，覆盖参考答案引导、校准与注入指令鲁棒性。"
+      },
+      "use": {
+        "en": "Design a cheap first-stage judge with escalation; test injection robustness per model before using it on untrusted outputs.",
+        "zh": "设计带升级的低成本一级评审；用于不可信输出前逐模型测注入鲁棒性。"
+      },
+      "caveat": {
+        "en": "Abstract-level review only. Judge benchmarks are public English tasks; injection robustness is model-specific, not a property of the System-1 design.",
+        "zh": "仅摘要级阅读。评审基准为公开英文任务；注入鲁棒性取决于具体模型，不是 System-1 设计的共性。"
+      }
+    },
+    {
+      "id": "reading-right-acting-wrong",
+      "name": "Reading Right, Acting Wrong (agent-loop decision diagnosis)",
+      "category": "evaluation",
+      "url": "https://arxiv.org/abs/2610.18579",
+      "source_ids": [
+        "reading-right-acting-wrong-2610-18579"
+      ],
+      "reviewed_on": "2026-11-21",
+      "summary": {
+        "en": "Pairs each agent next-action question with independent factual probes on the same state to separate misreading from wrong action.",
+        "zh": "对同一 agent 状态同时提问下一步动作与独立事实探针，区分“读错状态”与“读对仍选错”。"
+      },
+      "use": {
+        "en": "Add state probes to agent-decision evaluations before attributing failures to the readout or to missing evidence.",
+        "zh": "把失败归因于读出或证据缺失之前，先在 agent 决策评测中加入状态探针。"
+      },
+      "caveat": {
+        "en": "Preliminary v1, abstract-level review. Frozen states from simulated and benchmark environments, not live enterprise traffic.",
+        "zh": "初版预印本，仅摘要级阅读。冻结状态来自模拟与基准环境，不是真实企业流量。"
       }
     }
   ]

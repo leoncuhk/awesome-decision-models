@@ -1,112 +1,87 @@
 # Awesome Decision Models [![Awesome](https://awesome.re/badge.svg)](https://awesome.re)
 
-**Models, methods and evidence for reliable decisions in AI systems.**
+**Models, methods and evidence for reliable bounded decisions in AI systems — organized by the problems that matter for enterprise LLM applications.**
 
-[简体中文](README.zh-CN.md) · [Document map](docs/README.md) · [Model cards](docs/models.md) · [Evidence ledger](docs/evidence.md) · [Selection guide](docs/selection-guide.md) · [Methodology](docs/methodology.md) · [Sources](docs/sources.md)
+[简体中文](README.zh-CN.md) · [Problems](#problem-map) · [Playbooks](#playbooks) · [Landscape](docs/landscape.md) · [Model cards](docs/models.md) · [Evidence](docs/evidence.md) · [Methodology](docs/methodology.md)
 
-A curated guide to systems that **classify, score, rank, verify, route or abstain** rather than primarily generate prose. The central question is not which model has the most impressive headline, but **which method delivers acceptable outcomes at acceptable risk and total cost for a particular task**.
+Decision models — popularized by TypeSafe's Jev in September 2026 — return **typed probabilities over supplied options in one pass** instead of generating text. The new thing is the output contract: it makes bounded judgments priceable, calibratable and gateable. This repository asks one question: **which method delivers acceptable outcomes at acceptable risk and total cost for a given decision?**
 
-**Latest review batch: {{DATE}}.** {{ENTRY_COUNT}} selected resources, including {{CORE_COUNT}} core model families and {{EVIDENCE_COUNT}} contextualized evidence records. This edition reviews public sources; **it does not claim independent model reproduction**. Review depth and unresolved gaps are recorded in the [source register](docs/sources.md). Individual review dates/depths differ; this date does not mean every source was reread. Inclusion is not an endorsement or a production-readiness certification.
+Review batch {{DATE}}: {{ENTRY_COUNT}} resources, {{CORE_COUNT}} core model families, {{EVIDENCE_COUNT}} evidence records. Source review only; **nothing here is independently reproduced yet.** Inclusion is not endorsement.
 
-## Contents
+## How this repository is organized
 
-- [Start with the task](#start-with-the-task)
-- [Core models](#core-models)
-- [Baselines worth keeping](#baselines-worth-keeping)
-- [Routing and learning from outcomes](#routing-and-learning-from-outcomes)
-- [Reliability and evaluation](#reliability-and-evaluation)
-- [Foundations and recent research](#foundations-and-recent-research)
-- [Related lists](#related-lists)
-- [Maintenance and contribution](#maintenance-and-contribution)
-
-## Start with the task
-
-For current enterprise research, start with the [post-training synthesis (Chinese)](docs/decision-model-posttraining-enterprise.zh-CN.md): direct low-latency judgments, reasoning-preserving selective prediction, and conditional multi-field/image tasks have different comparison sets. The [document map](docs/README.md) distinguishes current judgments, proposed experiments, PR #5 multimodal revisions and history. No enterprise fine-tune or production gain is claimed.
-
-Here, **decision model** is an organizing label, not a claim that all these projects form one new, unified discipline. *Typed decisions* describes an output contract; *System One* is terminology used by some projects; *RLCD*, contrastive learning and supervised classification are different training approaches. Routing and selective prediction concern what the system does with a judgment.
-
-| Your bottleneck | A useful starting comparison | Do not confuse it with |
+| Layer | Answers | Where |
 | --- | --- | --- |
-| Understand a message or check a bounded requirement | Typed models, label classifiers and a supervised baseline | Optimizing the effect of a downstream action |
-| Choose among many reusable candidates | Dual encoders, rerankers and domain-trained selectors | Proving the best available candidate is correct |
-| Choose an executor: model, tool or person | Routing and learning to defer, using actual executor outcomes | A generic task-difficulty score |
-| Decide whether to automate | Held-out calibration, risk–coverage evaluation and abstention | Trusting a field named `confidence` |
-| Learn which action improves an outcome | Contextual bandits or suitable causal methods | Predicting correlations from historical logs |
+| Problems | What is known, what is open, how confident we are | [problems/](problems/) — one file per problem: judgment, evidence, counter-evidence, open experiments (Chinese) |
+| Playbooks | How to do it in an enterprise | [playbooks/](playbooks/) — general pipeline plus scenario guides (Chinese) |
+| Reference | Facts to look up | [landscape](docs/landscape.md), generated [model cards](docs/models.md), [evidence](docs/evidence.md), [sources](docs/sources.md) |
+| Rules | How evidence is judged | [methodology](docs/methodology.md), [contributing](CONTRIBUTING.md) |
 
-These are **curatorial starting points, not measured winners**. See the [selection guide](docs/selection-guide.md) for the decision contract and a minimal evaluation plan.
+<a id="problem-map"></a>
+## Problem map
+
+Maturity: **consensus** = multiple sources incl. third-party controls; **supported** = controlled but narrow evidence; **open** = key evidence missing.
+
+| | Problem | Current judgment | Maturity |
+| --- | --- | --- | --- |
+| **Judgment** | [P01 Output contract and readout](problems/P01-output-contract.md) | Value is the contract, not new intelligence; readout head choice matters little | supported |
+| | [P02 Learning signal for adaptation](problems/P02-learning-signal.md) | Direct CE/BCE supervision is the default; RL, distillation, soft targets must prove gains | supported |
+| | [P03 Read once or reason](problems/P03-read-or-reason.md) | The gap is reasoning, not size; outsourcing reasoning to a reference answer is often cheaper | open |
+| **Probability → decision** | [P04 Confidence semantics and serving fidelity](problems/P04-confidence-fidelity.md) | `confidence` is an interface field; recalibrate per task, returned object and serving path | consensus |
+| | [P05 Policy-level risk and drift](problems/P05-policy-risk.md) | Certify the acceptance policy, not per-item confidence; drift voids guarantees | theory consensus / practice open |
+| | [P06 Missing options and candidate coverage](problems/P06-candidate-coverage.md) | Softmax cannot detect all-wrong candidates; NONE collapses under hard negatives | supported |
+| **System** | [P07 Reading right, acting wrong](problems/P07-state-and-action.md) | Most errors sit in state and action contracts, not the readout | supported |
+| | [P08 Dynamic skill and path loading](problems/P08-skill-loading.md) | Selection errors, not context length; optimize loader recall with fallback | supported |
+| | [P09 System-1 as judge and evaluator](problems/P09-judge-layer.md) | Cheap first stage plus escalation; the earliest mature use case | supported |
+| | [P10 Partial feedback and heterogeneous repair](problems/P10-repair-actions.md) | Ask, fetch, re-retrieve and defer are different interventions; research frontier | open |
+| **Multimodal** | [P11 Multimodal post-training](problems/P11-multimodal.md) | Vision is often not actually trained; validate the visual path before comparing quality | supported |
+| **Selection** | [P12 Fragmented benchmarks and selection economics](problems/P12-benchmarks-and-selection.md) | Rank is not a selection signal; gate on license, trainability, hardware, serving fidelity | consensus |
+
+<a id="playbooks"></a>
+## Playbooks
+
+| Playbook | Use when |
+| --- | --- |
+| [General pipeline](playbooks/decision-pipeline.md) | Any enterprise decision: contract → method and base → data → training → acceptance |
+| [Multimodal post-training](playbooks/multimodal-posttraining.md) | Screenshots plus intent labels; local Mac training; G0–G4 gates |
+| [Skill routing selector](playbooks/skill-routing.md) | Service agent with tens of skills; loader training, staged experiments H1–H6 |
 
 ## Core models
 
-The table compares mechanisms and use cases, **not incompatible benchmark scores**. Each row links to primary material; version-specific details and licensing notes are in the [model cards](docs/models.md).
+Mechanism and suggested experiment only; version boundaries, licenses and limitations are in the [model cards](docs/models.md). No combined leaderboard: zero-shot, fine-tuned and Best-of-N results answer different questions.
 
 {{CORE_TABLE}}
 
-### Read these results in context
-
-{{EVIDENCE_LINKS}}
-
-For domain evaluation and verified training support, see the [image-intent adaptation workflow](docs/selection-guide.md#image-intent-adaptation). Start with the [one-page multimodal post-training route](docs/multimodal-decision-finetuning.md#quick-route), then follow the controlled experiments, candidate gates and [layered academic reading list](docs/multimodal-decision-finetuning.md#reading-list).
-
-Execution details: [split protocol](docs/multimodal-decision-finetuning.md#split-protocol), [minimal experiment matrix](docs/multimodal-decision-finetuning.md#experiment-matrix), [result record and stopping decision](docs/multimodal-decision-finetuning.md#result-template).
-
-Worked case: [MIRE tasks, labels and code](docs/mire-case-study.md#tasks), [official composite awards and semifinal scores](docs/mire-case-study.md#finalists), and [transfer limits](docs/mire-case-study.md#transfer-boundaries).
-
-The enterprise guide separates [readout, runtime reasoning and weight adaptation](docs/decision-model-posttraining-enterprise.zh-CN.md#readout). Version-specific model mechanisms remain in the [model cards](docs/models.md).
-
-Research planning (Chinese): [full October 22 survey](docs/multimodal-decision-research-survey-2026-10-22.md) and [falsifiable experiment protocol](docs/multimodal-decision-research-protocol.md), covering MIRE data-access limits, novelty comparisons, heterogeneous repair actions and stopping criteria. These are research plans, not reproduced results.
-
-**No combined accuracy leaderboard:** zero-shot classification, workflow fine-tuning and Best-of-N selection answer different questions. Local GPU forward time and remote API round-trip time are also different measurements.
-
 ## Baselines worth keeping
 
-A new training label is not evidence that a familiar baseline is obsolete. Deployment resources also help test whether a local implementation preserves the intended decision behavior. These alternatives help isolate gains from the data, output contract, architecture and training objective.
+A new training label does not make a familiar baseline obsolete.
 
 {{BASELINES}}
-
-Also retain a deterministic rule or ordinary supervised classifier where the task permits. A model should earn its complexity against the simplest credible alternative.
 
 ## Routing and learning from outcomes
 
 {{ROUTING}}
 
-For executor selection, collect **task, available evidence, executor, outcome, latency and cost**. Observed success for one selected executor does not reveal how every alternative would have performed. See the learning-to-defer and causal references below.
-
-## Reliability and evaluation
+## Reliability
 
 {{RELIABILITY}}
 
+## Evaluation
+
 {{EVALUATION}}
 
-A useful scorecard includes task quality, consequential errors, calibration, risk–coverage, subgroup/shift behavior and full-system cost. Fix the acceptance threshold on calibration data, not on the final test set. Keep sampling automatically accepted cases so confidently wrong decisions remain visible.
+## Foundations
 
-## Foundations and recent research
-
-Reading order: probability quality → abstention → executor handoff → risk control. Dates are publication/version dates, not a claim of exhaustive coverage of the latest literature. Abstract-only reviews are labeled in the source register.
+Reading order: probability quality → abstention → executor handoff → risk control.
 
 {{FOUNDATIONS}}
 
 ## Related lists
 
-These maintainers provide complementary discovery paths. This repository adds a task-first comparison and claim-level evidence records; it does not copy their collections or sort by stars.
-
 {{RELATED_LISTS}}
 
-## Maintenance and contribution
+## Contributing
 
-The factual catalog lives in [`data/catalog.json`](data/catalog.json); numerical claims live in [`data/evaluations.json`](data/evaluations.json). Generated Markdown must stay synchronized with those records.
+Canonical data lives in [`data/`](data/); README, model cards, evidence and sources are generated by `python3 scripts/render.py`. A new source is worth adding only if it changes a problem's judgment, evidence or open experiment — see [CONTRIBUTING](CONTRIBUTING.md). Changes are logged in [CHANGELOG](CHANGELOG.md).
 
-[Choose checks by changed files / 按变更范围选择检查](CONTRIBUTING.md#local-checks): prose-only work needs local link review; catalog/template changes need generation validation; code changes need tests.
-
-A [repository-scoped curator skill](.agents/skills/decision-models-curator/SKILL.md) defines the research/review procedure. A [weekly source watcher](.github/workflows/source-watch.yml) checks selected sources for changes and maintains an issue for review. **It does not run an AI researcher, update scientific claims, merge changes or require a paid model API.** See [maintenance](docs/maintenance.md) for setup, security, scheduling limits and manual use.
-
-Read [CONTRIBUTING](CONTRIBUTING.md) before adding a project or result. Negative findings, changed assumptions and corrections are welcome. [Initial review notes](updates/2026-09-25.md) preserve the original qualifications; the [October 6 release review](updates/2026-10-06-release-boundaries.md) and [October 11 review](updates/2026-10-11-typed-releases.md) record additions, corrections and remaining gaps. [October 13 multimodal/deployment review](updates/2026-10-13-multimodal-deployment.md) separates new release, calibration and application evidence. [October 15 update](updates/2026-10-15-serving-and-adaptation.md) reviews native vLLM, score changes, semantic features and domain adaptation. [October 16 research update](updates/2026-10-16-multimodal-finetuning.md) adds training-path and competition-evidence checks. [October 17 StartLux review](updates/2026-10-17-startlux-and-decisionpivot.md) records new model, benchmark and mechanism evidence. [Multimodal post-training guide update](updates/2026-10-17-d3-text-training.md) adds a paper-grounded experiment route and clarifies D3 text training. [Publishing instructions](PUBLISHING.md) explain how to initialize an empty repository safely.
-
-Original code and curation text: [MIT](LICENSE). Linked projects, model weights, datasets and papers retain their own licenses. A source-text revision does **not** pin a model's weights.
-
-[October25 weekly review](updates/2026-10-25-weekly-review.md) adds joint-request releases, bounded reread/abstention evidence and training/deployment corrections.
-
-[November13 review: mechanisms, application utility and evidence limits](updates/2026-11-13-jev-utility.md).
-
-[November13 Google release addendum](updates/2026-11-13-google-decision.md).
-
-[Branch review and application intent](docs/branch-review-2026-11-13.md)
+Original code and curation text: [MIT](LICENSE). Linked projects, weights, datasets and papers keep their own licenses.
