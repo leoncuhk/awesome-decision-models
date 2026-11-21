@@ -4,7 +4,7 @@
 
 ## Evidence gaps / negative findings
 
-## Recommendation impact
+## Problems / playbooks affected
 
 ## Checks actually completed
 

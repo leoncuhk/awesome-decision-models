@@ -632,7 +632,7 @@ Reported fractions are displayed as percentages where appropriate. More printed 
 <a id="e18"></a>
 ## E18 · Intern-Decision: exact-distribution calibration pilot, not hard-label accuracy
 
-**Evidence:** `author_reported` · **Reviewed:** 2026-10-13 · **Reproduced here:** no
+**Evidence:** `author_reported` · **Reviewed:** 2026-11-19 · **Reproduced here:** no
 
 | Protocol | Recorded context |
 | --- | --- |
@@ -664,6 +664,8 @@ Reported fractions are displayed as percentages where appropriate. More printed 
 - protocol: Pinned repository, pilot documentation and public reference/scorer paths read
 - raw outputs: Complete replay not performed here
 - temperature: Author-provided preset; private fitting/validation records unavailable
+- source code revision: 3572c8a68b5df5dafe02d0e093989ba8ec0183bc
+- provenance correction: 2026-11-19: previous model_revision was a source/report implementation revision, not an authenticated evaluated weight revision; numerical result retained.
 
 **Sources:** [Intern-Decision architecture and release scope](https://github.com/internlm/Intern-Decision/blob/3572c8a68b5df5dafe02d0e093989ba8ec0183bc/README.md); [Intern-Decision known-distribution calibration pilot](https://github.com/internlm/Intern-Decision/blob/3572c8a68b5df5dafe02d0e093989ba8ec0183bc/docs/CALIBRATION_BENCHMARK.md); [Intern-Decision evaluation protocol](https://github.com/internlm/Intern-Decision/blob/3572c8a68b5df5dafe02d0e093989ba8ec0183bc/docs/EVALUATION.md); [Intern-Decision-4B model card](https://huggingface.co/internlm/Intern-Decision-4B/blob/0e5e6aa7d6d750e2b1504ba11a8136cb58aeb3cd/README.md)
 
@@ -712,7 +714,7 @@ Reported fractions are displayed as percentages where appropriate. More printed 
 <a id="e20"></a>
 ## E20 · Verdict abstention: preserve hard-negative and synonym failures
 
-**Evidence:** `author_reported` · **Reviewed:** 2026-10-13 · **Reproduced here:** no
+**Evidence:** `author_reported` · **Reviewed:** 2026-11-19 · **Reproduced here:** no
 
 | Protocol | Recorded context |
 | --- | --- |
@@ -741,6 +743,8 @@ Reported fractions are displayed as percentages where appropriate. More printed 
 - protocol: Pinned raw exp_e5 report read
 - raw outputs: Aggregate counts public; per-example inference not replayed here
 - upstream revision: 30f15564821626ca5c1ad5b2638c4eb7078787dd
+- report revision: 30f15564821626ca5c1ad5b2638c4eb7078787dd
+- provenance correction: 2026-11-19: previous model_revision was a source/report implementation revision, not an authenticated evaluated weight revision; numerical result retained.
 
 **Sources:** [Verdict / OpenJev mechanism and negative findings](https://github.com/Heman10x-NGU/Verdict-open-jev/blob/30f15564821626ca5c1ad5b2638c4eb7078787dd/README.md); [Verdict raw abstention-generalization report](https://github.com/Heman10x-NGU/Verdict-open-jev/blob/30f15564821626ca5c1ad5b2638c4eb7078787dd/reports/v2/exp_e5_abstention_generalization.json)
 
@@ -835,7 +839,7 @@ Reported fractions are displayed as percentages where appropriate. More printed 
 <a id="e23"></a>
 ## E23 · Native vLLM D3: merged source and bounded parity/concurrency evidence
 
-**Evidence:** `author_reported` · **Reviewed:** 2026-10-15 · **Reproduced here:** no
+**Evidence:** `author_reported` · **Reviewed:** 2026-11-19 · **Reproduced here:** no
 
 | Protocol | Recorded context |
 | --- | --- |
@@ -872,6 +876,8 @@ Reported fractions are displayed as percentages where appropriate. More printed 
 - pr body sha256: 0ae4020db2a05e5caa67309f962810bed64cb36b9f67c49b740080acf75f12a5
 - raw outputs: Author tables/tests read; no model execution
 - release check: Latest official release rechecked Oct 15: v0.31.0
+- source code revision: 89cab550862e4b7f08d70c19682121362d7dd0c5
+- provenance correction: 2026-11-19: previous model_revision was a source/report implementation revision, not an authenticated evaluated weight revision; numerical result retained.
 
 **Sources:** [Native vLLM Decision 3.0 integration and author tests](https://github.com/vllm-project/vllm/pull/61565); [vLLM structured decisions at the D3 merge](https://github.com/vllm-project/vllm/blob/89cab550862e4b7f08d70c19682121362d7dd0c5/docs/models/structured_decisions_models.md); [vLLM D3 classification model implementation](https://github.com/vllm-project/vllm/blob/89cab550862e4b7f08d70c19682121362d7dd0c5/vllm/model_executor/models/d3.py); [d3 October 15 card and identity review](https://huggingface.co/vllm-sr/d3/blob/225be8b1e2270becab69c5fe05b26f99cbbdd66b/README.md)
 
@@ -1441,4 +1447,270 @@ Reported fractions are displayed as percentages where appropriate. More printed 
 - model hash: Paper pinned HF revisions: Liquid051bcc464b01b9f92942b364d9586b0ef5912432; Clef8b2e5fd17c09fd49bc2880b805d5323ec7ff4ff3; Decider6195aa55a72ae21e503c8a60198f7b390d42adb5; GLiNER9d1bfb848cd16d93ee56ccbc59cd92bf0f284d90; downloaded weights not checked
 
 **Sources:** [DFIP: Decision-Focused Inference Path for System One Models](https://arxiv.org/html/2610.36804v1); [DFIP frozen analysis and research preview](https://github.com/superagent-ai/dfip/tree/f2eef1746e5e39b92827759344d4ef47410fc464)
+
+<a id="e39"></a>
+## E39 · JEVal v2: pooled local-decision evidence and model/version limits
+
+**Evidence:** `author_reported` · **Reviewed:** 2026-11-19 · **Reproduced here:** no
+
+| Protocol | Recorded context |
+| --- | --- |
+| Task | Ten-domain English/Chinese typed local decisions; separate workflow and reasoning analyses |
+| Test unit | 10938 classification instances (choice/noul); 319 score items excluded from main accuracy |
+| Split | Paper-curated public task evaluation; no local enterprise test or independent training-contamination certification |
+| Reference | Benchmark labels; invalid responses count as incorrect for accuracy |
+| Training | SII authors evaluate their own models and released comparators. Paper model names are not independently authenticated against current HF tensors |
+| Measurement | Pooled classification accuracy; ECE with 10 equal-width bins and raw-vector Brier only on each model valid subset, not the same denominator as accuracy |
+| Hardware | Open models served on author NVIDIA systems; separate 200-question latency test contrasts local RTX 4090 with hosted API transport; no Mac measurement |
+
+| Reported measurement | Value |
+| --- | --- |
+| Table1 SII-4B pooled accuracy | 71.92% |
+| Table1 SII-27B pooled accuracy | 79.24% |
+| Table1 Jev pooled accuracy | 78.38% |
+| Table1 Kev-27B pooled accuracy | 77.17% |
+| Table1 Intern-4B pooled accuracy | 70.74% |
+| Table1 Nimble-9B pooled accuracy | 73.87% |
+| Table1 Laya pooled accuracy | 26.30% |
+
+**Interpretation:** The paper motivates testing SII and other typed readouts, not a universal enterprise winner; pooled classification, workflow success and domain adaptation are separate claims.
+
+- SII is proposed by these evaluators; not independent replication of SII.
+- Do not mix pooled JEVal accuracy with the SII release README equal-benchmark aggregate or a different current weight revision.
+- Laya zero-shot configuration here is not evidence about a specialist retrained on its target workload.
+- Calibration is conditional on valid output; latency includes unequal local/API transport contracts.
+- Exact Laya evaluated weight/runtime and raw per-model JEVal outputs remain unpinned/unavailable here; public input audit cannot independently rescore Table 1.
+
+**Artifacts and limits:**
+- protocol: Paper v2 body and denominator rules inspected
+- model identity: Per-model inference settings reported; current tensor bytes and all evaluated revisions not independently authenticated
+- raw outputs: No model run or full independent rescore here
+
+**Sources:** [JEVal and SII-Decision: General Decision Models, paper v2](https://arxiv.org/html/2610.03935v2); [JEVal fixed public test inputs and labels](https://huggingface.co/datasets/carlosxiang/JEVal/tree/5d0253c34cf5e371b3ae99c21f0a7170d7289f63)
+
+<a id="e40"></a>
+## E40 · PRDO v2: same-backbone selective prediction with rationale-conditioned readouts
+
+**Evidence:** `author_reported` · **Reviewed:** 2026-11-19 · **Reproduced here:** no
+
+| Protocol | Recorded context |
+| --- | --- |
+| Task | Post-rationale selective prediction; scoped example Qwen3-1.7B on MMLU-Pro |
+| Test unit | 1000 MMLU-Pro final-test questions per arm, three training seeds; paired over the same items |
+| Split | Development temperature fitting and threshold calibration distinct from test in paper protocol; public-code completeness not certified |
+| Reference | Task labels; each actual sampled rationale yields its own scored answer distribution |
+| Training | PRDO proper score plus reference KL; main path is not token-REINFORCE on rationale reward. SFT direct readout and generated baselines have different deployment contracts |
+| Measurement | Mean accuracy, Brier and AURC after stated calibration; same-base controls are not a universal no-generation-head comparison |
+| Hardware | Author CUDA experiments; matched update budgets do not guarantee equal generated-token compute or M5 feasibility |
+
+| Reported measurement | Value |
+| --- | --- |
+| Qwen3-1.7B MMLU-Pro SFT+TS accuracy mean | 39.50% |
+| Qwen3-1.7B MMLU-Pro GRPO+TS accuracy mean | 41.80% |
+| Qwen3-1.7B MMLU-Pro PRDO(Brier) accuracy mean | 44.40% |
+| SFT+TS Brier mean | 0.71 |
+| GRPO+TS Brier mean | 0.75 |
+| PRDO(Brier) Brier mean | 0.67 |
+| SFT+TS AURC mean | 0.383 |
+| GRPO+TS AURC mean | 0.472 |
+| PRDO(Brier) AURC mean | 0.317 |
+
+**Interpretation:** PRDO is a promising matched generative selective-prediction method when reasoning is retained; it neither proves CE inferior on direct enterprise routing nor discloses proprietary TypeSafe RLCD.
+
+- Other model/task cells and verification tasks establish boundaries; accuracy and risk ranking may move in different directions.
+- Same updates are not strict same token/latency cost. SFT direct readout is not the same inference contract as sampled rationale methods.
+- Source code and referenced plans/tags have gaps; this repository did not reproduce paper training or recalibration.
+- Distinct from StartLux RLCD² archival E31.
+
+**Artifacts and limits:**
+- paper: arXiv:2609.38850v2 fixed URL
+- source code revision: 5859d2b893314fb3581f06e4e36c303e372b3f48
+- raw outputs: Author tables inspected; no local model inference or training
+
+**Sources:** [PRDO: post-rationale distribution optimization, paper v2](https://arxiv.org/html/2609.38850v2); [PRDO: public OpenJev-RLCD implementation](https://github.com/ZimmyGao/openjev-rlcd/tree/5859d2b893314fb3581f06e4e36c303e372b3f48)
+
+<a id="e41"></a>
+## E41 · Chinese released-output panel: multilingual Laya also trails stronger comparators
+
+**Evidence:** `third_party_reported` · **Reviewed:** 2026-11-19 · **Reproduced here:** no
+
+| Protocol | Recorded context |
+| --- | --- |
+| Task | Chinese voice-assistant routing, synthetic ecommerce decisions and moderation in a released matched panel |
+| Test unit | 467 item/question decisions from 378 original cases; customer-service routing slice: 34 decisions |
+| Split | Author-released v02 and v02s outputs; the same 467 keys, gold labels and options across five models; not an independent enterprise holdout |
+| Reference | Original author labels; converted public data and small synthetic/manual slices, not independently re-adjudicated here |
+| Training | Author-run existing checkpoints; Laya package 0.3.20/model names reported, evaluated HF weight identities unpinned; no new training or inference |
+| Measurement | Argmax of each published probability vector compared with gold_idx; dependent questions retained as shared cases |
+| Hardware | Original hosted/local runtime differences retained; arithmetic audit on CPU does not measure model latency |
+
+| Reported measurement | Value |
+| --- | --- |
+| Jev released-panel correct decisions | 416/467 (89.08%) |
+| Multilingual Laya released-panel correct decisions | 370/467 (79.23%) |
+| English Laya released-panel correct decisions | 324/467 (69.38%) |
+| Jev synthetic customer-service route slice | 30/34 (88.24%) |
+| Multilingual Laya synthetic customer-service route slice | 21/34 (61.76%) |
+
+**Interpretation:** A separate released-output panel shows multilingual Laya also trailing Jev on these Chinese tasks; it does not identify the cause of the JEVal gap or select a production or post-training winner.
+
+- 378 cases are not 467 independent cases; voice routing dominates the combined panel, not a production traffic weighting.
+- Small synthetic customer-service slice and author labels do not establish enterprise generalization.
+- Same keys and labels do not prove identical runtime budgets, rendering, probability calibration or current checkpoint identity.
+- Public output arithmetic was independently reaggregated here; source labels/model responses were not regenerated.
+
+**Artifacts and limits:**
+- source report revision: aaf56ff139dc5440da3939892cad249154f1d35b
+- raw outputs: results/raw/v02_<model>.jsonl and v02s_<model>.jsonl; 10 file hashes compared in the local audit
+- arithmetic audit: Coordinator reran checksum/key/count aggregation and agreed with independent reviewer; no model inference or new labels
+- model hash: Not recorded in source run metadata
+
+**Sources:** [Chinese decision benchmark: fixed released prediction panel](https://github.com/CodyQin/zh-decision-bench/tree/aaf56ff139dc5440da3939892cad249154f1d35b)
+
+<a id="e42"></a>
+## E42 · Laya Gate D: three paired seeds do not select soft-CE over RLCD
+
+**Evidence:** `author_reported` · **Reviewed:** 2026-11-19 · **Reproduced here:** no
+
+| Protocol | Recorded context |
+| --- | --- |
+| Task | Compare default rlcd and soft-ce losses in the same encoder fine-tuning contract |
+| Test unit | 6 cells across 3 seeds; rlcd seed 0 reused from Gate R; 400 test cases / 2,000 typed decisions |
+| Split | LocalLLaMA/typed-decisions config all; 1,200 train cases / 6,000 decisions before the CLI holds out 400 calibration items |
+| Reference | Dataset typed labels; no independently collected enterprise labels |
+| Training | Same 4 epochs, microbatch 8, accumulation 8, encoder LR 2.5e-5, head LR 1e-4, max_len 1024 and head_max_len 256; loss is the only varying field |
+| Measurement | Shipped-temperature path. Brier follows choice+noul only; paired accuracy deltas change sign; no raw-temperature panel |
+| Hardware | One author/contributor Tesla T4 per run, torch 2.11.0+cu128; no Mac run |
+
+| Reported measurement | Value |
+| --- | --- |
+| RLCD seed0 accuracy | 77.50% |
+| RLCD seed1 accuracy | 77.80% |
+| RLCD seed2 accuracy | 77.55% |
+| soft-CE seed0 accuracy | 76.05% |
+| soft-CE seed1 accuracy | 79.15% |
+| soft-CE seed2 accuracy | 77.70% |
+| Mean paired soft-CE minus RLCD accuracy in percentage points | 0.0167 |
+
+**Interpretation:** This panel does not justify changing the default loss; it does not establish a universal CE or RLCD winner or a current enterprise base-model recommendation.
+
+- Seed deltas change sign and soft-CE spread is large; three seeds do not establish universal equality.
+- RNG and calibration paths differ from original notebook; inherited metadata and choice+noul-only Brier restrict cross-report comparisons.
+- Author/contributor-run cells inspected, not model training rerun here.
+
+**Artifacts and limits:**
+- source code revision: d1282e791d71e92f24f816ff3836e4fd1c2ded4a
+- training upstream revision: a4a8921afebfd852bba0000475cfb6ab737a124c
+- raw outputs: Public result tables and report limitations read; no original model training repeated
+- arithmetic audit: Published six aggregate cells recomputed using the source analyzer and independent arithmetic; this is not new inference or training.
+
+**Sources:** [Laya Gate D: paired three-seed RLCD / soft-CE panel](https://github.com/NandhaKishorM/laya/blob/d1282e791d71e92f24f816ff3836e4fd1c2ded4a/research/scripts/step4_benchmark/GATE_D_RESULTS.md)
+
+<a id="e43"></a>
+## E43 · Enterprise teacher-label audit: evidence reasoning plus self-critique
+
+**Evidence:** `author_reported` · **Reviewed:** 2026-11-20 · **Reproduced here:** no
+
+| Protocol | Recorded context |
+| --- | --- |
+| Task | Label intent from real ecommerce customer turns and prior dialogue |
+| Test unit | 5522 manually reviewed labeler-output instances, Table 1; not student classifier accuracy |
+| Split | Randomly sampled author test audit; private record identities and independence/blinding not independently authenticated |
+| Reference | Author manual review, not teacher agreement alone |
+| Training | Same Claude 3.7 labeler with one-stage explanation versus an additional critique/revision stage; more teacher computation, no teacher weight update |
+| Measurement | Stage-1 correctness = 4802 both-correct + 84 stage-1-only; stage-2 = 4802 + 566 stage-2-only; paper rounds to 88% and 97% |
+| Hardware | No local labeler run or Mac measurement; teacher computation and human costs not fully reported |
+
+| Reported measurement | Value |
+| --- | --- |
+| One-stage labeler correctness from Table 1 counts | 4886/5522 (88.48%) |
+| Two-stage labeler correctness from Table 1 counts | 5368/5522 (97.21%) |
+
+**Interpretation:** A task-specific example supports auditing and improving teacher labels before small-model SFT; it does not establish soft probabilities or self-critique as universally superior.
+
+- Additional critique spends extra annotation compute; not equal-call-budget comparison.
+- Private audit records, adjudication detail and source grouping remain unavailable; reported figures are not independent enterprise replication.
+- The 1206 human-annotated classifier-evaluation instances and production comparison are different datasets/endpoints.
+
+**Artifacts and limits:**
+- paper pdf sha256: fcf06cda1b53fb97144553767b794ec48854acf8c1f9304951b11079c3ba24ce
+- source: Official ACL PDF Table 1 and Section 4.1 inspected
+- raw outputs: Not public or re-executed; arithmetic on reported table cells only
+
+**Sources:** [Amazon multi-turn intent classification with LLM-based labeling](https://aclanthology.org/2026.customnlp4u-1.8.pdf)
+
+<a id="e44"></a>
+## E44 · Enterprise multi-turn classifier: author-reported one-month online comparison
+
+**Evidence:** `author_reported` · **Reviewed:** 2026-11-20 · **Reproduced here:** no
+
+| Protocol | Recorded context |
+| --- | --- |
+| Task | Production ecommerce multi-turn intent routing with fine-tuned RoBERTa |
+| Test unit | One-month author-described A/B; traffic sample size and allocation unspecified |
+| Split | Online deployment versus previous single-turn intent system; transcript and production data private |
+| Reference | Bot automation rate and positive customer response rate as defined by the author |
+| Training | Paper studies teacher-labeled transcripts, simulated intent switches and three separate domain/intent/issue classifiers. Production section names a fine-tuned RoBERTa but does not disclose the exact labeling/augmentation variant or checkpoint deployed; several representation/system changes coexist. |
+| Measurement | Section 6.3 reports increases of 4.91% and 7.89% without stating relative versus percentage-point interpretation; no conversion made |
+| Hardware | Author production end-to-end latency; infrastructure and batching not sufficiently specified for Mac transfer |
+
+| Reported measurement | Value |
+| --- | --- |
+| Bot automation rate increase, % as reported (relative/pp unspecified) | 4.91 |
+| Positive customer response rate increase, % as reported (relative/pp unspecified) | 7.89 |
+| Production end-to-end p50 seconds | 0.12 |
+| Production end-to-end p90 seconds | 0.16 |
+| Production end-to-end p99 seconds | 0.2 |
+
+**Interpretation:** This is author-reported enterprise system use and an online comparison; it strengthens the practical supervised-data route, not single-factor algorithm attribution.
+
+- No traffic counts, randomization/allocation details or confidence intervals disclosed.
+- Multi-turn context, taxonomy/data and modeling changed together; the comparison does not isolate teacher critique, CE, or distillation.
+- Section 6.3 names the deployed fine-tuned classifier, not the separately evaluated offline LLM hybrid.
+- No independent replication or target Chinese-customer/Mac result.
+
+**Artifacts and limits:**
+- paper pdf sha256: fcf06cda1b53fb97144553767b794ec48854acf8c1f9304951b11079c3ba24ce
+- source: Official ACL PDF Section 6.3; offline Table 3 kept separate
+- raw online results: Not published; no service or customer-data access here
+
+**Sources:** [Amazon multi-turn intent classification with LLM-based labeling](https://aclanthology.org/2026.customnlp4u-1.8.pdf)
+
+<a id="e45"></a>
+## E45 · Drex Max: positive appended RLAF stage with missing continued-SFT control
+
+**Evidence:** `author_reported` · **Reviewed:** 2026-11-20 · **Reproduced here:** no
+
+| Protocol | Recorded context |
+| --- | --- |
+| Task | Drex Max typed text decisions and calibration after appended training stages |
+| Test unit | Author retained SFT checkpoint versus post-RLAF/pre-vision checkpoint, Table 7; training-seed robustness not disclosed |
+| Split | Public Decision Index suite and held-out Choice accuracy; temperature fit on a separate half per author protocol; exact run artifacts not independently authenticated |
+| Reference | Author benchmark labels and verified/generative-judge training signal |
+| Training | Same dense 27B lineage; append finite-action gold/judge expected reward with reference KL and consistency terms. No equal-extra-compute continued-SFT comparator |
+| Measurement | DI points, Choice accuracy and ECE as reported; stage improvement is not a universally isolated RL objective advantage |
+| Hardware | Author GPU training; source repository exposes inference/serving/tests, not a complete RLAF trainer or tested M5 recipe |
+
+| Reported measurement | Value |
+| --- | --- |
+| SFT-only Decision Index points | 64.9 |
+| Post-RLAF/pre-vision Decision Index points | 66.9 |
+| SFT-only held-out Choice accuracy | 86.50% |
+| Post-RLAF/pre-vision held-out Choice accuracy | 88.00% |
+| SFT-only ECE | 4.40% |
+| Post-RLAF/pre-vision ECE | 3.50% |
+
+**Interpretation:** A positive RLAF-stage report prevents blanket dismissal of decision RL, while missing continued-supervision/compute/seed controls keep it below directly deployable supervised choices for this task.
+
+- The teacher term can override a verified answer in the derived optimum; occurrence rate was not measured.
+- Pointer RLAF uses a different, directly differentiated adjusted-target proper objective and should not be identified with Max or PPO.
+- Extra training, data and consistency terms are not fully isolated by retained intermediate checkpoints.
+- No tensor download, new inference/training or business/Mac validation.
+
+**Artifacts and limits:**
+- source code revision: 112f75b54e3257ad38c0349274ca5fdb7408452b
+- source: Paper v2 Sections 6.3/6.5/8.8, Table 7 inspected
+- raw outputs: Author results only; original training not repeated
+
+**Sources:** [Drex v2 paper: RLAF objectives and stage ablations](https://arxiv.org/html/2611.07854v2)
 
