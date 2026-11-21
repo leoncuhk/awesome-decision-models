@@ -842,6 +842,11 @@ LLM 提议问题，Jev 将文本转成语义特征，再由监督 CatBoost 预�
 
 相邻的类型化提取／估计系列：11月18日改版用并行slot自回归提取及专用数值头，与Clef闭集判断分开。 只按输入计费不等于零生成；官方结果为内部作者评测，未建立完整企业续训包或M5运行证据。发布27B／9B卡声明Apache-2.0，但公开权重不证明生产置信度已校准。
 
+<a id="unsloth-decision"></a>
+**[Unsloth decision-model training (FastDecisionModel / DecisionTrainer)](https://unsloth.ai/docs/basics/train-your-own-decision-model-with-unsloth)** — General trainer that turns a fine-tunable LLM, including Qwen3.5 VLMs, into a Clef-style joint-head decision model, with calibration, merged export, a local Jev-compatible Decision API and an Apple Silicon (MLX) LoRA path. Built-in holdout is a random row split and is reused for calibration and reported accuracy. Benchmarks are vendor-reported on public data. Decision modules are AGPL-3.0-only; review licensing before modifying or serving them. Not run here.
+
+通用训练框架：把可微调 LLM（含 Qwen3.5 VLM）训练成 Clef 式联合头决策模型，自带校准、合并导出、本地兼容 Jev 的 Decision API，以及 Apple Silicon（MLX）LoRA 路径。 内置留出集按行随机划分，且校准与报告准确率共用同一留出集；基准为厂商在公开数据上自报。决策模块为 AGPL-3.0-only，修改或对外服务前须审查许可。本仓未运行。
+
 ## Routing / 路由
 
 <a id="routellm"></a>

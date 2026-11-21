@@ -6,7 +6,7 @@
 
 决策模型由 TypeSafe 的 Jev 于 2026 年 9 月带火：对给定选项**一次前向输出类型化概率**，不生成文本。新东西是这个输出合同：它让有界判断可以计价、校准、设门槛。本仓只回答一个问题：**对一个具体决策，哪种方法能以可接受的风险和完整成本得到可接受的结果？**
 
-核查批次 2026-11-21：91 项资源，35 个核心模型族，45 条证据记录。仅做来源审阅，**尚无本仓独立复现**。收录不代表推荐。
+核查批次 2026-11-21：92 项资源，35 个核心模型族，45 条证据记录。仅做来源审阅，**尚无本仓独立复现**。收录不代表推荐。
 
 ## 仓库怎么组织
 
@@ -104,6 +104,7 @@
 - **[DFIP / Decision-Focused Inference Path](https://arxiv.org/html/2610.36804v1)** — 配对原生基线系统研究，分别审计驻留加速、对外答案字段与外部到达流量。
 - **[DICE / Direct Item Choice Estimation](https://arxiv.org/html/2610.34124v1)** — 监督式商品选择，以候选隔离共享前缀注意力和单独校准的置信度进行推荐。
 - **[Clairic / Clairic-Flash (typed extraction)](https://blog.cloudflare.com/open-clairic/)** — 相邻的类型化提取／估计系列：11月18日改版用并行slot自回归提取及专用数值头，与Clef闭集判断分开。
+- **[Unsloth decision-model training (FastDecisionModel / DecisionTrainer)](https://unsloth.ai/docs/basics/train-your-own-decision-model-with-unsloth)** — 通用训练框架：把可微调 LLM（含 Qwen3.5 VLM）训练成 Clef 式联合头决策模型，自带校准、合并导出、本地兼容 Jev 的 Decision API，以及 Apple Silicon（MLX）LoRA 路径。
 
 ## 路由与从结果中学习
 

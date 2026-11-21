@@ -106,6 +106,7 @@
 | 角色 | 候选与可查入口 | 关键实施边界 |
 |---|---|---|
 | 强监督对照／可采用的轻量实现 | 合适的中文／多语encoder＋CE；冻结多语embedding＋LR／小头 | 固定标签低延迟任务可优先；长状态／新条件语义与分组留出另测。它们是实际采用候选，不能用陈旧弱基线衬托LLM。 |
+| 通用训练框架（首轮 LoRA 臂的默认实现） | **Unsloth `FastDecisionModel`／`DecisionTrainer`**：任意可微调 LLM（Qwen3.5、Gemma 4、Llama）加 Clef 式联合读出头；也可在 Laya／Clef 上续训。数据为 `state`／`questions`／`gold` 三字段，支持 choice、noul、score | 源码（固定 `8b7cde79`）：loss 为 soft CE，可选 label smoothing、Brier、ordinal 项，并可对参考头加 KL 锚定；头部单独学习率 1e-4；按题型拟合温度（每型 ≥10 条）。**三处须改用自己的协议**：`split_holdout` 按行随机抽 10%（上限 400），不按客户、会话、时间分组；校准与报告准确率用同一留出集；官方基准为作者自报的公开数据混合。决策模块文件标 **AGPL-3.0-only**（仓库为 Apache-2.0／AGPL 双许可），企业内修改或对外提供服务前先做许可审查。[源码](https://github.com/unslothai/unsloth/tree/8b7cde79ebf5a901b2fd936bbee214fb8c7562c7/unsloth/models)／[文档](https://unsloth.ai/docs/basics/train-your-own-decision-model-with-unsloth) |
 | 直接自有标签适配 | **Kev-4B**的`--data`、`--init_from`与pointer head；同原版作前后对照 | 固定问题／标签合同；MPS分支存在，Qwen3.5混合结构backward、内存和保存重载仍须目标机实测。[训练源码](https://github.com/jaredpalmer/kev/blob/051142bf849c2c6ad3f23e17a7b5aea2686d9a91/kev/train.py) |
 | 新增native检查点领域续训 | **Valen-Decision1.5**的full／LoRA、自有JSONL、恢复／导出与已训Mixer保留 | 训练代码及完整cookbook确实存在；loss缺省分布CE，领域示例另配RPS／Brier，并有实验性离散动作RLCD，不能从名称认定优于CE。官方0.8B／H200的短smoke不是4B效果证据；当前训练统计在device上分配float64，MPS兼容需处理，不能靠ANE转换获得Mac训练。[训练源码](https://github.com/Valen-Team/Valen/blob/f6df4fdbc45bf44a4ffbebaeda53f5fe6e49b339/valen/training/README.md)／[领域流程](https://valen-team.github.io/cookbook/domain-finetuning/) |
 | 新增公开训练实现 | **Strands Gemma4 v2**；**RSI-Jev v7.0-VL** | Strands v2有从原始底座起训的LoRA／token-readout配方，但合并HF发布物不满足原`init_from`的未合并训练checkpoint格式，不能声称拿HF ID即可续训。RSI公开全语言训练代码，原始训练数据未公开。两者当前trainer均为CUDA路线，均非已验证M5方案。[Strands配方](https://github.com/strands-labs/strands-decider/blob/d4915c9b11f61bb01ed293f4dc4c770a0a51792b/training/README.md)／[RSI实现](https://github.com/Shanghua-Gao/RSI-Jev/tree/e58526f061afd4c383d33a22b309b888f8a3e3c7) |
@@ -206,13 +207,14 @@
 | 5 部署优化 | 需要时比较直接小模型、蒸馏学生、实际级联；记录量化前后概率及判断差异 | 同质量／预定非劣界内完整成本改善；强模型在defer子集上应有实测增量 |
 | 6 冻结确认 | 锁定model/schema/runtime、校准、完整门控／回退和预算，运行一次独立Test | 报配对区间、失败与退化；未显著不等于等价，未达标则缩窄、诊断或停止 |
 
-第一轮实际比较：冻结多语embedding＋简单头、多语encoder监督、0.6–4B LoRA监督（含原版）；按业务特征先保留其中少数组合。第二轮只对剩余标签／覆盖缺口加入经核验教师，固定保留样本后比较hard与soft。不默认“教师soft→训练27B→4B→每周CAPS→PRDO”。教师已够好可直接产标签；小模型直接达标则不必付教师训练费。若转交率为q，级联还要支付首阶段、转交子集的强模型、重试及人工等成本；强模型总体accuracy高，不保证在被转交的样本上更好。[级联对照](https://arxiv.org/html/2610.00346v2#S5.SS3)
+第一轮实际比较：冻结多语embedding＋简单头、多语encoder监督、0.6–4B LoRA监督（含原版；默认用 Unsloth `DecisionTrainer` 实现，自行提供分组划分和独立 Cal／Test）；按业务特征先保留其中少数组合。第二轮只对剩余标签／覆盖缺口加入经核验教师，固定保留样本后比较hard与soft。不默认“教师soft→训练27B→4B→每周CAPS→PRDO”。教师已够好可直接产标签；小模型直接达标则不必付教师训练费。若转交率为q，级联还要支付首阶段、转交子集的强模型、重试及人工等成本；强模型总体accuracy高，不保证在被转交的样本上更好。[级联对照](https://arxiv.org/html/2610.00346v2#S5.SS3)
 
 <a id="mac-feasibility"></a>
 ### M5 Pro 48GB：训练准入，不作内存／耗时承诺
 
 - 固定模型与代码revision、Python／框架／算子、精度及完整输入分布。先跑含代表性最长状态／候选的真实前向和反向，再测少量更新；记录峰值、swap、跳过样本、梯度有限性和失败。
 - 检查head或特殊marker是否实际被训练、候选顺序是否映射正确。保存adapter／head／tokenizer／schema和校准，重载后对同批输入比较概率与最终判定；服务端不能悄悄改模板或截断。
+- **Unsloth 有 Apple Silicon 训练路径**（`decision_mlx.py`，基于 unsloth-zoo 的 MLX）：仅支持 LoRA（拒绝全参微调），可 4-bit 加载普通 LM 并新建联合头训练，合并保存后重载的预测与训练态一致（测试容差 3e-2）。这是目前唯一在源码和测试层面覆盖 Mac 决策头训练的公开实现；M5 上的内存与耗时仍须实测。[MLX 实现](https://github.com/unslothai/unsloth/tree/8b7cde79ebf5a901b2fd936bbee214fb8c7562c7/unsloth/models/decision_mlx.py)
 - Kev有MPS分支但目标机backward未验证；SII公开wrapper用多GPU，已核LoRA发布为合并BF16独立权重、训练器另存adapter；Intern当前CUDA全语言训练不能按推理内存估算。改成MLX／LoRA是新实现，须重新验合同。
 - 新增Strands v2／RSI训练代码仍以CUDA为路径，Jeff当前仅CUDA／CPU；Valen native续训已公开，但其设备上float64统计是MPS兼容阻碍；Liquid、RSI量化及Decisio的MPS／MLX推理包不构成Mac后训练证据。Strands E2B的2.3B有效参数、MoE的active参数和adapter文件大小都不能代替完整驻留／反向内存。
 - 27B BF16仅权重通常已超48GB；量化教师推理与27B训练是不同任务。PRDO论文每run用48GB Ada，**另有125GB主机内存**；CPU offload不能给48GB统一内存凭空增加容量。[PRDO实现](https://github.com/ZimmyGao/openjev-rlcd/tree/5859d2b893314fb3581f06e4e36c303e372b3f48)

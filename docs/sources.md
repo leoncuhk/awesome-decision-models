@@ -3384,3 +3384,19 @@
 - Source revision: `not captured / live URL`
 - Note: Abstract only (v1, Oct13). Frozen agent decision states (simulated environments, customer-service policies, tool use, web navigation, coding); each next-action question paired with independent factual probes about the same state. Across seventeen fast systems and a reasoning model, most wrong actions follow correct reading, and more accurate systems have a larger share of such errors. Preliminary version; body not reviewed.
 
+<a id="unsloth-decision-docs"></a>
+## Train your own Decision Model with Unsloth
+
+- Source: https://unsloth.ai/docs/basics/train-your-own-decision-model-with-unsloth
+- Kind: `official_docs`; review depth: `content_reviewed`; reviewed: 2026-11-21
+- Source revision: `not captured / live URL`
+- Note: Full page reviewed Nov21. FastDecisionModel/DecisionTrainer turn a fine-tunable LLM (Qwen3.5, Gemma 4, Llama) into a decision model with a Clef-style joint head; can continue training Laya/Clef. Dataset fields state/questions/gold; choice, noul, score. Vendor table: Qwen3.5-0.8B typed-decisions 36%->73%, BANKING77 7%->74%, CLINC150 19%->76%; Qwen3.5-2B 33%->78% / 1%->58% / 1%->62%; test set 3000 rows (2000 typed-decisions, 500 BANKING77, 500 CLINC150), decontaminated per author; training mix of 12 public sources plus typed-decisions. Benchmark note says LoRA r=64 one epoch while reproduction steps say rank 16, 2 epochs, lr 2e-4, and the current code sample uses lr 2e-5, max_steps 240; configurations are not mapped to results. Author-reported; not reproduced. A WeChat translation (2026-10-09) is archived in the maintainer's notes.
+
+<a id="unsloth-decision-source"></a>
+## Unsloth decision-model trainer source (FastDecisionModel, DecisionTrainer, MLX path)
+
+- Source: https://github.com/unslothai/unsloth/tree/8b7cde79ebf5a901b2fd936bbee214fb8c7562c7/unsloth/models
+- Kind: `repository`; review depth: `content_reviewed`; reviewed: 2026-11-21
+- Source revision: `8b7cde79ebf5a901b2fd936bbee214fb8c7562c7`
+- Note: Read decision.py, _decision_common.py, decision_mlx.py, tests/test_decision_images.py, tests/test_decision_model_mlx.py and test_decision_mlx_guards.py. Loss: soft CE with optional label smoothing, Brier and ordinal terms, optional KL to a reference head; head LR 1e-4 (fresh head 3e-4 in Studio). Calibration: per-question-type temperatures (>=10 items) and option-count buckets, fitted against hard gold. split_holdout: random 10% of rows, capped at 400 decisions, not grouped. Images: Qwen3.5 VLM rows pass through the processor; LoRA on the language model only, vision tower frozen; tests assert image-dependent logits and gradients through the visual module. MLX: LoRA only, 4-bit plain LM trains as a new Clef head, merged save reloads within 3e-2; image rows skipped when the decoder lacks a vision tower. Decision files are SPDX AGPL-3.0-only; repository ships Apache-2.0 LICENSE plus AGPL COPYING. Tests not executed here.
+

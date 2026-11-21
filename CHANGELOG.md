@@ -2,6 +2,13 @@
 
 Each entry records what changed in the repository's knowledge, not every edit. Pre-2026-11-21 dated review notes (`updates/`) and retired documents can be recovered from tag `archive/pre-restructure-2026-11-21/main` or `…/research-dynamic-skill-loading-2026-11` with `git show <tag>:<path>`.
 
+## 2026-11-21 · Unsloth decision-model training
+
+- Source: a WeChat translation of the Unsloth guide, checked against the official docs and the pinned source (`8b7cde79`).
+- Added the Unsloth `FastDecisionModel` / `DecisionTrainer` entry. It is now the default implementation for the LoRA arm in the [general pipeline](playbooks/decision-pipeline.md) and the B3 decision-head arm in [multimodal post-training](playbooks/multimodal-posttraining.md). It is also the first public decision-head trainer with an Apple Silicon path.
+- Updated P02 (hard/soft and anchoring are one-parameter ablations), P11 (an image-conditioned decision-head trainer exists) and P12 (a training entry is no longer scarce; license becomes the gate).
+- Boundaries recorded: random row holdout reused for calibration; vendor-only benchmarks; AGPL-3.0-only decision modules.
+
 ## 2026-11-21 · Reorganize by field problems and playbooks
 
 - Knowledge layer: [problems/](problems/) P01–P12, one field problem per file with judgment, confidence, evidence, counter-evidence and open experiments. This replaces dated notes, theses and research branches.

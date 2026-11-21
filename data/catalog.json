@@ -4252,6 +4252,26 @@
       "review_depth": "abstract_reviewed",
       "source_revision": null,
       "review_note": "Abstract only (v1, Oct13). Frozen agent decision states (simulated environments, customer-service policies, tool use, web navigation, coding); each next-action question paired with independent factual probes about the same state. Across seventeen fast systems and a reasoning model, most wrong actions follow correct reading, and more accurate systems have a larger share of such errors. Preliminary version; body not reviewed."
+    },
+    {
+      "id": "unsloth-decision-docs",
+      "title": "Train your own Decision Model with Unsloth",
+      "url": "https://unsloth.ai/docs/basics/train-your-own-decision-model-with-unsloth",
+      "kind": "official_docs",
+      "reviewed_on": "2026-11-21",
+      "review_depth": "content_reviewed",
+      "source_revision": null,
+      "review_note": "Full page reviewed Nov21. FastDecisionModel/DecisionTrainer turn a fine-tunable LLM (Qwen3.5, Gemma 4, Llama) into a decision model with a Clef-style joint head; can continue training Laya/Clef. Dataset fields state/questions/gold; choice, noul, score. Vendor table: Qwen3.5-0.8B typed-decisions 36%->73%, BANKING77 7%->74%, CLINC150 19%->76%; Qwen3.5-2B 33%->78% / 1%->58% / 1%->62%; test set 3000 rows (2000 typed-decisions, 500 BANKING77, 500 CLINC150), decontaminated per author; training mix of 12 public sources plus typed-decisions. Benchmark note says LoRA r=64 one epoch while reproduction steps say rank 16, 2 epochs, lr 2e-4, and the current code sample uses lr 2e-5, max_steps 240; configurations are not mapped to results. Author-reported; not reproduced. A WeChat translation (2026-10-09) is archived in the maintainer's notes."
+    },
+    {
+      "id": "unsloth-decision-source",
+      "title": "Unsloth decision-model trainer source (FastDecisionModel, DecisionTrainer, MLX path)",
+      "url": "https://github.com/unslothai/unsloth/tree/8b7cde79ebf5a901b2fd936bbee214fb8c7562c7/unsloth/models",
+      "kind": "repository",
+      "reviewed_on": "2026-11-21",
+      "review_depth": "content_reviewed",
+      "source_revision": "8b7cde79ebf5a901b2fd936bbee214fb8c7562c7",
+      "review_note": "Read decision.py, _decision_common.py, decision_mlx.py, tests/test_decision_images.py, tests/test_decision_model_mlx.py and test_decision_mlx_guards.py. Loss: soft CE with optional label smoothing, Brier and ordinal terms, optional KL to a reference head; head LR 1e-4 (fresh head 3e-4 in Studio). Calibration: per-question-type temperatures (>=10 items) and option-count buckets, fitted against hard gold. split_holdout: random 10% of rows, capped at 400 decisions, not grouped. Images: Qwen3.5 VLM rows pass through the processor; LoRA on the language model only, vision tower frozen; tests assert image-dependent logits and gradients through the visual module. MLX: LoRA only, 4-bit plain LM trains as a new Clef head, merged save reloads within 3e-2; image rows skipped when the decoder lacks a vision tower. Decision files are SPDX AGPL-3.0-only; repository ships Apache-2.0 LICENSE plus AGPL COPYING. Tests not executed here."
     }
   ],
   "entries": [
@@ -7384,6 +7404,29 @@
       "caveat": {
         "en": "Preliminary v1, abstract-level review. Frozen states from simulated and benchmark environments, not live enterprise traffic.",
         "zh": "初版预印本，仅摘要级阅读。冻结状态来自模拟与基准环境，不是真实企业流量。"
+      }
+    },
+    {
+      "id": "unsloth-decision",
+      "name": "Unsloth decision-model training (FastDecisionModel / DecisionTrainer)",
+      "category": "baselines",
+      "url": "https://unsloth.ai/docs/basics/train-your-own-decision-model-with-unsloth",
+      "source_ids": [
+        "unsloth-decision-docs",
+        "unsloth-decision-source"
+      ],
+      "reviewed_on": "2026-11-21",
+      "summary": {
+        "en": "General trainer that turns a fine-tunable LLM, including Qwen3.5 VLMs, into a Clef-style joint-head decision model, with calibration, merged export, a local Jev-compatible Decision API and an Apple Silicon (MLX) LoRA path.",
+        "zh": "通用训练框架：把可微调 LLM（含 Qwen3.5 VLM）训练成 Clef 式联合头决策模型，自带校准、合并导出、本地兼容 Jev 的 Decision API，以及 Apple Silicon（MLX）LoRA 路径。"
+      },
+      "use": {
+        "en": "Default implementation for the LoRA arm of a first enterprise comparison and for decision-head image training; supply your own grouped split and separate calibration and test sets.",
+        "zh": "企业首轮比较中 LoRA 臂与图文决策头训练的默认实现；须自行提供分组划分及独立的校准集和测试集。"
+      },
+      "caveat": {
+        "en": "Built-in holdout is a random row split and is reused for calibration and reported accuracy. Benchmarks are vendor-reported on public data. Decision modules are AGPL-3.0-only; review licensing before modifying or serving them. Not run here.",
+        "zh": "内置留出集按行随机划分，且校准与报告准确率共用同一留出集；基准为厂商在公开数据上自报。决策模块为 AGPL-3.0-only，修改或对外服务前须审查许可。本仓未运行。"
       }
     }
   ]
