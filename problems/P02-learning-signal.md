@@ -24,6 +24,8 @@
 - PRDO 在保留推理的设置下，Brier 和 AURC 相对 GRPO＋TS 有改善；0.6B 数学验证的准确率反而下降（[E40](../docs/evidence.md#e40)）。
 - CAPS 在 10 选 1 的模拟日志上优于 positive-only，但日志是唯一 gold 的正误反馈，不是自然企业日志。
 
+实现层面：Unsloth `DecisionTrainer` 原生支持 hard／soft 目标、Brier、ordinal 项，以及对参考头的 KL 锚定（[源码](https://github.com/unslothai/unsloth/blob/8b7cde79ebf5a901b2fd936bbee214fb8c7562c7/unsloth/models/decision.py)）。hard 与 soft、加不加锚定的对照，现在在同一实现里改一个参数就能做，不需要各自搭训练器。它的校准代码注释写明：用 soft 目标训练会使 Clef 式头偏向低置信，所以校准统一按 hard gold 拟合。这是实现者的观察，不是受控实验结论。
+
 ## 开放
 
 - **中文长状态**：0.6–4B LoRA 能否胜过现代多语 encoder？目前的新研究主要是英语。

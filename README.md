@@ -6,7 +6,7 @@
 
 Decision models — popularized by TypeSafe's Jev in September 2026 — return **typed probabilities over supplied options in one pass** instead of generating text. The new thing is the output contract: it makes bounded judgments priceable, calibratable and gateable. This repository asks one question: **which method delivers acceptable outcomes at acceptable risk and total cost for a given decision?**
 
-Review batch 2026-11-21: 91 resources, 35 core model families, 45 evidence records. Source review only; **nothing here is independently reproduced yet.** Inclusion is not endorsement.
+Review batch 2026-11-21: 92 resources, 35 core model families, 45 evidence records. Source review only; **nothing here is independently reproduced yet.** Inclusion is not endorsement.
 
 ## How this repository is organized
 
@@ -104,6 +104,7 @@ A new training label does not make a familiar baseline obsolete.
 - **[DFIP / Decision-Focused Inference Path](https://arxiv.org/html/2610.36804v1)** — Paired native-baseline systems study audits resident acceleration, exposed answers and external arrivals separately.
 - **[DICE / Direct Item Choice Estimation](https://arxiv.org/html/2610.34124v1)** — Supervised item choice with candidate-isolated shared-prefix attention and separately calibrated recommendation confidence.
 - **[Clairic / Clairic-Flash (typed extraction)](https://blog.cloudflare.com/open-clairic/)** — Adjacent typed extraction/estimation family: November 18 redesign uses parallel slot autoregressive extraction plus specialized numerical heads, separate from Clef closed-option decisions.
+- **[Unsloth decision-model training (FastDecisionModel / DecisionTrainer)](https://unsloth.ai/docs/basics/train-your-own-decision-model-with-unsloth)** — General trainer that turns a fine-tunable LLM, including Qwen3.5 VLMs, into a Clef-style joint-head decision model, with calibration, merged export, a local Jev-compatible Decision API and an Apple Silicon (MLX) LoRA path.
 
 ## Routing and learning from outcomes
 

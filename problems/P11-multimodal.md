@@ -24,7 +24,8 @@
 - 真正带图训练的实例：
   - Intern-Decision：17,880 条样本中 5,500 条带图，冻结视觉塔与 projector，训练语言骨干；走 CUDA/XTuner，不是 LoRA；
   - MLX-VLM：有图像条件、completion-only 的语言侧 adapter 源码路径；
-  - Jev-Decision：Qwen3-VL-2B 上 pointer head 加 LoRA 的代码先例，没有公开结果。
+  - Jev-Decision：Qwen3-VL-2B 上 pointer head 加 LoRA 的代码先例，没有公开结果；
+  - **Unsloth `FastDecisionModel`**（2026-11）：Qwen3.5 VLM 加 Clef 式联合头，LoRA 只加在语言侧，视觉冻结但参与前向；单元测试确认图像影响输出且梯度经视觉塔回传，并有 Apple Silicon（MLX）路径。这是目前最直接可用的图文决策头训练实现，作者基准只覆盖文本任务（[源码](https://github.com/unslothai/unsloth/blob/8b7cde79ebf5a901b2fd936bbee214fb8c7562c7/tests/test_decision_images.py)）。
 - MIRE / WWW2025（23 类场景加 23 类意图）：官方基线是 Qwen2-VL-7B 全参 SFT。前三名线上分差只有 0.0034，用到了伪标签、model soup 和模型合并，无法归因到单项技巧（[E33](../docs/evidence.md#e33)、[E28](../docs/evidence.md#e28)）。
 - 冻结视觉参数仍需执行视觉编码器；冻结不等于关闭视觉输入。
 
@@ -39,7 +40,7 @@
 
 ## 企业含义
 
-在 M5 Pro 48GB 上：主候选 Qwen3.5-4B，图像条件语言侧 QLoRA；回退用 Qwen3.5-2B；Intern-Decision 作为参照系统。按 G0–G4 关卡推进。
+在 M5 Pro 48GB 上：主候选 Qwen3.5-4B，图像条件语言侧 QLoRA；回退用 Qwen3.5-2B；Intern-Decision 作为参照系统。读出有两种实现可比：MLX-VLM 的生成式短标签 SFT，以及 Unsloth MLX 的决策头训练。按 G0–G4 关卡推进。
 
 ## 关键阅读
 
