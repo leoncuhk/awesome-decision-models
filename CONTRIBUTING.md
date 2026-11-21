@@ -19,7 +19,7 @@ Problem files use one template: 问题 · 当前判断（置信度） · 证据�
 
 ## Branches
 
-One `main`. Open problems are files, not branches. Use a short-lived branch per pull request and delete it after merge. No force push.
+One `main`. Open problems are files, not branches. The maintainer commits directly to `main` after local checks; external contributors open a pull request. No force push.
 
 ## Local checks
 

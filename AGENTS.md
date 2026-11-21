@@ -26,4 +26,4 @@ This repository curates evidence, not marketing. It is organized by field proble
 - Do not change repository settings, credentials, access, licenses of third-party material or paid-service configuration without authorization.
 - The source watcher only detects changes. It never establishes improved accuracy and never auto-merges.
 - Select checks by changed files using `CONTRIBUTING.md#local-checks`.
-- One `main`; short-lived PR branches only, deleted after merge. No force push or automatic merge.
+- Solo maintenance: commit directly to `main` after the local checks pass. Use a pull request only for external contributions or when the owner asks for review. No force push.

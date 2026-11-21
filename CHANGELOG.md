@@ -2,6 +2,12 @@
 
 Each entry records what changed in the repository's knowledge, not every edit. Pre-2026-11-21 dated review notes (`updates/`) and retired documents can be recovered from tag `archive/pre-restructure-2026-11-21/main` or `…/research-dynamic-skill-loading-2026-11` with `git show <tag>:<path>`.
 
+## 2026-11-21 · Method views, PRDO and unified evaluation
+
+- Decision pipeline: added a table that maps each method (decision-head CE, teacher soft, generative SFT, GRPO, DPO/KTO, PRDO, partial feedback) to its extra data, inference contract, training compute and implementation. Each training view is derived from one master dataset with one frozen split.
+- Added how to run PRDO (mechanism, data, base, code paths, resources, controls) and a unified evaluation protocol.
+- Maintenance: direct commits to `main` after local checks; pull requests only for external contributions.
+
 ## 2026-11-21 · Unsloth decision-model training
 
 - Source: a WeChat translation of the Unsloth guide, checked against the official docs and the pinned source (`8b7cde79`).

@@ -38,6 +38,9 @@
 
 ## 企业含义
 
+各方法需要什么数据、用什么实现、怎样在同一张表上比较，见[通用流程：方法与数据视图](../playbooks/decision-pipeline.md#method-views)和[统一评测协议](../playbooks/decision-pipeline.md#unified-evaluation)。
+
+
 首轮只跑三组。不要默认走“教师 soft → 27B → 4B → 每周 CAPS → PRDO”这条链。使用 Jev 的输出训练竞争模型有条款风险。
 
 ## 关键阅读
