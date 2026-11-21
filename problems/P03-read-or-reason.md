@@ -15,6 +15,8 @@
 - 同尺寸对照显示，4B 决策模型在正确性判断上的缺口是推理缺口，不是规模缺口。给出参考答案后，一次读出就能在 JudgeBench 上追平推理评审（[To Jev or Not to Jev](https://arxiv.org/abs/2611.00505)）。
 - StartLux AutoThink 按最大候选概率开门，不确定时生成推理、再读出、两个分布混合。论文门槛 0.9，服务默认 0.6。同一 27B 模型在 DI 上触发 28–33%，在 DecisionPivot 上触发 61%（[E31](../docs/evidence.md#e31)）。
 - PRDO 对每条推理之后的答案分布做 proper-score 训练（[E40](../docs/evidence.md#e40)）。Jeffan 用选择性重读或层循环。
+- 第三种做法是 System-2 不接管决策，而是把推理沉淀进外部工具：JevRSI 让后台大模型编写规则、状态记忆和一步世界模型程序供前台决策模型使用，ALFWorld OOD 上从 45.52% 升到 85.82%，高于低置信度时由 LLM 接管的 81.34%（[2611.22432](https://arxiv.org/abs/2611.22432)）。
+- JevAgentHarness 按每类选择、在 agent 自己的轨迹上拟合置信阈值，低于阈值交给 LLM；不拟合阈值直接委托工具选择，成功率下降 19.0 个百分点（[2610.21412](https://arxiv.org/abs/2610.21412)）。
 - 初判、推理后读出、融合结果是三个不同的分布，要分别校准（[StartLux v2 §5.5](https://arxiv.org/html/2610.17309v2#S5.SS5)）。
 
 ## 开放

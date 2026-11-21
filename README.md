@@ -6,7 +6,7 @@
 
 Decision models — popularized by TypeSafe's Jev in September 2026 — return **typed probabilities over supplied options in one pass** instead of generating text. The new thing is the output contract: it makes bounded judgments priceable, calibratable and gateable. This repository asks one question: **which method delivers acceptable outcomes at acceptable risk and total cost for a given decision?**
 
-Review batch 2026-11-21: 92 resources, 35 core model families, 45 evidence records. Source review only; **nothing here is independently reproduced yet.** Inclusion is not endorsement.
+Review batch 2026-11-21: 98 resources, 36 core model families, 45 evidence records. Source review only; **nothing here is independently reproduced yet.** Inclusion is not endorsement.
 
 ## How this repository is organized
 
@@ -87,6 +87,7 @@ Mechanism and suggested experiment only; version boundaries, licenses and limita
 | [Respan Span-02](https://www.respan.ai/blog/introducing-span-2) · [card](docs/models.md#span-02) | Open decision serving artifact with a specialized quantized Rust/CUDA engine and optional reasoning. | Study self-hosted inference and budgeted reasoning as separate serving controls. |
 | [Decisio tuned v3 / Tachara AI](https://github.com/aminry/decisio) · [card](docs/models.md#decisio) | November20 Gemma12B tuned release with calibrated and commit serving policies and multiple precision ports. | A fresh serving/readout comparator; evaluate calibrated policy, commit policy and calculator under the same contract. |
 | [Valen-Decision1.5](https://github.com/Valen-Team/Valen) · [card](docs/models.md#valen-decision) | Multimodal typed-decision family with native published-checkpoint domain training, separate from its ONNX/GGUF/ANE conversions. | Prioritize an inspectable native-checkpoint LoRA comparator for proprietary data on compatible hardware; keep original and direct CE controls. |
+| [LemonDecider 4B (inclusionAI / Ant)](https://huggingface.co/inclusionAI/LemonDecider) · [card](docs/models.md#lemondecider) | Open Qwen3.5-4B typed-decision model with a 255-option readout, released with its 1.2M-row training mix, training and evaluation code. | Domestic, Apache-2.0 4B candidate for direct domain adaptation; its license-filtered data can serve as a capability-preserving replay mix. |
 
 ## Baselines worth keeping
 
@@ -105,6 +106,8 @@ A new training label does not make a familiar baseline obsolete.
 - **[DICE / Direct Item Choice Estimation](https://arxiv.org/html/2610.34124v1)** — Supervised item choice with candidate-isolated shared-prefix attention and separately calibrated recommendation confidence.
 - **[Clairic / Clairic-Flash (typed extraction)](https://blog.cloudflare.com/open-clairic/)** — Adjacent typed extraction/estimation family: November 18 redesign uses parallel slot autoregressive extraction plus specialized numerical heads, separate from Clef closed-option decisions.
 - **[Unsloth decision-model training (FastDecisionModel / DecisionTrainer)](https://unsloth.ai/docs/basics/train-your-own-decision-model-with-unsloth)** — General trainer that turns a fine-tunable LLM, including Qwen3.5 VLMs, into a Clef-style joint-head decision model, with calibration, merged export, a local Jev-compatible Decision API and an Apple Silicon (MLX) LoRA path.
+- **[SGLang /v1/decisions (zero-training readout)](https://docs.sglang.io/docs/supported-models/decision_models)** — Native SGLang endpoint that turns any chat model into a typed-decision service by reading single-token label log-probabilities after one prefill per question.
+- **[NanoJev](https://github.com/TianyuCodings/NanoJev)** — MIT Qwen3-0.6B decision-head model with dynamic 2-255 candidates and an end-to-end training pipeline.
 
 ## Routing and learning from outcomes
 
@@ -114,6 +117,8 @@ A new training label does not make a familiar baseline obsolete.
 - **[Parlant rule matching / Jev integration](https://github.com/emcie-co/parlant)** — Pinned CX engine implementation batches per-rule propositions over shared state and resolves declared rule relationships.
 - **[Modem Smart Triggers](https://modem.ai/blog/smart-triggers)** — Implementer-described product gates event-triggered agent runs with exact filters and a semantic condition.
 - **[Enterprise multi-turn intent learning (Amazon study)](https://aclanthology.org/2026.customnlp4u-1.8/)** — Evidence-guided and self-critique teacher labeling, followed by separate domain/intent/issue RoBERTa classifiers for real ecommerce conversations.
+- **[JevAgentHarness / AgentDecisionBench](https://github.com/JevAgentHarness/JevAgentHarness)** — Delegates an agent's multiple-choice steps to a decision model with per-choice confidence thresholds fitted on the agent's own trajectories, and trains a 4B model on post-mistake states.
+- **[JevRSI (System-2 improves the System-1 harness)](https://github.com/usail-hkust/JevRSI)** — A System-2 LLM asynchronously writes procedures, state-memory programs and world-model programs that feed a fast decision model, instead of taking over decisions.
 
 ## Reliability
 
@@ -143,6 +148,7 @@ A new training label does not make a familiar baseline obsolete.
 - **[JEVal v2](https://arxiv.org/html/2610.03935v2)** — Multidomain English/Chinese evaluation of local typed decisions, reasoning limits and workflow composition.
 - **[To Jev or Not to Jev (System-1 models as LLM judges)](https://arxiv.org/abs/2611.00505)** — Pre-registered comparison of 14 System-1 decision models with four generative judges on eleven judge benchmarks, including reference-guided judging, calibration and injected-instruction robustness.
 - **[Reading Right, Acting Wrong (agent-loop decision diagnosis)](https://arxiv.org/abs/2610.18579)** — Pairs each agent next-action question with independent factual probes on the same state to separate misreading from wrong action.
+- **[System1-Arena](https://arxiv.org/abs/2610.21244)** — Benchmark of nearly 100K questions asking which decisions can be left to System-1 models, spanning classification and agentic tasks.
 
 ## Foundations
 

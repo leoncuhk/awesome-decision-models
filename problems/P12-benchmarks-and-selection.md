@@ -18,6 +18,7 @@
 评测碎片化：
 - HF 社区 Decision Index 从 0.3.2 到 0.4，评分和数据都改了；0.4 的文本 Full 全部改为私有题，有 0.9 分的平局带。
 - [AA Index v2](https://artificialanalysis.ai/articles/decision-index-v2)：私有数据占比 45%，Brier 进入主分；前三名 Drex Max v1.1 / GLiDE v1.2 / Mammoth 27B 分别为 73 / 73 / 72。
+- Public 不等于 Full 的又一例：LemonDecider 公告称 DI 0.4.1 Public 61.67 分、Jev 1.14 为 60.7 分，但 0.4 的文本 Full 只由私有题决定，这不能说明“跑赢 Jev”。
 - 作者自建自评：StartLux 的 DecisionPivot；SII 用 JEVal 评测自家模型。StartLux 在 10 月 DI 上的第一名，到 DI 0.4.1 已不再是第一（[E29](../docs/evidence.md#e29)）。
 
 选型经济学：

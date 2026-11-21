@@ -13,6 +13,8 @@ agent 或业务流程选错动作时，是模型没读懂状态，还是读懂�
 ## 证据
 
 - 冻结的 agent 决策状态（覆盖客服政策、工具使用、网页导航、编码），每个“下一步动作”问题都配有独立的事实探针。结果：17 个快速系统加 1 个推理模型中，多数错误动作发生在状态已读对之后，且系统越准，这类错误占比越高（[Reading Right, Acting Wrong](https://arxiv.org/abs/2610.18579)，初版，仅读摘要）。
+- JevRSI 的消融直接对应三类信息缺口：去掉状态记忆，ALFWorld ID/OOD 下降 15.7／17.9 个百分点；去掉动作前提规则，BabyAI ID 下降 17.3；去掉一步世界模型，BabyAI ID 从 64.0% 降到 37.3%。补齐“过去、现在、未来”的信息，不改权重就大幅提升（[2611.22432](https://arxiv.org/abs/2611.22432)，文本游戏环境）。
+- 单题最准的决策模型只完成了 69.5% 的 agent 任务：孤立题准确率不能预测在完整流程里的表现（[JevAgentHarness](https://arxiv.org/abs/2610.21412)）。
 - Entagl 回放中，owner 和流程状态缺失直接导致错误路由；回放输入不匹配时，不能单独归因于模型（[Entagl](https://www.entagl.com/blog/typesafe-jev-benchmark-ai-decision-models)）。
 - Wix 用状态谓词门控，剔除了语义匹配后 59.4% 的候选，不需要任何模型调用（[2608.01050](https://arxiv.org/pdf/2608.01050)）。
 - Audiala：路由中位延迟 382 → 294ms，完整轮次却 8677 → 9262ms，稳定通过 38 → 33，23 分钟后回滚（[Audiala](https://audiala.com/blog/jev-in-production)）。

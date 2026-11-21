@@ -2,6 +2,12 @@
 
 Each entry records what changed in the repository's knowledge, not every edit. Pre-2026-11-21 dated review notes (`updates/`) and retired documents can be recovered from tag `archive/pre-restructure-2026-11-21/main` or `…/research-dynamic-skill-loading-2026-11` with `git show <tag>:<path>`.
 
+## 2026-11-21 · Readout paradigms, LemonDecider, harness collaboration
+
+- Sources: three WeChat articles (readout paradigms; LemonDecider; JevRSI) checked against primary sources, plus the SGLang decisions docs, NanoJev, JevAgentHarness and System1-Arena found while verifying them.
+- Added entries: LemonDecider 4B (core), SGLang `/v1/decisions` and NanoJev (baselines), System1-Arena (evaluation), JevAgentHarness and JevRSI (routing).
+- Landscape: readout-paradigm × engineering-constraint table. Decision pipeline: zero-training and Harness control arms in step 1, LemonDecider and SGLang candidate rows, data hygiene and replay guidance. P01/P02/P03/P07/P12 and the skill-routing playbook updated.
+
 ## 2026-11-21 · Method views, PRDO and unified evaluation
 
 - Decision pipeline: added a table that maps each method (decision-head CE, teacher soft, generative SFT, GRPO, DPO/KTO, PRDO, partial feedback) to its extra data, inference contract, training compute and implementation. Each training view is derived from one master dataset with one frozen split.

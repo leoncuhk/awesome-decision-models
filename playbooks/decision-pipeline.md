@@ -107,6 +107,8 @@
 |---|---|---|
 | 强监督对照／可采用的轻量实现 | 合适的中文／多语encoder＋CE；冻结多语embedding＋LR／小头 | 固定标签低延迟任务可优先；长状态／新条件语义与分组留出另测。它们是实际采用候选，不能用陈旧弱基线衬托LLM。 |
 | 通用训练框架（首轮 LoRA 臂的默认实现） | **Unsloth `FastDecisionModel`／`DecisionTrainer`**：任意可微调 LLM（Qwen3.5、Gemma 4、Llama）加 Clef 式联合读出头；也可在 Laya／Clef 上续训。数据为 `state`／`questions`／`gold` 三字段，支持 choice、noul、score | 源码（固定 `8b7cde79`）：loss 为 soft CE，可选 label smoothing、Brier、ordinal 项，并可对参考头加 KL 锚定；头部单独学习率 1e-4；按题型拟合温度（每型 ≥10 条）。**三处须改用自己的协议**：`split_holdout` 按行随机抽 10%（上限 400），不按客户、会话、时间分组；校准与报告准确率用同一留出集；官方基准为作者自报的公开数据混合。决策模块文件标 **AGPL-3.0-only**（仓库为 Apache-2.0／AGPL 双许可），企业内修改或对外提供服务前先做许可审查。[源码](https://github.com/unslothai/unsloth/tree/8b7cde79ebf5a901b2fd936bbee214fb8c7562c7/unsloth/models)／[文档](https://unsloth.ai/docs/basics/train-your-own-decision-model-with-unsloth) |
+| 零训练基线 | **SGLang `/v1/decisions`**：现有聊天模型每题一次 prefill，读单 token 标签概率 | 不训练也能拿到与托管决策 API 同形态的概率输出，作为任何后训练之前的必做对照；校准须在 Cal 集上另拟合。[文档](https://docs.sglang.io/docs/supported-models/decision_models) |
+| 国产开放 4B 适配起点 | **LemonDecider 4B**（Qwen3.5-4B，255 码读出，Apache-2.0） | 训练代码与 120 万条数据全公开，可从其权重直接续训或复用数据；训练走 CUDA，自定义运行时。公告分数是 Public 部分，不作为胜负依据。[模型卡](https://huggingface.co/inclusionAI/LemonDecider/tree/8eca78d5be8b6b0c02346051d8c6a99370d86f5e) |
 | 直接自有标签适配 | **Kev-4B**的`--data`、`--init_from`与pointer head；同原版作前后对照 | 固定问题／标签合同；MPS分支存在，Qwen3.5混合结构backward、内存和保存重载仍须目标机实测。[训练源码](https://github.com/jaredpalmer/kev/blob/051142bf849c2c6ad3f23e17a7b5aea2686d9a91/kev/train.py) |
 | 新增native检查点领域续训 | **Valen-Decision1.5**的full／LoRA、自有JSONL、恢复／导出与已训Mixer保留 | 训练代码及完整cookbook确实存在；loss缺省分布CE，领域示例另配RPS／Brier，并有实验性离散动作RLCD，不能从名称认定优于CE。官方0.8B／H200的短smoke不是4B效果证据；当前训练统计在device上分配float64，MPS兼容需处理，不能靠ANE转换获得Mac训练。[训练源码](https://github.com/Valen-Team/Valen/blob/f6df4fdbc45bf44a4ffbebaeda53f5fe6e49b339/valen/training/README.md)／[领域流程](https://valen-team.github.io/cookbook/domain-finetuning/) |
 | 新增公开训练实现 | **Strands Gemma4 v2**；**RSI-Jev v7.0-VL** | Strands v2有从原始底座起训的LoRA／token-readout配方，但合并HF发布物不满足原`init_from`的未合并训练checkpoint格式，不能声称拿HF ID即可续训。RSI公开全语言训练代码，原始训练数据未公开。两者当前trainer均为CUDA路线，均非已验证M5方案。[Strands配方](https://github.com/strands-labs/strands-decider/blob/d4915c9b11f61bb01ed293f4dc4c770a0a51792b/training/README.md)／[RSI实现](https://github.com/Shanghua-Gao/RSI-Jev/tree/e58526f061afd4c383d33a22b309b888f8a3e3c7) |
@@ -193,6 +195,13 @@
 
 数据构造优先覆盖相邻能力硬负例、最小事实改动、否定／例外、缺必要事实、多合法项、目标改变、新政策、长历史和无工具需求。Nimble式事实改动是数据因素，不是另一种底座或contrastive loss；控制数据量、标签频率和模板后才判断它有无增益。
 
+**数据卫生与回放（参照 LemonDecider 的做法）：**
+- **保能力回放集**：领域适配时混入一部分通用决策数据，防止窄覆盖造成其他题型退化。可用 LemonDecider-Decision-Mix，但必须先按 `row_licenses.jsonl` 过滤，只保留可商用的行（约 66%）。
+- **卫生清单**：按来源设数量上限；跨来源去重；用评测样本指纹排查泄漏；检查答案泄漏和输入长度。服务端遇到超长输入应拒绝或显式拆分，不要静默截断。
+- **软标签**只在原始标注本身有分歧时保留，不用大模型重新生成答案来“软化”。
+- **按模型弱点构造增量数据**：把错题直接作为训练候选，把正确题改写成更难的变体。只能从 Train/Dev 范围挖掘，不能碰 Test。
+- **采集系统自己的轨迹状态**：模型在真实流程中犯错后到达的状态，静态标注集里没有，要从影子运行或回放中补采（JevAgentHarness 的做法）。
+
 公共材料只用于对应诊断：[ABCD固定资料](https://github.com/asappresearch/abcd/tree/6b8700ce67c6b37b062dd7a60abc76d7ef832a97)可借流程／动作设计，但全会话subflow不等于每个可见前缀都可唯一识别；CLINC可测OOS／意图混淆，SGD-X可借描述变化，不能替代企业留出。[τ²固定评估合同](https://github.com/sierra-research/tau2-bench/blob/c06b07dd7c4d4ec61ba6ff9bcdf0b15dd7ef36d4/docs/evaluation.md)用于最终状态思想，版本、数据许可和模拟／真人边界分别保留。
 
 <a id="method-views"></a>
@@ -219,7 +228,7 @@ Unsloth 是通用微调框架（SFT、DPO/ORPO/KTO、GRPO/GSPO、VLM 训练，�
 
 | 步骤 | 具体交付与对照 | 推进／停止依据 |
 |---|---|---|
-| 1 定义与诊断 | 一项真实失败、冻结合同、当前系统及必要的无训练优化／便宜级联对照、可授权样本及独立标注小面板 | 先确认错误来自可学习判断；状态／工具／政策问题先修对应环节 |
+| 1 定义与诊断 | 一项真实失败、冻结合同、当前系统及必要的无训练对照：零训练读出（SGLang `/v1/decisions`）、便宜级联、按决策点拟合阈值的 LLM 回退（JevAgentHarness）、补信息的 Harness（JevRSI：规则、状态记忆、动作后果预测）；可授权样本及独立标注小面板 | 先确认错误来自缺信息还是缺能力：补信息后错误消失，就修 Harness 而不训练；状态、工具、政策问题先修对应环节 |
 | 2 候选准入 | 精确权重、代码、tokenizer、head、schema与许可证；转换少量人工核过的样本 | 实际forward／backward、有限更新、保存重载与服务概率正常，才扩大数据 |
 | 3 直接适配 | 固定候选与输入，对比原版、简单监督基线、目标小模型直接训练；记录标签量学习曲线及选择预算 | 关键错误和完整成本存在有用增量；失效先诊断，不靠扩大轮数保护既有推荐 |
 | 4 必要的消融 | 同数据hard／soft、LoRA／head或其他必要参数化；有明确问题才加teacher、replay／anchor | 一次改变一个因素，或声明因子设计；步数相同不自动代表tokens／算力相同 |

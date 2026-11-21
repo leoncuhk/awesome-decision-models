@@ -3400,3 +3400,75 @@
 - Source revision: `8b7cde79ebf5a901b2fd936bbee214fb8c7562c7`
 - Note: Read decision.py, _decision_common.py, decision_mlx.py, tests/test_decision_images.py, tests/test_decision_model_mlx.py and test_decision_mlx_guards.py. Loss: soft CE with optional label smoothing, Brier and ordinal terms, optional KL to a reference head; head LR 1e-4 (fresh head 3e-4 in Studio). Calibration: per-question-type temperatures (>=10 items) and option-count buckets, fitted against hard gold. split_holdout: random 10% of rows, capped at 400 decisions, not grouped. Images: Qwen3.5 VLM rows pass through the processor; LoRA on the language model only, vision tower frozen; tests assert image-dependent logits and gradients through the visual module. MLX: LoRA only, 4-bit plain LM trains as a new Clef head, merged save reloads within 3e-2; image rows skipped when the decoder lacks a vision tower. Decision files are SPDX AGPL-3.0-only; repository ships Apache-2.0 LICENSE plus AGPL COPYING. Tests not executed here.
 
+<a id="lemondecider-card"></a>
+## LemonDecider model card (inclusionAI)
+
+- Source: https://huggingface.co/inclusionAI/LemonDecider/tree/8eca78d5be8b6b0c02346051d8c6a99370d86f5e
+- Kind: `model_card`; review depth: `content_reviewed`; reviewed: 2026-11-21
+- Source revision: `8eca78d5be8b6b0c02346051d8c6a99370d86f5e`
+- Note: Card at the Nov17 revision: Qwen3.5-4B hybrid backbone with a 255-option marker-position decision readout, one question per forward, noncausal periodic full-attention layers, scalar temperature 0.835655, 8192 tokens per question, trust_remote_code. Stage 2 continues SFT on 35,467 model-aware incremental examples (wrong answers become training candidates; correct answers get an added question, step or condition). Apache-2.0 card license. The Nov7 announcement described v3 with multi-question joint training and checkpoint averaging; the card describes a later per-question serving contract.
+
+<a id="lemondecider-data"></a>
+## LemonDecider-Decision-Mix dataset
+
+- Source: https://huggingface.co/datasets/inclusionAI/LemonDecider-Decision-Mix/tree/cf1f10d526d52ec32bbd082ba15ff94c320f44b2
+- Kind: `model_card`; review depth: `abstract_reviewed`; reviewed: 2026-11-21
+- Source revision: `cf1f10d526d52ec32bbd082ba15ff94c320f44b2`
+- Note: Per the Nov7 announcement: 1,199,692 rows from 287 upstream datasets and 864 task labels in a five-field id/state/question/target/label format, one question per row (original multi-question grouping not kept). 61,057 rows keep soft labels from original annotator disagreement. Per-source caps, cross-source dedup, evaluation fingerprint and answer-leak checks. row_licenses.jsonl: about 66.2% commercial-use, 31% unclear, 2.8% non-commercial. Dataset license field is other; rows not inspected.
+
+<a id="lemondecider-announcement"></a>
+## 4B跑赢Jev：LemonDecider模型权重与训练数据全开源 (Ant Security WeChat)
+
+- Source: https://mp.weixin.qq.com/s/FTXQmVn98wTbs1BRygnQGg
+- Kind: `official_publication`; review depth: `content_reviewed`; reviewed: 2026-11-21
+- Source revision: `not captured / live URL`
+- Note: Publisher announcement Nov7. Reports Decision Index 0.4.1 Public 61.67 versus Jev 1.14 60.7 and median latency 50.7 ms over about 140k evaluation rows; hardware and batching not stated. DI 0.4 text Full is private-only, so the Public comparison is not a Full-board result.
+
+<a id="sglang-decisions"></a>
+## SGLang decision models (/v1/decisions)
+
+- Source: https://docs.sglang.io/docs/supported-models/decision_models
+- Kind: `official_docs`; review depth: `content_reviewed`; reviewed: 2026-11-21
+- Source revision: `not captured / live URL`
+- Note: Native SGLang extension. Renders each question as one chat-template user message with thinking off; labels A-Z for options, 0-9 for levels, yes/no; checks each label is one distinct token; one prefill pass per question through /v1/score; reads next-token log-probabilities over the full vocabulary. Any generation model with a Jinja chat template if the checks pass. label_mass for yes/no counts only lowercase tokens. Nightly build until a release contains it.
+
+<a id="openjev-sglang"></a>
+## openjev-sglang
+
+- Source: https://github.com/ekzhang/openjev-sglang/tree/bf6a53bbb1f75040b06de39abff1230524553ab5
+- Kind: `repository`; review depth: `content_reviewed`; reviewed: 2026-11-21
+- Source revision: `bf6a53bbb1f75040b06de39abff1230524553ab5`
+- Note: Early prefill-only Jev-compatible API with Qwen3.6-35B-A3B on SGLang (B200, Modal). README now points to the native SGLang decisions endpoint. No license file declared.
+
+<a id="nanojev-repo"></a>
+## NanoJev
+
+- Source: https://github.com/TianyuCodings/NanoJev/tree/45b629283ddeb3b3784806f352bbf5e97f71dd40
+- Kind: `repository`; review depth: `content_reviewed`; reviewed: 2026-11-21
+- Source revision: `45b629283ddeb3b3784806f352bbf5e97f71dd40`
+- Note: MIT. Qwen3-0.6B with decision heads: batched parallel decisions, dynamic 2-255 candidates via a shared scoring head, boolean and 2-10 level scores, end-to-end training pipeline. Author game results (ViZDoom, maze, Snake) versus Jev are game-specific.
+
+<a id="s1-arena"></a>
+## System1-Arena: Which Decisions Can Be Left to System 1?
+
+- Source: https://arxiv.org/abs/2610.21244
+- Kind: `paper`; review depth: `metadata_only`; reviewed: 2026-11-21
+- Source revision: `not captured / live URL`
+- Note: Metadata and the NanoJev README description only: benchmark of nearly 100K questions covering classification and agentic tasks, with code, leaderboard and dataset. Abstract and results not reviewed.
+
+<a id="jevagentharness-paper"></a>
+## JevAgentHarness: Benchmarking, Deploying and Training Decision Models That Share Control with LLMs
+
+- Source: https://arxiv.org/abs/2610.21412
+- Kind: `paper`; review depth: `abstract_reviewed`; reviewed: 2026-11-21
+- Source revision: `not captured / live URL`
+- Note: Abstract only. AgentDecisionBench tests decision models from isolated questions up to control of a running agent. The most accurate isolated-question model solved only 69.5% of agent tasks; delegating tool choices without a fitted confidence threshold lowered success by 19.0 points. JevAgentHarness fits a threshold per choice on the agent's own trajectories and lets the LLM decide below it. AgentDecision-4B is trained on states reached after the agent's own mistakes, with Jev answers as labels: 91.5% versus 82.0% for Jev on unlike tasks; 4B models made agents 81.1-89.0% cheaper and up to 2.5x faster on like tasks with under 3 points of success loss. Code repository MIT.
+
+<a id="jevrsi-paper"></a>
+## Think Once, Act Fast: Cost-Effective Recursive Self-Improvement for Decision Model Harness (JevRSI)
+
+- Source: https://arxiv.org/abs/2611.22432
+- Kind: `paper`; review depth: `abstract_reviewed`; reviewed: 2026-11-21
+- Source revision: `not captured / live URL`
+- Note: Abstract plus a detailed WeChat summary (AICV与前沿, Nov20). Jev-style System-1 selects actions; an asynchronous System-2 LLM develops a harness of procedures, state-memory programs and one-step world-model programs; utility-driven retrieval; feedback-triggered revisions. Reported ALFWorld OOD SR@1: bare StartLux-27B 45.52%, fixed harness 59.70%, low-confidence LLM takeover 81.34%, DeepSeek agent 82.83%, JevRSI 85.82%; harness developed while evaluating; cost savings count evaluation tokens only. Code repository MIT.
+

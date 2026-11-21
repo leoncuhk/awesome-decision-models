@@ -6,7 +6,7 @@
 
 决策模型由 TypeSafe 的 Jev 于 2026 年 9 月带火：对给定选项**一次前向输出类型化概率**，不生成文本。新东西是这个输出合同：它让有界判断可以计价、校准、设门槛。本仓只回答一个问题：**对一个具体决策，哪种方法能以可接受的风险和完整成本得到可接受的结果？**
 
-核查批次 2026-11-21：92 项资源，35 个核心模型族，45 条证据记录。仅做来源审阅，**尚无本仓独立复现**。收录不代表推荐。
+核查批次 2026-11-21：98 项资源，36 个核心模型族，45 条证据记录。仅做来源审阅，**尚无本仓独立复现**。收录不代表推荐。
 
 ## 仓库怎么组织
 
@@ -87,6 +87,7 @@
 | [Respan Span-02](https://www.respan.ai/blog/introducing-span-2) · [模型卡](docs/models.md#span-02) | 使用专用量化Rust／CUDA引擎、可选推理的开放判断服务产物。 | 研究自托管推理与预算推理，作为独立服务策略对照。 |
 | [Decisio tuned v3 / Tachara AI](https://github.com/aminry/decisio) · [模型卡](docs/models.md#decisio) | 11月20日发布的Gemma12B适配权重，含calibrated／commit策略及多精度部署包。 | 新增服务／读出对照；同合同分验calibrated、commit及计算器。 |
 | [Valen-Decision1.5](https://github.com/Valen-Team/Valen) · [模型卡](docs/models.md#valen-decision) | 多模态类型化判断系列，有从已发布native检查点领域训练的入口，与ONNX／GGUF／ANE转换分开。 | 在兼容硬件上优先纳入可审查的native续训LoRA对照，保留原版及直接CE控制。 |
+| [LemonDecider 4B (inclusionAI / Ant)](https://huggingface.co/inclusionAI/LemonDecider) · [模型卡](docs/models.md#lemondecider) | 基于 Qwen3.5-4B 的开放类型化决策模型，255 选项读出，同时公开 120 万条训练数据、训练与评测代码。 | 国产、Apache-2.0 的 4B 直接适配候选；按行许可过滤后的数据可作为保能力回放集。 |
 
 ## 值得保留的基线
 
@@ -105,6 +106,8 @@
 - **[DICE / Direct Item Choice Estimation](https://arxiv.org/html/2610.34124v1)** — 监督式商品选择，以候选隔离共享前缀注意力和单独校准的置信度进行推荐。
 - **[Clairic / Clairic-Flash (typed extraction)](https://blog.cloudflare.com/open-clairic/)** — 相邻的类型化提取／估计系列：11月18日改版用并行slot自回归提取及专用数值头，与Clef闭集判断分开。
 - **[Unsloth decision-model training (FastDecisionModel / DecisionTrainer)](https://unsloth.ai/docs/basics/train-your-own-decision-model-with-unsloth)** — 通用训练框架：把可微调 LLM（含 Qwen3.5 VLM）训练成 Clef 式联合头决策模型，自带校准、合并导出、本地兼容 Jev 的 Decision API，以及 Apple Silicon（MLX）LoRA 路径。
+- **[SGLang /v1/decisions (zero-training readout)](https://docs.sglang.io/docs/supported-models/decision_models)** — SGLang 原生端点：每题一次 prefill，读取单 token 标签的对数概率，把任意聊天模型变成类型化决策服务。
+- **[NanoJev](https://github.com/TianyuCodings/NanoJev)** — MIT 许可的 Qwen3-0.6B 决策头模型，支持 2–255 个动态候选，附端到端训练流程。
 
 ## 路由与从结果中学习
 
@@ -114,6 +117,8 @@
 - **[Parlant rule matching / Jev integration](https://github.com/emcie-co/parlant)** — 已核CX引擎源码：共享状态批量判断逐规则命题，再解析声明的规则关系。
 - **[Modem Smart Triggers](https://modem.ai/blog/smart-triggers)** — 实施者产品案例：精确过滤与语义条件控制事件是否启动完整Agent。
 - **[Enterprise multi-turn intent learning (Amazon study)](https://aclanthology.org/2026.customnlp4u-1.8/)** — 以证据解释和自检改善教师标签，再为真实电商对话训练独立的领域／意图／问题RoBERTa分类器。
+- **[JevAgentHarness / AgentDecisionBench](https://github.com/JevAgentHarness/JevAgentHarness)** — 把 agent 的选择题步骤交给决策模型，每类选择按 agent 自身轨迹拟合置信阈值，低于阈值由 LLM 决定；并在 agent 犯错后到达的状态上训练 4B 模型。
+- **[JevRSI (System-2 improves the System-1 harness)](https://github.com/usail-hkust/JevRSI)** — System-2 大模型不接管决策，而是异步编写规则、状态记忆程序和世界模型程序，为快速决策模型补上下文。
 
 ## 可靠性
 
@@ -143,6 +148,7 @@
 - **[JEVal v2](https://arxiv.org/html/2610.03935v2)** — 面向中英文多领域的局部类型化判断、推理边界与工作流组合评测。
 - **[To Jev or Not to Jev (System-1 models as LLM judges)](https://arxiv.org/abs/2611.00505)** — 预先声明协议，在 11 个评审基准上比较 14 个 System-1 决策模型与 4 个生成式评审，覆盖参考答案引导、校准与注入指令鲁棒性。
 - **[Reading Right, Acting Wrong (agent-loop decision diagnosis)](https://arxiv.org/abs/2610.18579)** — 对同一 agent 状态同时提问下一步动作与独立事实探针，区分“读错状态”与“读对仍选错”。
+- **[System1-Arena](https://arxiv.org/abs/2610.21244)** — 约 10 万题的基准，考察哪些决策可以交给 System-1 模型，覆盖分类与 agent 任务。
 
 ## 基础文献
 

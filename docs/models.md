@@ -776,6 +776,28 @@ Multimodal typed-decision family with native published-checkpoint domain trainin
 
 **Sources:** [Valen Decision1.5 4B fixed native release](https://huggingface.co/Valen-Team/Valen-Decision-1.5-4B/blob/9b0cacc976d7fb72f252ee1adb1564f5f15e462c/README.md); [Valen native own-data SFT/RLCD training](https://github.com/Valen-Team/Valen/blob/f6df4fdbc45bf44a4ffbebaeda53f5fe6e49b339/valen/training/README.md); [Valen training device/statistics boundary](https://github.com/Valen-Team/Valen/blob/f6df4fdbc45bf44a4ffbebaeda53f5fe6e49b339/valen/training/distributed.py); [Valen complete domain adaptation workflow](https://valen-team.github.io/cookbook/domain-finetuning/)
 
+<a id="lemondecider"></a>
+## LemonDecider 4B (inclusionAI / Ant)
+
+[Project / model](https://huggingface.co/inclusionAI/LemonDecider)
+
+Open Qwen3.5-4B typed-decision model with a 255-option readout, released with its 1.2M-row training mix, training and evaluation code.
+基于 Qwen3.5-4B 的开放类型化决策模型，255 选项读出，同时公开 120 万条训练数据、训练与评测代码。
+
+| Dimension | English | 中文 |
+| --- | --- | --- |
+| Scale | 4B (Qwen3.5-4B base); BF16 weights. | 4B（Qwen3.5-4B 底座），BF16 权重。 |
+| Mechanism | Marker-position 255-option decision readout, one question per forward; noncausal periodic full-attention layers; scalar calibrated temperature applied by the runtime; overlong question plus context is refused rather than truncated. | 标记位置的 255 选项读出，每题一次前向；周期性全注意力层改为非因果；运行时应用标量校准温度；“背景＋单题”超长时拒绝而非截断。 |
+| Training | Supervised decision training on Decision Mix (soft labels only where original annotators disagreed), then Stage 2 continued SFT on model-aware incremental data built from the model's errors and harder variants of correct answers. | 先在 Decision Mix 上监督训练（仅原始标注有分歧时保留软标签），再用按模型弱点构造的增量数据（错题与正确题的加难变体）做第二阶段继续 SFT。 |
+| Deployment | Public HF weights with code/infer.py and an HTTP service; text only; 8192 positions per question. | HF 公开权重，附 infer.py 与 HTTP 服务；仅文本；每题 8192 个位置。 |
+| Suggested use | Domestic, Apache-2.0 4B candidate for direct domain adaptation; its license-filtered data can serve as a capability-preserving replay mix. | 国产、Apache-2.0 的 4B 直接适配候选；按行许可过滤后的数据可作为保能力回放集。 |
+| Boundary | The headline win over Jev is a Public-only author run, while DI 0.4 Full is private. About 31% of training rows have unclear commercial terms. Custom runtime code; CUDA training; Mac training not established. | “胜过 Jev”是作者自跑的 Public 部分，而 DI 0.4 的 Full 只由私有题决定；约 31% 的训练行商用条款不明确；依赖自定义运行时代码，训练走 CUDA，Mac 可训性未确认。 |
+
+**License note:** Model card declares Apache-2.0; training rows carry per-row upstream licenses.
+**Recorded weight identifier:** 8eca78d5be8b6b0c02346051d8c6a99370d86f5e
+
+**Sources:** [LemonDecider model card (inclusionAI)](https://huggingface.co/inclusionAI/LemonDecider/tree/8eca78d5be8b6b0c02346051d8c6a99370d86f5e); [LemonDecider-Decision-Mix dataset](https://huggingface.co/datasets/inclusionAI/LemonDecider-Decision-Mix/tree/cf1f10d526d52ec32bbd082ba15ff94c320f44b2); [4B跑赢Jev：LemonDecider模型权重与训练数据全开源 (Ant Security WeChat)](https://mp.weixin.qq.com/s/FTXQmVn98wTbs1BRygnQGg)
+
 # Other resources / 其他资源
 
 Summary and boundary for every non-core entry. / 非核心条目的定位与边界。
@@ -847,6 +869,16 @@ LLM 提议问题，Jev 将文本转成语义特征，再由监督 CatBoost 预�
 
 通用训练框架：把可微调 LLM（含 Qwen3.5 VLM）训练成 Clef 式联合头决策模型，自带校准、合并导出、本地兼容 Jev 的 Decision API，以及 Apple Silicon（MLX）LoRA 路径。 内置留出集按行随机划分，且校准与报告准确率共用同一留出集；基准为厂商在公开数据上自报。决策模块为 AGPL-3.0-only，修改或对外服务前须审查许可。本仓未运行。
 
+<a id="sglang-decisions"></a>
+**[SGLang /v1/decisions (zero-training readout)](https://docs.sglang.io/docs/supported-models/decision_models)** — Native SGLang endpoint that turns any chat model into a typed-decision service by reading single-token label log-probabilities after one prefill per question. No training, so calibration and domain quality must be validated; labels limited to single tokens (A-Z, 0-9, yes/no); nightly-only at review time. openjev-sglang was the earlier prototype and declares no license.
+
+SGLang 原生端点：每题一次 prefill，读取单 token 标签的对数概率，把任意聊天模型变成类型化决策服务。 未训练，校准与领域质量须自行验证；标签限单 token（A–Z、0–9、yes/no）；核查时仅 nightly 版本提供。早期原型 openjev-sglang 未声明许可。
+
+<a id="nanojev"></a>
+**[NanoJev](https://github.com/TianyuCodings/NanoJev)** — MIT Qwen3-0.6B decision-head model with dynamic 2-255 candidates and an end-to-end training pipeline. Author results are game tasks; not evidence for customer-service text decisions.
+
+MIT 许可的 Qwen3-0.6B 决策头模型，支持 2–255 个动态候选，附端到端训练流程。 作者结果来自游戏任务，不能作为客服文本决策的证据。
+
 ## Routing / 路由
 
 <a id="routellm"></a>
@@ -878,6 +910,16 @@ LLM 提议问题，Jev 将文本转成语义特征，再由监督 CatBoost 预�
 **[Enterprise multi-turn intent learning (Amazon study)](https://aclanthology.org/2026.customnlp4u-1.8/)** — Evidence-guided and self-critique teacher labeling, followed by separate domain/intent/issue RoBERTa classifiers for real ecommerce conversations. Author-reported production A/B lacks sample/allocation/interval details and changes several system factors. Private data are unavailable; deployed classifier is not evidence that the offline LLM hybrid or soft-distribution distillation caused the online gain.
 
 以证据解释和自检改善教师标签，再为真实电商对话训练独立的领域／意图／问题RoBERTa分类器。 作者生产A/B未披露样本／分配／区间，系统同时改变多项因素；原数据私有。部署分类器不证明离线LLM级联或软分布蒸馏导致了线上收益。
+
+<a id="jevagentharness"></a>
+**[JevAgentHarness / AgentDecisionBench](https://github.com/JevAgentHarness/JevAgentHarness)** — Delegates an agent's multiple-choice steps to a decision model with per-choice confidence thresholds fitted on the agent's own trajectories, and trains a 4B model on post-mistake states. Abstract-level review. Labels come from Jev outputs, which carries terms risk for commercial training. Isolated-question accuracy did not predict agent success.
+
+把 agent 的选择题步骤交给决策模型，每类选择按 agent 自身轨迹拟合置信阈值，低于阈值由 LLM 决定；并在 agent 犯错后到达的状态上训练 4B 模型。 仅摘要级阅读。标签来自 Jev 输出，商用训练有条款风险；单题准确率不能预测 agent 任务成功。
+
+<a id="jevrsi"></a>
+**[JevRSI (System-2 improves the System-1 harness)](https://github.com/usail-hkust/JevRSI)** — A System-2 LLM asynchronously writes procedures, state-memory programs and world-model programs that feed a fast decision model, instead of taking over decisions. Text game environments with clean feedback; harness developed during evaluation; cost accounting excludes development and local compute.
+
+System-2 大模型不接管决策，而是异步编写规则、状态记忆程序和世界模型程序，为快速决策模型补上下文。 环境为反馈干净的文本游戏；Harness 在评估过程中持续开发；成本只计评估 Token，不含开发与本地算力。
 
 ## Reliability / 可靠性
 
@@ -997,6 +1039,11 @@ LLM 提议问题，Jev 将文本转成语义特征，再由监督 CatBoost 预�
 **[Reading Right, Acting Wrong (agent-loop decision diagnosis)](https://arxiv.org/abs/2610.18579)** — Pairs each agent next-action question with independent factual probes on the same state to separate misreading from wrong action. Preliminary v1, abstract-level review. Frozen states from simulated and benchmark environments, not live enterprise traffic.
 
 对同一 agent 状态同时提问下一步动作与独立事实探针，区分“读错状态”与“读对仍选错”。 初版预印本，仅摘要级阅读。冻结状态来自模拟与基准环境，不是真实企业流量。
+
+<a id="s1-arena"></a>
+**[System1-Arena](https://arxiv.org/abs/2610.21244)** — Benchmark of nearly 100K questions asking which decisions can be left to System-1 models, spanning classification and agentic tasks. Metadata-level review only; results not inspected.
+
+约 10 万题的基准，考察哪些决策可以交给 System-1 模型，覆盖分类与 agent 任务。 仅元数据级阅读，未检查结果。
 
 ## Foundations / 基础文献
 

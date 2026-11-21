@@ -26,6 +26,10 @@
 
 实现层面：Unsloth `DecisionTrainer` 原生支持 hard／soft 目标、Brier、ordinal 项，以及对参考头的 KL 锚定（[源码](https://github.com/unslothai/unsloth/blob/8b7cde79ebf5a901b2fd936bbee214fb8c7562c7/unsloth/models/decision.py)）。hard 与 soft、加不加锚定的对照，现在在同一实现里改一个参数就能做，不需要各自搭训练器。它的校准代码注释写明：用 soft 目标训练会使 Clef 式头偏向低置信，所以校准统一按 hard gold 拟合。这是实现者的观察，不是受控实验结论。
 
+数据层面的两条新实践：
+- LemonDecider 的 120 万条训练数据只在原始标注本身有分歧时保留软标签（约 5%），并按来源设上限、做跨来源去重和泄漏指纹检查；它的第二阶段把模型错题和正确题的加难变体作为增量数据（[模型卡](https://huggingface.co/inclusionAI/LemonDecider/tree/8eca78d5be8b6b0c02346051d8c6a99370d86f5e)）。
+- JevAgentHarness 发现现有决策模型从未见过 agent 犯错后到达的状态，于是在这类状态上训练 AgentDecision-4B，在与训练数据不同的任务上成功率 91.5%，Jev 为 82.0%（[2610.21412](https://arxiv.org/abs/2610.21412)，仅读摘要；标签来自 Jev 输出）。训练状态应从自己系统的真实轨迹采集，而不只是静态标注集。
+
 ## 开放
 
 - **中文长状态**：0.6–4B LoRA 能否胜过现代多语 encoder？目前的新研究主要是英语。

@@ -17,6 +17,20 @@
 
 注意：一次读出不以 RL 为前提；训练名称不证明校准；API 兼容不代表语义等价。
 
+<a id="readout-paradigms"></a>
+### 读出范式与工程约束
+
+读出范式决定的主要是工程约束（选项上限、能否零训练、多题能否共享一次前向、能否用现成推理框架），而不是准确率；联训时几种读出头的准确率差别不大（[Small Heads v4](https://arxiv.org/html/2611.15592v4)）。
+
+| 范式 | 代表 | 选项 | 多题 | 训练 | 服务 |
+|---|---|---|---|---|---|
+| 词表 token 读出 | [SGLang `/v1/decisions`](https://docs.sglang.io/docs/supported-models/decision_models)、openjev-sglang、StartLux、LLM-as-Jev | 受单 token 标签数限制（A–Z、0–9；openjev-sglang 用验证过的组合扩到 64）；多 token 标签需按序列对数概率归一化；新增 special token 需同时改 embedding 与 lm_head | 每题一次 prefill，可复用前缀缓存 | 可零训练 | 现成推理框架 |
+| 固定答码头（255 码） | D3、PPLX Decider、Drex Max、LemonDecider | ≤255，运行时可变；答码是位置，不是固定业务类别 | 多为每题一次前向 | 需训练读出头 | 自定义运行时 |
+| pointer／动态候选头 | Kev、Strands v1、NanoJev | 动态候选 | 依实现 | 需训练 | 自定义运行时 |
+| 联合 schema 头 | Clef、Unsloth `DecisionTrainer`、Intern（占位符监督） | 运行时可变 | 一条序列多题共享一次前向；字段顺序与相关性须另测 | 需训练 | 自定义运行时 |
+| 双塔相似度 | CLM | 大候选库，候选向量可缓存 | 候选独立编码 | InfoNCE | 向量检索式 |
+| encoder 分类器 | Laya、GLiClass、Verdict | 标签作为输入或候选 | 短上下文 | 小模型监督 | CPU 可跑 |
+
 ## 2. 生态分布（2026-11）
 
 **托管服务**：合同已趋同，差异在模态、版本冻结和数据边界。
