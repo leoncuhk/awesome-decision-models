@@ -2,7 +2,7 @@
 
 [Home](../README.md) · [中文首页](../README.zh-CN.md) · [Evidence](evidence.md)
 
-Source review: 2026-11-21. These are source-backed descriptions and curatorial use cases, not production certifications.
+Source review: 2026-11-23. These are source-backed descriptions and curatorial use cases, not production certifications.
 
 `Unknown` is intentional. An inspected source revision does not identify the deployed weight revision. Language support, licenses and resource requirements must be checked for the exact artifact. Recorded weight identifiers are source-reported unless a local binary verification is explicitly documented; recording an identifier is not a claim that the weights were downloaded or hashed here.
 
@@ -510,7 +510,7 @@ Five-size open-weight decision family plus a native customer training API.
 **License note:** Fastino Community License, not Apache; production commercial use by entities above the stated US$10M revenue threshold requires a separate agreement. Backbone terms also apply.
 **Recorded weight identifier:** Unknown / not pinned
 
-**Sources:** [fastino/GLiDE-2B — fixed release card](https://huggingface.co/fastino/GLiDE-2B/blob/00f122c120cdeed82284106cb77d9bab5a50ad16/README.md); [GLiDE decision model family](https://fastino.ai/blog/glide-decision-model-family); [GLiDE Training API](https://docs.fastino.ai/training); [Native decision forward/backward contract](https://docs.fastino.ai/api-reference/training-jobs/interactive/forward-backward); [GLiDE small-model fine-tuning example](https://fastino.ai/blog/glide-multimodal-decisions-fine-tuning); [GLiDE-2B Community License](https://huggingface.co/fastino/GLiDE-2B/blob/00f122c120cdeed82284106cb77d9bab5a50ad16/LICENSE); [GLiDE model/training pricing](https://docs.fastino.ai/pricing); [GLiDE-2B fixed public readout implementation](https://huggingface.co/fastino/GLiDE-2B/blob/00f122c120cdeed82284106cb77d9bab5a50ad16/glide/model.py)
+**Sources:** [fastino/GLiDE-2B — fixed release card](https://huggingface.co/fastino/GLiDE-2B/blob/00f122c120cdeed82284106cb77d9bab5a50ad16/README.md); [GLiDE decision model family](https://fastino.ai/blog/glide-decision-model-family); [GLiDE Training API](https://docs.fastino.ai/training); [Native decision forward/backward contract](https://docs.fastino.ai/api-reference/training-jobs/interactive/forward-backward); [GLiDE small-model fine-tuning example](https://fastino.ai/blog/glide-multimodal-decisions-fine-tuning); [GLiDE-2B Community License](https://huggingface.co/fastino/GLiDE-2B/blob/00f122c120cdeed82284106cb77d9bab5a50ad16/LICENSE); [GLiDE model/training pricing](https://docs.fastino.ai/pricing); [GLiDE-2B fixed public readout implementation](https://huggingface.co/fastino/GLiDE-2B/blob/00f122c120cdeed82284106cb77d9bab5a50ad16/glide/model.py); [GLiDE training and controlled conversion ablations](https://arxiv.org/html/2611.26509v1)
 
 <a id="liquid-d1"></a>
 ## Liquid d1 / d1.2
@@ -598,7 +598,7 @@ Open decision training implementation, distinct from Jeffan; published weights/d
 **License note:** Published weights CC-BY-NC-4.0; full mixed DecisionBank explicitly noncommercial. Code, base and individual data licenses are separate.
 **Recorded weight identifier:** e2c4fb2f00189672c77e9d9a1619a8fd4884ab2d
 
-**Sources:** [jgeuter/Jeff-1.1-Qwen-4B — fixed release card](https://huggingface.co/jgeuter/Jeff-1.1-Qwen-4B/blob/e2c4fb2f00189672c77e9d9a1619a8fd4884ab2d/README.md); [Jeff public training/export and own JSONL](https://github.com/j-geuter/Jeff/tree/938ac5a03c6ac43512e61266d9febf691edc17f8); [DecisionBank source/label provenance](https://huggingface.co/datasets/jgeuter/DecisionBank/tree/fbeee67758966fe78bfb008b28fc771924c0bc71)
+**Sources:** [jgeuter/Jeff-1.1-Qwen-4B — fixed release card](https://huggingface.co/jgeuter/Jeff-1.1-Qwen-4B/blob/e2c4fb2f00189672c77e9d9a1619a8fd4884ab2d/README.md); [Jeff public training/export and own JSONL](https://github.com/j-geuter/Jeff/tree/938ac5a03c6ac43512e61266d9febf691edc17f8); [DecisionBank source/label provenance](https://huggingface.co/datasets/jgeuter/DecisionBank/tree/fbeee67758966fe78bfb008b28fc771924c0bc71); [Inner Jev v2: release recipe versus retained v1 ablations](https://arxiv.org/html/2610.17205v2)
 
 <a id="jad"></a>
 ## JAD-S1 v0.5
@@ -781,17 +781,17 @@ Multimodal typed-decision family with native published-checkpoint domain trainin
 
 [Project / model](https://huggingface.co/inclusionAI/LemonDecider)
 
-Open Qwen3.5-4B typed-decision model with a 255-option readout, released with its 1.2M-row training mix, training and evaluation code.
-基于 Qwen3.5-4B 的开放类型化决策模型，255 选项读出，同时公开 120 万条训练数据、训练与评测代码。
+Open Qwen3.5-4B typed model with a255-option readout, inference code and a1.2M-row training mix; complete public trainer not located in this review.
+开放Qwen3.5-4B类型化模型，255选项读出、推理代码及约120万行训练混合；本轮未定位完整公开trainer。
 
 | Dimension | English | 中文 |
 | --- | --- | --- |
 | Scale | 4B (Qwen3.5-4B base); BF16 weights. | 4B（Qwen3.5-4B 底座），BF16 权重。 |
 | Mechanism | Marker-position 255-option decision readout, one question per forward; noncausal periodic full-attention layers; scalar calibrated temperature applied by the runtime; overlong question plus context is refused rather than truncated. | 标记位置的 255 选项读出，每题一次前向；周期性全注意力层改为非因果；运行时应用标量校准温度；“背景＋单题”超长时拒绝而非截断。 |
 | Training | Supervised decision training on Decision Mix (soft labels only where original annotators disagreed), then Stage 2 continued SFT on model-aware incremental data built from the model's errors and harder variants of correct answers. | 先在 Decision Mix 上监督训练（仅原始标注有分歧时保留软标签），再用按模型弱点构造的增量数据（错题与正确题的加难变体）做第二阶段继续 SFT。 |
-| Deployment | Public HF weights with code/infer.py and an HTTP service; text only; 8192 positions per question. | HF 公开权重，附 infer.py 与 HTTP 服务；仅文本；每题 8192 个位置。 |
-| Suggested use | Domestic, Apache-2.0 4B candidate for direct domain adaptation; its license-filtered data can serve as a capability-preserving replay mix. | 国产、Apache-2.0 的 4B 直接适配候选；按行许可过滤后的数据可作为保能力回放集。 |
-| Boundary | The headline win over Jev is a Public-only author run, while DI 0.4 Full is private. About 31% of training rows have unclear commercial terms. Custom runtime code; CUDA training; Mac training not established. | “胜过 Jev”是作者自跑的 Public 部分，而 DI 0.4 的 Full 只由私有题决定；约 31% 的训练行商用条款不明确；依赖自定义运行时代码，训练走 CUDA，Mac 可训性未确认。 |
+| Deployment | Public HF weights with root model.py and decision_runtime.py for Python/CLI/HTTP inference; text only,8192 tokens including the per-question template. Complete training pipeline not established. | HF公开权重，根目录model.py与decision_runtime.py提供Python／CLI／HTTP推理；仅文本，每题含模板8192 tokens；完整训练链尚未建立。 |
+| Suggested use | Open4B inference comparator and license-reviewed replay-data source; direct checkpoint fine-tuning requires a verified training loader and export path. | 开放4B推理对照及经许可核验的回放数据来源；直接检查点微调需核训练loader与导出链。 |
+| Boundary | The headline win over Jev is a Public-only author run, while DI 0.4 Full is private. About 31% of training rows have unclear commercial terms. Custom runtime code; published CUDA recipe is not an established executable trainer; Mac training not established. | “胜过 Jev”是作者自跑的 Public 部分，而 DI 0.4 的 Full 只由私有题决定；约 31% 的训练行商用条款不明确；依赖自定义运行时代码，披露的CUDA配方不等于可执行trainer，Mac 可训性未确认。 |
 
 **License note:** Model card declares Apache-2.0; training rows carry per-row upstream licenses.
 **Recorded weight identifier:** 8eca78d5be8b6b0c02346051d8c6a99370d86f5e
@@ -865,9 +865,9 @@ LLM 提议问题，Jev 将文本转成语义特征，再由监督 CatBoost 预�
 相邻的类型化提取／估计系列：11月18日改版用并行slot自回归提取及专用数值头，与Clef闭集判断分开。 只按输入计费不等于零生成；官方结果为内部作者评测，未建立完整企业续训包或M5运行证据。发布27B／9B卡声明Apache-2.0，但公开权重不证明生产置信度已校准。
 
 <a id="unsloth-decision"></a>
-**[Unsloth decision-model training (FastDecisionModel / DecisionTrainer)](https://unsloth.ai/docs/basics/train-your-own-decision-model-with-unsloth)** — General trainer that turns a fine-tunable LLM, including Qwen3.5 VLMs, into a Clef-style joint-head decision model, with calibration, merged export, a local Jev-compatible Decision API and an Apple Silicon (MLX) LoRA path. Built-in holdout is a random row split and is reused for calibration and reported accuracy. Benchmarks are vendor-reported on public data. Decision modules are AGPL-3.0-only; review licensing before modifying or serving them. Not run here.
+**[Unsloth decision-model training (FastDecisionModel / DecisionTrainer)](https://unsloth.ai/docs/basics/train-your-own-decision-model-with-unsloth)** — General trainer that turns a fine-tunable LLM, including Qwen3.5 VLMs, into a Clef-style joint-head decision model, with calibration, merged export, a local Jev-compatible Decision API and an Apple Silicon (MLX) LoRA path. Pinned calibration uses row-level two-fold cross-fitting for reports and refits on the full holdout for deployment; this does not replace group separation or independent policy/test evaluation. Vendor benchmarks and source tests are not a target-machine run. Decision modules are AGPL-3.0-only. A subsequent evaluate call on that same holdout uses the final fitted parameters, not the cross-fit report.
 
-通用训练框架：把可微调 LLM（含 Qwen3.5 VLM）训练成 Clef 式联合头决策模型，自带校准、合并导出、本地兼容 Jev 的 Decision API，以及 Apple Silicon（MLX）LoRA 路径。 内置留出集按行随机划分，且校准与报告准确率共用同一留出集；基准为厂商在公开数据上自报。决策模块为 AGPL-3.0-only，修改或对外服务前须审查许可。本仓未运行。
+通用训练框架：把可微调 LLM（含 Qwen3.5 VLM）训练成 Clef 式联合头决策模型，自带校准、合并导出、本地兼容 Jev 的 Decision API，以及 Apple Silicon（MLX）LoRA 路径。 固定版本校准报告用行级两半交叉拟合，部署校准在全留出上重拟合；不替代分组隔离或独立策略／测试验收。作者基准与源码测试不等于目标机运行；决策模块AGPL-3.0-only。 随后对同集调用evaluate使用最终拟合参数，不是交叉拟合报告。
 
 <a id="sglang-decisions"></a>
 **[SGLang /v1/decisions (zero-training readout)](https://docs.sglang.io/docs/supported-models/decision_models)** — Native SGLang endpoint that turns any chat model into a typed-decision service by reading single-token label log-probabilities after one prefill per question. No training, so calibration and domain quality must be validated; labels limited to single tokens (A-Z, 0-9, yes/no); nightly-only at review time. openjev-sglang was the earlier prototype and declares no license.

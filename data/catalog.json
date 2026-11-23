@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "reviewed_on": "2026-11-21",
+  "reviewed_on": "2026-11-23",
   "scope": "Evidence-backed models, methods and evaluation for bounded decisions in AI systems.",
   "sources": [
     {
@@ -4362,6 +4362,56 @@
       "review_depth": "abstract_reviewed",
       "source_revision": null,
       "review_note": "Abstract plus a detailed WeChat summary (AICV与前沿, Nov20). Jev-style System-1 selects actions; an asynchronous System-2 LLM develops a harness of procedures, state-memory programs and one-step world-model programs; utility-driven retrieval; feedback-triggered revisions. Reported ALFWorld OOD SR@1: bare StartLux-27B 45.52%, fixed harness 59.70%, low-confidence LLM takeover 81.34%, DeepSeek agent 82.83%, JevRSI 85.82%; harness developed while evaluating; cost savings count evaluation tokens only. Code repository MIT."
+    },
+    {
+      "id": "inner-jev-v2-review-nov23",
+      "title": "Inner Jev v2: release recipe versus retained v1 ablations",
+      "url": "https://arxiv.org/html/2610.17205v2",
+      "kind": "paper",
+      "reviewed_on": "2026-11-23",
+      "review_depth": "content_reviewed",
+      "source_revision": null,
+      "review_note": "Selected recipe/ablation sections reviewed; changed data, training budget and soup do not isolate a new algorithm. Historical v1 evidence preserved."
+    },
+    {
+      "id": "glide-paper-v1-review-nov23",
+      "title": "GLiDE training and controlled conversion ablations",
+      "url": "https://arxiv.org/html/2611.26509v1",
+      "kind": "paper",
+      "reviewed_on": "2026-11-23",
+      "review_depth": "content_reviewed",
+      "source_revision": null,
+      "review_note": "Selected training and ablation sections: matched-data single-seed directional soft-target gains are not conclusive superiority; full multi-stage release is not a controlled enterprise comparison."
+    },
+    {
+      "id": "unsloth-mlx-audit-nov23",
+      "title": "unsloth/models/decision_mlx.py — November23 static audit",
+      "url": "https://github.com/unslothai/unsloth/blob/8b7cde79ebf5a901b2fd936bbee214fb8c7562c7/unsloth/models/decision_mlx.py",
+      "kind": "repository",
+      "reviewed_on": "2026-11-23",
+      "review_depth": "content_reviewed",
+      "source_revision": "8b7cde79ebf5a901b2fd936bbee214fb8c7562c7",
+      "review_note": "Selected LoRA/full branches and save/load paths; no real model or target-machine execution."
+    },
+    {
+      "id": "unsloth-calibration-audit-nov23",
+      "title": "unsloth/models/_decision_common.py — November23 static audit",
+      "url": "https://github.com/unslothai/unsloth/blob/8b7cde79ebf5a901b2fd936bbee214fb8c7562c7/unsloth/models/_decision_common.py",
+      "kind": "repository",
+      "reviewed_on": "2026-11-23",
+      "review_depth": "content_reviewed",
+      "source_revision": "8b7cde79ebf5a901b2fd936bbee214fb8c7562c7",
+      "review_note": "Selected two-half cross-fitting and final holdout refit; row separation is not group/policy/test separation."
+    },
+    {
+      "id": "unsloth-mlx-tests-audit-nov23",
+      "title": "tests/test_decision_model_mlx.py — November23 static audit",
+      "url": "https://github.com/unslothai/unsloth/blob/8b7cde79ebf5a901b2fd936bbee214fb8c7562c7/tests/test_decision_model_mlx.py",
+      "kind": "repository",
+      "reviewed_on": "2026-11-23",
+      "review_depth": "content_reviewed",
+      "source_revision": "8b7cde79ebf5a901b2fd936bbee214fb8c7562c7",
+      "review_note": "Tiny ModernBERT and monkeypatched Clef loader tests inspected, not run; these do not certify real4B VLM/M5 capacity."
     }
   ],
   "entries": [
@@ -6867,7 +6917,8 @@
         "glide-training-demo-nov18",
         "glide-license-nov20",
         "glide-pricing-nov20",
-        "glide-2b-readout-nov20"
+        "glide-2b-readout-nov20",
+        "glide-paper-v1-review-nov23"
       ],
       "summary": {
         "en": "Five-size open-weight decision family plus a native customer training API.",
@@ -7053,7 +7104,8 @@
       "source_ids": [
         "jgeuter-jeff-4b-nov20",
         "jgeuter-jeff-trainer-nov20",
-        "decisionbank-nov20"
+        "decisionbank-nov20",
+        "inner-jev-v2-review-nov23"
       ],
       "summary": {
         "en": "Open decision training implementation, distinct from Jeffan; published weights/data have noncommercial restrictions.",
@@ -7503,20 +7555,23 @@
       "url": "https://unsloth.ai/docs/basics/train-your-own-decision-model-with-unsloth",
       "source_ids": [
         "unsloth-decision-docs",
-        "unsloth-decision-source"
+        "unsloth-decision-source",
+        "unsloth-mlx-audit-nov23",
+        "unsloth-calibration-audit-nov23",
+        "unsloth-mlx-tests-audit-nov23"
       ],
-      "reviewed_on": "2026-11-21",
+      "reviewed_on": "2026-11-23",
       "summary": {
         "en": "General trainer that turns a fine-tunable LLM, including Qwen3.5 VLMs, into a Clef-style joint-head decision model, with calibration, merged export, a local Jev-compatible Decision API and an Apple Silicon (MLX) LoRA path.",
         "zh": "通用训练框架：把可微调 LLM（含 Qwen3.5 VLM）训练成 Clef 式联合头决策模型，自带校准、合并导出、本地兼容 Jev 的 Decision API，以及 Apple Silicon（MLX）LoRA 路径。"
       },
       "use": {
-        "en": "Default implementation for the LoRA arm of a first enterprise comparison and for decision-head image training; supply your own grouped split and separate calibration and test sets.",
-        "zh": "企业首轮比较中 LoRA 臂与图文决策头训练的默认实现；须自行提供分组划分及独立的校准集和测试集。"
+        "en": "Implementation candidate for supported backbone/device combinations; verify real forward/backward/export and use grouped calibration/policy/test partitions.",
+        "zh": "受支持底座／设备组合的实现候选；先验真实前向、反向及导出，并使用分组校准、策略及测试划分。"
       },
       "caveat": {
-        "en": "Built-in holdout is a random row split and is reused for calibration and reported accuracy. Benchmarks are vendor-reported on public data. Decision modules are AGPL-3.0-only; review licensing before modifying or serving them. Not run here.",
-        "zh": "内置留出集按行随机划分，且校准与报告准确率共用同一留出集；基准为厂商在公开数据上自报。决策模块为 AGPL-3.0-only，修改或对外服务前须审查许可。本仓未运行。"
+        "en": "Pinned calibration uses row-level two-fold cross-fitting for reports and refits on the full holdout for deployment; this does not replace group separation or independent policy/test evaluation. Vendor benchmarks and source tests are not a target-machine run. Decision modules are AGPL-3.0-only. A subsequent evaluate call on that same holdout uses the final fitted parameters, not the cross-fit report.",
+        "zh": "固定版本校准报告用行级两半交叉拟合，部署校准在全留出上重拟合；不替代分组隔离或独立策略／测试验收。作者基准与源码测试不等于目标机运行；决策模块AGPL-3.0-only。 随后对同集调用evaluate使用最终拟合参数，不是交叉拟合报告。"
       }
     },
     {
@@ -7529,18 +7584,18 @@
         "lemondecider-data",
         "lemondecider-announcement"
       ],
-      "reviewed_on": "2026-11-21",
+      "reviewed_on": "2026-11-23",
       "summary": {
-        "en": "Open Qwen3.5-4B typed-decision model with a 255-option readout, released with its 1.2M-row training mix, training and evaluation code.",
-        "zh": "基于 Qwen3.5-4B 的开放类型化决策模型，255 选项读出，同时公开 120 万条训练数据、训练与评测代码。"
+        "en": "Open Qwen3.5-4B typed model with a255-option readout, inference code and a1.2M-row training mix; complete public trainer not located in this review.",
+        "zh": "开放Qwen3.5-4B类型化模型，255选项读出、推理代码及约120万行训练混合；本轮未定位完整公开trainer。"
       },
       "use": {
-        "en": "Domestic, Apache-2.0 4B candidate for direct domain adaptation; its license-filtered data can serve as a capability-preserving replay mix.",
-        "zh": "国产、Apache-2.0 的 4B 直接适配候选；按行许可过滤后的数据可作为保能力回放集。"
+        "en": "Open4B inference comparator and license-reviewed replay-data source; direct checkpoint fine-tuning requires a verified training loader and export path.",
+        "zh": "开放4B推理对照及经许可核验的回放数据来源；直接检查点微调需核训练loader与导出链。"
       },
       "caveat": {
-        "en": "The headline win over Jev is a Public-only author run, while DI 0.4 Full is private. About 31% of training rows have unclear commercial terms. Custom runtime code; CUDA training; Mac training not established.",
-        "zh": "“胜过 Jev”是作者自跑的 Public 部分，而 DI 0.4 的 Full 只由私有题决定；约 31% 的训练行商用条款不明确；依赖自定义运行时代码，训练走 CUDA，Mac 可训性未确认。"
+        "en": "The headline win over Jev is a Public-only author run, while DI 0.4 Full is private. About 31% of training rows have unclear commercial terms. Custom runtime code; published CUDA recipe is not an established executable trainer; Mac training not established.",
+        "zh": "“胜过 Jev”是作者自跑的 Public 部分，而 DI 0.4 的 Full 只由私有题决定；约 31% 的训练行商用条款不明确；依赖自定义运行时代码，披露的CUDA配方不等于可执行trainer，Mac 可训性未确认。"
       },
       "scale": {
         "en": "4B (Qwen3.5-4B base); BF16 weights.",
@@ -7555,8 +7610,8 @@
         "zh": "先在 Decision Mix 上监督训练（仅原始标注有分歧时保留软标签），再用按模型弱点构造的增量数据（错题与正确题的加难变体）做第二阶段继续 SFT。"
       },
       "availability": {
-        "en": "Public HF weights with code/infer.py and an HTTP service; text only; 8192 positions per question.",
-        "zh": "HF 公开权重，附 infer.py 与 HTTP 服务；仅文本；每题 8192 个位置。"
+        "en": "Public HF weights with root model.py and decision_runtime.py for Python/CLI/HTTP inference; text only,8192 tokens including the per-question template. Complete training pipeline not established.",
+        "zh": "HF公开权重，根目录model.py与decision_runtime.py提供Python／CLI／HTTP推理；仅文本，每题含模板8192 tokens；完整训练链尚未建立。"
       },
       "license_note": "Model card declares Apache-2.0; training rows carry per-row upstream licenses.",
       "weight_revision": "8eca78d5be8b6b0c02346051d8c6a99370d86f5e"

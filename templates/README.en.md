@@ -4,7 +4,7 @@
 
 [简体中文](README.zh-CN.md) · [Problems](#problem-map) · [Playbooks](#playbooks) · [Landscape](docs/landscape.md) · [Model cards](docs/models.md) · [Evidence](docs/evidence.md) · [Methodology](docs/methodology.md)
 
-Decision models — popularized by TypeSafe's Jev in September 2026 — return **typed probabilities over supplied options in one pass** instead of generating text. The new thing is the output contract: it makes bounded judgments priceable, calibratable and gateable. This repository asks one question: **which method delivers acceptable outcomes at acceptable risk and total cost for a given decision?**
+Decision models — popularized by TypeSafe's Jev in September 2026 — typically return **typed distributions over supplied options**. Direct readout is common; reasoning, per-question passes and service orchestration vary by product. The new thing is the output contract: it makes bounded judgments priceable, calibratable and gateable. This repository asks one question: **which method delivers acceptable outcomes at acceptable risk and total cost for a given decision?**
 
 Review batch {{DATE}}: {{ENTRY_COUNT}} resources, {{CORE_COUNT}} core model families, {{EVIDENCE_COUNT}} evidence records. Source review only; **nothing here is independently reproduced yet.** Inclusion is not endorsement.
 
@@ -24,15 +24,15 @@ Maturity: **consensus** = multiple sources incl. third-party controls; **support
 
 | | Problem | Current judgment | Maturity |
 | --- | --- | --- | --- |
-| **Judgment** | [P01 Output contract and readout](problems/P01-output-contract.md) | Value is the contract, not new intelligence; readout head choice matters little | supported |
+| **Judgment** | [P01 Output contract and readout](problems/P01-output-contract.md) | Specify the output contract; simple heads are a supported baseline, not universally equivalent | supported |
 | | [P02 Learning signal for adaptation](problems/P02-learning-signal.md) | Direct CE/BCE supervision is the default; RL, distillation, soft targets must prove gains | supported |
-| | [P03 Read once or reason](problems/P03-read-or-reason.md) | The gap is reasoning, not size; outsourcing reasoning to a reference answer is often cheaper | open |
+| | [P03 Read once or reason](problems/P03-read-or-reason.md) | Reasoning and reference guidance can help; measure task-specific quality and full cost | open |
 | **Probability → decision** | [P04 Confidence semantics and serving fidelity](problems/P04-confidence-fidelity.md) | `confidence` is an interface field; recalibrate per task, returned object and serving path | consensus |
 | | [P05 Policy-level risk and drift](problems/P05-policy-risk.md) | Certify the acceptance policy, not per-item confidence; drift voids guarantees | theory consensus / practice open |
 | | [P06 Missing options and candidate coverage](problems/P06-candidate-coverage.md) | Softmax cannot detect all-wrong candidates; NONE collapses under hard negatives | supported |
-| **System** | [P07 Reading right, acting wrong](problems/P07-state-and-action.md) | Most errors sit in state and action contracts, not the readout | supported |
+| **System** | [P07 Reading right, acting wrong](problems/P07-state-and-action.md) | Probe facts and actions separately to distinguish evidence, contract and model failures | supported |
 | | [P08 Dynamic skill and path loading](problems/P08-skill-loading.md) | Selection errors, not context length; optimize loader recall with fallback | supported |
-| | [P09 System-1 as judge and evaluator](problems/P09-judge-layer.md) | Cheap first stage plus escalation; the earliest mature use case | supported |
+| | [P09 System-1 as judge and evaluator](problems/P09-judge-layer.md) | Cheap first-stage judging plus escalation is a candidate; production maturity remains unproven | supported |
 | | [P10 Partial feedback and heterogeneous repair](problems/P10-repair-actions.md) | Ask, fetch, re-retrieve and defer are different interventions; research frontier | open |
 | **Multimodal** | [P11 Multimodal post-training](problems/P11-multimodal.md) | Vision is often not actually trained; validate the visual path before comparing quality | supported |
 | **Selection** | [P12 Fragmented benchmarks and selection economics](problems/P12-benchmarks-and-selection.md) | Rank is not a selection signal; gate on license, trainability, hardware, serving fidelity | consensus |

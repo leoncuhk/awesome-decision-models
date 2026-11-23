@@ -2,7 +2,7 @@
 
 更新：2026-11-21。场景：企业已有**数千张截图＋人工意图标签**，可以补充判定时点之前的历史上下文；目标机为 M5 Pro 48GB。本页只写怎么做。“为什么这样做”见 [P11](../problems/P11-multimodal.md)；合同、通用数据规则和风险验收沿用[通用流程](decision-pipeline.md)，本页只写多模态特有的部分。
 
-现状：方案可执行，但没有运行过；以下命令和资源估计都未在目标机上验证。
+现状：实施协议已整理，尚未完成依赖、命令及真实模型的端到端验证；以下命令和资源估计都未在目标机上验证。
 
 <a id="hypotheses"></a>
 ## 1. 预注册假设与主终点
@@ -39,7 +39,7 @@
 | 候选 | 已核实的起点 | 用图训练前必须过的门槛 |
 |---|---|---|
 | MLX-VLM（Mac 原生） | 固定 commit `2ceff4c1` 有本地图像、completion-only SFT 和量化底座的语言侧 adapter 路径：VisionDataset → pixels/grid → shifted completion loss → Qwen3.5 视觉融合 → 梯度引擎 | 源码支持不等于本机跑通。要核真实 pixels、mask、梯度、最长输入的内存和保存重载 |
-| **Unsloth `FastDecisionModel`** | Qwen3.5 VLM 加 Clef 式联合读出头；数据行的 `images` 字段经 processor 进入模型。源码注释与配置：LoRA 只加在语言模型上，视觉塔与读出所用 lm_head 冻结（`finetune_vision_layers=False`）。单元测试确认图像改变 logits、梯度经视觉塔回传、预测与评测走同一视觉路径。MLX 路径同样读取图像列，但解码器没有视觉塔时会跳过带图行并说明原因 | 确认所选权重确实带 `vision_config`：从纯文本 LM 转换来的不是视觉模型。`split_holdout` 按行随机，须换成第 6 节的连通组划分。决策模块为 AGPL-3.0-only。[源码](https://github.com/unslothai/unsloth/blob/8b7cde79ebf5a901b2fd936bbee214fb8c7562c7/unsloth/models/decision.py)／[图像测试](https://github.com/unslothai/unsloth/blob/8b7cde79ebf5a901b2fd936bbee214fb8c7562c7/tests/test_decision_images.py) |
+| **Unsloth `FastDecisionModel`** | Qwen3.5 VLM 加 Clef 式联合读出头；数据行的 `images` 字段经 processor 进入模型。源码注释与配置：LoRA 只加在语言模型上，视觉塔与读出所用 lm_head 冻结（`finetune_vision_layers=False`）。源码测试包含图像改变logits、梯度及预测／评测路径断言；测试替身不能替代真实冻结视觉塔与语言adapter的端到端检查。MLX 路径同样读取图像列，但解码器没有视觉塔时会跳过带图行并说明原因 | 确认所选权重确实带 `vision_config`：从纯文本 LM 转换来的不是视觉模型。`split_holdout` 按行随机，须换成第 6 节的连通组划分。决策模块为 AGPL-3.0-only。[源码](https://github.com/unslothai/unsloth/blob/8b7cde79ebf5a901b2fd936bbee214fb8c7562c7/unsloth/models/decision.py)／[图像测试](https://github.com/unslothai/unsloth/blob/8b7cde79ebf5a901b2fd936bbee214fb8c7562c7/tests/test_decision_images.py) |
 | Intern-Decision | CUDA/XTuner 路径带图训练：冻结视觉塔与 projector，训练全部语言参数；监督只在答码位置 | 不是现成的 Mac LoRA。要保留其占位符和答码监督合同，移植与导出另行验证 |
 | D3 经典版 / Turbo | 官方 wrapper 的 `train(True)` 抛出 inference-only 错误；第三方 Vis 只训练文本，去掉了视觉塔 | API 别名或推理能力不能证明可以训练图像 |
 | Qwen2/2.5/3-VL、Qwen3.5 | QwenVL 官方和 ms-swift 的图像训练配方可以作参考 | CUDA/Transformers 上的支持不能直接迁移到 MLX |

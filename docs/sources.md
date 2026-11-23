@@ -3472,3 +3472,43 @@
 - Source revision: `not captured / live URL`
 - Note: Abstract plus a detailed WeChat summary (AICV与前沿, Nov20). Jev-style System-1 selects actions; an asynchronous System-2 LLM develops a harness of procedures, state-memory programs and one-step world-model programs; utility-driven retrieval; feedback-triggered revisions. Reported ALFWorld OOD SR@1: bare StartLux-27B 45.52%, fixed harness 59.70%, low-confidence LLM takeover 81.34%, DeepSeek agent 82.83%, JevRSI 85.82%; harness developed while evaluating; cost savings count evaluation tokens only. Code repository MIT.
 
+<a id="inner-jev-v2-review-nov23"></a>
+## Inner Jev v2: release recipe versus retained v1 ablations
+
+- Source: https://arxiv.org/html/2610.17205v2
+- Kind: `paper`; review depth: `content_reviewed`; reviewed: 2026-11-23
+- Source revision: `not captured / live URL`
+- Note: Selected recipe/ablation sections reviewed; changed data, training budget and soup do not isolate a new algorithm. Historical v1 evidence preserved.
+
+<a id="glide-paper-v1-review-nov23"></a>
+## GLiDE training and controlled conversion ablations
+
+- Source: https://arxiv.org/html/2611.26509v1
+- Kind: `paper`; review depth: `content_reviewed`; reviewed: 2026-11-23
+- Source revision: `not captured / live URL`
+- Note: Selected training and ablation sections: matched-data single-seed directional soft-target gains are not conclusive superiority; full multi-stage release is not a controlled enterprise comparison.
+
+<a id="unsloth-mlx-audit-nov23"></a>
+## unsloth/models/decision_mlx.py — November23 static audit
+
+- Source: https://github.com/unslothai/unsloth/blob/8b7cde79ebf5a901b2fd936bbee214fb8c7562c7/unsloth/models/decision_mlx.py
+- Kind: `repository`; review depth: `content_reviewed`; reviewed: 2026-11-23
+- Source revision: `8b7cde79ebf5a901b2fd936bbee214fb8c7562c7`
+- Note: Selected LoRA/full branches and save/load paths; no real model or target-machine execution.
+
+<a id="unsloth-calibration-audit-nov23"></a>
+## unsloth/models/_decision_common.py — November23 static audit
+
+- Source: https://github.com/unslothai/unsloth/blob/8b7cde79ebf5a901b2fd936bbee214fb8c7562c7/unsloth/models/_decision_common.py
+- Kind: `repository`; review depth: `content_reviewed`; reviewed: 2026-11-23
+- Source revision: `8b7cde79ebf5a901b2fd936bbee214fb8c7562c7`
+- Note: Selected two-half cross-fitting and final holdout refit; row separation is not group/policy/test separation.
+
+<a id="unsloth-mlx-tests-audit-nov23"></a>
+## tests/test_decision_model_mlx.py — November23 static audit
+
+- Source: https://github.com/unslothai/unsloth/blob/8b7cde79ebf5a901b2fd936bbee214fb8c7562c7/tests/test_decision_model_mlx.py
+- Kind: `repository`; review depth: `content_reviewed`; reviewed: 2026-11-23
+- Source revision: `8b7cde79ebf5a901b2fd936bbee214fb8c7562c7`
+- Note: Tiny ModernBERT and monkeypatched Clef loader tests inspected, not run; these do not certify real4B VLM/M5 capacity.
+

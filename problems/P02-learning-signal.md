@@ -17,7 +17,7 @@
 - Inner Jev 中 Gemma 31B 把 soft 换成 hard，未检出能力差异（[2610.17205](https://arxiv.org/html/2610.17205v1)）。
 - Laya 三个配对种子分不出 soft-CE 与 RLCD（[E42](../docs/evidence.md#e42)）。
 - 窄覆盖适配会让跨题型表现退化：231 题 JevBench 一列从 81.4 降到 74.9（[LLM-as-Jev v3](https://arxiv.org/html/2610.02076v3)）。
-- 唯一有线上比较的企业案例（Amazon 多轮意图）用的是“教师解释＋自检＋人工审核”产出的标签，再训练 RoBERTa 学生（[E43](../docs/evidence.md#e43)、[E44](../docs/evidence.md#e44)）。
+- 本仓已收录且有线上比较的企业案例（Amazon 多轮意图）用的是“教师解释＋自检＋人工审核”产出的标签，再训练 RoBERTa 学生（[E43](../docs/evidence.md#e43)、[E44](../docs/evidence.md#e44)）。
 
 反证或条件性正例：
 - Drex Max 追加 RLAF 阶段后 DI 64.9 → 66.9，但缺少等算力继续 SFT 的对照和种子控制（[E45](../docs/evidence.md#e45)）。
@@ -29,6 +29,8 @@
 数据层面的两条新实践：
 - LemonDecider 的 120 万条训练数据只在原始标注本身有分歧时保留软标签（约 5%），并按来源设上限、做跨来源去重和泄漏指纹检查；它的第二阶段把模型错题和正确题的加难变体作为增量数据（[模型卡](https://huggingface.co/inclusionAI/LemonDecider/tree/8eca78d5be8b6b0c02346051d8c6a99370d86f5e)）。
 - JevAgentHarness 发现现有决策模型从未见过 agent 犯错后到达的状态，于是在这类状态上训练 AgentDecision-4B，在与训练数据不同的任务上成功率 91.5%，Jev 为 82.0%（[2610.21412](https://arxiv.org/abs/2610.21412)，仅读摘要；标签来自 Jev 输出）。训练状态应从自己系统的真实轨迹采集，而不只是静态标注集。
+
+新增版本核查（2026-11-23）：[Inner Jev v2](https://arxiv.org/html/2610.17205v2)更新Jeff1.1的数据、训练长度及soup，原hard／soft与head消融仍属1.0配方；不能把新整包分数归因单因素，也不把旧400步替换为新的统一步数。[GLiDE论文v1](https://arxiv.org/html/2611.26509v1)的同数据单seed转换消融给soft目标方向性收益，作者明确不足以确证；支持同预算hard／soft对照，不支持教师蒸馏普遍先于可信标签监督。
 
 ## 开放
 

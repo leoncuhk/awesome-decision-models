@@ -1,8 +1,26 @@
 # 通用流程：从决策合同到上线验收
 
-更新：2026-11-21。目标：**用企业自有数据改善一个明确的决策问题，在质量、风险、算力与完整成本约束下选出可实施方案，并验证相对现有方案的增益。** 判断依据见 [problems/](../problems/)；场景手册见[多模态后训练](multimodal-posttraining.md)与 [skill 路由选择器](skill-routing.md)；逐模型事实见[模型卡](../docs/models.md)、[证据台账](../docs/evidence.md)与[来源登记](../docs/sources.md)。
+更新：2026-11-23。目标：**用企业自有数据改善一个明确的决策问题，在质量、风险、算力与完整成本约束下选出可实施方案，并验证相对现有方案的增益。** 判断依据见 [problems/](../problems/)；场景手册见[多模态后训练](multimodal-posttraining.md)与 [skill 路由选择器](skill-routing.md)；逐模型事实见[模型卡](../docs/models.md)、[证据台账](../docs/evidence.md)与[来源登记](../docs/sources.md)。
 
 现状：研究与协议准备阶段；没有目标企业数据、训练结果或生产对照；目标训练机 M5 Pro 48GB 未运行。下文分别标明来源报告、公开产物核查与实施建议。
+
+<a id="current-recommendation"></a>
+## 本轮选择：先完成一次可判定的领域适配
+
+2026-11-23重新审视：文献与候选已经足够支持首轮实验设计；剩余决定性缺口是目标机训练回执、可信企业标签和独立业务对照。以下是**实施优先级**，不是尚未测得的效果排名。
+
+| 条件 | 首轮建议 | 为什么；何时换方案 |
+|---|---|---|
+| M5 Pro 48GB为固定训练机 | 先做轻量监督基线；重点验证Unsloth MLX＋受支持Qwen3.5-4B的直接CE／LoRA；2B作为资源备选 | 有Mac源码路径，尚无本机运行。先验依赖、真实反向、峰值、head保存重载和服务一致性；不支持时保留encoder／短标签MLX方案，不把推理量化包当训练方案 |
+| 可使用CUDA，要求专用检查点领域续训 | Kev或Valen中选一个，与同一检查点原版比较；再视缺口加入另一实现 | 自有数据loader和native续训可审；底座、数据暴露与head不同，两项目横比只能称系统选型，不能把差异归因某一个loss |
+| 数据允许上云且服务资格匹配 | GLiDE训练API或百炼，与上述本地方法做完整费用／效果比较 | 必须确认精确模型、导出／部署、账号及数据合同；托管训练不满足本地权重控制的所有需求 |
+| Lemon／Strands／RSI等新增产物 | 先作原版对照、数据或实现参考；有明确缺口再做适配 | Lemon完整trainer尚未定位；Strands合并checkpoint加载边界、RSI原数据缺口不能由榜单消除 |
+
+**首轮交付四项：** 冻结的业务合同和分组数据清单；目标机前向／反向／保存重载记录；原版、轻量监督、一个小模型直接适配的配对结果；最终接受／转交策略的风险、任务成功与完整成本。原版属于每个训练臂的必备对照，不能因“三组”省略。
+
+先挑一个高频且可裁定的决策点，例如“当前状态应加载哪些适用技能、是否需要补证”，不默认同时训练领域、下一步动作、退款资格和合规。数据预算按标注分歧、稀有错误与学习曲线分批增加，不预先保证固定几百条足够。
+
+若直接适配的剩余失败是标签覆盖，下一步比较经审核教师增强；若是概率问题，先单独校准／改完整门控；若是缺证据，先修取证；若确需生成推理，再比较PRDO。没有训练增量、未达风险约束或总成本反升，都可作为停止结果。实际训练沿用`improve/post-training`及业务项目入口；本仓继续维护问题、协议和公开证据。
 
 <a id="when-to-use"></a>
 ## 0. 什么判断适合决策模型
@@ -106,9 +124,9 @@
 | 角色 | 候选与可查入口 | 关键实施边界 |
 |---|---|---|
 | 强监督对照／可采用的轻量实现 | 合适的中文／多语encoder＋CE；冻结多语embedding＋LR／小头 | 固定标签低延迟任务可优先；长状态／新条件语义与分组留出另测。它们是实际采用候选，不能用陈旧弱基线衬托LLM。 |
-| 通用训练框架（首轮 LoRA 臂的默认实现） | **Unsloth `FastDecisionModel`／`DecisionTrainer`**：任意可微调 LLM（Qwen3.5、Gemma 4、Llama）加 Clef 式联合读出头；也可在 Laya／Clef 上续训。数据为 `state`／`questions`／`gold` 三字段，支持 choice、noul、score | 源码（固定 `8b7cde79`）：loss 为 soft CE，可选 label smoothing、Brier、ordinal 项，并可对参考头加 KL 锚定；头部单独学习率 1e-4；按题型拟合温度（每型 ≥10 条）。**三处须改用自己的协议**：`split_holdout` 按行随机抽 10%（上限 400），不按客户、会话、时间分组；校准与报告准确率用同一留出集；官方基准为作者自报的公开数据混合。决策模块文件标 **AGPL-3.0-only**（仓库为 Apache-2.0／AGPL 双许可），企业内修改或对外提供服务前先做许可审查。[源码](https://github.com/unslothai/unsloth/tree/8b7cde79ebf5a901b2fd936bbee214fb8c7562c7/unsloth/models)／[文档](https://unsloth.ai/docs/basics/train-your-own-decision-model-with-unsloth) |
-| 零训练基线 | **SGLang `/v1/decisions`**：现有聊天模型每题一次 prefill，读单 token 标签概率 | 不训练也能拿到与托管决策 API 同形态的概率输出，作为任何后训练之前的必做对照；校准须在 Cal 集上另拟合。[文档](https://docs.sglang.io/docs/supported-models/decision_models) |
-| 国产开放 4B 适配起点 | **LemonDecider 4B**（Qwen3.5-4B，255 码读出，Apache-2.0） | 训练代码与 120 万条数据全公开，可从其权重直接续训或复用数据；训练走 CUDA，自定义运行时。公告分数是 Public 部分，不作为胜负依据。[模型卡](https://huggingface.co/inclusionAI/LemonDecider/tree/8eca78d5be8b6b0c02346051d8c6a99370d86f5e) |
+| 通用训练框架（通过底座／设备准入后的候选） | **Unsloth `FastDecisionModel`／`DecisionTrainer`**：受支持的可微调LLM（须逐架构核验）加 Clef 式联合读出头；也可在 Laya／Clef 上续训。数据为 `state`／`questions`／`gold` 三字段，支持 choice、noul、score | 源码（固定 `8b7cde79`）：loss 为 soft CE，可选 label smoothing、Brier、ordinal 项，并可对参考头加 KL 锚定；头部单独学习率 1e-4；按题型拟合温度（每型 ≥10 条）。**三处须改用自己的协议**：`split_holdout` 按行随机抽 10%（上限 400），不按客户、会话、时间分组；该固定代码对留出行两半交叉拟合报告，最终部署校准再用全留出；随后对同集调用evaluate会使用全留出拟合参数，不再是该交叉报告；仍需独立Cal-policy／Test；官方基准为作者自报的公开数据混合。决策模块文件标 **AGPL-3.0-only**（仓库为 Apache-2.0／AGPL 双许可），企业内修改或对外提供服务前先做许可审查。[源码](https://github.com/unslothai/unsloth/tree/8b7cde79ebf5a901b2fd936bbee214fb8c7562c7/unsloth/models)／[文档](https://unsloth.ai/docs/basics/train-your-own-decision-model-with-unsloth) |
+| 零训练基线 | **SGLang `/v1/decisions`**：现有聊天模型每题一次 prefill，读单 token 标签概率 | 不训练也能拿到与托管决策 API 同形态的概率输出，零训练候选读出应保留作对照，SGLang只是兼容硬件上的一种实现；校准须在 Cal 集上另拟合。[文档](https://docs.sglang.io/docs/supported-models/decision_models) |
+| 开放4B推理／数据参照 | **LemonDecider 4B**（Qwen3.5-4B，255 码读出，Apache-2.0） | 公开权重、推理代码与约120万条数据；本轮未定位完整trainer或已验证的发布权重续训入口，不能据发布说明承诺直接续训。自定义运行时，原训练配方与可执行trainer分开。公告分数是 Public 部分，不作为胜负依据。[模型卡](https://huggingface.co/inclusionAI/LemonDecider/tree/8eca78d5be8b6b0c02346051d8c6a99370d86f5e) |
 | 直接自有标签适配 | **Kev-4B**的`--data`、`--init_from`与pointer head；同原版作前后对照 | 固定问题／标签合同；MPS分支存在，Qwen3.5混合结构backward、内存和保存重载仍须目标机实测。[训练源码](https://github.com/jaredpalmer/kev/blob/051142bf849c2c6ad3f23e17a7b5aea2686d9a91/kev/train.py) |
 | 新增native检查点领域续训 | **Valen-Decision1.5**的full／LoRA、自有JSONL、恢复／导出与已训Mixer保留 | 训练代码及完整cookbook确实存在；loss缺省分布CE，领域示例另配RPS／Brier，并有实验性离散动作RLCD，不能从名称认定优于CE。官方0.8B／H200的短smoke不是4B效果证据；当前训练统计在device上分配float64，MPS兼容需处理，不能靠ANE转换获得Mac训练。[训练源码](https://github.com/Valen-Team/Valen/blob/f6df4fdbc45bf44a4ffbebaeda53f5fe6e49b339/valen/training/README.md)／[领域流程](https://valen-team.github.io/cookbook/domain-finetuning/) |
 | 新增公开训练实现 | **Strands Gemma4 v2**；**RSI-Jev v7.0-VL** | Strands v2有从原始底座起训的LoRA／token-readout配方，但合并HF发布物不满足原`init_from`的未合并训练checkpoint格式，不能声称拿HF ID即可续训。RSI公开全语言训练代码，原始训练数据未公开。两者当前trainer均为CUDA路线，均非已验证M5方案。[Strands配方](https://github.com/strands-labs/strands-decider/blob/d4915c9b11f61bb01ed293f4dc4c770a0a51792b/training/README.md)／[RSI实现](https://github.com/Shanghua-Gao/RSI-Jev/tree/e58526f061afd4c383d33a22b309b888f8a3e3c7) |
@@ -196,10 +214,10 @@
 数据构造优先覆盖相邻能力硬负例、最小事实改动、否定／例外、缺必要事实、多合法项、目标改变、新政策、长历史和无工具需求。Nimble式事实改动是数据因素，不是另一种底座或contrastive loss；控制数据量、标签频率和模板后才判断它有无增益。
 
 **数据卫生与回放（参照 LemonDecider 的做法）：**
-- **保能力回放集**：领域适配时混入一部分通用决策数据，防止窄覆盖造成其他题型退化。可用 LemonDecider-Decision-Mix，但必须先按 `row_licenses.jsonl` 过滤，只保留可商用的行（约 66%）。
+- **保能力回放集**：领域适配时混入一部分通用决策数据，防止窄覆盖造成其他题型退化。可用 LemonDecider-Decision-Mix，但必须先按 `row_licenses.jsonl` 过滤，先筛作者标为commercial的行（约66.2%），再核上游具体条款及授权范围；该分类是best-effort，不是许可认证。
 - **卫生清单**：按来源设数量上限；跨来源去重；用评测样本指纹排查泄漏；检查答案泄漏和输入长度。服务端遇到超长输入应拒绝或显式拆分，不要静默截断。
-- **软标签**只在原始标注本身有分歧时保留，不用大模型重新生成答案来“软化”。
-- **按模型弱点构造增量数据**：把错题直接作为训练候选，把正确题改写成更难的变体。只能从 Train/Dev 范围挖掘，不能碰 Test。
+- **Lemon的软标签来源规则**是只保留原标注分歧；这不是所有任务的禁令。经核验教师分布仍可作蒸馏目标，应与同批数据hard目标比较，不将教师分布当真实业务概率。
+- **按模型弱点构造增量数据**：把经复核的错题及正确题的加难变体作为训练候选。仅从Train或声明的开发范围挖掘；Dev行一旦入Train须重新划定独立Dev，旧Dev分数失效，不能碰Cal或Test。
 - **采集系统自己的轨迹状态**：模型在真实流程中犯错后到达的状态，静态标注集里没有，要从影子运行或回放中补采（JevAgentHarness 的做法）。
 
 公共材料只用于对应诊断：[ABCD固定资料](https://github.com/asappresearch/abcd/tree/6b8700ce67c6b37b062dd7a60abc76d7ef832a97)可借流程／动作设计，但全会话subflow不等于每个可见前缀都可唯一识别；CLINC可测OOS／意图混淆，SGD-X可借描述变化，不能替代企业留出。[τ²固定评估合同](https://github.com/sierra-research/tau2-bench/blob/c06b07dd7c4d4ec61ba6ff9bcdf0b15dd7ef36d4/docs/evaluation.md)用于最终状态思想，版本、数据许可和模拟／真人边界分别保留。
@@ -211,7 +229,7 @@
 
 | 方法 | 额外数据要求 | 推理形态 | 训练计算 | 现成实现 |
 |---|---|---|---|---|
-| 决策头 CE/BCE | 无（gold 为硬标签或允许集合） | 一次前向出概率 | 低 | Unsloth `DecisionTrainer` |
+| 决策头 CE／独立命题BCE | 硬标签／分布／独立命题标签；允许集合须另定结构化目标 | 一次前向出概率 | 低 | Unsloth候选分布CE；独立命题可映射noul，任意多标签BCE需适配实现 |
 | 教师 soft/KL | 经审核的教师分布 | 同上 | 低，另计教师推理 | Unsloth（gold 支持 `probabilities` 字段） |
 | 生成式短标签 SFT | 无（标签写成文本） | 生成标签；序列概率须预先定义 | 低 | Unsloth SFT、MLX-VLM |
 | GRPO | 可验证奖励（gold 即可） | 推理后作答 | 高，在线采样 | Unsloth GRPO |
@@ -235,27 +253,27 @@ Unsloth 是通用微调框架（SFT、DPO/ORPO/KTO、GRPO/GSPO、VLM 训练，�
 | 5 部署优化 | 需要时比较直接小模型、蒸馏学生、实际级联；记录量化前后概率及判断差异 | 同质量／预定非劣界内完整成本改善；强模型在defer子集上应有实测增量 |
 | 6 冻结确认 | 锁定model/schema/runtime、校准、完整门控／回退和预算，运行一次独立Test | 报配对区间、失败与退化；未显著不等于等价，未达标则缩窄、诊断或停止 |
 
-第一轮实际比较：冻结多语embedding＋简单头、多语encoder监督、0.6–4B LoRA监督（含原版；默认用 Unsloth `DecisionTrainer` 实现，自行提供分组划分和独立 Cal／Test）；按业务特征先保留其中少数组合。第二轮只对剩余标签／覆盖缺口加入经核验教师，固定保留样本后比较hard与soft。不默认“教师soft→训练27B→4B→每周CAPS→PRDO”。教师已够好可直接产标签；小模型直接达标则不必付教师训练费。若转交率为q，级联还要支付首阶段、转交子集的强模型、重试及人工等成本；强模型总体accuracy高，不保证在被转交的样本上更好。[级联对照](https://arxiv.org/html/2610.00346v2#S5.SS3)
+第一轮实际比较：冻结多语embedding＋简单头、多语encoder监督、0.6–4B LoRA监督（含原版；通过资格检查后可用Unsloth `DecisionTrainer`实现，自行提供分组划分和独立 Cal／Test）；按业务特征先保留其中少数组合。第二轮只对剩余标签／覆盖缺口加入经核验教师，固定保留样本后比较hard与soft。不默认“教师soft→训练27B→4B→每周CAPS→PRDO”。教师已够好可直接产标签；小模型直接达标则不必付教师训练费。若转交率为q，级联还要支付首阶段、转交子集的强模型、重试及人工等成本；强模型总体accuracy高，不保证在被转交的样本上更好。[级联对照](https://arxiv.org/html/2610.00346v2#S5.SS3)
 
 <a id="prdo"></a>
 ### PRDO 的实施方式
 
 只在生产本来就保留推理、并按推理后的概率决定接受或转交时启用；零生成路由不需要它（见 [P03](../problems/P03-read-or-reason.md)）。
 
-- **机制**（[论文 v2](https://arxiv.org/html/2609.38850v2)、代码 README）：每题从当前模型采样 M=4 条推理；在每条推理后的 `Answer:` 位置读出选项分布 u；对**每条推理各自**的 u 计算 proper score（Brier：`2u_y − ‖u‖²`；log：`log u_y`），并加参考 KL（代码参数 `--kl-beta 0.04 --kl-tokens 0.01`）；主路径不对推理 token 做 REINFORCE（`--no-score-function`）。
-- **为什么不是 GRPO**：GRPO 的期望奖励对 u 是线性的，最优解把概率压到单个答案上，因此不产生可用的置信度；对多条推理的平均分布打分，又会奖励推理之间的分歧，而部署时单次请求只看到一条推理。
+- **机制**（[论文 v2](https://arxiv.org/html/2609.38850v2)、代码 README）：每题从当前模型采样 M=4 条推理；在每条推理后的 `Answer:` 位置读出选项分布 u；对**每条推理各自**的 u 计算 proper score（Brier：`2u_y − ‖u‖²`；log：`log u_y`），并加参考 KL（主阶段有效的token KL参数为`--kl-tokens 0.01`；`--no-score-function`下`--kl-beta 0.04`不参与该阶段loss）；主路径不对推理 token 做 REINFORCE（`--no-score-function`）。
+- **为什么不是 GRPO**：对固定状态、有限答案及只按正确性奖励的目标，期望效用倾向集中概率于最优动作；这不鼓励校准，但不是所有GRPO奖励、KL约束和训练配置都不能产生可用置信度的证明；对多条推理的平均分布打分，又会奖励推理之间的分歧，而该论文部署时单次请求只看到一条推理。若部署明确返回多条推理的平均分布，则应匹配该对象训练与校准，mixture目标并非普遍错误。
 - **数据**：主数据集的生成式提示视图。选项要映射到单个 token，用实际 tokenizer 核对。
 - **底座**：会生成推理的模型（如 Qwen3 系列）；决策头模型不适用。
 - **代码**：官方 openjev-rlcd（CUDA）。另一种思路是在 Unsloth `FastLanguageModel` 上自写 loss：不求梯度地采样推理，再把“提示＋推理＋`Answer:`”整段前向，取选项 token 分布计算 Brier 与 KL。这只是实现思路，没有现成代码，也未验证。
-- **资源**：论文每次运行用 48GB Ada，另需 125GB 主机内存。M5 48GB 上建议先试 0.6–1.7B，或使用云端 GPU。
-- **对照**：同底座的 reasoning-SFT＋TS 与 GRPO＋TS；同时报告准确率，因为 PRDO 在部分任务上准确率会下降（[E40](../docs/evidence.md#e40)）。
+- **资源**：论文每次运行用 48GB Ada，另需 125GB 主机内存。原实现为CUDA；缩至0.6–1.7B也不证明兼容MPS／MLX或能容纳。优先在兼容GPU验证；Mac移植需另验采样、反向、参考模型及完整内存。
+- **对照**：先保留论文的direct-answer SFT（空推理）＋TS及GRPO＋TS；reasoning-SFT＋TS是本项目可新增的对照，需额外推理监督并计入数据／计算预算；同时报告准确率，因为 PRDO 在部分任务上准确率会下降（[E40](../docs/evidence.md#e40)）。
 
 <a id="mac-feasibility"></a>
 ### M5 Pro 48GB：训练准入，不作内存／耗时承诺
 
 - 固定模型与代码revision、Python／框架／算子、精度及完整输入分布。先跑含代表性最长状态／候选的真实前向和反向，再测少量更新；记录峰值、swap、跳过样本、梯度有限性和失败。
 - 检查head或特殊marker是否实际被训练、候选顺序是否映射正确。保存adapter／head／tokenizer／schema和校准，重载后对同批输入比较概率与最终判定；服务端不能悄悄改模板或截断。
-- **Unsloth 有 Apple Silicon 训练路径**（`decision_mlx.py`，基于 unsloth-zoo 的 MLX）：仅支持 LoRA（拒绝全参微调），可 4-bit 加载普通 LM 并新建联合头训练，合并保存后重载的预测与训练态一致（测试容差 3e-2）。这是目前唯一在源码和测试层面覆盖 Mac 决策头训练的公开实现；M5 上的内存与耗时仍须实测。[MLX 实现](https://github.com/unslothai/unsloth/tree/8b7cde79ebf5a901b2fd936bbee214fb8c7562c7/unsloth/models/decision_mlx.py)
+- **Unsloth 有 Apple Silicon 训练路径**（`decision_mlx.py`，基于 unsloth-zoo 的 MLX）：有LoRA与非量化full_finetuning分支，4-bit训练限LoRA；可从受支持普通LM新建联合头。源码测试包含保存重载一致性断言，不能当真实底座或目标机运行回执。它是本轮确认的Mac训练实现候选，具体架构、图像路径、依赖与M5容量须实测。[MLX 实现](https://github.com/unslothai/unsloth/tree/8b7cde79ebf5a901b2fd936bbee214fb8c7562c7/unsloth/models/decision_mlx.py)
 - Kev有MPS分支但目标机backward未验证；SII公开wrapper用多GPU，已核LoRA发布为合并BF16独立权重、训练器另存adapter；Intern当前CUDA全语言训练不能按推理内存估算。改成MLX／LoRA是新实现，须重新验合同。
 - 新增Strands v2／RSI训练代码仍以CUDA为路径，Jeff当前仅CUDA／CPU；Valen native续训已公开，但其设备上float64统计是MPS兼容阻碍；Liquid、RSI量化及Decisio的MPS／MLX推理包不构成Mac后训练证据。Strands E2B的2.3B有效参数、MoE的active参数和adapter文件大小都不能代替完整驻留／反向内存。
 - 27B BF16仅权重通常已超48GB；量化教师推理与27B训练是不同任务。PRDO论文每run用48GB Ada，**另有125GB主机内存**；CPU offload不能给48GB统一内存凭空增加容量。[PRDO实现](https://github.com/ZimmyGao/openjev-rlcd/tree/5859d2b893314fb3581f06e4e36c303e372b3f48)
@@ -285,14 +303,14 @@ Unsloth 是通用微调框架（SFT、DPO/ORPO/KTO、GRPO/GSPO、VLM 训练，�
 <a id="unified-evaluation"></a>
 ### 统一评测协议：不同方法放在同一张表上
 
-所有方法最终都在同一组选项上给出一个概率分布，因此可以在同一个冻结 Test 上用同一套指标比较。条件有四个：
+先固定业务终点和允许动作／集合，在同一冻结Test比较完整策略；只有概率事件、候选及归一化语义一致时，才横比NLL／Brier。独立命题BCE、互斥choice、多解集合和生成序列并非同一分布。条件有四个：
 
 1. **评估实际用来决策的那个分布**：决策头取输出概率；生成式短标签按预先定义的序列概率；PRDO 取单条推理后的读出，不取多条平均。
-2. **统一校准程序**：所有方法在同一个 Cal-fit 上拟合温度、在同一个 Cal-policy 上选阈值，Test 只看一次。Unsloth 内置流程用同一个留出集既校准又报准确率，须替换。
-3. **成本单独报告**：推理类方法（GRPO、PRDO）每次请求都要生成，延迟和 token 成本显著高于一次读出，须实测完整请求的 p50/p95 与单次决策成本。等更新步数不等于等算力。
+2. **统一校准程序**：在同一个Cal-fit上按输出合同拟合合适的概率映射（单温度并非都适用），在同一个 Cal-policy 上选阈值，Test 只看一次。Unsloth内置两半交叉拟合报告仍非独立业务验收，应使用分组Cal-policy及Test。
+3. **成本单独报告**：本实验保留生成推理的GRPO／PRDO臂每次请求需生成（有限动作GRPO不必生成文本），延迟和 token 成本显著高于一次读出，须实测完整请求的 p50/p95 与单次决策成本。等更新步数不等于等算力。
 4. **划分只做一次**：按客户、会话、时间分组；种子波动单独报告，不当作独立样本。
 
-推进顺序：第一轮只比较冻结 embedding＋小头、多语 encoder、Unsloth 决策头 LoRA，三者都只需主数据集；第二轮仅在剩余错误来自标签缺口时加入教师 soft，与 hard 对比；第三轮只对保留推理的子任务比较 GRPO＋TS 与 PRDO。每轮输出同一张评分表，对照预注册的最小收益与关键风险上限决定继续或停止。
+推进顺序：第一轮只比较冻结embedding＋小头、多语encoder、通过准入的决策头LoRA，三者都只需主数据集；第二轮仅在剩余错误来自标签缺口时加入教师 soft，与 hard 对比；第三轮只对保留推理的子任务比较 GRPO＋TS 与 PRDO。每轮输出同一张评分表，对照预注册的最小收益与关键风险上限决定继续或停止。
 
 <a id="routing"></a>
 **路由结构与技能加载只在它们是瓶颈时比较**（完整方案见 [skill 路由选择器](skill-routing.md)）。 选项数、描述预算和可靠外部域信息决定是否试flat、检索、多候选或分层；Jev的层级.673是404／600联合正确，gold域细分另为567／600。显式NONE与外部gate等是候选机制，须同时测OOS误接受、域内覆盖与漏判。按需加载另固定判断器／执行器，分别测候选召回、实际加载、遵循、执行和任务终态；依赖闭包或状态新鲜度不能由top-k命中代替。

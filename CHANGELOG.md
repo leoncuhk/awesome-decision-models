@@ -2,6 +2,15 @@
 
 Each entry records what changed in the repository's knowledge, not every edit. Pre-2026-11-21 dated review notes (`updates/`) and retired documents can be recovered from tag `archive/pre-restructure-2026-11-21/main` or `…/research-dynamic-skill-loading-2026-11` with `git show <tag>:<path>`.
 
+## 2026-11-23 · Enterprise fine-tuning audit and conditional implementation choices
+
+- Rechecked the current problem/playbook structure; retained one home per judgment. The pipeline now gives a hardware-conditional first experiment and four concrete receipts, rather than a new global model ranking.
+- Corrected Unsloth qualifications: MLX includes nonquantized full-finetuning as well as LoRA; quantized training has narrower constraints. Pinned calibration reporting uses two-fold row cross-fitting, not simply in-sample reporting. Tiny/mocked tests do not prove real Qwen/VLM or target-Mac training. The prior November21 “first/default/LoRA-only” claims should be read with this correction.
+- Lemon weights, inference code and data are public; a complete trainer/direct native-checkpoint continuation path was not established. Retracted the stronger training-code availability claim while retaining the dataset and inference reference.
+- Separated independent multi-label BCE from alternative valid action sets; unified evaluation compares the business policy first and only compares proper scores for matching probability semantics. Scoped per-skill thresholds, soft-label rules and reasoning/size claims; removed the unsupported50% cascade cutoff.
+- PRDO main-stage token KL is distinct from the inactive score-function KL coefficient; direct-answer SFT is the paper baseline. Added Inner Jev v2 and GLiDE v1 training/ablation evidence without replacing historical results or claiming a new algorithm winner.
+- Source/static review only. No weights downloaded, model training/inference, enterprise data access, target-M5 measurement or production claim.
+
 ## 2026-11-21 · Readout paradigms, LemonDecider, harness collaboration
 
 - Sources: three WeChat articles (readout paradigms; LemonDecider; JevRSI) checked against primary sources, plus the SGLang decisions docs, NanoJev, JevAgentHarness and System1-Arena found while verifying them.

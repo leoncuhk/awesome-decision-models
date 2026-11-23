@@ -4,7 +4,7 @@
 
 ## 问题
 
-公开指数各测各的，很多是作者自评；头部模型能力已收敛。企业该怎样评测、怎样选型？
+公开指数各测各的，很多是作者自评；不同协议的头部名次尚不能证明能力已收敛。企业该怎样评测、怎样选型？
 
 ## 当前判断
 
@@ -24,7 +24,7 @@
 选型经济学：
 - 同一指数内成本从 $14 到 $859 / 1M tasks，跨度约 60 倍。
 - 许可差异：StartLux 权重 CC BY-NC；Jeff 发布权重非商用；GLiDE 有收入门槛；Liquid 有商业收入门槛。
-- 训练入口：Jev 不提供客户微调；GLiDE 和百炼提供托管训练；Kev、Valen、Strands v2、RSI、Jeff 有公开训练代码，多数走 CUDA。Unsloth（2026-11）把“任意可微调 LLM 加决策头”做成通用框架，覆盖 CUDA 和 Apple Silicon，并提供本地兼容 Jev 接口的 Decision API。训练入口因此不再是稀缺条件，选型重点转向许可（其决策模块为 AGPL-3.0-only）、底座和数据。
+- 训练入口：Jev 不提供客户微调；GLiDE 和百炼提供托管训练；Kev、Valen、Strands v2、RSI、Jeff 有公开训练代码，多数走 CUDA。Unsloth（2026-11）把“受支持LLM加决策头”做成通用框架，覆盖 CUDA 和 Apple Silicon，并提供本地兼容 Jev 接口的 Decision API。这增加了可审查实现，但不等于任意专用checkpoint可续训或M5已可运行；许可（决策模块AGPL-3.0-only）、底座、设备与数据仍分别准入。
 - 版本：托管服务的别名不冻结模型身份；Git commit、HF revision、权重哈希、API 版本是不同的标识。
 
 ## 企业含义
