@@ -3082,6 +3082,94 @@
         "raw_outputs": "Author results only; original training not repeated"
       },
       "reproduced_here": false
+    },
+    {
+      "id": "E46",
+      "title": "Fixed Decision Index small-model screen: candidate coverage, not domain adaptation results",
+      "model_ids": [
+        "adjudex",
+        "kev",
+        "valen-decision",
+        "rsi-jev",
+        "chinese-decision-pointer"
+      ],
+      "source_ids": [
+        "di-full-cohort-nov23",
+        "di-capacity-cohort-nov23"
+      ],
+      "evidence_type": "third_party_reported",
+      "reviewed_on": "2026-11-23",
+      "report_date": "2026-11-21",
+      "model_revision": null,
+      "protocol": {
+        "task": "Typed text decisions on Decision Index0.4.1 Full",
+        "test_unit": "346 submitted configurations;69 metadata-screened3–6.5B total-served-parameter rows; variants are not independent model families",
+        "split": "Full uses two private test components; public results carry zero Full weight. Enterprise train/test comparison absent",
+        "reference": "Maintainer private labels and equating against21 stock base models; full private item labels not released",
+        "training": "Each released configuration has its own prior training/data/readout; not matched-budget post-training controls",
+        "measurement": "Full index points,60% equated same-skills+40% new-domains;0.9-point dense tie groups are a display policy, not significance testing",
+        "hardware": "Maintainer serving protocol; no local model execution or M5 training measurement"
+      },
+      "metrics": [
+        {
+          "label": "Adjudex4B v7 Full index",
+          "value": 57.25,
+          "unit": "score"
+        },
+        {
+          "label": "Starlord4B Preview Full index",
+          "value": 56.94,
+          "unit": "score"
+        },
+        {
+          "label": "SingVL S1 4B Full index",
+          "value": 56.75,
+          "unit": "score"
+        },
+        {
+          "label": "KnowLine4B Gen5.5 Full index",
+          "value": 55.99,
+          "unit": "score"
+        },
+        {
+          "label": "Perplexity Flash v1.3 4B Full index",
+          "value": 55.14,
+          "unit": "score"
+        },
+        {
+          "label": "RSI-Jev v7 4B Full index",
+          "value": 49.93,
+          "unit": "score"
+        },
+        {
+          "label": "Valen1.5 4B Full index",
+          "value": 49.87,
+          "unit": "score"
+        },
+        {
+          "label": "Kev4B r10 Full index",
+          "value": 34.93,
+          "unit": "score"
+        },
+        {
+          "label": "Chinese Decision Pointer4B Full index",
+          "value": 53.96,
+          "unit": "score"
+        }
+      ],
+      "conclusion": "The former familiar-project shortlist missed stronger small configurations. Broad source screening is warranted, but exact native training/rights/device gates and enterprise matched comparisons determine adoption.",
+      "caveats": [
+        "Snapshot-bound coverage; unlisted/new models and private trainers remain outside the audited universe.",
+        "Total served parameters are screening metadata; effective/MoE names do not establish resident memory.",
+        "Source/code inspection does not establish successful continuation or superiority after domain adaptation.",
+        "Full private scores are maintainer-reported; data exposure, exact settings and original weights may differ across entries."
+      ],
+      "artifacts": {
+        "source_code_revision": "43c7f9b760d06fce7194575017c97ad8373b5e98",
+        "source": "Pinned full index and capacity metadata; per-candidate source eligibility in playbooks/assets/4b-candidate-audit.csv",
+        "raw_outputs": "Only published aggregate scores; private per-item outputs not independently verified"
+      },
+      "reproduced_here": false
     }
   ]
 }

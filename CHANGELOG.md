@@ -2,6 +2,12 @@
 
 Each entry records what changed in the repository's knowledge, not every edit. Pre-2026-11-21 dated review notes (`updates/`) and retired documents can be recovered from tag `archive/pre-restructure-2026-11-21/main` or `…/research-dynamic-skill-loading-2026-11` with `git show <tag>:<path>`.
 
+## 2026-11-23 · Coverage-first small-model selection
+
+- Corrected the familiar-project selection bias: screen all346 fixed DI configurations by3–6.5B total served parameters, yielding69 candidates with explicit access/review gaps. Small-model CSV records score, tie group, exact current artifact and training eligibility; current artifacts are not automatically the benchmark's original weights.
+- Added Adjudex4B v7's native full-weight continuation and Chinese Decision Pointer4B's native LoRA/head preservation, with E46's frozen comparison. Original45 evidence records preserved. Higher-scoring weights with restricted rights or no established trainer remain in the coverage record rather than silently disappearing.
+- Selection now distinguishes high-score training qualification from ready LoRA workflows and target-Mac portability; no new inference/training or enterprise performance claimed. The goal is a stable, conditional experimental shortlist, not another universal winner.
+
 ## 2026-11-23 · Enterprise fine-tuning audit and conditional implementation choices
 
 - Rechecked the current problem/playbook structure; retained one home per judgment. The pipeline now gives a hardware-conditional first experiment and four concrete receipts, rather than a new global model ranking.

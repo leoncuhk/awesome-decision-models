@@ -3512,3 +3512,131 @@
 - Source revision: `8b7cde79ebf5a901b2fd936bbee214fb8c7562c7`
 - Note: Tiny ModernBERT and monkeypatched Clef loader tests inspected, not run; these do not certify real4B VLM/M5 capacity.
 
+<a id="di-full-cohort-nov23"></a>
+## Decision Index0.4.1 complete frozen standings
+
+- Source: https://huggingface.co/spaces/multimodalart/jev-decision-index/blob/43c7f9b760d06fce7194575017c97ad8373b5e98/data/v03.json
+- Kind: `evaluation_report`; review depth: `content_reviewed`; reviewed: 2026-11-23
+- Source revision: `43c7f9b760d06fce7194575017c97ad8373b5e98`
+- Note: November21 snapshot,346 configurations. Full=60% equated private same-skills+40% equated private new-domains. Ranked row position differs from0.9-point dense tie group; no local inference.
+
+<a id="di-capacity-cohort-nov23"></a>
+## Decision Index capacity and checkpoint metadata
+
+- Source: https://huggingface.co/spaces/multimodalart/jev-decision-index/blob/43c7f9b760d06fce7194575017c97ad8373b5e98/data/index.json
+- Kind: `evaluation_report`; review depth: `content_reviewed`; reviewed: 2026-11-23
+- Source revision: `43c7f9b760d06fce7194575017c97ad8373b5e98`
+- Note: Capacity screen uses total served_params, not substring4B or active parameters.69 rows in3–6.5B band; checkpoint links can be unavailable and metadata is not a hardware measurement.
+
+<a id="adjudex4-v7-card-nov23"></a>
+## Adjudex4B v7 card
+
+- Source: https://huggingface.co/newsbang/adjudex-4b-v7/blob/ff4677a23dff03c4fc21383c77cf5f626ec23108/README.md
+- Kind: `model_card`; review depth: `content_reviewed`; reviewed: 2026-11-23
+- Source revision: `ff4677a23dff03c4fc21383c77cf5f626ec23108`
+- Note: Fixed release read; bundled Perplexity-v1.1-derived code includes full-weight continuation but default27B settings/reference cohort require adaptation. No training run or tensor download.
+
+<a id="adjudex4-v7-train-nov23"></a>
+## Adjudex4B v7 train
+
+- Source: https://huggingface.co/newsbang/adjudex-4b-v7/blob/ff4677a23dff03c4fc21383c77cf5f626ec23108/source/src/autojev/train.py
+- Kind: `repository`; review depth: `content_reviewed`; reviewed: 2026-11-23
+- Source revision: `ff4677a23dff03c4fc21383c77cf5f626ec23108`
+- Note: Fixed release read; bundled Perplexity-v1.1-derived code includes full-weight continuation but default27B settings/reference cohort require adaptation. No training run or tensor download.
+
+<a id="adjudex4-v7-model-nov23"></a>
+## Adjudex4B v7 model
+
+- Source: https://huggingface.co/newsbang/adjudex-4b-v7/blob/ff4677a23dff03c4fc21383c77cf5f626ec23108/source/src/autojev/model.py
+- Kind: `repository`; review depth: `content_reviewed`; reviewed: 2026-11-23
+- Source revision: `ff4677a23dff03c4fc21383c77cf5f626ec23108`
+- Note: Fixed release read; bundled Perplexity-v1.1-derived code includes full-weight continuation but default27B settings/reference cohort require adaptation. No training run or tensor download.
+
+<a id="adjudex4-v7-loss-nov23"></a>
+## Adjudex4B v7 loss
+
+- Source: https://huggingface.co/newsbang/adjudex-4b-v7/blob/ff4677a23dff03c4fc21383c77cf5f626ec23108/source/src/autojev/loss.py
+- Kind: `repository`; review depth: `content_reviewed`; reviewed: 2026-11-23
+- Source revision: `ff4677a23dff03c4fc21383c77cf5f626ec23108`
+- Note: Fixed release read; bundled Perplexity-v1.1-derived code includes full-weight continuation but default27B settings/reference cohort require adaptation. No training run or tensor download.
+
+<a id="chinese-pointer-card-nov23"></a>
+## Chinese Decision Pointer4B native release
+
+- Source: https://huggingface.co/quincyqiang/chinese-decision-pointer-4b/blob/889f23e2655e5cba1208bb17f90526092813f5f2/README.md
+- Kind: `model_card`; review depth: `content_reviewed`; reviewed: 2026-11-23
+- Source revision: `889f23e2655e5cba1208bb17f90526092813f5f2`
+- Note: Native merged pointer checkpoint and source-data limitations inspected. Public evaluation uses original/reversed option averaging; Chinese naming is not target-enterprise validation.
+
+<a id="chinese-pointer-training-nov23"></a>
+## Chinese Decision own-data LoRA training
+
+- Source: https://github.com/yanqiangmiffy/chinese-decision/blob/c16450b5d97ea4e1fe26cdd0ff7fb979f78cf4a8/scripts/train.py
+- Kind: `repository`; review depth: `content_reviewed`; reviewed: 2026-11-23
+- Source revision: `c16450b5d97ea4e1fe26cdd0ff7fb979f78cf4a8`
+- Note: Own-data entry, pointer readout, optimizer groups and checkpoint writes inspected; CUDA/NCCL, no target-machine run.
+
+<a id="chinese-pointer-loader-nov23"></a>
+## Chinese Decision native head-preserving loader
+
+- Source: https://github.com/yanqiangmiffy/chinese-decision/blob/c16450b5d97ea4e1fe26cdd0ff7fb979f78cf4a8/decision/modeling.py
+- Kind: `repository`; review depth: `content_reviewed`; reviewed: 2026-11-23
+- Source revision: `c16450b5d97ea4e1fe26cdd0ff7fb979f78cf4a8`
+- Note: from_pretrained handles released decision config and stored pointer head; PEFT paths inspected statically, not executed.
+
+<a id="strands-native-continuation-nov23"></a>
+## Strands v2 merged decision checkpoint continuation update
+
+- Source: https://github.com/strands-labs/strands-decider/blob/c3c845782095b31d438963ac2afcdfe41b49f757/training/train.py
+- Kind: `repository`; review depth: `content_reviewed`; reviewed: 2026-11-23
+- Source revision: `c3c845782095b31d438963ac2afcdfe41b49f757`
+- Note: November21 source adds _init_from_model_checkpoint: new LoRA on merged weights with retained native readout. Updates earlier d4915 loader limitation; not a local training run.
+
+<a id="cohort-starlord-4b-preview-nov23"></a>
+## xsdfasfgsa/Starlord-4B-preview — fixed eligibility audit
+
+- Source: https://huggingface.co/xsdfasfgsa/Starlord-4B-preview/tree/53321bddf5e9260cf46ea31abedf48487d2583d6
+- Kind: `model_card`; review depth: `content_reviewed`; reviewed: 2026-11-23
+- Source revision: `53321bddf5e9260cf46ea31abedf48487d2583d6`
+- Note: CC-BY-NC-ND4 weights;inference/evaluation package;no complete trainer located; no model run or tensor download.
+
+<a id="cohort-singvl-s1-4b-nov23"></a>
+## inclusionAI/SingVL_S1_4B — fixed eligibility audit
+
+- Source: https://huggingface.co/inclusionAI/SingVL_S1_4B/tree/c0846efa6a53bd21537f0f78e262dadcdabf39f7
+- Kind: `model_card`; review depth: `content_reviewed`; reviewed: 2026-11-23
+- Source revision: `c0846efa6a53bd21537f0f78e262dadcdabf39f7`
+- Note: No explicit release license or complete trainer located;current card/evaluation revisions differ,do not transfer current metrics to old board row; no model run or tensor download.
+
+<a id="cohort-knowline-4b-gen5.5-nov23"></a>
+## PelaAI/KnowLine-4B-Gen5.5 — fixed eligibility audit
+
+- Source: https://huggingface.co/PelaAI/KnowLine-4B-Gen5.5/tree/890ecc3765a16c8e22b884807e19827fa695eb9a
+- Kind: `model_card`; review depth: `content_reviewed`; reviewed: 2026-11-23
+- Source revision: `890ecc3765a16c8e22b884807e19827fa695eb9a`
+- Note: Apache weights/MIT serving;Gen5 same weights plus short-input rereading;no complete trainer located; no model run or tensor download.
+
+<a id="cohort-verdin-4b-v1.2-nov23"></a>
+## victorbennett/Verdin-4B-v1.2 — fixed eligibility audit
+
+- Source: https://huggingface.co/victorbennett/Verdin-4B-v1.2/tree/c31e656bb0e519d4b43bdf963fe7a3f6afbec5bd
+- Kind: `model_card`; review depth: `content_reviewed`; reviewed: 2026-11-23
+- Source revision: `c31e656bb0e519d4b43bdf963fe7a3f6afbec5bd`
+- Note: Converted Kev-derived inference package;no complete trainer located;NONE option has strong special downweighting;not a validated abstention policy; no model run or tensor download.
+
+<a id="cohort-piccolo-4b-nov23"></a>
+## agentscope-ai/Piccolo-4B — fixed eligibility audit
+
+- Source: https://huggingface.co/agentscope-ai/Piccolo-4B/tree/35f5e464ef884d8720b53d12c7f8aaf5497a3644
+- Kind: `model_card`; review depth: `content_reviewed`; reviewed: 2026-11-23
+- Source revision: `35f5e464ef884d8720b53d12c7f8aaf5497a3644`
+- Note: public_inference_no_trainer_located; no model run or tensor download.
+
+<a id="cohort-saif-4b-v2-nov23"></a>
+## GyrTechnology/saif-4b — fixed eligibility audit
+
+- Source: https://huggingface.co/GyrTechnology/saif-4b/tree/8319c9c33e88850b2e403378d2d0105957b38a37
+- Kind: `model_card`; review depth: `content_reviewed`; reviewed: 2026-11-23
+- Source revision: `8319c9c33e88850b2e403378d2d0105957b38a37`
+- Note: NC weights;current main isv2.1 while board isv2;do not inherit latest card scores; no model run or tensor download.
+

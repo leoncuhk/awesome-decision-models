@@ -6,7 +6,7 @@
 
 Decision models — popularized by TypeSafe's Jev in September 2026 — typically return **typed distributions over supplied options**. Direct readout is common; reasoning, per-question passes and service orchestration vary by product. The new thing is the output contract: it makes bounded judgments priceable, calibratable and gateable. This repository asks one question: **which method delivers acceptable outcomes at acceptable risk and total cost for a given decision?**
 
-Review batch 2026-11-23: 98 resources, 36 core model families, 45 evidence records. Source review only; **nothing here is independently reproduced yet.** Inclusion is not endorsement.
+Review batch 2026-11-23: 100 resources, 38 core model families, 46 evidence records. Source review only; **nothing here is independently reproduced yet.** Inclusion is not endorsement.
 
 ## How this repository is organized
 
@@ -88,6 +88,8 @@ Mechanism and suggested experiment only; version boundaries, licenses and limita
 | [Decisio tuned v3 / Tachara AI](https://github.com/aminry/decisio) · [card](docs/models.md#decisio) | November20 Gemma12B tuned release with calibrated and commit serving policies and multiple precision ports. | A fresh serving/readout comparator; evaluate calibrated policy, commit policy and calculator under the same contract. |
 | [Valen-Decision1.5](https://github.com/Valen-Team/Valen) · [card](docs/models.md#valen-decision) | Multimodal typed-decision family with native published-checkpoint domain training, separate from its ONNX/GGUF/ANE conversions. | Prioritize an inspectable native-checkpoint LoRA comparator for proprietary data on compatible hardware; keep original and direct CE controls. |
 | [LemonDecider 4B (inclusionAI / Ant)](https://huggingface.co/inclusionAI/LemonDecider) · [card](docs/models.md#lemondecider) | Open Qwen3.5-4B typed model with a255-option readout, inference code and a1.2M-row training mix; complete public trainer not located in this review. | Open4B inference comparator and license-reviewed replay-data source; direct checkpoint fine-tuning requires a verified training loader and export path. |
+| [Adjudex4B v7 / NewsBang](https://huggingface.co/newsbang/adjudex-4b-v7) · [card](docs/models.md#adjudex) | Qwen3.5-4B typed readout with public full-weight training/continuation code; a high-scoring candidate in the fixed small-model screen. | Prioritize native continuation qualification and frozen domain evaluation alongside another trainable4B candidate; verify held-out gains before scaling full-weight training. |
+| [Chinese Decision Pointer4B](https://huggingface.co/quincyqiang/chinese-decision-pointer-4b) · [card](docs/models.md#chinese-decision-pointer) | Qwen3.5-4B candidate-pointer model with Chinese training material and public LoRA implementation. | Include as a Chinese-oriented LoRA experiment alongside the high-scoring Adjudex and the Valen training control, after exact native loader/save/serve verification. |
 
 ## Baselines worth keeping
 

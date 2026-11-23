@@ -4412,6 +4412,166 @@
       "review_depth": "content_reviewed",
       "source_revision": "8b7cde79ebf5a901b2fd936bbee214fb8c7562c7",
       "review_note": "Tiny ModernBERT and monkeypatched Clef loader tests inspected, not run; these do not certify real4B VLM/M5 capacity."
+    },
+    {
+      "id": "di-full-cohort-nov23",
+      "title": "Decision Index0.4.1 complete frozen standings",
+      "url": "https://huggingface.co/spaces/multimodalart/jev-decision-index/blob/43c7f9b760d06fce7194575017c97ad8373b5e98/data/v03.json",
+      "kind": "evaluation_report",
+      "reviewed_on": "2026-11-23",
+      "review_depth": "content_reviewed",
+      "source_revision": "43c7f9b760d06fce7194575017c97ad8373b5e98",
+      "review_note": "November21 snapshot,346 configurations. Full=60% equated private same-skills+40% equated private new-domains. Ranked row position differs from0.9-point dense tie group; no local inference."
+    },
+    {
+      "id": "di-capacity-cohort-nov23",
+      "title": "Decision Index capacity and checkpoint metadata",
+      "url": "https://huggingface.co/spaces/multimodalart/jev-decision-index/blob/43c7f9b760d06fce7194575017c97ad8373b5e98/data/index.json",
+      "kind": "evaluation_report",
+      "reviewed_on": "2026-11-23",
+      "review_depth": "content_reviewed",
+      "source_revision": "43c7f9b760d06fce7194575017c97ad8373b5e98",
+      "review_note": "Capacity screen uses total served_params, not substring4B or active parameters.69 rows in3–6.5B band; checkpoint links can be unavailable and metadata is not a hardware measurement."
+    },
+    {
+      "id": "adjudex4-v7-card-nov23",
+      "title": "Adjudex4B v7 card",
+      "url": "https://huggingface.co/newsbang/adjudex-4b-v7/blob/ff4677a23dff03c4fc21383c77cf5f626ec23108/README.md",
+      "kind": "model_card",
+      "reviewed_on": "2026-11-23",
+      "review_depth": "content_reviewed",
+      "source_revision": "ff4677a23dff03c4fc21383c77cf5f626ec23108",
+      "review_note": "Fixed release read; bundled Perplexity-v1.1-derived code includes full-weight continuation but default27B settings/reference cohort require adaptation. No training run or tensor download."
+    },
+    {
+      "id": "adjudex4-v7-train-nov23",
+      "title": "Adjudex4B v7 train",
+      "url": "https://huggingface.co/newsbang/adjudex-4b-v7/blob/ff4677a23dff03c4fc21383c77cf5f626ec23108/source/src/autojev/train.py",
+      "kind": "repository",
+      "reviewed_on": "2026-11-23",
+      "review_depth": "content_reviewed",
+      "source_revision": "ff4677a23dff03c4fc21383c77cf5f626ec23108",
+      "review_note": "Fixed release read; bundled Perplexity-v1.1-derived code includes full-weight continuation but default27B settings/reference cohort require adaptation. No training run or tensor download."
+    },
+    {
+      "id": "adjudex4-v7-model-nov23",
+      "title": "Adjudex4B v7 model",
+      "url": "https://huggingface.co/newsbang/adjudex-4b-v7/blob/ff4677a23dff03c4fc21383c77cf5f626ec23108/source/src/autojev/model.py",
+      "kind": "repository",
+      "reviewed_on": "2026-11-23",
+      "review_depth": "content_reviewed",
+      "source_revision": "ff4677a23dff03c4fc21383c77cf5f626ec23108",
+      "review_note": "Fixed release read; bundled Perplexity-v1.1-derived code includes full-weight continuation but default27B settings/reference cohort require adaptation. No training run or tensor download."
+    },
+    {
+      "id": "adjudex4-v7-loss-nov23",
+      "title": "Adjudex4B v7 loss",
+      "url": "https://huggingface.co/newsbang/adjudex-4b-v7/blob/ff4677a23dff03c4fc21383c77cf5f626ec23108/source/src/autojev/loss.py",
+      "kind": "repository",
+      "reviewed_on": "2026-11-23",
+      "review_depth": "content_reviewed",
+      "source_revision": "ff4677a23dff03c4fc21383c77cf5f626ec23108",
+      "review_note": "Fixed release read; bundled Perplexity-v1.1-derived code includes full-weight continuation but default27B settings/reference cohort require adaptation. No training run or tensor download."
+    },
+    {
+      "id": "chinese-pointer-card-nov23",
+      "title": "Chinese Decision Pointer4B native release",
+      "url": "https://huggingface.co/quincyqiang/chinese-decision-pointer-4b/blob/889f23e2655e5cba1208bb17f90526092813f5f2/README.md",
+      "kind": "model_card",
+      "reviewed_on": "2026-11-23",
+      "review_depth": "content_reviewed",
+      "source_revision": "889f23e2655e5cba1208bb17f90526092813f5f2",
+      "review_note": "Native merged pointer checkpoint and source-data limitations inspected. Public evaluation uses original/reversed option averaging; Chinese naming is not target-enterprise validation."
+    },
+    {
+      "id": "chinese-pointer-training-nov23",
+      "title": "Chinese Decision own-data LoRA training",
+      "url": "https://github.com/yanqiangmiffy/chinese-decision/blob/c16450b5d97ea4e1fe26cdd0ff7fb979f78cf4a8/scripts/train.py",
+      "kind": "repository",
+      "reviewed_on": "2026-11-23",
+      "review_depth": "content_reviewed",
+      "source_revision": "c16450b5d97ea4e1fe26cdd0ff7fb979f78cf4a8",
+      "review_note": "Own-data entry, pointer readout, optimizer groups and checkpoint writes inspected; CUDA/NCCL, no target-machine run."
+    },
+    {
+      "id": "chinese-pointer-loader-nov23",
+      "title": "Chinese Decision native head-preserving loader",
+      "url": "https://github.com/yanqiangmiffy/chinese-decision/blob/c16450b5d97ea4e1fe26cdd0ff7fb979f78cf4a8/decision/modeling.py",
+      "kind": "repository",
+      "reviewed_on": "2026-11-23",
+      "review_depth": "content_reviewed",
+      "source_revision": "c16450b5d97ea4e1fe26cdd0ff7fb979f78cf4a8",
+      "review_note": "from_pretrained handles released decision config and stored pointer head; PEFT paths inspected statically, not executed."
+    },
+    {
+      "id": "strands-native-continuation-nov23",
+      "title": "Strands v2 merged decision checkpoint continuation update",
+      "url": "https://github.com/strands-labs/strands-decider/blob/c3c845782095b31d438963ac2afcdfe41b49f757/training/train.py",
+      "kind": "repository",
+      "reviewed_on": "2026-11-23",
+      "review_depth": "content_reviewed",
+      "source_revision": "c3c845782095b31d438963ac2afcdfe41b49f757",
+      "review_note": "November21 source adds _init_from_model_checkpoint: new LoRA on merged weights with retained native readout. Updates earlier d4915 loader limitation; not a local training run."
+    },
+    {
+      "id": "cohort-starlord-4b-preview-nov23",
+      "title": "xsdfasfgsa/Starlord-4B-preview — fixed eligibility audit",
+      "url": "https://huggingface.co/xsdfasfgsa/Starlord-4B-preview/tree/53321bddf5e9260cf46ea31abedf48487d2583d6",
+      "kind": "model_card",
+      "reviewed_on": "2026-11-23",
+      "review_depth": "content_reviewed",
+      "source_revision": "53321bddf5e9260cf46ea31abedf48487d2583d6",
+      "review_note": "CC-BY-NC-ND4 weights;inference/evaluation package;no complete trainer located; no model run or tensor download."
+    },
+    {
+      "id": "cohort-singvl-s1-4b-nov23",
+      "title": "inclusionAI/SingVL_S1_4B — fixed eligibility audit",
+      "url": "https://huggingface.co/inclusionAI/SingVL_S1_4B/tree/c0846efa6a53bd21537f0f78e262dadcdabf39f7",
+      "kind": "model_card",
+      "reviewed_on": "2026-11-23",
+      "review_depth": "content_reviewed",
+      "source_revision": "c0846efa6a53bd21537f0f78e262dadcdabf39f7",
+      "review_note": "No explicit release license or complete trainer located;current card/evaluation revisions differ,do not transfer current metrics to old board row; no model run or tensor download."
+    },
+    {
+      "id": "cohort-knowline-4b-gen5.5-nov23",
+      "title": "PelaAI/KnowLine-4B-Gen5.5 — fixed eligibility audit",
+      "url": "https://huggingface.co/PelaAI/KnowLine-4B-Gen5.5/tree/890ecc3765a16c8e22b884807e19827fa695eb9a",
+      "kind": "model_card",
+      "reviewed_on": "2026-11-23",
+      "review_depth": "content_reviewed",
+      "source_revision": "890ecc3765a16c8e22b884807e19827fa695eb9a",
+      "review_note": "Apache weights/MIT serving;Gen5 same weights plus short-input rereading;no complete trainer located; no model run or tensor download."
+    },
+    {
+      "id": "cohort-verdin-4b-v1.2-nov23",
+      "title": "victorbennett/Verdin-4B-v1.2 — fixed eligibility audit",
+      "url": "https://huggingface.co/victorbennett/Verdin-4B-v1.2/tree/c31e656bb0e519d4b43bdf963fe7a3f6afbec5bd",
+      "kind": "model_card",
+      "reviewed_on": "2026-11-23",
+      "review_depth": "content_reviewed",
+      "source_revision": "c31e656bb0e519d4b43bdf963fe7a3f6afbec5bd",
+      "review_note": "Converted Kev-derived inference package;no complete trainer located;NONE option has strong special downweighting;not a validated abstention policy; no model run or tensor download."
+    },
+    {
+      "id": "cohort-piccolo-4b-nov23",
+      "title": "agentscope-ai/Piccolo-4B — fixed eligibility audit",
+      "url": "https://huggingface.co/agentscope-ai/Piccolo-4B/tree/35f5e464ef884d8720b53d12c7f8aaf5497a3644",
+      "kind": "model_card",
+      "reviewed_on": "2026-11-23",
+      "review_depth": "content_reviewed",
+      "source_revision": "35f5e464ef884d8720b53d12c7f8aaf5497a3644",
+      "review_note": "public_inference_no_trainer_located; no model run or tensor download."
+    },
+    {
+      "id": "cohort-saif-4b-v2-nov23",
+      "title": "GyrTechnology/saif-4b — fixed eligibility audit",
+      "url": "https://huggingface.co/GyrTechnology/saif-4b/tree/8319c9c33e88850b2e403378d2d0105957b38a37",
+      "kind": "model_card",
+      "reviewed_on": "2026-11-23",
+      "review_depth": "content_reviewed",
+      "source_revision": "8319c9c33e88850b2e403378d2d0105957b38a37",
+      "review_note": "NC weights;current main isv2.1 while board isv2;do not inherit latest card scores; no model run or tensor download."
     }
   ],
   "entries": [
@@ -4920,7 +5080,8 @@
         "strands-v2-trainer-nov20",
         "strands-v2-data-nov20",
         "strands-v2-export-nov20",
-        "strands-v2-checkpoint-format-nov20"
+        "strands-v2-checkpoint-format-nov20",
+        "strands-native-continuation-nov23"
       ],
       "summary": {
         "en": "Qwen / Gemma decision family: v1 adapter-and-pointer releases and November 17 Gemma 4 E2B v2 merged code-readout release have different training and serving contracts.",
@@ -4934,7 +5095,7 @@
         "en": "Do not transfer v1 pointer/soup/KL or missing-image results to v2. v2 was trained on text; inherited image input is not image-adaptation evidence. Author public benchmarks and calibrated temperature do not certify enterprise risk. Legacy E07/E08/E11 and their missing-data/development-selection limitations remain dated records.",
         "zh": "不可将v1的pointer／soup／KL或缺图结果直接套给v2。v2仅用文本训练，继承图片输入不等于图像适配证据。作者公共基准及拟合温度不认证企业风险；E07／E08／E11及其缺数据、开发选择限制保留为带日期记录。"
       },
-      "reviewed_on": "2026-11-20",
+      "reviewed_on": "2026-11-23",
       "mechanism": {
         "en": "v1 replaces the LM head with a dynamic pointer head. v2 E2B trains a 255-code LM-row readout with strands-chat and prefix_bidir: state is shared, question branches are isolated, and all Gemma layers use the stated full-prompt mask, including normally sliding-window layers. No free-text generation.",
         "zh": "v1以动态pointer头替代LM头；v2 E2B用255答码LM-row读出、strands-chat及prefix_bidir：共享state，各题分支隔离；按其专用mask处理全部Gemma层，包括通常的滑窗层。不生成自由文本。"
@@ -4944,8 +5105,8 @@
         "zh": "v1的Qwen／Gemma配方与三种子adapter／head平均保留为历史，部分输入缺失。当前源码也公开v2从原始底座开始的监督配方：E2B为rank64／alpha128 LoRA加token readout、prefix_bidir及typed-row转换；原v2训练／开发数据未公开，转换器丢弃图片及缺instructions行。导出将adapter合入base BF16 shards，另存readout.safetensors和decision_config.json；trainer支持token-readout训练，但拒绝其frozen-KL选项。"
       },
       "availability": {
-        "en": "v1 trained adapter/head checkpoints can use init_from and then recalibrate. Released v2 is a merged decision checkpoint without the training config/adapter layout expected by that init_from loader; direct domain continuation from its HF ID is not established. Public v2 recipes can train on supplied text rows from the original base, or continue a retained unmerged training checkpoint. v2 MPS/CPU support on the card is inference; training selects CUDA else CPU and documents Linux/WSL NVIDIA. No M5 training run or generic MLX calibration support verified.",
-        "zh": "v1已训adapter／head检查点可用init_from并重新校准；发布v2为合并decision检查点，不含该init_from loader要求的训练config／adapter布局，尚未建立直接从其HF ID领域续训的路径。公开v2配方可从原始底座用自备文本训练，或继续保留的未合并训练检查点。卡片的MPS／CPU支持指推理；训练器选择CUDA否则CPU，文档以Linux／WSL NVIDIA为环境，未验证M5训练或通用MLX校准。"
+        "en": "November21 source c3c845 adds init_from for merged v2 decision checkpoints: new LoRA on merged weights, continued native readout. Older d4915 training-checkpoint-only limitation is historical. Public v2 rows remain unavailable; own-row converter exists. CUDA-oriented trainer, no M5 run.",
+        "zh": "11月21日源码c3c845新增合并v2 decision检查点init_from：在合并权重加新LoRA、继续训练原readout。旧d4915仅接受训练checkpoint的限制为历史状态。原v2数据仍未公开，有自有行转换；训练以CUDA为主，无M5回执。"
       },
       "license_note": "Reviewed v1 adapter/head and v2 model/code declare Apache-2.0; v1 loads a separate base, v2 ships merged base plus readout. Check exact base/data terms; no M5 or original-data replay claim.",
       "weight_revision": null,
@@ -7725,6 +7886,104 @@
       "caveat": {
         "en": "Text game environments with clean feedback; harness developed during evaluation; cost accounting excludes development and local compute.",
         "zh": "环境为反馈干净的文本游戏；Harness 在评估过程中持续开发；成本只计评估 Token，不含开发与本地算力。"
+      }
+    },
+    {
+      "id": "adjudex",
+      "name": "Adjudex4B v7 / NewsBang",
+      "category": "core_models",
+      "url": "https://huggingface.co/newsbang/adjudex-4b-v7",
+      "source_ids": [
+        "adjudex4-v7-card-nov23",
+        "adjudex4-v7-train-nov23",
+        "adjudex4-v7-model-nov23",
+        "adjudex4-v7-loss-nov23",
+        "di-full-cohort-nov23"
+      ],
+      "reviewed_on": "2026-11-23",
+      "weight_revision": "ff4677a23dff03c4fc21383c77cf5f626ec23108",
+      "license_note": "Published weights Apache-2.0; bundled Perplexity Decider v1.1 code credited in NOTICE. Original training data and row-level rights not fully audited.",
+      "tags": [
+        "typed-decisions",
+        "open-weight",
+        "full-finetuning"
+      ],
+      "summary": {
+        "en": "Qwen3.5-4B typed readout with public full-weight training/continuation code; a high-scoring candidate in the fixed small-model screen.",
+        "zh": "Qwen3.5-4B类型读出，发布包含全参训练／续训代码；固定小模型筛选中的高分候选。"
+      },
+      "scale": {
+        "en": "4B family, about4.54B served parameters in board metadata; roughly9.08GB model shards plus readout, not training peak.",
+        "zh": "4B系列，榜单元数据约4.54B驻留参数；模型shards约9.08GB另加readout，不是训练峰值。"
+      },
+      "mechanism": {
+        "en": "Noncausal full-attention layers, last-position pooling and a255-code BF16 head; per-question8,192-token limit rejects overflow.",
+        "zh": "全注意力层非因果、末位置池化及255码BF16头；每题8,192 token，超长拒绝。"
+      },
+      "training": {
+        "en": "Bundled autojev.train accepts own train/development/temperature rows and initial-checkpoint, preserving backbone/readout; full-weight CE with optional Brier, optimizer/resume/save code. CLI defaults still name27B and require development-reference predictions; match base revision, attention/pooling and schema. No ready LoRA/MLX path established.",
+        "zh": "autojev.train接受自有train／development／temperature行及initial-checkpoint，保留骨干／readout；全参CE、可选Brier，含优化器／恢复／保存。CLI仍默认27B并要求开发参考预测；须匹配底座revision、注意力／池化及schema。未建立现成LoRA／MLX路径。"
+      },
+      "availability": {
+        "en": "Native public checkpoint and System One server; release metadata Nov18. Training contains CUDA calls; apparent CPU fallback is not a validated CPU/MPS pipeline.",
+        "zh": "原生公开检查点及System One服务；发布元数据11月18日。训练含CUDA调用，表面CPU回退不构成CPU／MPS链路验证。"
+      },
+      "use": {
+        "en": "Prioritize native continuation qualification and frozen domain evaluation alongside another trainable4B candidate; verify held-out gains before scaling full-weight training.",
+        "zh": "优先核native续训并做冻结领域评测，与另一可训4B对照；先确认独立增量再扩大全参投入。"
+      },
+      "caveat": {
+        "en": "Highest score in this finite capacity screen is not universal superiority. Starlord and SingVL have nearby scores but fall in the next group under the first-member-anchored tie rule; grouping is not a significance test. Original training provenance, Chinese business effectiveness and target-Mac resource feasibility remain unverified.",
+        "zh": "在有限容量筛选中得分最高不等于普遍最优；Starlord及SingVL分差较小但依组首锚定规则落在下一组；分组不是显著性检验。原训练谱系、中文业务效果及目标Mac资源仍未验证。"
+      }
+    },
+    {
+      "id": "chinese-decision-pointer",
+      "name": "Chinese Decision Pointer4B",
+      "category": "core_models",
+      "url": "https://huggingface.co/quincyqiang/chinese-decision-pointer-4b",
+      "source_ids": [
+        "chinese-pointer-card-nov23",
+        "chinese-pointer-training-nov23",
+        "chinese-pointer-loader-nov23",
+        "di-full-cohort-nov23"
+      ],
+      "reviewed_on": "2026-11-23",
+      "weight_revision": "889f23e2655e5cba1208bb17f90526092813f5f2",
+      "license_note": "Model weights declare Apache-2.0; repository code MIT with third-party notices. Some original data sources are noncommercial/research-only; declaration does not license their redistribution or certify every downstream use.",
+      "tags": [
+        "typed-decisions",
+        "open-weight",
+        "chinese",
+        "lora"
+      ],
+      "summary": {
+        "en": "Qwen3.5-4B candidate-pointer model with Chinese training material and public LoRA implementation.",
+        "zh": "Qwen3.5-4B候选pointer模型，包含中文训练材料与公开LoRA实现。"
+      },
+      "scale": {
+        "en": "4B family; board serves about4.21B parameters.",
+        "zh": "4B系列，榜单驻留参数约4.21B。"
+      },
+      "mechanism": {
+        "en": "Decision marker and candidate endpoint pointer scoring; full-attention prompt bidirectionality, causal linear attention; multiple questions share a sequence.",
+        "zh": "决策marker与候选末位置pointer打分；全注意力prompt双向、线性注意力因果，多题共序列。"
+      },
+      "training": {
+        "en": "Own-data CUDA/NCCL trainer with LoRA and pointer head; loader recognizes a merged native decision checkpoint and retains its pointer head, then can add an adapter. Exact data/readout settings and parameter gradients require a smoke check. Source training mixes public tasks, Chinese data and generated exact-label problems; original mixture is not clean enterprise data.",
+        "zh": "自有数据CUDA／NCCL训练器含LoRA及pointer head；loader识别合并native判断检查点并保留pointer头，可再加adapter。精确数据／readout设置与梯度仍需smoke。原训练混合公共任务、中文数据与程序标签合成题，不是企业真实数据。"
+      },
+      "availability": {
+        "en": "Native merged HF weights, calibration/config and public training repository; no native MLX training or verified M5 run.",
+        "zh": "native合并HF权重、校准／配置及训练仓公开；无已确认原生MLX训练或M5运行。"
+      },
+      "use": {
+        "en": "Include as a Chinese-oriented LoRA experiment alongside the high-scoring Adjudex and the Valen training control, after exact native loader/save/serve verification.",
+        "zh": "在精确native加载／保存／服务验证后，作为中文LoRA实验候选，与高分Adjudex及Valen训练对照并列。"
+      },
+      "caveat": {
+        "en": "Board/full and author/public results differ; option reversal averaging costs extra passes. Shared questions may affect one another; absent candidates and Chinese domain transfer need own tests. No domain adaptation or commercial data-rights guarantee.",
+        "zh": "榜单Full与作者Public不同；顺序反转平均额外耗费前向。共享问题可能相互影响，缺候选及中文领域迁移须自测；不保证企业适配或数据商用权利。"
       }
     }
   ]

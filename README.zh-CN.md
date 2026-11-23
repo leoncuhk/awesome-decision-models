@@ -6,7 +6,7 @@
 
 决策模型由 TypeSafe 的 Jev 于 2026 年 9 月带火：对给定选项返回**类型化分布**。直接读出是常见实现，推理后读出、逐题前向及服务编排依产品而异。新东西是这个输出合同：它让有界判断可以计价、校准、设门槛。本仓只回答一个问题：**对一个具体决策，哪种方法能以可接受的风险和完整成本得到可接受的结果？**
 
-核查批次 2026-11-23：98 项资源，36 个核心模型族，45 条证据记录。仅做来源审阅，**尚无本仓独立复现**。收录不代表推荐。
+核查批次 2026-11-23：100 项资源，38 个核心模型族，46 条证据记录。仅做来源审阅，**尚无本仓独立复现**。收录不代表推荐。
 
 ## 仓库怎么组织
 
@@ -88,6 +88,8 @@
 | [Decisio tuned v3 / Tachara AI](https://github.com/aminry/decisio) · [模型卡](docs/models.md#decisio) | 11月20日发布的Gemma12B适配权重，含calibrated／commit策略及多精度部署包。 | 新增服务／读出对照；同合同分验calibrated、commit及计算器。 |
 | [Valen-Decision1.5](https://github.com/Valen-Team/Valen) · [模型卡](docs/models.md#valen-decision) | 多模态类型化判断系列，有从已发布native检查点领域训练的入口，与ONNX／GGUF／ANE转换分开。 | 在兼容硬件上优先纳入可审查的native续训LoRA对照，保留原版及直接CE控制。 |
 | [LemonDecider 4B (inclusionAI / Ant)](https://huggingface.co/inclusionAI/LemonDecider) · [模型卡](docs/models.md#lemondecider) | 开放Qwen3.5-4B类型化模型，255选项读出、推理代码及约120万行训练混合；本轮未定位完整公开trainer。 | 开放4B推理对照及经许可核验的回放数据来源；直接检查点微调需核训练loader与导出链。 |
+| [Adjudex4B v7 / NewsBang](https://huggingface.co/newsbang/adjudex-4b-v7) · [模型卡](docs/models.md#adjudex) | Qwen3.5-4B类型读出，发布包含全参训练／续训代码；固定小模型筛选中的高分候选。 | 优先核native续训并做冻结领域评测，与另一可训4B对照；先确认独立增量再扩大全参投入。 |
+| [Chinese Decision Pointer4B](https://huggingface.co/quincyqiang/chinese-decision-pointer-4b) · [模型卡](docs/models.md#chinese-decision-pointer) | Qwen3.5-4B候选pointer模型，包含中文训练材料与公开LoRA实现。 | 在精确native加载／保存／服务验证后，作为中文LoRA实验候选，与高分Adjudex及Valen训练对照并列。 |
 
 ## 值得保留的基线
 

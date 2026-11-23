@@ -8,7 +8,7 @@
 
 ## 当前判断
 
-1. **榜单名次不是选型信号。** 自建冻结评测集，按客户、会话、时间分组留出。
+1. **榜单名次是候选发现信号，不是企业选型结论。** 自建冻结评测集，按客户、会话、时间分组留出。
 2. **选型的准入门槛依次是**：许可 → 自有数据训练入口 → 目标硬件可训（forward/backward/保存重载）→ 服务概率与评测一致。全部通过后才比较质量。
 
 置信度：中高。
@@ -26,6 +26,8 @@
 - 许可差异：StartLux 权重 CC BY-NC；Jeff 发布权重非商用；GLiDE 有收入门槛；Liquid 有商业收入门槛。
 - 训练入口：Jev 不提供客户微调；GLiDE 和百炼提供托管训练；Kev、Valen、Strands v2、RSI、Jeff 有公开训练代码，多数走 CUDA。Unsloth（2026-11）把“受支持LLM加决策头”做成通用框架，覆盖 CUDA 和 Apple Silicon，并提供本地兼容 Jev 接口的 Decision API。这增加了可审查实现，但不等于任意专用checkpoint可续训或M5已可运行；许可（决策模块AGPL-3.0-only）、底座、设备与数据仍分别准入。
 - 版本：托管服务的别名不冻结模型身份；Git commit、HF revision、权重哈希、API 版本是不同的标识。
+
+2026-11-23覆盖审查：此前只比较熟悉的4B项目，遗漏Adjudex等更强原版候选。现在从完整榜单按总参数筛选，保留每一项的分数、精确发布revision、许可与训练审查深度，见[69行覆盖表](../playbooks/assets/4b-candidate-audit.csv)及[候选准入](../playbooks/decision-pipeline.md#small-model-coverage)。访问失败不等于闭源；有推理代码不等于完整trainer；存在trainer也不等于目标机已经训练成功。
 
 ## 企业含义
 

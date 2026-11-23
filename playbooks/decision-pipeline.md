@@ -12,15 +12,33 @@
 | 条件 | 首轮建议 | 为什么；何时换方案 |
 |---|---|---|
 | M5 Pro 48GB为固定训练机 | 先做轻量监督基线；重点验证Unsloth MLX＋受支持Qwen3.5-4B的直接CE／LoRA；2B作为资源备选 | 有Mac源码路径，尚无本机运行。先验依赖、真实反向、峰值、head保存重载和服务一致性；不支持时保留encoder／短标签MLX方案，不把推理量化包当训练方案 |
-| 可使用CUDA，要求专用检查点领域续训 | Kev或Valen中选一个，与同一检查点原版比较；再视缺口加入另一实现 | 自有数据loader和native续训可审；底座、数据暴露与head不同，两项目横比只能称系统选型，不能把差异归因某一个loss |
+| 可使用CUDA，要求专用检查点领域续训 | 优先核Adjudex4B v7的native全参续训，并列Chinese Pointer4B与Valen4B的LoRA路线作预算匹配比较；Kev保留工程基线 | 先按下方固定覆盖表完成训练资格准入；通用分数与训练便利性是不同理由，不能只选熟悉项目。全参与LoRA总预算不同，横比属于系统选型 |
 | 数据允许上云且服务资格匹配 | GLiDE训练API或百炼，与上述本地方法做完整费用／效果比较 | 必须确认精确模型、导出／部署、账号及数据合同；托管训练不满足本地权重控制的所有需求 |
-| Lemon／Strands／RSI等新增产物 | 先作原版对照、数据或实现参考；有明确缺口再做适配 | Lemon完整trainer尚未定位；Strands合并checkpoint加载边界、RSI原数据缺口不能由榜单消除 |
+| Lemon／Strands／RSI等新增产物 | 先作原版对照、数据或实现参考；有明确缺口再做适配 | Lemon完整trainer尚未定位；Strands新代码已补合并checkpoint续训，但精确版本／CUDA仍需准入；RSI原数据缺口不能由榜单消除 |
 
 **首轮交付四项：** 冻结的业务合同和分组数据清单；目标机前向／反向／保存重载记录；原版、轻量监督、一个小模型直接适配的配对结果；最终接受／转交策略的风险、任务成功与完整成本。原版属于每个训练臂的必备对照，不能因“三组”省略。
 
 先挑一个高频且可裁定的决策点，例如“当前状态应加载哪些适用技能、是否需要补证”，不默认同时训练领域、下一步动作、退款资格和合规。数据预算按标注分歧、稀有错误与学习曲线分批增加，不预先保证固定几百条足够。
 
 若直接适配的剩余失败是标签覆盖，下一步比较经审核教师增强；若是概率问题，先单独校准／改完整门控；若是缺证据，先修取证；若确需生成推理，再比较PRDO。没有训练增量、未达风险约束或总成本反升，都可作为停止结果。实际训练沿用`improve/post-training`及业务项目入口；本仓继续维护问题、协议和公开证据。
+
+<a id="small-model-coverage"></a>
+### 4B候选覆盖：先完整筛选，再缩短名单
+
+**范围固定于2026-11-23核查的DI0.4.1／11月21日快照**：将346个配置与容量元数据对齐，按**总驻留参数3–6.5B**筛出69行；这是近4B容量筛选，不代表69个独立架构。排除名称中的0.4B／74B误匹配；Gemma E4B约8B总参数、26B-A4B也不混入。62个HF发布物取得卡片与完整siblings，7项存在定位／访问缺口，逐项列在[覆盖表CSV](assets/4b-candidate-audit.csv)。这不是全网穷尽或所有69个trainer完整审计；对18个此前遗漏的靠前候选另做卡片／许可／文件清单与必要源码审查，并复核Adjudex及既有候选；低分行只作初筛。
+
+榜单中的Adjudex57.25为第15组，Starlord56.94及SingVL56.75为第16组；规则按各组首项锚定，因此两模型相差不到0.9也不必同组。分组不是显著性检验；原版分差不等于企业适配增量，详见[固定成绩记录E46](../docs/evidence.md#e46)。以前仅比较Kev／Valen／RSI／Perplexity的范围不足，不能据此称Valen为全体4B最优。
+
+| 候选层次 | 本轮处理 | 尚缺的证据 |
+|---|---|---|
+| Adjudex4B v7 | 高分且随包有全参CE／可选Brier、`initial-checkpoint`、读出保存及恢复代码，优先做训练链准入 | 代码来自Perplexity v1.1，CLI仍有27B默认值；须匹配4B、attention／pooling及开发参考预测。不是现成LoRA／M5方案，未实跑 |
+| Chinese Decision Pointer4B | 中文方向的实际LoRA候选；已核合并检查点加载、保留pointer head、新LoRA及head保存链，Full53.96 | 必须`--readout pointer`（默认letters）、转换prepared数据、核原训练数据权利；原榜配置为顺序／逆序两次平均，非单次开销，无M5训练证据 |
+| Valen4B | 保留为明确native LoRA流程的对照，不再因工程方便称效果首选 | 企业真实适配与目标硬件；MPS统计兼容问题 |
+| Starlord／SingVL／KnowLine | 保留高分原版资格调查；Starlord权重NC-ND，SingVL许可证及trainer未核，KnowLine5.5为Gen5同权重的短输入重读变体 | 商用／衍生许可、完整trainer及精确榜单版本身份，不把最新卡片和旧成绩混用 |
+| Perplexity Flash／其他高分推理包 | 作为可访问且许可合适的原版对照；没有trainer不等于永远不能训，但补工程须计成本 | 专用头、数据转换、真实反向、恢复／导出链 |
+| RSI／其他公开训练项目 | 根据协议和资源缺口选择第二阶段候选，详覆盖表 | 不因代码目录名有train就认证原生检查点续训；原配方和自有数据适配分别核 |
+
+**不再随着新名字直接换首选。** 研究候选进入实际训练和最终采用须逐步满足：属于目标规模／输出合同；固定产物可取得并有适用权利；原生训练或明确移植路径；目标机前后向及保存重载通过；最后才在同一企业留出、预算和风险合同上替换现用方案。新模型、未上榜的SII／Jeff／Lemon、以及异构Vega拟合头可保留研究入口，没有同协议分数就不补猜排名。
 
 <a id="when-to-use"></a>
 ## 0. 什么判断适合决策模型
@@ -129,7 +147,7 @@
 | 开放4B推理／数据参照 | **LemonDecider 4B**（Qwen3.5-4B，255 码读出，Apache-2.0） | 公开权重、推理代码与约120万条数据；本轮未定位完整trainer或已验证的发布权重续训入口，不能据发布说明承诺直接续训。自定义运行时，原训练配方与可执行trainer分开。公告分数是 Public 部分，不作为胜负依据。[模型卡](https://huggingface.co/inclusionAI/LemonDecider/tree/8eca78d5be8b6b0c02346051d8c6a99370d86f5e) |
 | 直接自有标签适配 | **Kev-4B**的`--data`、`--init_from`与pointer head；同原版作前后对照 | 固定问题／标签合同；MPS分支存在，Qwen3.5混合结构backward、内存和保存重载仍须目标机实测。[训练源码](https://github.com/jaredpalmer/kev/blob/051142bf849c2c6ad3f23e17a7b5aea2686d9a91/kev/train.py) |
 | 新增native检查点领域续训 | **Valen-Decision1.5**的full／LoRA、自有JSONL、恢复／导出与已训Mixer保留 | 训练代码及完整cookbook确实存在；loss缺省分布CE，领域示例另配RPS／Brier，并有实验性离散动作RLCD，不能从名称认定优于CE。官方0.8B／H200的短smoke不是4B效果证据；当前训练统计在device上分配float64，MPS兼容需处理，不能靠ANE转换获得Mac训练。[训练源码](https://github.com/Valen-Team/Valen/blob/f6df4fdbc45bf44a4ffbebaeda53f5fe6e49b339/valen/training/README.md)／[领域流程](https://valen-team.github.io/cookbook/domain-finetuning/) |
-| 新增公开训练实现 | **Strands Gemma4 v2**；**RSI-Jev v7.0-VL** | Strands v2有从原始底座起训的LoRA／token-readout配方，但合并HF发布物不满足原`init_from`的未合并训练checkpoint格式，不能声称拿HF ID即可续训。RSI公开全语言训练代码，原始训练数据未公开。两者当前trainer均为CUDA路线，均非已验证M5方案。[Strands配方](https://github.com/strands-labs/strands-decider/blob/d4915c9b11f61bb01ed293f4dc4c770a0a51792b/training/README.md)／[RSI实现](https://github.com/Shanghua-Gao/RSI-Jev/tree/e58526f061afd4c383d33a22b309b888f8a3e3c7) |
+| 新增公开训练实现 | **Strands Gemma4 v2**；**RSI-Jev v7.0-VL** | Strands v2有从原始底座起训的LoRA／token-readout配方；11月21日源码已新增合并decision checkpoint的init_from路径，在合并底座加新LoRA并保留readout。旧版本仅接受adapter格式的限制不再适用于该新实现，仍须实际准入。RSI公开全语言训练代码，原始训练数据未公开。两者当前trainer均为CUDA路线，均非已验证M5方案。[Strands配方](https://github.com/strands-labs/strands-decider/blob/c3c845782095b31d438963ac2afcdfe41b49f757/training/README.md)／[RSI实现](https://github.com/Shanghua-Gao/RSI-Jev/tree/e58526f061afd4c383d33a22b309b888f8a3e3c7) |
 | 新增训练器参考／监督对照 | **j-geuter/Jeff 1.1**；**Mapika Decider** | Jeff于11月14日公开自有JSONL训练器，但发布权重及全量混合DecisionBank限非商用；商用另从许可合适底座与自有数据起训。Mapika的监督配方及转换器公开，其环境PPO研究trainer未定位；默认Noul温度不能当概率校准。[Jeff源码](https://github.com/j-geuter/Jeff/tree/938ac5a03c6ac43512e61266d9febf691edc17f8)／[Mapika](https://github.com/Mapika/decider/tree/91b6fa9b94ab6c4dc2c63d3b14d413243b4fffcc) |
 | 读出／参数化对照 | **Qwen3.5-4B指令版＋明确的候选读出／LoRA实现** | 作为原始底座路线对照；不能只改模型名就复用另一家的head。当前无本仓Mac配方实测。[Inner Jev配方](https://arxiv.org/html/2610.17205v1#S4) |
 | 能力与蒸馏参照 | **SII-Decision-4B**；27B只在可承担的教师／质量参照条件下使用 | 4B基于Qwen3.5、27B基于Qwen3.8；原法从原始底座蒸馏，发布loader要求`gold_target/train_target/p0`。gold字段不必被解释成人工来源，但其语义及hard-Noul／验证用途要明确；不是仅换企业硬标签即可复用的续训入口。[固定代码](https://github.com/amazingljy1206/SII-Decision/tree/1723d83cbda69f48641c273280b5a2d06d6b3510) |

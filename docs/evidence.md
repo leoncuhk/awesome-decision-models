@@ -1714,3 +1714,44 @@ Reported fractions are displayed as percentages where appropriate. More printed 
 
 **Sources:** [Drex v2 paper: RLAF objectives and stage ablations](https://arxiv.org/html/2611.07854v2)
 
+<a id="e46"></a>
+## E46 · Fixed Decision Index small-model screen: candidate coverage, not domain adaptation results
+
+**Evidence:** `third_party_reported` · **Reviewed:** 2026-11-23 · **Reproduced here:** no
+
+| Protocol | Recorded context |
+| --- | --- |
+| Task | Typed text decisions on Decision Index0.4.1 Full |
+| Test unit | 346 submitted configurations;69 metadata-screened3–6.5B total-served-parameter rows; variants are not independent model families |
+| Split | Full uses two private test components; public results carry zero Full weight. Enterprise train/test comparison absent |
+| Reference | Maintainer private labels and equating against21 stock base models; full private item labels not released |
+| Training | Each released configuration has its own prior training/data/readout; not matched-budget post-training controls |
+| Measurement | Full index points,60% equated same-skills+40% new-domains;0.9-point dense tie groups are a display policy, not significance testing |
+| Hardware | Maintainer serving protocol; no local model execution or M5 training measurement |
+
+| Reported measurement | Value |
+| --- | --- |
+| Adjudex4B v7 Full index | 57.25 |
+| Starlord4B Preview Full index | 56.94 |
+| SingVL S1 4B Full index | 56.75 |
+| KnowLine4B Gen5.5 Full index | 55.99 |
+| Perplexity Flash v1.3 4B Full index | 55.14 |
+| RSI-Jev v7 4B Full index | 49.93 |
+| Valen1.5 4B Full index | 49.87 |
+| Kev4B r10 Full index | 34.93 |
+| Chinese Decision Pointer4B Full index | 53.96 |
+
+**Interpretation:** The former familiar-project shortlist missed stronger small configurations. Broad source screening is warranted, but exact native training/rights/device gates and enterprise matched comparisons determine adoption.
+
+- Snapshot-bound coverage; unlisted/new models and private trainers remain outside the audited universe.
+- Total served parameters are screening metadata; effective/MoE names do not establish resident memory.
+- Source/code inspection does not establish successful continuation or superiority after domain adaptation.
+- Full private scores are maintainer-reported; data exposure, exact settings and original weights may differ across entries.
+
+**Artifacts and limits:**
+- source code revision: 43c7f9b760d06fce7194575017c97ad8373b5e98
+- source: Pinned full index and capacity metadata; per-candidate source eligibility in playbooks/assets/4b-candidate-audit.csv
+- raw outputs: Only published aggregate scores; private per-item outputs not independently verified
+
+**Sources:** [Decision Index0.4.1 complete frozen standings](https://huggingface.co/spaces/multimodalart/jev-decision-index/blob/43c7f9b760d06fce7194575017c97ad8373b5e98/data/v03.json); [Decision Index capacity and checkpoint metadata](https://huggingface.co/spaces/multimodalart/jev-decision-index/blob/43c7f9b760d06fce7194575017c97ad8373b5e98/data/index.json)
+
