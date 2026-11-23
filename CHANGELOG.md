@@ -11,6 +11,10 @@ Each entry records what changed in the repository's knowledge, not every edit. P
 - PRDO main-stage token KL is distinct from the inactive score-function KL coefficient; direct-answer SFT is the paper baseline. Added Inner Jev v2 and GLiDE v1 training/ablation evidence without replacing historical results or claiming a new algorithm winner.
 - Source/static review only. No weights downloaded, model training/inference, enterprise data access, target-M5 measurement or production claim.
 
+## 2026-11-23 · Decision input format and data views
+
+- Decision pipeline §4: layered input structure (current turn, recent turns, summary, business state, options), a history-window ablation, truncation and leakage notes, and the rule that the master dataset is canonical while Unsloth and paper formats are derived views.
+
 ## 2026-11-21 · Readout paradigms, LemonDecider, harness collaboration
 
 - Sources: three WeChat articles (readout paradigms; LemonDecider; JevRSI) checked against primary sources, plus the SGLang decisions docs, NanoJev, JevAgentHarness and System1-Arena found while verifying them.
