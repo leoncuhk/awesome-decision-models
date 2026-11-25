@@ -3640,3 +3640,67 @@
 - Source revision: `8319c9c33e88850b2e403378d2d0105957b38a37`
 - Note: NC weights;current main isv2.1 while board isv2;do not inherit latest card scores; no model run or tensor download.
 
+<a id="qwen4b-config-architecture"></a>
+## Qwen3.5-4B fixed dense hybrid architecture
+
+- Source: https://huggingface.co/Qwen/Qwen3.5-4B/blob/851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a/config.json
+- Kind: `official_docs`; review depth: `content_reviewed`; reviewed: 2026-11-25
+- Source revision: `851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a`
+- Note: 32 dense layers,hidden2560,3:1 DeltaNet/full-attention. Family MoE boilerplate is not this checkpoint architecture.
+
+<a id="qwen27b-config-architecture"></a>
+## Qwen3.8-27B fixed dense hybrid architecture
+
+- Source: https://huggingface.co/Qwen/Qwen3.8-27B/blob/37561816e66b5b9153b1b64c10968c18c1e6f4a0/config.json
+- Kind: `official_docs`; review depth: `content_reviewed`; reviewed: 2026-11-25
+- Source revision: `37561816e66b5b9153b1b64c10968c18c1e6f4a0`
+- Note: 64 dense layers,hidden5120,3:1 hybrid; current architecture config,not proof of derivative training checkpoint identity.
+
+<a id="qwen-next-official-diagram"></a>
+## Qwen official Next layer schematic
+
+- Source: https://qianwen-res.oss-accelerate.aliyuncs.com/Qwen3-Next/model_architecture.png
+- Kind: `official_docs`; review depth: `content_reviewed`; reviewed: 2026-11-25
+- Source revision: `not captured / live URL`
+- Note: Original image viewed. Depicts MoE Next blocks; linked as a precedent,not relabeled as the dense4B/27B architecture.
+
+<a id="kev-architecture-nov25"></a>
+## Kev hybrid row execution and pointer head
+
+- Source: https://github.com/jaredpalmer/kev/blob/556167b5b151152cb4101629e25d883e9ead5094/kev/model.py
+- Kind: `repository`; review depth: `content_reviewed`; reviewed: 2026-11-25
+- Source revision: `556167b5b151152cb4101629e25d883e9ead5094`
+- Note: Selected forward/readout/LoRA paths: hybrid uses causal rows; prefix execution optimization is distinct from architecture and question batching.
+
+<a id="valen-head-architecture-nov25"></a>
+## Valen four-role Mixer head
+
+- Source: https://github.com/Valen-Team/Valen/blob/f6df4fdbc45bf44a4ffbebaeda53f5fe6e49b339/valen/modeling/qwen/heads.py
+- Kind: `repository`; review depth: `content_reviewed`; reviewed: 2026-11-25
+- Source revision: `f6df4fdbc45bf44a4ffbebaeda53f5fe6e49b339`
+- Note: Four pooled semantic roles mixed over roles/channels,not candidate axis; no model execution.
+
+<a id="valen-mask-architecture-nov25"></a>
+## Valen1.5 released attention-mask contract
+
+- Source: https://github.com/Valen-Team/Valen/blob/f6df4fdbc45bf44a4ffbebaeda53f5fe6e49b339/valen/modeling/qwen/DECISION_1_5.md
+- Kind: `repository`; review depth: `content_reviewed`; reviewed: 2026-11-25
+- Source revision: `f6df4fdbc45bf44a4ffbebaeda53f5fe6e49b339`
+- Note: bbox_blocks isolates bbox questions but lets ordinary decision questions share one full-attention block; linear layers remain causal.
+
+<a id="valen-parameters-architecture-nov25"></a>
+## Valen training parameter selection
+
+- Source: https://github.com/Valen-Team/Valen/blob/f6df4fdbc45bf44a4ffbebaeda53f5fe6e49b339/valen/modeling/qwen/builder.py
+- Kind: `repository`; review depth: `content_reviewed`; reviewed: 2026-11-25
+- Source revision: `f6df4fdbc45bf44a4ffbebaeda53f5fe6e49b339`
+- Note: joint-LoRA: language Linear adapters+heads+vision merger; joint-full permits full backbone including vision. Trainable declaration does not show gradient on text-only data.
+
+<a id="prdo-graph-architecture-nov25"></a>
+## PRDO main-stage gradient and readout graph
+
+- Source: https://github.com/ZimmyGao/openjev-rlcd/blob/5859d2b893314fb3581f06e4e36c303e372b3f48/openjev_rlcd/train.py
+- Kind: `repository`; review depth: `content_reviewed`; reviewed: 2026-11-25
+- Source revision: `5859d2b893314fb3581f06e4e36c303e372b3f48`
+- Note: No-grad rationale sampling then differentiable recomputation; original lm_head/candidate-token readout; proper loss and full-vocabulary token KL update shared parameters,reference frozen. No new classifier head.
+

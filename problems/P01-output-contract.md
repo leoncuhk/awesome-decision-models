@@ -24,6 +24,8 @@
 - **多字段联合可执行性**：“意图＋动作＋约束”三个字段各自合理，组合起来却可能不合法。可选方案有联合模型、因子图、独立头加投影、约束解码，目前还没有决策模型场景下的受控比较。
 - 只有当联合依赖改变了最优动作、且投影无法恢复这部分信息时，才值得做方法研究。
 
+固定源码图解见[Qwen与决策改造架构](../docs/landscape.md#architecture-deltas)：Kev pointer、Valen四角色Mixer、Adjudex255答码头各有不同hidden读出与mask；PRDO保留原词表头，改变的是训练计算图。Valen1.5普通决策题并非全部相互隔离，不能从API类型推断计算图。
+
 ## 企业含义
 
 各种读出范式的选项上限、多题共享、训练与服务约束见[领域图谱：读出范式](../docs/landscape.md#readout-paradigms)。零训练基线可直接用 SGLang `/v1/decisions` 接现有 LLM 建立。

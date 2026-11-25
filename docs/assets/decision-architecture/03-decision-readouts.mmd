@@ -1,0 +1,17 @@
+flowchart TB
+  subgraph K["Kev 4B｜pointer readout"]
+    direction LR
+    K1["状态＋单题＋候选"] --> K2["Qwen3.5 hidden states<br/>保持因果；hybrid逐题行"] --> K3["取最终决策向量 hD<br/>与各候选末位置 hi"] --> K4["投影后点积<br/>每候选一个 logit"] --> K5["候选 logits 除以 T<br/>再做 softmax"]
+  end
+  subgraph V["Valen 1.5 4B｜四角色 Mixer"]
+    direction LR
+    V1["状态＋多个决策问题<br/>可含图像"] --> V2["Qwen3.5 hidden states<br/>full层分块双向<br/>决策题共块；DeltaNet因果"] --> V3["每候选取四角色<br/>背景均值／问题均值<br/>候选均值／Decision"] --> V4["共享 Mixer 打分<br/>混合角色与通道<br/>不在头内混合候选"] --> V5["候选 logits 除以 T<br/>再做 softmax"]
+  end
+  subgraph A["Adjudex 4B v7｜255答码线性头"]
+    direction LR
+    A1["状态＋单题＋候选答码"] --> A2["Qwen3.5 hidden states<br/>full层非因果<br/>DeltaNet仍因果"] --> A3["取最后位置 hD"] --> A4["255行 Linear readout<br/>初建时取原词表答码行<br/>独立头与骨干联训"] --> A5["有效K项 logits 除以 T<br/>再做 softmax"]
+  end
+  K ~~~ V
+  V ~~~ A
+  classDef changed fill:#fff2dc,stroke:#996500,stroke-width:2px,color:#222;
+  class K3,K4,V3,V4,A3,A4 changed;

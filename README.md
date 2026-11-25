@@ -6,7 +6,7 @@
 
 Decision models — popularized by TypeSafe's Jev in September 2026 — typically return **typed distributions over supplied options**. Direct readout is common; reasoning, per-question passes and service orchestration vary by product. The new thing is the output contract: it makes bounded judgments priceable, calibratable and gateable. This repository asks one question: **which method delivers acceptable outcomes at acceptable risk and total cost for a given decision?**
 
-Review batch 2026-11-23: 100 resources, 38 core model families, 46 evidence records. Source review only; **nothing here is independently reproduced yet.** Inclusion is not endorsement.
+Review batch 2026-11-25: 100 resources, 38 core model families, 46 evidence records. Source review only; **nothing here is independently reproduced yet.** Inclusion is not endorsement.
 
 ## How this repository is organized
 

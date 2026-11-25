@@ -2,6 +2,13 @@
 
 Each entry records what changed in the repository's knowledge, not every edit. Pre-2026-11-21 dated review notes (`updates/`) and retired documents can be recovered from tag `archive/pre-restructure-2026-11-21/main` or `…/research-dynamic-skill-loading-2026-11` with `git show <tag>:<path>`.
 
+## 2026-11-25 · Qwen architecture and decision-training deltas
+
+- Added four editable Mermaid/SVG/PNG diagrams in the existing landscape: dense Qwen backbone, residual block, synchronized Kev/Valen/Adjudex readouts,and PRDO main-stage computation graph. Linked official Qwen-Next and PRDO originals with variant boundaries.
+- Pinned configs distinguish dense Qwen3.5-4B/3.8-27B from MoE family marketing. Source checks distinguish Kev hybrid causal rows,Valen four-role Mixer and released decision-question visibility,Adjudex255-slot initialization,and parameter-selection modes.
+- PRDO keeps its original causal LM/vocabulary head. No-grad discrete sampling differs from differentiable recomputation; labels feed only the loss,reference stays frozen,and shared parameters update. Qwen3 experiments are not labeled Qwen3.5.
+- Documentation and rendered-figure checks only; no model training/inference or new effectiveness claim.
+
 ## 2026-11-23 · Coverage-first small-model selection
 
 - Corrected the familiar-project selection bias: screen all346 fixed DI configurations by3–6.5B total served parameters, yielding69 candidates with explicit access/review gaps. Small-model CSV records score, tie group, exact current artifact and training eligibility; current artifacts are not automatically the benchmark's original weights.
