@@ -32,6 +32,8 @@
 
 新增版本核查（2026-11-23）：[Inner Jev v2](https://arxiv.org/html/2610.17205v2)更新Jeff1.1的数据、训练长度及soup，原hard／soft与head消融仍属1.0配方；不能把新整包分数归因单因素，也不把旧400步替换为新的统一步数。[GLiDE论文v1](https://arxiv.org/html/2611.26509v1)的同数据单seed转换消融给soft目标方向性收益，作者明确不足以确证；支持同预算hard／soft对照，不支持教师蒸馏普遍先于可信标签监督。
 
+[Perplexity v1.3官方报告](https://www.perplexity.ai/en-GB/hub/blog/perplexity-decider)补充领域LoRA、加权合并及Flash教师KL的实例；其蒸馏优势限所测同数据设置，不构成所有企业先训27B再压4B的依据。方法披露、v1.3训练器公开和自有数据适配成功是三个不同命题，详见[实现准入](../playbooks/decision-pipeline.md#pplx-v13-enterprise)。
+
 ## 开放
 
 - **中文长状态**：0.6–4B LoRA 能否胜过现代多语 encoder？目前的新研究主要是英语。

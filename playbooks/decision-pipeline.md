@@ -157,11 +157,59 @@
 | 托管定制备选 | 百炼`decision-model-preview-2026-09-24`的`efficient_sft` | 官方有LoRA流程，但需开通、数据可获准上云且匹配版本／地域／schema；部署费用与训练总成本分开。不是微调TypeSafe Jev，也不是已持有开放权重。[官方指南](https://help.aliyun.com/en/model-studio/decision-model-tuning-guide) |
 | 新增托管定制备选 | **Fastino GLiDE Training API**；开放小尺寸另作对照 | 原生typed-row有gold／soft_target与CE／KL训练及checkpoint部署合同；已有2B示例及0.8B／2B报价，精确自助base ID、账号开放性及本地导出尚未实调。仅文本、未定位完整本地trainer；Community License有收入门槛，非Apache。公开2B的confidence为概率差，不能继承原阈值。[训练合同](https://docs.fastino.ai/training)／[许可](https://huggingface.co/fastino/GLiDE-2B/blob/00f122c120cdeed82284106cb77d9bab5a50ad16/LICENSE) |
 | 小型／不同骨干推理参照 | **Liquid d1-2B／Omni-2B、MNN-Pocket-0.3B-Dec、H2O Lightning、JAD** | 分别有开放产物，但尚未建立各自完整自有数据续训闭环。Liquid有MPS／MLX推理，商业收入门槛适用；MNN的600条温度拟合不是独立准确率。先按实际错误选少数，不全部开实验。[逐项资格](../docs/models.md) |
-| 强参考及其他机制 | PPLX、Clef、StartLux、许可允许的强LLM；Nimble的数据构造可跨路线使用 | 权重／代码／原数据／完整训练器分开。PPLX已到v1.3；StartLux权重非商业许可且完整v1.1训练包未定位；Jev不提供客户FT。详见[逐项模型卡](../docs/models.md) |
+| 需补训练适配的强候选 | **PPLX Decider v1.3 27B**，从native决策检查点起步 | 有较详细训练报告、开放权重与读出，但公开接口冻结并关闭梯度，需保留v4 marker／mask的可微wrapper、恢复／导出及独立验收；不得直接复用v1.1 trainer。见[专项准入](#pplx-v13-enterprise) |
+| 强参考及其他机制 | Clef、StartLux、许可允许的强LLM；Nimble的数据构造可跨路线使用 | 权重／代码／原数据／完整训练器分开。PPLX已到v1.3；StartLux权重非商业许可且完整v1.1训练包未定位；Jev不提供客户FT。详见[逐项模型卡](../docs/models.md) |
 
 不因可在Mac训练而给Laya质量优先级。经典322M／421M encoder可作有理由的成本基线；当前Laya／Vega的4B reader拟合头是另一个对象，不能互借Banking77成绩。小于2B也不应按尺寸排除，是否纳入由目标错误和预算决定。
 
 11月20日新上传的Decisio v3值得作读出／服务对照；calibrated与commit两份BF16包的声明tensor身份相同，FP8／MLX等版本不应算成多个独立训练增益。当前仅有作者分布内留出与推理服务包，未建立其企业训练链。Clairic改为生成式slot提取；Span-02是专用量化推理engine；WPS v1.1在显式tag而非默认main。这些产物不能因“新”直接进入本机后训练前三名。具体版本与许可见[模型卡](../docs/models.md)。
+
+<a id="pplx-v13-enterprise"></a>
+### Perplexity Decider v1.3 27B：企业数据续训准入
+
+2026-11-25核查的[完整native发布物](https://huggingface.co/perplexity-ai/pplx-decider-v1.3/tree/9c2ebb27470d3dec2ad7ab727727e40d142c7213)公开、ungated、Apache-2.0，原底座为Qwen3.8-27B。本节的“base”指**已经后训练的Decider检查点**，不是回到原Qwen随机重建决策头。结论是**值得优先做有界训练适配验证，但不是开箱可运行的企业trainer**。38个发布文件含推理、协议、fast与Locate代码，未定位v1.3完整trainer／loss／optimizer／数据构造闭环；v1.1带训练代码不代表能直接训练v1.3。
+
+官方[技术报告](https://www.perplexity.ai/en-GB/hub/blog/perplexity-decider)披露通用全参、领域LoRA加权合并、视觉适配及Flash蒸馏；这支持把已学会决策合同的权重作为适配起点，不意味着企业必须重跑原作者全部阶段。效果和案例以[证据E47](../docs/evidence.md#e47)的作者报告边界理解；报告较详细，不据此宣称领域最完整、企业成功或普遍胜过其他底座。
+
+**先冻结实际输出与执行合同。**
+
+| 对象 | 该发布物的事实 | 企业适配要求 |
+|---|---|---|
+| 普通判断 | 默认`separate`为每题独立序列；`isolated`可共享state，但state看全部题，因此可经多层间接串扰 | 首轮从单题文本／`separate`合同起步；保存原分组以便后续比较，不把一次HTTP等同一次前向或统计独立 |
+| 读出 | `joint_config.version=4`，每题`fim_suffix`特殊marker读出；独立255×5120头，候选答码及tokenizer固定 | 保留原权重、readout、processor、模板、marker索引、attention mask与有效K项；不能用v1.1末token模板或直接换成CausalLM完整词表头 |
+| 注意力 | full层非因果；DeltaNet保持因果；separate／isolated／fast的计算不同 | 训练和服务在同一合同下对照；不靠模型名称假定通用Trainer能保留自定义mask |
+| 校准 | 保存温度只是原数据拟合参数 | 训练loss用未校准logits；完成适配后在独立Cal-fit拟合，再在Cal-policy验证完整接受／转交策略，Test冻结确认 |
+| Locate | 另有未合并LoRA、marker embedding及span头；混合请求需额外forward | 首轮若目标仅路由，关闭Locate；要保留抽取时，先保留原版Locate作为独立服务对照，再验证或重适配新的底座配对 |
+| 加速／精度 | fast可改变少量近边界答案；Locate在fast下禁用 | 先用reference路径验收，再比较实际生产fast／量化／batch。概率差异可能改变执行门槛 |
+
+**训练实现缺口是具体可定位的。** 固定[model.py](https://huggingface.co/perplexity-ai/pplx-decider-v1.3/blob/9c2ebb27470d3dec2ad7ab727727e40d142c7213/source/src/pplx_decider/model.py)将backbone/readout冻结并设eval；`reference_logits`带`@torch.inference_mode()`，结果转CPU普通列表。直接调用`Decider.logits()`无法作为反向传播loss输入。应新增薄的可微训练wrapper，复用已核协议编码与骨干／readout加载，返回marker位置的tensor logits，保留其计算图；不能只改requires_grad后继续走推理接口。
+
+第一轮建议（设计建议，尚未实现或运行）：
+
+1. **语言侧LoRA＋原255头冻结**作为受限适配臂；精确列出参与的full attention、DeltaNet与FFN投影，不照抄另一架构的q/v名单。纯文本任务冻结视觉模块及Locate，保留原head身份，不重置答码含义。
+2. 使用可信硬标签或有依据的分布做候选内CE；另比较“同LoRA＋原head解冻”，确定冻结head是否限制领域增益。不要同时加入新数据、不同mode、Brier、多个教师和多次权重平均后归因一个算法。
+3. 只有保留任务出现回归时，比较获授权的replay或原版分布KL锚定。旧模型与新政策冲突时，以核定新gold为准，不让锚定强迫保留旧错误。
+4. LoRA合并系数可在Dev有限搜索，但合并不自动保能力；三seed soup、Flash蒸馏和视觉专项均非首轮必选。先验证27B适配净增量，才讨论压缩。
+
+**不可遗漏的代码风险。** `isolated`依赖forward期间暂存的`isolation.layout`，推理后会清空；若增加gradient checkpointing而直接沿用该生命周期，backward重算可能失去原mask。须让layout在反向重算仍然正确或改为显式无状态输入，并对checkpointing开／关比较梯度和输出。这是静态发现的风险，不是本仓复现的失败。
+
+Locate的`verify_base`核部分配置、readout及tokenizer哈希，并未认证全部backbone tensor；即使加载通过，也不能证明更新底座后原Locate仍兼容。不要把域LoRA与Locate LoRA直接叠加或合并后声称互不干扰。独立存储原checkpoint、新adapter、head状态、校准器和训练／部署配置；整模型或adapter导出都须重载复验。
+
+**企业数据和算力是进入训练的前提。**
+
+| 必须准备 | 最小可审查内容 |
+|---|---|
+| 单一目标 | 例如路由适用性或信息充分性，定义输入时点、候选、允许动作、关键错误代价与fallback；先核原版是否已达标 |
+| 获授权的真实输入 | 决策前会话、必要状态和当时政策；标签可参考结果裁定，但未来事实不得进模型输入。输入分布应覆盖长状态、近似候选、无适用项和目标变化 |
+| 标签语义 | 确定单gold、独立多标签或多解集合；choice概率不能当每动作独立成功率。硬标签不强制转teacher-soft；多解／缺证据不得随意伪造唯一答案 |
+| 可信切分 | 先按客户／案件／会话／时间及近重复分组，再做增强；Train、Dev、Cal-fit、Cal-policy、Test职责分离，保留所有尝试与决策记录 |
+| 保留能力合同 | 只承诺实际需要的题型、中文／多语、图片或Locate；准备相应回归切片，不默认保留整个原模型能力 |
+| GPU预算 | 原生BF16主权重约49GiB，另需激活、梯度、优化器及adapter。LoRA仍驻留底座，full训练通常显著增加显存；不把能推理或某卡标称容量当可训练保证 |
+
+**推进顺序与停止条件：** 固定native版本原版评测 → 对真实代表性batch核模板／marker及前向一致性 → 有限反向更新并验证非零有限梯度／loss → 保存重载和reference服务概率对齐 → 同数据比较原版、LoRA及必要解冻头臂 → 独立校准／策略验收 → 业务影子及有界对照。任何阶段不能保留原计算合同、关键错误恶化、总成本无收益或原版已足够，都应停止扩大投入。
+
+当前完成的是官方证据、发布完整清单及静态源码审查；没有权重下载、企业数据、实际反向／保存重载、NVIDIA峰值或生产结果。通过上述准入后，v1.3才可从“值得工程适配的强候选”升级为“本项目已验证可训底座”。
+
 
 <a id="evidence"></a>
 ## 3. 哪些证据支持上述选择

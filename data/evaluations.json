@@ -3170,6 +3170,65 @@
         "raw_outputs": "Only published aggregate scores; private per-item outputs not independently verified"
       },
       "reproduced_here": false
+    },
+    {
+      "id": "E47",
+      "title": "Perplexity v1.3: author query evaluations and production-request judge agreement",
+      "model_ids": [
+        "pplx-decider",
+        "jev"
+      ],
+      "source_ids": [
+        "pplx-v13-report-nov25"
+      ],
+      "evidence_type": "author_reported",
+      "reviewed_on": "2026-11-25",
+      "report_date": "2026-11-12",
+      "model_revision": null,
+      "protocol": {
+        "task": "Private query classification and typed questions sampled from Decision API traffic",
+        "test_unit": "63 classification tasks;separate production sample1,000,000 deduplicated requests containing2,318,887 questions;requests/questions not independent interchangeable units",
+        "split": "Author internal/private and public nonbenchmark evaluations;production requests from first18 service days,PII-masked and permissioned per report;not this enterprise held-out set",
+        "reference": "63-task references independently relabelled by frontier LLM;production reference answers from frontier LLM judges,not human gold or observed task outcomes",
+        "training": "Published27B v1.3 evaluated zero-shot for these tasks;author describes earlier generalist/domain/vision training,not new enterprise-data adaptation by this repository",
+        "measurement": "Mean task accuracy for63 tasks;agreement with judges for production questions. No independently audited matched random production treatment effect",
+        "hardware": "Local Decider versus external API comparators;complete matched hardware,latency and local cost accounting not established"
+      },
+      "metrics": [
+        {
+          "label": "63 tasks mean accuracy against LLM-relabeled reference",
+          "value": 0.916,
+          "unit": "fraction"
+        },
+        {
+          "label": "63 tasks reported gain over production classifiers,percentage points",
+          "value": 6.54,
+          "unit": "score"
+        },
+        {
+          "label": "v1.3 production-question judge agreement",
+          "value": 0.9398,
+          "unit": "fraction"
+        },
+        {
+          "label": "Jev1.14 production-question judge agreement",
+          "value": 0.9335,
+          "unit": "fraction"
+        }
+      ],
+      "conclusion": "These reports justify evaluating the released checkpoint as a strong prior;they do not prove native training readiness,domain fine-tuning improvement or automated customer-resolution reliability.",
+      "caveats": [
+        "Judge agreement is not ground-truth accuracy;reference bias and correlated questions matter.",
+        "The production comparison gap is0.63 percentage points,not a matched enterprise fine-tuning result.",
+        "Rule-audit case is a vendor-reported workflow and replay;52% is one rule trigger-volume reduction,not overall incident reduction.",
+        "Blog recipe disclosure does not establish complete original data/trainer availability;native release semantics must be separately audited."
+      ],
+      "artifacts": {
+        "source": "Official English locale report fully read;native package reviewed separately",
+        "raw_outputs": "Original task/request-level predictions and private evaluation labels not independently audited",
+        "source_code_revision": null
+      },
+      "reproduced_here": false
     }
   ]
 }

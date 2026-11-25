@@ -6,7 +6,7 @@
 
 决策模型由 TypeSafe 的 Jev 于 2026 年 9 月带火：对给定选项返回**类型化分布**。直接读出是常见实现，推理后读出、逐题前向及服务编排依产品而异。新东西是这个输出合同：它让有界判断可以计价、校准、设门槛。本仓只回答一个问题：**对一个具体决策，哪种方法能以可接受的风险和完整成本得到可接受的结果？**
 
-核查批次 2026-11-25：100 项资源，38 个核心模型族，46 条证据记录。仅做来源审阅，**尚无本仓独立复现**。收录不代表推荐。
+核查批次 2026-11-25：100 项资源，38 个核心模型族，47 条证据记录。仅做来源审阅，**尚无本仓独立复现**。收录不代表推荐。
 
 ## 仓库怎么组织
 
@@ -62,7 +62,7 @@
 | [jevos (current v5; historical v2)](https://github.com/feder-cr/jev) · [模型卡](docs/models.md#jevos) | 本地CPU类型化判断，采用Jev形状的API：v5文档在是非之外加入choice和早期score支持，发布OpenVINO INT8及GGUF产物。 | 作为短规则／分流判断的CPU推理对照；考虑适配前，先验证各题型与精确发布产物。 |
 | [Clef / Clef-Flash / Clef-Omni](https://huggingface.co/Cloudflare/clef) · [模型卡](docs/models.md#clef) | Cloudflare类型化判断系列：稠密Clef／Flash及10月9日Clef-Omni用联合schema评分；Clairic是独立提取系列。 | 按任务所需文本／图像／音频／视频证据，在相同风险与完整系统成本下比较有界判断。 |
 | [Strands Decider (v1 pointer / v2 code readout)](https://github.com/strands-labs/strands-decider) · [模型卡](docs/models.md#strands-decider) | Qwen／Gemma判断系列：v1为adapter与pointer发布物，11月17日Gemma4 E2B v2为合并权重与答码读出；训练及服务合同不同。 | 在相同有界文本判断上比较v1与v2；选配方前核对领域训练从何种权重开始及导出后的推理路径。 |
-| [Perplexity Decider (current v1.3; archival v1 / v1.1 / v1.2)](https://huggingface.co/perplexity-ai/pplx-decider-v1.3) · [模型卡](docs/models.md#pplx-decider) | v1.3类型化判断及可选span定位系列；27B Qwen3.8与蒸馏Flash 4B Qwen3.5，早期版本分别保留。 | 经具体任务验证后，作为文本／图像判读的自部署对照。 |
+| [Perplexity Decider (current v1.3; archival v1 / v1.1 / v1.2)](https://huggingface.co/perplexity-ai/pplx-decider-v1.3) · [模型卡](docs/models.md#pplx-decider) | v1.3类型化判断及可选span定位系列；27B Qwen3.8与蒸馏Flash 4B Qwen3.5，早期版本分别保留。 | 较强native27B原版对照及需工程准入的企业适配候选；先补保留v4 marker／mask／readout的可微wrapper，再声称可训，并与未适配原版对照。 |
 | [Microsoft-Decision-1.1](https://ai.azure.com/catalog/models/Microsoft-Decision-1.1) · [模型卡](docs/models.md#ms-decision) | Gemma4托管类型化判断，GA且支持图像。 | 比较分类、路由和按标准评分。 |
 | [OpenAI Decisions API / GPT-6 Luna](https://developers.openai.com/api/docs/guides/decisions) · [模型卡](docs/models.md#openai-decisions) | 面向文本／图像的GA类型化判断API。 | 托管分类、路由与有序评分。 |
 | [Google Gemini Decision 1 / Decisions API](https://aistudio.google.com/docs/models/gemini-decision-1) · [模型卡](docs/models.md#gemini-decision-1) | 11月11日发布的托管模型，支持文本、图像、音频、视频和PDF判断，在共享输入上隔离各问题。 | 在相同证据、风险约束和完整成本下比较多模态分流、媒体规则检查与路由。 |

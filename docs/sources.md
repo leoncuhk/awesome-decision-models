@@ -3704,3 +3704,43 @@
 - Source revision: `5859d2b893314fb3581f06e4e36c303e372b3f48`
 - Note: No-grad rationale sampling then differentiable recomputation; original lm_head/candidate-token readout; proper loss and full-vocabulary token KL update shared parameters,reference frozen. No new classifier head.
 
+<a id="pplx-v13-report-nov25"></a>
+## Perplexity Decider v1.3 official training/evaluation report
+
+- Source: https://www.perplexity.ai/en-GB/hub/blog/perplexity-decider
+- Kind: `official_publication`; review depth: `content_reviewed`; reviewed: 2026-11-25
+- Source revision: `not captured / live URL`
+- Note: Official November12 report. Three-stage adaptation/Flash distillation and Locate described;63 classification tasks relabelled by frontier LLMs,1M production requests scored against judges,not audited business outcomes or a complete released training corpus.
+
+<a id="pplx-v13-native-trainability-nov25"></a>
+## Perplexity v1.3 native model and inference boundary
+
+- Source: https://huggingface.co/perplexity-ai/pplx-decider-v1.3/blob/9c2ebb27470d3dec2ad7ab727727e40d142c7213/source/src/pplx_decider/model.py
+- Kind: `repository`; review depth: `content_reviewed`; reviewed: 2026-11-25
+- Source revision: `9c2ebb27470d3dec2ad7ab727727e40d142c7213`
+- Note: Frozen backbone/readout and inference_mode/list-return path;selected differentiable adaptation seams and isolated mask lifetime reviewed statically. No training run.
+
+<a id="pplx-v13-protocol-nov25"></a>
+## Perplexity v1.3 request compiler and marker contract
+
+- Source: https://huggingface.co/perplexity-ai/pplx-decider-v1.3/blob/9c2ebb27470d3dec2ad7ab727727e40d142c7213/source/src/pplx_decider/protocol.py
+- Kind: `repository`; review depth: `content_reviewed`; reviewed: 2026-11-25
+- Source revision: `9c2ebb27470d3dec2ad7ab727727e40d142c7213`
+- Note: Protocol-v4 per-question markers,valid-code selection and grouping differ from v1.1. Schema support is not a complete trainer.
+
+<a id="pplx-v13-locate-coupling-nov25"></a>
+## Perplexity v1.3 Locate adapter and base verification
+
+- Source: https://huggingface.co/perplexity-ai/pplx-decider-v1.3/blob/9c2ebb27470d3dec2ad7ab727727e40d142c7213/source/src/pplx_decider/locate.py
+- Kind: `repository`; review depth: `content_reviewed`; reviewed: 2026-11-25
+- Source revision: `9c2ebb27470d3dec2ad7ab727727e40d142c7213`
+- Note: Independent Locate adapter/head,base verification scope and mode switching reviewed. Passing partial config/readout hashes does not certify all updated backbone tensors or retained extraction quality.
+
+<a id="pplx-v13-config-nov25"></a>
+## Perplexity v1.3 saved training-objective configuration
+
+- Source: https://huggingface.co/perplexity-ai/pplx-decider-v1.3/blob/9c2ebb27470d3dec2ad7ab727727e40d142c7213/decision_config.json
+- Kind: `official_docs`; review depth: `content_reviewed`; reviewed: 2026-11-25
+- Source revision: `9c2ebb27470d3dec2ad7ab727727e40d142c7213`
+- Note: Saved27B objective CE,readout_frozen=true. Blog description of training the pruned head is not mapped to all released stages; do not invent an end-to-end original recipe.
+

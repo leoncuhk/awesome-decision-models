@@ -1755,3 +1755,39 @@ Reported fractions are displayed as percentages where appropriate. More printed 
 
 **Sources:** [Decision Index0.4.1 complete frozen standings](https://huggingface.co/spaces/multimodalart/jev-decision-index/blob/43c7f9b760d06fce7194575017c97ad8373b5e98/data/v03.json); [Decision Index capacity and checkpoint metadata](https://huggingface.co/spaces/multimodalart/jev-decision-index/blob/43c7f9b760d06fce7194575017c97ad8373b5e98/data/index.json)
 
+<a id="e47"></a>
+## E47 · Perplexity v1.3: author query evaluations and production-request judge agreement
+
+**Evidence:** `author_reported` · **Reviewed:** 2026-11-25 · **Reproduced here:** no
+
+| Protocol | Recorded context |
+| --- | --- |
+| Task | Private query classification and typed questions sampled from Decision API traffic |
+| Test unit | 63 classification tasks;separate production sample1,000,000 deduplicated requests containing2,318,887 questions;requests/questions not independent interchangeable units |
+| Split | Author internal/private and public nonbenchmark evaluations;production requests from first18 service days,PII-masked and permissioned per report;not this enterprise held-out set |
+| Reference | 63-task references independently relabelled by frontier LLM;production reference answers from frontier LLM judges,not human gold or observed task outcomes |
+| Training | Published27B v1.3 evaluated zero-shot for these tasks;author describes earlier generalist/domain/vision training,not new enterprise-data adaptation by this repository |
+| Measurement | Mean task accuracy for63 tasks;agreement with judges for production questions. No independently audited matched random production treatment effect |
+| Hardware | Local Decider versus external API comparators;complete matched hardware,latency and local cost accounting not established |
+
+| Reported measurement | Value |
+| --- | --- |
+| 63 tasks mean accuracy against LLM-relabeled reference | 91.60% |
+| 63 tasks reported gain over production classifiers,percentage points | 6.54 |
+| v1.3 production-question judge agreement | 93.98% |
+| Jev1.14 production-question judge agreement | 93.35% |
+
+**Interpretation:** These reports justify evaluating the released checkpoint as a strong prior;they do not prove native training readiness,domain fine-tuning improvement or automated customer-resolution reliability.
+
+- Judge agreement is not ground-truth accuracy;reference bias and correlated questions matter.
+- The production comparison gap is0.63 percentage points,not a matched enterprise fine-tuning result.
+- Rule-audit case is a vendor-reported workflow and replay;52% is one rule trigger-volume reduction,not overall incident reduction.
+- Blog recipe disclosure does not establish complete original data/trainer availability;native release semantics must be separately audited.
+
+**Artifacts and limits:**
+- source: Official English locale report fully read;native package reviewed separately
+- raw outputs: Original task/request-level predictions and private evaluation labels not independently audited
+- source code revision: None
+
+**Sources:** [Perplexity Decider v1.3 official training/evaluation report](https://www.perplexity.ai/en-GB/hub/blog/perplexity-decider)
+

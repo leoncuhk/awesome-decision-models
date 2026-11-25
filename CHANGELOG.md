@@ -2,6 +2,12 @@
 
 Each entry records what changed in the repository's knowledge, not every edit. Pre-2026-11-21 dated review notes (`updates/`) and retired documents can be recovered from tag `archive/pre-restructure-2026-11-21/main` or `…/research-dynamic-skill-loading-2026-11` with `git show <tag>:<path>`.
 
+## 2026-11-25 · Perplexity v1.3 enterprise continuation qualification
+
+- Reviewed official training/evaluation report and complete native27B release. Classified v1.3 as a strong candidate requiring a differentiable training adapter,not an executable original training recipe. Added concrete data,gradient/mask,head,calibration,export and GPU gates in the existing pipeline.
+- Corrected one-request/one-forward and isolated-question independence claims. Locate remains a separate adapter/forward path;continued backbone training requires renewed extraction qualification. v1.1 trainer is not protocol-v4 compatible by model-name substitution.
+- E47 distinguishes LLM-relabeled query accuracy and production judge agreement from human gold,domain adaptation and business outcomes. Existing46 evidence records preserved;no model training/inference or customer-data access.
+
 ## 2026-11-25 · Keep only the two accepted structure diagrams
 
 - Retained the layered backbone and readout comparison plates as SVG sources plus PNG previews (four files). Removed the superseded01–04 flow diagrams, their Mermaid sources and obsolete render config after a verified recovery archive.

@@ -19,6 +19,8 @@
 - 定义各不相同：D3 的 confidence 是 1 − 归一化熵；GLiDE-2B 公开版是概率差；Gemini 是最高选项概率。
 - 行业信号：[AA Index v2](https://artificialanalysis.ai/articles/decision-index-v2) 以 50×(1+准确率−Brier) 计分，校准进入主分。
 
+- Perplexity v1.3的isolated可经state间接串扰，默认separate才是逐题独立合同；Locate与decision混合需分开forward。公开API关闭梯度、推理mask生命周期与保存后的Locate兼容都需单独核验，见[企业适配准入](../playbooks/decision-pipeline.md#pplx-v13-enterprise)。
+
 ## 企业含义
 
 - 每个上线判断都要有独立的 Cal-fit 集；温度拟合的对象是实际返回给系统的那个分布。
