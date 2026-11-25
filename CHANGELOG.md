@@ -2,6 +2,12 @@
 
 Each entry records what changed in the repository's knowledge, not every edit. Pre-2026-11-21 dated review notes (`updates/`) and retired documents can be recovered from tag `archive/pre-restructure-2026-11-21/main` or `…/research-dynamic-skill-loading-2026-11` with `git show <tag>:<path>`.
 
+## 2026-11-25 · Neural-network structure plates
+
+- Replaced flow-oriented diagrams as the primary visual entry with two layered neural-network plates: embedding/decoder stack/residual blocks/linear operators, and four aligned readout structures with tensor shapes and trainable parameter boundaries.
+- Kept prior data-flow/computation diagrams as auxiliary material. PRDO retains its vocabulary head and original causal backbone; no unsupported Qwen3.5 attribution or new classifier head.
+- SVG and PNG inspected; existing pinned architecture evidence reused. No model execution.
+
 ## 2026-11-25 · Qwen architecture and decision-training deltas
 
 - Added four editable Mermaid/SVG/PNG diagrams in the existing landscape: dense Qwen backbone, residual block, synchronized Kev/Valen/Adjudex readouts,and PRDO main-stage computation graph. Linked official Qwen-Next and PRDO originals with variant boundaries.

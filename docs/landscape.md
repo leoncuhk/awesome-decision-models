@@ -32,13 +32,29 @@
 | encoder 分类器 | Laya、GLiClass、Verdict | 标签作为输入或候选 | 短上下文 | 小模型监督 | CPU 可跑 |
 
 <a id="architecture-deltas"></a>
-### Qwen基座与四条改造路线：三组、四张图
+### 神经网络结构：先看层与矩阵，再看数据流
+
+下面两张是模型结构主图，采用自下向上的层堆叠，表示神经网络模块、张量维度、矩阵和残差连接。此前01–04图属于模块数据流／训练计算辅助图，不应单独替代模型结构图。
+
+**结构图A：Qwen3.5-4B语言路径。** 左侧是embedding、32层及词表头，中间展开单个decoder layer，右侧列full attention、DeltaNet、SwiGLU及LoRA的参数位置。视觉前端为可选支路，见后面的总览；本图不宣称完整展开视觉encoder。Qwen3.8-27B的尺寸差异写在图下注。
+
+![Qwen神经网络层级结构](assets/decision-architecture/05-neural-network-backbone.png)
+
+[可缩放、可编辑SVG](assets/decision-architecture/05-neural-network-backbone.svg)
+
+**结构图B：四种网络读出与后训练更新位置。** Kev展开两路Linear投影与点积，Valen展开四角色投影及两层Mixer，Adjudex显示255×d权重矩阵；PRDO保留V×d词表矩阵，虚线指出loss更新共享主干和原词表头，reference及采样细节另见训练计算辅助图。矩阵网格是维度示意，格子数量不代表真实参数数量；三个4B网络共同d=2560，PRDO的d依实际论文基座而定。参数模式、注意力可见性及损失仍须结合下方固定版本表阅读。
+
+![Kev Valen Adjudex PRDO神经网络结构对照](assets/decision-architecture/06-neural-network-readouts.png)
+
+[可缩放、可编辑SVG](assets/decision-architecture/06-neural-network-readouts.svg)
+
+### 辅助图：基座数据流、读出过程与训练计算
 
 核查于2026-11-25。**模型架构图（model architecture diagram）**描述模块及连接；**架构差异图（architecture delta）**突出改哪里；**训练计算图（training computation graph）**标出loss、冻结对象和梯度。三个概念不应混画成“换softmax”。本节图是按固定配置／源码重绘的解释图，不是厂商披露的Jev内部结构，也不是效果复现。
 
 **原图入口：** [Qwen官方Qwen3-Next层结构PNG](https://qianwen-res.oss-accelerate.aliyuncs.com/Qwen3-Next/model_architecture.png)（[官方模型卡引用](https://huggingface.co/Qwen/Qwen3-Next-80B-A3B-Instruct-GGUF)）；[PRDO论文Figure1原SVG](https://arxiv.org/html/2609.38850v2/fig1_schematic.svg)。Qwen原图是Next的MoE层，不可直接当Qwen3.5-4B或Qwen3.8-27B：本节这两个具体模型的FFN为稠密结构。Qwen3.5页面的家族级MoE宣传不能覆盖具体config。
 
-**阅读顺序：** 图1看整体；图2只展开一个语言层；图3沿相同顺序比较三种决策读出；图4单独看PRDO的学习信号。推理数据流用实线，PRDO反向更新用虚线；图1–3橙色突出需要理解的模块／改动，不表示整个节点全参可训。训练范围另见表。
+**辅助图阅读顺序：** 图1看数据流整体；图2只展开一个语言层；图3沿相同顺序比较三种决策读出；图4单独看PRDO的学习信号。推理数据流用实线，PRDO反向更新用虚线；图1–3橙色突出需要理解的模块／改动，不表示整个节点全参可训。训练范围另见表。
 
 **图1｜Qwen生成式基座：输入 → 混合语言骨干 → 词表头。**
 
