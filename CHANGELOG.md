@@ -2,6 +2,12 @@
 
 Each entry records what changed in the repository's knowledge, not every edit. Pre-2026-11-21 dated review notes (`updates/`) and retired documents can be recovered from tag `archive/pre-restructure-2026-11-21/main` or `…/research-dynamic-skill-loading-2026-11` with `git show <tag>:<path>`.
 
+## 2026-11-25 · First-principles learning-to-practice checklist
+
+- Replaced the generic implementation-step table with12 checkable tasks in the existing pipeline: problem/architecture/sample tracing,data and baselines,native training qualification,gradient/save checks,controlled adaptation,calibration,frozen testing and business validation.
+- Each task has a deliverable or gate. Distinguishes toy/debug checks,software correctness,held-out model gains and production outcomes;conditional teacher/distillation/reasoning/RL work follows diagnosed failures rather than a fixed upgrade chain.
+- Planning/synthesis only;no task marked completed,no enterprise data or training run created.
+
 ## 2026-11-25 · Perplexity v1.3 enterprise continuation qualification
 
 - Reviewed official training/evaluation report and complete native27B release. Classified v1.3 as a strong candidate requiring a differentiable training adapter,not an executable original training recipe. Added concrete data,gradient/mask,head,calibration,export and GPU gates in the existing pipeline.
