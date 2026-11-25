@@ -2,6 +2,11 @@
 
 Each entry records what changed in the repository's knowledge, not every edit. Pre-2026-11-21 dated review notes (`updates/`) and retired documents can be recovered from tag `archive/pre-restructure-2026-11-21/main` or `…/research-dynamic-skill-loading-2026-11` with `git show <tag>:<path>`.
 
+## 2026-11-25 · Keep only the two accepted structure diagrams
+
+- Retained the layered backbone and readout comparison plates as SVG sources plus PNG previews (four files). Removed the superseded01–04 flow diagrams, their Mermaid sources and obsolete render config after a verified recovery archive.
+- Updated current links and captions; kept the scientific explanations, version-pinned sources and original external figure URLs. Prior files remain recoverable from Git commit0868acf and the locally verified backup receipt.
+
 ## 2026-11-25 · Neural-network structure plates
 
 - Replaced flow-oriented diagrams as the primary visual entry with two layered neural-network plates: embedding/decoder stack/residual blocks/linear operators, and four aligned readout structures with tensor shapes and trainable parameter boundaries.

@@ -34,53 +34,39 @@
 <a id="architecture-deltas"></a>
 ### 神经网络结构：先看层与矩阵，再看数据流
 
-下面两张是模型结构主图，采用自下向上的层堆叠，表示神经网络模块、张量维度、矩阵和残差连接。此前01–04图属于模块数据流／训练计算辅助图，不应单独替代模型结构图。
+下面两张是模型结构主图，采用自下向上的层堆叠，表示神经网络模块、张量维度、矩阵和残差连接。每张保留PNG浏览版及可编辑SVG源；旧数据流图已移出当前目录，恢复依据见变更记录。
 
-**结构图A：Qwen3.5-4B语言路径。** 左侧是embedding、32层及词表头，中间展开单个decoder layer，右侧列full attention、DeltaNet、SwiGLU及LoRA的参数位置。视觉前端为可选支路，见后面的总览；本图不宣称完整展开视觉encoder。Qwen3.8-27B的尺寸差异写在图下注。
+**结构图A：Qwen3.5-4B语言路径。** 左侧是embedding、32层及词表头，中间展开单个decoder layer，右侧列full attention、DeltaNet、SwiGLU及LoRA的参数位置。视觉前端为可选支路，本图不展开视觉encoder；其作用见下方说明。Qwen3.8-27B的尺寸差异写在图下注。
 
 ![Qwen神经网络层级结构](assets/decision-architecture/05-neural-network-backbone.png)
 
 [可缩放、可编辑SVG](assets/decision-architecture/05-neural-network-backbone.svg)
 
-**结构图B：四种网络读出与后训练更新位置。** Kev展开两路Linear投影与点积，Valen展开四角色投影及两层Mixer，Adjudex显示255×d权重矩阵；PRDO保留V×d词表矩阵，虚线指出loss更新共享主干和原词表头，reference及采样细节另见训练计算辅助图。矩阵网格是维度示意，格子数量不代表真实参数数量；三个4B网络共同d=2560，PRDO的d依实际论文基座而定。参数模式、注意力可见性及损失仍须结合下方固定版本表阅读。
+**结构图B：四种网络读出与后训练更新位置。** Kev展开两路Linear投影与点积，Valen展开四角色投影及两层Mixer，Adjudex显示255×d权重矩阵；PRDO保留V×d词表矩阵，虚线指出loss更新共享主干和原词表头，reference及采样细节见下方PRDO说明及论文原图。矩阵网格是维度示意，格子数量不代表真实参数数量；三个4B网络共同d=2560，PRDO的d依实际论文基座而定。参数模式、注意力可见性及损失仍须结合下方固定版本表阅读。
 
 ![Kev Valen Adjudex PRDO神经网络结构对照](assets/decision-architecture/06-neural-network-readouts.png)
 
 [可缩放、可编辑SVG](assets/decision-architecture/06-neural-network-readouts.svg)
 
-### 辅助图：基座数据流、读出过程与训练计算
+### 结构与后训练说明
 
 核查于2026-11-25。**模型架构图（model architecture diagram）**描述模块及连接；**架构差异图（architecture delta）**突出改哪里；**训练计算图（training computation graph）**标出loss、冻结对象和梯度。三个概念不应混画成“换softmax”。本节图是按固定配置／源码重绘的解释图，不是厂商披露的Jev内部结构，也不是效果复现。
 
 **原图入口：** [Qwen官方Qwen3-Next层结构PNG](https://qianwen-res.oss-accelerate.aliyuncs.com/Qwen3-Next/model_architecture.png)（[官方模型卡引用](https://huggingface.co/Qwen/Qwen3-Next-80B-A3B-Instruct-GGUF)）；[PRDO论文Figure1原SVG](https://arxiv.org/html/2609.38850v2/fig1_schematic.svg)。Qwen原图是Next的MoE层，不可直接当Qwen3.5-4B或Qwen3.8-27B：本节这两个具体模型的FFN为稠密结构。Qwen3.5页面的家族级MoE宣传不能覆盖具体config。
 
-**辅助图阅读顺序：** 图1看数据流整体；图2只展开一个语言层；图3沿相同顺序比较三种决策读出；图4单独看PRDO的学习信号。推理数据流用实线，PRDO反向更新用虚线；图1–3橙色突出需要理解的模块／改动，不表示整个节点全参可训。训练范围另见表。
-
-**图1｜Qwen生成式基座：输入 → 混合语言骨干 → 词表头。**
-
-![Qwen稠密混合基座总览](assets/decision-architecture/01-qwen-backbone.png)
-
-[可缩放SVG](assets/decision-architecture/01-qwen-backbone.svg) · [Mermaid源](assets/decision-architecture/01-qwen-backbone.mmd)
+**Qwen基座。**
 
 - 文本经tokenizer及embedding；图像／视频可先经视觉encoder和merger，变为与文本同维度的表示并按位置融合。纯文本请求没有实际视觉计算，不要把视觉模块存在误写成视觉已经训练。
 - 语言骨干输出的是**每个位置的上下文向量**`H`。普通生成模型用`lm_head`将最后位置投到词表，采样下个token后再继续；决策模型可以在这里改读出，省去答案文字的逐token生成。
 - 固定[Qwen3.5-4B配置](https://huggingface.co/Qwen/Qwen3.5-4B/blob/851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a/config.json)：32层、hidden=2560，8组“3×DeltaNet＋1×full attention”；固定[Qwen3.8-27B配置](https://huggingface.co/Qwen/Qwen3.8-27B/blob/37561816e66b5b9153b1b64c10968c18c1e6f4a0/config.json)：64层、hidden=5120，16组相同模式。它们都不是把FFN换为MoE的型号。
 
-**图2｜一个语言层：注意力与FFN各有残差通路。**
-
-![Qwen单层与残差路径](assets/decision-architecture/02-qwen-block.png)
-
-[可缩放SVG](assets/decision-architecture/02-qwen-block.svg) · [Mermaid源](assets/decision-architecture/02-qwen-block.mmd)
+**单层网络及LoRA。**
 
 `RMSNorm`控制数值尺度；序列混合算子让当前位置吸收其他位置的信息；`FFN`变换每个位置的特征；两个加号是残差相加。DeltaNet用门控递归状态汇总前缀，full attention显式比较可见位置的Q／K／V并门控输出，两者不是同一种算子。原生成骨干保持因果；把full层mask改双向，不会自动把DeltaNet递归改成双向。更多算子细节见[官方实现说明](https://huggingface.co/docs/transformers/model_doc/qwen3_5)。
 
 LoRA是给选定线性矩阵增加低秩更新：`W_eff = W_frozen + (alpha/r) B A`。它改变**哪些参数更新**，不必改变推理模块的连接形状；全参训练则允许更新原有矩阵。图中不应把LoRA画成接在整个模型末尾的新分类头。
 
-**图3｜同一类Qwen底座，三种直接决策改造。**
-
-![Kev、Valen与Adjudex读出改造对照](assets/decision-architecture/03-decision-readouts.png)
-
-[可缩放SVG](assets/decision-architecture/03-decision-readouts.svg) · [Mermaid源](assets/decision-architecture/03-decision-readouts.mmd)
+**三种直接决策改造。**
 
 这三条路线均不执行原来的整词表生成头，但取hidden的位置与新头不同。用`hD`表示题末决策位置、`hi`表示候选i的端点；`T`为部署校准温度，以下是机制简式，不省略工程中的mask／类型映射。
 
@@ -105,26 +91,22 @@ LoRA是给选定线性矩阵增加低秩更新：`W_eff = W_frozen + (alpha/r) B
 
 固定证据：[Kev模型／pointer](https://github.com/jaredpalmer/kev/blob/556167b5b151152cb4101629e25d883e9ead5094/kev/model.py)、[Kev训练loss](https://github.com/jaredpalmer/kev/blob/556167b5b151152cb4101629e25d883e9ead5094/kev/train.py)；[Valen头](https://github.com/Valen-Team/Valen/blob/f6df4fdbc45bf44a4ffbebaeda53f5fe6e49b339/valen/modeling/qwen/heads.py)、[mask契约](https://github.com/Valen-Team/Valen/blob/f6df4fdbc45bf44a4ffbebaeda53f5fe6e49b339/valen/modeling/qwen/DECISION_1_5.md)、[训练builder](https://github.com/Valen-Team/Valen/blob/f6df4fdbc45bf44a4ffbebaeda53f5fe6e49b339/valen/modeling/qwen/builder.py)；[Adjudex模型](https://huggingface.co/newsbang/adjudex-4b-v7/blob/ff4677a23dff03c4fc21383c77cf5f626ec23108/source/src/autojev/model.py)、[loss](https://huggingface.co/newsbang/adjudex-4b-v7/blob/ff4677a23dff03c4fc21383c77cf5f626ec23108/source/src/autojev/loss.py)。
 
-**图4｜PRDO：保留原网络，改变推理后的概率训练。**
+**PRDO：保留原网络，改变推理后的概率训练。**
 
-![PRDO主阶段计算图](assets/decision-architecture/04-prdo-training.png)
-
-[可缩放SVG](assets/decision-architecture/04-prdo-training.svg) · [Mermaid源](assets/decision-architecture/04-prdo-training.mmd)
-
-图示为主阶段、M条采样中的一条；proper loss与token KL均对M条分别计算后平均；采样使用当前θ或与其同步的数值副本。灰色表示不参与反传的采样结果／冻结reference；橙色是可微读出／loss路径，真正更新的是当前模型θ。**正确标签y只进入loss，不进入模型提示。**
+PRDO主阶段对M条采样分别计算proper loss与token KL再平均；采样使用当前θ或同步数值副本，reference冻结，真正更新的是当前模型θ。**正确标签y只进入loss，不进入模型提示。**
 
 - **网络未换头：** 原因果LM＋原`lm_head`；在`题目＋采样推理＋Answer:`处，选择候选标签的K个词表logit再softmax。实际标签须在模板中核tokenization，不能将任意中文多token标签当单token。
 - **改的是训练信号：** 先无梯度生成推理token，再用可训练模型重算整段；逐推理计算Brier或负对数loss，并加推理历史上的**全词表**token KL，reference冻结。读出梯度反传共享主干及词表头；不是“只训一个概率头”。
 - **不反传离散采样 ≠ 推理能力不变。** 主阶段没有对采样推理使用REINFORCE项，但共享权重更新仍可改变未来推理。论文采用全参，不是已经提供LoRA配方。
 - **训练／部署分开：** 论文主配置每题采样M=4；单推理部署是生成一条推理再读概率，不是每次默认四次投票。可选第二阶段另加score-function项，没有新网络模块。
-- **基座分开：** 论文主要用Qwen3-0.6B／1.7B、SmolLM3-3B、Phi-4-mini-instruct；不能把图1的Qwen3.5混合结构直接当论文已验证网络。
+- **基座分开：** 论文主要用Qwen3-0.6B／1.7B、SmolLM3-3B、Phi-4-mini-instruct；不能把结构图A的Qwen3.5混合结构直接当论文已验证网络。
 
 证据：[PRDO v2 Figure1及方法](https://arxiv.org/html/2609.38850v2#S3.F1)、[固定训练实现](https://github.com/ZimmyGao/openjev-rlcd/blob/5859d2b893314fb3581f06e4e36c303e372b3f48/openjev_rlcd/train.py)。主阶段有效锚定为token KL；`kl-beta`在此不贡献score-function梯度，但固定CLI仍以其正值启用reference，不能只凭概念图删除参数。实施细节沿用[PRDO流程](../playbooks/decision-pipeline.md#prdo)。
 
-**如何使用这套图：** 对外讲解先看图1＋图3，解释“保留骨干、换读出”；准备后训练时加入图2与参数范围表，解释“更新哪里”；需要生成推理的任务再看图4，解释“优化哪条梯度”。不把更多模块画成更高准确率，也不把架构图当企业适配成功的证据。
+**阅读顺序：** 先看结构图A理解网络层与矩阵，再看结构图B比较读出改造；训练范围和PRDO梯度以本节说明为准。不把更多模块画成更高准确率，也不把架构图当企业适配成功的证据。
 
 
-图源维护：使用Mermaid CLI 12.2.0；源码和[render-config](assets/decision-architecture/render-config.json)同目录。PNG按1800px最大边渲染，SVG可缩放。
+图源维护：当前目录仅保留两张结构图的SVG源及PNG浏览版。
 
 ## 2. 生态分布（2026-11）
 

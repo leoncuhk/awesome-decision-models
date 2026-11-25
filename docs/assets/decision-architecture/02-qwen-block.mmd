@@ -1,8 +1,0 @@
-flowchart LR
-  X["层输入 x"] --> N1["RMSNorm"] --> A["序列混合算子<br/>DeltaNet 或 gated full attention"] --> P(("＋"))
-  X --> P
-  P --> N2["RMSNorm"] --> F["稠密 SwiGLU FFN<br/>gate_proj／up_proj／down_proj"] --> Q(("＋"))
-  P --> Q
-  Q --> Y["下一层"]
-  classDef focus fill:#fff2dc,stroke:#996500,stroke-width:2px,color:#222;
-  class A,F focus;

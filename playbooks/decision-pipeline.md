@@ -121,7 +121,7 @@
 <a id="readout"></a>
 ### 读出、推理和参数化是不同维度
 
-先看[四张架构／训练计算图](../docs/landscape.md#architecture-deltas)，定位输入与mask、hidden读出、输出头及可训练参数；按固定版本验证，勿从统一API推断同一计算图。
+先看[两张神经网络结构图](../docs/landscape.md#architecture-deltas)，定位输入与mask、hidden读出、输出头及可训练参数；按固定版本验证，勿从统一API推断同一计算图。
 
 | 选择 | 需要核查什么 |
 |---|---|
